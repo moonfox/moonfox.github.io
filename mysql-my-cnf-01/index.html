@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="戛戛Happy" />
+
+
+
+<meta name="description" content="#在这里加入其它 的 MySQL 服务器配置
+ #…
+如果不使用InnoDB表将一列一行注释去除skip-innodb #
+数据文件必须能够容下数据与索引确定有足够的磁盘空间
+ innodb_data_file_path = /ibdata/ibdata1:2000M;/dr2/ibdata/ibdata2:2000M:autoextend
+设置缓冲池的大小为你的主内存大小的50 - 80 %，但">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql my.cnf">
+<meta property="og:url" content="http://gagahappy.com/mysql-my-cnf-01/index.html">
+<meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
+<meta property="og:description" content="#在这里加入其它 的 MySQL 服务器配置
+ #…
+如果不使用InnoDB表将一列一行注释去除skip-innodb #
+数据文件必须能够容下数据与索引确定有足够的磁盘空间
+ innodb_data_file_path = /ibdata/ibdata1:2000M;/dr2/ibdata/ibdata2:2000M:autoextend
+设置缓冲池的大小为你的主内存大小的50 - 80 %，但">
+<meta property="og:updated_time" content="2016-08-16T18:51:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql my.cnf">
+<meta name="twitter:description" content="#在这里加入其它 的 MySQL 服务器配置
+ #…
+如果不使用InnoDB表将一列一行注释去除skip-innodb #
+数据文件必须能够容下数据与索引确定有足够的磁盘空间
+ innodb_data_file_path = /ibdata/ibdata1:2000M;/dr2/ibdata/ibdata2:2000M:autoextend
+设置缓冲池的大小为你的主内存大小的50 - 80 %，但">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="漂自己的移，让别人都撞墙去吧" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>mysql my.cnf | 漂自己的移，让别人都撞墙去吧</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/huitailang.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">戛戛Happy</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="#" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" href="/sina weibo" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa Facebook" href="#" title="Facebook"></a>
+                            
+                                <a class="fa Twitter" href="#" title="Twitter"></a>
+                            
+                                <a class="fa Instagram" href="#" title="Instagram"></a>
+                            
+                                <a class="fa Flickr" href="#" title="Flickr"></a>
+                            
+                                <a class="fa Tumblr" href="#" title="Tumblr"></a>
+                            
+                                <a class="fa _500px" href="#" title="_500px"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人物/">人物</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美食/">美食</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">戛戛Happy</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/huitailang.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">戛戛Happy</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="#" title="Email"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="/sina weibo" title="新浪微博"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                                <a class="fa Facebook" target="_blank" href="#" title="Facebook"></a>
+                            
+                                <a class="fa Twitter" target="_blank" href="#" title="Twitter"></a>
+                            
+                                <a class="fa Instagram" target="_blank" href="#" title="Instagram"></a>
+                            
+                                <a class="fa Flickr" target="_blank" href="#" title="Flickr"></a>
+                            
+                                <a class="fa Tumblr" target="_blank" href="#" title="Tumblr"></a>
+                            
+                                <a class="fa _500px" target="_blank" href="#" title="_500px"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-mysql-my-cnf-01" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/mysql-my-cnf-01/" class="article-date">
+      <time datetime="2009-12-28T02:26:26.000Z" itemprop="datePublished">2009-12-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mysql my.cnf
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>#在这里加入其它 的 MySQL 服务器配置</p>
+<p> #…</p>
+<h1 id="如果不使用InnoDB表将一列一行注释去除"><a href="#如果不使用InnoDB表将一列一行注释去除" class="headerlink" title="如果不使用InnoDB表将一列一行注释去除"></a>如果不使用InnoDB表将一列一行注释去除</h1><h1 id="skip-innodb"><a href="#skip-innodb" class="headerlink" title="skip-innodb"></a>skip-innodb</h1><p> #</p>
+<h1 id="数据文件必须"><a href="#数据文件必须" class="headerlink" title="数据文件必须"></a>数据文件必须</h1><h1 id="能够容下数据与索引"><a href="#能够容下数据与索引" class="headerlink" title="能够容下数据与索引"></a>能够容下数据与索引</h1><h1 id="确定有足够的"><a href="#确定有足够的" class="headerlink" title="确定有足够的"></a>确定有足够的</h1><h1 id="磁盘空间"><a href="#磁盘空间" class="headerlink" title="磁盘空间"></a>磁盘空间</h1><!--more +阅读全文+-->
+<p> innodb_data_file_path = /ibdata/ibdata1:2000M;/dr2/ibdata/ibdata2:2000M:autoextend</p>
+<h1 id="设置缓冲池的大小为"><a href="#设置缓冲池的大小为" class="headerlink" title="设置缓冲池的大小为"></a>设置缓冲池的大小为</h1><h1 id="你的主内存大小的"><a href="#你的主内存大小的" class="headerlink" title="你的主内存大小的"></a>你的主内存大小的</h1><h1 id="50-80-，但是"><a href="#50-80-，但是" class="headerlink" title="50 - 80 %，但是"></a>50 - 80 %，但是</h1><h1 id="在-Linux-x86-总内存"><a href="#在-Linux-x86-总内存" class="headerlink" title="在 Linux x86 总内存"></a>在 Linux x86 总内存</h1><h1 id="使用必须小于-2-GB"><a href="#使用必须小于-2-GB" class="headerlink" title="使用必须小于 2 GB"></a>使用必须小于 2 GB</h1><p> set-variable = innodb_buffer_pool_size=1G<br> set-variable = innodb_additional_mem_pool_size=20M<br> innodb_log_group_home_dir = /dr3/iblogs</p>
+<h1 id="log-arch-dir-必须和"><a href="#log-arch-dir-必须和" class="headerlink" title=".._log_arch_dir 必须和"></a>.._log_arch_dir 必须和</h1><h1 id="log-group-home-dir一样；"><a href="#log-group-home-dir一样；" class="headerlink" title=".._log_group_home_dir一样；"></a>.._log_group_home_dir一样；</h1><h1 id="从-4-0-6开始，可以省略它"><a href="#从-4-0-6开始，可以省略它" class="headerlink" title="从 4.0.6开始，可以省略它"></a>从 4.0.6开始，可以省略它</h1><p> innodb_log_arch_dir = /dr3/iblogs<br> set-variable = innodb_log_files_in_group=3</p>
+<h1 id="设置日志文件的大小约为"><a href="#设置日志文件的大小约为" class="headerlink" title="设置日志文件的大小约为"></a>设置日志文件的大小约为</h1><h1 id="缓冲池-buffer-pool"><a href="#缓冲池-buffer-pool" class="headerlink" title="缓冲池(buffer pool)"></a>缓冲池(buffer pool)</h1><h1 id="大小的-15"><a href="#大小的-15" class="headerlink" title="大小的 15 %"></a>大小的 15 %</h1><p> set-variable = innodb_log_file_size=150M<br> set-variable = innodb_log_buffer_size=8M</p>
+<h1 id="如果丢失最近几个事务影响"><a href="#如果丢失最近几个事务影响" class="headerlink" title="如果丢失最近几个事务影响"></a>如果丢失最近几个事务影响</h1><h1 id="不大的话可以设置"><a href="#不大的话可以设置" class="headerlink" title="不大的话可以设置"></a>不大的话可以设置</h1><h1 id="flush-log-at-trx-commit-0"><a href="#flush-log-at-trx-commit-0" class="headerlink" title=".._flush_log_at_trx_commit = 0"></a>.._flush_log_at_trx_commit = 0</h1><p> innodb_flush_log_at_trx_commit=1<br> set-variable = innodb_lock_wait_timeout=50</p>
+<p> #innodb_flush_method=fdatasync</p>
+<p> #set-variable = innodb_thread_concurrency=5</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/mysql-my-cnf-01/">mysql my.cnf</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
+        <p><span>发布时间:</span>2009-12-28, 10:26:26</p>
+        <p><span>最后更新:</span>2016-08-17, 02:51:51</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/mysql-my-cnf-01/" title="mysql my.cnf">http://gagahappy.com/mysql-my-cnf-01/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://gagahappy.com/mysql-my-cnf-01/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/18ziduo-s2617/">
+                     十八子作S2617南极银锋七件套刀
+                </a>
+            </div>
+        
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如果不使用InnoDB表将一列一行注释去除"><span class="toc-number">1.</span> <span class="toc-text">如果不使用InnoDB表将一列一行注释去除</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#skip-innodb"><span class="toc-number">2.</span> <span class="toc-text">skip-innodb</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据文件必须"><span class="toc-number">3.</span> <span class="toc-text">数据文件必须</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#能够容下数据与索引"><span class="toc-number">4.</span> <span class="toc-text">能够容下数据与索引</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#确定有足够的"><span class="toc-number">5.</span> <span class="toc-text">确定有足够的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#磁盘空间"><span class="toc-number">6.</span> <span class="toc-text">磁盘空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设置缓冲池的大小为"><span class="toc-number">7.</span> <span class="toc-text">设置缓冲池的大小为</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#你的主内存大小的"><span class="toc-number">8.</span> <span class="toc-text">你的主内存大小的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#50-80-，但是"><span class="toc-number">9.</span> <span class="toc-text">50 - 80 %，但是</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在-Linux-x86-总内存"><span class="toc-number">10.</span> <span class="toc-text">在 Linux x86 总内存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用必须小于-2-GB"><span class="toc-number">11.</span> <span class="toc-text">使用必须小于 2 GB</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#log-arch-dir-必须和"><span class="toc-number">12.</span> <span class="toc-text">.._log_arch_dir 必须和</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#log-group-home-dir一样；"><span class="toc-number">13.</span> <span class="toc-text">.._log_group_home_dir一样；</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从-4-0-6开始，可以省略它"><span class="toc-number">14.</span> <span class="toc-text">从 4.0.6开始，可以省略它</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设置日志文件的大小约为"><span class="toc-number">15.</span> <span class="toc-text">设置日志文件的大小约为</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#缓冲池-buffer-pool"><span class="toc-number">16.</span> <span class="toc-text">缓冲池(buffer pool)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#大小的-15"><span class="toc-number">17.</span> <span class="toc-text">大小的 15 %</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如果丢失最近几个事务影响"><span class="toc-number">18.</span> <span class="toc-text">如果丢失最近几个事务影响</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#不大的话可以设置"><span class="toc-number">19.</span> <span class="toc-text">不大的话可以设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#flush-log-at-trx-commit-0"><span class="toc-number">20.</span> <span class="toc-text">.._flush_log_at_trx_commit = 0</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"mysql my.cnf　| 漂自己的移，让别人都撞墙去吧　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/18ziduo-s2617/" title="上一篇:  十八子作S2617南极银锋七件套刀">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/10-golden-lessons-from-steve-jobs/">史蒂夫·乔布斯经典语录</a></li><li class="post-list-item"><a class="post-list-link" href="/18ziduo-s2617/"> 十八子作S2617南极银锋七件套刀</a></li><li class="post-list-item"><a class="post-list-link" href="/mysql-my-cnf-01/">mysql my.cnf</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 戛戛Happy
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+
+  </div>
+</body>
+</html>
