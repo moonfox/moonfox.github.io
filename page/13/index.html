@@ -22,7 +22,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:url" content="http://gagahappy.com/page/13/index.html">
+<meta property="og:url" content="http://www.gagahappy.com/page/13/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漂自己的移，让别人都撞墙去吧">
@@ -485,7 +485,7 @@
         <p>fedora14下用个人帐户登录系统建立目录时，默认权限变成了drwxrwxr-x，而不是我们通常设置的drwxr-xr-x。另建其他帐户问题依然存在，很是奇怪，经过一番的查找，问题出在了系统环境文件里。具体解决方法如下</p>
 <p>打开系统环境文件，发现文件中多了以下几行，怀疑是升级时系统加入的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> [ <span class="variable">$UID</span> <span class="_">-gt</span> 199 ] &amp;&amp; [ <span class="string">"`id -gn`"</span> = <span class="string">"`id -un`"</span> ]; <span class="keyword">then</span></div><div class="line">    <span class="built_in">umask</span> 002</div><div class="line"><span class="keyword">else</span></div><div class="line">    <span class="built_in">umask</span> 022</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure></p>
 <p>umask把普通用户登录后文件及目录的默认权限设置为775了，改回755问题即可解决。在文件尾端加入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">umask</span> 022</div></pre></td></tr></table></figure></p>
-<p>移步<a href="http://www.gagahappy.com/linux-modify-default-rights-by-umask/" target="_blank" rel="external"> fedora 设置文件默认权限</a>了解相关umask知识</p>
+<p>移步<a href="http://www.gagahappy.com/linux-modify-default-rights-by-umask/"> fedora 设置文件默认权限</a>了解相关umask知识</p>
 
       
     </div>
