@@ -254,6 +254,68 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-delegation-be-enhance-by-active-support-in-module" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/delegation-be-enhance-by-active-support-in-module/" class="article-date">
+      <time datetime="2015-04-24T15:54:33.000Z" itemprop="datePublished">2015-04-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/delegation-be-enhance-by-active-support-in-module/">Delegation be enhance by active support in module</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>基本思想是:当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象</p>
+<p>#Delegation is particularly useful with Active Record associations:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span> &lt; ActiveRecord::Base</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hello</span></span></div><div class="line">    <span class="string">'hello'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">goodbye</span></span></div><div class="line">    <span class="string">'goodbye'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &lt; ActiveRecord::Base</span></div><div class="line">  belongs_to <span class="symbol">:greeter</span></div><div class="line">  delegate <span class="symbol">:hello</span>, <span class="symbol">to:</span> <span class="symbol">:greeter</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Foo.new.hello   <span class="comment"># =&gt; "hello"</span></div><div class="line">Foo.new.goodbye <span class="comment"># =&gt; NoMethodError: undefined method `goodbye' for #&lt;Foo:0x1af30c&gt;</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/gossip/">杂七杂八</a>
+    </div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-pg-connection-bad" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1473,70 +1535,6 @@
       
           
         <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、测试顶级上下文中定义的实例变量的作用域</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、顶级上下文中定义的实例变量只能被main对象访问，因为实例变量暴露在toplevel的context中，self为main</span></div><div class="line"><span class="comment">#    相当于运行main.instance_eval&#123;<span class="doctag">@toplevel</span>_variate="toplevel variate"&#125;</span></div><div class="line"><span class="comment"># 2、私有方法不属于instance_methods的集合，它属于private_instance_methods</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"></div><div class="line">@toplevel_variate = <span class="string">"toplevel variate"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">  <span class="string">"@toplevel_variate in my_method which define in toplevel:<span class="subst">#&#123;@toplevel_variate&#125;</span>"</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Object.class_eval <span class="keyword">do</span> <span class="params">|variable|</span></div><div class="line">  puts <span class="string">"Object can acccess @toplevel_variate:<span class="subst">#&#123;@var&#125;</span>"</span> <span class="comment"># nil</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">self</span>.instance_eval <span class="keyword">do</span></div><div class="line">  puts <span class="string">"@toplevel_variate in self object:<span class="subst">#&#123;@toplevel_variate&#125;</span>"</span> <span class="comment"># toplevel variate</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">puts my_method</div><div class="line">puts <span class="string">"Object.private_instance_methods:"</span> + Object.private_instance_methods(<span class="literal">false</span>).grep(<span class="symbol">:my_method</span>).to_s <span class="comment"># :my_method</span></div><div class="line">puts <span class="string">"Object.instance_methods:"</span> + Object.instance_methods(<span class="literal">false</span>).grep(<span class="symbol">:my_method</span>).to_s <span class="comment">#nil</span></div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-extend-class-method-by-module" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/extend-class-method-by-module/" class="article-date">
-      <time datetime="2015-03-31T15:55:43.000Z" itemprop="datePublished">2015-03-31</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/extend-class-method-by-module/">使用include,让模块中定义的方法分别插入类方法与实例方法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、类扩展:使用include,让模块中定义的方法分别插入类方法与实例方法中</span></div><div class="line"><span class="comment"># 2、obj实例对象调用extend,则模块中定义的方法为？</span></div><div class="line"><span class="comment"># 3、在模块中定义的实例变量能否被包含它的类的实例对象看到</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、通过重定义横块中的self.included方法，并对参数(receiver),使用关键字extend/include,分别向包含它的类中插入了</span></div><div class="line"><span class="comment">#    类方法(定义在ClassMethods模块中的方法)和实例方法(定义在InstanceMethod模块中)</span></div><div class="line"><span class="comment"># 2、obj实例对象调用extend,则模块中定义的方法为这个obj的单例方法，可以通过把方法定义在module中，让实例对象调用extend</span></div><div class="line"><span class="comment">#    来方便快速的增加自身的单例方法</span></div><div class="line"><span class="comment"># 3、可以。在模块中定义的实例变量可以被包含它的类的实例对象看到,因为被include的模块相当于当前类的父类，当前对象的</span></div><div class="line"><span class="comment">#    实例变量对其所有实例方法可见</span></div><div class="line"><span class="comment"># 4、extend方法的实质就是把module中定义的方法插入到对象的单件类中</span></div><div class="line"><span class="comment"># 5、调用MyClass.instance_methods(false)可以发现，在它的实例方法中并不包含实例方法instance_method，而MyClass</span></div><div class="line"><span class="comment">#    的实例对象可以调用这个方法，这正说明了类中include的模块(被代理类封装)充当这个类的父类。也验证了结论4</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  <span class="class"><span class="keyword">module</span> <span class="title">M</span></span></div><div class="line">    <span class="class"><span class="keyword">module</span> <span class="title">ClassMethods</span></span></div><div class="line">      <span class="function"><span class="keyword">def</span> <span class="title">class_method</span></span></div><div class="line">        <span class="string">"i am a class method"</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">module</span> <span class="title">InstanceMethods</span></span></div><div class="line">      <span class="function"><span class="keyword">def</span> <span class="title">instance_method</span><span class="params">(from)</span></span></div><div class="line">        @instance_variate = <span class="string">"i am a instance variate in M"</span></div><div class="line">        <span class="string">"i am a instance method from:<span class="subst">#&#123;from&#125;</span>"</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">included</span><span class="params">(receiver)</span></span></div><div class="line">      receiver.extend         ClassMethods</div><div class="line">      receiver.send <span class="symbol">:include</span>, InstanceMethods</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="comment">#+ &lt;!-- more --&gt;</span></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">    <span class="keyword">include</span> M</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_instance_variate_from_module</span><span class="params">(from)</span></span></div><div class="line">      <span class="string">"<span class="subst">#&#123;@instance_variate&#125;</span> from: <span class="subst">#&#123;from&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  obj = Object.new</div><div class="line">  obj.extend M::InstanceMethods</div><div class="line">  my = MyClass.new</div><div class="line"></div><div class="line">  puts <span class="string">"================test1 OUTPUT================"</span></div><div class="line">  puts MyClass.class_method</div><div class="line">  puts my.instance_method(<span class="string">"MyClass.new obj"</span>)</div><div class="line">  puts my.get_instance_variate_from_module(<span class="string">"MyClass.new"</span>)</div><div class="line">  puts obj.instance_method(<span class="string">"Object.new"</span>)</div><div class="line">  puts obj.instance_eval(<span class="string">"@instance_variate"</span>)</div><div class="line">  puts <span class="string">"MyClass.instance_methods:"</span>+MyClass.instance_methods(<span class="literal">false</span>).to_s</div><div class="line">  puts <span class="string">"================test1 OUTPUT================"</span></div><div class="line"></div><div class="line">  <span class="comment"># ================test1 OUTPUT================</span></div><div class="line">  <span class="comment"># i am a class method</span></div><div class="line">  <span class="comment"># i am a instance method from:MyClass.new obj</span></div><div class="line">  <span class="comment"># i am a instance variate in M from: MyClass.new</span></div><div class="line">  <span class="comment"># i am a instance method from:Object.new</span></div><div class="line">  <span class="comment"># i am a instance variate in M</span></div><div class="line">  <span class="comment"># MyClass.instance_methods:[:get_instance_variate_from_module]</span></div><div class="line">  <span class="comment"># ================test1 OUTPUT================</span></div><div class="line"></div><div class="line">&#125;.call</div></pre></td></tr></table></figure>
       
     </div>
     
