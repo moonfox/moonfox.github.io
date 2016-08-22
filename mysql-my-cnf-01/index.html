@@ -27,7 +27,7 @@
  #…
 如果不使用InnoDB表将一列一行注释去除skip-innodb #
 数据文件必须能够容下数据与索引确定有足够的磁盘空间">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-22T06:07:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql my.cnf">
 <meta name="twitter:description" content="#在这里加入其它 的 MySQL 服务器配置
@@ -305,15 +305,14 @@
         <p>#在这里加入其它 的 MySQL 服务器配置</p>
 <p> #…</p>
 <h1 id="如果不使用InnoDB表将一列一行注释去除"><a href="#如果不使用InnoDB表将一列一行注释去除" class="headerlink" title="如果不使用InnoDB表将一列一行注释去除"></a>如果不使用InnoDB表将一列一行注释去除</h1><h1 id="skip-innodb"><a href="#skip-innodb" class="headerlink" title="skip-innodb"></a>skip-innodb</h1><p> #</p>
-<h1 id="数据文件必须"><a href="#数据文件必须" class="headerlink" title="数据文件必须"></a>数据文件必须</h1><h1 id="能够容下数据与索引"><a href="#能够容下数据与索引" class="headerlink" title="能够容下数据与索引"></a>能够容下数据与索引</h1><h1 id="确定有足够的"><a href="#确定有足够的" class="headerlink" title="确定有足够的"></a>确定有足够的</h1><h1 id="磁盘空间"><a href="#磁盘空间" class="headerlink" title="磁盘空间"></a>磁盘空间</h1><ul>
-<li><a id="more"></a>
-<p>innodb_data_file_path = /ibdata/ibdata1:2000M;/dr2/ibdata/ibdata2:2000M:autoextend</p>
-<h1 id="设置缓冲池的大小为"><a href="#设置缓冲池的大小为" class="headerlink" title="设置缓冲池的大小为"></a>设置缓冲池的大小为</h1><h1 id="你的主内存大小的"><a href="#你的主内存大小的" class="headerlink" title="你的主内存大小的"></a>你的主内存大小的</h1><h1 id="50-80-，但是"><a href="#50-80-，但是" class="headerlink" title="50 - 80 %，但是"></a>50 - 80 %，但是</h1><h1 id="在-Linux-x86-总内存"><a href="#在-Linux-x86-总内存" class="headerlink" title="在 Linux x86 总内存"></a>在 Linux x86 总内存</h1><h1 id="使用必须小于-2-GB"><a href="#使用必须小于-2-GB" class="headerlink" title="使用必须小于 2 GB"></a>使用必须小于 2 GB</h1><p>set-variable = innodb_buffer_pool_size=1G<br>set-variable = innodb_additional_mem_pool_size=20M<br>innodb_log_group_home_dir = /dr3/iblogs</p>
-<h1 id="log-arch-dir-必须和"><a href="#log-arch-dir-必须和" class="headerlink" title=".._log_arch_dir 必须和"></a>.._log_arch_dir 必须和</h1><h1 id="log-group-home-dir一样；"><a href="#log-group-home-dir一样；" class="headerlink" title=".._log_group_home_dir一样；"></a>.._log_group_home_dir一样；</h1><h1 id="从-4-0-6开始，可以省略它"><a href="#从-4-0-6开始，可以省略它" class="headerlink" title="从 4.0.6开始，可以省略它"></a>从 4.0.6开始，可以省略它</h1><p>innodb_log_arch_dir = /dr3/iblogs<br>set-variable = innodb_log_files_in_group=3</p>
-<h1 id="设置日志文件的大小约为"><a href="#设置日志文件的大小约为" class="headerlink" title="设置日志文件的大小约为"></a>设置日志文件的大小约为</h1><h1 id="缓冲池-buffer-pool"><a href="#缓冲池-buffer-pool" class="headerlink" title="缓冲池(buffer pool)"></a>缓冲池(buffer pool)</h1><h1 id="大小的-15"><a href="#大小的-15" class="headerlink" title="大小的 15 %"></a>大小的 15 %</h1><p>set-variable = innodb_log_file_size=150M<br>set-variable = innodb_log_buffer_size=8M</p>
-<h1 id="如果丢失最近几个事务影响"><a href="#如果丢失最近几个事务影响" class="headerlink" title="如果丢失最近几个事务影响"></a>如果丢失最近几个事务影响</h1><h1 id="不大的话可以设置"><a href="#不大的话可以设置" class="headerlink" title="不大的话可以设置"></a>不大的话可以设置</h1><h1 id="flush-log-at-trx-commit-0"><a href="#flush-log-at-trx-commit-0" class="headerlink" title=".._flush_log_at_trx_commit = 0"></a>.._flush_log_at_trx_commit = 0</h1><p>innodb_flush_log_at_trx_commit=1<br>set-variable = innodb_lock_wait_timeout=50<br>#innodb_flush_method=fdatasync<br>#set-variable = innodb_thread_concurrency=5</p>
-</li>
-</ul>
+<h1 id="数据文件必须"><a href="#数据文件必须" class="headerlink" title="数据文件必须"></a>数据文件必须</h1><h1 id="能够容下数据与索引"><a href="#能够容下数据与索引" class="headerlink" title="能够容下数据与索引"></a>能够容下数据与索引</h1><h1 id="确定有足够的"><a href="#确定有足够的" class="headerlink" title="确定有足够的"></a>确定有足够的</h1><h1 id="磁盘空间"><a href="#磁盘空间" class="headerlink" title="磁盘空间"></a>磁盘空间</h1><a id="more"></a>
+<p> innodb_data_file_path = /ibdata/ibdata1:2000M;/dr2/ibdata/ibdata2:2000M:autoextend</p>
+<h1 id="设置缓冲池的大小为"><a href="#设置缓冲池的大小为" class="headerlink" title="设置缓冲池的大小为"></a>设置缓冲池的大小为</h1><h1 id="你的主内存大小的"><a href="#你的主内存大小的" class="headerlink" title="你的主内存大小的"></a>你的主内存大小的</h1><h1 id="50-80-，但是"><a href="#50-80-，但是" class="headerlink" title="50 - 80 %，但是"></a>50 - 80 %，但是</h1><h1 id="在-Linux-x86-总内存"><a href="#在-Linux-x86-总内存" class="headerlink" title="在 Linux x86 总内存"></a>在 Linux x86 总内存</h1><h1 id="使用必须小于-2-GB"><a href="#使用必须小于-2-GB" class="headerlink" title="使用必须小于 2 GB"></a>使用必须小于 2 GB</h1><p> set-variable = innodb_buffer_pool_size=1G<br> set-variable = innodb_additional_mem_pool_size=20M<br> innodb_log_group_home_dir = /dr3/iblogs</p>
+<h1 id="log-arch-dir-必须和"><a href="#log-arch-dir-必须和" class="headerlink" title=".._log_arch_dir 必须和"></a>.._log_arch_dir 必须和</h1><h1 id="log-group-home-dir一样；"><a href="#log-group-home-dir一样；" class="headerlink" title=".._log_group_home_dir一样；"></a>.._log_group_home_dir一样；</h1><h1 id="从-4-0-6开始，可以省略它"><a href="#从-4-0-6开始，可以省略它" class="headerlink" title="从 4.0.6开始，可以省略它"></a>从 4.0.6开始，可以省略它</h1><p> innodb_log_arch_dir = /dr3/iblogs<br> set-variable = innodb_log_files_in_group=3</p>
+<h1 id="设置日志文件的大小约为"><a href="#设置日志文件的大小约为" class="headerlink" title="设置日志文件的大小约为"></a>设置日志文件的大小约为</h1><h1 id="缓冲池-buffer-pool"><a href="#缓冲池-buffer-pool" class="headerlink" title="缓冲池(buffer pool)"></a>缓冲池(buffer pool)</h1><h1 id="大小的-15"><a href="#大小的-15" class="headerlink" title="大小的 15 %"></a>大小的 15 %</h1><p> set-variable = innodb_log_file_size=150M<br> set-variable = innodb_log_buffer_size=8M</p>
+<h1 id="如果丢失最近几个事务影响"><a href="#如果丢失最近几个事务影响" class="headerlink" title="如果丢失最近几个事务影响"></a>如果丢失最近几个事务影响</h1><h1 id="不大的话可以设置"><a href="#不大的话可以设置" class="headerlink" title="不大的话可以设置"></a>不大的话可以设置</h1><h1 id="flush-log-at-trx-commit-0"><a href="#flush-log-at-trx-commit-0" class="headerlink" title=".._flush_log_at_trx_commit = 0"></a>.._flush_log_at_trx_commit = 0</h1><p> innodb_flush_log_at_trx_commit=1<br> set-variable = innodb_lock_wait_timeout=50</p>
+<p> #innodb_flush_method=fdatasync</p>
+<p> #set-variable = innodb_thread_concurrency=5</p>
 
       
     </div>
@@ -325,7 +324,7 @@
         <p><span>本文标题:</span><a href="/mysql-my-cnf-01/">mysql my.cnf</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2009-12-28, 10:26:26</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2016-08-22, 14:07:26</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/mysql-my-cnf-01/" title="mysql my.cnf">http://www.gagahappy.com/mysql-my-cnf-01/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/mysql-my-cnf-01/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

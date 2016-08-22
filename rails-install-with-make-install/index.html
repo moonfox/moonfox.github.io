@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="注意事项：1、请务必将系统更新到最新2、最好直接使用root用户进行安装3、在安装之前，应该确认操作系统已经安装好gcc编译器，否则请先行安装gcc编译器：gcc ?v如能返回gcc版本号，则gcc正确安装。
 安装环境1.安装build工具sudo aptitude install build-essential linux-headers-$(uname -r)2.安装readline zlib">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-22T06:05:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编译安装rails">
 <meta name="twitter:description" content="注意事项：1、请务必将系统更新到最新2、最好直接使用root用户进行安装3、在安装之前，应该确认操作系统已经安装好gcc编译器，否则请先行安装gcc编译器：gcc ?v如能返回gcc版本号，则gcc正确安装。
@@ -297,11 +297,7 @@
       
           
         <p>注意事项：<br>1、请务必将系统更新到最新<br>2、最好直接使用root用户进行安装<br>3、在安装之前，应该确认操作系统已经安装好gcc编译器，否则请先行安装gcc编译器：gcc ?v如能返回gcc版本号，则gcc正确安装。</p>
-<p>安装环境<br>1.安装build工具<br>sudo aptitude install build-essential linux-headers-$(uname -r)<br>2.安装readline zlib libncurses5<br>apt-get install zlib1g-dev<br>apt-get install libreadline5 libreadline5-dev<br>apt-get install libncurses5 libncurses5-dev</p>
-<ul>
-<li><a id="more"></a>
-注：本人安装时 用到了  “zlib1g-dev” 和”ruby-zlib-0.6.0” 由于安装过程十分不顺利，在安装rails的时候出现错误，提示没有载入 zlib，所以又去安装ruby-zlib-0.6-0，安装失败<br>然后又安装 “zlib1g-dev”后，安装ruby-zlib-0.6-0成功，随后rails也成功用gem安装。<br>如果先安装“zlib1g-dev”，可能就用不安装”ruby-zlib-0.6-0”，也可以成功安装rails，至于这点，本人没有亲自尝试，打算在下次安装时再亲自试验下。如果您试验成功，望告之。<br>（这一点在后来再次安装时貌似必须安装”ruby-zlib-0.6-0”，并且一定要用uname -r 查看当前编译环境，并将旧的编译环境文件删除）</li>
-</ul>
+<p>安装环境<br>1.安装build工具<br>sudo aptitude install build-essential linux-headers-$(uname -r)<br>2.安装readline zlib libncurses5<br>apt-get install zlib1g-dev<br>apt-get install libreadline5 libreadline5-dev<br>apt-get install libncurses5 libncurses5-dev<br><a id="more"></a><br>注：本人安装时 用到了  “zlib1g-dev” 和”ruby-zlib-0.6.0” 由于安装过程十分不顺利，在安装rails的时候出现错误，提示没有载入 zlib，所以又去安装ruby-zlib-0.6-0，安装失败<br>然后又安装 “zlib1g-dev”后，安装ruby-zlib-0.6-0成功，随后rails也成功用gem安装。<br>如果先安装“zlib1g-dev”，可能就用不安装”ruby-zlib-0.6-0”，也可以成功安装rails，至于这点，本人没有亲自尝试，打算在下次安装时再亲自试验下。如果您试验成功，望告之。<br>（这一点在后来再次安装时貌似必须安装”ruby-zlib-0.6-0”，并且一定要用uname -r 查看当前编译环境，并将旧的编译环境文件删除）</p>
 <p>&nbsp;</p>
 <p><span style="color: magenta;">可以直接安装zlib1g-dev ，而不用安装ruby-zlib-0.6-0，也可以安装成功</span></p>
 <p>开始安装<br>安装ruby<br>ruby的源代码下载：<br><a href="http://www.ruby-lang.org/en/downloads/" target="_blank" rel="external">http://www.ruby-lang.org/en/downloads/</a><br>wget <a href="ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p72.tar.gz" target="_blank" rel="external">ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p72.tar.gz</a>    注：安装包名字据你的名子而定，可以从官网直接下载到本地再进行安装<br>tar xvfz ruby-1.8.7-p72.tar.gz<br>cd ruby-1.8.7-p72<br>./configure –prefix=/usr/local/ruby    (是否可以直接指定openssl)<br>(考虑 一起编译openssl )<br>sudo make<br>sudo make install<br>安装好以后，加入/usr/local/ruby/bin到操作系统的PATH环境变量中<br>编辑/etc/environment<br>gedit /etc/environment<br>在最后面加入：<br>PATH=”/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/ruby/bin”<br>执行命令,使环境变量修改生效：<br>source /etc/environment   注：在Ubuntu下好像没有此命令。（Linux）上应该可以。可以通过重新登录的方法使环境变量修改生效。</p>
@@ -332,7 +328,7 @@ from /usr/local/ruby/lib/ruby/1.8/irb/init.rb:21:in</code>setup’<br>from /usr/
         <p><span>本文标题:</span><a href="/rails-install-with-make-install/">编译安装rails</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2011-07-01, 17:42:06</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2016-08-22, 14:05:49</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/rails-install-with-make-install/" title="编译安装rails">http://www.gagahappy.com/rails-install-with-make-install/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/rails-install-with-make-install/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

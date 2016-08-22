@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://www.gagahappy.com/install-berkeley-db/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="1简介BDB的全称Berkeley DB，是一套开放源码的嵌入式数据库的程序库。它为应用程序提供可伸缩的、高性能的、有事务保护功能的数据管理服务。Berkeley DB为数据的存取和管理提供了一组简洁的函数调用API接口。BDB为多种编程语言提供了API接口，其中包括C、C++、Java、Perl、Tcl、Python和PHP，所有的数据库操作都在程序库内部发生。多个进程，或者同一进程的多个线程可">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-22T06:05:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装Berkeley DB">
 <meta name="twitter:description" content="1简介BDB的全称Berkeley DB，是一套开放源码的嵌入式数据库的程序库。它为应用程序提供可伸缩的、高性能的、有事务保护功能的数据管理服务。Berkeley DB为数据的存取和管理提供了一组简洁的函数调用API接口。BDB为多种编程语言提供了API接口，其中包括C、C++、Java、Perl、Tcl、Python和PHP，所有的数据库操作都在程序库内部发生。多个进程，或者同一进程的多个线程可">
@@ -294,10 +294,8 @@
       
           
         <p>1<br>简介BDB的全称Berkeley DB，是一套开放源码的嵌入式数据库的程序库。它为应用程序提供可伸缩的、高性能的、有事务保护功能的数据管理服务。Berkeley DB为数据的存取和管理提供了一组简洁的函数调用API接口。<br>BDB为多种编程语言提供了API接口，其中包括C、C++、Java、Perl、Tcl、Python和PHP，所有的数据库操作都在程序库内部发生。多个进程，或者同一进程的多个线程可同时使用数据库，有如各自单独使用，底层的服务如加锁、事务日志、共享缓冲区管理、内存管理等等都由程序库透明地执行。<br>BDB物理结构：</p>
-<ul>
-<li><a id="more"></a>
-2<br>存储逻辑介绍BDB所管理数据的逻辑组织单位是若干个独立或有一定关系的数据库(database)，每个数据库由若干记录组成，这些记录全都被表示成(key，value)的形式。<br>如果把一组相关的(key，value)对也看作一个表的话，那么每一个数据库只允许存放一个table，这一点不同于一般的关系数据库。实际上，在Berkeley DB中所提到的“数据库”，相当于一般关系数据库系统中的表；而“key/data”对相当于关系数据库系统中的行(rows)；Berkeley DB不提供关系数据库中列直接访问的功能，而是在“key/data”对中的data项中通过实际应用来封装字段(列)。<br>在物理组织上，每一个数据库在创建的时候可以由应用程序根据其数据特点来选择一种合适的存储结构。可供选择的四种文件存储结构分别是：哈希、B树、定长记录(队列)和变长记录(基于记录号的简单存储方式)。<br>其中定长记录和变长记录存储方法必须使用逻辑记录号(logical record numbers，本质上就是一个整数)做为key。<br>哈希和B树存储方法对key没有特别的要求。当数据量非常多时（内存不能放下所有数据时），建议使用哈希，因为哈希比B树的索引信息小，会少一些I/O操作。<br>3<br>系统结构介绍：BDB由五个主要的子系统构成.包括: 存取管理子系统、内存池管理子系统、事务子系统、锁子系统以及日志子系统。</li>
-</ul>
+<a id="more"></a>
+<p>2<br>存储逻辑介绍BDB所管理数据的逻辑组织单位是若干个独立或有一定关系的数据库(database)，每个数据库由若干记录组成，这些记录全都被表示成(key，value)的形式。<br>如果把一组相关的(key，value)对也看作一个表的话，那么每一个数据库只允许存放一个table，这一点不同于一般的关系数据库。实际上，在Berkeley DB中所提到的“数据库”，相当于一般关系数据库系统中的表；而“key/data”对相当于关系数据库系统中的行(rows)；Berkeley DB不提供关系数据库中列直接访问的功能，而是在“key/data”对中的data项中通过实际应用来封装字段(列)。<br>在物理组织上，每一个数据库在创建的时候可以由应用程序根据其数据特点来选择一种合适的存储结构。可供选择的四种文件存储结构分别是：哈希、B树、定长记录(队列)和变长记录(基于记录号的简单存储方式)。<br>其中定长记录和变长记录存储方法必须使用逻辑记录号(logical record numbers，本质上就是一个整数)做为key。<br>哈希和B树存储方法对key没有特别的要求。当数据量非常多时（内存不能放下所有数据时），建议使用哈希，因为哈希比B树的索引信息小，会少一些I/O操作。<br>3<br>系统结构介绍：BDB由五个主要的子系统构成.包括: 存取管理子系统、内存池管理子系统、事务子系统、锁子系统以及日志子系统。</p>
 <p>3.1<br>数据存取子系统    数据存取（Access Methods）子系统为创建和访问数据库文件提供了多种支持。Berkeley DB提供了以下四种文件存储方法：<br>哈希文件、B树、定长记录（队列）和变长记录（基于记录号的简单存储方式），应用程序可以从中选择最适合的文件组织结构。<br>创建表时可以使用任意一种结构，并且可以在同一个应用程序中对不同存储类型的文件进行混合操作。<br>3.2<br>内存池管理子系统    内存池（Memory pool）子系统对Berkeley DB所使用的共享缓冲区进行有效的管理。它允许同时访问数据库的多个进程或者进程的多个线程共享一个高速缓存，负责将修改后的页写回文件和为新调入的页分配内存空间。<br>    它也可以独立于Berkeley DB系统之外，单独被应用程序使用，为其自己的文件和页分配内存空间。<br>内存池管理子系统适用于需要灵活的、面向页的、缓冲的共享文件访问的应用。<br>内存数据和硬盘文件的同步有两种方式：<br>1.<br>需要程序显式条用同步函数才能完成，当数据量比较大时同步比较慢，会造成大量的I/O操作，而且由于内部锁的原因，会对查询造成影响。<br>2.<br>在BDB打开时会设置一个cache的大小，也就是BDB使用内存的大小。如果超过这个大小，BDB会自动同步数据到硬盘文件。<br>3.3<br>事务子系统</p>
 <p>事务（Transaction）子系统为Berkeley DB提供事务管理功能。它允许把一组对数据库的修改看作一个原子单位，这组操作要么全做，要么全不做。在默认的情况下，系统将提供严格的ACID事务属性，但是应用程序可以选择不使用系统所作的隔离保证。该子系统使用两段锁技术和先写日志策略来保证数据库数据的正确性和一致性。<br>它也可以被应用程序单独使用来对其自身的数据更新进行事务保护。事务子系统适用于需要事务保证数据的修改的应用。<br>在本次项目里，并没有用到事务，所以对此研究也不够深入。<br>3.4<br>锁子系统    锁（Locking）子系统为BDB提供锁机制，为系统提供多用户读取和单用户修改同一对象的共享控制。<br>数据存取子系统可利用该子系统获得对页或记录的读写权限；事务子系统利用锁机制来实现多个事务的并发控制。</p>
 <p>该子系统也可被应用程序单独采用。锁子系统适用于一个灵活的、快速的、可设置的锁管理器。<br>目前的使用上来看，当使用BDB的进程异常终止时，所占用的锁并不能释放，需要删除BDB环境文件才能释放所有锁。这个问题后期再详细研究一下。<br>3.5<br>日志子系统<br>日志（Logging）子系统采用的是先写日志的策略，用于支持事务子系统进行数据恢复，保证数据一致性。<br>4<br>编译、安装可以在<a href="http://www.oracle.com/technology/products/berkeley-db/index.html" target="_blank" rel="external">http://www.oracle.com/technology/products/berkeley-db/index.html</a> 现在最新的安装包和文档。<br>       将安装包结压后，进入build_unix目录</p>
@@ -313,7 +311,7 @@
         <p><span>本文标题:</span><a href="/install-berkeley-db/">安装Berkeley DB</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2011-07-13, 20:17:21</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2016-08-22, 14:05:38</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/install-berkeley-db/" title="安装Berkeley DB">http://www.gagahappy.com/install-berkeley-db/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/install-berkeley-db/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

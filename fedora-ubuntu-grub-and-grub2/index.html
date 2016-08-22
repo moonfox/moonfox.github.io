@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="实践环境：ubuntu 10.10 和 fedora 14这里涉及到一个安装先后的问题。
 情况一、先安装fedora，后安装ubuntu如果不出意外的话，ubuntu会自动搜索你硬盘上的所有操作系统，并生成所有操作系统的对应菜单。如果运气不好，没有生成fedora的启动菜单项，我们可以手工生成。">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-22T06:05:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fedora ubuntu 建立多重启动菜单">
 <meta name="twitter:description" content="实践环境：ubuntu 10.10 和 fedora 14这里涉及到一个安装先后的问题。
@@ -297,12 +297,7 @@
       
           
         <p>实践环境：ubuntu 10.10 和 fedora 14<br>这里涉及到一个安装先后的问题。</p>
-<p>情况一、先安装fedora，后安装ubuntu<br>如果不出意外的话，ubuntu会自动搜索你硬盘上的所有操作系统，并生成所有操作系统的对应菜单。<br>如果运气不好，没有生成fedora的启动菜单项，我们可以手工生成。</p>
-<ul>
-<li><a id="more"></a>
-进入ubuntu系统，执行命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo grub-install /dev/sda      <span class="comment">#安装grub到硬盘mbr</span></div><div class="line">sudo update-grub2                <span class="comment">#更新grub.cfg，自动加载硬盘上所有的系统</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
+<p>情况一、先安装fedora，后安装ubuntu<br>如果不出意外的话，ubuntu会自动搜索你硬盘上的所有操作系统，并生成所有操作系统的对应菜单。<br>如果运气不好，没有生成fedora的启动菜单项，我们可以手工生成。<br><a id="more"></a><br>进入ubuntu系统，执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo grub-install /dev/sda      <span class="comment">#安装grub到硬盘mbr</span></div><div class="line">sudo update-grub2                <span class="comment">#更新grub.cfg，自动加载硬盘上所有的系统</span></div></pre></td></tr></table></figure></p>
 <p>情况二、先安装ubuntu，后安装fedora<br>这样的话就比较麻烦了，不过还是可能解决的。首先最好可以确保你可以在fedora下进入ubuntu所在分区，并找到grub.cfg文件，文件路径/boot/grub/grub.cfg（请根据你的实际情况）</p>
 <p>然后打开fedora的启动菜单<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gedit /boot/grub/menu.lst</div></pre></td></tr></table></figure></p>
 <p>在打开的文件中添加<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">title Ubuntu, with Linux 2.6.35-25-generic</div><div class="line">root (hd0,7)  <span class="comment">#根目录所在分区，请根据你的实际情况替换</span></div><div class="line">kernel /vmlinuz-2.6.35-25-generic root=UUID=8a00acbf-5189-4<span class="built_in">cd</span>2-8a4f-1775e93e1877 ro   quiet splash  <span class="comment">#可以直接把ubuntu分区上的grub.cfg上的相同字段内容复制</span></div><div class="line">initrd /initrd.img-2.6.35-25-generic <span class="comment">#可以直接把ubuntu分区上的grub.cfg上的相同字段内容复制</span></div></pre></td></tr></table></figure></p>
@@ -318,7 +313,7 @@
         <p><span>本文标题:</span><a href="/fedora-ubuntu-grub-and-grub2/">fedora ubuntu 建立多重启动菜单</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2011-04-10, 16:47:25</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2016-08-22, 14:05:52</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/fedora-ubuntu-grub-and-grub2/" title="fedora ubuntu 建立多重启动菜单">http://www.gagahappy.com/fedora-ubuntu-grub-and-grub2/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/fedora-ubuntu-grub-and-grub2/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

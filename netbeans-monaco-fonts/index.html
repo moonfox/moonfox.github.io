@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://www.gagahappy.com/netbeans-monaco-fonts/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="monaco字体是苹果操作系统下的一款字体，很艺术性，个人感觉比较接近手写。代码用这种字体显示相当漂亮。以下操作均是在ubuntu的操作系统上，如果你是windows请自己谷歌 or 百度吧安装：1、先在/usr/share/fonts/下新建一个文件夹macsudo mkdir /usr/share/fonts/mac2、然后把下载的monaco字体复制到此文件夹下sudo cp ［路径＋*.t">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-22T06:07:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="让netbeans支持monaco字体">
 <meta name="twitter:description" content="monaco字体是苹果操作系统下的一款字体，很艺术性，个人感觉比较接近手写。代码用这种字体显示相当漂亮。以下操作均是在ubuntu的操作系统上，如果你是windows请自己谷歌 or 百度吧安装：1、先在/usr/share/fonts/下新建一个文件夹macsudo mkdir /usr/share/fonts/mac2、然后把下载的monaco字体复制到此文件夹下sudo cp ［路径＋*.t">
@@ -294,10 +294,7 @@
       
           
         <p>monaco字体是苹果操作系统下的一款字体，很艺术性，个人感觉比较接近手写。代码用这种字体显示相当漂亮。<br>以下操作均是在ubuntu的操作系统上，如果你是windows请自己谷歌 or 百度吧<br>安装：<br>1、先在/usr/share/fonts/下新建一个文件夹mac<br>sudo mkdir /usr/share/fonts/mac<br>2、然后把下载的monaco字体复制到此文件夹下<br>sudo cp ［路径＋*.ttf］ /usr/share/fonts/mac<br>3、开始安装</p>
-<ul>
-<li><a id="more"></a>
-</li>
-</ul>
+<a id="more"></a>
 <p>cd /usr/share/fonts/mac/<br>sudo mkfontscale<br>（创建字体的fonts.scale文件，它用来控制字体旋转缩放）<br>sudo mkfontdir<br>（创建字体的fonts.dir文件，它用来控制字体粗斜体产生）<br>sudo fc-cache -fv sudo fc-cache -fv<br>（建立字体缓存信息，也就是让系统认识字体）<br>然后再重新登录系统，就可以在netbeans中使用monaco字体。注：monaco的字体只有在调到18号字的时候才能完美显示，否则是相当的难看的。<br>4、删除字体，直接删除mac文件夹，然后sudo fc-cache -fv<br>如果你的代码中不需要对中文进行支持，那么你就不用再往下看了。</p>
 <p>由于monaco并不支持中文，所以页面中的中文字体全都变成了方块。解决方法如下<br>1、 修改$JAVA_HOME/jre/lib/目录下的fontconfig.properties文件，如果没有，可以将fontconfig.properties.src复制一份成为fontconfig.properties<br>2、在# Font File Names下加入filename.-apple-monaco-medium-r-normal–0-0-0-0-m-0-iso8859-1=/usr/share/fonts/mac/MONACO.TTF（请根据你自己的实际情况进行修改）<br>3、在# Component Font Mappings下加入allfonts.monaco=-apple-monaco-medium-r-normal–0-0-0-0-m-0-iso8859-1(后经实践不用加上这个也可以)<br>4、修改所有monospaced.xxx.latin-1, 修改为-apple-monaco-medium-r-normal–0-0-0-0-m-0-iso8859-1<br>保存后重新启动netbeans。现在中文正常显示了吧。什么，你的还不行，那恭喜你了。请自己去谷歌 or 百度一下吧。</p>
 
@@ -311,7 +308,7 @@
         <p><span>本文标题:</span><a href="/netbeans-monaco-fonts/">让netbeans支持monaco字体</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2009-06-14, 17:58:21</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2016-08-22, 14:07:49</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/netbeans-monaco-fonts/" title="让netbeans支持monaco字体">http://www.gagahappy.com/netbeans-monaco-fonts/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/netbeans-monaco-fonts/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

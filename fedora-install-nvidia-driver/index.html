@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="这次主要介绍一下fedora N卡的驱动安装方法。
 1、当前内核版本号要和你用yum install kernel-headers已经安装的最新的版本要一致rpm -qa | grep ^kernelkernel-devel-2.6.33.5-124.fc13.i686kernel-headers-2.6.33.5-124.fc13.i686kernel-2.6.33.5-124.fc13.i68">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-22T06:07:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fedora 安装显卡驱动">
 <meta name="twitter:description" content="这次主要介绍一下fedora N卡的驱动安装方法。
@@ -298,10 +298,7 @@
           
         <p>这次主要介绍一下fedora N卡的驱动安装方法。</p>
 <p>1、当前内核版本号要和你用yum install kernel-headers已经安装的最新的版本要一致<br>rpm -qa | grep ^kernel<br>kernel-devel-2.6.33.5-124.fc13.i686<br>kernel-headers-2.6.33.5-124.fc13.i686<br>kernel-2.6.33.5-124.fc13.i686<br>这三个的版本号应该一致，如果不一致，请升级到最新版  运行yum update kernel升级至最新版本</p>
-<ul>
-<li><a id="more"></a>
-</li>
-</ul>
+<a id="more"></a>
 <p>2、下载显卡驱动<br>查看显卡型号<br>lspci | grep VGA<br>01:00.0 VGA compatible controller: nVidia Corporation GT218 [GeForce 210] (rev a2) 说明是geForce 210<br>官方网址<a href="http://www.nvidia.cn/Download/index.aspx?lang=cn" target="_blank" rel="external">http://www.nvidia.cn/Download/index.aspx?lang=cn</a></p>
 <p>3、要修改的文件<br>vim  /etc/modprobe.d/blacklist.conf<br>添加以下行阻止 nouveau 模块的加载<br>blacklist nouveau</p>
 <p>4、安装驱动<br>重新启动系统后，进入grup选择菜单，在选择的内核上按e进行编辑，最后面接上一个空格和一个数字3，如<br>kernel /vmlinuz-2.6.33.5-124.fc13.i686 ro root=UUID=ece1ac0a-ef69-4d71-988e-20eef00b2f20 rd_NO_LUKS rd_NO_LVM rd_NO_MD rd_NO_DM LANG=en_US.UTF-8 SYSFONT=latarcyrheb-sun16 KEYBOARDTYPE=pc KEYTABLE=us rhgb quiet 3<br>然后Enter完成编辑，用b进行引导启动。</p>
@@ -321,7 +318,7 @@
         <p><span>本文标题:</span><a href="/fedora-install-nvidia-driver/">fedora 安装显卡驱动</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2010-06-26, 22:32:27</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2016-08-22, 14:07:03</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/fedora-install-nvidia-driver/" title="fedora 安装显卡驱动">http://www.gagahappy.com/fedora-install-nvidia-driver/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/fedora-install-nvidia-driver/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

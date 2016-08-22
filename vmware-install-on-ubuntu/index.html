@@ -25,7 +25,7 @@
 <meta property="og:description" content="一、安装系统编译环境    apt-get  install build-essential    build-essential|依赖: libc6-dev  依赖:     libc6-dev  依赖: g++  依赖: make  依赖: dpkg-dev
   安装完成后，我们就有了g++,make，在安装Vmware-tool时，会用到。
 二、查看是否已经安装了相应的 linux-head">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-22T06:05:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装虚拟机工具VMware">
 <meta name="twitter:description" content="一、安装系统编译环境    apt-get  install build-essential    build-essential|依赖: libc6-dev  依赖:     libc6-dev  依赖: g++  依赖: make  依赖: dpkg-dev
@@ -305,26 +305,18 @@
 <pre><code> 安装 linux-headers-2.6.27-11-generic
 apt-get install linux-headers-2.6.27-11-generic
 被安装到 /usr/src/linux-headers-2.6.27-11-generic
-</code></pre><ul>
-<li><a id="more"></a>
-<p>三、安装VMware-tools</p>
-<pre><code>若是桌面环境可以直接从光盘解压 ：vmware-linux-tools.tar.gz 包
-文字模式下挂载光驱
-运行
-mount -t iso9660 /dev/cdrom /mnt
-</code></pre><p>　　加载CDROM设备，这时如果进入 /mnt 目录下，你将会发现多了一个文件：vmware-linux-tools.tar.gz。这就是WMWARE TOOLS的LINUX软件包。</p>
-<pre><code> 拷贝到任意目录
- cp ./vmware-linux-tools.tar.gz  /home/g
-卸载CDROM。 umount /dev/cdrom
+</code></pre><a id="more"></a>
+<p>三、安装VMware-tools<br>       若是桌面环境可以直接从光盘解压 ：vmware-linux-tools.tar.gz 包<br>       文字模式下挂载光驱<br>       运行<br>       mount -t iso9660 /dev/cdrom /mnt<br>　　加载CDROM设备，这时如果进入 /mnt 目录下，你将会发现多了一个文件：vmware-linux-tools.tar.gz。这就是WMWARE TOOLS的LINUX软件包。<br>       拷贝到任意目录<br>       cp ./vmware-linux-tools.tar.gz  /home/g<br>      卸载CDROM。 umount /dev/cdrom</p>
+<pre><code>  解压   tar zxpf vmware-linux-tools.tar.gz
+  进入目录 cd  vmware-linux-tools
+  执行 ./vmware-install.pl
 
-解压   tar zxpf vmware-linux-tools.tar.gz
-进入目录 cd  vmware-linux-tools
-执行 ./vmware-install.pl
-</code></pre><p>   安装开始，对应的进行相关选择即可，注意，切不可一路回车，因为有的选项默认是[no]，这时你若回了车，则表时不安装，可能会失去相应功能。<br>  在选择 /usr/src/linux/include 时，就手动录入为 /usr/src/linux-headers-2.6.27-11-generic/include，就是我们刚才手动安装的headers-2.6.27-11-generic。如果选择默路径<br>  则系统会提示路径不正确。你仍然需要手动安装。</p>
-<p>  此安装过程主要针对ubuntu 8.10 server。ubuntu 8.10 desktop 安装时要相对简单，VMware所有依赖的软件包大部分都已经安装好了。</p>
-</li>
-</ul>
+ 安装开始，对应的进行相关选择即可，注意，切不可一路回车，因为有的选项默认是[no]，这时你若回了车，则表时不安装，可能会失去相应功能。
+在选择 /usr/src/linux/include 时，就手动录入为 /usr/src/linux-headers-2.6.27-11-generic/include，就是我们刚才手动安装的headers-2.6.27-11-generic。如果选择默路径
+则系统会提示路径不正确。你仍然需要手动安装。
 
+此安装过程主要针对ubuntu 8.10 server。ubuntu 8.10 desktop 安装时要相对简单，VMware所有依赖的软件包大部分都已经安装好了。
+</code></pre>
       
     </div>
     
@@ -335,7 +327,7 @@ mount -t iso9660 /dev/cdrom /mnt
         <p><span>本文标题:</span><a href="/vmware-install-on-ubuntu/">安装虚拟机工具VMware</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2011-07-07, 18:11:15</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2016-08-22, 14:05:44</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/vmware-install-on-ubuntu/" title="安装虚拟机工具VMware">http://www.gagahappy.com/vmware-install-on-ubuntu/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/vmware-install-on-ubuntu/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

@@ -23,7 +23,7 @@ fedora 默认新建的用户不在sudo组，但可以编辑/etc/sudoers文件将
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="在ubuntu下执行某条命令时如果需要root权限，我们只需要在此命令的前面加上sudo，转到fedora后如果要执行root权限的命令，需要先切换到root用户，才能使用，感觉用起来十分不顺手。在网上搜索后，发现可以通过配置sudo的方式来决定这个问题。方法如下
 fedora 默认新建的用户不在sudo组，但可以编辑/etc/sudoers文件将普通用户加入sudo组。要注意的是修改该文件只能使">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-22T06:07:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fedora 使用 sudo">
 <meta name="twitter:description" content="在ubuntu下执行某条命令时如果需要root权限，我们只需要在此命令的前面加上sudo，转到fedora后如果要执行root权限的命令，需要先切换到root用户，才能使用，感觉用起来十分不顺手。在网上搜索后，发现可以通过配置sudo的方式来决定这个问题。方法如下
@@ -298,10 +298,7 @@ fedora 默认新建的用户不在sudo组，但可以编辑/etc/sudoers文件将
           
         <p>在ubuntu下执行某条命令时如果需要root权限，我们只需要在此命令的前面加上sudo，转到fedora后如果要执行root权限的命令，需要先切换到root用户，才能使用，感觉用起来十分不顺手。在网上搜索后，发现可以通过配置sudo的方式来决定这个问题。方法如下</p>
 <p>fedora 默认新建的用户不在sudo组，但可以编辑/etc/sudoers文件将普通用户加入sudo组。要注意的是修改该文件只能使用visudo命令</p>
-<ul>
-<li><a id="more"></a>
-</li>
-</ul>
+<a id="more"></a>
 <p>1、首先切换到 root<br>su -<br>(注意有- ，这和su不同，在用命令”su”的时候只是切换到root，但没有把root的环境变量传过去，还是当前用户的环境变量，而使用带横线参数的”su -“命令则将环境变量也一起转换过去，就象用root登录一样)</p>
 <p>2、然后visudo<br>这个和vi的用法一样，移动光标，到最后一行，按a，进入append模式，输入以下这行内容<br>yourname ALL=(ALL)<br>然后按Esc，再输入:wq保存文件并退出，这样就把自己加入了sudo组，可以使用sudo命令了。<br>如果不想在sudo的时候输入密码，干脆就把上面那行换成下面这行即可：<br>yourname ALL=(ALL)NOPASSWD: ALL</p>
 <p>3、测试 sudo<br>测试以上是否正确配置了 sudo ,只需要在普通用户权限下输入<br>sudo whoami<br>如果配置正确,则命令会返回“root”字样。</p>
@@ -316,7 +313,7 @@ fedora 默认新建的用户不在sudo组，但可以编辑/etc/sudoers文件将
         <p><span>本文标题:</span><a href="/fedora-sudo/">fedora 使用 sudo</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2010-06-23, 00:31:18</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2016-08-22, 14:07:09</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/fedora-sudo/" title="fedora 使用 sudo">http://www.gagahappy.com/fedora-sudo/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/fedora-sudo/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

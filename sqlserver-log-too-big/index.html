@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://www.gagahappy.com/sqlserver-log-too-big/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="在SQL Server数据库中事务日志起着至关重要的作用：它持续记录数据库所有的事务和这些事务对数据库所做的修改;一旦数据库出现灾难事件，就需要事务日志来进行近期数据的恢复操作。不过，要得到任何好处都要付出的相应代价：在活动数据库中，事务日志会消耗大量的存储空间，如果你不做任何干预，事务逻辑日志会一直增长，直到塞满存储这些日志文件的所有可用空间。SQL Server提供了两个用来平衡事务日志对空间">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-22T06:07:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqlserver日志文件太大解决方法">
 <meta name="twitter:description" content="在SQL Server数据库中事务日志起着至关重要的作用：它持续记录数据库所有的事务和这些事务对数据库所做的修改;一旦数据库出现灾难事件，就需要事务日志来进行近期数据的恢复操作。不过，要得到任何好处都要付出的相应代价：在活动数据库中，事务日志会消耗大量的存储空间，如果你不做任何干预，事务逻辑日志会一直增长，直到塞满存储这些日志文件的所有可用空间。SQL Server提供了两个用来平衡事务日志对空间">
@@ -295,10 +295,7 @@
           
         <pre><code>在SQL Server数据库中事务日志起着至关重要的作用：它持续记录数据库所有的事务和这些事务对数据库所做的修改;一旦数据库出现灾难事件，就需要事务日志来进行近期数据的恢复操作。不过，要得到任何好处都要付出的相应代价：在活动数据库中，事务日志会消耗大量的存储空间，如果你不做任何干预，事务逻辑日志会一直增长，直到塞满存储这些日志文件的所有可用空间。SQL Server提供了两个用来平衡事务日志对空间巨大需求的操作：截断事务日志和收缩事务日志。
 </code></pre><p>　　日志截断</p>
-<ul>
-<li><a id="more"></a>
-</li>
-</ul>
+<a id="more"></a>
 <p>　　截断事务日志操作就是清除事务日志文件中的非活动记录。一般情况下，SQL Server能够自动执行截断操作，不需要人工干预管理。截断的频率取决于数据库的使用程度。你每进行一次完整恢复模式或大容量日志恢复模式的数据库备份，SQL Server就会截断一次事务日志。如果是在简单恢复模式下(不能还原事务日志)，SQL Server会在每个检查点之后截断事务日志。</p>
 <p>　　你也可以通过间接的方式手动驱使SQL Server执行事务日志截断操作，需要运行备份操作，不过你可以给SQL Server下指示，表明你只想执行事务日志的备份操作，不做执行其他任何操作。通过以下的T-SQL命令可以达到上述效果：</p>
 <p>　　BACKUP LOG WITH TRUNCATE_ONLY;</p>
@@ -336,7 +333,7 @@
         <p><span>本文标题:</span><a href="/sqlserver-log-too-big/">sqlserver日志文件太大解决方法</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2009-09-16, 14:12:40</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2016-08-22, 14:07:41</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/sqlserver-log-too-big/" title="sqlserver日志文件太大解决方法">http://www.gagahappy.com/sqlserver-log-too-big/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/sqlserver-log-too-big/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
