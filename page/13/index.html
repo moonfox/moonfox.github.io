@@ -254,6 +254,75 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-rails2-2-2-can-not-connect-mysql-drive-bug" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails2-2-2-can-not-connect-mysql-drive-bug/" class="article-date">
+      <time datetime="2011-07-03T09:56:36.000Z" itemprop="datePublished">2011-07-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails2-2-2-can-not-connect-mysql-drive-bug/">解决rails2.2.2不能连接mysql 数据库驱动问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>gem install mysql – –with-mysql-config=/usr/local/mysql/bin/mysql_config</p>
+<p>1. gem install mysql –no-rdoc –no-ri \<br>2. – –with-mysql-include=/usr/local/mysql/include \<br>3. –with-mysql-lib=/usr/local/mysql/lib \<br>4. –with-mysql-config=/usr/local/mysql/bin/mysql_config</p>
+<p>“/usr/local/mysql/lib” to /etc/ld.so.conf and ran ldconfig</p>
+<p>修改 /etc/ld.so.conf<br>加入<br>include /opt/mysql/lib</p>
+<p>gem install mysql – –with-mysql-lib=/opt/mysql/lib/mysql –with-mysql-include=/opt/mysql/include/mysql/</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-mysql-install-with-make-install" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1532,72 +1601,6 @@
         <p class="article-more-link">
           <a href="/nginx-config-option/#more">阅读全文 >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-find-all-is-error-in-rails-2-0-up" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/find-all-is-error-in-rails-2-0-up/" class="article-date">
-      <time datetime="2011-03-25T13:09:49.000Z" itemprop="datePublished">2011-03-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/find-all-is-error-in-rails-2-0-up/">find_all终成大患了</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>正如之前预料的那样，升级到rails2.3后，find_all终成大患了。其实早在rails 1.2时就已经提示，find_all方法将在2.0版本的时候被移除，所以当时最稳妥的做法就是使用find(:all)这样的原生方法。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># In rails2.0 up can not work</span></div><div class="line">find_all(<span class="symbol">:all</span>)</div></pre></td></tr></table></figure>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># In rails2.0  still work</span></div><div class="line">find(<span class="symbol">:all</span>)</div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li></ul>
-    </div>
-
       
       <div class="clearfix"></div>
     </div>
