@@ -254,6 +254,73 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-deploy-nginx-thin" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/deploy-nginx-thin/" class="article-date">
+      <time datetime="2015-04-28T05:46:16.000Z" itemprop="datePublished">2015-04-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/deploy-nginx-thin/">部署thin + nginx</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>部署thin + nginx<br>生成配置文件<br>thin config -C /etc/thin/<config-name>.yml -c <rails-app-root-path> –servers <number-of-threads> -e <environment><br>thin config -C /etc/thin/myapp.yml -c /var/rails/myapp –servers 5 –socket /tmp/thin.myapp.sock -e development<br>替换<config-name>为自己的应用名称，替换<rails-app-root-path>为应用的根目录，替换<number-of-threads>为启动的线程数，也就是启动多少个Thin服务，替换<environment>为运行环境。</environment></number-of-threads></rails-app-root-path></config-name></environment></number-of-threads></rails-app-root-path></config-name></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">thin:</span></div><div class="line"><span class="symbol">environment:</span> development</div><div class="line"><span class="symbol">address:</span> <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span></div><div class="line"><span class="symbol">port:</span> <span class="number">3001</span></div><div class="line"><span class="symbol">timeout:</span> <span class="number">30</span></div><div class="line"><span class="symbol">log:</span> log/thin.log</div><div class="line"><span class="symbol">pid:</span> tmp/pids/thin.pid</div><div class="line"><span class="symbol">max_conns:</span> <span class="number">1024</span></div><div class="line"><span class="symbol">max_persistent_conns:</span> <span class="number">512</span></div><div class="line"><span class="symbol">wait:</span> <span class="number">30</span></div><div class="line"><span class="symbol">servers:</span> <span class="number">2</span></div><div class="line"><span class="symbol">daemonize:</span> <span class="literal">true</span></div><div class="line"><span class="comment"># require: []</span></div></pre></td></tr></table></figure>
+<p>启动: thin start -C config/thin.yml<br>停止: thin stop -C config/thin.yml<br>nginx:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">     listen 3001;</div><div class="line">     charset utf-8;</div><div class="line">     root /var/rails/mysapp/public;</div><div class="line">     access_log logs/access.log;</div><div class="line">     error_log  logs/error.log;</div><div class="line"></div><div class="line">     location / &#123;</div><div class="line">         <span class="comment"># proxy_pass          http://rails_servers;</span></div><div class="line">         <span class="comment"># proxy_redirect      default;</span></div><div class="line">         proxy_redirect      <span class="literal">false</span>;</div><div class="line">         proxy_set_header    X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">         proxy_set_header    X-Real-IP <span class="variable">$remote_addr</span>;</div><div class="line">         proxy_set_header    Host <span class="variable">$http_host</span>;</div><div class="line">         proxy_next_upstream http_502 http_504 error timeout invalid_header;</div><div class="line">         proxy_pass <span class="literal">false</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (<span class="_">-f</span> <span class="variable">$request_filename</span>/index.html)</div><div class="line">        &#123;</div><div class="line">          rewrite (.*) <span class="variable">$1</span>/index.html <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (<span class="_">-f</span> <span class="variable">$request_filename</span>.html) &#123;</div><div class="line">          rewrite (.*) <span class="variable">$1</span>.html <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (!<span class="_">-f</span> <span class="variable">$request_filename</span>) &#123;</div><div class="line">          proxy_pass http://rails_servers;</div><div class="line">          <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> &#125;</div><div class="line"> upstream rails_servers&#123;</div><div class="line">        server 127.0.0.1:3002;</div><div class="line">        server 127.0.0.1:3003;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/thin/">thin</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-rspec-exception-identity-or-equivalence" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1468,72 +1535,6 @@
       
           
         <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、测试eval的filename,与lineno参数使用</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、可以自定义程序出错时的出错信息（出错的文件名，程序在哪行执行的,方便出错日志的查询,错误的定位)</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">    string = <span class="string">"1/0"</span></div><div class="line">    <span class="comment"># eval(string, nil, __FILE__, __LINE__)</span></div><div class="line">    eval(string, <span class="literal">nil</span>, <span class="string">"custom_file.rb"</span>, <span class="number">60</span>)</div><div class="line">    <span class="comment"># eval(string)</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">MyClass.new.my_method <span class="comment"># custom_file.rb:60:in `/': divided by 0 (ZeroDivisionError)</span></div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-load-secondary-args-true-or-false" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/load-secondary-args-true-or-false/" class="article-date">
-      <time datetime="2015-04-04T14:06:30.000Z" itemprop="datePublished">2015-04-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/load-secondary-args-true-or-false/">load文件参数为false或true时,对变量,实例变量,常量的影响</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、load文件参数为false时，对变量，实例变量,常量的影响</span></div><div class="line"><span class="comment"># 2、load文件参数为false时，类是否被重新打开</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、变量不会被加载的文件影响，实例变量和常量会被影响。因为被加载文件中的变量会在文件加载完成后，掉出加载文件的作用域</span></div><div class="line"><span class="comment">#    而实例变量和常量不会掉出作用域</span></div><div class="line"><span class="comment"># 2、类可以被重新打开，因为被加载文件中类也没有掉出作用域（因为类也是常量）</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  var  = <span class="number">2</span></div><div class="line">  @var = <span class="number">2</span></div><div class="line">  VAR  = <span class="number">2</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">      <span class="string">"i'm in load_2 file"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  puts <span class="string">"==========Test1:OUTPUT=========="</span></div><div class="line"></div><div class="line">  load File.expand_path(<span class="string">'load_file.rb'</span>, File.dirname(__FILE_<span class="number">_</span>))</div><div class="line"></div><div class="line">  puts <span class="string">'==========load_2.rb======='</span></div><div class="line">  puts <span class="string">"var :<span class="subst">#&#123;var &#125;</span>"</span></div><div class="line">  puts <span class="string">"@var:<span class="subst">#&#123;@var&#125;</span>"</span></div><div class="line">  puts <span class="string">"VAR :<span class="subst">#&#123;VAR &#125;</span>"</span></div><div class="line">  puts <span class="string">"my_method:<span class="subst">#&#123;MyClass.new.my_method&#125;</span>"</span></div><div class="line">  puts <span class="string">'==========load_2.rb======='</span></div><div class="line">  puts <span class="string">"==========Test1:OUTPUT=========="</span></div><div class="line">  <span class="comment"># &lt;!-- more --&gt;</span></div><div class="line">  <span class="comment"># ==========Test1:OUTPUT==========</span></div><div class="line">  <span class="comment"># ==========load_1.rb=======</span></div><div class="line">  <span class="comment"># var :1</span></div><div class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></div><div class="line">  <span class="comment"># VAR :1</span></div><div class="line">  <span class="comment"># my_method:i'm in load_1 file</span></div><div class="line">  <span class="comment"># ==========load_1.rb=======</span></div><div class="line"></div><div class="line">  <span class="comment"># ==========load_2.rb=======</span></div><div class="line">  <span class="comment"># var :2</span></div><div class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></div><div class="line">  <span class="comment"># VAR :1</span></div><div class="line">  <span class="comment"># my_method:i'm in load_1 file</span></div><div class="line">  <span class="comment"># ==========load_2.rb=======</span></div><div class="line">  <span class="comment"># ==========Test1:OUTPUT==========</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标2:</span></div><div class="line"><span class="comment"># 1、load文件参数为true时，对变量，实例变量,常量的影响</span></div><div class="line"><span class="comment"># 2、load文件参数为true时，类是否被重新打开</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、变量不会被加载的文件影响，实例变量和常量也不会被影响</span></div><div class="line"><span class="comment"># 2、类不会被影响</span></div><div class="line"><span class="comment"># 因为ruby会在load文件时为其创建匿名模块，让其文件中的实例变量、常量、类落在其自身范围内，且在load完成后，销毁这个</span></div><div class="line"><span class="comment"># 匿名模块（即加载文件中的所有内容），加入true参数的这种做法无法让加载它的文件使用其文件中代码，仅仅是起到了运行load</span></div><div class="line"><span class="comment"># 文件的代码的作用</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  var  = <span class="number">2</span></div><div class="line">  @var = <span class="number">2</span></div><div class="line">  VAR  = <span class="number">2</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">      <span class="string">"i'm in load_2 file"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  puts <span class="string">"==========Test2:OUTPUT=========="</span></div><div class="line"></div><div class="line">  load File.expand_path(<span class="string">'load_file.rb'</span>, File.dirname(__FILE_<span class="number">_</span>)), <span class="literal">true</span></div><div class="line"></div><div class="line">  puts <span class="string">'==========load_2.rb======='</span></div><div class="line">  puts <span class="string">"var :<span class="subst">#&#123;var &#125;</span>"</span></div><div class="line">  puts <span class="string">"@var:<span class="subst">#&#123;@var&#125;</span>"</span></div><div class="line">  puts <span class="string">"VAR :<span class="subst">#&#123;VAR &#125;</span>"</span></div><div class="line">  puts <span class="string">"my_method:<span class="subst">#&#123;MyClass.new.my_method&#125;</span>"</span></div><div class="line">  puts <span class="string">'==========load_2.rb======='</span></div><div class="line">  puts <span class="string">"==========Test2:OUTPUT=========="</span></div><div class="line"></div><div class="line">  <span class="comment"># ==========Test2:OUTPUT==========</span></div><div class="line">  <span class="comment"># ==========load_1.rb=======</span></div><div class="line">  <span class="comment"># var :1</span></div><div class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></div><div class="line">  <span class="comment"># VAR :1</span></div><div class="line">  <span class="comment"># my_method:i'm in load_1 file</span></div><div class="line">  <span class="comment"># ==========load_1.rb=======</span></div><div class="line"></div><div class="line">  <span class="comment"># ==========load_2.rb=======</span></div><div class="line">  <span class="comment"># var :2</span></div><div class="line">  <span class="comment"># <span class="doctag">@var</span>:2</span></div><div class="line">  <span class="comment"># VAR :2</span></div><div class="line">  <span class="comment"># my_method:i'm in load_2 file</span></div><div class="line">  <span class="comment"># ==========load_2.rb=======</span></div><div class="line">  <span class="comment"># ==========Test2:OUTPUT==========</span></div><div class="line">&#125;.call</div></pre></td></tr></table></figure>
-<p>load_file.rb<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># module Load1</span></div><div class="line"></div><div class="line">var = <span class="number">1</span></div><div class="line">@var = <span class="number">1</span></div><div class="line">VAR = <span class="number">1</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">    <span class="string">"i'm in load_1 file"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">puts <span class="string">'==========load_1.rb======='</span></div><div class="line">puts <span class="string">"var :<span class="subst">#&#123;var &#125;</span>"</span></div><div class="line">puts <span class="string">"@var:<span class="subst">#&#123;@var&#125;</span>"</span></div><div class="line">puts <span class="string">"VAR :<span class="subst">#&#123;VAR &#125;</span>"</span></div><div class="line">puts <span class="string">"my_method:<span class="subst">#&#123;MyClass.new.my_method&#125;</span>"</span></div><div class="line">puts <span class="string">'==========load_1.rb======='</span></div><div class="line">puts</div><div class="line"></div><div class="line"><span class="comment"># end</span></div></pre></td></tr></table></figure></p>
-
       
     </div>
     

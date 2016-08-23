@@ -254,6 +254,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-mac-usb-play-dead" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/mac-usb-play-dead/" class="article-date">
+      <time datetime="2016-08-23T12:23:09.000Z" itemprop="datePublished">2016-08-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mac-usb-play-dead/">Mac Air USB设备冷启动不能识别</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>发现 Mac Air 右边(或左边)的USB接口在冷开机后，不能自动识别USB设备(极少的时候可以)，但接上<strong>苹果自己的USB延长线</strong>，后就可以了，非常奇怪。网上说这是苹果的硬件设计所导致的，是硬伤。</p>
+<p>目前发现的不能自动识别的设备有</p>
+<ul>
+<li>非苹果的键盘</li>
+<li>U盘</li>
+<li>移动硬盘</li>
+</ul>
+<p>PS: 这苹果的USB延长线管网卖140+一根，看来真是贵的有道理啊</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/software/">玩转软件</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mac/">mac</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-fix-tags-category-for-google-search" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1530,73 +1602,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/postgresql/">postgresql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/redis/">redis</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-deploy-nginx-thin" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/deploy-nginx-thin/" class="article-date">
-      <time datetime="2015-04-28T05:46:16.000Z" itemprop="datePublished">2015-04-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/deploy-nginx-thin/">部署thin + nginx</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>部署thin + nginx<br>生成配置文件<br>thin config -C /etc/thin/<config-name>.yml -c <rails-app-root-path> –servers <number-of-threads> -e <environment><br>thin config -C /etc/thin/myapp.yml -c /var/rails/myapp –servers 5 –socket /tmp/thin.myapp.sock -e development<br>替换<config-name>为自己的应用名称，替换<rails-app-root-path>为应用的根目录，替换<number-of-threads>为启动的线程数，也就是启动多少个Thin服务，替换<environment>为运行环境。</environment></number-of-threads></rails-app-root-path></config-name></environment></number-of-threads></rails-app-root-path></config-name></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">thin:</span></div><div class="line"><span class="symbol">environment:</span> development</div><div class="line"><span class="symbol">address:</span> <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span></div><div class="line"><span class="symbol">port:</span> <span class="number">3001</span></div><div class="line"><span class="symbol">timeout:</span> <span class="number">30</span></div><div class="line"><span class="symbol">log:</span> log/thin.log</div><div class="line"><span class="symbol">pid:</span> tmp/pids/thin.pid</div><div class="line"><span class="symbol">max_conns:</span> <span class="number">1024</span></div><div class="line"><span class="symbol">max_persistent_conns:</span> <span class="number">512</span></div><div class="line"><span class="symbol">wait:</span> <span class="number">30</span></div><div class="line"><span class="symbol">servers:</span> <span class="number">2</span></div><div class="line"><span class="symbol">daemonize:</span> <span class="literal">true</span></div><div class="line"><span class="comment"># require: []</span></div></pre></td></tr></table></figure>
-<p>启动: thin start -C config/thin.yml<br>停止: thin stop -C config/thin.yml<br>nginx:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">     listen 3001;</div><div class="line">     charset utf-8;</div><div class="line">     root /var/rails/mysapp/public;</div><div class="line">     access_log logs/access.log;</div><div class="line">     error_log  logs/error.log;</div><div class="line"></div><div class="line">     location / &#123;</div><div class="line">         <span class="comment"># proxy_pass          http://rails_servers;</span></div><div class="line">         <span class="comment"># proxy_redirect      default;</span></div><div class="line">         proxy_redirect      <span class="literal">false</span>;</div><div class="line">         proxy_set_header    X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">         proxy_set_header    X-Real-IP <span class="variable">$remote_addr</span>;</div><div class="line">         proxy_set_header    Host <span class="variable">$http_host</span>;</div><div class="line">         proxy_next_upstream http_502 http_504 error timeout invalid_header;</div><div class="line">         proxy_pass <span class="literal">false</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (<span class="_">-f</span> <span class="variable">$request_filename</span>/index.html)</div><div class="line">        &#123;</div><div class="line">          rewrite (.*) <span class="variable">$1</span>/index.html <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (<span class="_">-f</span> <span class="variable">$request_filename</span>.html) &#123;</div><div class="line">          rewrite (.*) <span class="variable">$1</span>.html <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (!<span class="_">-f</span> <span class="variable">$request_filename</span>) &#123;</div><div class="line">          proxy_pass http://rails_servers;</div><div class="line">          <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> &#125;</div><div class="line"> upstream rails_servers&#123;</div><div class="line">        server 127.0.0.1:3002;</div><div class="line">        server 127.0.0.1:3003;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/thin/">thin</a></li></ul>
     </div>
 
       
