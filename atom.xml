@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.gagahappy.com/"/>
-  <updated>2016-08-23T15:14:55.000Z</updated>
+  <updated>2016-08-24T14:11:46.000Z</updated>
   <id>http://www.gagahappy.com/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用ssh-add添加私钥到ssh-agent</title>
+    <link href="http://www.gagahappy.com/use-ssh-add-add-ssh-key/"/>
+    <id>http://www.gagahappy.com/use-ssh-add-add-ssh-key/</id>
+    <published>2016-08-24T13:47:09.000Z</published>
+    <updated>2016-08-24T14:11:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用ssh-add命令可以把私钥添加到ssh-agent，当登录远程主机中的程序(如:git push)请求对应的私钥时，可以由ssh-agent把本地私钥发送给远程主机(启动这个功能要在ssh配置中设置 <code>ForwardAgent yes</code>)</p>
+<p>添加私钥到ssh-agent</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ssh-add /your_ssh_key_path</div><div class="line"><span class="comment">#=&gt; Identity added: /Users/ga/.ssh/id</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> $? <span class="comment">#查看是否添加成功</span></div><div class="line"><span class="comment">#=&gt; 0 如果这里返回的不是0，则说明添加失败。如果你的key是加密的，在添加时还要输入密码</span></div><div class="line"></div><div class="line">ssh-add <span class="_">-l</span> <span class="comment">#查看已经添加到ssh-agent中的key</span></div><div class="line"><span class="comment">#=&gt; 2048 SHA256:9GlH51tb7Oxbxxxxxxxxxxxxxxxxxx</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用ssh-add命令可以把私钥添加到ssh-agent，当登录远程主机中的程序(如:git push)请求对应的私钥时，可以由ssh-agent把本地私钥发送给远程主机(启动这个功能要在ssh配置中设置 &lt;code&gt;ForwardAgent yes&lt;/code&gt;)&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="我爱Linux" scheme="http://www.gagahappy.com/category/linux/"/>
+    
+    
+      <category term="linux" scheme="http://www.gagahappy.com/tag/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>Mac Air 冷启动USB设备不能识别</title>
@@ -310,28 +335,6 @@
     
     
       <category term="postgresql" scheme="http://www.gagahappy.com/tag/postgresql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ruby 哈希排序注意事项</title>
-    <link href="http://www.gagahappy.com/ruby-hash-sort-by-key-be-case-of-key-type/"/>
-    <id>http://www.gagahappy.com/ruby-hash-sort-by-key-be-case-of-key-type/</id>
-    <published>2015-05-20T15:22:43.000Z</published>
-    <updated>2016-08-17T18:03:11.000Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 如果key的数据类型不一致，会导致异常，其实这种情况已经不是第一次遇上了</span></div><div class="line"><span class="comment"># ArgumentError: comparison of Array with Array failed</span></div><div class="line">hash = &#123;<span class="symbol">c:</span> <span class="number">3</span>, <span class="string">"a"</span> =&gt; <span class="number">1</span>, <span class="symbol">b:</span><span class="number">2</span>&#125;</div><div class="line"></div><div class="line"><span class="comment"># 可以用hash#sort_by解决,把key统一成一致的数据类型</span></div><div class="line">hash.sort_by&#123;<span class="params">|k,v|</span>k.to_s&#125;</div><div class="line"><span class="comment"># 等效于</span></div><div class="line">hash.sort_by&#123;<span class="params">|h|</span>h[<span class="number">0</span>].to_s&#125;</div><div class="line"><span class="comment"># 最终的输出结果为</span></div><div class="line"><span class="comment">#=&gt; [["a", 1], [:b, 2], [:c, 3]]</span></div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;figure class=&quot;highlight ruby&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div
-    
-    </summary>
-    
-      <category term="程序开发" scheme="http://www.gagahappy.com/category/development/"/>
-    
-    
-      <category term="Ruby" scheme="http://www.gagahappy.com/tag/ruby/"/>
     
   </entry>
   

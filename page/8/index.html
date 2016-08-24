@@ -252,6 +252,70 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-lui-qian-show-david-berglas-magic" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/lui-qian-show-david-berglas-magic/" class="article-date">
+      <time datetime="2012-10-12T17:15:54.000Z" itemprop="datePublished">2012-10-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/lui-qian-show-david-berglas-magic/">刘谦EMC表演全球无人破解的巴格拉斯效果</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <embed src="http://player.youku.com/player.php/sid/XMjg0MDAwMzA0/v.swf" quality="high" width="480" height="400" align="middle" allowscriptaccess="sameDomain" allowfullscreen="true" type="application/x-shockwave-flash">
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/entertainment/">娱乐</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-chanel-coco" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1541,73 +1605,9 @@
 
 
   
-    <article id="post-rails-railsorderedoptions" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/rails-railsorderedoptions/" class="article-date">
-      <time datetime="2012-02-07T10:19:21.000Z" itemprop="datePublished">2012-02-07</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/rails-railsorderedoptions/">rails Rails::OrderedOptions</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rails::OrderedOptions</span> &lt; Array <span class="comment">#:nodoc:</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">[]=</span><span class="params">(key, value)</span></span></div><div class="line">    key = key.to_sym</div><div class="line"></div><div class="line">    <span class="keyword">if</span> pair = find_pair(key)</div><div class="line">      pair.pop</div><div class="line">      pair &lt;&lt; value</div><div class="line">    <span class="keyword">else</span></div><div class="line">      <span class="keyword">self</span> &lt;&lt; [key, value]</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">[]</span><span class="params">(key)</span></span></div><div class="line">    pair = find_pair(key.to_sym)</div><div class="line">    pair ? pair.last : <span class="literal">nil</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">method_missing</span><span class="params">(name, *args)</span></span></div><div class="line">    <span class="keyword">if</span> name.to_s =~ <span class="regexp">/(.*)=$/</span></div><div class="line">      <span class="keyword">self</span>[$1.to_sym] = args.first</div><div class="line">    <span class="keyword">else</span></div><div class="line">      <span class="keyword">self</span>[name]</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  private</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_pair</span><span class="params">(key)</span></span></div><div class="line">      <span class="keyword">self</span>.each &#123; <span class="params">|i|</span> <span class="keyword">return</span> i <span class="keyword">if</span> i.first == key &#125;</div><div class="line">      <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
     </nav>
   
 </div>

@@ -252,6 +252,70 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-rails-railsorderedoptions" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails-railsorderedoptions/" class="article-date">
+      <time datetime="2012-02-07T10:19:21.000Z" itemprop="datePublished">2012-02-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails-railsorderedoptions/">rails Rails::OrderedOptions</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rails::OrderedOptions</span> &lt; Array <span class="comment">#:nodoc:</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">[]=</span><span class="params">(key, value)</span></span></div><div class="line">    key = key.to_sym</div><div class="line"></div><div class="line">    <span class="keyword">if</span> pair = find_pair(key)</div><div class="line">      pair.pop</div><div class="line">      pair &lt;&lt; value</div><div class="line">    <span class="keyword">else</span></div><div class="line">      <span class="keyword">self</span> &lt;&lt; [key, value]</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">[]</span><span class="params">(key)</span></span></div><div class="line">    pair = find_pair(key.to_sym)</div><div class="line">    pair ? pair.last : <span class="literal">nil</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">method_missing</span><span class="params">(name, *args)</span></span></div><div class="line">    <span class="keyword">if</span> name.to_s =~ <span class="regexp">/(.*)=$/</span></div><div class="line">      <span class="keyword">self</span>[$1.to_sym] = args.first</div><div class="line">    <span class="keyword">else</span></div><div class="line">      <span class="keyword">self</span>[name]</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  private</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_pair</span><span class="params">(key)</span></span></div><div class="line">      <span class="keyword">self</span>.each &#123; <span class="params">|i|</span> <span class="keyword">return</span> i <span class="keyword">if</span> i.first == key &#125;</div><div class="line">      <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-ruby-escape" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1524,78 +1588,9 @@
 
 
   
-    <article id="post-whats-the-most-happiness-for-northern-europe" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/whats-the-most-happiness-for-northern-europe/" class="article-date">
-      <time datetime="2011-11-27T05:51:48.000Z" itemprop="datePublished">2011-11-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/whats-the-most-happiness-for-northern-europe/">北欧人为什么最幸福</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>下午的四、五点钟，北欧人已经下班开着车到湖边或山上，恣意地划船或攀岩；此刻的中国CBD区，上班族仍卖力地冲业绩，继续吃著各种方便食品。不成文的加班文化，让中国夜晚的办公大楼依旧灯火通明，晚餐的应酬又变相地延长了工作的时间。<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/life/">生活</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/whats-the-most-happiness-for-northern-europe/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
     </nav>
   
 </div>

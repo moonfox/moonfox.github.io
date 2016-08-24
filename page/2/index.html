@@ -252,6 +252,76 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-issues-of-install-memcached-reds-postgresql" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/issues-of-install-memcached-reds-postgresql/" class="article-date">
+      <time datetime="2015-04-29T15:53:38.000Z" itemprop="datePublished">2015-04-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/issues-of-install-memcached-reds-postgresql/">安装memcached、redis、postgresql问题总结</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>编译 ./configure –prefix=/srv/memcached/memcached145 –with-libevent=/usr/<br>需要安装 libevent ，安装时要确保知道安装路径</p>
+<p>启动memcached<br>memcached -d -u root -m 200 -P /tmp/memcached.pid</p>
+<p>安装redis</p>
+<p>make PREFIX=/srv/redis/redis2815 install</p>
+<p>启动:daemonize yes: Make redis run as a daemon<br>redis-server /usr/etc/redis.conf</p>
+<p>安装postgresql<br>遇到问题:Can’t find the ‘libpq-fe.h header<br>解决方法:<br>1、gem install pg -v ‘0.18.1’ – –with-pg-config=/path/config<br>–with-pg=/path/pg –with-pg-lib=/path/<br>2、yum install postgresql-devel<br>最终用方法2解决<br>yum list installed | grep postgres</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/postgresql/">postgresql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/redis/">redis</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-deploy-nginx-thin" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1503,73 +1573,9 @@
 
 
   
-    <article id="post-how-to-use-eval-args-filename-and-lineno" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/how-to-use-eval-args-filename-and-lineno/" class="article-date">
-      <time datetime="2015-04-05T15:22:09.000Z" itemprop="datePublished">2015-04-05</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/how-to-use-eval-args-filename-and-lineno/">测试eval的filename,与lineno参数使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、测试eval的filename,与lineno参数使用</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、可以自定义程序出错时的出错信息（出错的文件名，程序在哪行执行的,方便出错日志的查询,错误的定位)</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">    string = <span class="string">"1/0"</span></div><div class="line">    <span class="comment"># eval(string, nil, __FILE__, __LINE__)</span></div><div class="line">    eval(string, <span class="literal">nil</span>, <span class="string">"custom_file.rb"</span>, <span class="number">60</span>)</div><div class="line">    <span class="comment"># eval(string)</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">MyClass.new.my_method <span class="comment"># custom_file.rb:60:in `/': divided by 0 (ZeroDivisionError)</span></div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>
