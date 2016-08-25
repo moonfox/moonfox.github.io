@@ -604,7 +604,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>第一件：想安个win7<br>第二件：想看源码<br>第三件：买个外套<br>…………………………………..</p>
+        <p>第一件：想安个win7<br>第二件：想看源码<br>第三件：买个外套</p>
+<hr>
 <p>这是2009年的最后一天了，必须得发博，不能落下了！</p>
 
       
@@ -800,11 +801,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>#在这里加入其它 的 MySQL 服务器配置</p>
-<p> #…</p>
-<h1 id="如果不使用InnoDB表将一列一行注释去除"><a href="#如果不使用InnoDB表将一列一行注释去除" class="headerlink" title="如果不使用InnoDB表将一列一行注释去除"></a>如果不使用InnoDB表将一列一行注释去除</h1><h1 id="skip-innodb"><a href="#skip-innodb" class="headerlink" title="skip-innodb"></a>skip-innodb</h1><p> #</p>
-<h1 id="数据文件必须"><a href="#数据文件必须" class="headerlink" title="数据文件必须"></a>数据文件必须</h1><h1 id="能够容下数据与索引"><a href="#能够容下数据与索引" class="headerlink" title="能够容下数据与索引"></a>能够容下数据与索引</h1><h1 id="确定有足够的"><a href="#确定有足够的" class="headerlink" title="确定有足够的"></a>确定有足够的</h1><h1 id="磁盘空间"><a href="#磁盘空间" class="headerlink" title="磁盘空间"></a>磁盘空间</h1>
-          
+        <p>在这里加入其它 的 MySQL 服务器配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">innodb_flush_log_at_trx_commit=1</div><div class="line">set-variable = innodb_lock_wait_timeout=50</div><div class="line">#innodb_flush_method=fdatasync</div><div class="line">#set-variable = innodb_thread_concurrency=5</div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -821,10 +820,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/mysql-my-cnf-01/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -873,8 +868,9 @@
       
           
               <p>Sphinx是什么?<br>简单引用一下官方wiki的文章：</p>
-<pre><code>Sphinx是一个基于SQL的全文检索引擎，可以结合MySQL,PostgreSQL做全文搜索，它可以提供比数据库本身更专业的搜索功能，使得应用程序更容易实现专业化的全文检索。Sphinx特别为一些脚本语言设计搜索API接口，如PHP,Python,Perl,Ruby等，同时为MySQL也设计了一个存储引擎插件。
-</code></pre>
+<blockquote>
+<p>Sphinx是一个基于SQL的全文检索引擎，可以结合MySQL,PostgreSQL做全文搜索，它可以提供比数据库本身更专业的搜索功能，使得应用程序更容易实现专业化的全文检索。Sphinx特别为一些脚本语言设计搜索API接口，如PHP,Python,Perl,Ruby等，同时为MySQL也设计了一个存储引擎插件。</p>
+</blockquote>
           
       
     </div>
@@ -943,7 +939,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>1 . 查看mysql存储引擎情况： mysql&gt;show engines。 InnoDB | YES，说明此mysql数据库服务器支持InnoDB引擎。<br>2. 设置InnoDB为默认引擎：在配置文件my.cnf中的 [mysqld] 下面加入default-storage-engine=INNODB<br>3. 重启mysql服务器<br>4. 登录mysql数据库，mysql&gt;show engines。如果出现 InnoDB |DEFAULT，则表示设置InnoDB为默认引擎成功。</p>
+        <p>1 . 查看mysql存储引擎情况： mysql&gt;show engines。 InnoDB | YES，说明此mysql数据库服务器支持InnoDB引擎。</p>
+<ol>
+<li>设置InnoDB为默认引擎：在配置文件my.cnf中的 [mysqld] 下面加入default-storage-engine=INNODB</li>
+<li>重启mysql服务器</li>
+<li>登录mysql数据库，mysql&gt;show engines。如果出现 InnoDB |DEFAULT，则表示设置InnoDB为默认引擎成功。</li>
+</ol>
 
       
     </div>
@@ -1406,10 +1407,18 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>美国知名杂志《福布斯》今晨评选出了七大近在眼前的金融泡沫。黄金、房地产、股市、国债证券等成为投资者未来所重点关注的投资，同时也存在着潜在的泡沫。</p>
+              <blockquote>
+<p>本文来源：<a href="http://media.163.com/special/007625CB/fzwb.html">法制晚报</a></p>
+</blockquote>
+<p>美国知名杂志《福布斯》今晨评选出了七大近在眼前的金融泡沫。黄金、房地产、股市、国债证券等成为投资者未来所重点关注的投资，同时也存在着潜在的泡沫。</p>
+<blockquote>
 <p>《福布斯》称，当投资者回顾过去十年来什么对他们来说最受伤时，三大泡沫让他们苦不堪言，那就是：网络股、房地产和金融服务。这三大类滋生巨大泡沫，并最终成为了金融危机的始作俑者。</p>
 <p>《福布斯》同时指出，在未来的十年内，黄金最有可能成为泡沫之一。自2000年以来金价已经上涨了近300%。</p>
-<p>这从黄金制造商Newmont Mining和BarrickGold的股票在2009年内上涨了逾25%就可见一斑。</p>
+</blockquote>
+<ul>
+<li><p>这从黄金制造商Newmont Mining和BarrickGold的股票在2009年内上涨了逾25%就可见一斑。报道特别指出，另外一个可能的泡沫来自中国的房地产市场，但这个泡沫是可以避免的。</p>
+</li>
+<li><p>中国的增长看上去“疑似”当年日本和美国市场崩盘前的状况：大的开发商严重依赖金融高杠杆(利用银行贷款来发展房地产，空手套白狼)和所谓“价格永远上涨利率永远走低”的概念。</p>
           
       
     </div>
@@ -1582,7 +1591,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/31/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/">33</a><a class="page-number" href="/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/33/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/31/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="page-number" href="/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/">33</a><a class="page-number" href="/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/33/">Next &raquo;</a>
     </nav>
   
 </div>

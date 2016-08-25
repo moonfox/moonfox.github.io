@@ -15,16 +15,19 @@
 
 
 
-<meta name="description" content="rails2.0快速体验1、新建一个Rails程序rails todo这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入rails todo -d mysql">
+<meta name="description" content="rails2.0快速体验
+1、 新建一个Rails程序123rails todo# 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入rails todo -d mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rails2.0快速体验">
 <meta property="og:url" content="http://www.gagahappy.com/rails-2-quick-show/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="rails2.0快速体验1、新建一个Rails程序rails todo这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入rails todo -d mysql">
-<meta property="og:updated_time" content="2016-08-22T06:07:30.000Z">
+<meta property="og:description" content="rails2.0快速体验
+1、 新建一个Rails程序123rails todo# 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入rails todo -d mysql">
+<meta property="og:updated_time" content="2016-08-25T06:35:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rails2.0快速体验">
-<meta name="twitter:description" content="rails2.0快速体验1、新建一个Rails程序rails todo这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入rails todo -d mysql">
+<meta name="twitter:description" content="rails2.0快速体验
+1、 新建一个Rails程序123rails todo# 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入rails todo -d mysql">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -291,16 +294,25 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>rails2.0快速体验<br>1、新建一个Rails程序<br>rails todo<br>这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入<br>rails todo -d mysql</p>
+        <p>rails2.0快速体验</p>
+<p>1、 新建一个Rails程序<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rails todo</div><div class="line"><span class="comment"># 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入</span></div><div class="line">rails todo <span class="_">-d</span> mysql</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<p>2、修改数据库配置文件<br>cd todo<br>进入项目所在文件夹，找config目录下的database.yml 数据库配置文件,修改数据库用户名与密码配置<br>development:<br>   adapter: mysql<br>   encoding: utf8<br>   database: todo_development<br>   username: root<br>   password: root</p>
-<p>test:<br>  adapter: mysql<br>   encoding: utf8<br>   database: todo_test<br>   username: root<br>   password: root</p>
-<p>production:<br>   adapter: mysql<br>   encoding: utf8<br>   database: todo_production<br>   username: root<br>   password: root<br>注意：“：”与后面的字符串之间要有一个空格</p>
-<p>3、创建数据库<br>rake db:create:all<br>这里又一个新东西“rake db:create:all”，它将给你建立起各个数据库，现在不需要你自己去手工搞了。是不是比以前爽了。<br>运行后如果什么反应都没有，则说明数据库创建成功。</p>
-<p>4、rails的魔法就在这里开始。<br>用脚手架生成一个关于todo的应用<br>ruby script/generate scaffold todo title:string body:text done:boolean due:datetime<br>运行后会发现生成许多文件，rails帮助我们做了许多事件，它生成了todo这个应用的model,view,controller,这不就是MVC吗，已经帮助你生成了最基本的框架，下面你要做的事情就是不断向这个框架里填充东西。</p>
-<p>脚手架又为我们生成了一个创建表的migration(迁移任务)，让我们再次运行迁移任务<br>rake db:migrate</p>
+<p>2、 修改数据库配置文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> todo</div></pre></td></tr></table></figure></p>
+<p>进入项目所在文件夹，找config目录下的database.yml 数据库配置文件,修改数据库用户名与密码配置<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">development:</span></div><div class="line">   <span class="symbol">adapter:</span> mysql</div><div class="line">   <span class="symbol">encoding:</span> utf8</div><div class="line">   <span class="symbol">database:</span> todo_development</div><div class="line">   <span class="symbol">username:</span> root</div><div class="line">   <span class="symbol">password:</span> root</div><div class="line"></div><div class="line"><span class="symbol">test:</span></div><div class="line">  <span class="symbol">adapter:</span> mysql</div><div class="line">   <span class="symbol">encoding:</span> utf8</div><div class="line">   <span class="symbol">database:</span> todo_test</div><div class="line">   <span class="symbol">username:</span> root</div><div class="line">   <span class="symbol">password:</span> root</div><div class="line"></div><div class="line"><span class="symbol">production:</span></div><div class="line">   <span class="symbol">adapter:</span> mysql</div><div class="line">   <span class="symbol">encoding:</span> utf8</div><div class="line">   <span class="symbol">database:</span> todo_production</div><div class="line">   <span class="symbol">username:</span> root</div><div class="line">   <span class="symbol">password:</span> root</div><div class="line"><span class="comment">#注意：“：”与后面的字符串之间要有一个空格</span></div></pre></td></tr></table></figure></p>
+<p>3、创建数据库<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rake <span class="symbol">db:</span><span class="symbol">create:</span>all</div><div class="line"><span class="comment"># 又一个新东西“rake db:create:all”，它将给你建立起各个数据库，现在不需要你自己去手工搞了。是不是比以前爽了。</span></div></pre></td></tr></table></figure></p>
+<p>后如果什么反应都没有，则说明数据库创建成功。</p>
+<p>4、rails的魔法就在这里开始。</p>
+<blockquote>
+<p>用脚手架生成一个关于todo的应用<br><code>ruby script/generate scaffold todo title:string body:text done:boolean due:datetime</code></p>
+<p>运行后会发现生成许多文件，rails帮助我们做了许多事件</p>
+<p>它生成了todo这个应用的model,view,controller,这不就是MVC吗，已经帮助你生成了最基本的框架，下面你要做的事情就是不断向这个框架里填充东西。</p>
+</blockquote>
+<p>脚手架又为我们生成了一个创建表的migration(迁移任务)，让我们再次运行迁移任务<br><code>rake db:migrate</code></p>
 <p>提示：当你已经熟练掌握rails的开发时，就可以不用脚手架了。</p>
-<p>5、让我们使用下rails的魔法吧<br>启动我们的项目<br>ruby script/server<br>然后用浏览器访问下面的链接<a href="http://127.0.0.1:3000/todos" target="_blank" rel="external">http://127.0.0.1:3000/todos</a><br>搞定了一个todolist</p>
+<p>5、让我们使用下rails的魔法吧</p>
+<blockquote>
+<p>启动我们的项目<br><code>ruby script/server</code><br>然后用浏览器访问下面的链接<a href="http://127.0.0.1:3000/todos" target="_blank" rel="external">http://127.0.0.1:3000/todos</a><br>搞定了一个todolist</p>
+</blockquote>
 
       
     </div>
@@ -312,7 +324,7 @@
         <p><span>本文标题:</span><a href="/rails-2-quick-show/">rails2.0快速体验</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2009-12-07, 14:48:45</p>
-        <p><span>最后更新:</span>2016-08-22, 14:07:30</p>
+        <p><span>最后更新:</span>2016-08-25, 14:35:18</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/rails-2-quick-show/" title="rails2.0快速体验">http://www.gagahappy.com/rails-2-quick-show/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/rails-2-quick-show/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

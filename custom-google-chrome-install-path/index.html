@@ -16,18 +16,27 @@
 
 
 <meta name="description" content="google-chrome在安装时不能选择安装路径，默认是被安装在C盘，所有网页缓存也会被保存在C盘，C盘的空间就会不断的被占用，产生的磁盘碎片也会降低系统的性能，所以，我们务必要把google chrome请出C盘，安装到其它分区。
-把chrome从系统目录提取出来Vista下，Win+R运行 %UserProfile%\AppData\Local\Google\ChromeXP下，Win+R运">
+
+把chrome从系统目录提取出来: Vista下，Win+R运行
+
+%UserProfile%\AppData\Local\Google\ChromeXP下，Wi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自定义google chrome安装路径">
 <meta property="og:url" content="http://www.gagahappy.com/custom-google-chrome-install-path/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="google-chrome在安装时不能选择安装路径，默认是被安装在C盘，所有网页缓存也会被保存在C盘，C盘的空间就会不断的被占用，产生的磁盘碎片也会降低系统的性能，所以，我们务必要把google chrome请出C盘，安装到其它分区。
-把chrome从系统目录提取出来Vista下，Win+R运行 %UserProfile%\AppData\Local\Google\ChromeXP下，Win+R运">
-<meta property="og:updated_time" content="2016-08-22T06:07:30.000Z">
+
+把chrome从系统目录提取出来: Vista下，Win+R运行
+
+%UserProfile%\AppData\Local\Google\ChromeXP下，Wi">
+<meta property="og:updated_time" content="2016-08-25T06:47:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义google chrome安装路径">
 <meta name="twitter:description" content="google-chrome在安装时不能选择安装路径，默认是被安装在C盘，所有网页缓存也会被保存在C盘，C盘的空间就会不断的被占用，产生的磁盘碎片也会降低系统的性能，所以，我们务必要把google chrome请出C盘，安装到其它分区。
-把chrome从系统目录提取出来Vista下，Win+R运行 %UserProfile%\AppData\Local\Google\ChromeXP下，Win+R运">
+
+把chrome从系统目录提取出来: Vista下，Win+R运行
+
+%UserProfile%\AppData\Local\Google\ChromeXP下，Wi">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -295,18 +304,35 @@
       
           
         <p>google-chrome在安装时不能选择安装路径，默认是被安装在C盘，所有网页缓存也会被保存在C盘，C盘的空间就会不断的被占用，产生的磁盘碎片也会降低系统的性能，所以，我们务必要把google chrome请出C盘，安装到其它分区。</p>
-<p>把chrome从系统目录提取出来<br>Vista下，Win+R运行 %UserProfile%\AppData\Local\Google\Chrome<br>XP下，Win+R运行 %UserProfile%\Local Settings\Application Data\Google\Chrome</p>
-<p>然后把application文件夹复制出来，把文件夹改名为“chrome”(随便什么你喜欢的名字)。然后进入这个文件夹，新建一个文件夹，名字叫做c_profile(随便什么你喜欢的名字)</p>
+<ol>
+<li><p>把chrome从系统目录提取出来: Vista下，Win+R运行</p>
+<blockquote>
+<p>%UserProfile%\AppData\Local\Google\Chrome<br>XP下，Win+R运行 %UserProfile%\Local Settings\Application Data\Google\Chrome</p>
+</blockquote>
+</li>
+<li><p>然后把application文件夹复制出来，把文件夹改名为“chrome”(随便什么你喜欢的名字)。然后进入这个文件夹，新建一个文件夹，名字叫做c_profile(随便什么你喜欢的名字)</p>
+</li>
+<li><p>最后把3.0.195.33,（这是个目录，在你刚刚复制的application文件夹下，其名子会随着chrome的版本而不同，具体视你的文件而定）目录下的所有文件、文件夹移动到chrome.exe同级目录下。</p>
 <a id="more"></a>
-<p>最后把3.0.195.33,（这是个目录，在你刚刚复制的application文件夹下，其名子会随着chrome的版本而不同，具体视你的文件而定）目录下的所有文件、文件夹移动到chrome.exe同级目录下。</p>
-<p>在chrome.exe目录初始化配置文件<br>然后Win+R打开命令行，cd 到你复制出来的chrome.exe所在路径，运行</p>
+</li>
+<li><p>在chrome.exe目录初始化配置文件<br>然后Win+R打开命令行，cd 到你复制出来的chrome.exe所在路径，运行</p>
+<blockquote>
 <p>chrome.exe –first-run –user-data-dir=c_profile</p>
-<p>建立快捷方式，随时呼叫绿色版的Google Chrome<br>好了。Google Chrome已经在当前目录下的est_profile初始化用户配置文件完毕了。</p>
-<p>然后在桌面建立个chrome.exe的快捷方式；右击这个快捷方式，属性，在“目标”后面添加</p>
-<p>–user-data-dir=c_profile</p>
-<p>注意添加的命令行启动参数最前面有个空格。完整路径例子：</p>
-<p>T:\chrome\chrome.exe –user-data-dir=c_profile</p>
-<p>Google Chrome的精简<br>Chrome目录下（原来3.0.195.33目录下的）<br>Installer子目录可以直接删除掉<br>Locales下面只保留en-US.dll和zh-CN.dll就可以了</p>
+</blockquote>
+</li>
+<li><p>建立快捷方式，随时呼叫绿色版的Google Chrome<br>好了。Google Chrome已经在当前目录下的est_profile初始化用户配置文件完毕了。</p>
+</li>
+<li><p>在桌面建立个chrome.exe的快捷方式；右击这个快捷方式，属性，在“目标”后面添加<code>--user-data-dir=c_profile</code></p>
+<blockquote>
+<p>注意添加的命令行启动参数最前面有个空格。完整路径例子：<br>T:\chrome\chrome.exe –user-data-dir=c_profile</p>
+</blockquote>
+</li>
+<li><p>Google Chrome的精简</p>
+<blockquote>
+<p>Chrome目录下（原来3.0.195.33目录下的）<br>Installer子目录可以直接删除掉<br>Locales下面只保留en-US.dll和zh-CN.dll就可以了</p>
+</blockquote>
+</li>
+</ol>
 
       
     </div>
@@ -318,7 +344,7 @@
         <p><span>本文标题:</span><a href="/custom-google-chrome-install-path/">自定义google chrome安装路径</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2009-12-13, 14:49:48</p>
-        <p><span>最后更新:</span>2016-08-22, 14:07:30</p>
+        <p><span>最后更新:</span>2016-08-25, 14:47:53</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/custom-google-chrome-install-path/" title="自定义google chrome安装路径">http://www.gagahappy.com/custom-google-chrome-install-path/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/custom-google-chrome-install-path/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

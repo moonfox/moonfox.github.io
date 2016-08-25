@@ -15,22 +15,19 @@
 
 
 
-<meta name="description" content="我们可以使用strftime（）函数将时间格式化为我们想要的格式。它的原型如下：
-size_t strftime(char strDest,size_t maxsize,const char format,const struct tm *timeptr);
-我们可以根据format指向字符串中格式命令把timeptr中保存的时间信息放在strDest指向的字符串中，最多向strDest中存放ma">
+<meta name="description" content="我们可以使用strftime（）函数将时间格式化为我们想要的格式。它的原型如下：123456size_t strftime(char *strDest,size_t maxsize,const char *format,const struct tm *timeptr);
+我们可以根据format指向字符串中格式命令把timeptr中保存的时间信息放在strDest指向的字符串中，最多向strDe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="strftime函数将时间格式化">
 <meta property="og:url" content="http://www.gagahappy.com/strftime/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="我们可以使用strftime（）函数将时间格式化为我们想要的格式。它的原型如下：
-size_t strftime(char strDest,size_t maxsize,const char format,const struct tm *timeptr);
-我们可以根据format指向字符串中格式命令把timeptr中保存的时间信息放在strDest指向的字符串中，最多向strDest中存放ma">
-<meta property="og:updated_time" content="2016-08-24T14:28:45.000Z">
+<meta property="og:description" content="我们可以使用strftime（）函数将时间格式化为我们想要的格式。它的原型如下：123456size_t strftime(char *strDest,size_t maxsize,const char *format,const struct tm *timeptr);
+我们可以根据format指向字符串中格式命令把timeptr中保存的时间信息放在strDest指向的字符串中，最多向strDe">
+<meta property="og:updated_time" content="2016-08-25T03:44:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="strftime函数将时间格式化">
-<meta name="twitter:description" content="我们可以使用strftime（）函数将时间格式化为我们想要的格式。它的原型如下：
-size_t strftime(char strDest,size_t maxsize,const char format,const struct tm *timeptr);
-我们可以根据format指向字符串中格式命令把timeptr中保存的时间信息放在strDest指向的字符串中，最多向strDest中存放ma">
+<meta name="twitter:description" content="我们可以使用strftime（）函数将时间格式化为我们想要的格式。它的原型如下：123456size_t strftime(char *strDest,size_t maxsize,const char *format,const struct tm *timeptr);
+我们可以根据format指向字符串中格式命令把timeptr中保存的时间信息放在strDest指向的字符串中，最多向strDe">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -297,12 +294,10 @@ size_t strftime(char strDest,size_t maxsize,const char format,const struct tm *t
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>我们可以使用strftime（）函数将时间格式化为我们想要的格式。它的原型如下：</p>
-<p>size_t strftime(<br>char <em>strDest,<br>size_t maxsize,<br>const char </em>format,<br>const struct tm *timeptr<br>);</p>
+        <p>我们可以使用strftime（）函数将时间格式化为我们想要的格式。它的原型如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">size_t</span> strftime(</div><div class="line"><span class="keyword">char</span> *strDest,</div><div class="line"><span class="keyword">size_t</span> maxsize,</div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> *format,</div><div class="line"><span class="keyword">const</span> <span class="keyword">struct</span> tm *timeptr</div><div class="line">);</div></pre></td></tr></table></figure></p>
 <p>我们可以根据format指向字符串中格式命令把timeptr中保存的时间信息放在strDest指向的字符串中，最多向strDest中存放maxsize个字符。该函数返回向strDest指向的字符串中放置的字符数。</p>
 <a id="more"></a>
-<p>函 数strftime()的操作有些类似于sprintf()：识别以百分号(%)开始的格式命令集合，格式化输出结果放在一个字符串中。格式化命令说明串 strDest中各种日期和时间信息的确切表示方法。格式串中的其他字符原样放进串中。格式命令列在下面，它们是区分大小写的。</p>
-<p>%a 星期几的简写<br>%A 星期几的全称<br>%b 月分的简写<br>%B 月份的全称<br>%c 标准的日期的时间串<br>%C 年份的后两位数字<br>%d 十进制表示的每月的第几天<br>%D 月/天/年<br>%e 在两字符域中，十进制表示的每月的第几天<br>%F 年-月-日<br>%g 年份的后两位数字，使用基于周的年<br>%G 年分，使用基于周的年<br>%h 简写的月份名<br>%H 24小时制的小时<br>%I 12小时制的小时<br>%j 十进制表示的每年的第几天<br>%m 十进制表示的月份<br>%M 十时制表示的分钟数<br>%n 新行符<br>%p 本地的AM或PM的等价显示<br>%r 12小时的时间<br>%R 显示小时和分钟：hh:mm<br>%S 十进制的秒数<br>%t 水平制表符<br>%T 显示时分秒：hh:mm:ss<br>%u 每周的第几天，星期一为第一天 （值从0到6，星期一为0）<br>%U 第年的第几周，把星期日做为第一天（值从0到53）<br>%V 每年的第几周，使用基于周的年<br>%w 十进制表示的星期几（值从0到6，星期天为0）<br>%W 每年的第几周，把星期一做为第一天（值从0到53）<br>%x 标准的日期串<br>%X 标准的时间串<br>%y 不带世纪的十进制年份（值从0到99）<br>%Y 带世纪部分的十制年份<br>%z，%Z 时区名称，如果不能得到时区名称则返回空字符。<br>%% 百分号</p>
+<p>函数<code>strftime()</code>的操作有些类似于<code>sprintf()</code>：识别以百分号(%)开始的格式命令集合，格式化输出结果放在一个字符串中。格式化命令说明串 strDest中各种日期和时间信息的确切表示方法。格式串中的其他字符原样放进串中。格式命令列在下面，它们是区分大小写的。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">%a 星期几的简写</div><div class="line">%A 星期几的全称</div><div class="line">%b 月分的简写</div><div class="line">%B 月份的全称</div><div class="line">%c 标准的日期的时间串</div><div class="line">%C 年份的后两位数字</div><div class="line">%d 十进制表示的每月的第几天</div><div class="line">%D 月/天/年</div><div class="line">%e 在两字符域中，十进制表示的每月的第几天</div><div class="line">%F 年-月-日</div><div class="line">%g 年份的后两位数字，使用基于周的年</div><div class="line">%G 年分，使用基于周的年</div><div class="line">%h 简写的月份名</div><div class="line">%H <span class="number">24</span>小时制的小时</div><div class="line">%I <span class="number">12</span>小时制的小时</div><div class="line">%j 十进制表示的每年的第几天</div><div class="line">%m 十进制表示的月份</div><div class="line">%M 十时制表示的分钟数</div><div class="line">%n 新行符</div><div class="line">%p 本地的AM或PM的等价显示</div><div class="line">%r <span class="number">12</span>小时的时间</div><div class="line">%R 显示小时和分钟：hh:mm</div><div class="line">%S 十进制的秒数</div><div class="line">%t 水平制表符</div><div class="line">%T 显示时分秒：hh:mm:ss</div><div class="line">%u 每周的第几天，星期一为第一天 （值从<span class="number">0</span>到<span class="number">6</span>，星期一为<span class="number">0</span>）</div><div class="line">%U 第年的第几周，把星期日做为第一天（值从<span class="number">0</span>到<span class="number">53</span>）</div><div class="line">%V 每年的第几周，使用基于周的年</div><div class="line">%w 十进制表示的星期几（值从<span class="number">0</span>到<span class="number">6</span>，星期天为<span class="number">0</span>）</div><div class="line">%W 每年的第几周，把星期一做为第一天（值从<span class="number">0</span>到<span class="number">53</span>）</div><div class="line">%x 标准的日期串</div><div class="line">%X 标准的时间串</div><div class="line">%y 不带世纪的十进制年份（值从<span class="number">0</span>到<span class="number">99</span>）</div><div class="line">%Y 带世纪部分的十制年份</div><div class="line">%z，%Z 时区名称，如果不能得到时区名称则返回空字符。</div><div class="line">%% 百分号</div></pre></td></tr></table></figure></p>
 <p>如果想显示现在是几点了，并以12小时制显示，就象下面这段程序：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">＃include <span class="string">"time.h"</span></div><div class="line">＃include <span class="string">"stdio.h"</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">struct</span> tm *ptr;</div><div class="line"><span class="keyword">time_t</span> lt;</div><div class="line"><span class="keyword">char</span> str[<span class="number">80</span>];</div><div class="line">lt=time(<span class="literal">NULL</span>);</div><div class="line">ptr=localtime(&amp;lt;);</div><div class="line">strftime(str,<span class="number">100</span>,<span class="string">"It is now %I %p"</span>,ptr);</div><div class="line"><span class="built_in">printf</span>(str);</div><div class="line"><span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//其运行结果为：</span></div><div class="line"><span class="comment">//It is now 4PM</span></div></pre></td></tr></table></figure>
 <p>而下面的程序则显示当前的完整日期：</p>
@@ -318,7 +313,7 @@ size_t strftime(char strDest,size_t maxsize,const char format,const struct tm *t
         <p><span>本文标题:</span><a href="/strftime/">strftime函数将时间格式化</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2009-05-26, 12:10:51</p>
-        <p><span>最后更新:</span>2016-08-24, 22:28:45</p>
+        <p><span>最后更新:</span>2016-08-25, 11:44:25</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/strftime/" title="strftime函数将时间格式化">http://www.gagahappy.com/strftime/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/strftime/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

@@ -15,19 +15,46 @@
 
 
 
-<meta name="description" content="安装了ubuntu 9.10后，用network-manager无法进行adsl连接，折腾了好一阵子，最终解决办法如下：Linux里面有两套管理网络连接的方案：1、/etc/network/interfaces（/etc/init.d/networking）2、Network-Manager
-两套方案是冲突的，不能同时共存。第一个方案适用于没有X的环境，如：服务器；或者那些完全不需要改动连接的场合">
+<meta name="description" content="安装了ubuntu 9.10后，用network-manager无法进行adsl连接，折腾了好一阵子，最终解决办法如下：
+Linux里面有两套管理网络连接的方案：
+
+
+/etc/network/interfaces（/etc/init.d/networking）
+/Network-Manager
+
+
+两套方案是冲突的，不能同时共存
+
+第一个方案适用于没有X的环境，如：服务器；或者那些完全不需要改动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu 9.10 Network Manager ADSL无法上网">
 <meta property="og:url" content="http://www.gagahappy.com/ubuntu-9-10-network-manager-adsl/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="安装了ubuntu 9.10后，用network-manager无法进行adsl连接，折腾了好一阵子，最终解决办法如下：Linux里面有两套管理网络连接的方案：1、/etc/network/interfaces（/etc/init.d/networking）2、Network-Manager
-两套方案是冲突的，不能同时共存。第一个方案适用于没有X的环境，如：服务器；或者那些完全不需要改动连接的场合">
-<meta property="og:updated_time" content="2016-08-22T06:07:32.000Z">
+<meta property="og:description" content="安装了ubuntu 9.10后，用network-manager无法进行adsl连接，折腾了好一阵子，最终解决办法如下：
+Linux里面有两套管理网络连接的方案：
+
+
+/etc/network/interfaces（/etc/init.d/networking）
+/Network-Manager
+
+
+两套方案是冲突的，不能同时共存
+
+第一个方案适用于没有X的环境，如：服务器；或者那些完全不需要改动">
+<meta property="og:updated_time" content="2016-08-25T06:01:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu 9.10 Network Manager ADSL无法上网">
-<meta name="twitter:description" content="安装了ubuntu 9.10后，用network-manager无法进行adsl连接，折腾了好一阵子，最终解决办法如下：Linux里面有两套管理网络连接的方案：1、/etc/network/interfaces（/etc/init.d/networking）2、Network-Manager
-两套方案是冲突的，不能同时共存。第一个方案适用于没有X的环境，如：服务器；或者那些完全不需要改动连接的场合">
+<meta name="twitter:description" content="安装了ubuntu 9.10后，用network-manager无法进行adsl连接，折腾了好一阵子，最终解决办法如下：
+Linux里面有两套管理网络连接的方案：
+
+
+/etc/network/interfaces（/etc/init.d/networking）
+/Network-Manager
+
+
+两套方案是冲突的，不能同时共存
+
+第一个方案适用于没有X的环境，如：服务器；或者那些完全不需要改动">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -294,14 +321,39 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>安装了ubuntu 9.10后，用network-manager无法进行adsl连接，折腾了好一阵子，最终解决办法如下：<br>Linux里面有两套管理网络连接的方案：<br>1、/etc/network/interfaces（/etc/init.d/networking）<br>2、Network-Manager</p>
-<p>两套方案是冲突的，不能同时共存。<br>第一个方案适用于没有X的环境，如：服务器；或者那些完全不需要改动连接的场合。<br>第二套方案使用于有桌面的环境，特别是笔记本，搬来搬去，网络连接情况随时会变的。</p>
+        <p>安装了ubuntu 9.10后，用network-manager无法进行adsl连接，折腾了好一阵子，最终解决办法如下：</p>
+<p>Linux里面有两套管理网络连接的方案：</p>
+<blockquote>
+<ol>
+<li>/etc/network/interfaces（/etc/init.d/networking）</li>
+<li>/Network-Manager</li>
+</ol>
+</blockquote>
+<p>两套方案是冲突的，不能同时共存</p>
+<blockquote>
+<p>第一个方案适用于没有X的环境，如：服务器；或者那些完全不需要改动连接的场合。<br>第二套方案使用于有桌面的环境，特别是笔记本，搬来搬去，网络连接情况随时会变的。</p>
+</blockquote>
 <a id="more"></a>
-<p>－－－－－－－－－－－－－<br>他们两个为了避免冲突，又能共享配置，就有了下面的解决方案：<br>1、当Network-Manager发现/etc/network/interfaces被改动的时候，则关闭自己（显示为未托管），除非managed设置成真。<br>2、当managed设置成真时，/etc/network/interfaces，则不生效。</p>
-<p>升级至ubuntu 9.10后，启用network-manager，adsl无法上网，网上说这是ubuntu升级至9.10后的一个bug，解决方法如下<br>1、从PPA更新network-manager<br>sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys BC8EBFE8<br>在/etc/apt/sources.list最后加上<br>deb <a href="http://ppa.launchpad.net/network-manager/trunk/ubuntu" target="_blank" rel="external">http://ppa.launchpad.net/network-manager/trunk/ubuntu</a> karmic main<br>deb-src <a href="http://ppa.launchpad.net/network-manager/trunk/ubuntu" target="_blank" rel="external">http://ppa.launchpad.net/network-manager/trunk/ubuntu</a> karmic main<br>sudo aptitude update<br>sudo aptitude safe-upgrade</p>
-<p>2、删除文件<br>把/etc/network/interfaces和/etc/resolv.conf备份一下都删除。（interfaces会在使用pppoeconf配置后生成）</p>
-<p>3、通过Network Manager配置网络链接</p>
-<p>4、重新启动电脑</p>
+<hr>
+<p>他们两个为了避免冲突，又能共享配置，就有了下面的解决方案：</p>
+<blockquote>
+<ol>
+<li>当Network-Manager发现/etc/network/interfaces被改动的时候，则关闭自己（显示为未托管），除非managed设置成真。</li>
+<li>当managed设置成真时，/etc/network/interfaces，则不生效。</li>
+</ol>
+</blockquote>
+<p>升级至ubuntu 9.10后，启用network-manager，adsl无法上网，网上说这是ubuntu升级至9.10后的一个bug，解决方法如下</p>
+<blockquote>
+<ol>
+<li><p>从PPA更新network-manager</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BC8EBFE8</div><div class="line">在/etc/apt/sources.list最后加上</div><div class="line">deb http://ppa.launchpad.net/network-manager/trunk/ubuntu karmic main</div><div class="line">deb-src http://ppa.launchpad.net/network-manager/trunk/ubuntu karmic main</div><div class="line">sudo aptitude update</div><div class="line">sudo aptitude safe-upgrade</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除文件<br>把/etc/network/interfaces和/etc/resolv.conf备份一下都删除。（interfaces会在使用pppoeconf配置后生成）</p>
+</li>
+<li>通过Network Manager配置网络链接</li>
+<li>重新启动电脑</li>
+</ol>
+</blockquote>
 <p>如果还不行可以修改DSL里的PPP的协议设置</p>
 
       
@@ -314,7 +366,7 @@
         <p><span>本文标题:</span><a href="/ubuntu-9-10-network-manager-adsl/">ubuntu 9.10 Network Manager ADSL无法上网</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2009-11-08, 22:33:54</p>
-        <p><span>最后更新:</span>2016-08-22, 14:07:32</p>
+        <p><span>最后更新:</span>2016-08-25, 14:01:25</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/ubuntu-9-10-network-manager-adsl/" title="ubuntu 9.10 Network Manager ADSL无法上网">http://www.gagahappy.com/ubuntu-9-10-network-manager-adsl/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/ubuntu-9-10-network-manager-adsl/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

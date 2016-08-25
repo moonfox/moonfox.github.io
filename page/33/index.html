@@ -477,8 +477,15 @@
       
           
               <p>google-chrome在安装时不能选择安装路径，默认是被安装在C盘，所有网页缓存也会被保存在C盘，C盘的空间就会不断的被占用，产生的磁盘碎片也会降低系统的性能，所以，我们务必要把google chrome请出C盘，安装到其它分区。</p>
-<p>把chrome从系统目录提取出来<br>Vista下，Win+R运行 %UserProfile%\AppData\Local\Google\Chrome<br>XP下，Win+R运行 %UserProfile%\Local Settings\Application Data\Google\Chrome</p>
-<p>然后把application文件夹复制出来，把文件夹改名为“chrome”(随便什么你喜欢的名字)。然后进入这个文件夹，新建一个文件夹，名字叫做c_profile(随便什么你喜欢的名字)</p>
+<ol>
+<li><p>把chrome从系统目录提取出来: Vista下，Win+R运行</p>
+<blockquote>
+<p>%UserProfile%\AppData\Local\Google\Chrome<br>XP下，Win+R运行 %UserProfile%\Local Settings\Application Data\Google\Chrome</p>
+</blockquote>
+</li>
+<li><p>然后把application文件夹复制出来，把文件夹改名为“chrome”(随便什么你喜欢的名字)。然后进入这个文件夹，新建一个文件夹，名字叫做c_profile(随便什么你喜欢的名字)</p>
+</li>
+<li><p>最后把3.0.195.33,（这是个目录，在你刚刚复制的application文件夹下，其名子会随着chrome的版本而不同，具体视你的文件而定）目录下的所有文件、文件夹移动到chrome.exe同级目录下。</p>
           
       
     </div>
@@ -808,8 +815,11 @@
       
           
         <p>查找 包含alias字符串的*.conf的文件</p>
-<p>find / -name “*.conf” | xargs grep “alias”</p>
-<p>1. grep -R -l 一些也可以实现，但是通过管道 | 比单纯用grep 复杂的参数更有效率。<br>2. xargs是用来展开find获得的结果，使其作为grep的参数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find / -name <span class="string">"*.conf"</span> | xargs grep <span class="string">"alias"</span></div></pre></td></tr></table></figure>
+<ol>
+<li>grep -R -l 一些也可以实现，但是通过管道 | 比单纯用grep 复杂的参数更有效率。</li>
+<li>xargs是用来展开find获得的结果，使其作为grep的参数。</li>
+</ol>
 
       
     </div>
@@ -874,7 +884,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>rails2.0快速体验<br>1、新建一个Rails程序<br>rails todo<br>这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入<br>rails todo -d mysql</p>
+              <p>rails2.0快速体验</p>
+<p>1、 新建一个Rails程序<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rails todo</div><div class="line"><span class="comment"># 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入</span></div><div class="line">rails todo <span class="_">-d</span> mysql</div></pre></td></tr></table></figure></p>
           
       
     </div>
@@ -1008,7 +1019,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>发现如果要把两个字符串连接在一起。如<br>a = “abc”<br>b = a + “de”<br>此时b的值为”abcde”<br>但如果a = nil时，就会抛出未定义“+”的异常，因为此时a为nil。但如果我们改变一下b右边的表达式，将其改为b = “#{a}de”。这时就不会抛出错误了，此时b=&gt; “de”。</p>
+        <p>发现如果要把两个字符串连接在一起。如<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a = <span class="string">"abc"</span></div><div class="line">b = a + <span class="string">"de"</span></div><div class="line"><span class="comment"># 此时b的值为"abcde", 但如果a = nil时，就会抛出未定义“+”的异常，因为此时a为nil。但如果我们改变一下b右边的表达式，将其改为b = "#&#123;a&#125;de"。这时就不会抛出错误了，此时b=&gt; "de"。</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -1026,77 +1037,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-fire-safety" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/fire-safety/" class="article-date">
-      <time datetime="2009-12-04T15:03:42.000Z" itemprop="datePublished">2009-12-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/fire-safety/">消防安全</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>单位请了北京火灾防治中心的老师来讲有关消防安全方面的知识，这个话题听上去有些严肃，离我们好像又有些遥远，但这些知识却可以挽救自己和他人的生命，所以对于消防安全，我们应该给予高度的重视。在这里就和大家分享一下消防安全的相关知识。</p>
-<p>一、“防火”应防范什么，如何有效防范<br>工作和生活环境中消防安全隐患的自我排查、 治理 。</p>
-<p>二、发生后，该如何”自救”<br>发生火情应如何就地取材，全力扑救；<br>发生火灾应如何有效疏散，自救逃生。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/information/">让资讯飞</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/youknow/">小知识</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/fire-safety/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -1147,7 +1087,10 @@
         <p>单位组织献血，据说还有奖金，还可以休息几天，真是不错啊，本来不想献血的，但听说能有奖金，就决定去献一次血。哈哈，表要笑偶是冲着奖金去的，偶的思想就是这样的单纯。</p>
 <p>下班回到家后把这想法和老妈说了，结果遭到老妈的强烈反对，说什么你那么瘦，体质又不好，前几天又得了感冒，这12月和1月份又是流感高发期，你献什么献啊！经过老妈这一番吓唬，献血这件是最终做罢。</p>
 <p>其实，真实情况是这样的，已经在单位报了名了，结果被刷下来了，可能是因为偶太瘦了吧，不符合献血规定。哈哈。</p>
-<p>有关献血的英文词句<br>Non-remunerated blood donation 无偿献血<br>blood donation  献血<br>Blood Donation Centre 捐血中心<br>blood donation without payment 献血无须缴付<br>voluntary blood donation 自愿献血<br>volunteer blood donation 志愿无偿献血<br>free blood donation 免费献血 </p>
+<p>有关献血的英文词句</p>
+<blockquote>
+<p>Non-remunerated blood donation 无偿献血<br>blood donation  献血<br>Blood Donation Centre 捐血中心<br>blood donation without payment 献血无须缴付<br>voluntary blood donation 自愿献血<br>volunteer blood donation 志愿无偿献血<br>free blood donation 免费献血</p>
+</blockquote>
 
       
     </div>
@@ -1165,76 +1108,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/weibo/">微博</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-linux-basic-script" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/linux-basic-script/" class="article-date">
-      <time datetime="2009-12-02T14:34:57.000Z" itemprop="datePublished">2009-12-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/linux-basic-script/">Linux脚本编写语法基础介绍</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>Linux脚本编写语法基础介绍：<br>1 开头<br>程序必须以下面的行开始（必须方在文件的第一行）：</p>
-<p>#!/bin/sh<br>符号#!用来告诉系统它后面的参数是用来执行该文件的程序。在这个例子中我们使用/bin/sh来执行程序。<br>当编写脚本完成时，如果要执行该脚本，还必须使其可执行。<br>要使编写脚本可执行：<br>编译 chmod +x filename 这样才能用./filename 来运行<br>2 注释<br>在进行shell编程时，以#开头的句子表示注释，直到这一行的结束。我们真诚地建议您在程序中使用注释。<br>如果您使用了注释，那么即使相当长的时间内没有使用该脚本，您也能在很短的时间内明白该脚本的作用及工作原理。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/linux-basic-script/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -1416,8 +1289,18 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>UML是程序员应该掌握的技能之一，单位为此特别进行了四天的UML培训，简单总结下。</p>
-<p>1 类图<br>2 高级用例图<br>3 对核心分析类画活动图 ，基本流程（正常流程）<br>4 低级用例图<br>5 类图<br>依赖要有参数</p>
+              <blockquote>
+<p>UML是程序员应该掌握的技能之一，单位为此特别进行了四天的UML培训，简单总结下。</p>
+<blockquote>
+<ol>
+<li>类图</li>
+<li>高级用例图</li>
+<li>对核心分析类画活动图 ，基本流程（正常流程）</li>
+<li>低级用例图</li>
+<li>类图 依赖要有参数</li>
+</ol>
+</blockquote>
+</blockquote>
           
       
     </div>
@@ -1588,9 +1471,140 @@
 
 
   
+    <article id="post-haagendazs" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/haagendazs/" class="article-date">
+      <time datetime="2009-11-26T15:02:24.000Z" itemprop="datePublished">2009-11-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/haagendazs/">哈根达斯</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>发现自己居然有点开始喜欢单身生活了，居然起了独自要去吃哈根达斯的冲动。原因有二。</p>
+<p>第一、到目前为止，还没吃过呢。<br>第二、看了《蜗居》里海藻那么的爱吃冰淇淋却N进而不买。发觉生活是一吃的苦要比享福多的事儿，所以要好好努力啊，这才是生活。（可不是因为海藻不舍得买冰淇淋，这才哪到哪啊）</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/food/">美食么么</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/cate/">美食</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-beauty-girl-and-beancurd" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/beauty-girl-and-beancurd/" class="article-date">
+      <time datetime="2009-11-21T13:50:46.000Z" itemprop="datePublished">2009-11-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/beauty-girl-and-beancurd/">美女 臭豆腐</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>下班后格外的饿，下了地铁后终于坚持不住了，周围全是买小吃的，绕有兴趣的逛了起来，寻找还没有被发现的小吃滩，突然发现了消失了很久的那家卖臭豆腐的小滩，属他家的臭豆腐好吃。买了一份，价格已经由以前的1元涨到3元了，味道还像以前那样好吃。除了吃臭豆腐，还发现来这里吃臭豆腐的漂亮MM还真不少，可让我赶上这波了。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/weibo/">微博</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/32/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="page-number" href="/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/34/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/32/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="page-number" href="/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/page/34/">34</a><a class="page-number" href="/page/35/">35</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/34/">Next &raquo;</a>
     </nav>
   
 </div>

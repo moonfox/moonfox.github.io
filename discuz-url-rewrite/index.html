@@ -16,18 +16,18 @@
 
 
 <meta name="description" content="Apache Web Server（独立主机用户）
-    RewriteEngine On    RewriteRule ^(.)/archiver/((fid|tid)-[\w-]+.html)$ $1/archiver/index.php?$2    RewriteRule ^(.)/forum-([0-9]+)-([0-9]+).html$ $1/forumdisplay.php?fid=">
+12345678&amp;lt;IfModule mod_rewrite.c&amp;gt;    RewriteEngine On    RewriteRule ^(.*)/archiver/((fid|tid)-[\w\-]+\.html)$ $1/archiver/index.php?$2    RewriteRule ^(.*)/forum-([0-9]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Discuz URL 静态化">
 <meta property="og:url" content="http://www.gagahappy.com/discuz-url-rewrite/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="Apache Web Server（独立主机用户）
-    RewriteEngine On    RewriteRule ^(.)/archiver/((fid|tid)-[\w-]+.html)$ $1/archiver/index.php?$2    RewriteRule ^(.)/forum-([0-9]+)-([0-9]+).html$ $1/forumdisplay.php?fid=">
-<meta property="og:updated_time" content="2016-08-22T06:07:35.000Z">
+12345678&amp;lt;IfModule mod_rewrite.c&amp;gt;    RewriteEngine On    RewriteRule ^(.*)/archiver/((fid|tid)-[\w\-]+\.html)$ $1/archiver/index.php?$2    RewriteRule ^(.*)/forum-([0-9]">
+<meta property="og:updated_time" content="2016-08-25T05:44:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Discuz URL 静态化">
 <meta name="twitter:description" content="Apache Web Server（独立主机用户）
-    RewriteEngine On    RewriteRule ^(.)/archiver/((fid|tid)-[\w-]+.html)$ $1/archiver/index.php?$2    RewriteRule ^(.)/forum-([0-9]+)-([0-9]+).html$ $1/forumdisplay.php?fid=">
+12345678&amp;lt;IfModule mod_rewrite.c&amp;gt;    RewriteEngine On    RewriteRule ^(.*)/archiver/((fid|tid)-[\w\-]+\.html)$ $1/archiver/index.php?$2    RewriteRule ^(.*)/forum-([0-9]">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -291,23 +291,11 @@
       
           
         <p>Apache Web Server（独立主机用户）</p>
-<ifmodule mod_rewrite.c=""><br>    RewriteEngine On<br>    RewriteRule ^(.<em>)/archiver/((fid|tid)-[\w-]+.html)$ $1/archiver/index.php?$2<br>    RewriteRule ^(.</em>)/forum-([0-9]+)-([0-9]+).html$ $1/forumdisplay.php?fid=$2&amp;page=$3<br>    RewriteRule ^(.<em>)/thread-([0-9]+)-([0-9]+)-([0-9]+).html$ $1/viewthread.php?<br><br>tid=$2&amp;extra=page\%3D$4&amp;page=$3<br>    RewriteRule ^(.</em>)/space-(username|uid)-(.+).html$ $1/space.php?$2=$3<br>    RewriteRule ^(.*)/tag-(.+).html$ $1/tag.php?name=$2<br></ifmodule>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;IfModule mod_rewrite.c&gt;</div><div class="line">    RewriteEngine On</div><div class="line">    RewriteRule ^(.*)/archiver/((fid|tid)-[\w\-]+\.html)$ <span class="variable">$1</span>/archiver/index.php?<span class="variable">$2</span></div><div class="line">    RewriteRule ^(.*)/forum-([0-9]+)-([0-9]+)\.html$ <span class="variable">$1</span>/forumdisplay.php?fid=<span class="variable">$2</span>&amp;page=<span class="variable">$3</span></div><div class="line">    RewriteRule ^(.*)/thread-([0-9]+)-([0-9]+)-([0-9]+)\.html$ <span class="variable">$1</span>/viewthread.php?tid=<span class="variable">$2</span>&amp;extra=page\%3D<span class="variable">$4</span>&amp;page=<span class="variable">$3</span></div><div class="line">    RewriteRule ^(.*)/space-(username|uid)-(.+)\.html$ <span class="variable">$1</span>/space.php?<span class="variable">$2</span>=<span class="variable">$3</span></div><div class="line">    RewriteRule ^(.*)/tag-(.+)\.html$ <span class="variable">$1</span>/tag.php?name=<span class="variable">$2</span></div><div class="line">&lt;/IfModule&gt;</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>Apache Web Server（虚拟主机用户）</p>
-<ifmodule mod_rewrite.c="">
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;IfModule mod_rewrite.c&gt;</div><div class="line">    <span class="comment"># 将 RewriteEngine 模式打开</span></div><div class="line">    RewriteEngine On</div><div class="line">    <span class="comment"># 修改以下语句中的/discuz 为你的论坛目录地址，如果程序放在根目录中，请将 /discuz 修改为 /</span></div><div class="line">    RewriteBase /discuz</div><div class="line">    <span class="comment"># Rewrite 系统规则请勿修改</span></div><div class="line">    RewriteRule ^archiver/((fid|tid)-[\w\-]+\.html)$ archiver/index.php?<span class="variable">$1</span></div><div class="line">    RewriteRule ^forum-([0-9]+)-([0-9]+)\.html$ forumdisplay.php?fid=<span class="variable">$1</span>&amp;page=<span class="variable">$2</span></div><div class="line">    RewriteRule ^thread-([0-9]+)-([0-9]+)-([0-9]+)\.html$ viewthread.php?tid=<span class="variable">$1</span>&amp;extra=page\%3D<span class="variable">$3</span>&amp;page=<span class="variable">$2</span></div><div class="line">    RewriteRule ^space-(username|uid)-(.+)\.html$ space.php?<span class="variable">$1</span>=<span class="variable">$2</span></div><div class="line">    RewriteRule ^tag-(.+)\.html$ tag.php?name=<span class="variable">$1</span></div></pre></td></tr></table></figure>
 
-<pre><code>    # 将 RewriteEngine 模式打开
-RewriteEngine On
-
-# 修改以下语句中的 /discuz 为你的论坛目录地址，如果程序放在根目录中，请将 /discuz 修
-</code></pre><p>改为 /<br>    RewriteBase /discuz</p>
-<pre><code># Rewrite 系统规则请勿修改
-RewriteRule ^archiver/((fid|tid)-[\w\-]+\.html)$ archiver/index.php?$1
-RewriteRule ^forum-([0-9]+)-([0-9]+)\.html$ forumdisplay.php?fid=$1&amp;page=$2
-RewriteRule ^thread-([0-9]+)-([0-9]+)-([0-9]+)\.html$ viewthread.php?
-</code></pre><p>tid=$1&amp;extra=page\%3D$3&amp;page=$2<br>    RewriteRule ^space-(username|uid)-(.+).html$ space.php?$1=$2<br>    RewriteRule ^tag-(.+).html$ tag.php?name=$1</p>
-</ifmodule>
       
     </div>
     
@@ -318,7 +306,7 @@ RewriteRule ^thread-([0-9]+)-([0-9]+)-([0-9]+)\.html$ viewthread.php?
         <p><span>本文标题:</span><a href="/discuz-url-rewrite/">Discuz URL 静态化</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2009-10-27, 21:53:51</p>
-        <p><span>最后更新:</span>2016-08-22, 14:07:35</p>
+        <p><span>最后更新:</span>2016-08-25, 13:44:47</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/discuz-url-rewrite/" title="Discuz URL 静态化">http://www.gagahappy.com/discuz-url-rewrite/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/discuz-url-rewrite/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

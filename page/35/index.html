@@ -252,135 +252,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-talk-to-someone" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/talk-to-someone/" class="article-date">
-      <time datetime="2009-10-26T14:00:10.000Z" itemprop="datePublished">2009-10-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/talk-to-someone/">和某人的聊天记录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p></p><p style="text-align: left;">和某人的聊天记录，如图，某人应该已经知道是谁了吧<br><img src="http://img.gagahappy.com/blog/2009/10/dgfjn2fc_55hq25k7g7_b.png" alt="和某人的聊天记录" title="和某人的聊天记录"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/taandme/">Ta们的我</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-splayer" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/splayer/" class="article-date">
-      <time datetime="2009-10-25T15:06:55.000Z" itemprop="datePublished">2009-10-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/splayer/">射手播放器3.0正式版</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>《射手播放器3.0正式版》(SPlayer V3.0)自动下载字幕的播放器[安装包]</p>
-<p><img src="http://img.gagahappy.com/blog/2009/10/thumb4.jpg" alt="射手播放器" title="射手播放器"></p>
-<p>软件介绍：<br>射手影音播放器是由射手网创建与维护的开源播放器项目。内核基于MPC（感谢Gabest）、MPC-HC与ffmpeg。采用最新DirectX硬件加速技术，特有画面增益，清晰播放720p、1080p高清。是真正属于中文用户的开源播放器。</p>
-<p>PS：试用后发现可以记忆播放的影片进度，即再次打开此影片时，可以从你上次关闭的地方接着播放影片。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/software/">玩转软件</a>
-    </div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-up" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -618,11 +489,9 @@
       
           
         <p>如果是ubuntu桌面环境的话，不用mount，接入的U盘就可以直接被系统识别，访问起来非常方便，但如果没有桌面环境呢，比如在ubuntu server端，如何访问U盘呢？</p>
-<p>第一步：查看U盘信息<br>sudo fdisk -l 得到类似下面这样的信息</p>
-<p>Disk /dev/sdb: 8027 MB, 8027897856 bytes<br>14 heads, 22 sectors/track, 50907 cylinders<br>Units = cylinders of 308 * 512 = 157696 bytes</p>
-<p>   Device Boot      Start         End      Blocks   Id  System<br>/dev/sdb1               8       50908     7838628    7  HPFS/NTFS</p>
+<p>第一步：查看U盘信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sudo fdisk <span class="_">-l</span> 得到类似下面这样的信息</div><div class="line"></div><div class="line">Disk /dev/sdb: 8027 MB, 8027897856 bytes</div><div class="line">14 heads, 22 sectors/track, 50907 cylinders</div><div class="line">Units = cylinders of 308 * 512 = 157696 bytes</div><div class="line"></div><div class="line">Device Boot      Start         End      Blocks   Id  System</div><div class="line">/dev/sdb1               8       50908     7838628    7  HPFS/NTFS</div></pre></td></tr></table></figure></p>
 <p>很容易看出来，这是一块U盘，并且只有一个分区 sdb1，且文件系统为NTFS</p>
-<p>第二步：挂载U盘到指定节点<br>sudo mount -t ntfs-3g /dev/sdb1 /mnt/windows/u （／mnt/windows/u为你要挂载到的节点，这个你可以随便指定。）</p>
+<p>第二步：挂载U盘到指定节点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mount -t ntfs-3g /dev/sdb1 /mnt/windows/u （／mnt/windows/u为你要挂载到的节点，这个你可以随便指定。）</div></pre></td></tr></table></figure></p>
 <p>然后你就可以通过 cd /mnt/windows/u 对U盘上的内容进行访问了。</p>
 
       
@@ -688,8 +557,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p><img src="http://img.gagahappy.com/blog/2009/10/thumb1.jpg" alt="机械迷城" title="机械迷城"></p>
-<p>中文名称: 机械迷城</p>
+              <p>中文名称: 机械迷城</p>
+<p><img src="http://img.gagahappy.com/blog/2009/10/thumb1.jpg" alt="机械迷城" title="机械迷城"></p>
           
       
     </div>
@@ -1095,8 +964,17 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在你安装dabr时，请确认已满足以下必要条件<br>1、php版本 5.2＋因为要用到 json_decode() function)<br>2、确保主机支持 mcrypt 模块<br>3、确保主机支持 mod_rewrite 模块</p>
-<p>偶在安装后运行时遇到<br>1、Parse error: syntax error, unexpected ‘=’, expecting ‘)’ in /data/home/zz43d1/htdocs/dabr/common/user.php on line 52<br>可能就是php版本低于5.2造成的，偶用的是万网的主机，为php4.4.9。<br>2、如果主机不支持 mcrypt 模块，可以用第三方方法解决。这个在网上已经有方案了。</p>
+        <p>在你安装dabr时，请确认已满足以下必要条件</p>
+<ol>
+<li>php版本 5.2＋因为要用到 json_decode() function)</li>
+<li>确保主机支持 mcrypt 模块</li>
+<li>确保主机支持 mod_rewrite 模块</li>
+</ol>
+<p>偶在安装后运行时遇到</p>
+<ol>
+<li><code>Parse error: syntax error, unexpected &#39;=&#39;, expecting &#39;)&#39; in /data/home/zz43d1/htdocs/dabr/common/user.php on line 52</code><br>可能就是php版本低于5.2造成的，偶用的是万网的主机，为php4.4.9。</li>
+<li>如果主机不支持 mcrypt 模块，可以用第三方方法解决。这个在网上已经有方案了。</li>
+</ol>
 
       
     </div>
@@ -1607,9 +1485,140 @@
 
 
   
+    <article id="post-belongs-to-primary-key" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/belongs-to-primary-key/" class="article-date">
+      <time datetime="2009-10-08T14:48:13.000Z" itemprop="datePublished">2009-10-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/belongs-to-primary-key/">belongs_to 选项中的:primary_key</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在定义mode时给belongs_to加入了:primary_key选项，运行时报错，提示Unknown primary-key。去网上寻找答案，在rubyonrails的官方网站的关于rails2.3.3新特性介绍中看到有这么一段描述</p>
+<blockquote>
+<p>:primary_key option for belongs_to for broader support of legacy schemas and those using a separate UUID primary key: belongs_to :employee, :primary_key =&gt; ‘SSN’, :foreign_key =&gt; ‘EMPID’</p>
+</blockquote>
+<p>原来直到rails2.3.3时primary_key才被belongs_to支持，偶用的是rails2.3.2，难怪会出现Unknown primary-key错误。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-netbeans-6-7-1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/netbeans-6-7-1/" class="article-date">
+      <time datetime="2009-10-08T11:54:56.000Z" itemprop="datePublished">2009-10-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/netbeans-6-7-1/">netbeans 6.7.1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>刚刚安装了netbeans 6.7.1，目前的感觉是启动速度比以前的版本都要快</p>
+<p><img src="http://img.gagahappy.com/blog/2009/10/netbeans6.7.1.png" alt="netbeans6.7.1" title="netbeans6.7.1"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/software/">玩转软件</a>
+    </div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/34/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="page-number" href="/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/page/36/">36</a><a class="page-number" href="/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/36/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/34/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="page-number" href="/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/page/36/">36</a><a class="page-number" href="/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/page/41/">41</a><a class="extend next" rel="next" href="/page/36/">Next &raquo;</a>
     </nav>
   
 </div>

@@ -16,21 +16,18 @@
 
 
 <meta name="description" content="如果是ubuntu桌面环境的话，不用mount，接入的U盘就可以直接被系统识别，访问起来非常方便，但如果没有桌面环境呢，比如在ubuntu server端，如何访问U盘呢？
-第一步：查看U盘信息sudo fdisk -l 得到类似下面这样的信息
-Disk /dev/sdb: 8027 MB, 8027897856 bytes14 heads, 22 sectors/track, 50907 cyl">
+第一步：查看U盘信息12345678sudo fdisk -l 得到类似下面这样的信息Disk /dev/sdb: 8027 MB, 8027897856 bytes14 heads, 22 sectors/track, 50">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu mount u盘">
 <meta property="og:url" content="http://www.gagahappy.com/ubuntu-mount-u-driv/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="如果是ubuntu桌面环境的话，不用mount，接入的U盘就可以直接被系统识别，访问起来非常方便，但如果没有桌面环境呢，比如在ubuntu server端，如何访问U盘呢？
-第一步：查看U盘信息sudo fdisk -l 得到类似下面这样的信息
-Disk /dev/sdb: 8027 MB, 8027897856 bytes14 heads, 22 sectors/track, 50907 cyl">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+第一步：查看U盘信息12345678sudo fdisk -l 得到类似下面这样的信息Disk /dev/sdb: 8027 MB, 8027897856 bytes14 heads, 22 sectors/track, 50">
+<meta property="og:updated_time" content="2016-08-25T05:40:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu mount u盘">
 <meta name="twitter:description" content="如果是ubuntu桌面环境的话，不用mount，接入的U盘就可以直接被系统识别，访问起来非常方便，但如果没有桌面环境呢，比如在ubuntu server端，如何访问U盘呢？
-第一步：查看U盘信息sudo fdisk -l 得到类似下面这样的信息
-Disk /dev/sdb: 8027 MB, 8027897856 bytes14 heads, 22 sectors/track, 50907 cyl">
+第一步：查看U盘信息12345678sudo fdisk -l 得到类似下面这样的信息Disk /dev/sdb: 8027 MB, 8027897856 bytes14 heads, 22 sectors/track, 50">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -298,11 +295,9 @@ Disk /dev/sdb: 8027 MB, 8027897856 bytes14 heads, 22 sectors/track, 50907 cyl">
       
           
         <p>如果是ubuntu桌面环境的话，不用mount，接入的U盘就可以直接被系统识别，访问起来非常方便，但如果没有桌面环境呢，比如在ubuntu server端，如何访问U盘呢？</p>
-<p>第一步：查看U盘信息<br>sudo fdisk -l 得到类似下面这样的信息</p>
-<p>Disk /dev/sdb: 8027 MB, 8027897856 bytes<br>14 heads, 22 sectors/track, 50907 cylinders<br>Units = cylinders of 308 * 512 = 157696 bytes</p>
-<p>   Device Boot      Start         End      Blocks   Id  System<br>/dev/sdb1               8       50908     7838628    7  HPFS/NTFS</p>
+<p>第一步：查看U盘信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sudo fdisk <span class="_">-l</span> 得到类似下面这样的信息</div><div class="line"></div><div class="line">Disk /dev/sdb: 8027 MB, 8027897856 bytes</div><div class="line">14 heads, 22 sectors/track, 50907 cylinders</div><div class="line">Units = cylinders of 308 * 512 = 157696 bytes</div><div class="line"></div><div class="line">Device Boot      Start         End      Blocks   Id  System</div><div class="line">/dev/sdb1               8       50908     7838628    7  HPFS/NTFS</div></pre></td></tr></table></figure></p>
 <p>很容易看出来，这是一块U盘，并且只有一个分区 sdb1，且文件系统为NTFS</p>
-<p>第二步：挂载U盘到指定节点<br>sudo mount -t ntfs-3g /dev/sdb1 /mnt/windows/u （／mnt/windows/u为你要挂载到的节点，这个你可以随便指定。）</p>
+<p>第二步：挂载U盘到指定节点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mount -t ntfs-3g /dev/sdb1 /mnt/windows/u （／mnt/windows/u为你要挂载到的节点，这个你可以随便指定。）</div></pre></td></tr></table></figure></p>
 <p>然后你就可以通过 cd /mnt/windows/u 对U盘上的内容进行访问了。</p>
 
       
@@ -315,7 +310,7 @@ Disk /dev/sdb: 8027 MB, 8027897856 bytes14 heads, 22 sectors/track, 50907 cyl">
         <p><span>本文标题:</span><a href="/ubuntu-mount-u-driv/">ubuntu mount u盘</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2009-10-21, 22:59:28</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2016-08-25, 13:40:17</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/ubuntu-mount-u-driv/" title="ubuntu mount u盘">http://www.gagahappy.com/ubuntu-mount-u-driv/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/ubuntu-mount-u-driv/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>

@@ -15,22 +15,19 @@
 
 
 
-<meta name="description" content="编译安装mysql后，用chkconfig令命将其加入随机启动shell&amp;gt; cp mysql.server /etc/init.d/mysqlshell&amp;gt; chmod +x /etc/init.d/mysqlshell&amp;gt; chkconfig –add mysql出现下面的错误
-
-insserv: warning: script ‘K20acpi-support’ missing">
+<meta name="description" content="编译安装mysql后，用chkconfig令命将其加入随机启动123cp mysql.server /etc/init.d/mysqlchmod +x /etc/init.d/mysqlchkconfig --add mysql
+出现下面的错误">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu mysql 自动启动">
 <meta property="og:url" content="http://www.gagahappy.com/ubuntu-mysql-add-to-service/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="编译安装mysql后，用chkconfig令命将其加入随机启动shell&amp;gt; cp mysql.server /etc/init.d/mysqlshell&amp;gt; chmod +x /etc/init.d/mysqlshell&amp;gt; chkconfig –add mysql出现下面的错误
-
-insserv: warning: script ‘K20acpi-support’ missing">
-<meta property="og:updated_time" content="2016-08-22T06:07:33.000Z">
+<meta property="og:description" content="编译安装mysql后，用chkconfig令命将其加入随机启动123cp mysql.server /etc/init.d/mysqlchmod +x /etc/init.d/mysqlchkconfig --add mysql
+出现下面的错误">
+<meta property="og:updated_time" content="2016-08-25T05:55:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu mysql 自动启动">
-<meta name="twitter:description" content="编译安装mysql后，用chkconfig令命将其加入随机启动shell&amp;gt; cp mysql.server /etc/init.d/mysqlshell&amp;gt; chmod +x /etc/init.d/mysqlshell&amp;gt; chkconfig –add mysql出现下面的错误
-
-insserv: warning: script ‘K20acpi-support’ missing">
+<meta name="twitter:description" content="编译安装mysql后，用chkconfig令命将其加入随机启动123cp mysql.server /etc/init.d/mysqlchmod +x /etc/init.d/mysqlchkconfig --add mysql
+出现下面的错误">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -297,12 +294,12 @@ insserv: warning: script ‘K20acpi-support’ missing">
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>编译安装mysql后，用chkconfig令命将其加入随机启动<br>shell&gt; cp mysql.server /etc/init.d/mysql<br>shell&gt; chmod +x /etc/init.d/mysql<br>shell&gt; chkconfig –add mysql<br>出现下面的错误</p>
+        <p>编译安装mysql后，用chkconfig令命将其加入随机启动<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cp mysql.server /etc/init.d/mysql</div><div class="line">chmod +x /etc/init.d/mysql</div><div class="line">chkconfig --add mysql</div></pre></td></tr></table></figure></p>
+<p>出现下面的错误<br><a id="more"></a></p>
 <blockquote>
-<p>insserv: warning: script ‘K20acpi-support’ missing LSB tags and overrides</p>
-<a id="more"></a>
-<p>insserv: warning: current start runlevel(s) (0 6) of script <code>umountfs&#39; overwrites defaults (empty).
-insserv: warning: current start runlevel(s) (0 6) of script</code>sendsigs’ overwrites defaults (empty).<br>insserv: warning: script ‘rsyslog’ missing LSB tags and overrides<br>insserv: warning: script ‘dmesg’ missing LSB tags and overrides<br>insserv: warning: script ‘acpi-support’ missing LSB tags and overrides<br>insserv: warning: script ‘udevtrigger’ missing LSB tags and overrides<br>insserv: warning: current start runlevel(s) (0 6) of script <code>wpa-ifupdown&#39; overwrites defaults (empty).
+<p><code>insserv: warning: script &#39;K20acpi-support&#39; missing LSB tags and overrides
+insserv: warning: current start runlevel(s) (0 6) of script umountfs&#39; overwrites defaults (empty).
+insserv: warning: current start runlevel(s) (0 6) of script sendsigs&#39; overwrites defaults (empty).
 insserv: warning: script &#39;gdm&#39; missing LSB tags and overrides
 insserv: warning: script &#39;acpid&#39; missing LSB tags and overrides
 insserv: warning: script &#39;hal&#39; missing LSB tags and overrides
@@ -317,13 +314,19 @@ insserv: warning: script &#39;usplash&#39; missing LSB tags and overrides
 insserv: warning: script &#39;hwclock-save&#39; missing LSB tags and overrides
 insserv: warning: script &#39;dbus&#39; missing LSB tags and overrides
 insserv: warning: script &#39;apport&#39; missing LSB tags and overrides
-insserv: warning: current start runlevel(s) (6) of script</code>reboot’ overwrites defaults (empty).<br>insserv: warning: current start runlevel(s) (0 6) of script <code>umountnfs.sh&#39; overwrites defaults (empty).
+insserv: warning: current start runlevel(s) (6) of script reboot&#39; overwrites defaults (empty).
+insserv: warning: current start runlevel(s) (0 6) of script umountnfs.sh&#39; overwrites defaults (empty).
 insserv: warning: script &#39;ufw&#39; missing LSB tags and overrides
-insserv: warning: current start runlevel(s) (0 6) of script</code>umountroot’ overwrites defaults (empty).<br>insserv: warning: script ‘avahi-daemon’ missing LSB tags and overrides<br>insserv: warning: script ‘network-manager’ missing LSB tags and overrides<br>insserv: warning: script ‘atd’ missing LSB tags and overrides<br>insserv: warning: script ‘module-init-tools’ missing LSB tags and overrides<br>insserv: warning: script ‘udev-finish’ missing LSB tags and overrides<br>insserv: warning: current start runlevel(s) (0) of script <code>halt&#39; overwrites defaults (empty).
-insserv: warning: script &#39;rsyslog-kmsg&#39; missing LSB tags and overrides
-insserv: warning: script &#39;udev&#39; missing LSB tags and overrides
-insserv: warning: current start runlevel(s) (0 6) of script</code>networking’ overwrites defaults (empty).<br>insserv: There is a loop between service rsyslog and pulseaudio if stopped<br>insserv:? loop involving service pulseaudio at depth 3<br>insserv:? loop involving service rsyslog at depth 2<br>insserv:? loop involving service udev at depth 1<br>insserv: There is a loop between service rsyslog and pulseaudio if stopped<br>insserv:? loop involving service dbus at depth 2<br>insserv: exiting without changing boot order!<br>/sbin/insserv failed, exit code 1<br>mysql ????????????????? 0:off? 1:off? 2:off? 3:off? 4:off? 5:off? 6:off<br>很明显，加入自动启动失败。到网上查询无果，最终用ubuntu自带的update-rc.d解决（chkconfig为linux自带 ，在部分ubuntu版本中（如8.04）被移去）<br>shell&gt;sudo update-rc.d mysql defaults<br>然后在用chkconfig –list mysql 查看<br>mysql                   0:off  1:off  2:on   3:on   4:on   5:on   6:off<br>终于正常了。<br>疑问：在虚拟机中可以成功用chkconfig将mysql加入到随机启动中，不知道为什么在主机中不能实现，以前在主机上也可以成功将mysql加入随机启动的啊（现在用的是ubuntu9.10）</p>
+insserv: warning: current start runlevel(s) (0 6) of script umountroot&#39; overwrites defaults (empty).
+insserv: warning: script &#39;avahi-daemon&#39; missing LSB tags and overrides
+insserv: warning: script &#39;network-manager&#39; missing LSB tags and overrides
+insserv: warning: script &#39;atd&#39; missing LSB tags and overrides
+insserv: warning: script &#39;module-init-tools&#39; missing LSB tags and overrides</code></p>
 </blockquote>
+<p>很明显，加入自动启动失败。到网上查询无果，最终用ubuntu自带的update-rc.d解决（chkconfig为linux自带，在部分ubuntu版本中（如8.04）被移去）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo update-rc.d mysql defaults</div><div class="line">chkconfig --list mysql</div><div class="line"></div><div class="line">=&gt; mysql 0:off  1:off  2:on   3:on   4:on   5:on   6:off</div></pre></td></tr></table></figure>
+<p>终于正常了。</p>
+<p>疑问：在虚拟机中可以成功用chkconfig将mysql加入到随机启动中，不知道为什么在主机中不能实现，以前在主机上也可以成功将mysql加入随机启动的啊（现在用的是ubuntu9.10）</p>
 
       
     </div>
@@ -335,7 +338,7 @@ insserv: warning: current start runlevel(s) (0 6) of script</code>networking’ 
         <p><span>本文标题:</span><a href="/ubuntu-mysql-add-to-service/">ubuntu mysql 自动启动</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2009-11-05, 22:29:40</p>
-        <p><span>最后更新:</span>2016-08-22, 14:07:33</p>
+        <p><span>最后更新:</span>2016-08-25, 13:55:47</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/ubuntu-mysql-add-to-service/" title="ubuntu mysql 自动启动">http://www.gagahappy.com/ubuntu-mysql-add-to-service/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/ubuntu-mysql-add-to-service/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
