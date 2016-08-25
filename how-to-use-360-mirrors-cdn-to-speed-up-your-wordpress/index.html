@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://www.gagahappy.com/how-to-use-360-mirrors-cdn-to-speed-up-your-wordpress/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="最近几天因 Google 服务器无法访问，造成国内几十万 WordPress 网站打开超级缓慢、甚至无法打开。不管你使用的国内主机，还是国外主机，只要你的网站中调用了Google Fonts字体，或者使用了Google Ajax前端库，在国内访问时都会卡得比较严重。今天，WordPress非官方中文站再次撰文，详细告诉你如何使用 360 的镜像服务，来给你的 WordPress 网站提速。">
-<meta property="og:updated_time" content="2016-08-22T06:05:14.000Z">
+<meta property="og:updated_time" content="2016-08-25T13:35:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何使用360镜像解决WordPress访问速度慢的问题">
 <meta name="twitter:description" content="最近几天因 Google 服务器无法访问，造成国内几十万 WordPress 网站打开超级缓慢、甚至无法打开。不管你使用的国内主机，还是国外主机，只要你的网站中调用了Google Fonts字体，或者使用了Google Ajax前端库，在国内访问时都会卡得比较严重。今天，WordPress非官方中文站再次撰文，详细告诉你如何使用 360 的镜像服务，来给你的 WordPress 网站提速。">
@@ -291,26 +291,63 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>最近几天因 Google 服务器无法访问，造成国内几十万 WordPress 网站打开超级缓慢、甚至无法打开。不管你使用的国内主机，还是国外主机，只要你的网站中调用了Google Fonts字体，或者使用了Google Ajax前端库，在国内访问时都会卡得比较严重。今天，WordPress非官方中文站再次撰文，详细告诉你如何使用 360 的镜像服务，来给你的 WordPress 网站提速。</p>
+        <blockquote>
+<p><strong>最近几天因 Google 服务器无法访问，造成国内几十万 WordPress 网站打开超级缓慢、甚至无法打开。不管你使用的国内主机，还是国外主机，只要你的网站中调用了Google Fonts字体，或者使用了Google Ajax前端库，在国内访问时都会卡得比较严重。今天，WordPress非官方中文站再次撰文，详细告诉你如何使用 360 的镜像服务，来给你的 WordPress 网站提速。</strong></p>
+</blockquote>
 <a id="more"></a>
-<p>这次 Google 服务无法访问造成 WordPress 网站打开速度缓慢的情况，WordPress非官方中文站前面已经两次撰文，介绍了如何使用插件来禁用 WordPress 核心程序和自带主题中调用的 Open Sans 等 Google Fonts 字体，以及如何使用 360 镜像的 Google Fonts 字体服务给 WordPress 网站加速。根据这两篇教程的介绍，有些网友跟我们反馈，他们的网站已经恢复了正常，包括著名的左岸读书；但是也有一些网友的网站访问速度尚未完全恢复，也有一些网友不知道该如何操作。</p>
-<p>因此，我们这次教程将更为详细地介绍一下，如何使用 360 公司提供的镜像服务，来给你的 WordPress 网站提速。本文主要针对 WordPress 新手，介绍得比较细致（也可以理解为啰嗦^-^）；如果你是 WordPress 高手，可以快速跳过具体操作步骤的介绍。<br>Google Fonts 和 Google Ajax 服务器的作用</p>
-<p>Google Fonts 是 Google 公司提供的字体库服务（fonts.googleapis.com），Google Ajax 是 Google 公司提供的前端开发用的 js 库服务（ajax.googleapis.com）。一般来说，使用 Google 公司提供的公共服务，可以有效减少网站流量，加快网站的访问速度。但由于我们的国情不同，这类服务一旦访问出现困难，依赖这些服务的网站打开反而会极其缓慢。</p>
+<p>这次 Google 服务无法访问造成 WordPress 网站打开速度缓慢的情况，WordPress非官方中文站前面已经两次撰文，介绍了如何使用插件来禁用 WordPress 核心程序和自带主题中调用的 Open Sans 等 Google Fonts 字体，以及如何使用 360 镜像的 Google Fonts 字体服务给 WordPress 网站加速。</p>
+<p>根据这两篇教程的介绍，有些网友跟我们反馈，他们的网站已经恢复了正常，包括著名的左岸读书；但是也有一些网友的网站访问速度尚未完全恢复，也有一些网友不知道该如何操作。</p>
+<p>因此，我们这次教程将更为详细地介绍一下，如何使用 360 公司提供的镜像服务，来给你的 WordPress 网站提速。本文主要针对 WordPress 新手，介绍得比较细致（也可以理解为啰嗦^-^）；如果你是 WordPress 高手，可以快速跳过具体操作步骤的介绍。</p>
+<hr>
+<blockquote>
+<p>Google Fonts 和 Google Ajax 服务器的作用<br>Google Fonts 是 Google 公司提供的字体库服务（fonts.googleapis.com），Google Ajax 是 Google 公司提供的前端开发用的 js 库服务（ajax.googleapis.com）。</p>
+</blockquote>
+<p>一般来说，使用 Google 公司提供的公共服务，可以有效减少网站流量，加快网站的访问速度。但由于我们的国情不同，这类服务一旦访问出现困难，依赖这些服务的网站打开反而会极其缓慢。</p>
 <p>哪些文件调用了 Google Fonts 和 Google Ajax 的服务</p>
 <ul>
 <li>WordPress 3.5 之前的版本中，核心程序和自带主题都没有调用 Google Fonts 和 Google Ajax 服务。</li>
 <li>WordPress 3.5 ~ WordPress 3.7 各版本中（含类似 3.5.1 这样的小版本），核心程序文件 wp-includes/script-loader.php 和自带主题的函数文件 functions.php 文件调用了以上服务：</li>
 </ul>
-<p>1. wp-includes/script-loader.php<br>2. wp-content/themes/twentytwelve/functions.php<br>3. wp-content/themes/twentythirteen/functions.php</p>
+<ol>
+<li>wp-includes/script-loader.php</li>
+<li>wp-content/themes/twentytwelve/functions.php</li>
+<li>wp-content/themes/twentythirteen/functions.php</li>
+</ol>
 <ul>
-<li>WordPress 3.8 各版本中（含类似 3.8.1 这样的小版本），除了核心程序文件 script-loader.php 文件和自带主题的函数文件 functions.php 文件外，WordPress 自带编辑器的样式文件也调用了 Google Fonts 服务：<br>1. wp-includes/script-loader.php<br>2. wp-includes/js/tinymce/themes/advanced/skins/wp_theme/dialog.css<br>3. wp-content/themes/twentytwelve/functions.php<br>4. wp-content/themes/twentythirteen/functions.php<br>5. wp-content/themes/twentyfourteen/functions.php</li>
-<li>WordPress 3.9 各版本中（含类似 3.9.1 这样的小版本），和 WordPress 3.8 版本一样，只是 WordPress 自带编辑器的样式文件更换了位置：<br>1. wp-includes/script-loader.php<br>2. wp-includes/js/tinymce/plugins/compat3x/css/dialog.css<br>3. wp-content/themes/twentytwelve/functions.php<br>4. wp-content/themes/twentythirteen/functions.php<br>5. wp-content/themes/twentyfourteen/functions.php</li>
+<li>WordPress 3.8 各版本中（含类似 3.8.1 这样的小版本），除了核心程序文件 script-loader.php 文件和自带主题的函数文件 functions.php 文件外，WordPress 自带编辑器的样式文件也调用了 Google Fonts 服务：</li>
 </ul>
+<ol>
+<li>wp-includes/script-loader.php</li>
+<li>wp-includes/js/tinymce/themes/advanced/skins/wp_theme/dialog.css</li>
+<li>wp-content/themes/twentytwelve/functions.php</li>
+<li>wp-content/themes/twentythirteen/functions.php</li>
+<li>wp-content/themes/twentyfourteen/functions.php</li>
+</ol>
+<ul>
+<li>WordPress 3.9 各版本中（含类似 3.9.1 这样的小版本），和 WordPress 3.8 版本一样，只是 WordPress 自带编辑器的样式文件更换了位置：</li>
+</ul>
+<ol>
+<li>wp-includes/script-loader.php</li>
+<li>wp-includes/js/tinymce/plugins/compat3x/css/dialog.css</li>
+<li>wp-content/themes/twentytwelve/functions.php</li>
+<li>wp-content/themes/twentythirteen/functions.php</li>
+<li>wp-content/themes/twentyfourteen/functions.php</li>
+</ol>
 <p>举个例子，比如我的网站 mydomain.com 使用的是 WordPress 3.9.1 版本（最新版本总是增加安全），和自带的 Twenty Fourteen 主题；那么我只需要修改 WordPress 3.9 版本中的1、2、5这三项。不过万一哪天我想要使用另外两款主题呢？如果你不想以后麻烦的话，我们建议你将这个5个文件一次都修改掉。</p>
-<p>将 Google Fonts 和 Google Ajax 替换为 360 的镜像库服务<br>360公司及时推出了 Google Fonts 和 Google Ajax 的镜像服务。虽然我们一向对这个公司缺乏好感，但毫无疑问这项服务做得非常及时。其实 Google Fonts 服务对中文字体意义不大；Google Ajax 在国内也有很多类似的服务，比如新浪也提供类似的库服务。但是 360 完全镜像了 Google 的这两项服务，做了一个很不错的营销。<br>我们还是以网站 mydomain.com 为例，我们来依次修改上面 WodPress 3.9 版本对应的5个文件：</p>
-<p>1. 使用 FTP 软件将 wp-includes/script-loader.php 文件下载到本地；同时，建议将服务器上 script-loader.php 文件改名为 script-loader.php.backup 作为备份，<br>2. 使用你常用的文本编辑器，比如 EverEdit 编辑器，打开 script-loader.php 文件，将其中 googleapis.com 全部替换为 useso.com ，<br>这样，fonts.googleapis.com 就变成了 fonts.useso.com ， ajax.googleapis.com 就变成了 ajax.useso.com 。<br>3. 保存对 script-loader.php 文件所做修改，然后上传到 wp-includes 目录下。<br>4. 对于另外4个文件，重复以上动作，完成修改。</p>
+<p>将 Google Fonts 和 Google Ajax 替换为 360 的镜像库服务<br>360公司及时推出了 Google Fonts 和 Google Ajax 的镜像服务。虽然我们一向对这个公司缺乏好感，但毫无疑问这项服务做得非常及时。其实 Google Fonts 服务对中文字体意义不大；Google Ajax 在国内也有很多类似的服务，比如新浪也提供类似的库服务。但是 360 完全镜像了 Google 的这两项服务，做了一个很不错的营销。</p>
+<p>我们还是以网站 mydomain.com 为例，我们来依次修改上面 WodPress 3.9 版本对应的5个文件：</p>
+<blockquote>
+<ol>
+<li>使用 FTP 软件将 wp-includes/script-loader.php 文件下载到本地；同时，建议将服务器上 script-loader.php 文件改名为 script-loader.php.backup 作为备份，</li>
+<li>使用你常用的文本编辑器，比如 EverEdit 编辑器，打开 script-loader.php 文件，将其中 googleapis.com 全部替换为 useso.com ，<br>这样，fonts.googleapis.com 就变成了 fonts.useso.com ， ajax.googleapis.com 就变成了 ajax.useso.com 。</li>
+<li>保存对 script-loader.php 文件所做修改，然后上传到 wp-includes 目录下。</li>
+<li>对于另外4个文件，重复以上动作，完成修改。</li>
+</ol>
+</blockquote>
 <p>这样，我们就将 Google Fonts 字体库和 Google Ajax JS资源库全部换成了360网站提供的服务上了。现在重新打开你的网站，速度是不是快了很多？</p>
-<p>本文链接: <a href="http://wpchina.org/how-to-use-360-mirrors-cdn-to-speed-up-your-wordpress-1564/" target="_blank" rel="external">http://wpchina.org/how-to-use-360-mirrors-cdn-to-speed-up-your-wordpress-1564/</a></p>
+<blockquote>
+<p>转载: <a href="http://wpchina.org/how-to-use-360-mirrors-cdn-to-speed-up-your-wordpress-1564/" target="_blank" rel="external">http://wpchina.org/how-to-use-360-mirrors-cdn-to-speed-up-your-wordpress-1564/</a></p>
+</blockquote>
 
       
     </div>

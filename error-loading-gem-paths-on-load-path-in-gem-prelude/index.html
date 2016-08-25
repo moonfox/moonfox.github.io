@@ -37,7 +37,7 @@ Error loading gem paths on load path in gem_preludecan’t modify frozen string
 :76:in `set_paths’
 :47:in `path’
 :286:in `pus">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-25T14:18:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Error loading gem paths on load path in gem_prelude">
 <meta name="twitter:description" content="在用rvm安装ruby后运行gem，出现
@@ -324,8 +324,9 @@ Error loading gem paths on load path in gem_preludecan’t modify frozen string
 <p><internal:gem_prelude>:76:in `set_paths’</internal:gem_prelude></p>
 <p><internal:gem_prelude>:47:in `path’</internal:gem_prelude></p>
 <p><internal:gem_prelude>:286:in `push_all_highest_version_gems_on_load_path’</internal:gem_prelude></p>
-<p><internal:gem_prelude>:355:in `<compiled>‘<br>解决方法：找到 your/home/.rvm/src/ruby-your-version/gem_prelude.rb文件 编辑<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">     <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">set_home</span><span class="params">(home)</span></span></div><div class="line">       home = home.gsub File::ALT_SEPARATOR, File::SEPARATOR <span class="keyword">if</span> File::ALT_SEPARATOR</div><div class="line">-      @gem_home = home.force_encoding(Encoding.find(<span class="string">'filesystem'</span>))</div><div class="line">+      @gem_home = home.dup.force_encoding(Encoding.find(<span class="string">'filesystem'</span>)</div><div class="line">     <span class="keyword">end</span></div></pre></td></tr></table></figure></compiled></internal:gem_prelude></p>
+<p><internal:gem_prelude>:355:in `<compiled>‘</compiled></internal:gem_prelude></p>
 </blockquote>
+<p>解决方法：找到 your/home/.rvm/src/ruby-your-version/gem_prelude.rb文件 编辑<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">set_home</span><span class="params">(home)</span></span></div><div class="line"> home = home.gsub File::ALT_SEPARATOR, File::SEPARATOR <span class="keyword">if</span> File::ALT_SEPARATOR</div><div class="line">- @gem_home = home.force_encoding(Encoding.find(<span class="string">'filesystem'</span>))</div><div class="line">+ @gem_home = home.dup.force_encoding(Encoding.find(<span class="string">'filesystem'</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
 
       
     </div>

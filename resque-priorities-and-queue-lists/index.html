@@ -25,7 +25,7 @@ Let’s say we add a warm_cache queue">
 <meta property="og:description" content="Priorities and Queue Lists
 Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”
 Let’s say we add a warm_cache queue">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-25T14:20:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="resque Priorities and Queue Lists">
 <meta name="twitter:description" content="Priorities and Queue Lists
@@ -301,7 +301,8 @@ Let’s say we add a warm_cache queue">
 <p>Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”</p>
 <p>Let’s say we add a warm_cache queue in addition to our file_serve queue. We’d now start a worker like so:</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ QUEUES=file_serve,warm_cache rake <span class="symbol">resque:</span>work</div></pre></td></tr></table></figure>
-<p>When the worker looks for new jobs, it will first check file_serve. If it finds a job, it’ll process it then check file_serve again. It will keep checking file_serve until no more jobs are available. At that point, it will check warm_cache. If it finds a job it’ll process it then check file_serve (repeating the whole process).<br>Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”</p>
+<p>When the worker looks for new jobs, it will first check file_serve. If it finds a job, it’ll process it then check file_serve again. It will keep checking file_serve until no more jobs are available. At that point, it will check warm_cache. If it finds a job it’ll process it then check file_serve (repeating the whole process).</p>
+<p>Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”</p>
 
       
     </div>

@@ -15,22 +15,16 @@
 
 
 
-<meta name="description" content="proxy_set_header Host $http_host;proxy_redirect false;
-if (-f $request_filename/index.html) {rewrite (.*) $1/index.html break;}
-if (-f $request_filename.html) {rewrite (.*) $1.html break;}if (!-f $req">
+<meta name="description" content="1234567891011121314proxy_set_header Host $http_host;proxy_redirect false;if (-f $request_filename/index.html) &amp;#123;rewrite (.*) $1/index.html break;&amp;#125;if (-f $request_filename.html) &amp;#123;rewrite">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx proxy configration">
 <meta property="og:url" content="http://www.gagahappy.com/nginx-proxy-configration/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="proxy_set_header Host $http_host;proxy_redirect false;
-if (-f $request_filename/index.html) {rewrite (.*) $1/index.html break;}
-if (-f $request_filename.html) {rewrite (.*) $1.html break;}if (!-f $req">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:description" content="1234567891011121314proxy_set_header Host $http_host;proxy_redirect false;if (-f $request_filename/index.html) &amp;#123;rewrite (.*) $1/index.html break;&amp;#125;if (-f $request_filename.html) &amp;#123;rewrite">
+<meta property="og:updated_time" content="2016-08-25T14:20:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx proxy configration">
-<meta name="twitter:description" content="proxy_set_header Host $http_host;proxy_redirect false;
-if (-f $request_filename/index.html) {rewrite (.*) $1/index.html break;}
-if (-f $request_filename.html) {rewrite (.*) $1.html break;}if (!-f $req">
+<meta name="twitter:description" content="1234567891011121314proxy_set_header Host $http_host;proxy_redirect false;if (-f $request_filename/index.html) &amp;#123;rewrite (.*) $1/index.html break;&amp;#125;if (-f $request_filename.html) &amp;#123;rewrite">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -297,9 +291,7 @@ if (-f $request_filename.html) {rewrite (.*) $1.html break;}if (!-f $req">
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>proxy_set_header Host $http_host;<br>proxy_redirect false;</p>
-<p>if (-f $request_filename/index.html) {<br>rewrite (.*) $1/index.html break;<br>}</p>
-<p>if (-f $request_filename.html) {<br>rewrite (.*) $1.html break;<br>}<br>if (!-f $request_filename) {<br>proxy_pass <a href="http://thin_cluster" target="_blank" rel="external">http://thin_cluster</a>;<br>break;<br>} </p>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">proxy_set_header Host <span class="variable">$http_host</span>;</div><div class="line">proxy_redirect <span class="literal">false</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="_">-f</span> <span class="variable">$request_filename</span>/index.html) &#123;</div><div class="line">rewrite (.*) <span class="variable">$1</span>/index.html <span class="built_in">break</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="_">-f</span> <span class="variable">$request_filename</span>.html) &#123;</div><div class="line">rewrite (.*) <span class="variable">$1</span>.html <span class="built_in">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (!<span class="_">-f</span> <span class="variable">$request_filename</span>) &#123;</div><div class="line">proxy_pass http://thin_cluster;</div><div class="line"><span class="built_in">break</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>

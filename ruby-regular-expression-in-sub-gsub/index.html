@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="在使用sub,gsub 时，正则表达式不中不能使用全局变量1234str = &quot;a123b456c789&quot;str.sub(/(a\d+)(b\d+)(c\d+)/,&quot;a=#&amp;#123;$1&amp;#125;, b=#&amp;#123;$2&amp;#125;, c=#&amp;#123;$3&amp;#125;&quot;)=&amp;gt;&quot;a=, b=, c=&quot;
 可以使用1234str = &quot;a123b456c789&quot;str.sub(/(a\d+">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-25T14:20:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ruby 正则表达式中的全局变量">
 <meta name="twitter:description" content="在使用sub,gsub 时，正则表达式不中不能使用全局变量1234str = &quot;a123b456c789&quot;str.sub(/(a\d+)(b\d+)(c\d+)/,&quot;a=#&amp;#123;$1&amp;#125;, b=#&amp;#123;$2&amp;#125;, c=#&amp;#123;$3&amp;#125;&quot;)=&amp;gt;&quot;a=, b=, c=&quot;
@@ -298,6 +298,7 @@
 <p>可以使用<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">str = <span class="string">"a123b456c789"</span></div><div class="line">str.sub(<span class="regexp">/(a\d+)(b\d+)(c\d+)/</span>,<span class="string">'a=\1, b=\2, c=\3'</span>)</div><div class="line">=&gt;</div><div class="line"><span class="string">"a=123, b=456, c=789"</span></div></pre></td></tr></table></figure></p>
 <p>或</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">str = <span class="string">"a123b456c789"</span></div><div class="line">str.sub(<span class="regexp">/(a\d+)(b\d+)(c\d+)/</span>) &#123;<span class="string">"a=<span class="subst">#&#123;$1&#125;</span>, b=<span class="subst">#&#123;$2&#125;</span>, c=<span class="subst">#&#123;$3&#125;</span>"</span>&#125;</div><div class="line">=&gt;</div><div class="line"><span class="string">"a=123, b=456, c=789"</span></div></pre></td></tr></table></figure>
+
       
     </div>
     

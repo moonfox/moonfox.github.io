@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://www.gagahappy.com/redirect-file-to-strerr/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="1234567891011121314151617#include &amp;lt;stdio.h&amp;gt;void redirect_file_to_strerr(void);int main(int argc, char const *argv[])&amp;#123;  redirect_file_to_strerr();  return 0;&amp;#125;void redirect_file_to_strer">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-25T13:20:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重定向文件内容到标准错误">
 <meta name="twitter:description" content="1234567891011121314151617#include &amp;lt;stdio.h&amp;gt;void redirect_file_to_strerr(void);int main(int argc, char const *argv[])&amp;#123;  redirect_file_to_strerr();  return 0;&amp;#125;void redirect_file_to_strer">
@@ -293,7 +293,7 @@
           
         <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">redirect_file_to_strerr</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></div><div class="line">&#123;</div><div class="line">  redirect_file_to_strerr();</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">redirect_file_to_strerr</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">  FILE *f;</div><div class="line">  f = fopen(<span class="string">"redirect_file_to_strerr.txt"</span>, <span class="string">"w"</span>);</div><div class="line">  dup2(<span class="number">2</span>, fileno(f));</div><div class="line">  <span class="built_in">fprintf</span>(f, <span class="string">"%s\n"</span>, <span class="string">"hello world"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>假设 f的文件描述符为10;<br>dup2(2, fileno(f))将把流向f的数据重定向到strerr，所以写入f的内容不会被保存在文件中，而是显示在了屏幕上(sterr默认流向屏幕),redirect_out_to_file.txt文件内容为空。</p>
-<p>1 =&gt; screen<br>2 =&gt; screen<br><del datetime="2014-12-02T15:11:38+00:00">10 =&gt; redirect_file_to_strerr.txt”</del><br>10 =&gt; 2</p>
+<p>1 =&gt; screen<br>2 =&gt; screen<br><del>10 =&gt; redirect_file_to_strerr.txt”</del><br>10 =&gt; 2</p>
 
       
     </div>
