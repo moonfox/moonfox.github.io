@@ -15,16 +15,22 @@
 
 
 
-<meta name="description" content="对于BLOG与TEXT类型的字段，数据也不一定会放在BLOB页中。如create table t4(v1 blog) charset=latin1插入4条数据insert into t4 select repeat(‘a’,8000);其数据依然存放在数据页中。page offset 00000003, page type [B-tree Node], page level [0001]page">
+<meta name="description" content="对于BLOG与TEXT类型的字段，数据也不一定会放在BLOB页中。如create table t4(v1 blog) charset=latin1插入4条数据insert into t4 select repeat(&amp;#39;a&amp;#39;,8000);其数据依然存放在数据页中。
+
+page offset 00000003, page type [B-tree Node], page level [">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql BLOB TEXT数据类型存储">
 <meta property="og:url" content="http://www.gagahappy.com/mysql-blob-text-page-type/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="对于BLOG与TEXT类型的字段，数据也不一定会放在BLOB页中。如create table t4(v1 blog) charset=latin1插入4条数据insert into t4 select repeat(‘a’,8000);其数据依然存放在数据页中。page offset 00000003, page type [B-tree Node], page level [0001]page">
-<meta property="og:updated_time" content="2016-08-22T06:05:00.000Z">
+<meta property="og:description" content="对于BLOG与TEXT类型的字段，数据也不一定会放在BLOB页中。如create table t4(v1 blog) charset=latin1插入4条数据insert into t4 select repeat(&amp;#39;a&amp;#39;,8000);其数据依然存放在数据页中。
+
+page offset 00000003, page type [B-tree Node], page level [">
+<meta property="og:updated_time" content="2016-08-25T10:52:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql BLOB TEXT数据类型存储">
-<meta name="twitter:description" content="对于BLOG与TEXT类型的字段，数据也不一定会放在BLOB页中。如create table t4(v1 blog) charset=latin1插入4条数据insert into t4 select repeat(‘a’,8000);其数据依然存放在数据页中。page offset 00000003, page type [B-tree Node], page level [0001]page">
+<meta name="twitter:description" content="对于BLOG与TEXT类型的字段，数据也不一定会放在BLOB页中。如create table t4(v1 blog) charset=latin1插入4条数据insert into t4 select repeat(&amp;#39;a&amp;#39;,8000);其数据依然存放在数据页中。
+
+page offset 00000003, page type [B-tree Node], page level [">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -291,10 +297,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>对于BLOG与TEXT类型的字段，数据也不一定会放在BLOB页中。<br>如create table t4(v1 blog) charset=latin1插入4条数据insert into t4 select repeat(‘a’,8000);其数据依然存放在数据页中。<br>page offset 00000003, page type [B-tree Node], page level [0001]<br>page offset 00000004, page type [B-tree Node], page level [0000]<br>page offset 00000005, page type [B-tree Node], page level [0000]<br>page offset 00000006, page type [B-tree Node], page level [0000]<br>page offset 00000000, page type [Freshly Allocated Page]</p>
+        <p>对于BLOG与TEXT类型的字段，数据也不一定会放在BLOB页中。<br>如<code>create table t4(v1 blog) charset=latin1</code>插入4条数据<code>insert into t4 select repeat(&#39;a&#39;,8000);</code>其数据依然存放在数据页中。</p>
+<blockquote>
+<p>page offset 00000003, page type [B-tree Node], page level [0001]<br>page offset 00000004, page type [B-tree Node], page level [0000]<br>page offset 00000005, page type [B-tree Node], page level [0000]<br>page offset 00000006, page type [B-tree Node], page level [0000]<br>page offset 00000000, page type [Freshly Allocated Page]</p>
+</blockquote>
 <a id="more"></a>
-<p>如果插入的数据为insert into t4 select repeat(‘a’,20000);数据会被放入BLOB页中<br>page offset 00000003, page type [B-tree Node], page level [0000]<br>page offset 00000004, page type [Uncompressed BLOB Page]<br>page offset 00000005, page type [Uncompressed BLOB Page]<br>page offset 00000006, page type [Uncompressed BLOB Page]<br>page offset 00000007, page type [Uncompressed BLOB Page]<br>page offset 00000008, page type [Uncompressed BLOB Page]<br>page offset 00000009, page type [Uncompressed BLOB Page]<br>page offset 0000000a, page type [Uncompressed BLOB Page]<br>page offset 0000000b, page type [Uncompressed BLOB Page]</p>
-<p>因些，大多数情况下BLOB数据还是会发生溢出，实际数据保存在BLOB页中，数据页中只保存数据的前768字节。这里之所以产生了8个BLOB页，是否是一页里要放入2条记录，而20000.0/16384＝1.2，即一条记录要两页才能放下，也满足了一页里最好放两条记录的要求，所以4条记录是2*4=8页。</p>
+<p>如果插入的数据为<code>insert into t4 select repeat(&#39;a&#39;,20000);</code>数据会被放入BLOB页中</p>
+<blockquote>
+<p>page offset 00000003, page type [B-tree Node], page level [0000]<br>page offset 00000004, page type [Uncompressed BLOB Page]<br>page offset 00000005, page type [Uncompressed BLOB Page]<br>page offset 00000006, page type [Uncompressed BLOB Page]<br>page offset 00000007, page type [Uncompressed BLOB Page]<br>page offset 00000008, page type [Uncompressed BLOB Page]<br>page offset 00000009, page type [Uncompressed BLOB Page]<br>page offset 0000000a, page type [Uncompressed BLOB Page]<br>page offset 0000000b, page type [Uncompressed BLOB Page]</p>
+</blockquote>
+<p><strong>因些，大多数情况下BLOB数据还是会发生溢出，实际数据保存在BLOB页中，数据页中只保存数据的前768字节。这里之所以产生了8个BLOB页，是否是一页里要放入2条记录，而20000.0/16384＝1.2，即一条记录要两页才能放下，也满足了一页里最好放两条记录的要求，所以4条记录是2*4=8页。</strong></p>
 
       
     </div>
@@ -306,7 +318,7 @@
         <p><span>本文标题:</span><a href="/mysql-blob-text-page-type/">mysql BLOB TEXT数据类型存储</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2015-02-06, 22:12:50</p>
-        <p><span>最后更新:</span>2016-08-22, 14:05:00</p>
+        <p><span>最后更新:</span>2015-02-06, 22:12:50</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/mysql-blob-text-page-type/" title="mysql BLOB TEXT数据类型存储">http://www.gagahappy.com/mysql-blob-text-page-type/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/mysql-blob-text-page-type/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -335,6 +347,7 @@
             </div>
         
     </nav>
+
 
   
 </article>

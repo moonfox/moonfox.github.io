@@ -17,20 +17,20 @@
 
 <meta name="description" content="如果你用gem install rake安装了10.1.0版本的rake（假设是最新的），当你直接使用调用rake时，使用的会是这个最新版本的rake。
 如果项目的Gemfile中指定的版本是0.9.6（或者是Gemfile.lock中是0.9.6）的话，你如果不加bundle exec，将会用rake 10.1.0的版本去执行本来应该由0.9.6版本的rake写出的Rake task。
-会不会出">
+会不会">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pry Outline">
 <meta property="og:url" content="http://www.gagahappy.com/pry-outline/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="如果你用gem install rake安装了10.1.0版本的rake（假设是最新的），当你直接使用调用rake时，使用的会是这个最新版本的rake。
 如果项目的Gemfile中指定的版本是0.9.6（或者是Gemfile.lock中是0.9.6）的话，你如果不加bundle exec，将会用rake 10.1.0的版本去执行本来应该由0.9.6版本的rake写出的Rake task。
-会不会出">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+会不会">
+<meta property="og:updated_time" content="2016-08-25T10:05:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pry Outline">
 <meta name="twitter:description" content="如果你用gem install rake安装了10.1.0版本的rake（假设是最新的），当你直接使用调用rake时，使用的会是这个最新版本的rake。
 如果项目的Gemfile中指定的版本是0.9.6（或者是Gemfile.lock中是0.9.6）的话，你如果不加bundle exec，将会用rake 10.1.0的版本去执行本来应该由0.9.6版本的rake写出的Rake task。
-会不会出">
+会不会">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -297,16 +297,39 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>如果你用gem install rake安装了10.1.0版本的rake（假设是最新的），当你直接使用调用rake时，使用的会是这个最新版本的rake。</p>
-<p>如果项目的Gemfile中指定的版本是0.9.6（或者是Gemfile.lock中是0.9.6）的话，你如果不加bundle exec，将会用rake 10.1.0的版本去执行本来应该由0.9.6版本的rake写出的Rake task。</p>
-<p>会不会出问题？可能会，可能不会。因为很有可能原作者使用0.9.6版本的rake写的Rake task中没有什么被废弃的部分，10.1.10也能正确执行。但是不兼容的情况也会发生。</p>
-<p>bundle exec就是为了解决这样的问题而存在的：在目前的Bundle环境里执行某个操作，这样对于不同的人来说，不论系统里是什么版本的Gem，总是会使用该项目Gemfile中指定的版本来执行某个操作。</p>
-<p>其他<br> pry plugins 也可以裝一下，包括：<br> 1. pry-stack_explorer 輸入 show-stack 的話可以看到 call stack<br> 2. pry-debugger 可以加上 step, next, finish 和 continue 的控制</p>
-<p> 3. pry-nav:也因為 binding.pry 太好用。社群也基於 Pry 繼續做了其他的 pry 的 plugin。最 killling 的就是 pry-nav。pry-nav 做的就是可以讓你在 binding.pry 的攔節點前後，作 next、step。直接一行一行的逐一 debug。相信我，如果你在寫通訊交涉的 Library，或者是正在改複雜的 Rails View</p>
-<p> 4. pry-remote<br> Pry 搭配 Rails，在往常的作法只有 rails s 可以叫出 debug console 而已。但很多人實際上是使用 Pow 作為開發用 HTTP Server。這樣的需求可以用 pry-remote 解決。pry-remote 的作法是把原本的 bindig.pry 改成 binding.remote_pry。而 binding.remote_pry 會開一支 DRb 起來，開發者再用 pry-remote 連到 debug console。</p>
-<p>5 sinatra使用Pry<br>pry -r ./application.rb   # sinatra project, require application.rb<br>rails c                   # rails project</p>
-<p>6 pry 用法<br>show-method 显示当前对象的源码<br>show-method Author#hi 显示Author#hi方法的源码</p>
-<p>.pwd前面的.是调用shell的命令，而非pry的本身的方法</p>
+        <ul>
+<li>如果你用<code>gem install rake</code>安装了10.1.0版本的rake（假设是最新的），当你直接使用调用rake时，使用的会是这个最新版本的rake。</li>
+<li>如果项目的Gemfile中指定的版本是0.9.6（或者是Gemfile.lock中是0.9.6）的话，你如果不加bundle exec，将会用rake 10.1.0的版本去执行本来应该由0.9.6版本的rake写出的Rake task。</li>
+<li>会不会出问题？可能会，可能不会。因为很有可能原作者使用0.9.6版本的rake写的Rake task中没有什么被废弃的部分，10.1.10也能正确执行。但是不兼容的情况也会发生。</li>
+</ul>
+<blockquote>
+<p><strong>bundle exec就是为了解决这样的问题而存在的：在目前的Bundle环境里执行某个操作，这样对于不同的人来说，不论系统里是什么版本的Gem，总是会使用该项目Gemfile中指定的版本来执行某个操作</strong></p>
+</blockquote>
+<p>其他<br><code>pry plugins</code> 也可以裝一下，包括：</p>
+<ol>
+<li>pry-stack_explorer 輸入 show-stack 的話可以看到 call stack</li>
+<li>pry-debugger 可以加上 step, next, finish 和 continue 的控制</li>
+<li><p>pry-nav:也因為 binding.pry 太好用。</p>
+<blockquote>
+<p>社群也基於 Pry 繼續做了其他的 pry 的 plugin。最 killling 的就是 pry-nav。pry-nav 做的就是可以讓你在 binding.pry 的攔節點前後，作 next、step。直接一行一行的逐一 debug。相信我，如果你在寫通訊交涉的 Library，或者是正在改複雜的 Rails View</p>
+</blockquote>
+</li>
+<li><p>pry-remote</p>
+<blockquote>
+<p>Pry 搭配 Rails，在往常的作法只有 rails s 可以叫出 debug console 而已。但很多人實際上是使用 Pow 作為開發用 HTTP Server。這樣的需求可以用 pry-remote 解決。pry-remote 的作法是把原本的 bindig.pry 改成 binding.remote_pry。而 binding.remote_pry 會開一支 DRb 起來，開發者再用 pry-remote 連到 debug console</p>
+</blockquote>
+</li>
+<li><p>sinatra使用Pry</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pry -r ./application.rb <span class="comment">#sinatra project, require  application.rb</span></div><div class="line">rails c <span class="comment"># rails project</span></div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>pry 用法</p>
+<blockquote>
+<p><code>show-method</code> 显示当前对象的源码<br><code>show-method Author#hi</code> 显示Author#hi方法的源码<br><code>.pwd</code>前面的<code>.</code>是调用shell的命令，而非pry的本身的方法</p>
+</blockquote>
+</li>
+</ol>
 
       
     </div>
@@ -318,7 +341,7 @@
         <p><span>本文标题:</span><a href="/pry-outline/">Pry Outline</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2015-05-03, 21:08:51</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2015-05-03, 21:08:51</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/pry-outline/" title="Pry Outline">http://www.gagahappy.com/pry-outline/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/pry-outline/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -347,6 +370,7 @@
             </div>
         
     </nav>
+
 
   
 </article>

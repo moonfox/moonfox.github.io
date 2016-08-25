@@ -281,7 +281,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>相关性的计算依据有四点：<br>word是否同现在文档中<br>word在文档中出现的次数<br>word在索引列中的数量<br>多个少文档包含此word</p>
+        <p>相关性的计算依据有四点：</p>
+<ul>
+<li>word是否同现在文档中</li>
+<li>word在文档中出现的次数</li>
+<li>word在索引列中的数量</li>
+<li>多个少文档包含此word</li>
+</ul>
 
       
     </div>
@@ -346,7 +352,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>二进制日志文件<br>    记录了对数据库的更改操作，但不包括select和show这类操作，因为它们对数据本身没有进行修改。<br>    日志格式ROW：采用ROW格式会大大增加日志文件的体积，在主从复制时，复制是采用二进制格式传输的，因此会增加对带宽的占用。<br>    其体积增大的原因是其记录了每一行的所有信息（所有列信息），所以日志体积会增长很大，而STATEMENT格式只记录基本的SQL语句信息，所以日志文件体积增长较小。</p>
+        <p>二进制日志文件</p>
+<blockquote>
+<p>记录了对数据库的更改操作，但不包括select和show这类操作，因为它们对数据本身没有进行修改。</p>
+<p>日志格式ROW：采用ROW格式会大大增加日志文件的体积，在主从复制时，复制是采用二进制格式传输的，因此会增加对带宽的占用。</p>
+<p>其体积增大的原因是其记录了每一行的所有信息（所有列信息），所以日志体积会增长很大，而STATEMENT格式只记录基本的SQL语句信息，所以日志文件体积增长较小。</p>
+</blockquote>
 
       
     </div>
@@ -411,7 +422,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p> 行溢出数据,innodb引擎最大只支持65532字节的行，而不是65536节字，但此时一行的字节数据已经超过行所在页的字节数据（每页16KB，16384字节）<br>create table t2(t1 varchar(65535)) charset=latin1;会引发错误，因为还有别的开销</p>
+        <p>行溢出数据,innodb引擎最大只支持65532字节的行，而不是65536节字，但此时一行的字节数据已经超过行所在页的字节数据（每页16KB，16384字节）</p>
+<p><code>create table t2(t1 varchar(65535)) charset=latin1;</code> 会引发错误，因为还有别的开销</p>
 
       
     </div>
@@ -541,7 +553,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Compressed和Dynamic行记录格式<br>主要区别是在存储BLOB和TEXT时采用完全溢出的方式，行记录中只存20个字节的指针，数据存放在off page页中。同时，Compressed格式可以对BLOB、TEXT这样的大对象进行zip算法的压缩存储</p>
+        <p>Compressed和Dynamic行记录格式</p>
+<p>主要区别是在存储BLOB和TEXT时采用完全溢出的方式，行记录中只存20个字节的指针，数据存放在off page页中。同时，Compressed格式可以对BLOB、TEXT这样的大对象进行zip算法的压缩存储</p>
 
       
     </div>
@@ -736,7 +749,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>mysql 子分区<br>在range/list分区的基础上，还可以创建key/hash子分区。子分区的文件直接保存在表名目录下，而不是嵌套在父目录下。<br>如果为一个分区指定了子分区的名称，那么所有分区都要指定子分区的名称，且子分区的名称必须唯一，不能与其它分区的名称相同，每个子分区的数据必须相同。</p>
+        <p>mysql 子分区<br>在range/list分区的基础上，还可以创建key/hash子分区。子分区的文件直接保存在表名目录下，而不是嵌套在父目录下。</p>
+<p>如果为一个分区指定了子分区的名称，那么所有分区都要指定子分区的名称，且子分区的名称必须唯一，不能与其它分区的名称相同，每个子分区的数据必须相同。</p>
 <p>子分区一般应用在特别大的表上，在多个磁盘上分别分配数据文件与索引文件。这种方式不适用于innodb引擎，因为innodb的数据与索引保存在一个文件里。使用data directory =’’，index directory =’’分别设置数据与索引文件，可以使用myisam引擎实现此种需求的表。</p>
 
       
@@ -802,7 +816,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>mysql 创建触发器，好久没看望触发器了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">delimiter $$</div><div class="line">create trigger tgr_userinfo_update before update on userinfo</div><div class="line">for each row</div><div class="line">begin</div><div class="line">if new.income &lt; old.income then</div><div class="line">insert into userinfo_err</div><div class="line">select old.userid,old.income,new.income,user(),now();</div><div class="line">set new.income = old.income;</div><div class="line">end if;</div><div class="line">end;</div><div class="line">$$</div><div class="line">delimiter ;</div></pre></td></tr></table></figure></p>
+        <p>mysql 创建触发器，好久没看望触发器了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">delimiter $$</div><div class="line">create trigger tgr_userinfo_update before update on userinfo</div><div class="line">for each row</div><div class="line">begin</div><div class="line">if new.income &lt; old.income then</div><div class="line">insert into userinfo_err</div><div class="line">select old.userid,old.income,new.income,user(),now();</div><div class="line">set new.income = old.income;</div><div class="line">end if;</div><div class="line">end;</div><div class="line">$$</div><div class="line">delimiter ;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -867,7 +882,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>对于BLOG与TEXT类型的字段，数据也不一定会放在BLOB页中。<br>如create table t4(v1 blog) charset=latin1插入4条数据insert into t4 select repeat(‘a’,8000);其数据依然存放在数据页中。<br>page offset 00000003, page type [B-tree Node], page level [0001]<br>page offset 00000004, page type [B-tree Node], page level [0000]<br>page offset 00000005, page type [B-tree Node], page level [0000]<br>page offset 00000006, page type [B-tree Node], page level [0000]<br>page offset 00000000, page type [Freshly Allocated Page]</p>
+              <p>对于BLOG与TEXT类型的字段，数据也不一定会放在BLOB页中。<br>如<code>create table t4(v1 blog) charset=latin1</code>插入4条数据<code>insert into t4 select repeat(&#39;a&#39;,8000);</code>其数据依然存放在数据页中。</p>
+<blockquote>
+<p>page offset 00000003, page type [B-tree Node], page level [0001]<br>page offset 00000004, page type [B-tree Node], page level [0000]<br>page offset 00000005, page type [B-tree Node], page level [0000]<br>page offset 00000006, page type [B-tree Node], page level [0000]<br>page offset 00000000, page type [Freshly Allocated Page]</p>
+</blockquote>
           
       
     </div>
@@ -936,7 +954,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>mysql The server quit without updating PID，这个错误出现已经不止一次了。造成这个错误的原因有很多。这前也处理过好几次，但都是通过网上google的。<br>这次也google了，不过问题没有解决，突然想到了mysql的错误日志，打开日志查找有[error]的字段，发现是在my.cnf配置里有一处配置写错了，修正之后，再启动mysql，一切正常了。</p>
+        <p>mysql The server quit without updating PID，这个错误出现已经不止一次了。造成这个错误的原因有很多。这前也处理过好几次，但都是通过网上google的。</p>
+<p>这次也google了，不过问题没有解决，突然想到了mysql的错误日志，打开日志查找有[error]的字段，发现是在my.cnf配置里有一处配置写错了，修正之后，再启动mysql，一切正常了。</p>
 <p>总结：mysql会把相关启动，运行，关闭的信息记录到错误日志，所以当mysql发生异常时应该先查看错误日志，而不是上网google.</p>
 
       
@@ -1136,8 +1155,9 @@
       
           
         <p>Sharapova Survives Aussie Open Epic</p>
-<p></p><p>看得我是热泪盈眶啊</p><p></p>
+<p>看得我是热泪盈眶啊</p>
 <script src="http://player.ooyala.com/player.js?height=324&pcode=1kNG061cgaoolOncv54OAO1ceO-I&deepLinkEmbedCode=5sNXh2cjrksGo9MPT19kny-MZck10mF4&externalId=espn%3A12202710&width=576&video_pcode=1kNG061cgaoolOncv54OAO1ceO-I&embedCode=5sNXh2cjrksGo9MPT19kny-MZck10mF4"></script>
+
       
     </div>
     
@@ -1202,7 +1222,8 @@
       
           
         <p>格式化磁盘最小分配单元，最小单元为512字节。</p>
-<p>为什么不能比512字节还要小，如256字节。因为一个扇区为512字节，最小单元比512字节还要小的话，一个扇区就可能存储两个文件的数据：<br>如file1:256字节,file2:256字节。全都存到一个扇区的话，在读取file1时，也会把file2的数据取出。</p>
+<p>为什么不能比512字节还要小，如256字节。因为一个扇区为512字节，最小单元比512字节还要小的话，一个扇区就可能存储两个文件的数据：</p>
+<p>如file1:256字节,file2:256字节。全都存到一个扇区的话，在读取file1时，也会把file2的数据取出。</p>
 <p>一般最小单元系统默认为4KB，如果存的文件都小于4KB的话，会浪费很多的扇区，即存储空间。</p>
 
       
@@ -1268,7 +1289,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>纳秒与毫秒换算，一直以为是1ms=1000ns，其实是不对的，应该是<br>1ms = 1000000ns<br>CPU的一个时钟周期是纳秒级的，所以比磁盘读写毫秒级，要快上千万倍。CPU是不可能停在那里等待磁盘IO完成后，再做其它事情的，在等待的时间里，CPU可以执行千万次的指令了。</p>
+        <p>纳秒与毫秒换算，一直以为是1ms=1000ns，其实是不对的，应该是: 1ms = 1000000ns</p>
+<p>CPU的一个时钟周期是纳秒级的，所以比磁盘读写毫秒级，要快上千万倍。CPU是不可能停在那里等待磁盘IO完成后，再做其它事情的，在等待的时间里，CPU可以执行千万次的指令了。</p>
 
       
     </div>
@@ -1333,7 +1355,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>wptouch访问速度非常的慢，这是因为默认是用的google font，改为使用浏览器字体，即可解决问题。<br>设置：wptouch—主题设置—品牌—排印（选择浏览器字体）</p>
+        <p>wptouch访问速度非常的慢，这是因为默认是用的google font，改为使用浏览器字体，即可解决问题。</p>
+<blockquote>
+<p>设置：wptouch—主题设置—品牌—排印（选择浏览器字体）</p>
+</blockquote>
 
       
     </div>
@@ -1398,7 +1423,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>instagram发送验证码手机收不到，这种情况多是使用安卓的手机，把sim卡换到苹果手机上就可以收到了。<br>这是红果果的BS安卓手机么</p>
+        <p>instagram发送验证码手机收不到，这种情况多是使用安卓的手机，把sim卡换到苹果手机上就可以收到了</p>
+<p>这是红果果的BS安卓手机么</p>
 
       
     </div>

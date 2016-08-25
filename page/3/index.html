@@ -604,7 +604,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在sublime中用cmd+b运行代码时，其运行环境往往和你正在使用的rvm指定的ruby版本不一样，安装RVM switch for sublime插件可以较好的解决这个问题。<br>在安装后，你可以选择<br>RVM Auto Ruby:设置当前环境和你的RVM一致（最好在cmd下先用rvm指定ruby版本,再用cmd打开sublime）<br>RVM Default Ruby<br>RVM System Ruby</p>
+        <p>在sublime中用cmd+b运行代码时，其运行环境往往和你正在使用的rvm指定的ruby版本不一样，安装RVM switch for sublime插件可以较好的解决这个问题。</p>
+<p>在安装后，你可以选择</p>
+<ul>
+<li>RVM Auto Ruby:设置当前环境和你的RVM一致（最好在cmd下先用rvm指定ruby版本,再用cmd打开sublime）</li>
+<li>RVM Default Ruby</li>
+<li>RVM System Ruby</li>
+</ul>
 
       
     </div>
@@ -928,7 +934,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>redo日志应首先持久化在磁盘上，然后事务的操作结果才写入db buffer，（此时，内存中的数据和data file对应的数据不同，我们认为内存中的数据是脏数据），db buffer再选择合适的时机将数据持久化到data file中。这种顺序可以保证在需要故障恢复时恢复最后的修改操作。先持久化日志的策略叫做Write Ahead Log，即预写日志,也叫日志先行。</p>
+        <blockquote>
+<p><strong>redo日志应首先持久化在磁盘上，然后事务的操作结果才写入db buffer，（此时，内存中的数据和data file对应的数据不同，我们认为内存中的数据是脏数据），db buffer再选择合适的时机将数据持久化到data file中。这种顺序可以保证在需要故障恢复时恢复最后的修改操作。先持久化日志的策略叫做Write Ahead Log，即预写日志,也叫日志先行。</strong></p>
+</blockquote>
 
       
     </div>
@@ -993,7 +1001,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>数据不会被删除，除非page中的数据被重新组织<br> Of course actually deleting the record still doesn’t actually delete it — it just links the record into a “garbage” list, where record space may be reused. However nothing is guaranteed to be really removed from a page until the page is re-organized.</p>
+        <p>数据不会被删除，除非page中的数据被重新组织</p>
+<blockquote>
+<p>Of course actually deleting the record still doesn’t actually delete it — it just links the record into a “garbage” list, where record space may be reused. However nothing is guaranteed to be really removed from a page until the page is re-organized.</p>
+</blockquote>
 
       
     </div>
@@ -1189,7 +1200,7 @@
       
           
         <p>mysql当前读与快照读如何产生?</p>
-<p>select <em> from table where ? lock in share mode;<br>select </em> from table where ? for update;<br>insert into table values (…);<br>update table set ? where ?;<br>delete from table where ?;<br>所有以上的语句，都属于当前读，读取记录的最新版本。并且，读取之后，还需要保证其他并发事务不能修改当前记录，对读取记录加锁。其中，除了第一条语句，对读取记录加S锁 (共享锁)外，其他的操作，都加的是X锁 (排它锁)。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> ? <span class="keyword">lock</span> <span class="keyword">in</span> <span class="keyword">share</span> <span class="keyword">mode</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> ? <span class="keyword">for</span> <span class="keyword">update</span>;</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">table</span> <span class="keyword">values</span> (…);</div><div class="line"><span class="keyword">update</span> <span class="keyword">table</span> <span class="keyword">set</span> ? <span class="keyword">where</span> ?;</div><div class="line"><span class="keyword">delete</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> ?;</div><div class="line"></div><div class="line"><span class="comment">-- 所有以上的语句，都属于当前读，读取记录的最新版本。并且，读取之后，还需要保证其他并发事务不能修改当前记录，对读取记录加锁。其中，除了第一条语句，对读取记录加S锁 (共享锁)外，其他的操作，都加的是X锁 (排它锁)。</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -1384,7 +1395,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>innodb启动日志<br>23:24:30 28434 [Note] Plugin ‘FEDERATED’ is disabled.<br>23:24:30 28434 [Note] InnoDB: The InnoDB memory heap is disabled<br>23:24:30 28434 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins<br>23:24:30 28434 [Note] InnoDB: Compressed tables use zlib 1.2.3<br>23:24:30 28434 [Note] InnoDB: Using CPU crc32 instructions<br>23:24:30 28434 [Note] InnoDB: Initializing buffer pool, size = 128.0M<br>23:24:30 28434 [Note] InnoDB: Completed initialization of buffer pool<br>23:24:30 28434 [Note] InnoDB: Highest supported file format is Barracuda.<br>23:24:30 28434 [Note] InnoDB: 128 rollback segment(s) are active.<br>23:24:30 28434 [Note] InnoDB: Waiting for purge to start<br>23:24:30 28434 [Note] InnoDB: 5.6.13 started; log sequence number 1287659157<br>23:24:30 28434 [Note] Server hostname (bind-address): ‘127.0.0.1’; port: 3306<br>23:24:30 28434 [Note]   - ‘127.0.0.1’ resolves to ‘127.0.0.1’;<br>23:24:30 28434 [Note] Server socket created on IP: ‘127.0.0.1’.<br>23:24:30 28434 [Note] Event Scheduler: Loaded 0 events<br>可以获取不少有用的信息，如file format is Barracuda.说明了支持的行格式的兼容情况。</p>
+        <p>innodb启动日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">23:24:30 28434 [Note] Plugin &apos;FEDERATED&apos; is disabled.</div><div class="line">23:24:30 28434 [Note] InnoDB: The InnoDB memory heap is disabled</div><div class="line">23:24:30 28434 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins</div><div class="line">23:24:30 28434 [Note] InnoDB: Compressed tables use zlib 1.2.3</div><div class="line">23:24:30 28434 [Note] InnoDB: Using CPU crc32 instructions</div><div class="line">23:24:30 28434 [Note] InnoDB: Initializing buffer pool, size = 128.0M</div><div class="line">23:24:30 28434 [Note] InnoDB: Completed initialization of buffer pool</div><div class="line">23:24:30 28434 [Note] InnoDB: Highest supported file format is Barracuda.</div><div class="line">23:24:30 28434 [Note] InnoDB: 128 rollback segment(s) are active.</div><div class="line">23:24:30 28434 [Note] InnoDB: Waiting for purge to start</div><div class="line">23:24:30 28434 [Note] InnoDB: 5.6.13 started; log sequence number 1287659157</div><div class="line">23:24:30 28434 [Note] Server hostname (bind-address): &apos;127.0.0.1&apos;; port: 3306</div><div class="line">23:24:30 28434 [Note]   - &apos;127.0.0.1&apos; resolves to &apos;127.0.0.1&apos;;</div><div class="line">23:24:30 28434 [Note] Server socket created on IP: &apos;127.0.0.1&apos;.</div><div class="line">23:24:30 28434 [Note] Event Scheduler: Loaded 0 events</div><div class="line"></div><div class="line">-- 可以获取不少有用的信息，如file format is Barracuda.说明了支持的行格式的兼容情况。</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -1449,7 +1460,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>innodb 锁处理<br>当两个事务对同一资源时行修改操作时，会对这一资源加上X锁。b的原始值为1140;<br>T1: update t_lock set b = 1143 where id = 1;没有执行commit<br>T2: update t_lock set b = 1145 where id = 1;操作会因为执行超时而抛出异常：<br>Lock wait timeout exceeded; try restarting transaction。因为T2在等待T1执行commit，释放资源。因为T1一直没有commit，所以导致了T2的超时。这里可以看做是T1被T2阻塞了。</p>
+        <p>innodb 锁处理<br>当两个事务对同一资源时行修改操作时，会对这一资源加上X锁。b的原始值为1140</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">T1: update t_lock set b = 1143 where id = 1;没有执行commit</div><div class="line">T2: update t_lock set b = 1145 where id = 1;操作会因为执行超时而抛出异常：</div><div class="line"></div><div class="line">Lock wait timeout exceeded; try restarting transaction</div><div class="line"></div><div class="line"># 因为T2在等待T1执行commit，释放资源。因为T1一直没有commit，所以导致了T2的超时。这里可以看做是T1被T2阻塞了。</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -1514,9 +1526,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>看到网上的例子都是用50%的填充因子来举例的，这样举例具不太容易让人明白。下面是我对填充因子的理解。</p>
-<p>什么是填充因子<br>设置数据要占用page空间的比例。比如设置70%，即数据至少要填充page空间的70%。</p>
+              <p>看到网上的例子都是用50%的填充因子来举例的，这样举例具不太容易让人明白。下面是我对填充因子的理解</p>
+<p>什么是填充因子</p>
+<blockquote>
+<p>设置数据要占用page空间的比例。比如设置70%，即数据至少要填充page空间的70%。</p>
 <p>设置填充因子的主要作用是为新数据预留一定的空间，当有新数据时，可以插入到预留的空间里，从而避免分页的发生。</p>
+</blockquote>
           
       
     </div>

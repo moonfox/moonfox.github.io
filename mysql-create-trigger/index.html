@@ -15,16 +15,19 @@
 
 
 
-<meta name="description" content="mysql 创建触发器，好久没看望触发器了。123456789101112delimiter $$create trigger tgr_userinfo_update before update on userinfofor each rowbeginif new.income &amp;lt; old.income theninsert into userinfo_errselect old.useri">
+<meta name="description" content="mysql 创建触发器，好久没看望触发器了
+123456789101112delimiter $$create trigger tgr_userinfo_update before update on userinfofor each rowbeginif new.income &amp;lt; old.income theninsert into userinfo_errselect old.useri">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql 创建触发器">
 <meta property="og:url" content="http://www.gagahappy.com/mysql-create-trigger/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="mysql 创建触发器，好久没看望触发器了。123456789101112delimiter $$create trigger tgr_userinfo_update before update on userinfofor each rowbeginif new.income &amp;lt; old.income theninsert into userinfo_errselect old.useri">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:description" content="mysql 创建触发器，好久没看望触发器了
+123456789101112delimiter $$create trigger tgr_userinfo_update before update on userinfofor each rowbeginif new.income &amp;lt; old.income theninsert into userinfo_errselect old.useri">
+<meta property="og:updated_time" content="2016-08-25T10:51:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql 创建触发器">
-<meta name="twitter:description" content="mysql 创建触发器，好久没看望触发器了。123456789101112delimiter $$create trigger tgr_userinfo_update before update on userinfofor each rowbeginif new.income &amp;lt; old.income theninsert into userinfo_errselect old.useri">
+<meta name="twitter:description" content="mysql 创建触发器，好久没看望触发器了
+123456789101112delimiter $$create trigger tgr_userinfo_update before update on userinfofor each rowbeginif new.income &amp;lt; old.income theninsert into userinfo_errselect old.useri">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -291,7 +294,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>mysql 创建触发器，好久没看望触发器了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">delimiter $$</div><div class="line">create trigger tgr_userinfo_update before update on userinfo</div><div class="line">for each row</div><div class="line">begin</div><div class="line">if new.income &lt; old.income then</div><div class="line">insert into userinfo_err</div><div class="line">select old.userid,old.income,new.income,user(),now();</div><div class="line">set new.income = old.income;</div><div class="line">end if;</div><div class="line">end;</div><div class="line">$$</div><div class="line">delimiter ;</div></pre></td></tr></table></figure></p>
+        <p>mysql 创建触发器，好久没看望触发器了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">delimiter $$</div><div class="line">create trigger tgr_userinfo_update before update on userinfo</div><div class="line">for each row</div><div class="line">begin</div><div class="line">if new.income &lt; old.income then</div><div class="line">insert into userinfo_err</div><div class="line">select old.userid,old.income,new.income,user(),now();</div><div class="line">set new.income = old.income;</div><div class="line">end if;</div><div class="line">end;</div><div class="line">$$</div><div class="line">delimiter ;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -303,7 +307,7 @@
         <p><span>本文标题:</span><a href="/mysql-create-trigger/">mysql 创建触发器</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2015-02-08, 01:03:33</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2015-02-08, 01:03:33</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/mysql-create-trigger/" title="mysql 创建触发器">http://www.gagahappy.com/mysql-create-trigger/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/mysql-create-trigger/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -332,6 +336,7 @@
             </div>
         
     </nav>
+
 
   
 </article>

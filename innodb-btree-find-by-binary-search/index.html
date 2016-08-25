@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://www.gagahappy.com/innodb-btree-find-by-binary-search/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="1.Start at the root page of the index.2.Binary search using the page directory (repeatedly splitting the directory in half based on whether the current record is greater than or less than the search k">
-<meta property="og:updated_time" content="2016-08-22T06:04:58.000Z">
+<meta property="og:updated_time" content="2016-08-25T10:45:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Innodb B+树查询数据过程">
 <meta name="twitter:description" content="1.Start at the root page of the index.2.Binary search using the page directory (repeatedly splitting the directory in half based on whether the current record is greater than or less than the search k">
@@ -292,7 +292,10 @@
       
           
         <p>1.Start at the root page of the index.<br>2.Binary search using the page directory (repeatedly splitting the directory in half based on whether the current record is greater than or less than the search key) until a record is found via the page directory with the highest key that does not exceed the search key.<br>3.Linear search from that record until finding an individual record with the highest key that does not exceed the search key. If the current page is a leaf page, return the record. If the current page is a non-leaf page, load the child page this record points to, and return to step 2.</p>
-<p>查找过程如下:<br><a id="more"></a><br>binary_search: root=3, level=2, key=(10000)<br>binary_search_by_directory: page=3, level=2, dir.size=1, dir[0]=()<br>linear_search_from_cursor: page=3, level=2, start=(i=252)<br>linear_search_from_cursor: page=3, level=2, current=(i=252)<br>binary_search_by_directory: page=36, level=1, dir.size=166, dir[82]=(i=258175)<br>binary_search_by_directory: page=36, level=1, dir.size=82, dir[40]=(i=122623)<br>binary_search_by_directory: page=36, level=1, dir.size=40, dir[19]=(i=52742)<br>binary_search_by_directory: page=36, level=1, dir.size=19, dir[9]=(i=20930)<br>binary_search_by_directory: page=36, level=1, dir.size=9, dir[4]=(i=8930)<br>binary_search_by_directory: page=36, level=1, dir.size=5, dir[2]=(i=12759)<br>binary_search_by_directory: page=36, level=1, dir.size=2, dir[0]=(i=8930)<br>linear_search_from_cursor: page=36, level=1, start=(i=8930)<br>linear_search_from_cursor: page=36, level=1, current=(i=8930)<br>linear_search_from_cursor: page=36, level=1, current=(i=9381)<br>linear_search_from_cursor: page=36, level=1, current=(i=9830)<br>binary_search_by_directory: page=424, level=0, dir.size=81, dir[40]=(i=10059)<br>binary_search_by_directory: page=424, level=0, dir.size=40, dir[19]=(i=9938)<br>binary_search_by_directory: page=424, level=0, dir.size=21, dir[10]=(i=9997)<br>binary_search_by_directory: page=424, level=0, dir.size=11, dir[5]=(i=10025)<br>binary_search_by_directory: page=424, level=0, dir.size=5, dir[2]=(i=10006)<br>binary_search_by_directory: page=424, level=0, dir.size=2, dir[0]=(i=9997)<br>linear_search_from_cursor: page=424, level=0, start=(i=9997)<br>linear_search_from_cursor: page=424, level=0, current=(i=9997)<br>linear_search_from_cursor: page=424, level=0, current=(i=9998)<br>linear_search_from_cursor: page=424, level=0, current=(i=9999)<br>linear_search_from_cursor: page=424, level=0, current=(i=10000)</p>
+<p>查找过程如下:<br><a id="more"></a></p>
+<blockquote>
+<p>binary_search: root=3, level=2, key=(10000)<br>binary_search_by_directory: page=3, level=2, dir.size=1, dir[0]=()<br>linear_search_from_cursor: page=3, level=2, start=(i=252)<br>linear_search_from_cursor: page=3, level=2, current=(i=252)<br>binary_search_by_directory: page=36, level=1, dir.size=166, dir[82]=(i=258175)<br>binary_search_by_directory: page=36, level=1, dir.size=82, dir[40]=(i=122623)<br>binary_search_by_directory: page=36, level=1, dir.size=40, dir[19]=(i=52742)<br>binary_search_by_directory: page=36, level=1, dir.size=19, dir[9]=(i=20930)<br>binary_search_by_directory: page=36, level=1, dir.size=9, dir[4]=(i=8930)<br>binary_search_by_directory: page=36, level=1, dir.size=5, dir[2]=(i=12759)<br>binary_search_by_directory: page=36, level=1, dir.size=2, dir[0]=(i=8930)<br>linear_search_from_cursor: page=36, level=1, start=(i=8930)<br>linear_search_from_cursor: page=36, level=1, current=(i=8930)<br>linear_search_from_cursor: page=36, level=1, current=(i=9381)<br>linear_search_from_cursor: page=36, level=1, current=(i=9830)<br>binary_search_by_directory: page=424, level=0, dir.size=81, dir[40]=(i=10059)<br>binary_search_by_directory: page=424, level=0, dir.size=40, dir[19]=(i=9938)<br>binary_search_by_directory: page=424, level=0, dir.size=21, dir[10]=(i=9997)<br>binary_search_by_directory: page=424, level=0, dir.size=11, dir[5]=(i=10025)<br>binary_search_by_directory: page=424, level=0, dir.size=5, dir[2]=(i=10006)<br>binary_search_by_directory: page=424, level=0, dir.size=2, dir[0]=(i=9997)<br>linear_search_from_cursor: page=424, level=0, start=(i=9997)<br>linear_search_from_cursor: page=424, level=0, current=(i=9997)<br>linear_search_from_cursor: page=424, level=0, current=(i=9998)<br>linear_search_from_cursor: page=424, level=0, current=(i=9999)<br>linear_search_from_cursor: page=424, level=0, current=(i=10000)</p>
+</blockquote>
 <p>{:binary_search=&gt;1,<br> :binary_search_by_directory=&gt;14,<br> :linear_search_from_cursor=&gt;3,<br> :linear_search_from_cursor_record_scans=&gt;8,<br> :compare_key=&gt;40,<br> :compare_key_field_comparison=&gt;40,<br> :binary_search_by_directory_recurse_left=&gt;8,<br> :binary_search_by_directory_recurse_right=&gt;3,<br> :binary_search_by_directory_linear_search=&gt;2}</p>
 
       
@@ -305,7 +308,7 @@
         <p><span>本文标题:</span><a href="/innodb-btree-find-by-binary-search/">Innodb B+树查询数据过程</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2015-03-11, 15:16:55</p>
-        <p><span>最后更新:</span>2016-08-22, 14:04:58</p>
+        <p><span>最后更新:</span>2015-03-11, 15:16:55</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/innodb-btree-find-by-binary-search/" title="Innodb B+树查询数据过程">http://www.gagahappy.com/innodb-btree-find-by-binary-search/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/innodb-btree-find-by-binary-search/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -334,6 +337,7 @@
             </div>
         
     </nav>
+
 
   
 </article>

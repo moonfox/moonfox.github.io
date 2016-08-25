@@ -16,18 +16,18 @@
 
 
 <meta name="description" content="mysql当前读与快照读如何产生?
-select  from table where ? lock in share mode;select  from table where ? for update;insert into table values (…);update table set ? where ?;delete from table where ?;所有以上的语句，都属于当前读，读">
+1234567select * from table where ? lock in share mode;select * from table where ? for update;insert into table values (…);update table set ? where ?;delete from table where ?;-- 所有以上">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql 当前读与快照读如何产生">
 <meta property="og:url" content="http://www.gagahappy.com/how-to-create-current-real-and-snapshot/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="mysql当前读与快照读如何产生?
-select  from table where ? lock in share mode;select  from table where ? for update;insert into table values (…);update table set ? where ?;delete from table where ?;所有以上的语句，都属于当前读，读">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+1234567select * from table where ? lock in share mode;select * from table where ? for update;insert into table values (…);update table set ? where ?;delete from table where ?;-- 所有以上">
+<meta property="og:updated_time" content="2016-08-25T10:32:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql 当前读与快照读如何产生">
 <meta name="twitter:description" content="mysql当前读与快照读如何产生?
-select  from table where ? lock in share mode;select  from table where ? for update;insert into table values (…);update table set ? where ?;delete from table where ?;所有以上的语句，都属于当前读，读">
+1234567select * from table where ? lock in share mode;select * from table where ? for update;insert into table values (…);update table set ? where ?;delete from table where ?;-- 所有以上">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -295,7 +295,7 @@ select  from table where ? lock in share mode;select  from table where ? for upd
       
           
         <p>mysql当前读与快照读如何产生?</p>
-<p>select <em> from table where ? lock in share mode;<br>select </em> from table where ? for update;<br>insert into table values (…);<br>update table set ? where ?;<br>delete from table where ?;<br>所有以上的语句，都属于当前读，读取记录的最新版本。并且，读取之后，还需要保证其他并发事务不能修改当前记录，对读取记录加锁。其中，除了第一条语句，对读取记录加S锁 (共享锁)外，其他的操作，都加的是X锁 (排它锁)。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> ? <span class="keyword">lock</span> <span class="keyword">in</span> <span class="keyword">share</span> <span class="keyword">mode</span>;</div><div class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> ? <span class="keyword">for</span> <span class="keyword">update</span>;</div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">table</span> <span class="keyword">values</span> (…);</div><div class="line"><span class="keyword">update</span> <span class="keyword">table</span> <span class="keyword">set</span> ? <span class="keyword">where</span> ?;</div><div class="line"><span class="keyword">delete</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> ?;</div><div class="line"></div><div class="line"><span class="comment">-- 所有以上的语句，都属于当前读，读取记录的最新版本。并且，读取之后，还需要保证其他并发事务不能修改当前记录，对读取记录加锁。其中，除了第一条语句，对读取记录加S锁 (共享锁)外，其他的操作，都加的是X锁 (排它锁)。</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -307,7 +307,7 @@ select  from table where ? lock in share mode;select  from table where ? for upd
         <p><span>本文标题:</span><a href="/how-to-create-current-real-and-snapshot/">mysql 当前读与快照读如何产生</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2015-03-18, 23:59:24</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2015-03-18, 23:59:24</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/how-to-create-current-real-and-snapshot/" title="mysql 当前读与快照读如何产生">http://www.gagahappy.com/how-to-create-current-real-and-snapshot/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/how-to-create-current-real-and-snapshot/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -336,6 +336,7 @@ select  from table where ? lock in share mode;select  from table where ? for upd
             </div>
         
     </nav>
+
 
   
 </article>

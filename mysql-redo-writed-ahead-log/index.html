@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://www.gagahappy.com/mysql-redo-writed-ahead-log/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="redo日志应首先持久化在磁盘上，然后事务的操作结果才写入db buffer，（此时，内存中的数据和data file对应的数据不同，我们认为内存中的数据是脏数据），db buffer再选择合适的时机将数据持久化到data file中。这种顺序可以保证在需要故障恢复时恢复最后的修改操作。先持久化日志的策略叫做Write Ahead Log，即预写日志,也叫日志先行。">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:updated_time" content="2016-08-25T10:30:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql redo日志先行">
 <meta name="twitter:description" content="redo日志应首先持久化在磁盘上，然后事务的操作结果才写入db buffer，（此时，内存中的数据和data file对应的数据不同，我们认为内存中的数据是脏数据），db buffer再选择合适的时机将数据持久化到data file中。这种顺序可以保证在需要故障恢复时恢复最后的修改操作。先持久化日志的策略叫做Write Ahead Log，即预写日志,也叫日志先行。">
@@ -291,7 +291,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>redo日志应首先持久化在磁盘上，然后事务的操作结果才写入db buffer，（此时，内存中的数据和data file对应的数据不同，我们认为内存中的数据是脏数据），db buffer再选择合适的时机将数据持久化到data file中。这种顺序可以保证在需要故障恢复时恢复最后的修改操作。先持久化日志的策略叫做Write Ahead Log，即预写日志,也叫日志先行。</p>
+        <blockquote>
+<p><strong>redo日志应首先持久化在磁盘上，然后事务的操作结果才写入db buffer，（此时，内存中的数据和data file对应的数据不同，我们认为内存中的数据是脏数据），db buffer再选择合适的时机将数据持久化到data file中。这种顺序可以保证在需要故障恢复时恢复最后的修改操作。先持久化日志的策略叫做Write Ahead Log，即预写日志,也叫日志先行。</strong></p>
+</blockquote>
 
       
     </div>
@@ -303,7 +305,7 @@
         <p><span>本文标题:</span><a href="/mysql-redo-writed-ahead-log/">mysql redo日志先行</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2015-03-22, 17:33:11</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2015-03-22, 17:33:11</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/mysql-redo-writed-ahead-log/" title="mysql redo日志先行">http://www.gagahappy.com/mysql-redo-writed-ahead-log/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/mysql-redo-writed-ahead-log/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -332,6 +334,7 @@
             </div>
         
     </nav>
+
 
   
 </article>

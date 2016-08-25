@@ -15,25 +15,22 @@
 
 
 
-<meta name="description" content="编译 ./configure –prefix=/srv/memcached/memcached145 –with-libevent=/usr/需要安装 libevent ，安装时要确保知道安装路径
+<meta name="description" content="编译 ./configure --prefix=/srv/memcached/memcached145 --with-libevent=/usr/需要安装 libevent ，安装时要确保知道安装路径
 启动memcachedmemcached -d -u root -m 200 -P /tmp/memcached.pid
-安装redis
-make PREFIX=/srv/redis/redis2815">
+安装redismake PREFIX=/srv/redis/redis281">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装memcached、redis、postgresql问题总结">
 <meta property="og:url" content="http://www.gagahappy.com/issues-of-install-memcached-reds-postgresql/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="编译 ./configure –prefix=/srv/memcached/memcached145 –with-libevent=/usr/需要安装 libevent ，安装时要确保知道安装路径
+<meta property="og:description" content="编译 ./configure --prefix=/srv/memcached/memcached145 --with-libevent=/usr/需要安装 libevent ，安装时要确保知道安装路径
 启动memcachedmemcached -d -u root -m 200 -P /tmp/memcached.pid
-安装redis
-make PREFIX=/srv/redis/redis2815">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+安装redismake PREFIX=/srv/redis/redis281">
+<meta property="og:updated_time" content="2016-08-25T10:09:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装memcached、redis、postgresql问题总结">
-<meta name="twitter:description" content="编译 ./configure –prefix=/srv/memcached/memcached145 –with-libevent=/usr/需要安装 libevent ，安装时要确保知道安装路径
+<meta name="twitter:description" content="编译 ./configure --prefix=/srv/memcached/memcached145 --with-libevent=/usr/需要安装 libevent ，安装时要确保知道安装路径
 启动memcachedmemcached -d -u root -m 200 -P /tmp/memcached.pid
-安装redis
-make PREFIX=/srv/redis/redis2815">
+安装redismake PREFIX=/srv/redis/redis281">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -300,12 +297,16 @@ make PREFIX=/srv/redis/redis2815">
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>编译 ./configure –prefix=/srv/memcached/memcached145 –with-libevent=/usr/<br>需要安装 libevent ，安装时要确保知道安装路径</p>
-<p>启动memcached<br>memcached -d -u root -m 200 -P /tmp/memcached.pid</p>
-<p>安装redis</p>
-<p>make PREFIX=/srv/redis/redis2815 install</p>
-<p>启动:daemonize yes: Make redis run as a daemon<br>redis-server /usr/etc/redis.conf</p>
-<p>安装postgresql<br>遇到问题:Can’t find the ‘libpq-fe.h header<br>解决方法:<br>1、gem install pg -v ‘0.18.1’ – –with-pg-config=/path/config<br>–with-pg=/path/pg –with-pg-lib=/path/<br>2、yum install postgresql-devel<br>最终用方法2解决<br>yum list installed | grep postgres</p>
+        <p>编译 <code>./configure --prefix=/srv/memcached/memcached145 --with-libevent=/usr/</code><br>需要安装 libevent ，安装时要确保知道安装路径</p>
+<p>启动memcached<br><code>memcached -d -u root -m 200 -P /tmp/memcached.pid</code></p>
+<p>安装redis<br><code>make PREFIX=/srv/redis/redis2815 install</code></p>
+<p>启动:daemonize yes: Make redis run as a daemon<br><code>redis-server /usr/etc/redis.conf</code></p>
+<p>安装postgresql，遇到问题:Can’t find the ‘libpq-fe.h header<br>解决方法:</p>
+<ol>
+<li><code>gem install pg -v &#39;0.18.1&#39; -- --with-pg-config=/path/config
+--with-pg=/path/pg --with-pg-lib=/path/</code></li>
+<li><code>yum install postgresql-devel</code><br>最终用方法2解决<br><code>yum list installed | grep postgres</code></li>
+</ol>
 
       
     </div>
@@ -317,7 +318,7 @@ make PREFIX=/srv/redis/redis2815">
         <p><span>本文标题:</span><a href="/issues-of-install-memcached-reds-postgresql/">安装memcached、redis、postgresql问题总结</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2015-04-29, 23:53:38</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2015-04-29, 23:53:38</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/issues-of-install-memcached-reds-postgresql/" title="安装memcached、redis、postgresql问题总结">http://www.gagahappy.com/issues-of-install-memcached-reds-postgresql/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/issues-of-install-memcached-reds-postgresql/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -346,6 +347,7 @@ make PREFIX=/srv/redis/redis2815">
             </div>
         
     </nav>
+
 
   
 </article>

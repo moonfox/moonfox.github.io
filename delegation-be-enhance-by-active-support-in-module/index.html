@@ -15,19 +15,37 @@
 
 
 
-<meta name="description" content="基本思想是:当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象
-#Delegation is particularly useful with Active Record associations:1234567891011121314151617class Greeter &amp;lt; ActiveRecord::Base  def hello    &apos;hello&apos;  end  d">
+<meta name="description" content="基本思想是:
+
+
+当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象
+Delegation is particularly useful with Active Record associations:
+
+
+1234567891011121314151617class Greeter &amp;lt; ActiveRecord::Base  def hello    &apos;hello&apos;  e">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Delegation be enhance by active support in module">
 <meta property="og:url" content="http://www.gagahappy.com/delegation-be-enhance-by-active-support-in-module/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="基本思想是:当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象
-#Delegation is particularly useful with Active Record associations:1234567891011121314151617class Greeter &amp;lt; ActiveRecord::Base  def hello    &apos;hello&apos;  end  d">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:description" content="基本思想是:
+
+
+当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象
+Delegation is particularly useful with Active Record associations:
+
+
+1234567891011121314151617class Greeter &amp;lt; ActiveRecord::Base  def hello    &apos;hello&apos;  e">
+<meta property="og:updated_time" content="2016-08-25T10:14:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Delegation be enhance by active support in module">
-<meta name="twitter:description" content="基本思想是:当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象
-#Delegation is particularly useful with Active Record associations:1234567891011121314151617class Greeter &amp;lt; ActiveRecord::Base  def hello    &apos;hello&apos;  end  d">
+<meta name="twitter:description" content="基本思想是:
+
+
+当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象
+Delegation is particularly useful with Active Record associations:
+
+
+1234567891011121314151617class Greeter &amp;lt; ActiveRecord::Base  def hello    &apos;hello&apos;  e">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -290,8 +308,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>基本思想是:当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象</p>
-<p>#Delegation is particularly useful with Active Record associations:<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span> &lt; ActiveRecord::Base</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hello</span></span></div><div class="line">    <span class="string">'hello'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">goodbye</span></span></div><div class="line">    <span class="string">'goodbye'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &lt; ActiveRecord::Base</span></div><div class="line">  belongs_to <span class="symbol">:greeter</span></div><div class="line">  delegate <span class="symbol">:hello</span>, <span class="symbol">to:</span> <span class="symbol">:greeter</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Foo.new.hello   <span class="comment"># =&gt; "hello"</span></div><div class="line">Foo.new.goodbye <span class="comment"># =&gt; NoMethodError: undefined method `goodbye' for #&lt;Foo:0x1af30c&gt;</span></div></pre></td></tr></table></figure></p>
+        <p>基本思想是:</p>
+<blockquote>
+<ul>
+<li>当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象</li>
+<li>Delegation is particularly useful with Active Record associations:</li>
+</ul>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span> &lt; ActiveRecord::Base</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hello</span></span></div><div class="line">    <span class="string">'hello'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">goodbye</span></span></div><div class="line">    <span class="string">'goodbye'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &lt; ActiveRecord::Base</span></div><div class="line">  belongs_to <span class="symbol">:greeter</span></div><div class="line">  delegate <span class="symbol">:hello</span>, <span class="symbol">to:</span> <span class="symbol">:greeter</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Foo.new.hello   <span class="comment"># =&gt; "hello"</span></div><div class="line">Foo.new.goodbye <span class="comment"># =&gt; NoMethodError: undefined method `goodbye' for #&lt;Foo:0x1af30c&gt;</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -303,7 +327,7 @@
         <p><span>本文标题:</span><a href="/delegation-be-enhance-by-active-support-in-module/">Delegation be enhance by active support in module</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">戛戛Happy</a></p>
         <p><span>发布时间:</span>2015-04-24, 23:54:33</p>
-        <p><span>最后更新:</span>2016-08-18, 02:03:11</p>
+        <p><span>最后更新:</span>2015-04-24, 23:54:33</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/delegation-be-enhance-by-active-support-in-module/" title="Delegation be enhance by active support in module">http://www.gagahappy.com/delegation-be-enhance-by-active-support-in-module/</a>
             <span class="copy-path" data-clipboard-text="原文: http://www.gagahappy.com/delegation-be-enhance-by-active-support-in-module/　　作者: 戛戛Happy" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -332,6 +356,7 @@
             </div>
         
     </nav>
+
 
   
 </article>
