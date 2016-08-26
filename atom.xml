@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.gagahappy.com/"/>
-  <updated>2016-08-24T14:11:46.000Z</updated>
+  <updated>2016-08-26T11:05:44.000Z</updated>
   <id>http://www.gagahappy.com/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用aws s3 托管网站</title>
+    <link href="http://www.gagahappy.com/amazon-simple-storage-service/"/>
+    <id>http://www.gagahappy.com/amazon-simple-storage-service/</id>
+    <published>2016-08-26T09:43:17.000Z</published>
+    <updated>2016-08-26T11:05:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>出于速度的原因，把网站内容放到aws s3上了，之前放到github page上，发现速度不是很稳定，且有的时候出现不了能放问的情况</p>
+<p>简单介绍下s3托管静态网站的使用</p>
+<ol>
+<li>在s3上创建bucket，名子要和你的域名一样，如 www.youdomain.com</li>
+<li>设置这个bucket，启动静态托管</li>
+<li><p>登录你的域名后台管理平台，建立CNAME记录</p>
+<blockquote>
+<p>桶的根结点类似 www.youdomain.com.s3-website-ap-northeast-1.amazonaws.com</p>
+</blockquote>
+</li>
+<li><p>设置bucket的权限策略，添加新的策略，权限为公开，这样才能让别人访问你的网站内容</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"Version"</span>: <span class="string">"2012-10-17"</span>,</div><div class="line">  <span class="attr">"Statement"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"Sid"</span>: <span class="string">"PublicReadForGetBucketObjects"</span>,</div><div class="line">      <span class="attr">"Effect"</span>: <span class="string">"Allow"</span>,</div><div class="line">      <span class="attr">"Principal"</span>: <span class="string">"*"</span>,</div><div class="line">      <span class="attr">"Action"</span>: <span class="string">"s3:GetObject"</span>,</div><div class="line">      <span class="attr">"Resource"</span>: <span class="string">"arn:aws:s3:::www.youdomain.com/*"</span></div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>上传文件到s3</p>
+</li>
+</ol>
+<p>使用aws s3命令行工具进行上传</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">aws s3 sync . s3://www.youdomain.com --exclude <span class="string">".git/*"</span> --delete</div><div class="line"></div><div class="line"><span class="comment"># 参数delete的作用是：删除目标路径中，源路径不存的文件、文件夹</span></div></pre></td></tr></table></figure>
+<p>进入你的网站存放路径，输入以上命令，文件就会被同步到s3了，如果一切正常，你就可以通过你的域名进行访问了。当然，你也可以使用分配给你的桶路径进行访问</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;出于速度的原因，把网站内容放到aws s3上了，之前放到github page上，发现速度不是很稳定，且有的时候出现不了能放问的情况&lt;/p&gt;
+&lt;p&gt;简单介绍下s3托管静态网站的使用&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在s3上创建bucket，名子要和你的域名一样，如 www.you
+    
+    </summary>
+    
+      <category term="程序开发" scheme="http://www.gagahappy.com/category/development/"/>
+    
+    
+      <category term="s3" scheme="http://www.gagahappy.com/tag/s3/"/>
+    
+  </entry>
   
   <entry>
     <title>使用ssh-add添加私钥到ssh-agent</title>
@@ -294,34 +338,6 @@
     
     
       <category term="linux" scheme="http://www.gagahappy.com/tag/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PostGIS安装问题</title>
-    <link href="http://www.gagahappy.com/postgis-install-issues/"/>
-    <id>http://www.gagahappy.com/postgis-install-issues/</id>
-    <published>2015-05-31T14:03:37.000Z</published>
-    <updated>2016-08-17T18:03:11.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>用brew 安装 postgis （环境：postgre用的是mac版的postgre.app，psql用的是brew版的)</p>
-<p>这样问题就来了，在安装postgis时，会查找psql，由于psql在/usr/sbin下，即用的是brew的，安装postgis时总是报错（具体错误大概是说不能解释postgre sql）。搞了半天没弄好。</p>
-<p>决定把postgre.app的路径放到加载路径的最前面，/Applications/Postgres93.app/Contents/MacOS,放到路径最前面，再次安装postgis，一切安好。但undefined method `point’ for #&lt;ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::TableDefinition:错误还是没有解决</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;用brew 安装 postgis （环境：postgre用的是mac版的postgre.app，psql用的是brew版的)&lt;/p&gt;
-&lt;p&gt;这样问题就来了，在安装postgis时，会查找psql，由于psql在/usr/sbin下，即用的是brew的，安装postgis时总
-    
-    </summary>
-    
-      <category term="数据库" scheme="http://www.gagahappy.com/category/database/"/>
-    
-      <category term="程序开发" scheme="http://www.gagahappy.com/category/database/development/"/>
-    
-    
-      <category term="postgresql" scheme="http://www.gagahappy.com/tag/postgresql/"/>
     
   </entry>
   
