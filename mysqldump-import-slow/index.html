@@ -16,21 +16,18 @@
 
 
 <meta name="description" content="MySQL导出的SQL语句在导入时有可能会非常非常慢。在导出时合理使用几个参数，可以大大加快导 入的速度。
--e 使用包括几个VALUES列表的多行INSERT语法;–max_allowed_packet=XXX 客户端/服务器之间通信的缓存区的最大大小;–net_buffer_length=XXX  TCP/IP和套接字通信缓冲区大小,创建长度达net_buffer_length的行。
-注意：m">
+123-e 使用包括几个VALUES列表的多行INSERT语法;--max_allowed_packet=XXX 客户端/服务器之间通信的缓存区的最大大小;--net_buffer_length=XXX  TCP/IP和套接字通信缓冲区大小,创建长度达net_buffer_length的行。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL 导入慢的解决方法">
 <meta property="og:url" content="http://www.gagahappy.com/mysqldump-import-slow/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="MySQL导出的SQL语句在导入时有可能会非常非常慢。在导出时合理使用几个参数，可以大大加快导 入的速度。
--e 使用包括几个VALUES列表的多行INSERT语法;–max_allowed_packet=XXX 客户端/服务器之间通信的缓存区的最大大小;–net_buffer_length=XXX  TCP/IP和套接字通信缓冲区大小,创建长度达net_buffer_length的行。
-注意：m">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+123-e 使用包括几个VALUES列表的多行INSERT语法;--max_allowed_packet=XXX 客户端/服务器之间通信的缓存区的最大大小;--net_buffer_length=XXX  TCP/IP和套接字通信缓冲区大小,创建长度达net_buffer_length的行。">
+<meta property="og:updated_time" content="2016-08-27T06:01:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 导入慢的解决方法">
 <meta name="twitter:description" content="MySQL导出的SQL语句在导入时有可能会非常非常慢。在导出时合理使用几个参数，可以大大加快导 入的速度。
--e 使用包括几个VALUES列表的多行INSERT语法;–max_allowed_packet=XXX 客户端/服务器之间通信的缓存区的最大大小;–net_buffer_length=XXX  TCP/IP和套接字通信缓冲区大小,创建长度达net_buffer_length的行。
-注意：m">
+123-e 使用包括几个VALUES列表的多行INSERT语法;--max_allowed_packet=XXX 客户端/服务器之间通信的缓存区的最大大小;--net_buffer_length=XXX  TCP/IP和套接字通信缓冲区大小,创建长度达net_buffer_length的行。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -298,11 +295,10 @@
       
           
         <p>MySQL导出的SQL语句在导入时有可能会非常非常慢。在导出时合理使用几个参数，可以大大加快导 入的速度。</p>
-<p>-e 使用包括几个VALUES列表的多行INSERT语法;<br>–max_allowed_packet=XXX 客户端/服务器之间通信的缓存区的最大大小;<br>–net_buffer_length=XXX  TCP/IP和套接字通信缓冲区大小,创建长度达net_buffer_length的行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="_">-e</span> 使用包括几个VALUES列表的多行INSERT语法;</div><div class="line">--max_allowed_packet=XXX 客户端/服务器之间通信的缓存区的最大大小;</div><div class="line">--net_buffer_length=XXX  TCP/IP和套接字通信缓冲区大小,创建长度达net_buffer_length的行。</div></pre></td></tr></table></figure>
 <p>注意：max_allowed_packet和net_buffer_length不能比目标数据库的设定数值 大，否则可能出错。</p>
-<p>首先确定目标库的参数值</p>
-<p>mysql&gt;show variables like ‘max_allowed_packet’;<br>mysql&gt;show variables like ‘net_buffer_length’;</p>
-<p>根据参数值书写mysqldump命令，如：<br>E:\eis&gt;mysqldump -uroot -p eis_db goodclassification -e –max_allowed_packet=1048576 –net_buffer_length=16384 &gt;good3.sql</p>
+<p>首先确定目标库的参数值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">show variables like &apos;max_allowed_packet&apos;;</div><div class="line">show variables like &apos;net_buffer_length&apos;;</div></pre></td></tr></table></figure></p>
+<p>根据参数值书写mysqldump命令，如：<br><code>mysqldump -uroot -p eis_db goodclassification -e --max_allowed_packet=1048576 --net_buffer_length=16384 &gt;good3.sql</code></p>
 
       
     </div>

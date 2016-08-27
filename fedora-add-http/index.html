@@ -15,19 +15,19 @@
 
 
 
-<meta name="description" content="在编译安装httpd后，将其放到/etc/init.d/目录下，使其可以随开机自动启动，命令如下chkconfig –add httpd，执行此命令后报错，提示“service apache does not support chkconfig“，这是因为在httpd中没有相关的chkconfig信息，导致chkconfig不能识别，所以要在httpd中添chkconfig的描述信息。
-方法如下编">
+<meta name="description" content="在编译安装httpd后，将其放到/etc/init.d/目录下，使其可以随开机自动启动，命令如下1chkconfig --add httpd，执行此命令后报错，提示“service apache does not support chkconfig“，这是因为在httpd中没有相关的chkconfig信息，导致chkconfig不能识别，所以要在httpd中添chkconfig的描述信息。
+方法如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fedora 添加httpd服务">
 <meta property="og:url" content="http://www.gagahappy.com/fedora-add-http/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="在编译安装httpd后，将其放到/etc/init.d/目录下，使其可以随开机自动启动，命令如下chkconfig –add httpd，执行此命令后报错，提示“service apache does not support chkconfig“，这是因为在httpd中没有相关的chkconfig信息，导致chkconfig不能识别，所以要在httpd中添chkconfig的描述信息。
-方法如下编">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:description" content="在编译安装httpd后，将其放到/etc/init.d/目录下，使其可以随开机自动启动，命令如下1chkconfig --add httpd，执行此命令后报错，提示“service apache does not support chkconfig“，这是因为在httpd中没有相关的chkconfig信息，导致chkconfig不能识别，所以要在httpd中添chkconfig的描述信息。
+方法如">
+<meta property="og:updated_time" content="2016-08-27T05:27:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fedora 添加httpd服务">
-<meta name="twitter:description" content="在编译安装httpd后，将其放到/etc/init.d/目录下，使其可以随开机自动启动，命令如下chkconfig –add httpd，执行此命令后报错，提示“service apache does not support chkconfig“，这是因为在httpd中没有相关的chkconfig信息，导致chkconfig不能识别，所以要在httpd中添chkconfig的描述信息。
-方法如下编">
+<meta name="twitter:description" content="在编译安装httpd后，将其放到/etc/init.d/目录下，使其可以随开机自动启动，命令如下1chkconfig --add httpd，执行此命令后报错，提示“service apache does not support chkconfig“，这是因为在httpd中没有相关的chkconfig信息，导致chkconfig不能识别，所以要在httpd中添chkconfig的描述信息。
+方法如">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -294,9 +294,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在编译安装httpd后，将其放到/etc/init.d/目录下，使其可以随开机自动启动，命令如下<br>chkconfig –add httpd，执行此命令后报错，提示“service apache does not support chkconfig“，这是因为在httpd中没有相关的chkconfig信息，导致chkconfig不能识别，所以要在httpd中添chkconfig的描述信息。</p>
-<p>方法如下<br>编辑httpd文件。加入chkconfig描述信息:</p>
-<h1 id="description-http-apache-service"><a href="#description-http-apache-service" class="headerlink" title="description:http apache  service"></a>description:http apache  service</h1><h1 id="chkconfig-2345-98-98"><a href="#chkconfig-2345-98-98" class="headerlink" title="chkconfig: 2345 98 98"></a>chkconfig: 2345 98 98</h1><p>以上信息均为注释信息，前面一定要有#<br>这时，再次执行chkconfig –add httpd，httpd被成功加入服务，可以随机自动启动了。</p>
+        <p>在编译安装httpd后，将其放到/etc/init.d/目录下，使其可以随开机自动启动，命令如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig --add httpd，执行此命令后报错，提示“service apache does not support chkconfig“，这是因为在httpd中没有相关的chkconfig信息，导致chkconfig不能识别，所以要在httpd中添chkconfig的描述信息。</div></pre></td></tr></table></figure></p>
+<p>方法如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">编辑httpd文件。加入chkconfig描述信息:</div><div class="line"><span class="comment"># description:http apache  service</span></div><div class="line"><span class="comment"># chkconfig: 2345 98 98</span></div><div class="line">以上信息均为注释信息，前面一定要有<span class="comment">#</span></div><div class="line">这时，再次执行chkconfig --add httpd，httpd被成功加入服务，可以随机自动启动了。</div></pre></td></tr></table></figure></p>
 
       
     </div>

@@ -25,7 +25,7 @@
 网速慢， 是因为浏览器在对DNS解析上花费了大量的时间，所以我们要做的工作就是加速DNS的解析。">
 <meta property="og:image" content="http://img.gagahappy.com/blog/2010/10/sendpix01.jpg">
 <meta property="og:image" content="http://img.gagahappy.com/blog/2010/10/sendpix11.jpg">
-<meta property="og:updated_time" content="2016-08-22T06:06:44.000Z">
+<meta property="og:updated_time" content="2016-08-27T04:07:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决Ubuntu 10.04 DNS解析慢、上网速度慢">
 <meta name="twitter:description" content="自从ubuntu升级到10.04后，上网速度感觉变慢了很多（ADSL），原因也众说分云，有说是firefox浏览器造成的，于是用chrome访问，速度依然很慢，可见不是由于浏览器造成的。
@@ -299,28 +299,39 @@
           
         <p>自从ubuntu升级到10.04后，上网速度感觉变慢了很多（ADSL），原因也众说分云，有说是firefox浏览器造成的，于是用chrome访问，速度依然很慢，可见不是由于浏览器造成的。</p>
 <p>网速慢， 是因为浏览器在对DNS解析上花费了大量的时间，所以我们要做的工作就是加速DNS的解析。<br><a id="more"></a><br>安装dnsmasq</p>
+<p>第1步<br><code>sudo apt-get install dnsmasq</code></p>
+<p>第2步<br><code>sudo gedit /etc/dnsmasq.conf</code>，找到 <code>#resolv-file=，用resolv-file=/etc/resolv.dnsmasq.conf</code>替换，确保你没有更改过<code>/etc/resolv.conf</code>文件，如果改过，恢复原状</p>
+<p>第3步<br><code>sudo cp /etc/resolv.conf /etc/resolv.dnsmasq.conf</code></p>
+<p>第4步<br>修改ADSL ip4的DNS服务器地址为127.0.0.1这里一定要从图型界面修改，否则重启后resolv.conf会被重写</p>
 <blockquote>
-<p>第1步、 sudo apt-get install dnsmasq</p>
-<p>第2步、sudo gedit /etc/dnsmasq.conf，找到 #resolv-file=，用resolv-file=/etc/resolv.dnsmasq.conf替换，确保你没有更改过/etc/resolv.conf文件，如果改过，恢复原状</p>
-<p>第3步、sudo cp /etc/resolv.conf /etc/resolv.dnsmasq.conf</p>
-<p>第4步、修改ADSL ip4的DNS服务器地址为127.0.0.1这里一定要从图型界面修改，否则重启后resolv.conf会被重写</p>
-<p>图一<br><a href="http://img.gagahappy.com/blog/2010/10/sendpix01.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2010/10/sendpix01.jpg" alt="" title="dns"></a></p>
-<p>图二<br><a href="http://img.gagahappy.com/blog/2010/10/sendpix11.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2010/10/sendpix11.jpg" alt="" title="sendpix1"></a></p>
-<p>第5步、 重新启动 dnsmasq sudo /etc/init.d/dnsmasq restart<br>再次访问网页，你会发现解析速度比以前快了N个数量级。</p>
+<p>图一<br><img src="http://img.gagahappy.com/blog/2010/10/sendpix01.jpg" alt="" title="dns"></p>
+<p>图二<br><img src="http://img.gagahappy.com/blog/2010/10/sendpix11.jpg" alt="" title="sendpix1"></p>
 </blockquote>
+<p>第5步<br>重新启动 <code>dnsmasq sudo /etc/init.d/dnsmasq restart</code><br>再次访问网页，你会发现解析速度比以前快了N个数量级。</p>
 <p>小测试，访问gagahappy.com，调用 dig gagahappy.com 两次</p>
+<p>第一次</p>
 <blockquote>
-<p>第一次<br>Query time: 21 msec<br>SERVER: 127.0.0.1#53(127.0.0.1)<br>WHEN: Sun Oct 17 22:18:00 2010<br>MSG SIZE  rcvd: 47<br></p></blockquote><p></p>
-<p>第二次<br>Query time: 0 msec<br>SERVER: 127.0.0.1#53(127.0.0.1)<br>WHEN: Sun Oct 17 22:18:49 2010<br>MSG SIZE  rcvd: 47</p>
+<p>Query time: 21 msec<br>SERVER: 127.0.0.1#53(127.0.0.1)<br>WHEN: Sun Oct 17 22:18:00 2010<br>MSG SIZE  rcvd: 47<br></p></blockquote><p></p>
 
-<p> 你会发现使用dnsmasq快了N个数量级</p>
+<p>第二次</p>
+<blockquote>
+<p>Query time: 0 msec<br>SERVER: 127.0.0.1#53(127.0.0.1)<br>WHEN: Sun Oct 17 22:18:49 2010<br>MSG SIZE  rcvd: 47</p>
+</blockquote>
+<p>你会发现使用dnsmasq快了N个数量级</p>
 <p>注意：在这里要说一下修改resolv.conf的问题，网上的方法是在第3步后</p>
 <blockquote>
-<p>1、 编辑resolv.conf sudo gedit /etc/resolv.conf</p>
-<p>2、将其中的域名服务器全部去掉，加入nameserver 127.0.0.1</p>
-<p>3、执行命令sudo gedit /etc/ppp/peers/provider（Ubuntu 10.04的文件名是provider，其他版本可能不同）</p>
-<p>4、在 usepeerdns 前面增加＃ ，也就是把这条语句覆盖掉，以防resolv.conf的设置被pppoe覆盖<br>以上方法经本人实践，在ubuntu10.04 + ADSL上网环境中无效，经重新启动后，resolv.conf文件依然会被重写，即加入的127.0.0.1丢失，造成dnsmasq失效，访问速度依然很慢</p>
+<ol>
+<li><p>编辑resolv.conf sudo gedit /etc/resolv.conf</p>
+</li>
+<li><p>将其中的域名服务器全部去掉，加入nameserver 127.0.0.1</p>
+</li>
+<li><p>执行命令sudo gedit /etc/ppp/peers/provider（Ubuntu 10.04的文件名是provider，其他版本可能不同）</p>
+</li>
+<li><p>在 usepeerdns 前面增加＃ ，也就是把这条语句覆盖掉，以防resolv.conf的设置被pppoe覆盖</p>
+</li>
+</ol>
 </blockquote>
+<p>以上方法经本人实践，在ubuntu10.04 + ADSL上网环境中无效，经重新启动后，resolv.conf文件依然会被重写，即加入的127.0.0.1丢失，造成dnsmasq失效，访问速度依然很慢</p>
 
       
     </div>

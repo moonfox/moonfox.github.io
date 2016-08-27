@@ -252,76 +252,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-ubuntu-10-10maverick-meerkat-rc" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/ubuntu-10-10maverick-meerkat-rc/" class="article-date">
-      <time datetime="2010-10-01T14:17:57.000Z" itemprop="datePublished">2010-10-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/ubuntu-10-10maverick-meerkat-rc/">Ubuntu 10.10(Maverick Meerkat) RC </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>Ubuntu 10.10(Maverick Meerkat) RC 于当地时间9.30晚/北京时间10.1发布。</p>
-<p>相比 10.04，Ubuntu Desktop Edition (GNOME 版) 带来以下新特性：<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/ubuntu-10-10maverick-meerkat-rc/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-zhuangxiu-after-baojie-work" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -482,9 +412,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>阻止wordpress more链接跳转到页面的中间</p>
+        <p>阻止wordpress more链接跳转到页面的中间</p>
 <p>默认情况下，点击more链接将会将读者带到单篇文章浏览的形式，并且会转到more标签指定的位置。这样，如果你使用默认的more标签功能，读者点击more链接之后将会被带入到文章的半中间。曾经一段时间，大家比较接受这样的做法，不过，现在越来越人觉得还是直接打开文章页面不跳转到其他位置比较好。</p>
-          
+<p>总之一句话，如果你希望点击more标签后，打开进入的是文章页面的顶部，那么请在当前主题的functions.php文件，添加下面的代码:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> remove_more_jump_link(<span class="variable">$link</span>) &#123;</div><div class="line"><span class="variable">$offset</span>  = strpos(<span class="variable">$link</span>, <span class="string">'#more-'</span>);</div><div class="line"><span class="keyword">if</span>  (<span class="variable">$offset</span>) &#123;</div><div class="line"><span class="variable">$end</span>  = strpos(<span class="variable">$link</span>, <span class="string">'"'</span>,<span class="variable">$offset</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span>  (<span class="variable">$end</span>) &#123;</div><div class="line"><span class="variable">$link</span>  = substr_replace(<span class="variable">$link</span>, <span class="string">''</span>, <span class="variable">$offset</span>, <span class="variable">$end</span>-<span class="variable">$offset</span>);</div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span>  <span class="variable">$link</span>;</div><div class="line">&#125;</div><div class="line">add_filter(<span class="string">'the_content_more_link'</span>,  <span class="string">'remove_more_jump_link'</span>);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>原文地址：<a href="http://www.wordpress.la/WordPress-more-tag-tips.html" target="_blank" rel="external">http://www.wordpress.la/WordPress-more-tag-tips.html</a></p>
+</blockquote>
+
       
     </div>
     
@@ -501,10 +435,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/wordpress/">wordpress</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/stop-wordpress-more-jump-link/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -554,7 +484,9 @@
           
               <p>感觉东方家园的安装送货还是比较准时的，约了10点钟安装地板，10点半左右到达，您可能会说晚了半个小时，但比起其他安装队伍来说，这已经是比较准时的了。</p>
 <p>安装地板前最好把地面用吸尘器吸一遍，彻底把地面上的灰尘打扫干净，这样在地板上行走的时候就不会把地面上的灰带上来，虽然在地板下面已经有一层膜对地板进行了保护，但效果不如把地面打扫干净的好。</p>
-<p>东方家园安装地板的收费情况如下：<br>安装费用<br>地板：12元/平米<br>踢脚线：3元/平米<br>
+<p>东方家园安装地板的收费情况如下：</p>
+<blockquote>
+<p>安装费用<br>地板：12元/平米<br>踢脚线：3元/平米<br>
           
       
     </div>
@@ -1018,13 +950,52 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>1． 在家里墙上乱涂乱画。</p>
-<p>外国小孩：这是绘画天性的体现，值得鼓励。</p>
-<p>咱小时候：一顿毒打。</p>
-<p>2． 放学家长来接的晚了，自己先直接回家了。</p>
-<p>外国小孩：这是探索精神的体现，值得鼓励。</p>
-<p>咱小时候：一顿毒打。</p>
-          
+        <p>1．在家里墙上乱涂乱画。</p>
+<blockquote>
+<p>外国小孩：这是绘画天性的体现，值得鼓励。<br>咱小时候：一顿毒打。</p>
+</blockquote>
+<p>2．放学家长来接的晚了，自己先直接回家了。</p>
+<blockquote>
+<p>外国小孩：这是探索精神的体现，值得鼓励。<br>咱小时候：一顿毒打。</p>
+</blockquote>
+<p>3．玩得一身全是泥土很脏的回到家。</p>
+<blockquote>
+<p>外国小孩：这是孩子的天性，值得鼓励。<br>咱小时候：一顿毒打。</p>
+</blockquote>
+<p>4．带异性小朋友回家玩被家长发现。</p>
+<blockquote>
+<p>外国小孩：这么早就学会和异性沟通，值得鼓励。<br>咱小时候：一顿毒打。</p>
+</blockquote>
+<p>5．考试成绩不理想。</p>
+<blockquote>
+<p>外国小孩：人难免有失误的时候，值得鼓励。<br>咱小时候：一顿毒打</p>
+</blockquote>
+<p>6．在外面和别的小朋友打架了。</p>
+<blockquote>
+<p>外国小孩：孩子嘛，不懂事很正常。<br>咱小时候：一顿毒打。</p>
+</blockquote>
+<p>7．吃饭时掉的哪哪儿都是。</p>
+<blockquote>
+<p>外国小孩：告诉他不能浪费，都捡起来吃了就好。<br>咱小时候：一顿毒打。</p>
+</blockquote>
+<p>8．痴迷于某些兴趣爱好，废寝忘食。</p>
+<blockquote>
+<p>外国小孩：多些爱好是好事情，值得鼓励。<br>咱小时候：一顿毒打。</p>
+</blockquote>
+<p>9．看课外书影响休息。</p>
+<blockquote>
+<p>外国小孩：没事的，不要打扰孩子的专注，值得鼓励。<br>咱小时候：一顿毒打。</p>
+</blockquote>
+<p>10. 和父母意见不统一，发生争执时。</p>
+<blockquote>
+<p>外国小孩：大家公平讨论，各抒己见。<br>咱小时候：一顿毒打。</p>
+</blockquote>
+<p>最后：强调声明咱绝对不是崇洋媚外，但咱的教育方式确实需要改进。</p>
+<p>不过话说回来，我们虽然从小就遭到不断地毒打，我们还是依然的茁壮成长！</p>
+<blockquote>
+<p>原文链接：<a href="http://hexie.me/2010/09/15/cha-ju-wai/" target="_blank" rel="external">http://hexie.me/2010/09/15/cha-ju-wai/</a></p>
+</blockquote>
+
       
     </div>
     
@@ -1041,10 +1012,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/funny/">有趣</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/children-different-chinese-with-foreign/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -1092,12 +1059,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p> <a href="http://img.gagahappy.com/blog/2010/09/201098112616.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2010/09/201098112616.jpg" alt="" title="胡宁"></a></p>
-<pre><code>新浪科技讯 9月8日上午消息，原谷歌技术总监胡宁已正式加盟上海聚胜万合广告有限公司(简称：MediaV)，并出任该公司首席技术官。&lt;!-- more --&gt;
-</code></pre><p>　　胡宁于清华大学计算机科学与技术系本科毕业，后赴美国卡耐基梅隆大学攻读并获得娱乐技术硕士，计算机科学硕士、博士学位。2005年加入Google，先后在Google纽约、硅谷总部、北京分部工作，历任工程师、高级工程师、主任工程师、技术总监。</p>
-<p>　　2005年起任移动搜索质量的技术带头人，主持开发数十项创新及改进功能，拥有搜索算法的美国和全球专利，负责多个世界重量级运营商的移动搜索产品发布，包括中国移动、欧洲Vodafone、日本DoCoMo和KDDI；2007年被派往中国领导音乐产品研发，2009年3月发布谷歌音乐，推出相似歌曲、音乐泡泡、个性推荐等多个代表技术最前沿的创新功能，胡宁2010年起负责Android服务开发。</p>
-<p>　　MediaV由前好耶总裁杨炯纬创办，定位互联网营销解决方案提供商，2009年10月，MediaV完成首轮融资，投资方为光速创投基金。今年8月份MediaV宣布又获得纪源资本和光速创投的联合投资。</p>
+        <p><img src="http://img.gagahappy.com/blog/2010/09/201098112616.jpg" alt="" title="胡宁"></p>
+<p>新浪科技讯 9月8日上午消息，原谷歌技术总监胡宁已正式加盟上海聚胜万合广告有限公司(简称：MediaV)，并出任该公司首席技术官。</p>
+<p>胡宁于清华大学计算机科学与技术系本科毕业，后赴美国卡耐基梅隆大学攻读并获得娱乐技术硕士，计算机科学硕士、博士学位。2005年加入Google，先后在Google纽约、硅谷总部、北京分部工作，历任工程师、高级工程师、主任工程师、技术总监。</p>
+<p>2005年起任移动搜索质量的技术带头人，主持开发数十项创新及改进功能，拥有搜索算法的美国和全球专利，负责多个世界重量级运营商的移动搜索产品发布，包括中国移动、欧洲Vodafone、日本DoCoMo和KDDI；2007年被派往中国领导音乐产品研发，2009年3月发布谷歌音乐，推出相似歌曲、音乐泡泡、个性推荐等多个代表技术最前沿的创新功能，胡宁2010年起负责Android服务开发。</p>
+<p>MediaV由前好耶总裁杨炯纬创办，定位互联网营销解决方案提供商，2009年10月，MediaV完成首轮融资，投资方为光速创投基金。今年8月份MediaV宣布又获得纪源资本和光速创投的联合投资。</p>
+<blockquote>
 <p>原文：<a href="http://tech.sina.com.cn/i/2010-09-08/10244633159.shtml" target="_blank" rel="external">http://tech.sina.com.cn/i/2010-09-08/10244633159.shtml</a></p>
+</blockquote>
 
       
     </div>
@@ -1571,6 +1540,81 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
     </div>
 
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-fun-xiangqin-danding-must" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/fun-xiangqin-danding-must/" class="article-date">
+      <time datetime="2010-09-08T16:57:10.000Z" itemprop="datePublished">2010-09-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/fun-xiangqin-danding-must/">看别人相亲一定要淡定o(︶︿︶)o</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>以下剧情不知道到是不是虚构。不过如果这事发生在大家身上，你说情何以堪。。大家要蛋定o(︶︿︶)o</p>
+<blockquote>
+<p>来源：豆瓣 <a href="http://www.douban.com/group/topic/13657494/">http://www.douban.com/group/topic/13657494/</a></p>
+</blockquote>
+<p>今天中午在公司旁边吃饭，旁边桌好像是在相亲，据言论猜测，女方人员两位，相亲女和其娃娃脸叔叔，男方人员三人，相亲男，相亲男哥哥协同夫人。背景就这些。</p>
+<p>相亲女长得不错，很傲气，对相亲男要求颇多，什么有车有房，什么不许抽烟喝酒，什么不习惯和老人相处……总之态度十分恶劣，气焰异常嚣张！</p>
+<p>相亲男十分软绵，听条件时唯唯诺诺，完全不像男人，其凶长有理有据的替他反驳，他还反倒替相亲女说话，气得其凶长都差点骂娘了。周围的男同胞一个个哀其不幸，怒其不争，不过也对其表示十二万分的理解，那相亲女确实踏马地漂亮。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/funny/">有趣</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/fun-xiangqin-danding-must/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

@@ -16,18 +16,21 @@
 
 
 <meta name="description" content="阻止wordpress more链接跳转到页面的中间
-默认情况下，点击more链接将会将读者带到单篇文章浏览的形式，并且会转到more标签指定的位置。这样，如果你使用默认的more标签功能，读者点击more链接之后将会被带入到文章的半中间。曾经一段时间，大家比较接受这样的做法，不过，现在越来越人觉得还是直接打开文章页面不跳转到其他位置比较好。">
+默认情况下，点击more链接将会将读者带到单篇文章浏览的形式，并且会转到more标签指定的位置。这样，如果你使用默认的more标签功能，读者点击more链接之后将会被带入到文章的半中间。曾经一段时间，大家比较接受这样的做法，不过，现在越来越人觉得还是直接打开文章页面不跳转到其他位置比较好。
+总之一句话，如果你希望点击more标签后，打开进入的是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="阻止wordpress more链接跳转到页面的中间">
 <meta property="og:url" content="http://www.gagahappy.com/stop-wordpress-more-jump-link/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="阻止wordpress more链接跳转到页面的中间
-默认情况下，点击more链接将会将读者带到单篇文章浏览的形式，并且会转到more标签指定的位置。这样，如果你使用默认的more标签功能，读者点击more链接之后将会被带入到文章的半中间。曾经一段时间，大家比较接受这样的做法，不过，现在越来越人觉得还是直接打开文章页面不跳转到其他位置比较好。">
-<meta property="og:updated_time" content="2016-08-22T06:06:52.000Z">
+默认情况下，点击more链接将会将读者带到单篇文章浏览的形式，并且会转到more标签指定的位置。这样，如果你使用默认的more标签功能，读者点击more链接之后将会被带入到文章的半中间。曾经一段时间，大家比较接受这样的做法，不过，现在越来越人觉得还是直接打开文章页面不跳转到其他位置比较好。
+总之一句话，如果你希望点击more标签后，打开进入的是">
+<meta property="og:updated_time" content="2016-08-27T04:17:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阻止wordpress more链接跳转到页面的中间">
 <meta name="twitter:description" content="阻止wordpress more链接跳转到页面的中间
-默认情况下，点击more链接将会将读者带到单篇文章浏览的形式，并且会转到more标签指定的位置。这样，如果你使用默认的more标签功能，读者点击more链接之后将会被带入到文章的半中间。曾经一段时间，大家比较接受这样的做法，不过，现在越来越人觉得还是直接打开文章页面不跳转到其他位置比较好。">
+默认情况下，点击more链接将会将读者带到单篇文章浏览的形式，并且会转到more标签指定的位置。这样，如果你使用默认的more标签功能，读者点击more链接之后将会被带入到文章的半中间。曾经一段时间，大家比较接受这样的做法，不过，现在越来越人觉得还是直接打开文章页面不跳转到其他位置比较好。
+总之一句话，如果你希望点击more标签后，打开进入的是">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -296,12 +299,10 @@
           
         <p>阻止wordpress more链接跳转到页面的中间</p>
 <p>默认情况下，点击more链接将会将读者带到单篇文章浏览的形式，并且会转到more标签指定的位置。这样，如果你使用默认的more标签功能，读者点击more链接之后将会被带入到文章的半中间。曾经一段时间，大家比较接受这样的做法，不过，现在越来越人觉得还是直接打开文章页面不跳转到其他位置比较好。</p>
-<a id="more"></a>
-<p>总之一句话，如果你希望点击more标签后，打开进入的是文章页面的顶部，那么请在当前主题的functions.php文件，添加下面的代码:</p>
+<p>总之一句话，如果你希望点击more标签后，打开进入的是文章页面的顶部，那么请在当前主题的functions.php文件，添加下面的代码:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> remove_more_jump_link(<span class="variable">$link</span>) &#123;</div><div class="line"><span class="variable">$offset</span>  = strpos(<span class="variable">$link</span>, <span class="string">'#more-'</span>);</div><div class="line"><span class="keyword">if</span>  (<span class="variable">$offset</span>) &#123;</div><div class="line"><span class="variable">$end</span>  = strpos(<span class="variable">$link</span>, <span class="string">'"'</span>,<span class="variable">$offset</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span>  (<span class="variable">$end</span>) &#123;</div><div class="line"><span class="variable">$link</span>  = substr_replace(<span class="variable">$link</span>, <span class="string">''</span>, <span class="variable">$offset</span>, <span class="variable">$end</span>-<span class="variable">$offset</span>);</div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span>  <span class="variable">$link</span>;</div><div class="line">&#125;</div><div class="line">add_filter(<span class="string">'the_content_more_link'</span>,  <span class="string">'remove_more_jump_link'</span>);</div></pre></td></tr></table></figure></p>
 <blockquote>
-<p>function remove_more_jump_link($link) {<br>$offset  = strpos($link, ‘#more-‘);<br>if  ($offset) {<br>$end  = strpos($link, ‘“‘,$offset);<br>}<br>if  ($end) {<br>$link  = substr_replace($link, ‘’, $offset, $end-$offset);<br>}<br>return  $link;<br>}<br>add_filter(‘the_content_more_link’,  ‘remove_more_jump_link’);</p>
-</blockquote>
 <p>原文地址：<a href="http://www.wordpress.la/WordPress-more-tag-tips.html" target="_blank" rel="external">http://www.wordpress.la/WordPress-more-tag-tips.html</a></p>
+</blockquote>
 
       
     </div>

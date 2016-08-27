@@ -15,19 +15,19 @@
 
 
 
-<meta name="description" content="在使用rails 2.3.8与mysql 5.1 开发时，运行rake db:migrate 出现CREATE TABLE schema_migrations (versionvarchar(255) NOT NULL) ENGINE=InnoDB错误提示，原因是新版mysql的客户端连接库对rails 2.3的支持不够好导致的。
-解决方法，换一个旧版本的mysql的libmySQL.dll文件，">
+<meta name="description" content="在使用rails 2.3.8与mysql 5.1 开发时，运行rake db:migrate 出现12CREATE TABLE `schema_migrations` (`version`varchar(255) NOT NULL) ENGINE=InnoDB错误提示# 原因是新版mysql的客户端连接库对rails 2.3的支持不够好导致的。
+解决方法，换一个旧版本的mysql的libmySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rake db:migrate CREATE TABLE `schema_migrations`">
 <meta property="og:url" content="http://www.gagahappy.com/rake-dbmigrate-create-table-schema-migrations/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="在使用rails 2.3.8与mysql 5.1 开发时，运行rake db:migrate 出现CREATE TABLE schema_migrations (versionvarchar(255) NOT NULL) ENGINE=InnoDB错误提示，原因是新版mysql的客户端连接库对rails 2.3的支持不够好导致的。
-解决方法，换一个旧版本的mysql的libmySQL.dll文件，">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:description" content="在使用rails 2.3.8与mysql 5.1 开发时，运行rake db:migrate 出现12CREATE TABLE `schema_migrations` (`version`varchar(255) NOT NULL) ENGINE=InnoDB错误提示# 原因是新版mysql的客户端连接库对rails 2.3的支持不够好导致的。
+解决方法，换一个旧版本的mysql的libmySQL">
+<meta property="og:updated_time" content="2016-08-27T05:07:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rake db:migrate CREATE TABLE `schema_migrations`">
-<meta name="twitter:description" content="在使用rails 2.3.8与mysql 5.1 开发时，运行rake db:migrate 出现CREATE TABLE schema_migrations (versionvarchar(255) NOT NULL) ENGINE=InnoDB错误提示，原因是新版mysql的客户端连接库对rails 2.3的支持不够好导致的。
-解决方法，换一个旧版本的mysql的libmySQL.dll文件，">
+<meta name="twitter:description" content="在使用rails 2.3.8与mysql 5.1 开发时，运行rake db:migrate 出现12CREATE TABLE `schema_migrations` (`version`varchar(255) NOT NULL) ENGINE=InnoDB错误提示# 原因是新版mysql的客户端连接库对rails 2.3的支持不够好导致的。
+解决方法，换一个旧版本的mysql的libmySQL">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -294,9 +294,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在使用rails 2.3.8与mysql 5.1 开发时，运行rake db:migrate 出现CREATE TABLE <code>schema_migrations</code> (<code>version</code>varchar(255) NOT NULL) ENGINE=InnoDB错误提示，原因是新版mysql的客户端连接库对rails 2.3的支持不够好导致的。</p>
+        <p>在使用rails 2.3.8与mysql 5.1 开发时，运行rake db:migrate 出现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE `schema_migrations` (`version`varchar(255) NOT NULL) ENGINE=InnoDB错误提示</div><div class="line"># 原因是新版mysql的客户端连接库对rails 2.3的支持不够好导致的。</div></pre></td></tr></table></figure></p>
 <p>解决方法，换一个旧版本的mysql的libmySQL.dll文件，复制到ruby目录下的bin文件夹中就可以解决这个问题了。</p>
-<p>附libmySQL.dll下载地址：<a href="http://instantrails.rubyforge.org/svn/trunk/InstantRails-win/InstantRails/mysql/bin/libmySQL.dll" target="_blank" rel="external">http://instantrails.rubyforge.org/svn/trunk/InstantRails-win/InstantRails/mysql/bin/libmySQL.dll</a></p>
+<blockquote>
+<p><a href="http://instantrails.rubyforge.org/svn/trunk/InstantRails-win/InstantRails/mysql/bin/libmySQL.dll" target="_blank" rel="external">附libmySQL.dll下载地址：</a></p>
+</blockquote>
 
       
     </div>

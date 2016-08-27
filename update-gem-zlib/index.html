@@ -15,22 +15,25 @@
 
 
 
-<meta name="description" content="升级gem提示 no such file to load zlib，按照以前的经验，马上安装了zlib1g-dev，运行后问题依旧存在，无奈。突然起ruby source中包含zlib文件，最终解决办法如下。1、进行ruby源码包2、安装ruby自身提供的zlib包
+<meta name="description" content="升级gem提示 no such file to load zlib，按照以前的经验，马上安装了zlib1g-dev，运行后问题依旧存在，无奈。突然起ruby source中包含zlib文件，最终解决办法如下。
 
-cd ext/zlibruby ./extconf.rbmakesudo make install再次运行sudo gem upd">
+进行ruby源码包
+安装ruby自身提供的zlib包12345cd ext/zlibruby ./extconf.rbmakesudo make installsudo gem updat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="升级gem提示缺少no such file to load zlib">
 <meta property="og:url" content="http://www.gagahappy.com/update-gem-zlib/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="升级gem提示 no such file to load zlib，按照以前的经验，马上安装了zlib1g-dev，运行后问题依旧存在，无奈。突然起ruby source中包含zlib文件，最终解决办法如下。1、进行ruby源码包2、安装ruby自身提供的zlib包
+<meta property="og:description" content="升级gem提示 no such file to load zlib，按照以前的经验，马上安装了zlib1g-dev，运行后问题依旧存在，无奈。突然起ruby source中包含zlib文件，最终解决办法如下。
 
-cd ext/zlibruby ./extconf.rbmakesudo make install再次运行sudo gem upd">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+进行ruby源码包
+安装ruby自身提供的zlib包12345cd ext/zlibruby ./extconf.rbmakesudo make installsudo gem updat">
+<meta property="og:updated_time" content="2016-08-27T06:33:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="升级gem提示缺少no such file to load zlib">
-<meta name="twitter:description" content="升级gem提示 no such file to load zlib，按照以前的经验，马上安装了zlib1g-dev，运行后问题依旧存在，无奈。突然起ruby source中包含zlib文件，最终解决办法如下。1、进行ruby源码包2、安装ruby自身提供的zlib包
+<meta name="twitter:description" content="升级gem提示 no such file to load zlib，按照以前的经验，马上安装了zlib1g-dev，运行后问题依旧存在，无奈。突然起ruby source中包含zlib文件，最终解决办法如下。
 
-cd ext/zlibruby ./extconf.rbmakesudo make install再次运行sudo gem upd">
+进行ruby源码包
+安装ruby自身提供的zlib包12345cd ext/zlibruby ./extconf.rbmakesudo make installsudo gem updat">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -297,10 +300,12 @@ cd ext/zlibruby ./extconf.rbmakesudo make install再次运行sudo gem upd">
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>升级gem提示 no such file to load zlib，按照以前的经验，马上安装了zlib1g-dev，运行后问题依旧存在，无奈。突然起ruby source中包含zlib文件，最终解决办法如下。<br>1、进行ruby源码包<br>2、安装ruby自身提供的zlib包</p>
-<blockquote>
-<p>cd ext/zlib<br>ruby ./extconf.rb<br>make<br>sudo make install<br>再次运行sudo gem update –system，成功升级！</p>
-</blockquote>
+        <p>升级gem提示 no such file to load zlib，按照以前的经验，马上安装了zlib1g-dev，运行后问题依旧存在，无奈。突然起ruby source中包含zlib文件，最终解决办法如下。</p>
+<ol>
+<li>进行ruby源码包</li>
+<li>安装ruby自身提供的zlib包<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ext/zlib</div><div class="line">ruby ./extconf.rb</div><div class="line">make</div><div class="line">sudo make install</div><div class="line">sudo gem update --system</div></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>

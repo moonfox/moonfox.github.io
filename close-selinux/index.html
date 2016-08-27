@@ -15,22 +15,16 @@
 
 
 
-<meta name="description" content="修改/etc/selinux/config
-
-This file controls the state of SELinux on the system.SELINUX= can take one of these three values:enforcing - SELinux security policy is enforced.permissive - SELinux prints war">
+<meta name="description" content="修改/etc/selinux/config1234567891011This file controls the state of SELinux on the system.SELINUX= can take one of these three values:enforcing - SELinux security policy is enforced.permissive - SELinux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何关闭SELinux">
 <meta property="og:url" content="http://www.gagahappy.com/close-selinux/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="修改/etc/selinux/config
-
-This file controls the state of SELinux on the system.SELINUX= can take one of these three values:enforcing - SELinux security policy is enforced.permissive - SELinux prints war">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:description" content="修改/etc/selinux/config1234567891011This file controls the state of SELinux on the system.SELINUX= can take one of these three values:enforcing - SELinux security policy is enforced.permissive - SELinux">
+<meta property="og:updated_time" content="2016-08-27T05:10:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何关闭SELinux">
-<meta name="twitter:description" content="修改/etc/selinux/config
-
-This file controls the state of SELinux on the system.SELINUX= can take one of these three values:enforcing - SELinux security policy is enforced.permissive - SELinux prints war">
+<meta name="twitter:description" content="修改/etc/selinux/config1234567891011This file controls the state of SELinux on the system.SELINUX= can take one of these three values:enforcing - SELinux security policy is enforced.permissive - SELinux">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -297,15 +291,9 @@ This file controls the state of SELinux on the system.SELINUX= can take one of t
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>修改/etc/selinux/config</p>
-<blockquote>
-<h1 id="This-file-controls-the-state-of-SELinux-on-the-system"><a href="#This-file-controls-the-state-of-SELinux-on-the-system" class="headerlink" title="This file controls the state of SELinux on the system."></a>This file controls the state of SELinux on the system.</h1><h1 id="SELINUX-can-take-one-of-these-three-values"><a href="#SELINUX-can-take-one-of-these-three-values" class="headerlink" title="SELINUX= can take one of these three values:"></a>SELINUX= can take one of these three values:</h1><h1 id="enforcing-SELinux-security-policy-is-enforced"><a href="#enforcing-SELinux-security-policy-is-enforced" class="headerlink" title="enforcing - SELinux security policy is enforced."></a>enforcing - SELinux security policy is enforced.</h1><h1 id="permissive-SELinux-prints-warnings-instead-of-enforcing"><a href="#permissive-SELinux-prints-warnings-instead-of-enforcing" class="headerlink" title="permissive - SELinux prints warnings instead of enforcing."></a>permissive - SELinux prints warnings instead of enforcing.</h1><h1 id="disabled-SELinux-is-fully-disabled"><a href="#disabled-SELinux-is-fully-disabled" class="headerlink" title="disabled - SELinux is fully disabled."></a>disabled - SELinux is fully disabled.</h1><p>SELINUX=enforcing</p>
-<h1 id="SELINUXTYPE-type-of-policy-in-use-Possible-values-are"><a href="#SELINUXTYPE-type-of-policy-in-use-Possible-values-are" class="headerlink" title="SELINUXTYPE= type of policy in use. Possible values are:"></a>SELINUXTYPE= type of policy in use. Possible values are:</h1><h1 id="targeted-Only-targeted-network-daemons-are-protected"><a href="#targeted-Only-targeted-network-daemons-are-protected" class="headerlink" title="targeted - Only targeted network daemons are protected."></a>targeted - Only targeted network daemons are protected.</h1><h1 id="strict-Full-SELinux-protection"><a href="#strict-Full-SELinux-protection" class="headerlink" title="strict - Full SELinux protection."></a>strict - Full SELinux protection.</h1><p>SELINUXTYPE=targeted</p>
-</blockquote>
+        <p>修改/etc/selinux/config<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">This file controls the state of SELinux on the system.</div><div class="line">SELINUX= can take one of these three values:</div><div class="line">enforcing - SELinux security policy is enforced.</div><div class="line">permissive - SELinux prints warnings instead of enforcing.</div><div class="line">disabled - SELinux is fully disabled.</div><div class="line">&gt; SELINUX=enforcing</div><div class="line"></div><div class="line">SELINUXTYPE= <span class="built_in">type</span> of policy <span class="keyword">in</span> use. Possible values are:</div><div class="line">targeted - Only targeted network daemons are protected.</div><div class="line">strict - Full SELinux protection.</div><div class="line">SELINUXTYPE=targeted</div></pre></td></tr></table></figure></p>
 <p>把 SELINUX设定为disable, 下次启动系统后将会停止SElinux。</p>
-<p>检查SELinux现时况态</p>
-<p>要知到你现在是否使用 SELinux:</p>
-<h1 id="getenforce"><a href="#getenforce" class="headerlink" title="getenforce"></a>getenforce</h1><p>Enforcing</p>
+<p>检查SELinux现时况态,要知到你现在是否使用 SELinux:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">getenforce</div><div class="line">Enforcing</div></pre></td></tr></table></figure></p>
 
       
     </div>

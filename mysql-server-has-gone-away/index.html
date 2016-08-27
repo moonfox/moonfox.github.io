@@ -15,16 +15,28 @@
 
 
 
-<meta name="description" content="在对windows下的mysql 进行数据库还原的时候出现这个错误。1、最有可能的原因是服务器超时，比如说在一个脚本里连接上服务器后进行了一些数据库操作后，就开始冷落了数据库，执行起其他一些非数据库操作的耗时操作，数据库等啊等等啊等，结果超时了，只好关闭连接。如果是这个原因，请加大wait_timeout。2、还有可能是因为SQL语句太长所致，比如插入一个BLOB列，或者用一条INSERT语句同时">
+<meta name="description" content="在对windows下的mysql 进行数据库还原的时候出现这个错误。
+
+最有可能的原因是服务器超时，比如说在一个脚本里连接上服务器后进行了一些数据库操作后，就开始冷落了数据库，执行起其他一些非数据库操作的耗时操作，数据库等啊等等啊等，结果超时了，只好关闭连接。如果是这个原因，请加大wait_timeout。
+
+还有可能是因为SQL语句太长所致，比如插入一个BLOB列，或者用一条INSERT语句同时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL server has gone away">
 <meta property="og:url" content="http://www.gagahappy.com/mysql-server-has-gone-away/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="在对windows下的mysql 进行数据库还原的时候出现这个错误。1、最有可能的原因是服务器超时，比如说在一个脚本里连接上服务器后进行了一些数据库操作后，就开始冷落了数据库，执行起其他一些非数据库操作的耗时操作，数据库等啊等等啊等，结果超时了，只好关闭连接。如果是这个原因，请加大wait_timeout。2、还有可能是因为SQL语句太长所致，比如插入一个BLOB列，或者用一条INSERT语句同时">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:description" content="在对windows下的mysql 进行数据库还原的时候出现这个错误。
+
+最有可能的原因是服务器超时，比如说在一个脚本里连接上服务器后进行了一些数据库操作后，就开始冷落了数据库，执行起其他一些非数据库操作的耗时操作，数据库等啊等等啊等，结果超时了，只好关闭连接。如果是这个原因，请加大wait_timeout。
+
+还有可能是因为SQL语句太长所致，比如插入一个BLOB列，或者用一条INSERT语句同时">
+<meta property="og:updated_time" content="2016-08-27T06:00:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL server has gone away">
-<meta name="twitter:description" content="在对windows下的mysql 进行数据库还原的时候出现这个错误。1、最有可能的原因是服务器超时，比如说在一个脚本里连接上服务器后进行了一些数据库操作后，就开始冷落了数据库，执行起其他一些非数据库操作的耗时操作，数据库等啊等等啊等，结果超时了，只好关闭连接。如果是这个原因，请加大wait_timeout。2、还有可能是因为SQL语句太长所致，比如插入一个BLOB列，或者用一条INSERT语句同时">
+<meta name="twitter:description" content="在对windows下的mysql 进行数据库还原的时候出现这个错误。
+
+最有可能的原因是服务器超时，比如说在一个脚本里连接上服务器后进行了一些数据库操作后，就开始冷落了数据库，执行起其他一些非数据库操作的耗时操作，数据库等啊等等啊等，结果超时了，只好关闭连接。如果是这个原因，请加大wait_timeout。
+
+还有可能是因为SQL语句太长所致，比如插入一个BLOB列，或者用一条INSERT语句同时">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -291,9 +303,21 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在对windows下的mysql 进行数据库还原的时候出现这个错误。<br>1、最有可能的原因是服务器超时，比如说在一个脚本里连接上服务器后进行了一些数据库操作后，就开始冷落了数据库，执行起其他一些非数据库操作的耗时操作，数据库等啊等等啊等，结果超时了，只好关闭连接。如果是这个原因，请加大wait_timeout。<br>2、还有可能是因为SQL语句太长所致，比如插入一个BLOB列，或者用一条INSERT语句同时插入很多行，因为SQL太长，数据库可能就无法接收到完整的SQL，结果数据库就会觉得客户端出错了，从而关闭连接。如果是这个原因，请加大max_allowed_packet。</p>
-<p>解决方案<br>如果是第一种情况：将wait_timeout加大<br>如果是第二种情况：将max_allowed_packet加大，如果max_allowed_packet=800M</p>
-<p>注意事项<br>在重新配置mysql配置文件后，请重新启动mysql服务，使当前配置生效。<br>windows下重新启动mysql的方法：net stop mysql; net start mysql</p>
+        <p>在对windows下的mysql 进行数据库还原的时候出现这个错误。</p>
+<ol>
+<li><p>最有可能的原因是服务器超时，比如说在一个脚本里连接上服务器后进行了一些数据库操作后，就开始冷落了数据库，执行起其他一些非数据库操作的耗时操作，数据库等啊等等啊等，结果超时了，只好关闭连接。如果是这个原因，请加大wait_timeout。</p>
+</li>
+<li><p>还有可能是因为SQL语句太长所致，比如插入一个BLOB列，或者用一条INSERT语句同时插入很多行，因为SQL太长，数据库可能就无法接收到完整的SQL，结果数据库就会觉得客户端出错了，从而关闭连接。如果是这个原因，请加大max_allowed_packet。</p>
+</li>
+</ol>
+<p>解决方案</p>
+<blockquote>
+<p>如果是第一种情况：将wait_timeout加大<br>如果是第二种情况：将max_allowed_packet加大，如果max_allowed_packet=800M</p>
+</blockquote>
+<p>注意事项</p>
+<blockquote>
+<p>在重新配置mysql配置文件后，请重新启动mysql服务，使当前配置生效。<br>windows下重新启动mysql的方法：net stop mysql; net start mysql</p>
+</blockquote>
 
       
     </div>

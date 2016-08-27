@@ -15,43 +15,16 @@
 
 
 
-<meta name="description" content="ruby中的条件判断语句case我们都不应该陌生吧，在view层使用时出现了这样一个怪现象。如果这样写&amp;lt;% case 条件表达示 %&amp;gt;&amp;lt;% when “条件1”%&amp;gt;
-标题
-&amp;lt;% when “条件2”%&amp;gt;
-标题
-&amp;lt;% end %&amp;gt;被告知有语法错误。如果写成
-&amp;lt;%
-case 条件表达示
-when “条件1”
-%&amp;gt;
-程序顺利通过。即将case">
+<meta name="description" content="ruby中的条件判断语句case我们都不应该陌生吧，在view层使用时出现了这样一个怪现象。12345678910111213# 如果这样写&amp;lt;% case 条件表达示 %&amp;gt;&amp;lt;% when &quot;条件1&quot;%&amp;gt;标题&amp;lt;% when &quot;条件2&quot;%&amp;gt;标题&amp;lt;% end %&amp;gt;# 被告知有语法错误。 如果写成&amp;lt;%case 条件表达示when &quot;条件1&quot;%&amp;gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="奇怪的ruby case">
 <meta property="og:url" content="http://www.gagahappy.com/ruby-case-bug/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="ruby中的条件判断语句case我们都不应该陌生吧，在view层使用时出现了这样一个怪现象。如果这样写&amp;lt;% case 条件表达示 %&amp;gt;&amp;lt;% when “条件1”%&amp;gt;
-标题
-&amp;lt;% when “条件2”%&amp;gt;
-标题
-&amp;lt;% end %&amp;gt;被告知有语法错误。如果写成
-&amp;lt;%
-case 条件表达示
-when “条件1”
-%&amp;gt;
-程序顺利通过。即将case">
-<meta property="og:updated_time" content="2016-08-17T18:03:11.000Z">
+<meta property="og:description" content="ruby中的条件判断语句case我们都不应该陌生吧，在view层使用时出现了这样一个怪现象。12345678910111213# 如果这样写&amp;lt;% case 条件表达示 %&amp;gt;&amp;lt;% when &quot;条件1&quot;%&amp;gt;标题&amp;lt;% when &quot;条件2&quot;%&amp;gt;标题&amp;lt;% end %&amp;gt;# 被告知有语法错误。 如果写成&amp;lt;%case 条件表达示when &quot;条件1&quot;%&amp;gt;">
+<meta property="og:updated_time" content="2016-08-27T05:34:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="奇怪的ruby case">
-<meta name="twitter:description" content="ruby中的条件判断语句case我们都不应该陌生吧，在view层使用时出现了这样一个怪现象。如果这样写&amp;lt;% case 条件表达示 %&amp;gt;&amp;lt;% when “条件1”%&amp;gt;
-标题
-&amp;lt;% when “条件2”%&amp;gt;
-标题
-&amp;lt;% end %&amp;gt;被告知有语法错误。如果写成
-&amp;lt;%
-case 条件表达示
-when “条件1”
-%&amp;gt;
-程序顺利通过。即将case">
+<meta name="twitter:description" content="ruby中的条件判断语句case我们都不应该陌生吧，在view层使用时出现了这样一个怪现象。12345678910111213# 如果这样写&amp;lt;% case 条件表达示 %&amp;gt;&amp;lt;% when &quot;条件1&quot;%&amp;gt;标题&amp;lt;% when &quot;条件2&quot;%&amp;gt;标题&amp;lt;% end %&amp;gt;# 被告知有语法错误。 如果写成&amp;lt;%case 条件表达示when &quot;条件1&quot;%&amp;gt;">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -318,16 +291,8 @@ when “条件1”
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>ruby中的条件判断语句case我们都不应该陌生吧，在view层使用时出现了这样一个怪现象。<br>如果这样写<br><span style="color: #ff0000;">&lt;% case 条件表达示 %&gt;<br>&lt;% when “条件1”%&gt;</span></p>
-<p>标题</p>
-<p>&lt;% when “条件2”%&gt;</p>
-<p>标题</p>
-<p>&lt;% end %&gt;<br>被告知有语法错误。<br>如果写成</p>
-<p><span style="color: #ff0000;">&lt;%</span></p>
-<p><span style="color: #ff0000;">case 条件表达示</span></p>
-<p><span style="color: #ff0000;">when “条件1”</span></p>
-<p><span style="color: #ff0000;">%&gt;</span></p>
-<p>程序顺利通过。即将case 与第一个when写在一起，这时程序不会出错。难道分开放在&lt;%%&gt;里会出错。差点被这个bug折腾死！ORG</p>
+        <p>ruby中的条件判断语句case我们都不应该陌生吧，在view层使用时出现了这样一个怪现象。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 如果这样写</span></div><div class="line">&lt;% <span class="keyword">case</span> 条件表达示 %&gt;</div><div class="line">&lt;% <span class="keyword">when</span> <span class="string">"条件1"</span>%&gt;</div><div class="line">标题</div><div class="line">&lt;% <span class="keyword">when</span> <span class="string">"条件2"</span>%&gt;</div><div class="line">标题</div><div class="line">&lt;% <span class="keyword">end</span> %&gt;</div><div class="line"></div><div class="line"><span class="comment"># 被告知有语法错误。 如果写成</span></div><div class="line">&lt;%</div><div class="line"><span class="keyword">case</span> 条件表达示</div><div class="line"><span class="keyword">when</span> <span class="string">"条件1"</span></div><div class="line">%&gt;</div></pre></td></tr></table></figure></p>
+<p>程序顺利通过。即将case 与第一个when写在一起，这时程序不会出错。难道分开放在<code>&lt;%%&gt;</code>里会出错。差点被这个bug折腾死！ORG</p>
 
       
     </div>
@@ -355,8 +320,8 @@ when “条件1”
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/ubuntu-cmd-mplayer/">
-                    ubuntu 下命令行播放器mplayer
+                <a href="/goole-eat-douzi/">
+                    goole首页游戏，吃豆子
                 </a>
             </div>
         
@@ -407,7 +372,7 @@ when “条件1”
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/ubuntu-cmd-mplayer/" title="上一篇: ubuntu 下命令行播放器mplayer">
+            <a href="/goole-eat-douzi/" title="上一篇: goole首页游戏，吃豆子">
                 <i class="fa fa-angle-left"></i>
             </a>
         

@@ -15,16 +15,31 @@
 
 
 
-<meta name="description" content="由于9.10自带的fcitx默认版本为3.6，在本人的机子上经常出现CPU满载的情况，不得不更换其它输入法，但都没有fcitx好用（本人用五笔），发现其官网上已经提供了3.6.3的稳定版，决定自行进行安装。">
+<meta name="description" content="由于9.10自带的fcitx默认版本为3.6，在本人的机子上经常出现CPU满载的情况，不得不更换其它输入法，但都没有fcitx好用（本人用五笔），发现其官网上已经提供了3.6.3的稳定版，决定自行进行安装。
+
+一、下载首先从fcitx的官网下载fcitx-3.6.3.tar.bz2，更新日期为2010-02-13
+二、安装
+
+手动编译安装安装必须的库文件：sudo apt-get install">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu9.10 install fcitx 3.6.3 ">
 <meta property="og:url" content="http://www.gagahappy.com/ubuntu9-10-install-fcitx-3-6-3/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="由于9.10自带的fcitx默认版本为3.6，在本人的机子上经常出现CPU满载的情况，不得不更换其它输入法，但都没有fcitx好用（本人用五笔），发现其官网上已经提供了3.6.3的稳定版，决定自行进行安装。">
-<meta property="og:updated_time" content="2016-08-22T06:07:17.000Z">
+<meta property="og:description" content="由于9.10自带的fcitx默认版本为3.6，在本人的机子上经常出现CPU满载的情况，不得不更换其它输入法，但都没有fcitx好用（本人用五笔），发现其官网上已经提供了3.6.3的稳定版，决定自行进行安装。
+
+一、下载首先从fcitx的官网下载fcitx-3.6.3.tar.bz2，更新日期为2010-02-13
+二、安装
+
+手动编译安装安装必须的库文件：sudo apt-get install">
+<meta property="og:updated_time" content="2016-08-27T06:13:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu9.10 install fcitx 3.6.3 ">
-<meta name="twitter:description" content="由于9.10自带的fcitx默认版本为3.6，在本人的机子上经常出现CPU满载的情况，不得不更换其它输入法，但都没有fcitx好用（本人用五笔），发现其官网上已经提供了3.6.3的稳定版，决定自行进行安装。">
+<meta name="twitter:description" content="由于9.10自带的fcitx默认版本为3.6，在本人的机子上经常出现CPU满载的情况，不得不更换其它输入法，但都没有fcitx好用（本人用五笔），发现其官网上已经提供了3.6.3的稳定版，决定自行进行安装。
+
+一、下载首先从fcitx的官网下载fcitx-3.6.3.tar.bz2，更新日期为2010-02-13
+二、安装
+
+手动编译安装安装必须的库文件：sudo apt-get install">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -291,12 +306,29 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>由于9.10自带的fcitx默认版本为3.6，在本人的机子上经常出现CPU满载的情况，不得不更换其它输入法，但都没有fcitx好用（本人用五笔），发现其官网上已经提供了3.6.3的稳定版，决定自行进行安装。</p>
-<a id="more"></a>
+        <blockquote>
+<p>由于9.10自带的fcitx默认版本为3.6，在本人的机子上经常出现CPU满载的情况，不得不更换其它输入法，但都没有fcitx好用（本人用五笔），发现其官网上已经提供了3.6.3的稳定版，决定自行进行安装。</p>
+</blockquote>
 <p>一、下载<br>首先从fcitx的官网下载fcitx-3.6.3.tar.bz2，更新日期为2010-02-13</p>
-<p>二、安装<br>1、手动编译安装<br>安装必须的库文件：sudo apt-get install libxpm-dev libxft-dev libxtst-dev<br>安装过程就不多说了，说说安装后出现的问题。<br>问题1、启动后输入法栏为灰色，即不能使用，从网上找了N多方法也没有解决。<br>问题2、不能随机启动。至今没有解决<br>总结：用这种方法安装的难度还是满大的，不建议使用。</p>
-<p>2、生成deb包，进入安装<br>安装必须的库文件：sudo apt-get install debhelper<br>进入解压后的文件夹<br>cd fcitx-3.6.3<br>fakeroot debian/rules binary<br>待程序运行结束后，会在当前目录的上层生成fcitx_3.6~rc-1_i386.deb文件，双击安装即可，然后再重新登入下，即可使用。<br>优点：安装相对简单，易上手</p>
+<p>二、安装</p>
+<ol>
+<li><p>手动编译安装<br>安装必须的库文件：<br><code>sudo apt-get install libxpm-dev libxft-dev libxtst-dev</code></p>
+<blockquote>
+<p>安装过程就不多说了，说说安装后出现的问题</p>
+<ul>
+<li>问题1、启动后输入法栏为灰色，即不能使用，从网上找了N多方法也没有解决。</li>
+<li>问题2、不能随机启动。至今没有解决</li>
+</ul>
+<p>总结：用这种方法安装的难度还是满大的，不建议使用。</p>
+</blockquote>
+</li>
+<li><p>生成deb包，进入安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">安装必须的库文件：</div><div class="line">sudo apt-get install debhelper</div><div class="line">进入解压后的文件夹</div><div class="line"><span class="built_in">cd</span> fcitx-3.6.3</div><div class="line">fakeroot debian/rules binary</div><div class="line">待程序运行结束后，会在当前目录的上层生成fcitx_3.6~rc-1_i386.deb文件，双击安装即可，然后再重新登入下，即可使用。</div><div class="line">优点：安装相对简单，易上手</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
 <p>使用感受：fcitx-3.6.3还是比较另人满意的，在输入速度和界面美观上表现的都不错。</p>
+</blockquote>
 
       
     </div>

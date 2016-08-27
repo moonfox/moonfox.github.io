@@ -252,71 +252,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-apply-for-google-adsense" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/apply-for-google-adsense/" class="article-date">
-      <time datetime="2010-10-18T17:44:57.000Z" itemprop="datePublished">2010-10-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/apply-for-google-adsense/">申请GoogleAdSense</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>申请了GoogleAdSense，希望可以顺利通过审核！</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/software/">玩转软件</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/google/">google</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
     <article id="post-ubuntu-10-04-speed-dns" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -482,7 +417,7 @@
       
           
         <p>本博在<a href="http://www.gagahappy.com/ubuntu-10-04-restart-network-manger/">ubuntu 10.04 重启网络服务</a>一文中介绍了怎样重启网络服务，后来在使用过程中发现此方法并不正确，后经网上搜索，更正如下</p>
-<p>sudo service network-manager stop<br>sudo rm /var/lib/NetworkManager/NetworkManager.state<br>sudo service network-manager start<br>sudo gedit /etc/NetworkManager/nm-system-settings.conf<br>把false改成true<br>sudo service network-manager restart</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo service network-manager stop</div><div class="line">sudo rm /var/lib/NetworkManager/NetworkManager.state</div><div class="line">sudo service network-manager start</div><div class="line">sudo gedit /etc/NetworkManager/nm-system-settings.conf</div><div class="line"><span class="comment"># 把false改成true</span></div><div class="line">sudo service network-manager restart</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -613,7 +548,7 @@
       
           
         <p>发现rails3.0在配置数据库密码这里有一个要注意的地方，当你的密码完全是纯数字的时候，会引发can’t convert Fixnum into String 错误，这时如果你非要用数字做密码，请给数字密码加上引号。当密码是以字母开头的时候，不会出现这种现象，rails会顺利的启动。</p>
-<p><a href="http://img.gagahappy.com/blog/2010/10/sendpix1.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2010/10/sendpix1.jpg" alt="" title="rails3"></a></p>
+<p><a href="http://img.gagahappy.com/blog/2010/10/sendpix1.jpg" title="rails3" target="_blank" rel="external"></a></p>
 
       
     </div>
@@ -678,7 +613,12 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>高内聚,低耦合在软件工程里有,主要是说模块之间和模块内部之间的关系紧密程度<br>高内聚就是提高模块内部的关联程度,低耦合当然就是降低模块之间的关联程度<br>耦合性比较高的话，模块代码不易分离，是不好的编程模式<br>内聚是越高越好，内聚个人认为是只是实现一个功能，不是很多的功能</p>
+        <ul>
+<li>高内聚,低耦合在软件工程里有,主要是说模块之间和模块内部之间的关系紧密程度</li>
+<li>高内聚就是提高模块内部的关联程度,低耦合当然就是降低模块之间的关联程度</li>
+<li>耦合性比较高的话，模块代码不易分离，是不好的编程模式</li>
+<li>内聚是越高越好，内聚个人认为是只是实现一个功能，不是很多的功能</li>
+</ul>
 
       
     </div>
@@ -739,8 +679,17 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>记得以前把ubuntu美化成mac要安装许多软件，不但时间长，而且相当的复杂，上手比较困难，使得许多人望而却步，其中也包括本博，终于Macbuntu的出现使得这一问题变得相当简单，下载后一健安装就可以完成ubuntu界面向MAC OSX的转变。</p>
-          
+        <p>记得以前把ubuntu美化成mac要安装许多软件，不但时间长，而且相当的复杂，上手比较困难，使得许多人望而却步，其中也包括本博，终于Macbuntu的出现使得这一问题变得相当简单，下载后一健安装就可以完成ubuntu界面向MAC OSX的转变。</p>
+<p>目前，Macbuntu有两种版本，分别针对ubuntu10.04和ubuntu10.10，下载的时候一定要选对版本，否则不能正常安装。</p>
+<p>安装步骤：</p>
+<ol>
+<li>下载：<a href="http://sourceforge.net/projects/macbuntu/files/macbuntu-10.04/v2.3/Macbuntu-10.04.tar.gz/download" target="_blank" rel="external">http://sourceforge.net/projects/macbuntu/files/macbuntu-10.04/v2.3/Macbuntu-10.04.tar.gz/download</a></li>
+<li>安装：解压后进入文件夹，执行./install.sh。注意，这里不用加sudo</li>
+<li>选择安装内容：<br><img src="http://img.gagahappy.com/blog/2010/10/sendpix0.jpg" alt="" title="Macbuntu"></li>
+</ol>
+<p>在这个过程中会让你选择一些特效，例如show desktop，scale等类似Mac os X的Expose特效。</p>
+<p>等待安装完成后，界面会自动变成MAC OSX，怎么样，简单吧，相信你已经安装好了，尽情的使用吧！</p>
+
       
     </div>
     
@@ -757,10 +706,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
     </div>
 
-      
-        <p class="article-more-link">
-          <a href="/macbuntu-make-ubuntu-to-mac-osx/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -1068,7 +1013,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <p>51. 亚瑟王（King Arthur）：传说中的凯尔特人首领。<br><a href="http://img.gagahappy.com/blog/2010/10/King-Arthur.jpg"><img src="http://img.gagahappy.com/blog/2010/10/King-Arthur.jpg" alt="" title="King Arthur"></a><br>52. 弗洛伦丝·南丁格尔（Florence Nightingale，1820－1910）：著名护士，慈善家。</p>
+              <p>51. 亚瑟王（King Arthur）：传说中的凯尔特人首领。<br><img src="http://img.gagahappy.com/blog/2010/10/King-Arthur.jpg" alt="" title="King Arthur"><br>52. 弗洛伦丝·南丁格尔（Florence Nightingale，1820－1910）：著名护士，慈善家。</p>
 <p>53. T·E·劳伦斯（T. E. Lawrence，1888－1935）：军人，即“阿拉伯的劳伦斯”。<br>
           
       
@@ -1141,7 +1086,7 @@
               <p>1. 温斯顿·邱吉尔爵士（Sir Winston Churchill，1874－1965）：政治家，曾担任联合王国首相（1940－1945、1951－1955），二战“三巨头”之一。</p>
 <p>2. 伊赞巴德·金顿·布鲁内尔（Isambard Kingdom Brunel，1806–1859）：工程师，英国铁路体系的奠基人。</p>
 <p>3.戴安娜王妃（ Princess Diana，1961－1997）：王室，威尔士王妃（1981－1996）</p>
-<p><a href="http://img.gagahappy.com/blog/2010/10/2246451789128890769.jpg"><img src="http://img.gagahappy.com/blog/2010/10/2246451789128890769.jpg" alt="" title="戴安娜王妃"></a></p>
+<p><img src="http://img.gagahappy.com/blog/2010/10/2246451789128890769.jpg" alt="" title="戴安娜王妃"></p>
           
       
     </div>
@@ -1557,6 +1502,79 @@
           
         <p>从Ubuntu 10.04升级到Ubuntu 10.10</p>
 <p>press Alt+F2 and type in “update-manager -d” (without the quotes) into the command box. Update Manager should open up and tell you: New distribution release ‘10.10’ is available. Click Upgrade and follow the on-screen instructions. </p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ubuntu-10-10maverick-meerkat-rc" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ubuntu-10-10maverick-meerkat-rc/" class="article-date">
+      <time datetime="2010-10-01T14:17:57.000Z" itemprop="datePublished">2010-10-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ubuntu-10-10maverick-meerkat-rc/">Ubuntu 10.10(Maverick Meerkat) RC </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Ubuntu 10.10(Maverick Meerkat) RC 于当地时间9.30晚/北京时间10.1发布。</p>
+<p>相比 10.04，Ubuntu Desktop Edition (GNOME 版) 带来以下新特性：</p>
+<ul>
+<li>为 Ubuntu 设计的 Ubuntu font；正式发布时可能会被用作默认字体。</li>
+<li>GNOME 升级到刚刚发布的 2.32；Evolution 升级到 2.30，相比 10.4 中的版本性能明显提升；Shotwell 代替 F-Spot 成为默认照片管理器；Gwibber 升级到最新版以支持 Twitter 新的身份验证系统。</li>
+<li>现在可以点开通知区域的小喇叭(Sound Indicator)控制音乐播放器。</li>
+<li>Ubuntu 软件中心大幅改进：主界面增加“Feature 和 What’s New”两栏，推介优秀的和最新的软件；可以通过软件中心购买付费软件 (Get Software-&gt;For Purchase，不过目前只有一个用于测试的包)；</li>
+<li>Ubunto One: Ubuntu One 的登入登出集成到了桌面右上角的 Indicator Applet Session；增加了 Ubuntu SSO 的集成度；Nautilus 中管理文件夹同步的选项得到改进；文件同步速度提升；现在可以在 Ubuntu One 音乐商店中分享音乐链接。</li>
+</ul>
 
       
     </div>
