@@ -252,6 +252,82 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-error-loading-gem-paths-on-load-path-in-gem-prelude" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/error-loading-gem-paths-on-load-path-in-gem-prelude/" class="article-date">
+      <time datetime="2012-02-11T09:03:16.000Z" itemprop="datePublished">2012-02-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/error-loading-gem-paths-on-load-path-in-gem-prelude/">Error loading gem paths on load path in gem_prelude</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在用rvm安装ruby后运行gem，出现</p>
+<blockquote>
+<p>Error loading gem paths on load path in gem_prelude<br>can’t modify frozen string</p>
+<p><internal:gem_prelude>:69:in `force_encoding’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:69:in `set_home’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:38:in `dir’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:76:in `set_paths’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:47:in `path’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:286:in `push_all_highest_version_gems_on_load_path’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:355:in `<compiled>‘</compiled></internal:gem_prelude></p>
+</blockquote>
+<p>解决方法：找到 your/home/.rvm/src/ruby-your-version/gem_prelude.rb文件 编辑<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">set_home</span><span class="params">(home)</span></span></div><div class="line"> home = home.gsub File::ALT_SEPARATOR, File::SEPARATOR <span class="keyword">if</span> File::ALT_SEPARATOR</div><div class="line">- @gem_home = home.force_encoding(Encoding.find(<span class="string">'filesystem'</span>))</div><div class="line">+ @gem_home = home.dup.force_encoding(Encoding.find(<span class="string">'filesystem'</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-rackbuilder-rackup" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1495,78 +1571,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/git/">git</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-adwords-account-is-disabled" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/adwords-account-is-disabled/" class="article-date">
-      <time datetime="2011-12-03T01:09:53.000Z" itemprop="datePublished">2011-12-03</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/adwords-account-is-disabled/">adwords帐号屡次被停用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>以下是来自adwords的账号停用邮件</p>
-<blockquote>
-<p>我们注意到，您的 Google AdWords 帐户不符合我们的服务条款和广告政策要求。因<br>此，您的帐户以及所有相关帐户均已被停用，您的广告将不会继续在 Google 上投放。<br>请注意，不论现在还是今后，我们都禁止您拥有或创建其他任何 AdWords 帐户。</p>
-</blockquote>
-<p>用了200元血的教训才知道，adwords不做用来做taobao的广告～～～呃，我是血泪纵流啊~</p>
-<blockquote>
-<p>所谓的相关账号指的是什么呢。如果你两个账号都用同一个银行卡，则被视为相关账号，悲惧啊</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/adwords/">adwords</a></li></ul>
     </div>
 
       
