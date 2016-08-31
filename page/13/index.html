@@ -252,6 +252,73 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-rails2-2-2-can-not-connect-mysql-drive-bug" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails2-2-2-can-not-connect-mysql-drive-bug/" class="article-date">
+      <time datetime="2011-07-03T09:56:36.000Z" itemprop="datePublished">2011-07-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails2-2-2-can-not-connect-mysql-drive-bug/">解决rails2.2.2不能连接mysql 数据库驱动问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gem install mysql -- --with-mysql-config=/usr/<span class="built_in">local</span>/mysql/bin/mysql_config</div><div class="line"></div><div class="line">gem install mysql --no-rdoc --no-ri \</div><div class="line">-- --with-mysql-include=/usr/<span class="built_in">local</span>/mysql/include \</div><div class="line">--with-mysql-lib=/usr/<span class="built_in">local</span>/mysql/lib \</div><div class="line">--with-mysql-config=/usr/<span class="built_in">local</span>/mysql/bin/mysql_config</div><div class="line"></div><div class="line"><span class="string">"/usr/local/mysql/lib"</span> to /etc/ld.so.conf and ran ldconfig</div></pre></td></tr></table></figure>
+<p>修改 <code>/etc/ld.so.conf</code>， 加入<code>include /opt/mysql/lib</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem install mysql -- --with-mysql-lib=/opt/mysql/lib/mysql --with-mysql-include=/opt/mysql/include/mysql/</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-fedora-install-urar" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1526,72 +1593,6 @@
         <p>在编译nginx时遇到rewrite module requires the PCRE library错误，提示需要PCRE库，解决方法：</p>
 <p>ubuntu下执行<br>apt-get install libpcre3-dev</p>
 <p>RHEL下执行<br>yum -y install pcre-devel</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/linux/">我爱Linux</a><a class="article-category-link" href="/category/linux/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-emerg-getpwnam-nginx-failed" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/emerg-getpwnam-nginx-failed/" class="article-date">
-      <time datetime="2011-03-22T15:44:13.000Z" itemprop="datePublished">2011-03-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/emerg-getpwnam-nginx-failed/">[emerg]: getpwnam(“nginx”) failed</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在启动nginx之前还需要添加nginx用户组，否则会提示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[emerg]: getpwnam(“nginx”) failed</div></pre></td></tr></table></figure></p>
-<p>添加用户组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo adduser --system --no-create-home --disabled-password --group nginx</div></pre></td></tr></table></figure></p>
 
       
     </div>

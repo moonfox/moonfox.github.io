@@ -252,6 +252,70 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-rails-memcache-config" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails-memcache-config/" class="article-date">
+      <time datetime="2011-09-07T05:53:41.000Z" itemprop="datePublished">2011-09-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails-memcache-config/">rails memcache config</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">config.gem <span class="string">"cached_model"</span></div><div class="line"><span class="keyword">require</span> <span class="string">'memcache'</span></div><div class="line">memcache_options = &#123;</div><div class="line"><span class="symbol">:c_threshold</span> =&gt; <span class="number">10_000</span>,</div><div class="line"><span class="symbol">:compression</span> =&gt; <span class="literal">true</span>,</div><div class="line"><span class="symbol">:debug</span> =&gt;<span class="literal">false</span>,</div><div class="line"><span class="symbol">:namespace</span> =&gt; <span class="string">'my_rails_app'</span>,</div><div class="line"><span class="symbol">:readonly</span> =&gt; <span class="literal">false</span>,</div><div class="line"><span class="symbol">:urlencode</span> =&gt;<span class="literal">false</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">CACHE = MemCache.new memcache_options</div><div class="line">CACHE.servers = [<span class="string">'localhost:11211'</span>, <span class="string">'localhost:11212'</span>]</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-git-log-author" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1458,71 +1522,6 @@
         <p>对于 “修复未提交文件中的错误” 时我们可以使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset -- yourfile</div></pre></td></tr></table></figure></p>
 <p>这条命令会把文件恢复到index中的版本，而不是恢复到  HEAD revision。<br>当然，如果你没有把修改后的文件内容添加到index ,这个命令还是可以把你所做的修改恢复成你本地最初始的状态。</p>
 <p>建议最好还是能看一下英文版，可以更准确的理解原著中要表达的意思。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/git/">git</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-git-checkout-file" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/git-checkout-file/" class="article-date">
-      <time datetime="2011-07-26T15:26:41.000Z" itemprop="datePublished">2011-07-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/git-checkout-file/">git 恢复单个文件</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>如果你只是要恢复一个文件(修复未提交文件中的错误),如”hello.rb”, 你就要使用 git checkout<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -- hello.rb</div></pre></td></tr></table></figure></p>
 
       
     </div>
