@@ -252,6 +252,72 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-method-missing-be-careful-use" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/method-missing-be-careful-use/" class="article-date">
+      <time datetime="2015-05-14T15:18:31.000Z" itemprop="datePublished">2015-05-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/method-missing-be-careful-use/">method_missing 方法使用注意事项</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>method_missing 方法使用注意事项，其实最要应该注意的就是不能在method_missing 方法中出现找不到的方法，否则程序将掉入无限循环中</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">method_missing</span><span class="params">(method, *args)</span></span></div><div class="line">  not_exist_method <span class="comment">#一个不存在的方法</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># 当程序进入method_missing方法后，发现找不到not_exist_method方法，则又会掉入method_missing,然后又会发现找不到not_exist_method，然后又掉入method_missing,然后loop...</span></div><div class="line"></div><div class="line"><span class="comment"># 这种陷阱一般很难发现，所以在method_missing中编写代码时，一定要小心</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-git-write-tree-generate-tree-id" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1527,72 +1593,6 @@
           
         <p>Two segments are allocated for each index in InnoDB. One is for nonleaf nodes of the B-tree, the other is for the leaf nodes. Keeping the leaf nodes contiguous on disk enables better sequential I/O operations, because these leaf nodes contain the actual table data.</p>
 <p>每个索引拥有2个segment，一个用于非叶结点，另一个用于叶子结点</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-innodb-does-not-guarantee-that-it-uses-free-pages-sequentially" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/innodb-does-not-guarantee-that-it-uses-free-pages-sequentially/" class="article-date">
-      <time datetime="2015-04-11T15:39:59.000Z" itemprop="datePublished">2015-04-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/innodb-does-not-guarantee-that-it-uses-free-pages-sequentially/">Innodb不保证连续的使用空闲空间保存数据</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>InnoDB does not guarantee that it uses free pages sequentially, and many optimizations around bulk data loading will cause pages to be used out of order. (More on page splitting and these optimizations)</p>
-<p>1、Innodb不保证连续的使用空闲空间保存数据，这么做的原因有(页的分裂和一些优化)<br>2、在为新数据分配extent时，可以看到有种情况发生：一个index后面是多个free page(63个),然后再是一个index.</p>
 
       
     </div>

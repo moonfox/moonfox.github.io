@@ -252,6 +252,74 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-min-byte-of-format-disk" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/min-byte-of-format-disk/" class="article-date">
+      <time datetime="2015-01-19T06:34:36.000Z" itemprop="datePublished">2015-01-19</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/min-byte-of-format-disk/">格式化磁盘最小分配单元</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>格式化磁盘最小分配单元，最小单元为512字节。</p>
+<p>为什么不能比512字节还要小，如256字节。因为一个扇区为512字节，最小单元比512字节还要小的话，一个扇区就可能存储两个文件的数据：</p>
+<p>如file1:256字节,file2:256字节。全都存到一个扇区的话，在读取file1时，也会把file2的数据取出。</p>
+<p>一般最小单元系统默认为4KB，如果存的文件都小于4KB的话，会浪费很多的扇区，即存储空间。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/computer/">计算机</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/os/">操作系统</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-ns-to-ms" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1525,73 +1593,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/c-lang/">c-lang</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-redirect-file-to-strerr" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/redirect-file-to-strerr/" class="article-date">
-      <time datetime="2014-12-02T15:11:33.000Z" itemprop="datePublished">2014-12-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/redirect-file-to-strerr/">重定向文件内容到标准错误</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">redirect_file_to_strerr</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></div><div class="line">&#123;</div><div class="line">  redirect_file_to_strerr();</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">redirect_file_to_strerr</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">  FILE *f;</div><div class="line">  f = fopen(<span class="string">"redirect_file_to_strerr.txt"</span>, <span class="string">"w"</span>);</div><div class="line">  dup2(<span class="number">2</span>, fileno(f));</div><div class="line">  <span class="built_in">fprintf</span>(f, <span class="string">"%s\n"</span>, <span class="string">"hello world"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>假设 f的文件描述符为10;<br>dup2(2, fileno(f))将把流向f的数据重定向到strerr，所以写入f的内容不会被保存在文件中，而是显示在了屏幕上(sterr默认流向屏幕),redirect_out_to_file.txt文件内容为空。</p>
-<p>1 =&gt; screen<br>2 =&gt; screen<br><del>10 =&gt; redirect_file_to_strerr.txt”</del><br>10 =&gt; 2</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/linux/">我爱Linux</a><a class="article-category-link" href="/category/linux/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/c-lang/">c-lang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/linux/">linux</a></li></ul>
     </div>
 
       

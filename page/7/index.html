@@ -252,6 +252,73 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-redirect-file-to-strerr" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/redirect-file-to-strerr/" class="article-date">
+      <time datetime="2014-12-02T15:11:33.000Z" itemprop="datePublished">2014-12-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/redirect-file-to-strerr/">重定向文件内容到标准错误</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">redirect_file_to_strerr</span><span class="params">(<span class="keyword">void</span>)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></div><div class="line">&#123;</div><div class="line">  redirect_file_to_strerr();</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">redirect_file_to_strerr</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">  FILE *f;</div><div class="line">  f = fopen(<span class="string">"redirect_file_to_strerr.txt"</span>, <span class="string">"w"</span>);</div><div class="line">  dup2(<span class="number">2</span>, fileno(f));</div><div class="line">  <span class="built_in">fprintf</span>(f, <span class="string">"%s\n"</span>, <span class="string">"hello world"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>假设 f的文件描述符为10;<br>dup2(2, fileno(f))将把流向f的数据重定向到strerr，所以写入f的内容不会被保存在文件中，而是显示在了屏幕上(sterr默认流向屏幕),redirect_out_to_file.txt文件内容为空。</p>
+<p>1 =&gt; screen<br>2 =&gt; screen<br><del>10 =&gt; redirect_file_to_strerr.txt”</del><br>10 =&gt; 2</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a><a class="article-category-link" href="/category/linux/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/c-lang/">c-lang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/linux/">linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-linux-pipeline" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1517,71 +1584,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/funny/">有趣</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-keyword-of-photograph-of-500px" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/keyword-of-photograph-of-500px/" class="article-date">
-      <time datetime="2014-08-27T15:03:13.000Z" itemprop="datePublished">2014-08-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/keyword-of-photograph-of-500px/">keyword of photograph of 500px</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>action activity attractive beauty blue caucasian cheerful child childhood clouds cute daughter emotion exterior face flying fun funny game girl happiness happy human joy joyful kid lifestyle looking lovely outdoor outside paying people person playground playtime sky smile spring young youth</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/photograph/">photograph</a></li></ul>
     </div>
 
       
