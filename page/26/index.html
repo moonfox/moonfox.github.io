@@ -252,6 +252,72 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-fedora-add-http" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/fedora-add-http/" class="article-date">
+      <time datetime="2010-06-15T15:16:41.000Z" itemprop="datePublished">2010-06-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/fedora-add-http/">fedora 添加httpd服务</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在编译安装httpd后，将其放到/etc/init.d/目录下，使其可以随开机自动启动，命令如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chkconfig --add httpd，执行此命令后报错，提示“service apache does not support chkconfig“，这是因为在httpd中没有相关的chkconfig信息，导致chkconfig不能识别，所以要在httpd中添chkconfig的描述信息。</div></pre></td></tr></table></figure></p>
+<p>方法如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">编辑httpd文件。加入chkconfig描述信息:</div><div class="line"><span class="comment"># description:http apache  service</span></div><div class="line"><span class="comment"># chkconfig: 2345 98 98</span></div><div class="line">以上信息均为注释信息，前面一定要有<span class="comment">#</span></div><div class="line">这时，再次执行chkconfig --add httpd，httpd被成功加入服务，可以随机自动启动了。</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/fedora/">fedora</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-starbucks-coffee-and-rubik" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1532,76 +1598,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-18ziduo-s2617" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/18ziduo-s2617/" class="article-date">
-      <time datetime="2010-04-27T15:05:42.000Z" itemprop="datePublished">2010-04-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/18ziduo-s2617/"> 十八子作S2617南极银锋七件套刀</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>从网上买了一套刀具，十八子作的，国内品牌，国外的刀具是好，不过就是太贵了，动辄上千的不适合我这样的~~</p>
-<p>套刀<br><img src="http://img.gagahappy.com/blog/2010/04/400553090-1_o.jpg" alt="400553090-1_o" title="400553090-1_o"></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/cate/">美食</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/18ziduo-s2617/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>

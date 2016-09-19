@@ -252,6 +252,72 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-segments-for-index-in-innodb" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/segments-for-index-in-innodb/" class="article-date">
+      <time datetime="2015-04-12T14:59:54.000Z" itemprop="datePublished">2015-04-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/segments-for-index-in-innodb/">segments for index in innodb</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Two segments are allocated for each index in InnoDB. One is for nonleaf nodes of the B-tree, the other is for the leaf nodes. Keeping the leaf nodes contiguous on disk enables better sequential I/O operations, because these leaf nodes contain the actual table data.</p>
+<p>每个索引拥有2个segment，一个用于非叶结点，另一个用于叶子结点</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-innodb-does-not-guarantee-that-it-uses-free-pages-sequentially" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1477,71 +1543,6 @@
       
           
         <p>mysql undo日志写入磁盘，以512B写入磁盘，这样就保证了写入的原子性，因为磁盘扇区的size为512B，所以写入要么成功，要么失败，不会发生只写入部分写入的情况，如只写入了100B，这种情况是绝对不会发生的。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-undo-segment-header-page-addr" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/undo-segment-header-page-addr/" class="article-date">
-      <time datetime="2015-03-19T13:42:01.000Z" itemprop="datePublished">2015-03-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/undo-segment-header-page-addr/">undo segment的头页面的址址</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>系统表空间的第五个页面，保存着undo segment的头页面的址址，这个是系统固定下来的。</p>
 
       
     </div>
