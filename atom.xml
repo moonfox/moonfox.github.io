@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.gagahappy.com/"/>
-  <updated>2016-09-19T14:59:00.000Z</updated>
+  <updated>2016-09-19T15:33:33.000Z</updated>
   <id>http://www.gagahappy.com/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo设置skip_render,指定不进行渲染的文件</title>
+    <link href="http://www.gagahappy.com/hexo-set-skip-render/"/>
+    <id>http://www.gagahappy.com/hexo-set-skip-render/</id>
+    <published>2016-09-19T15:22:32.000Z</published>
+    <updated>2016-09-19T15:33:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>其实是一个比较简单的问题，但搞了1小时，也是挺坑的，在<code>_config.yml</code>文件修改后，一定要执行一下<code>hexo clean</code>，不然skip_render可能不会生效。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 路径是相对source目录的</span></div><div class="line"><span class="comment"># 不对google7caf449f9ab0f94b.html与your-other-ignore-file进行渲染，保持文件原有内容</span></div><div class="line"></div><div class="line"><span class="symbol">skip_render:</span></div><div class="line">  - <span class="string">"google7caf449f9ab0f94b.html"</span></div><div class="line">  - <span class="string">"your-other-ignore-file"</span></div></pre></td></tr></table></figure>
+<p>对整个目录要跳过的同学，还请自行google</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;其实是一个比较简单的问题，但搞了1小时，也是挺坑的，在&lt;code&gt;_config.yml&lt;/code&gt;文件修改后，一定要执行一下&lt;code&gt;hexo clean&lt;/code&gt;，不然skip_render可能不会生效。&lt;/p&gt;
+&lt;figure class=&quot;highlight
+    
+    </summary>
+    
+      <category term="程序开发" scheme="http://www.gagahappy.com/category/development/"/>
+    
+    
+      <category term="hexo" scheme="http://www.gagahappy.com/tag/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>从你的全世界路过</title>
@@ -265,62 +291,6 @@
     
     
       <category term="mac" scheme="http://www.gagahappy.com/tag/mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>自定义yelee标签云路径</title>
-    <link href="http://www.gagahappy.com/fix-tags-category-for-google-search/"/>
-    <id>http://www.gagahappy.com/fix-tags-category-for-google-search/</id>
-    <published>2016-08-22T12:29:04.000Z</published>
-    <updated>2016-08-22T14:17:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在把博客迁移到Hexo后，发现不能被google收录，登录google webmaster后，发现是由于在迁移过程中产生了以下错误</p>
-<blockquote>
-<ul>
-<li>网址/tag/被迁移为tags/</li>
-<li>网址/categroy被迁移为categories</li>
-</ul>
-</blockquote>
-<p>错误原因是hexo默认的标签和分类的名称为 tags、categories，而wordpress设置为tag、category，由于hexo使用是yelee主题，还需要修改它的标签云路径</p>
-<p>要修改的文件</p>
-<blockquote>
-<ul>
-<li>hexo的配置文件_config.yml</li>
-<li>yelee的配置文件_config.yml及layout/_partial/page.ejs</li>
-</ul>
-</blockquote>
-<p>hexo配置设置<br><figure class="highlight ruby"><figcaption><span>/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 设置tag与category的目录</span></div><div class="line"><span class="symbol">tag_dir:</span> tag <span class="comment">#tags改为tag</span></div><div class="line"><span class="symbol">category_dir:</span> category</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>yelee主题设置<br><figure class="highlight"><figcaption><span>yelee/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 修改标签云路径</div><div class="line">menu:</div><div class="line">  主页: /</div><div class="line">  所有文章: /archives/</div><div class="line">  标签云: /tag/</div><div class="line">  关于我: /about/</div></pre></td></tr></table></figure></p>
-<figure class="highlight ruby"><figcaption><span>yelee/layout/_partial/page.ejs</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 让新的tag标签云生效</span></div><div class="line"><span class="comment"># 这里的tag对应yelee_config中标签云的tag路径</span></div><div class="line">&lt;% <span class="keyword">if</span> (page.path === <span class="string">"tag/index.html"</span>)&#123; %&gt;</div><div class="line">    &lt;!-- Tag Cloud Page --&gt;</div><div class="line">    &lt;<span class="string">%- partial('tag-</span>cloud-page<span class="string">') %&gt;</span></div><div class="line">&lt;% &#125; %&gt;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在把博客迁移到Hexo后，发现不能被google收录，登录google webmaster后，发现是由于在迁移过程中产生了以下错误&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;网址/tag/被迁移为tags/&lt;/li&gt;
-&lt;li&gt;网址/categroy被迁移为categories&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;错误原因是hexo默认的标签和分类的名称为 tags、categories，而wordpress设置为tag、category，由于hexo使用是yelee主题，还需要修改它的标签云路径&lt;/p&gt;
-&lt;p&gt;要修改的文件&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;hexo的配置文件_config.yml&lt;/li&gt;
-&lt;li&gt;yelee的配置文件_config.yml及layout/_partial/page.ejs&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;hexo配置设置&lt;br&gt;&lt;figure class=&quot;highlight ruby&quot;&gt;&lt;figcaption&gt;&lt;span&gt;/_config.yml&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 设置tag与category的目录&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;symbol&quot;&gt;tag_dir:&lt;/span&gt; tag &lt;span class=&quot;comment&quot;&gt;#tags改为tag&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;symbol&quot;&gt;category_dir:&lt;/span&gt; category&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="程序开发" scheme="http://www.gagahappy.com/category/development/"/>
-    
-    
-      <category term="hexo" scheme="http://www.gagahappy.com/tag/hexo/"/>
     
   </entry>
   
