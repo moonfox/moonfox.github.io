@@ -252,6 +252,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-use-gpg4win-to-check-signature-on-windows" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/use-gpg4win-to-check-signature-on-windows/" class="article-date">
+      <time datetime="2016-09-19T15:50:10.000Z" itemprop="datePublished">2016-09-19</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/use-gpg4win-to-check-signature-on-windows/">在windows下，使用Gpg4win对文件进行完整性校验</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>安装Gpg4win，之后切换到windows下的命令行窗口（开始菜单-&gt;运行-&gt;输入cmd然后回车）</p>
+<p>在命令行下进入要验证的文件目录，有如下文件</p>
+<blockquote>
+<p>shadowsockR-donet-4.0.exe.sig<br>shadowsockR-donet-4.0.exe</p>
+</blockquote>
+<p>首先获取RSA key ID：得到的RSA key ID为DA0F4B18，但同时得到提示<code>Can&#39;t check signature: No public key</code>无公钥，不能验证签名。<br>PS: 无奈啊，windows下的命令，只好截图了<br><img src="http://img.gagahappy.com/blog/2016/09/pgp_01.png" alt="图1" title="图1"></p>
+<p>添加公钥服务器：设置要获取的ID为ID为DA0F4B18，提示导入成功<br><img src="http://img.gagahappy.com/blog/2016/09/pgp_02.png" alt="图2" title="图2"></p>
+<p>进行校验：其实这个命令我们刚刚已经执行过了，可以看到Primary key fingerprint后面的签名了，这个签名应该和提供给你的签名是一致的，如果一致说明文件没有被改动过<br><img src="http://img.gagahappy.com/blog/2016/09/pgp_03.png" alt="图3" title="图3"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/software/">玩转软件</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/win7/">win7</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-hexo-set-skip-render" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1539,71 +1611,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-use-index-option-when-you-use-git-stash" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/use-index-option-when-you-use-git-stash/" class="article-date">
-      <time datetime="2015-05-19T13:58:01.000Z" itemprop="datePublished">2015-05-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/use-index-option-when-you-use-git-stash/">在git stash 中使用--index 恢复暂存区</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在git stash 中使用–index 恢复暂存区<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">git stash pop --index</div><div class="line"></div><div class="line">Your branch is up-to-date with <span class="string">'origin/develop'</span>.</div><div class="line">Changes to be committed: (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</div><div class="line"></div><div class="line">modified:   metaprogramming/blocks/block_args.rb</div><div class="line"></div><div class="line">Changes not staged <span class="keyword">for</span> commit:</div><div class="line">(use <span class="string">"git add &lt;file&gt;..."</span> to update what will be committed)</div><div class="line">(use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</div><div class="line"></div><div class="line">modified:   metaprogramming/blocks/block_args.rb</div><div class="line">modified:   metaprogramming/blocks/block_binding.rb</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/git/">git</a></li></ul>
     </div>
 
       

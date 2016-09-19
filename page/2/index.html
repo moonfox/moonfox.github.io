@@ -252,6 +252,71 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-use-index-option-when-you-use-git-stash" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/use-index-option-when-you-use-git-stash/" class="article-date">
+      <time datetime="2015-05-19T13:58:01.000Z" itemprop="datePublished">2015-05-19</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/use-index-option-when-you-use-git-stash/">在git stash 中使用--index 恢复暂存区</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在git stash 中使用–index 恢复暂存区<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">git stash pop --index</div><div class="line"></div><div class="line">Your branch is up-to-date with <span class="string">'origin/develop'</span>.</div><div class="line">Changes to be committed: (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</div><div class="line"></div><div class="line">modified:   metaprogramming/blocks/block_args.rb</div><div class="line"></div><div class="line">Changes not staged <span class="keyword">for</span> commit:</div><div class="line">(use <span class="string">"git add &lt;file&gt;..."</span> to update what will be committed)</div><div class="line">(use <span class="string">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="keyword">in</span> working directory)</div><div class="line"></div><div class="line">modified:   metaprogramming/blocks/block_args.rb</div><div class="line">modified:   metaprogramming/blocks/block_binding.rb</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-what-difference-between-type-and-p-option" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1534,78 +1599,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-redis-hyperloglog-command" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/redis-hyperloglog-command/" class="article-date">
-      <time datetime="2015-04-15T15:42:45.000Z" itemprop="datePublished">2015-04-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/redis-hyperloglog-command/">redis HyperLogLog 命令</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <ol>
-<li>返回储存在给定键的 HyperLogLog 的近似基数</li>
-<li>通过 HyperLogLog 数据结构， 用户可以使用少量固定大小的内存， 来储存集合中的唯一元素 （每个 HyperLogLog 只需使用 12k 字节内存，以及几个字节的内存来储存键本身）。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">redis&gt; PFADD  databases  &quot;Redis&quot;  &quot;MongoDB&quot;  &quot;MySQL&quot;</div><div class="line">(integer) 1</div><div class="line"></div><div class="line">redis&gt; PFCOUNT  databases</div><div class="line">(integer) 3</div><div class="line"></div><div class="line">redis&gt; PFADD  databases  &quot;Redis&quot;    # Redis 已经存在，不必对估计数量进行更新</div><div class="line">(integer) 0</div><div class="line"></div><div class="line">redis&gt; PFCOUNT  databases    # 元素估计数量没有变化</div><div class="line">(integer) 3</div><div class="line"></div><div class="line">redis&gt; PFADD  databases  &quot;PostgreSQL&quot;    # 添加一个不存在的元素</div><div class="line">(integer) 1</div><div class="line"></div><div class="line">redis&gt; PFCOUNT  databases    # 估计数量增一</div><div class="line">4</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>问题思考：<br>这个是如何实现的，不存储元素的话，如何知道这个元素已经存在了。</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/redis/">redis</a></li></ul>
     </div>
 
       

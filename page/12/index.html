@@ -252,6 +252,74 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-mysql-manager-of-pid-file-quit-without-updating-file" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/mysql-manager-of-pid-file-quit-without-updating-file/" class="article-date">
+      <time datetime="2011-08-01T04:34:10.000Z" itemprop="datePublished">2011-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mysql-manager-of-pid-file-quit-without-updating-file/">mysql不能启动 Manager of pid-file quit without updating file.</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>启动mysql失败，提示Manager of pid-file quit without updating file.错误。从网上直接搜索错误信息，感觉出错原因及解决方案都不适用于本机的情况。</p>
+<p>本着出错要查出其原因的原则，查看了mysql的出错日志（出错日志所在路径，请根据您自己机子的实际情况查找），发现错误信息：File ‘./mysql-bin.index’ not found (Errcode: 13)，查看数据库文件，mysql-bin.index确实存在。</p>
+<p>查看数据库文件的权限，发现全都变成了 drwx—— 2  1001 1001。突然想起之前重建过mysql用户，造成数据库文件的权限用户信息丢失。重新授权即可。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo chown -R  mysql var/</div><div class="line">sudo chgrp -R  mysql var/</div></pre></td></tr></table></figure></p>
+<p>再次启动mysql，成功！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-rspec-it-describe-same-and-run" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1499,72 +1567,6 @@
         <p class="article-more-link">
           <a href="/the-different-between-include-and-extend-in-ruby/#more">阅读全文 >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-install-openssh" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/install-openssh/" class="article-date">
-      <time datetime="2011-07-15T12:22:45.000Z" itemprop="datePublished">2011-07-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/install-openssh/">安装OpenSSH</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>安装OpenSSH<br>Ubuntu缺省没有安装SSH Server，使用以下命令安装：</p>
-<p>sudo apt-get install openssh-server openssh-client</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
-    </div>
-
       
       <div class="clearfix"></div>
     </div>

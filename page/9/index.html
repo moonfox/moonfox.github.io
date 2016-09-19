@@ -252,6 +252,76 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-resque-priorities-and-queue-lists" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/resque-priorities-and-queue-lists/" class="article-date">
+      <time datetime="2012-02-21T15:26:20.000Z" itemprop="datePublished">2012-02-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/resque-priorities-and-queue-lists/">resque Priorities and Queue Lists</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Priorities and Queue Lists</p>
+<p>Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”</p>
+<p>Let’s say we add a warm_cache queue in addition to our file_serve queue. We’d now start a worker like so:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ QUEUES=file_serve,warm_cache rake <span class="symbol">resque:</span>work</div></pre></td></tr></table></figure>
+<p>When the worker looks for new jobs, it will first check file_serve. If it finds a job, it’ll process it then check file_serve again. It will keep checking file_serve until no more jobs are available. At that point, it will check warm_cache. If it finds a job it’ll process it then check file_serve (repeating the whole process).</p>
+<p>Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/resque/">resque</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-ruby-regular-expression-in-sub-gsub" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1497,71 +1567,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-tar-cvzf-folder" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/tar-cvzf-folder/" class="article-date">
-      <time datetime="2011-12-09T13:22:14.000Z" itemprop="datePublished">2011-12-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/tar-cvzf-folder/">如何使用tar对整个文件夹打包?</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>如何使用tar对整个文件夹打包?<br>tar cvzf xxx.tar.gz xxx/</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
     </div>
 
       
