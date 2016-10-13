@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.gagahappy.com/"/>
-  <updated>2016-09-19T16:33:50.000Z</updated>
+  <updated>2016-10-13T15:53:46.000Z</updated>
   <id>http://www.gagahappy.com/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AWS的免费SQS服务</title>
+    <link href="http://www.gagahappy.com/aws-sqs-for-free/"/>
+    <id>http://www.gagahappy.com/aws-sqs-for-free/</id>
+    <published>2016-10-13T15:42:24.000Z</published>
+    <updated>2016-10-13T15:53:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<p> AWS的免费套餐里包含了SQS（不过期服务/产品），支持1,000,000个请求。也就是说，当超过1,000,000时，会收费的吧？限量是每个月吧？</p>
+<p>话说S3免费的2000个PUT请求确实少了点，如果使用SYNC同步3000个文件，是算一次PUT呢，还是3000个呢？从账单上看，应该是按3000个算的，前2000个没有收费，后面1000个开始计费了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; AWS的免费套餐里包含了SQS（不过期服务/产品），支持1,000,000个请求。也就是说，当超过1,000,000时，会收费的吧？限量是每个月吧？&lt;/p&gt;
+&lt;p&gt;话说S3免费的2000个PUT请求确实少了点，如果使用SYNC同步3000个文件，是算一次PUT呢，还是30
+    
+    </summary>
+    
+      <category term="程序开发" scheme="http://www.gagahappy.com/category/development/"/>
+    
+    
+      <category term="s3" scheme="http://www.gagahappy.com/tag/s3/"/>
+    
+  </entry>
   
   <entry>
     <title>在windows下，使用Gpg4win对文件进行完整性校验</title>
@@ -268,31 +293,6 @@
     
     
       <category term="s3" scheme="http://www.gagahappy.com/tag/s3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用ssh-add添加私钥到ssh-agent</title>
-    <link href="http://www.gagahappy.com/use-ssh-add-add-ssh-key/"/>
-    <id>http://www.gagahappy.com/use-ssh-add-add-ssh-key/</id>
-    <published>2016-08-24T13:47:09.000Z</published>
-    <updated>2016-08-24T14:11:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用ssh-add命令可以把私钥添加到ssh-agent，当登录远程主机中的程序(如:git push)请求对应的私钥时，可以由ssh-agent把本地私钥发送给远程主机(启动这个功能要在ssh配置中设置 <code>ForwardAgent yes</code>)</p>
-<p>添加私钥到ssh-agent</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ssh-add /your_ssh_key_path</div><div class="line"><span class="comment">#=&gt; Identity added: /Users/ga/.ssh/id</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> $? <span class="comment">#查看是否添加成功</span></div><div class="line"><span class="comment">#=&gt; 0 如果这里返回的不是0，则说明添加失败。如果你的key是加密的，在添加时还要输入密码</span></div><div class="line"></div><div class="line">ssh-add <span class="_">-l</span> <span class="comment">#查看已经添加到ssh-agent中的key</span></div><div class="line"><span class="comment">#=&gt; 2048 SHA256:9GlH51tb7Oxbxxxxxxxxxxxxxxxxxx</span></div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;使用ssh-add命令可以把私钥添加到ssh-agent，当登录远程主机中的程序(如:git push)请求对应的私钥时，可以由ssh-agent把本地私钥发送给远程主机(启动这个功能要在ssh配置中设置 &lt;code&gt;ForwardAgent yes&lt;/code&gt;)&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="我爱Linux" scheme="http://www.gagahappy.com/category/linux/"/>
-    
-    
-      <category term="linux" scheme="http://www.gagahappy.com/tag/linux/"/>
     
   </entry>
   

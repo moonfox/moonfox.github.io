@@ -252,6 +252,72 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-aws-sqs-for-free" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/aws-sqs-for-free/" class="article-date">
+      <time datetime="2016-10-13T15:42:24.000Z" itemprop="datePublished">2016-10-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/aws-sqs-for-free/">AWS的免费SQS服务</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p> AWS的免费套餐里包含了SQS（不过期服务/产品），支持1,000,000个请求。也就是说，当超过1,000,000时，会收费的吧？限量是每个月吧？</p>
+<p>话说S3免费的2000个PUT请求确实少了点，如果使用SYNC同步3000个文件，是算一次PUT呢，还是3000个呢？从账单上看，应该是按3000个算的，前2000个没有收费，后面1000个开始计费了。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/s3/">s3</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-use-gpg4win-to-check-signature-on-windows" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1547,70 +1613,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/postgresql/">postgresql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ruby-hash-sort-by-key-be-case-of-key-type" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/ruby-hash-sort-by-key-be-case-of-key-type/" class="article-date">
-      <time datetime="2015-05-20T15:22:43.000Z" itemprop="datePublished">2015-05-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/ruby-hash-sort-by-key-be-case-of-key-type/">ruby 哈希排序注意事项</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 如果key的数据类型不一致，会导致异常，其实这种情况已经不是第一次遇上了</span></div><div class="line"><span class="comment"># ArgumentError: comparison of Array with Array failed</span></div><div class="line">hash = &#123;<span class="symbol">c:</span> <span class="number">3</span>, <span class="string">"a"</span> =&gt; <span class="number">1</span>, <span class="symbol">b:</span><span class="number">2</span>&#125;</div><div class="line"></div><div class="line"><span class="comment"># 可以用hash#sort_by解决,把key统一成一致的数据类型</span></div><div class="line">hash.sort_by&#123;<span class="params">|k,v|</span>k.to_s&#125;</div><div class="line"><span class="comment"># 等效于</span></div><div class="line">hash.sort_by&#123;<span class="params">|h|</span>h[<span class="number">0</span>].to_s&#125;</div><div class="line"><span class="comment"># 最终的输出结果为</span></div><div class="line"><span class="comment">#=&gt; [["a", 1], [:b, 2], [:c, 3]]</span></div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
     </div>
 
       
