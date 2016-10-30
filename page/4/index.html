@@ -252,6 +252,135 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-when-run-of-block-in-mehtod" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/when-run-of-block-in-mehtod/" class="article-date">
+      <time datetime="2015-03-27T13:52:04.000Z" itemprop="datePublished">2015-03-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/when-run-of-block-in-mehtod/">测试块中的代码什么时候被执行</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、测试块中的代码什么时候被执行</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、只有在块被真正调用的时候才会被执行:对块调用方法yield/call</span></div><div class="line"><span class="comment"># 说明: 一般方法中都会用yield去调用块，使得传入方法的块中的代码马上执行,这难免会让人产生代码只要被放在do..end或&#123;&#125;</span></div><div class="line"><span class="comment"># 就会被马上执行的错觉。</span></div><div class="line"><span class="comment"># 下面的代码只有当去掉注释时，块中的代码才会被执行</span></div><div class="line"><span class="comment"># 2、调用yield后，就一定要传入块，否则就产生错误，除非在加入了block_given?判断</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span><span class="params">(&amp;block)</span></span></div><div class="line">    <span class="comment"># yield</span></div><div class="line">    <span class="comment"># block.call</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  my_method <span class="keyword">do</span></div><div class="line">    lastname = <span class="string">"Caroline"</span></div><div class="line">    puts lastname <span class="comment"># =&gt;这里不会有输出，除非去掉方法中的注释</span></div><div class="line">  <span class="keyword">end</span></div><div class="line">&#125;.call</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-thoughtful-ruby-block-and-variable" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/thoughtful-ruby-block-and-variable/" class="article-date">
+      <time datetime="2015-03-26T12:56:48.000Z" itemprop="datePublished">2015-03-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/thoughtful-ruby-block-and-variable/">ruby 块与局部变量绑定的思考</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>文章已经修改，之前的结论有误，现已经修改<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 重要结论:</span></div><div class="line"><span class="comment"># 1、块绑定局部变量的时间:在块被定义的时开始绑定的,绑定局部变量只是名子绑定,块内绑定的同名局部变量的值还可以在块外被修改</span></div><div class="line"><span class="comment">#（在块绑定局部变量后，如果块外部的同名局部变量改变了其值，则块中绑定的同名变量的值会被改变）</span></div><div class="line"><span class="comment"># 以下测试的局部绑定都证明了绑定是从块被定义时开始的</span></div><div class="line"><span class="comment"># 2、注意那些在块中初始化的变量，是否这些变量也出现在块定义外部的前后，不同位置的同名局部变量会对块内的变量产生不同的影响</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 测试方法中的局部变量firstname,lastname是否会影响到块中的被绑定的同名变量的值</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、块会绑定局部变量firstname,lastname,把它们以块的方式传到my_method方法</span></div><div class="line"><span class="comment"># 它们的值不会受到方法中同名变量的影响（闭包特性）</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">    firstname = <span class="string">"Maria"</span></div><div class="line">    lastname = <span class="string">"Sharapova"</span></div><div class="line">    <span class="keyword">yield</span> <span class="string">"Hi! I'm"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line">  firstname = <span class="string">"Max"</span></div><div class="line">  lastname = <span class="string">"Black"</span></div><div class="line">  myname = lambda &#123; <span class="params">|say|</span> puts <span class="string">"test1: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span>"</span> &#125;</div><div class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I'm Max Black</span></div><div class="line">&#125;.call</div><div class="line"></div><div class="line"><span class="comment"># &lt;!-- more --&gt;</span></div><div class="line"></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标2:</span></div><div class="line"><span class="comment"># 1、测试块可以绑定局部变量的范围</span></div><div class="line"><span class="comment"># 2、在块后面出现的局部变量是否会覆盖其块内已经绑定的同名局部变量的值（块中已经绑定的局部变量的值是否会被改变）</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、块会绑定在它定义时出现在它前面的局部变量firstname,lastname.</span></div><div class="line"><span class="comment"># 2、块中last变量的值为lastname="wang"，因为块在定义时绑定了lastname,块中同名的lastname对上下文中的其它成员</span></div><div class="line"><span class="comment"># 是可见的，所以对局部变量赋值lastname="Wang"，也就改变了块内lastname的值。它覆盖了前面lastname="Black"的值。</span></div><div class="line"><span class="comment"># 3、局部变量lastname＝"Green"出现在块被调用以后，块调用在赋值语句之前执行，对lastname="Green"的赋值不会影响到</span></div><div class="line"><span class="comment"># 块内部的同名变量lastname,此时块内部的lastname＝"wang"</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">    firstname = <span class="string">"Maria"</span></div><div class="line">    lastname = <span class="string">"Sharapova"</span></div><div class="line">    <span class="keyword">yield</span> <span class="string">"Hi! I'm"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line">  firstname = <span class="string">"Max"</span></div><div class="line">  lastname = <span class="string">"Black"</span></div><div class="line">  myname = lambda &#123; <span class="params">|say|</span> puts <span class="string">"test2: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span>"</span> &#125;</div><div class="line">  lastname = <span class="string">"Wang"</span></div><div class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I'm Max Wang</span></div><div class="line">  lastname = <span class="string">"Green"</span></div><div class="line">&#125;.call</div><div class="line"></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标3:</span></div><div class="line"><span class="comment"># 测试在块中定义的已经初始化的变量的值是否受外部的同名局部变量值的影响:(局部变量的定义在块定义的前面)</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、局部变量不能影响块中同名变量的值</span></div><div class="line"><span class="comment"># 2、局部变量的值会随块中同名变量的值在执行过程中的改变而改变,day_changed的值为被改变的值:Mon</span></div><div class="line"><span class="comment"># 3、发生1、2情况的原因是，在块被执行时，它会先看到块内的say="Mon"，而不再去看被绑定的局部变量say的值("Sun")</span></div><div class="line"><span class="comment"># 因为局部变量day已经被绑定到块，块中的day对其上下文可见，在块执行后，块中同名变量day的值会改变局部</span></div><div class="line"><span class="comment"># 变量day的值，此时局部变量day的值为"Mon"</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">    firstname = <span class="string">"Maria"</span></div><div class="line">    lastname = <span class="string">"Sharapova"</span></div><div class="line">    <span class="keyword">yield</span> <span class="string">"Hi! I'm"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line">  firstname = <span class="string">"Max"</span></div><div class="line">  lastname = <span class="string">"Black"</span></div><div class="line">  day = <span class="string">"Sun"</span></div><div class="line">  myname = lambda &#123; <span class="params">|say|</span> day = <span class="string">"Mon"</span>; puts <span class="string">"test3: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span> at <span class="subst">#&#123;day&#125;</span>"</span>&#125;</div><div class="line">  <span class="comment">#day = "Sun"</span></div><div class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I'm Max Black at Mon</span></div><div class="line">  day_changed = day</div><div class="line">  puts <span class="string">"test3: day:<span class="subst">#&#123;day_changed&#125;</span>"</span></div><div class="line">  <span class="comment"># day = "Wed"</span></div><div class="line">  <span class="comment"># my_method &amp;myname #＝&gt; Hi! I'm Max Black at Mon</span></div><div class="line">  <span class="comment"># day_changed = day</span></div><div class="line">  <span class="comment"># puts "test3: day:#&#123;day_changed&#125;"</span></div><div class="line">&#125;.call</div><div class="line"></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标4:</span></div><div class="line"><span class="comment"># 测试在块中定义的已经初始化的变量的值是否受外部的同名局部变量值的影响:(局部变量的定义在块定义的后面)</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、最终的值是块中变量的值，局部变量不能影响块中同名变量的值</span></div><div class="line"><span class="comment"># 2、局部变量的值会不随块中同名变量的值在执行过程中的改变而改变,day_changed的值:Sun</span></div><div class="line"><span class="comment"># 3、发生1、2情况的原因是：因为day局部变量的定义出现在块定义的后面，这就导致了块根本没有绑定day这个局部变量</span></div><div class="line"><span class="comment"># 块内的变量day是块内部附加的变量，此时块内部的day与块外部的day没有任何关系</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">    firstname = <span class="string">"Maria"</span></div><div class="line">    lastname = <span class="string">"Sharapova"</span></div><div class="line">    <span class="keyword">yield</span> <span class="string">"Hi! I'm"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line">  firstname = <span class="string">"Max"</span></div><div class="line">  lastname = <span class="string">"Black"</span></div><div class="line">  <span class="comment"># day = "Sun"</span></div><div class="line">  myname = lambda &#123; <span class="params">|say|</span> day = <span class="string">"Mon"</span>; puts <span class="string">"test4: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span> at <span class="subst">#&#123;day&#125;</span>"</span>&#125;</div><div class="line">  day = <span class="string">"Sun"</span></div><div class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I'm Max Black at Mon</span></div><div class="line">  day_changed = day</div><div class="line">  puts <span class="string">"test4: day:<span class="subst">#&#123;day_changed&#125;</span>"</span></div><div class="line">  <span class="comment"># day = "Wed"</span></div><div class="line">  <span class="comment"># my_method &amp;myname #＝&gt; Hi! I'm Max Black at Mon</span></div><div class="line">  <span class="comment"># day_changed = day</span></div><div class="line">  <span class="comment"># puts "test5: day:#&#123;day_changed&#125;" # =&gt; Web</span></div><div class="line">&#125;.call</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-redo-log-record-type-and-function" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1425,142 +1554,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-the-infimum-record-in-index-page" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/the-infimum-record-in-index-page/" class="article-date">
-      <time datetime="2015-03-05T15:11:08.000Z" itemprop="datePublished">2015-03-05</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/the-infimum-record-in-index-page/">The infimum record in index page</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>The infimum record represents a value lower than any possible key in the page. Its “next record” pointer points to the user record with the lowest key in the page. Infimum serves as a fixed entry point for sequentially scanning user records.</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-transaction-acid-rule" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/transaction-acid-rule/" class="article-date">
-      <time datetime="2015-03-04T03:06:33.000Z" itemprop="datePublished">2015-03-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/transaction-acid-rule/">ACID原则</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>ACID原则</p>
-<ul>
-<li>原子性(Atomicity): 要进行的操作一般为一系列的操作，这些操作要么都被完成，要么都不被完成。这些操作是不可被分割的。<br>如果事务是是执行一系列的操作，其中的一条sql执行失败，那么其它那些执行成功的sql要进行撤消操作。</li>
-<li>一致性(consistency):数据库从一种一致的状态变成下一种一致的状态。</li>
-<li>隔离性(isolation):这个事务中操作的对象，在这个事务提交前，对其它事物都不可见。</li>
-<li>持久性(durability):数据被写入磁盘</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
     </div>
 
       
