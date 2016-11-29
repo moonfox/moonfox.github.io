@@ -252,6 +252,135 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-extend-class-method-by-module" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/extend-class-method-by-module/" class="article-date">
+      <time datetime="2015-03-31T15:55:43.000Z" itemprop="datePublished">2015-03-31</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/extend-class-method-by-module/">使用include,让模块中定义的方法分别插入类方法与实例方法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、类扩展:使用include,让模块中定义的方法分别插入类方法与实例方法中</span></div><div class="line"><span class="comment"># 2、obj实例对象调用extend,则模块中定义的方法为？</span></div><div class="line"><span class="comment"># 3、在模块中定义的实例变量能否被包含它的类的实例对象看到</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、通过重定义横块中的self.included方法，并对参数(receiver),使用关键字extend/include,分别向包含它的类中插入了</span></div><div class="line"><span class="comment">#    类方法(定义在ClassMethods模块中的方法)和实例方法(定义在InstanceMethod模块中)</span></div><div class="line"><span class="comment"># 2、obj实例对象调用extend,则模块中定义的方法为这个obj的单例方法，可以通过把方法定义在module中，让实例对象调用extend</span></div><div class="line"><span class="comment">#    来方便快速的增加自身的单例方法</span></div><div class="line"><span class="comment"># 3、可以。在模块中定义的实例变量可以被包含它的类的实例对象看到,因为被include的模块相当于当前类的父类，当前对象的</span></div><div class="line"><span class="comment">#    实例变量对其所有实例方法可见</span></div><div class="line"><span class="comment"># 4、extend方法的实质就是把module中定义的方法插入到对象的单件类中</span></div><div class="line"><span class="comment"># 5、调用MyClass.instance_methods(false)可以发现，在它的实例方法中并不包含实例方法instance_method，而MyClass</span></div><div class="line"><span class="comment">#    的实例对象可以调用这个方法，这正说明了类中include的模块(被代理类封装)充当这个类的父类。也验证了结论4</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  <span class="class"><span class="keyword">module</span> <span class="title">M</span></span></div><div class="line">    <span class="class"><span class="keyword">module</span> <span class="title">ClassMethods</span></span></div><div class="line">      <span class="function"><span class="keyword">def</span> <span class="title">class_method</span></span></div><div class="line">        <span class="string">"i am a class method"</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">module</span> <span class="title">InstanceMethods</span></span></div><div class="line">      <span class="function"><span class="keyword">def</span> <span class="title">instance_method</span><span class="params">(from)</span></span></div><div class="line">        @instance_variate = <span class="string">"i am a instance variate in M"</span></div><div class="line">        <span class="string">"i am a instance method from:<span class="subst">#&#123;from&#125;</span>"</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">included</span><span class="params">(receiver)</span></span></div><div class="line">      receiver.extend         ClassMethods</div><div class="line">      receiver.send <span class="symbol">:include</span>, InstanceMethods</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="comment">#&lt;!-- more --&gt;</span></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">    <span class="keyword">include</span> M</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_instance_variate_from_module</span><span class="params">(from)</span></span></div><div class="line">      <span class="string">"<span class="subst">#&#123;@instance_variate&#125;</span> from: <span class="subst">#&#123;from&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  obj = Object.new</div><div class="line">  obj.extend M::InstanceMethods</div><div class="line">  my = MyClass.new</div><div class="line"></div><div class="line">  puts <span class="string">"================test1 OUTPUT================"</span></div><div class="line">  puts MyClass.class_method</div><div class="line">  puts my.instance_method(<span class="string">"MyClass.new obj"</span>)</div><div class="line">  puts my.get_instance_variate_from_module(<span class="string">"MyClass.new"</span>)</div><div class="line">  puts obj.instance_method(<span class="string">"Object.new"</span>)</div><div class="line">  puts obj.instance_eval(<span class="string">"@instance_variate"</span>)</div><div class="line">  puts <span class="string">"MyClass.instance_methods:"</span>+MyClass.instance_methods(<span class="literal">false</span>).to_s</div><div class="line">  puts <span class="string">"================test1 OUTPUT================"</span></div><div class="line"></div><div class="line">  <span class="comment"># ================test1 OUTPUT================</span></div><div class="line">  <span class="comment"># i am a class method</span></div><div class="line">  <span class="comment"># i am a instance method from:MyClass.new obj</span></div><div class="line">  <span class="comment"># i am a instance variate in M from: MyClass.new</span></div><div class="line">  <span class="comment"># i am a instance method from:Object.new</span></div><div class="line">  <span class="comment"># i am a instance variate in M</span></div><div class="line">  <span class="comment"># MyClass.instance_methods:[:get_instance_variate_from_module]</span></div><div class="line">  <span class="comment"># ================test1 OUTPUT================</span></div><div class="line"></div><div class="line">&#125;.call</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-define-method-in-kernel-module" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/define-method-in-kernel-module/" class="article-date">
+      <time datetime="2015-03-30T14:46:08.000Z" itemprop="datePublished">2015-03-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/define-method-in-kernel-module/">测试在kernel中定义的方法的作用对象</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、Kernel模块内定义实例方法，哪些对象可以使用</span></div><div class="line"><span class="comment"># 2、Kernel的单件方法哪些对象可以使用</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、Kernel模块内定义实例方法,ruby的所有对象都可以使用，因为Kernel会被Mixin入Object,其实例方法(用def定义的),可以</span></div><div class="line"><span class="comment">#    被所有ruby对象使用(MyClass/"string")</span></div><div class="line"><span class="comment"># 2、Kernel的单件方法只能被其自己使用,其它类和方法都不能使用(MyClass/MyClass.new)</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  <span class="class"><span class="keyword">module</span> <span class="title">Kernel</span></span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">im_singleton_method</span></span></div><div class="line">      <span class="string">"i'm a singleton method of Kernel define in Kernel"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">im_instance_method</span><span class="params">(from=<span class="string">"Kernel"</span>)</span></span></div><div class="line">      <span class="string">"i'm a instance method define in Kernel and call from <span class="subst">#&#123;from&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>;</span> <span class="keyword">end</span></div><div class="line">  puts Kernel.im_singleton_method</div><div class="line">  puts <span class="string">"Kernel.singleton_methods:"</span> + Kernel.singleton_methods(<span class="literal">false</span>).grep(<span class="regexp">/im_singleton_method/</span>).to_s</div><div class="line">  puts <span class="string">"Kernel.im_instance_method:"</span> + Kernel.instance_methods(<span class="literal">false</span>).grep(<span class="regexp">/im_instance_method/</span>).to_s</div><div class="line">  puts MyClass.new.im_instance_method(<span class="string">"obj"</span>)</div><div class="line">  puts MyClass.im_instance_method(<span class="string">"MyClass"</span>)</div><div class="line">  puts <span class="keyword">begin</span> MyClass.im_singleton_method <span class="keyword">rescue</span> <span class="string">"undefined method `im_singleton_method' for MyClass:Class"</span> <span class="keyword">end</span></div><div class="line">  puts <span class="keyword">begin</span> MyClass.new.im_singleton_method <span class="keyword">rescue</span> <span class="string">"undefined method `im_singleton_method' for #&lt;MyClass:0x007fbb22813640&gt;"</span> <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="comment"># ================test1 OUTPUT================</span></div><div class="line">  <span class="comment"># i'm a singleton method of Kernel define in Kernel</span></div><div class="line">  <span class="comment"># Kernel.singleton_methods:[:im_singleton_method]</span></div><div class="line">  <span class="comment"># Kernel.im_instance_method:[:im_instance_method]</span></div><div class="line">  <span class="comment"># i'm a instance method define in Kernel and call from obj</span></div><div class="line">  <span class="comment"># i'm a instance method define in Kernel and call from MyClass</span></div><div class="line">  <span class="comment"># undefined method `im_singleton_method' for MyClass:Class</span></div><div class="line">  <span class="comment"># undefined method `im_singleton_method' for #&lt;MyClass:0x007fbb22813640&gt;</span></div><div class="line">  <span class="comment"># ================test1 OUTPUT================</span></div><div class="line">&#125;.call</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-sublime-text-load-rvm-ruby-version" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1414,136 +1543,6 @@
           
         <p>辅助索引为何不直接保存主键地址，如果保存了主键的地址，就可以不很快的找到记录，而不用再进行二次查找。被这个问题困扰了一阵。答案来了</p>
 <p>辅助索引使用主键作为”指针” 而不是使用地址值作为指针的好处是，减少了当出现行移动或者数据页分裂时辅助索引的维护工作，使用主键值当作指针会让辅助索引占用更多的空间，换来的好处是InnoDB在移动行时无须更新辅助索引中的这个”指针”。也就是说行的位置（实现中通过16K的Page来定位，后面会涉及）会随着数据库里数据的修改而发生变化（前面的B+树节点分裂以及Page的分裂），使用聚簇索引就可以保证不管这个主键B+树的节点如何变化，辅助索引树都不受影响。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-innodb-page-heap-allocation" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/innodb-page-heap-allocation/" class="article-date">
-      <time datetime="2015-03-08T10:12:48.000Z" itemprop="datePublished">2015-03-08</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/innodb-page-heap-allocation/">innodb使用记录数据空间分配</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>innodb使用记录数据空间分配，根据文件结构，在插入新数据时，heap是由上而下分配空间的，即向记录尾部追加数据，而对slot分配，是由下向上分配的。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-innodb-page-header-page-n-heap" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/innodb-page-header-page-n-heap/" class="article-date">
-      <time datetime="2015-03-07T13:21:31.000Z" itemprop="datePublished">2015-03-07</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/innodb-page-header-page-n-heap/">innodb-page-header 结构</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>page-header 结构中<br>page-n-heap:表示页面中记录数，包括已经删除的记录，,page-n-heap的初始为x8002，那么<br>page-n-heap=x8031，那么页中的记录数为x8031-x8002=x2f，即47，页中有47条记录。</p>
 
       
     </div>

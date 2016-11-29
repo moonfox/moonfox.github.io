@@ -252,6 +252,141 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-immature-woman" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/immature-woman/" class="article-date">
+      <time datetime="2010-02-21T14:03:23.000Z" itemprop="datePublished">2010-02-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/immature-woman/">不成熟女人标志</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>不成熟女人标志：</p>
+<p>1.相信自己吸引力;<br>2.与上司恋爱;<br>3.和穷人结婚;<br>4.把秘密告诉丈夫;<br>5.把同事当朋友;<br>6.不尊重父母的劝告;<br>7.两次以上的人流;<br>8.不化妆去应聘;<br>9.不卸妆就睡觉;<br>10.不会伪高潮</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/youknow/">小知识</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ruby-rails-not-conn-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-rails-not-conn-mysql/" class="article-date">
+      <time datetime="2010-02-20T14:10:39.000Z" itemprop="datePublished">2010-02-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-rails-not-conn-mysql/">ruby与rails版本差异不能连接mysql</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>由于ruby与rails版本差异，可能会出现在使用低版本的rails时，出现不能连接mysql的情况。</p>
+</blockquote>
+<p>现象：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby/lib/ruby/gems/<span class="number">1.8</span>/gems/activerecord-<span class="number">1.15</span>.<span class="number">2</span>/lib/active_record/vendor/mysql.<span class="symbol">rb:</span><span class="number">566</span><span class="symbol">:in</span> <span class="symbol">initialize:</span> wrong number of arguments (<span class="number">1</span> <span class="keyword">for</span> <span class="number">0</span>) (ArgumentError)</div></pre></td></tr></table></figure></p>
+<p>解决方法<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">scramble41</span><span class="params">(password, message)</span></span></div><div class="line">    <span class="keyword">return</span> <span class="number">0x00</span>.chr <span class="keyword">if</span> password.<span class="literal">nil</span>? <span class="keyword">or</span> password.empty?</div><div class="line">    buf = [<span class="number">0x14</span>]</div><div class="line">    <span class="comment">#s1 = Digest::SHA1.new(password).digest</span></div><div class="line">    s1 = Digest::SHA1.new</div><div class="line">    s1 &lt;&lt; password</div><div class="line">    s1 = s1.digest</div><div class="line">    <span class="comment">#s2 = Digest::SHA1.new(s1).digest</span></div><div class="line">    s2 = Digest::SHA1.new &lt;&lt; s1</div><div class="line">    s2 = s2.digest</div><div class="line">    <span class="comment">#x = Digest::SHA1.new(message + s2).digest</span></div><div class="line">    x = Digest::SHA1.new &lt;&lt; (message + s2)</div><div class="line">    x = x.digest</div><div class="line">    (<span class="number">0</span>..s1.length - <span class="number">1</span>).each &#123;<span class="params">|i|</span> buf.push(s1[i] ^ x[i])&#125;</div><div class="line">    buf.pack(<span class="string">"C*"</span>)</div><div class="line">  <span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-memory-is-getting-worse-and-worse-in" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1417,140 +1552,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/win7/">win7</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-svn-change-ur" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/svn-change-ur/" class="article-date">
-      <time datetime="2010-01-26T09:56:56.000Z" itemprop="datePublished">2010-01-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/svn-change-ur/">svn更换仓库地址</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>因为IP地址的变更，造成项目不能更新与提交，解决方法如下</p>
-<ol>
-<li>从新的仓库地址重新检出项目文件（费时，费力）</li>
-<li>如果你使用了TortoiseSVN，在项目上点击右键，选择TortoiseSVN  –&gt; Relocate，输入新的仓库地址，又可以更新与提交文件了吧！</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/svn/">svn</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ubuntu-9-10-menu" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/ubuntu-9-10-menu/" class="article-date">
-      <time datetime="2010-01-25T14:07:48.000Z" itemprop="datePublished">2010-01-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/ubuntu-9-10-menu/">ubuntu 9.10 启动菜单</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>ubuntu升级到9.10后，原本在/boot/grub/menu.lst下的启动菜单文件已经找不到了，取而代之的是/boot/grub/grub.cfg。修改启动菜单顺序的时候需要把bengin与end之间的菜单内容统一移动到你想要放置的位置。并且在修改菜单前要注意备份以及为/boot/grub/grub.cfg文件添加可写属性。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
     </div>
 
       
