@@ -252,6 +252,90 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-fix-tags-category-for-google-search" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/fix-tags-category-for-google-search/" class="article-date">
+      <time datetime="2016-08-22T12:29:04.000Z" itemprop="datePublished">2016-08-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/fix-tags-category-for-google-search/">自定义yelee标签云路径</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>在把博客迁移到Hexo后，发现不能被google收录，登录google webmaster后，发现是由于在迁移过程中产生了以下错误</p>
+<blockquote>
+<ul>
+<li>网址/tag/被迁移为tags/</li>
+<li>网址/categroy被迁移为categories</li>
+</ul>
+</blockquote>
+<p>错误原因是hexo默认的标签和分类的名称为 tags、categories，而wordpress设置为tag、category，由于hexo使用是yelee主题，还需要修改它的标签云路径</p>
+<p>要修改的文件</p>
+<blockquote>
+<ul>
+<li>hexo的配置文件_config.yml</li>
+<li>yelee的配置文件_config.yml及layout/_partial/page.ejs</li>
+</ul>
+</blockquote>
+<p>hexo配置设置<br><figure class="highlight ruby"><figcaption><span>/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 设置tag与category的目录</span></div><div class="line"><span class="symbol">tag_dir:</span> tag <span class="comment">#tags改为tag</span></div><div class="line"><span class="symbol">category_dir:</span> category</div></pre></td></tr></table></figure></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/hexo/">hexo</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/fix-tags-category-for-google-search/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-migrate-blog-to-hexo" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1532,71 +1616,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/thin/">thin</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-rspec-exception-identity-or-equivalence" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/rspec-exception-identity-or-equivalence/" class="article-date">
-      <time datetime="2015-04-25T15:59:48.000Z" itemprop="datePublished">2015-04-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/rspec-exception-identity-or-equivalence/">rspec exception identity or equivalence</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><code>expect</code> does not support <code>==</code> matcher.<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">expect(actual).to eql(expected)   <span class="comment"># passes if actual.eql?(expected)</span></div><div class="line">expect(actual).to equal(expected) <span class="comment"># passes if actual.equal?(expected)</span></div><div class="line"></div><div class="line"><span class="comment"># <span class="doctag">NOTE:</span> `expect` does not support `==` matcher.</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rspec/">rspec</a></li></ul>
     </div>
 
       
