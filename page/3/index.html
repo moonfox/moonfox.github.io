@@ -252,6 +252,453 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-amazon-simple-storage-service" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/amazon-simple-storage-service/" class="article-date">
+      <time datetime="2016-08-26T09:43:17.000Z" itemprop="datePublished">2016-08-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/amazon-simple-storage-service/">使用aws s3 托管网站</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>出于速度的原因，把网站内容放到aws s3上了，之前放到github page上，发现速度不是很稳定，且有的时候出现不了能放问的情况</p>
+<p>简单介绍下s3托管静态网站的使用</p>
+<ol>
+<li>在s3上创建bucket，名子要和你的域名一样，如 www.youdomain.com</li>
+<li>设置这个bucket，启动静态托管</li>
+<li><p>登录你的域名后台管理平台，建立CNAME记录</p>
+<blockquote>
+<p>桶的根结点类似 www.youdomain.com.s3-website-ap-northeast-1.amazonaws.com</p>
+</blockquote>
+</li>
+<li><p>设置bucket的权限策略，添加新的策略，权限为公开，这样才能让别人访问你的网站内容</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"Version"</span>: <span class="string">"2012-10-17"</span>,</div><div class="line">  <span class="attr">"Statement"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"Sid"</span>: <span class="string">"PublicReadForGetBucketObjects"</span>,</div><div class="line">      <span class="attr">"Effect"</span>: <span class="string">"Allow"</span>,</div><div class="line">      <span class="attr">"Principal"</span>: <span class="string">"*"</span>,</div><div class="line">      <span class="attr">"Action"</span>: <span class="string">"s3:GetObject"</span>,</div><div class="line">      <span class="attr">"Resource"</span>: <span class="string">"arn:aws:s3:::www.youdomain.com/*"</span></div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>上传文件到s3</p>
+</li>
+</ol>
+<p>使用aws s3命令行工具进行上传</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">aws s3 sync . s3://www.youdomain.com --exclude <span class="string">".git/*"</span> --delete</div><div class="line"></div><div class="line"><span class="comment"># 参数delete的作用是：删除目标路径中，源路径不存的文件、文件夹</span></div></pre></td></tr></table></figure>
+<p>进入你的网站存放路径，输入以上命令，文件就会被同步到s3了，如果一切正常，你就可以通过你的域名进行访问了。当然，你也可以使用分配给你的桶路径进行访问</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/s3/">s3</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-use-ssh-add-add-ssh-key" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/use-ssh-add-add-ssh-key/" class="article-date">
+      <time datetime="2016-08-24T13:47:09.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/use-ssh-add-add-ssh-key/">使用ssh-add添加私钥到ssh-agent</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>使用ssh-add命令可以把私钥添加到ssh-agent，当登录远程主机中的程序(如:git push)请求对应的私钥时，可以由ssh-agent把本地私钥发送给远程主机(启动这个功能要在ssh配置中设置 <code>ForwardAgent yes</code>)</p>
+<p>添加私钥到ssh-agent</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ssh-add /your_ssh_key_path</div><div class="line"><span class="comment">#=&gt; Identity added: /Users/ga/.ssh/id</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> $? <span class="comment">#查看是否添加成功</span></div><div class="line"><span class="comment">#=&gt; 0 如果这里返回的不是0，则说明添加失败。如果你的key是加密的，在添加时还要输入密码</span></div><div class="line"></div><div class="line">ssh-add <span class="_">-l</span> <span class="comment">#查看已经添加到ssh-agent中的key</span></div><div class="line"><span class="comment">#=&gt; 2048 SHA256:9GlH51tb7Oxbxxxxxxxxxxxxxxxxxx</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/linux/">linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mac-usb-play-dead" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/mac-usb-play-dead/" class="article-date">
+      <time datetime="2016-08-23T12:23:09.000Z" itemprop="datePublished">2016-08-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mac-usb-play-dead/">Mac Air 冷启动USB设备不能识别</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>发现 Mac Air 右边(或左边)的USB接口在冷开机后，不能自动识别USB设备(极少的时候可以)，但接上<strong>苹果自己的USB延长线</strong>，后就可以了，非常奇怪。网上说这是苹果的硬件设计所导致的，是硬伤。</p>
+<p>目前发现的不能自动识别的设备有</p>
+<ul>
+<li>非苹果的键盘</li>
+<li>U盘</li>
+<li>移动硬盘</li>
+</ul>
+<p>PS: 这苹果的USB延长线官网卖140+一根，看来真是贵的有道理啊</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/software/">玩转软件</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mac/">mac</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-fix-tags-category-for-google-search" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/fix-tags-category-for-google-search/" class="article-date">
+      <time datetime="2016-08-22T12:29:04.000Z" itemprop="datePublished">2016-08-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/fix-tags-category-for-google-search/">自定义yelee标签云路径</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>在把博客迁移到Hexo后，发现不能被google收录，登录google webmaster后，发现是由于在迁移过程中产生了以下错误</p>
+<blockquote>
+<ul>
+<li>网址/tag/被迁移为tags/</li>
+<li>网址/categroy被迁移为categories</li>
+</ul>
+</blockquote>
+<p>错误原因是hexo默认的标签和分类的名称为 tags、categories，而wordpress设置为tag、category，由于hexo使用是yelee主题，还需要修改它的标签云路径</p>
+<p>要修改的文件</p>
+<blockquote>
+<ul>
+<li>hexo的配置文件_config.yml</li>
+<li>yelee的配置文件_config.yml及layout/_partial/page.ejs</li>
+</ul>
+</blockquote>
+<p>hexo配置设置<br><figure class="highlight ruby"><figcaption><span>/_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 设置tag与category的目录</span></div><div class="line"><span class="symbol">tag_dir:</span> tag <span class="comment">#tags改为tag</span></div><div class="line"><span class="symbol">category_dir:</span> category</div></pre></td></tr></table></figure></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/hexo/">hexo</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/fix-tags-category-for-google-search/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-migrate-blog-to-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/migrate-blog-to-hexo/" class="article-date">
+      <time datetime="2016-08-21T17:59:40.000Z" itemprop="datePublished">2016-08-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/migrate-blog-to-hexo/">博客又从aws迁移到Hexo</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>把博客又从aws迁移到Hexo了，真是折腾啊，迁移中处理了几个问题</p>
+<ol>
+<li>由于主题原因引起的单篇文章体积过大的问题</li>
+<li>highlight 代码块空白行不显示问题</li>
+<li>图片迁移到七牛</li>
+<li>对原有主题做了小小的修改。最最关键的是，不用为空间的事情担心了，因为已经全是不要钱的了</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/hexo/">hexo</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-chinese-women-volleybal-win" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/chinese-women-volleybal-win/" class="article-date">
+      <time datetime="2016-08-21T17:50:35.000Z" itemprop="datePublished">2016-08-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/chinese-women-volleybal-win/">中国女排奥运夺冠</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>中国女排奥运夺冠，12年后再次夺得奥运会金牌，中国女排你最牛，为中国女排的姑娘们感动到自豪、骄傲，爱你们，你们是最棒的，各个都是大美女</p>
+<p><img src="http://img.gagahappy.com/blog/2016/08/nvpai_05.jpg_b1" alt="女排夺冠"></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/information/">让资讯飞</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/people/">人物</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/chinese-women-volleybal-win/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-webapp-migrate-to-docker" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1203,419 +1650,9 @@
 
 
   
-    <article id="post-scope-of-instance-variable-in-rake-block" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/scope-of-instance-variable-in-rake-block/" class="article-date">
-      <time datetime="2015-04-30T05:20:05.000Z" itemprop="datePublished">2015-04-30</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/scope-of-instance-variable-in-rake-block/">rake 实例变量作用范围</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>rake 实例变量作用范围,可以看到在task的block中，当前self为main，所以@people可以在say方法中访问。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">desc <span class="string">"test instance variable"</span></div><div class="line">task <span class="symbol">:hello_world</span> =&gt; <span class="symbol">:environment</span> <span class="keyword">do</span></div><div class="line">  @people = <span class="string">"Jone"</span></div><div class="line">  puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say</span></span></div><div class="line">    puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></div><div class="line">    puts @people</div><div class="line">  <span class="keyword">end</span></div><div class="line">  say</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">#=&gt;main</span></div><div class="line"><span class="comment">#=&gt;main</span></div><div class="line"><span class="comment">#=&gt;Jone</span></div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-issues-of-install-memcached-reds-postgresql" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/issues-of-install-memcached-reds-postgresql/" class="article-date">
-      <time datetime="2015-04-29T15:53:38.000Z" itemprop="datePublished">2015-04-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/issues-of-install-memcached-reds-postgresql/">安装memcached、redis、postgresql问题总结</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>编译 <code>./configure --prefix=/srv/memcached/memcached145 --with-libevent=/usr/</code><br>需要安装 libevent ，安装时要确保知道安装路径</p>
-<p>启动memcached<br><code>memcached -d -u root -m 200 -P /tmp/memcached.pid</code></p>
-<p>安装redis<br><code>make PREFIX=/srv/redis/redis2815 install</code></p>
-<p>启动:daemonize yes: Make redis run as a daemon<br><code>redis-server /usr/etc/redis.conf</code></p>
-<p>安装postgresql，遇到问题:Can’t find the ‘libpq-fe.h header<br>解决方法:</p>
-<ol>
-<li><code>gem install pg -v &#39;0.18.1&#39; -- --with-pg-config=/path/config
---with-pg=/path/pg --with-pg-lib=/path/</code></li>
-<li><code>yum install postgresql-devel</code><br>最终用方法2解决<br><code>yum list installed | grep postgres</code></li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/postgresql/">postgresql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/redis/">redis</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-deploy-nginx-thin" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/deploy-nginx-thin/" class="article-date">
-      <time datetime="2015-04-28T05:46:16.000Z" itemprop="datePublished">2015-04-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/deploy-nginx-thin/">部署thin + nginx</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>部署thin + nginx<br>生成配置文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; <span class="_">-e</span> &lt;environment&gt;</div><div class="line"></div><div class="line">thin config -C /etc/thin/myapp.yml -c /var/rails/myapp --servers 5 --socket /tmp/thin.myapp.sock <span class="_">-e</span> development</div><div class="line"></div><div class="line">替换&lt;config-name&gt;为自己的应用名称，替换&lt;rails-app-root-path&gt;为应用的根目录，替换&lt;number-of-threads&gt;为启动的线程数，也就是启动多少个Thin服务，替换&lt;environment&gt;为运行环境。</div></pre></td></tr></table></figure></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">thin:</span></div><div class="line"><span class="symbol">environment:</span> development</div><div class="line"><span class="symbol">address:</span> <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span></div><div class="line"><span class="symbol">port:</span> <span class="number">3001</span></div><div class="line"><span class="symbol">timeout:</span> <span class="number">30</span></div><div class="line"><span class="symbol">log:</span> log/thin.log</div><div class="line"><span class="symbol">pid:</span> tmp/pids/thin.pid</div><div class="line"><span class="symbol">max_conns:</span> <span class="number">1024</span></div><div class="line"><span class="symbol">max_persistent_conns:</span> <span class="number">512</span></div><div class="line"><span class="symbol">wait:</span> <span class="number">30</span></div><div class="line"><span class="symbol">servers:</span> <span class="number">2</span></div><div class="line"><span class="symbol">daemonize:</span> <span class="literal">true</span></div><div class="line"><span class="comment"># require: []</span></div></pre></td></tr></table></figure>
-<p>启动: <code>thin start -C config/thin.yml</code><br>停止: <code>thin stop -C config/thin.yml</code></p>
-<p>nginx:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">     listen 3001;</div><div class="line">     charset utf-8;</div><div class="line">     root /var/rails/mysapp/public;</div><div class="line">     access_log logs/access.log;</div><div class="line">     error_log  logs/error.log;</div><div class="line"></div><div class="line">     location / &#123;</div><div class="line">         <span class="comment"># proxy_pass          http://rails_servers;</span></div><div class="line">         <span class="comment"># proxy_redirect      default;</span></div><div class="line">         proxy_redirect      <span class="literal">false</span>;</div><div class="line">         proxy_set_header    X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">         proxy_set_header    X-Real-IP <span class="variable">$remote_addr</span>;</div><div class="line">         proxy_set_header    Host <span class="variable">$http_host</span>;</div><div class="line">         proxy_next_upstream http_502 http_504 error timeout invalid_header;</div><div class="line">         proxy_pass <span class="literal">false</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (<span class="_">-f</span> <span class="variable">$request_filename</span>/index.html)</div><div class="line">        &#123;</div><div class="line">          rewrite (.*) <span class="variable">$1</span>/index.html <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (<span class="_">-f</span> <span class="variable">$request_filename</span>.html) &#123;</div><div class="line">          rewrite (.*) <span class="variable">$1</span>.html <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (!<span class="_">-f</span> <span class="variable">$request_filename</span>) &#123;</div><div class="line">          proxy_pass http://rails_servers;</div><div class="line">          <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> &#125;</div><div class="line"> upstream rails_servers&#123;</div><div class="line">        server 127.0.0.1:3002;</div><div class="line">        server 127.0.0.1:3003;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/thin/">thin</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-rspec-exception-identity-or-equivalence" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/rspec-exception-identity-or-equivalence/" class="article-date">
-      <time datetime="2015-04-25T15:59:48.000Z" itemprop="datePublished">2015-04-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/rspec-exception-identity-or-equivalence/">rspec exception identity or equivalence</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><code>expect</code> does not support <code>==</code> matcher.<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">expect(actual).to eql(expected)   <span class="comment"># passes if actual.eql?(expected)</span></div><div class="line">expect(actual).to equal(expected) <span class="comment"># passes if actual.equal?(expected)</span></div><div class="line"></div><div class="line"><span class="comment"># <span class="doctag">NOTE:</span> `expect` does not support `==` matcher.</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rspec/">rspec</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-delegation-be-enhance-by-active-support-in-module" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/delegation-be-enhance-by-active-support-in-module/" class="article-date">
-      <time datetime="2015-04-24T15:54:33.000Z" itemprop="datePublished">2015-04-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/delegation-be-enhance-by-active-support-in-module/">Delegation be enhance by active support in module</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>基本思想是:</p>
-<blockquote>
-<ul>
-<li>当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象</li>
-<li>Delegation is particularly useful with Active Record associations:</li>
-</ul>
-</blockquote>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span> &lt; ActiveRecord::Base</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hello</span></span></div><div class="line">    <span class="string">'hello'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">goodbye</span></span></div><div class="line">    <span class="string">'goodbye'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &lt; ActiveRecord::Base</span></div><div class="line">  belongs_to <span class="symbol">:greeter</span></div><div class="line">  delegate <span class="symbol">:hello</span>, <span class="symbol">to:</span> <span class="symbol">:greeter</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Foo.new.hello   <span class="comment"># =&gt; "hello"</span></div><div class="line">Foo.new.goodbye <span class="comment"># =&gt; NoMethodError: undefined method `goodbye' for #&lt;Foo:0x1af30c&gt;</span></div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-pg-connection-bad" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/pg-connection-bad/" class="article-date">
-      <time datetime="2015-04-23T07:45:18.000Z" itemprop="datePublished">2015-04-23</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/pg-connection-bad/">pg连接错误</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>pg连接错误</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">postgresql_adapter.rb:1216:<span class="keyword">in</span> `initialize<span class="string">': 致命错误:  用户 "pgsql" Ident 认证失败 (PG::ConnectionBad)</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>问题环境<br>在安装postgresql_server的机器上，部署rails应用，连接时host:127.0.0.1出现以上错误，改为ip地址后，正常访问</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/postgresql/">postgresql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </div>

@@ -252,6 +252,404 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ubuntu-10-04-speed-dns" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ubuntu-10-04-speed-dns/" class="article-date">
+      <time datetime="2010-10-17T15:22:29.000Z" itemprop="datePublished">2010-10-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ubuntu-10-04-speed-dns/">解决Ubuntu 10.04 DNS解析慢、上网速度慢</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>自从ubuntu升级到10.04后，上网速度感觉变慢了很多（ADSL），原因也众说分云，有说是firefox浏览器造成的，于是用chrome访问，速度依然很慢，可见不是由于浏览器造成的。</p>
+<p>网速慢， 是因为浏览器在对DNS解析上花费了大量的时间，所以我们要做的工作就是加速DNS的解析。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/ubuntu-10-04-speed-dns/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-feed-test-on-google-reader-display-related-post" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/feed-test-on-google-reader-display-related-post/" class="article-date">
+      <time datetime="2010-10-17T07:14:13.000Z" itemprop="datePublished">2010-10-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/feed-test-on-google-reader-display-related-post/">feed测试</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>feed测试，不知道相关文章能不能在google reader 上显示。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/software/">玩转软件</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/google/">google</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ubuntu-10-04-restart-network-manger-repair" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ubuntu-10-04-restart-network-manger-repair/" class="article-date">
+      <time datetime="2010-10-17T03:01:09.000Z" itemprop="datePublished">2010-10-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ubuntu-10-04-restart-network-manger-repair/">解决Ubuntu10.04“网络已禁用”的问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>本博在<a href="http://www.gagahappy.com/ubuntu-10-04-restart-network-manger/">ubuntu 10.04 重启网络服务</a>一文中介绍了怎样重启网络服务，后来在使用过程中发现此方法并不正确，后经网上搜索，更正如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo service network-manager stop</div><div class="line">sudo rm /var/lib/NetworkManager/NetworkManager.state</div><div class="line">sudo service network-manager start</div><div class="line">sudo gedit /etc/NetworkManager/nm-system-settings.conf</div><div class="line"><span class="comment"># 把false改成true</span></div><div class="line">sudo service network-manager restart</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ubuntu-10-04-restart-network-manger" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ubuntu-10-04-restart-network-manger/" class="article-date">
+      <time datetime="2010-10-16T12:27:26.000Z" itemprop="datePublished">2010-10-16</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ubuntu-10-04-restart-network-manger/">ubuntu 10.04 重启网络服务</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>ubuntu 10.04 重启网络服务<br>sudo restart network-manager</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-rails3-passwd-must-to-be-string-format" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails3-passwd-must-to-be-string-format/" class="article-date">
+      <time datetime="2010-10-15T15:28:34.000Z" itemprop="datePublished">2010-10-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails3-passwd-must-to-be-string-format/">rails3.0怪异的数据库密码配置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>发现rails3.0在配置数据库密码这里有一个要注意的地方，当你的密码完全是纯数字的时候，会引发can’t convert Fixnum into String 错误，这时如果你非要用数字做密码，请给数字密码加上引号。当密码是以字母开头的时候，不会出现这种现象，rails会顺利的启动。</p>
+<p><a href="http://img.gagahappy.com/blog/2010/10/sendpix1.jpg" title="rails3" target="_blank" rel="external"></a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-software-engineering-about-high-cohesion-and-loose-coupling" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/software-engineering-about-high-cohesion-and-loose-coupling/" class="article-date">
+      <time datetime="2010-10-14T12:51:28.000Z" itemprop="datePublished">2010-10-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/software-engineering-about-high-cohesion-and-loose-coupling/">软件工程--高内聚,低耦合</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ul>
+<li>高内聚,低耦合在软件工程里有,主要是说模块之间和模块内部之间的关系紧密程度</li>
+<li>高内聚就是提高模块内部的关联程度,低耦合当然就是降低模块之间的关联程度</li>
+<li>耦合性比较高的话，模块代码不易分离，是不好的编程模式</li>
+<li>内聚是越高越好，内聚个人认为是只是实现一个功能，不是很多的功能</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/software/">玩转软件</a>
+    </div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-macbuntu-make-ubuntu-to-mac-osx" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1212,416 +1610,9 @@
 
 
   
-    <article id="post-zhuangxiu-after-baojie-work" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-after-baojie-work/" class="article-date">
-      <time datetime="2010-09-30T12:31:36.000Z" itemprop="datePublished">2010-09-30</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-after-baojie-work/">装修笔记——第53天，保洁开荒后的细节工作</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>新房装修完成后，我们会做一次保洁工作，但这只是对新家清洁的开荒工作，仅仅是一个基础打扫，保洁做完后，还有许多细节的地方要我们自己打扫，如许多死角，墙砖上流下的水印。</p>
-<p>所以，为了我们的新家，我们还是应该再自己把所有的地方再仔细清洁一次。例如我家，踢脚线就没有擦干净，上面还留有腻子等粘在砖上的物体，需要用小铲子先将其铲除才能擦干净，光擦踢脚线这项工作就用了一个小时。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-baojie-new-home" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-baojie-new-home/" class="article-date">
-      <time datetime="2010-09-29T14:05:55.000Z" itemprop="datePublished">2010-09-29</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-baojie-new-home/">装修笔记——第52天，保洁</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>请来了保洁，把所有的活都包了是120元，贵了20元，保洁师傅从早上8:30一直干到下午1:30，总体效果还是不错的。保洁完成后，又在每个房间的正中央放了一盆水，房间也是需要喝水的。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-stop-wordpress-more-jump-link" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/stop-wordpress-more-jump-link/" class="article-date">
-      <time datetime="2010-09-27T12:02:13.000Z" itemprop="datePublished">2010-09-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/stop-wordpress-more-jump-link/">阻止wordpress more链接跳转到页面的中间</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>阻止wordpress more链接跳转到页面的中间</p>
-<p>默认情况下，点击more链接将会将读者带到单篇文章浏览的形式，并且会转到more标签指定的位置。这样，如果你使用默认的more标签功能，读者点击more链接之后将会被带入到文章的半中间。曾经一段时间，大家比较接受这样的做法，不过，现在越来越人觉得还是直接打开文章页面不跳转到其他位置比较好。</p>
-<p>总之一句话，如果你希望点击more标签后，打开进入的是文章页面的顶部，那么请在当前主题的functions.php文件，添加下面的代码:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> remove_more_jump_link(<span class="variable">$link</span>) &#123;</div><div class="line"><span class="variable">$offset</span>  = strpos(<span class="variable">$link</span>, <span class="string">'#more-'</span>);</div><div class="line"><span class="keyword">if</span>  (<span class="variable">$offset</span>) &#123;</div><div class="line"><span class="variable">$end</span>  = strpos(<span class="variable">$link</span>, <span class="string">'"'</span>,<span class="variable">$offset</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span>  (<span class="variable">$end</span>) &#123;</div><div class="line"><span class="variable">$link</span>  = substr_replace(<span class="variable">$link</span>, <span class="string">''</span>, <span class="variable">$offset</span>, <span class="variable">$end</span>-<span class="variable">$offset</span>);</div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span>  <span class="variable">$link</span>;</div><div class="line">&#125;</div><div class="line">add_filter(<span class="string">'the_content_more_link'</span>,  <span class="string">'remove_more_jump_link'</span>);</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>原文地址：<a href="http://www.wordpress.la/WordPress-more-tag-tips.html" target="_blank" rel="external">http://www.wordpress.la/WordPress-more-tag-tips.html</a></p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/software/">玩转软件</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/wordpress/">wordpress</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-install-shexiang-diban" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-install-shexiang-diban/" class="article-date">
-      <time datetime="2010-09-26T14:40:47.000Z" itemprop="datePublished">2010-09-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-install-shexiang-diban/">装修笔记——第49天，地板安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>感觉东方家园的安装送货还是比较准时的，约了10点钟安装地板，10点半左右到达，您可能会说晚了半个小时，但比起其他安装队伍来说，这已经是比较准时的了。</p>
-<p>安装地板前最好把地面用吸尘器吸一遍，彻底把地面上的灰尘打扫干净，这样在地板上行走的时候就不会把地面上的灰带上来，虽然在地板下面已经有一层膜对地板进行了保护，但效果不如把地面打扫干净的好。</p>
-<p>东方家园安装地板的收费情况如下：</p>
-<blockquote>
-<p>安装费用<br>地板：12元/平米<br>踢脚线：3元/平米<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/zhuangxiu-install-shexiang-diban/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-install-jieju-faenza" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-install-jieju-faenza/" class="article-date">
-      <time datetime="2010-09-25T15:05:56.000Z" itemprop="datePublished">2010-09-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-install-jieju-faenza/">装修笔记——第48天，洁具安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>买了法恩莎的洁具，经过一番讨价还价后，免去了安装时所需要的所有五金的钱，安装过程还算顺利，就是安装的师傅来得太晚了，约好的下午2点，结果都5点了才来，不过师傅的活很认真，一直安到7点钟，但是还是没有安完，直到第二天的上午才算是大功告成。</p>
-<p>在洁具安装好后要做的工作就是检查是否漏水，漏水有的时候在试水的时候是不会马上出现的，有的时候需要等上一会，才能发现漏水，特别是洗脸池的下水管，我当时检查时就没有查出来，结果过了没有三分钟，就发生了漏水，又让安装师傅给重新调整了下，问题算是解决了。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-install-ao-chubao" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-install-ao-chubao/" class="article-date">
-      <time datetime="2010-09-25T14:41:40.000Z" itemprop="datePublished">2010-09-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-install-ao-chubao/">装修笔记——第48天，厨宝安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>苏宁电器对于六环外的客户，采用第一天送货，第二天安装的方式，分两次进行，对于六环以内的客户，送货与安装则是同一天。</p>
-<p>先说一下厨宝的费用，一般情况下是160-180元，厨宝的安装是免费的，但配件却是收费的，而且价格不菲。如果你自备了配件，要是以后发生漏水后，他们是不负责维修的。</p>
-<p>综上所综，在安装厨宝前，最好把接水龙头和厨宝的这两个冷水口事先留好，这样在安装的时候可以节约一大笔费用，因为配件主要的费用全在安装两个冷水口所用的配件上面。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/20/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/22/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/20/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/22/">Next &raquo;</a>
     </nav>
   
 </div>

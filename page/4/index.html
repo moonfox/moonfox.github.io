@@ -252,6 +252,416 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-scope-of-instance-variable-in-rake-block" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/scope-of-instance-variable-in-rake-block/" class="article-date">
+      <time datetime="2015-04-30T05:20:05.000Z" itemprop="datePublished">2015-04-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/scope-of-instance-variable-in-rake-block/">rake 实例变量作用范围</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>rake 实例变量作用范围,可以看到在task的block中，当前self为main，所以@people可以在say方法中访问。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">desc <span class="string">"test instance variable"</span></div><div class="line">task <span class="symbol">:hello_world</span> =&gt; <span class="symbol">:environment</span> <span class="keyword">do</span></div><div class="line">  @people = <span class="string">"Jone"</span></div><div class="line">  puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say</span></span></div><div class="line">    puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></div><div class="line">    puts @people</div><div class="line">  <span class="keyword">end</span></div><div class="line">  say</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment">#=&gt;main</span></div><div class="line"><span class="comment">#=&gt;main</span></div><div class="line"><span class="comment">#=&gt;Jone</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-issues-of-install-memcached-reds-postgresql" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/issues-of-install-memcached-reds-postgresql/" class="article-date">
+      <time datetime="2015-04-29T15:53:38.000Z" itemprop="datePublished">2015-04-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/issues-of-install-memcached-reds-postgresql/">安装memcached、redis、postgresql问题总结</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>编译 <code>./configure --prefix=/srv/memcached/memcached145 --with-libevent=/usr/</code><br>需要安装 libevent ，安装时要确保知道安装路径</p>
+<p>启动memcached<br><code>memcached -d -u root -m 200 -P /tmp/memcached.pid</code></p>
+<p>安装redis<br><code>make PREFIX=/srv/redis/redis2815 install</code></p>
+<p>启动:daemonize yes: Make redis run as a daemon<br><code>redis-server /usr/etc/redis.conf</code></p>
+<p>安装postgresql，遇到问题:Can’t find the ‘libpq-fe.h header<br>解决方法:</p>
+<ol>
+<li><code>gem install pg -v &#39;0.18.1&#39; -- --with-pg-config=/path/config
+--with-pg=/path/pg --with-pg-lib=/path/</code></li>
+<li><code>yum install postgresql-devel</code><br>最终用方法2解决<br><code>yum list installed | grep postgres</code></li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/postgresql/">postgresql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/redis/">redis</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-deploy-nginx-thin" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/deploy-nginx-thin/" class="article-date">
+      <time datetime="2015-04-28T05:46:16.000Z" itemprop="datePublished">2015-04-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/deploy-nginx-thin/">部署thin + nginx</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>部署thin + nginx<br>生成配置文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; <span class="_">-e</span> &lt;environment&gt;</div><div class="line"></div><div class="line">thin config -C /etc/thin/myapp.yml -c /var/rails/myapp --servers 5 --socket /tmp/thin.myapp.sock <span class="_">-e</span> development</div><div class="line"></div><div class="line">替换&lt;config-name&gt;为自己的应用名称，替换&lt;rails-app-root-path&gt;为应用的根目录，替换&lt;number-of-threads&gt;为启动的线程数，也就是启动多少个Thin服务，替换&lt;environment&gt;为运行环境。</div></pre></td></tr></table></figure></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">thin:</span></div><div class="line"><span class="symbol">environment:</span> development</div><div class="line"><span class="symbol">address:</span> <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span></div><div class="line"><span class="symbol">port:</span> <span class="number">3001</span></div><div class="line"><span class="symbol">timeout:</span> <span class="number">30</span></div><div class="line"><span class="symbol">log:</span> log/thin.log</div><div class="line"><span class="symbol">pid:</span> tmp/pids/thin.pid</div><div class="line"><span class="symbol">max_conns:</span> <span class="number">1024</span></div><div class="line"><span class="symbol">max_persistent_conns:</span> <span class="number">512</span></div><div class="line"><span class="symbol">wait:</span> <span class="number">30</span></div><div class="line"><span class="symbol">servers:</span> <span class="number">2</span></div><div class="line"><span class="symbol">daemonize:</span> <span class="literal">true</span></div><div class="line"><span class="comment"># require: []</span></div></pre></td></tr></table></figure>
+<p>启动: <code>thin start -C config/thin.yml</code><br>停止: <code>thin stop -C config/thin.yml</code></p>
+<p>nginx:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">     listen 3001;</div><div class="line">     charset utf-8;</div><div class="line">     root /var/rails/mysapp/public;</div><div class="line">     access_log logs/access.log;</div><div class="line">     error_log  logs/error.log;</div><div class="line"></div><div class="line">     location / &#123;</div><div class="line">         <span class="comment"># proxy_pass          http://rails_servers;</span></div><div class="line">         <span class="comment"># proxy_redirect      default;</span></div><div class="line">         proxy_redirect      <span class="literal">false</span>;</div><div class="line">         proxy_set_header    X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">         proxy_set_header    X-Real-IP <span class="variable">$remote_addr</span>;</div><div class="line">         proxy_set_header    Host <span class="variable">$http_host</span>;</div><div class="line">         proxy_next_upstream http_502 http_504 error timeout invalid_header;</div><div class="line">         proxy_pass <span class="literal">false</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (<span class="_">-f</span> <span class="variable">$request_filename</span>/index.html)</div><div class="line">        &#123;</div><div class="line">          rewrite (.*) <span class="variable">$1</span>/index.html <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (<span class="_">-f</span> <span class="variable">$request_filename</span>.html) &#123;</div><div class="line">          rewrite (.*) <span class="variable">$1</span>.html <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (!<span class="_">-f</span> <span class="variable">$request_filename</span>) &#123;</div><div class="line">          proxy_pass http://rails_servers;</div><div class="line">          <span class="built_in">break</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"> &#125;</div><div class="line"> upstream rails_servers&#123;</div><div class="line">        server 127.0.0.1:3002;</div><div class="line">        server 127.0.0.1:3003;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/thin/">thin</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-rspec-exception-identity-or-equivalence" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rspec-exception-identity-or-equivalence/" class="article-date">
+      <time datetime="2015-04-25T15:59:48.000Z" itemprop="datePublished">2015-04-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rspec-exception-identity-or-equivalence/">rspec exception identity or equivalence</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><code>expect</code> does not support <code>==</code> matcher.<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">expect(actual).to eql(expected)   <span class="comment"># passes if actual.eql?(expected)</span></div><div class="line">expect(actual).to equal(expected) <span class="comment"># passes if actual.equal?(expected)</span></div><div class="line"></div><div class="line"><span class="comment"># <span class="doctag">NOTE:</span> `expect` does not support `==` matcher.</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rspec/">rspec</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-delegation-be-enhance-by-active-support-in-module" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/delegation-be-enhance-by-active-support-in-module/" class="article-date">
+      <time datetime="2015-04-24T15:54:33.000Z" itemprop="datePublished">2015-04-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/delegation-be-enhance-by-active-support-in-module/">Delegation be enhance by active support in module</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>基本思想是:</p>
+<blockquote>
+<ul>
+<li>当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象</li>
+<li>Delegation is particularly useful with Active Record associations:</li>
+</ul>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span> &lt; ActiveRecord::Base</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hello</span></span></div><div class="line">    <span class="string">'hello'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">goodbye</span></span></div><div class="line">    <span class="string">'goodbye'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &lt; ActiveRecord::Base</span></div><div class="line">  belongs_to <span class="symbol">:greeter</span></div><div class="line">  delegate <span class="symbol">:hello</span>, <span class="symbol">to:</span> <span class="symbol">:greeter</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Foo.new.hello   <span class="comment"># =&gt; "hello"</span></div><div class="line">Foo.new.goodbye <span class="comment"># =&gt; NoMethodError: undefined method `goodbye' for #&lt;Foo:0x1af30c&gt;</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
+    </div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-pg-connection-bad" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/pg-connection-bad/" class="article-date">
+      <time datetime="2015-04-23T07:45:18.000Z" itemprop="datePublished">2015-04-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/pg-connection-bad/">pg连接错误</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>pg连接错误</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">postgresql_adapter.rb:1216:<span class="keyword">in</span> `initialize<span class="string">': 致命错误:  用户 "pgsql" Ident 认证失败 (PG::ConnectionBad)</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>问题环境<br>在安装postgresql_server的机器上，部署rails应用，连接时host:127.0.0.1出现以上错误，改为ip地址后，正常访问</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/postgresql/">postgresql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-ruby-hash-sort" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1196,402 +1606,9 @@
 
 
   
-    <article id="post-which-day-is-easter-in-2015" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/which-day-is-easter-in-2015/" class="article-date">
-      <time datetime="2015-04-06T04:23:06.000Z" itemprop="datePublished">2015-04-06</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/which-day-is-easter-in-2015/">复活节的由来,2015年复活节是哪一天几月几日</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>复活节（主复活日）是一个西方的重要节日，在每年春分月圆之后第一个星期日。基督徒认为，复活节象征着重生与希望，为纪念耶稣基督于公元30到33年之间被钉死在十字架之后第三天复活的日子。天主教/新教和东正教复活节的计算略有差异，根据罗马教会传统，在春分(3月21日)当日见到满月或过了春分见到第一个满月后，遇到的第一个星期日即为复活节。东正教会则规定，如果满月恰好出现在这第一个星期日，则复活节再推迟一周。因此，复活节的日期大致在公历3月22日至4月25日之间。</p>
-<p>　　复活节那一天，是经由三个历法（分别是西历、中国阴历、星期）合并出来的，怪不得它会如此飘忽不定了。有些年份三个教派的复活节是重合的，而有些年份又不同，进而它们耶稣受难日的日期也有所差异，2015年的天主教、新教的复活节是2015年4月5日。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/youknow/">小知识</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/which-day-is-easter-in-2015/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-how-to-use-eval-args-filename-and-lineno" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/how-to-use-eval-args-filename-and-lineno/" class="article-date">
-      <time datetime="2015-04-05T15:22:09.000Z" itemprop="datePublished">2015-04-05</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/how-to-use-eval-args-filename-and-lineno/">测试eval的filename,与lineno参数使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、测试eval的filename,与lineno参数使用</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、可以自定义程序出错时的出错信息（出错的文件名，程序在哪行执行的,方便出错日志的查询,错误的定位)</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">    string = <span class="string">"1/0"</span></div><div class="line">    <span class="comment"># eval(string, nil, __FILE__, __LINE__)</span></div><div class="line">    eval(string, <span class="literal">nil</span>, <span class="string">"custom_file.rb"</span>, <span class="number">60</span>)</div><div class="line">    <span class="comment"># eval(string)</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">MyClass.new.my_method <span class="comment"># custom_file.rb:60:in `/': divided by 0 (ZeroDivisionError)</span></div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-load-secondary-args-true-or-false" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/load-secondary-args-true-or-false/" class="article-date">
-      <time datetime="2015-04-04T14:06:30.000Z" itemprop="datePublished">2015-04-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/load-secondary-args-true-or-false/">load文件参数为false或true时,对变量,实例变量,常量的影响</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、load文件参数为false时，对变量，实例变量,常量的影响</span></div><div class="line"><span class="comment"># 2、load文件参数为false时，类是否被重新打开</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、变量不会被加载的文件影响，实例变量和常量会被影响。因为被加载文件中的变量会在文件加载完成后，掉出加载文件的作用域</span></div><div class="line"><span class="comment">#    而实例变量和常量不会掉出作用域</span></div><div class="line"><span class="comment"># 2、类可以被重新打开，因为被加载文件中类也没有掉出作用域（因为类也是常量）</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  var  = <span class="number">2</span></div><div class="line">  @var = <span class="number">2</span></div><div class="line">  VAR  = <span class="number">2</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">      <span class="string">"i'm in load_2 file"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  puts <span class="string">"==========Test1:OUTPUT=========="</span></div><div class="line"></div><div class="line">  load File.expand_path(<span class="string">'load_file.rb'</span>, File.dirname(__FILE_<span class="number">_</span>))</div><div class="line"></div><div class="line">  puts <span class="string">'==========load_2.rb======='</span></div><div class="line">  puts <span class="string">"var :<span class="subst">#&#123;var &#125;</span>"</span></div><div class="line">  puts <span class="string">"@var:<span class="subst">#&#123;@var&#125;</span>"</span></div><div class="line">  puts <span class="string">"VAR :<span class="subst">#&#123;VAR &#125;</span>"</span></div><div class="line">  puts <span class="string">"my_method:<span class="subst">#&#123;MyClass.new.my_method&#125;</span>"</span></div><div class="line">  puts <span class="string">'==========load_2.rb======='</span></div><div class="line">  puts <span class="string">"==========Test1:OUTPUT=========="</span></div><div class="line">  <span class="comment"># &lt;!-- more --&gt;</span></div><div class="line">  <span class="comment"># ==========Test1:OUTPUT==========</span></div><div class="line">  <span class="comment"># ==========load_1.rb=======</span></div><div class="line">  <span class="comment"># var :1</span></div><div class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></div><div class="line">  <span class="comment"># VAR :1</span></div><div class="line">  <span class="comment"># my_method:i'm in load_1 file</span></div><div class="line">  <span class="comment"># ==========load_1.rb=======</span></div><div class="line"></div><div class="line">  <span class="comment"># ==========load_2.rb=======</span></div><div class="line">  <span class="comment"># var :2</span></div><div class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></div><div class="line">  <span class="comment"># VAR :1</span></div><div class="line">  <span class="comment"># my_method:i'm in load_1 file</span></div><div class="line">  <span class="comment"># ==========load_2.rb=======</span></div><div class="line">  <span class="comment"># ==========Test1:OUTPUT==========</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标2:</span></div><div class="line"><span class="comment"># 1、load文件参数为true时，对变量，实例变量,常量的影响</span></div><div class="line"><span class="comment"># 2、load文件参数为true时，类是否被重新打开</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、变量不会被加载的文件影响，实例变量和常量也不会被影响</span></div><div class="line"><span class="comment"># 2、类不会被影响</span></div><div class="line"><span class="comment"># 因为ruby会在load文件时为其创建匿名模块，让其文件中的实例变量、常量、类落在其自身范围内，且在load完成后，销毁这个</span></div><div class="line"><span class="comment"># 匿名模块（即加载文件中的所有内容），加入true参数的这种做法无法让加载它的文件使用其文件中代码，仅仅是起到了运行load</span></div><div class="line"><span class="comment"># 文件的代码的作用</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  var  = <span class="number">2</span></div><div class="line">  @var = <span class="number">2</span></div><div class="line">  VAR  = <span class="number">2</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">      <span class="string">"i'm in load_2 file"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  puts <span class="string">"==========Test2:OUTPUT=========="</span></div><div class="line"></div><div class="line">  load File.expand_path(<span class="string">'load_file.rb'</span>, File.dirname(__FILE_<span class="number">_</span>)), <span class="literal">true</span></div><div class="line"></div><div class="line">  puts <span class="string">'==========load_2.rb======='</span></div><div class="line">  puts <span class="string">"var :<span class="subst">#&#123;var &#125;</span>"</span></div><div class="line">  puts <span class="string">"@var:<span class="subst">#&#123;@var&#125;</span>"</span></div><div class="line">  puts <span class="string">"VAR :<span class="subst">#&#123;VAR &#125;</span>"</span></div><div class="line">  puts <span class="string">"my_method:<span class="subst">#&#123;MyClass.new.my_method&#125;</span>"</span></div><div class="line">  puts <span class="string">'==========load_2.rb======='</span></div><div class="line">  puts <span class="string">"==========Test2:OUTPUT=========="</span></div><div class="line"></div><div class="line">  <span class="comment"># ==========Test2:OUTPUT==========</span></div><div class="line">  <span class="comment"># ==========load_1.rb=======</span></div><div class="line">  <span class="comment"># var :1</span></div><div class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></div><div class="line">  <span class="comment"># VAR :1</span></div><div class="line">  <span class="comment"># my_method:i'm in load_1 file</span></div><div class="line">  <span class="comment"># ==========load_1.rb=======</span></div><div class="line"></div><div class="line">  <span class="comment"># ==========load_2.rb=======</span></div><div class="line">  <span class="comment"># var :2</span></div><div class="line">  <span class="comment"># <span class="doctag">@var</span>:2</span></div><div class="line">  <span class="comment"># VAR :2</span></div><div class="line">  <span class="comment"># my_method:i'm in load_2 file</span></div><div class="line">  <span class="comment"># ==========load_2.rb=======</span></div><div class="line">  <span class="comment"># ==========Test2:OUTPUT==========</span></div><div class="line">&#125;.call</div></pre></td></tr></table></figure>
-<p>load_file.rb<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># module Load1</span></div><div class="line"></div><div class="line">var = <span class="number">1</span></div><div class="line">@var = <span class="number">1</span></div><div class="line">VAR = <span class="number">1</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">    <span class="string">"i'm in load_1 file"</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">puts <span class="string">'==========load_1.rb======='</span></div><div class="line">puts <span class="string">"var :<span class="subst">#&#123;var &#125;</span>"</span></div><div class="line">puts <span class="string">"@var:<span class="subst">#&#123;@var&#125;</span>"</span></div><div class="line">puts <span class="string">"VAR :<span class="subst">#&#123;VAR &#125;</span>"</span></div><div class="line">puts <span class="string">"my_method:<span class="subst">#&#123;MyClass.new.my_method&#125;</span>"</span></div><div class="line">puts <span class="string">'==========load_1.rb======='</span></div><div class="line">puts</div><div class="line"></div><div class="line"><span class="comment"># end</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-instance-variate-in-toplevel" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/instance-variate-in-toplevel/" class="article-date">
-      <time datetime="2015-04-03T13:02:35.000Z" itemprop="datePublished">2015-04-03</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/instance-variate-in-toplevel/">测试顶级上下文中定义的实例变量的作用域</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、测试顶级上下文中定义的实例变量的作用域</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、顶级上下文中定义的实例变量只能被main对象访问，因为实例变量暴露在toplevel的context中，self为main</span></div><div class="line"><span class="comment">#    相当于运行main.instance_eval&#123;<span class="doctag">@toplevel</span>_variate="toplevel variate"&#125;</span></div><div class="line"><span class="comment"># 2、私有方法不属于instance_methods的集合，它属于private_instance_methods</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"></div><div class="line">@toplevel_variate = <span class="string">"toplevel variate"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></div><div class="line">  <span class="string">"@toplevel_variate in my_method which define in toplevel:<span class="subst">#&#123;@toplevel_variate&#125;</span>"</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Object.class_eval <span class="keyword">do</span> <span class="params">|variable|</span></div><div class="line">  puts <span class="string">"Object can acccess @toplevel_variate:<span class="subst">#&#123;@var&#125;</span>"</span> <span class="comment"># nil</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="keyword">self</span>.instance_eval <span class="keyword">do</span></div><div class="line">  puts <span class="string">"@toplevel_variate in self object:<span class="subst">#&#123;@toplevel_variate&#125;</span>"</span> <span class="comment"># toplevel variate</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">puts my_method</div><div class="line">puts <span class="string">"Object.private_instance_methods:"</span> + Object.private_instance_methods(<span class="literal">false</span>).grep(<span class="symbol">:my_method</span>).to_s <span class="comment"># :my_method</span></div><div class="line">puts <span class="string">"Object.instance_methods:"</span> + Object.instance_methods(<span class="literal">false</span>).grep(<span class="symbol">:my_method</span>).to_s <span class="comment">#nil</span></div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-extend-class-method-by-module" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/extend-class-method-by-module/" class="article-date">
-      <time datetime="2015-03-31T15:55:43.000Z" itemprop="datePublished">2015-03-31</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/extend-class-method-by-module/">使用include,让模块中定义的方法分别插入类方法与实例方法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、类扩展:使用include,让模块中定义的方法分别插入类方法与实例方法中</span></div><div class="line"><span class="comment"># 2、obj实例对象调用extend,则模块中定义的方法为？</span></div><div class="line"><span class="comment"># 3、在模块中定义的实例变量能否被包含它的类的实例对象看到</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、通过重定义横块中的self.included方法，并对参数(receiver),使用关键字extend/include,分别向包含它的类中插入了</span></div><div class="line"><span class="comment">#    类方法(定义在ClassMethods模块中的方法)和实例方法(定义在InstanceMethod模块中)</span></div><div class="line"><span class="comment"># 2、obj实例对象调用extend,则模块中定义的方法为这个obj的单例方法，可以通过把方法定义在module中，让实例对象调用extend</span></div><div class="line"><span class="comment">#    来方便快速的增加自身的单例方法</span></div><div class="line"><span class="comment"># 3、可以。在模块中定义的实例变量可以被包含它的类的实例对象看到,因为被include的模块相当于当前类的父类，当前对象的</span></div><div class="line"><span class="comment">#    实例变量对其所有实例方法可见</span></div><div class="line"><span class="comment"># 4、extend方法的实质就是把module中定义的方法插入到对象的单件类中</span></div><div class="line"><span class="comment"># 5、调用MyClass.instance_methods(false)可以发现，在它的实例方法中并不包含实例方法instance_method，而MyClass</span></div><div class="line"><span class="comment">#    的实例对象可以调用这个方法，这正说明了类中include的模块(被代理类封装)充当这个类的父类。也验证了结论4</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  <span class="class"><span class="keyword">module</span> <span class="title">M</span></span></div><div class="line">    <span class="class"><span class="keyword">module</span> <span class="title">ClassMethods</span></span></div><div class="line">      <span class="function"><span class="keyword">def</span> <span class="title">class_method</span></span></div><div class="line">        <span class="string">"i am a class method"</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">module</span> <span class="title">InstanceMethods</span></span></div><div class="line">      <span class="function"><span class="keyword">def</span> <span class="title">instance_method</span><span class="params">(from)</span></span></div><div class="line">        @instance_variate = <span class="string">"i am a instance variate in M"</span></div><div class="line">        <span class="string">"i am a instance method from:<span class="subst">#&#123;from&#125;</span>"</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">included</span><span class="params">(receiver)</span></span></div><div class="line">      receiver.extend         ClassMethods</div><div class="line">      receiver.send <span class="symbol">:include</span>, InstanceMethods</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="comment">#&lt;!-- more --&gt;</span></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></div><div class="line">    <span class="keyword">include</span> M</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_instance_variate_from_module</span><span class="params">(from)</span></span></div><div class="line">      <span class="string">"<span class="subst">#&#123;@instance_variate&#125;</span> from: <span class="subst">#&#123;from&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  obj = Object.new</div><div class="line">  obj.extend M::InstanceMethods</div><div class="line">  my = MyClass.new</div><div class="line"></div><div class="line">  puts <span class="string">"================test1 OUTPUT================"</span></div><div class="line">  puts MyClass.class_method</div><div class="line">  puts my.instance_method(<span class="string">"MyClass.new obj"</span>)</div><div class="line">  puts my.get_instance_variate_from_module(<span class="string">"MyClass.new"</span>)</div><div class="line">  puts obj.instance_method(<span class="string">"Object.new"</span>)</div><div class="line">  puts obj.instance_eval(<span class="string">"@instance_variate"</span>)</div><div class="line">  puts <span class="string">"MyClass.instance_methods:"</span>+MyClass.instance_methods(<span class="literal">false</span>).to_s</div><div class="line">  puts <span class="string">"================test1 OUTPUT================"</span></div><div class="line"></div><div class="line">  <span class="comment"># ================test1 OUTPUT================</span></div><div class="line">  <span class="comment"># i am a class method</span></div><div class="line">  <span class="comment"># i am a instance method from:MyClass.new obj</span></div><div class="line">  <span class="comment"># i am a instance variate in M from: MyClass.new</span></div><div class="line">  <span class="comment"># i am a instance method from:Object.new</span></div><div class="line">  <span class="comment"># i am a instance variate in M</span></div><div class="line">  <span class="comment"># MyClass.instance_methods:[:get_instance_variate_from_module]</span></div><div class="line">  <span class="comment"># ================test1 OUTPUT================</span></div><div class="line"></div><div class="line">&#125;.call</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-define-method-in-kernel-module" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/define-method-in-kernel-module/" class="article-date">
-      <time datetime="2015-03-30T14:46:08.000Z" itemprop="datePublished">2015-03-30</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/define-method-in-kernel-module/">测试在kernel中定义的方法的作用对象</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、Kernel模块内定义实例方法，哪些对象可以使用</span></div><div class="line"><span class="comment"># 2、Kernel的单件方法哪些对象可以使用</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、Kernel模块内定义实例方法,ruby的所有对象都可以使用，因为Kernel会被Mixin入Object,其实例方法(用def定义的),可以</span></div><div class="line"><span class="comment">#    被所有ruby对象使用(MyClass/"string")</span></div><div class="line"><span class="comment"># 2、Kernel的单件方法只能被其自己使用,其它类和方法都不能使用(MyClass/MyClass.new)</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  <span class="class"><span class="keyword">module</span> <span class="title">Kernel</span></span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">im_singleton_method</span></span></div><div class="line">      <span class="string">"i'm a singleton method of Kernel define in Kernel"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">im_instance_method</span><span class="params">(from=<span class="string">"Kernel"</span>)</span></span></div><div class="line">      <span class="string">"i'm a instance method define in Kernel and call from <span class="subst">#&#123;from&#125;</span>"</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>;</span> <span class="keyword">end</span></div><div class="line">  puts Kernel.im_singleton_method</div><div class="line">  puts <span class="string">"Kernel.singleton_methods:"</span> + Kernel.singleton_methods(<span class="literal">false</span>).grep(<span class="regexp">/im_singleton_method/</span>).to_s</div><div class="line">  puts <span class="string">"Kernel.im_instance_method:"</span> + Kernel.instance_methods(<span class="literal">false</span>).grep(<span class="regexp">/im_instance_method/</span>).to_s</div><div class="line">  puts MyClass.new.im_instance_method(<span class="string">"obj"</span>)</div><div class="line">  puts MyClass.im_instance_method(<span class="string">"MyClass"</span>)</div><div class="line">  puts <span class="keyword">begin</span> MyClass.im_singleton_method <span class="keyword">rescue</span> <span class="string">"undefined method `im_singleton_method' for MyClass:Class"</span> <span class="keyword">end</span></div><div class="line">  puts <span class="keyword">begin</span> MyClass.new.im_singleton_method <span class="keyword">rescue</span> <span class="string">"undefined method `im_singleton_method' for #&lt;MyClass:0x007fbb22813640&gt;"</span> <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="comment"># ================test1 OUTPUT================</span></div><div class="line">  <span class="comment"># i'm a singleton method of Kernel define in Kernel</span></div><div class="line">  <span class="comment"># Kernel.singleton_methods:[:im_singleton_method]</span></div><div class="line">  <span class="comment"># Kernel.im_instance_method:[:im_instance_method]</span></div><div class="line">  <span class="comment"># i'm a instance method define in Kernel and call from obj</span></div><div class="line">  <span class="comment"># i'm a instance method define in Kernel and call from MyClass</span></div><div class="line">  <span class="comment"># undefined method `im_singleton_method' for MyClass:Class</span></div><div class="line">  <span class="comment"># undefined method `im_singleton_method' for #&lt;MyClass:0x007fbb22813640&gt;</span></div><div class="line">  <span class="comment"># ================test1 OUTPUT================</span></div><div class="line">&#125;.call</div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 </div>
