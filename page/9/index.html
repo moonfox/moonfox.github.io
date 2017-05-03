@@ -252,6 +252,76 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-linux-redirect-stdout-stderr" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/linux-redirect-stdout-stderr/" class="article-date">
+      <time datetime="2014-11-24T16:01:26.000Z" itemprop="datePublished">2014-11-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/linux-redirect-stdout-stderr/">linux 重定向标准输出标准输入到文件</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>linux 重定向 标准输出 标准输入到文件，测试程序用C语言，执行程序名为test_out<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></div><div class="line"></span>&#123;</div><div class="line">  <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"%s\n"</span>, <span class="string">"this is stderr"</span>);</div><div class="line">  <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">"%s\n"</span>, <span class="string">"this is stdout"</span>);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>测试1<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$&gt; test_out</div><div class="line">=&gt; <span class="built_in">stderr</span></div><div class="line">=&gt; <span class="built_in">stdout</span></div></pre></td></tr></table></figure></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a><a class="article-category-link" href="/category/linux/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/c-lang/">c-lang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/linux/">linux</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/linux-redirect-stdout-stderr/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-say-goodbye-to-spam" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1510,73 +1580,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/people/">人物</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-linux-split-file" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/linux-split-file/" class="article-date">
-      <time datetime="2012-11-09T05:17:18.000Z" itemprop="datePublished">2012-11-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/linux-split-file/">linux split 命令</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>linux split 命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">功能说明：切割文件。</div><div class="line"></div><div class="line">语法：split [--help][--version][-&lt;行数&gt;][-b &lt;字节&gt;][-C &lt;字节&gt;][<span class="_">-l</span> &lt;行数&gt;][要切割的文件][输出文件名]</div><div class="line"></div><div class="line">补充说明：split可将文件切成较小的文件，预设每1000行会切成一个小文件。</div><div class="line"></div><div class="line">参数：</div><div class="line"></div><div class="line">-&lt;行数&gt;或<span class="_">-l</span>&lt;行数&gt; 　指定每多少行就要切成一个小文件。</div><div class="line"></div><div class="line">-b&lt;字节&gt; 　指定每多少字就要切成一个小文件。支持单位:m,k</div><div class="line"></div><div class="line">-C&lt;字节&gt; 　与-b参数类似，但切割时尽量维持每行的完整性。</div><div class="line"></div><div class="line">--help 　显示帮助。</div><div class="line"></div><div class="line">--version 　显示版本信息。</div><div class="line"></div><div class="line">[输出文件名] 　设置切割后文件的前置文件名，split会自动在前置文件名后再加上编号。</div></pre></td></tr></table></figure>
-<p>使用例子：<br><code>split -b 100m filename</code></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/linux/">linux</a></li></ul>
     </div>
 
       

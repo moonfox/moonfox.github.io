@@ -252,6 +252,80 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ubuntu-initrdimg" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ubuntu-initrdimg/" class="article-date">
+      <time datetime="2009-05-25T08:30:45.000Z" itemprop="datePublished">2009-05-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ubuntu-initrdimg/">ubuntu initrd.img 制作</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>今天开机，出现<em>Unable to mount root fs on unknown</em>-<em>block</em>(<em>0</em>,<em>0</em>)，导致不能进入系统。在网上搜了一大把，全说是编译内核时，才可能出现这种情况。经分析，系统的内核本身就是好的，查看启动菜单项，发现是卡在了<code>/initrd.img-2.6.28-12-generic</code>这里，查找对应文件，发现内容居然为空。如果在启动时选择进入2.6.28-11-generic，则成功进入系统（看来在升级的时候还是把旧内核留下为上策啊。一旦出现类似情况，还可以进入老系统！）。</p>
+<p>原因找到就好办多了，重新制作一个/initrd.img-2.6.28-12-generic文件即可。进入 /lib/modules下与内核对应该的文件夹，运行 <code>mkinitramfs -o /boot/initrd.img-xxx</code>然后重新启动系统。OK。又能进入Ubuntu 9.04的怀抱了。</p>
+<blockquote>
+<p>总结：</p>
+<ul>
+<li>遇到问题一定要分析，不要盲目的跟随网上的解决方法，必须先分析出错原因。否则如果真是按照网上的说法去重新编译内核的话，不但麻烦，一旦失败，又会引来其它新的问题。</li>
+<li>本人同样也遇到了<code>Unable to mount root fs on unknown_-_block_(_0_,_0_)</code> 这个问题，但它仅是丢失initrd.img－XXX文件造成的，所以我们只要重新生成这个文件，一切就都OK了。</li>
+</ul>
+</blockquote>
+<p>PS：Ubuntu 貌拟在非正常关机的情况下，对文件的保护是相当脆弱啊。居然能造成文件丢失。晕之</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">

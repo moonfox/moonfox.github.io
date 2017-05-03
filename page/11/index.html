@@ -252,6 +252,75 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-rackbuilder-rackup" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rackbuilder-rackup/" class="article-date">
+      <time datetime="2012-02-09T09:29:27.000Z" itemprop="datePublished">2012-02-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rackbuilder-rackup/">Rack::Builder  rackup</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>rackup converts the supplied rack config file to an instance of Rack::Builder. This is how is happens under the hood ( just so you get an idea ) :<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">config_file = File.read(config)</div><div class="line">rack_application = eval(<span class="string">"Rack::Builder.new &#123; <span class="subst">#&#123;config_file&#125;</span> &#125;"</span>)</div></pre></td></tr></table></figure></p>
+<p>And then rackup supplies rack_application to the respective webserver :</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">server.run rack_application, options</div></pre></td></tr></table></figure>
+<p>Very straight forward! In short, rack config files are evaluated within the context of a Rack::Builder object. So if we convert infinity to a rack config file which rackup can understand :<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># infinity.ru</span></div><div class="line"></div><div class="line">infinity = Proc.new &#123;<span class="params">|env|</span> [<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span> =&gt; <span class="string">"text/html"</span>&#125;, env.inspect]&#125;</div><div class="line"></div><div class="line">use Rack::CommonLogger</div><div class="line"></div><div class="line">map <span class="string">'/'</span> <span class="keyword">do</span></div><div class="line">  run infinity</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">map <span class="string">'/version'</span> <span class="keyword">do</span></div><div class="line">  map <span class="string">'/'</span> <span class="keyword">do</span></div><div class="line">    run Proc.new &#123;<span class="params">|env|</span> [<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span> =&gt; <span class="string">"text/html"</span>&#125;, <span class="string">"infinity 0.1"</span>] &#125;</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  map <span class="string">'/last'</span> <span class="keyword">do</span></div><div class="line">    run Proc.new &#123;<span class="params">|env|</span> [<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span> =&gt; <span class="string">"text/html"</span>&#125;, <span class="string">"infinity beta 0.0"</span>] &#125;</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+<p>And now run it :<br><code>rackup infinity.ru</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rack/">rack</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-eager-load-application-classes" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1500,76 +1569,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/adwords/">adwords</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-google-checkout" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/google-checkout/" class="article-date">
-      <time datetime="2011-12-02T03:32:42.000Z" itemprop="datePublished">2011-12-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/google-checkout/">Google 电子钱包</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>关于 Google 电子钱包</p>
-<p>Google 电子钱包会存储您的付款信息、交易记录、优惠等信息。所有信息都会同步到云。这样，无论您使用什么设备，钱包中的信息都会保持一致，便于您在实体店购物或在线购物。您可以通过下载 Google 电子钱包应用程序（Android 版）或在线使用 Google 电子钱包来访问您的 Google 电子钱包。<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/information/">让资讯飞</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/google/">google</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/google-checkout/#more">阅读全文 >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
