@@ -252,6 +252,71 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-before-2012-one-month" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/before-2012-one-month/" class="article-date">
+      <time datetime="2012-11-22T02:02:35.000Z" itemprop="datePublished">2012-11-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/before-2012-one-month/">before 2012 one month</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="http://img.gagahappy.com/blog/2012/11/2012-11-21.png" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2012/11/2012-11-21.png" alt="" title="2012-11-21"></a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/people/">人物</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-linux-split-file" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1525,82 +1590,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rvm/">rvm</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-error-loading-gem-paths-on-load-path-in-gem-prelude" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/error-loading-gem-paths-on-load-path-in-gem-prelude/" class="article-date">
-      <time datetime="2012-02-11T09:03:16.000Z" itemprop="datePublished">2012-02-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/error-loading-gem-paths-on-load-path-in-gem-prelude/">Error loading gem paths on load path in gem_prelude</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在用rvm安装ruby后运行gem，出现</p>
-<blockquote>
-<p>Error loading gem paths on load path in gem_prelude<br>can’t modify frozen string</p>
-<p><internal:gem_prelude>:69:in `force_encoding’</internal:gem_prelude></p>
-<p><internal:gem_prelude>:69:in `set_home’</internal:gem_prelude></p>
-<p><internal:gem_prelude>:38:in `dir’</internal:gem_prelude></p>
-<p><internal:gem_prelude>:76:in `set_paths’</internal:gem_prelude></p>
-<p><internal:gem_prelude>:47:in `path’</internal:gem_prelude></p>
-<p><internal:gem_prelude>:286:in `push_all_highest_version_gems_on_load_path’</internal:gem_prelude></p>
-<p><internal:gem_prelude>:355:in `<compiled>‘</compiled></internal:gem_prelude></p>
-</blockquote>
-<p>解决方法：找到 your/home/.rvm/src/ruby-your-version/gem_prelude.rb文件 编辑<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">set_home</span><span class="params">(home)</span></span></div><div class="line"> home = home.gsub File::ALT_SEPARATOR, File::SEPARATOR <span class="keyword">if</span> File::ALT_SEPARATOR</div><div class="line">- @gem_home = home.force_encoding(Encoding.find(<span class="string">'filesystem'</span>))</div><div class="line">+ @gem_home = home.dup.force_encoding(Encoding.find(<span class="string">'filesystem'</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
     </div>
 
       

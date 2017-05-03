@@ -252,6 +252,72 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-a-kind-of-spoil" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/a-kind-of-spoil/" class="article-date">
+      <time datetime="2016-08-30T14:50:46.000Z" itemprop="datePublished">2016-08-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/a-kind-of-spoil/">爱你的方式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>这世上有很多种爱你的方式，但我只给你一种：溺爱</p>
+<p><img src="http://img.gagahappy.com/blog/2016/08/spoil.jpg_b1" alt="spoil" title="spoil"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/consciousness/">意识流</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/love/">love</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-a-conflict-between-youdao-and-lr" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1519,71 +1585,6 @@
       
           
         <p>可以调用to_sql方法察看实际ORM输出出來的SQL，例如Event.open_public.recent_three_days.to_sql<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Post.where(<span class="symbol">author_id:</span> <span class="number">1</span>).order(<span class="string">"id desc"</span>).limit(<span class="number">3</span>).to_sql</div><div class="line"><span class="comment"># SELECT  `posts`.* FROM `posts`  WHERE `posts`.`author_id` = 1 ORDER BY id desc LIMIT 3</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-pass-argument-to-scope" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/pass-argument-to-scope/" class="article-date">
-      <time datetime="2015-05-05T15:56:43.000Z" itemprop="datePublished">2015-05-05</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/pass-argument-to-scope/">向Scope传递参数</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>向Scope传递参数<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span> &lt; ActiveRecord::Base</span></div><div class="line">    scope <span class="symbol">:recent</span>, -&gt; &#123; <span class="params">|date|</span> where([<span class="string">"created_at &gt; ? "</span>, date ]) &#125;</div><div class="line">    <span class="comment"># 等同于 scope :recent, lambda&#123; |date| where(["created_at &gt; ? ", date ]) &#125;</span></div><div class="line">    <span class="comment"># 或 scope :recent, Proc.new&#123; |t| where(["created_at &gt; ? ", t ]) &#125;</span></div><div class="line"><span class="keyword">end</span></div><div class="line">Event.recent( Time.now - <span class="number">7</span>.days )</div></pre></td></tr></table></figure></p>
 
       
     </div>
