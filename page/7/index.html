@@ -20,12 +20,15 @@
     
 
 
+<meta name="description" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
 <meta property="og:type" content="website">
 <meta property="og:title" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:url" content="http://www.gagahappy.com/page/7/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
+<meta property="og:description" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漂自己的移，让别人都撞墙去吧">
+<meta name="twitter:description" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -252,6 +255,271 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-mysql-index-hint" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/mysql-index-hint/" class="article-date">
+      <time datetime="2015-02-25T02:36:18.000Z" itemprop="datePublished">2015-02-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mysql-index-hint/">索引提示</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>索引提示<br>（1）优化器错误的选择了索引（这种情况很少发生）<br>（2）查询有多个索引可以使用，使得优化器选择索引的时间大大超过了SQL语句的执行时间</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-cardinality-count" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/cardinality-count/" class="article-date">
+      <time datetime="2015-02-24T01:32:52.000Z" itemprop="datePublished">2015-02-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/cardinality-count/">Cardinality的统计</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>数据库都是通过采样(sample)的方法，来完成Cardinality的统计。<br>对Cardinality的统计是在存储引擎层面进行的，所以不同的引擎用各自的方法实现。</p>
+<p>innodb在进行insert/update操作时，进行Cardinality的统计，但不是每次都进行统计，因为会增加数据库负担。对于数据非常大的表，更不可能进行实时统计，因为那样会影响执行时间，带来非常长的执行时间。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-fulltext-auxiliary-table" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/fulltext-auxiliary-table/" class="article-date">
+      <time datetime="2015-02-23T02:44:23.000Z" itemprop="datePublished">2015-02-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/fulltext-auxiliary-table/">全文索引表auxiliary table</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>全文索引要借助辅助表auxiliary table，它是持久性的（文件形式），其使用倒排索引inverted index来存储单词及单词所在文档的位置信息</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-use-with-query-expansion-be-careful" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/use-with-query-expansion-be-careful/" class="article-date">
+      <time datetime="2015-02-22T02:45:45.000Z" itemprop="datePublished">2015-02-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/use-with-query-expansion-be-careful/">慎用With query expansion</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>With query expansion, 支持扩展查询（相关性查询）。如查询database，同时也会把含有mysql但不含database的记录也找到。但此功能可能会带来诸多非相关性的查询，要谨慎使用。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-select-count-second-index" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -306,6 +574,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -381,6 +650,7 @@
 
 
 
+
   
     <article id="post-mysql-slow-query-log" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -436,6 +706,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -517,6 +788,7 @@
 
 
 
+
   
     <article id="post-mysql-bin-log" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -577,6 +849,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -653,6 +926,7 @@
 
 
 
+
   
     <article id="post-mysql-query-log" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -708,6 +982,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -784,6 +1059,7 @@
 
 
 
+
   
     <article id="post-char-record-format" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -849,6 +1125,7 @@
 
 
 
+
   
     <article id="post-mysql-log-file" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -904,6 +1181,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -981,6 +1259,7 @@
 
 
 
+
   
     <article id="post-mysql-create-trigger" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1037,6 +1316,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -1119,6 +1399,7 @@
 
 
 
+
   
     <article id="post-mysql-the-server-quit-without-updating-pid" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1176,6 +1457,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -1253,6 +1535,7 @@
 
 
 
+
   
     <article id="post-yodao-dict-cannt-capture-for-firefox" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1310,274 +1593,6 @@
   
 </article>
 
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-sharapova-survives-aussie-open-epic" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/sharapova-survives-aussie-open-epic/" class="article-date">
-      <time datetime="2015-01-21T15:29:51.000Z" itemprop="datePublished">2015-01-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/sharapova-survives-aussie-open-epic/">Sharapova Survives Aussie Open Epic</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Sharapova Survives Aussie Open Epic</p>
-<p>看得我是热泪盈眶啊</p>
-<script src="http://player.ooyala.com/player.js?height=324&pcode=1kNG061cgaoolOncv54OAO1ceO-I&deepLinkEmbedCode=5sNXh2cjrksGo9MPT19kny-MZck10mF4&externalId=espn%3A12202710&width=576&video_pcode=1kNG061cgaoolOncv54OAO1ceO-I&embedCode=5sNXh2cjrksGo9MPT19kny-MZck10mF4"></script>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/news/">新闻</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-min-byte-of-format-disk" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/min-byte-of-format-disk/" class="article-date">
-      <time datetime="2015-01-19T06:34:36.000Z" itemprop="datePublished">2015-01-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/min-byte-of-format-disk/">格式化磁盘最小分配单元</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>格式化磁盘最小分配单元，最小单元为512字节。</p>
-<p>为什么不能比512字节还要小，如256字节。因为一个扇区为512字节，最小单元比512字节还要小的话，一个扇区就可能存储两个文件的数据：</p>
-<p>如file1:256字节,file2:256字节。全都存到一个扇区的话，在读取file1时，也会把file2的数据取出。</p>
-<p>一般最小单元系统默认为4KB，如果存的文件都小于4KB的话，会浪费很多的扇区，即存储空间。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/computer/">计算机</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/os/">操作系统</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ns-to-ms" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/ns-to-ms/" class="article-date">
-      <time datetime="2015-01-15T07:18:15.000Z" itemprop="datePublished">2015-01-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/ns-to-ms/">纳秒与毫秒换算</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>纳秒与毫秒换算，一直以为是1ms=1000ns，其实是不对的，应该是: 1ms = 1000000ns</p>
-<p>CPU的一个时钟周期是纳秒级的，所以比磁盘读写毫秒级，要快上千万倍。CPU是不可能停在那里等待磁盘IO完成后，再做其它事情的，在等待的时间里，CPU可以执行千万次的指令了。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/computer/">计算机</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/os/">操作系统</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-wptouch-access-slowly-by-google-font" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/wptouch-access-slowly-by-google-font/" class="article-date">
-      <time datetime="2015-01-10T07:13:12.000Z" itemprop="datePublished">2015-01-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/wptouch-access-slowly-by-google-font/">wptouch访问速度非常的慢</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>wptouch访问速度非常的慢，这是因为默认是用的google font，改为使用浏览器字体，即可解决问题。</p>
-<blockquote>
-<p>设置：wptouch—主题设置—品牌—排印（选择浏览器字体）</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/software/">玩转软件</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/wordpress/">wordpress</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
 
 
 

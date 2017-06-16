@@ -20,12 +20,15 @@
     
 
 
+<meta name="description" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
 <meta property="og:type" content="website">
 <meta property="og:title" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:url" content="http://www.gagahappy.com/page/4/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
+<meta property="og:description" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漂自己的移，让别人都撞墙去吧">
+<meta name="twitter:description" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -252,6 +255,273 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-git-ls-files-show-index-files" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/git-ls-files-show-index-files/" class="article-date">
+      <time datetime="2015-05-17T14:18:07.000Z" itemprop="datePublished">2015-05-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/git-ls-files-show-index-files/">git ls-files 显示暂存区目录树</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>git ls-files 显示暂存区目录树</p>
+<p>如果一个删除的文件已经git add到暂存区，则暂存区的目录树不会包含这个文件，这也证明了暂存区有着自己的目录树</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-method-missing-be-careful-use" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/method-missing-be-careful-use/" class="article-date">
+      <time datetime="2015-05-14T15:18:31.000Z" itemprop="datePublished">2015-05-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/method-missing-be-careful-use/">method_missing 方法使用注意事项</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>method_missing 方法使用注意事项，其实最要应该注意的就是不能在method_missing 方法中出现找不到的方法，否则程序将掉入无限循环中</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">method_missing</span><span class="params">(method, *args)</span></span></div><div class="line">  not_exist_method <span class="comment">#一个不存在的方法</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="comment"># 当程序进入method_missing方法后，发现找不到not_exist_method方法，则又会掉入method_missing,然后又会发现找不到not_exist_method，然后又掉入method_missing,然后loop...</span></div><div class="line"></div><div class="line"><span class="comment"># 这种陷阱一般很难发现，所以在method_missing中编写代码时，一定要小心</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-git-write-tree-generate-tree-id" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/git-write-tree-generate-tree-id/" class="article-date">
+      <time datetime="2015-05-13T14:38:07.000Z" itemprop="datePublished">2015-05-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/git-write-tree-generate-tree-id/">git write-tree 生成tree对象</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>可以用git write-tree 为暂存区生成tree对象，以便可以用ls-tree对暂存区进行查看</p>
+<p>执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git write-tree</div><div class="line">git ls_tree &lt;git write-tree 的输出&gt;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-active-record-transmit-to-sql" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/active-record-transmit-to-sql/" class="article-date">
+      <time datetime="2015-05-06T15:51:18.000Z" itemprop="datePublished">2015-05-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/active-record-transmit-to-sql/">查看ORM实际生成的sql</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>可以调用to_sql方法察看实际ORM输出出來的SQL，例如Event.open_public.recent_three_days.to_sql<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Post.where(<span class="symbol">author_id:</span> <span class="number">1</span>).order(<span class="string">"id desc"</span>).limit(<span class="number">3</span>).to_sql</div><div class="line"><span class="comment"># SELECT  `posts`.* FROM `posts`  WHERE `posts`.`author_id` = 1 ORDER BY id desc LIMIT 3</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-pass-argument-to-scope" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -306,6 +576,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -413,6 +684,7 @@
 
 
 
+
   
     <article id="post-scope-of-instance-variable-in-rake-block" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -469,6 +741,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -553,6 +826,7 @@
 
 
 
+
   
     <article id="post-deploy-nginx-thin" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -611,6 +885,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -686,6 +961,7 @@
 
 
 
+
   
     <article id="post-delegation-be-enhance-by-active-support-in-module" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -744,6 +1020,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -823,6 +1100,7 @@
 
 
 
+
   
     <article id="post-ruby-hash-sort" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -878,6 +1156,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -955,6 +1234,7 @@
 
 
 
+
   
     <article id="post-rspec-exception-types-classes-response" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1010,6 +1290,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -1089,6 +1370,7 @@
 
 
 
+
   
     <article id="post-rspec-exception-comparisons" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1144,6 +1426,7 @@
   </div>
   
 </article>
+
 
 
 
@@ -1226,6 +1509,7 @@
 
 
 
+
   
     <article id="post-redis-hyperloglog-command" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1298,6 +1582,7 @@
 
 
 
+
   
     <article id="post-rails4-server-up-with-rack" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -1355,268 +1640,6 @@
   
 </article>
 
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-segments-for-index-in-innodb" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/segments-for-index-in-innodb/" class="article-date">
-      <time datetime="2015-04-12T14:59:54.000Z" itemprop="datePublished">2015-04-12</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/segments-for-index-in-innodb/">segments for index in innodb</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Two segments are allocated for each index in InnoDB. One is for nonleaf nodes of the B-tree, the other is for the leaf nodes. Keeping the leaf nodes contiguous on disk enables better sequential I/O operations, because these leaf nodes contain the actual table data.</p>
-<p>每个索引拥有2个segment，一个用于非叶结点，另一个用于叶子结点</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-innodb-does-not-guarantee-that-it-uses-free-pages-sequentially" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/innodb-does-not-guarantee-that-it-uses-free-pages-sequentially/" class="article-date">
-      <time datetime="2015-04-11T15:39:59.000Z" itemprop="datePublished">2015-04-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/innodb-does-not-guarantee-that-it-uses-free-pages-sequentially/">Innodb不保证连续的使用空闲空间保存数据</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>InnoDB does not guarantee that it uses free pages sequentially, and many optimizations around bulk data loading will cause pages to be used out of order. (More on page splitting and these optimizations)</p>
-<p>1、Innodb不保证连续的使用空闲空间保存数据，这么做的原因有(页的分裂和一些优化)<br>2、在为新数据分配extent时，可以看到有种情况发生：一个index后面是多个free page(63个),然后再是一个index.</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-btree-not-actually-find-a-record" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/btree-not-actually-find-a-record/" class="article-date">
-      <time datetime="2015-04-10T12:32:36.000Z" itemprop="datePublished">2015-04-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/btree-not-actually-find-a-record/">B+树索引本身并不能找到一条记录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>B+树索引本身并不能找到一条记录，只能找到记录所在的页。详细见具本章节中的内容，及查看本机数据内容。找到所在页后，把页载入内存，</p>
-<p>在内存中对Page Directory进行binary search。依次类推，最终找到记录(通过n_owned)。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-redis-hashring" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/redis-hashring/" class="article-date">
-      <time datetime="2015-04-09T04:21:25.000Z" itemprop="datePublished">2015-04-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/redis-hashring/">Redis::HashRing source code</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'zlib'</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Redis</span></span></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">HashRing</span></span></div><div class="line"></div><div class="line">    POINTS_PER_SERVER = <span class="number">160</span> <span class="comment"># this is the default in libmemcached</span></div><div class="line"></div><div class="line">    <span class="keyword">attr_reader</span> <span class="symbol">:ring</span>, <span class="symbol">:sorted_keys</span>, <span class="symbol">:replicas</span>, <span class="symbol">:nodes</span></div><div class="line"></div><div class="line">    <span class="comment"># nodes is a list of objects that have a proper to_s representation.</span></div><div class="line">    <span class="comment"># replicas indicates how many virtual points should be used pr. node,</span></div><div class="line">    <span class="comment"># replicas are required to improve the distribution.</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initialize</span><span class="params">(nodes=[], replicas=POINTS_PER_SERVER)</span></span></div><div class="line">      @replicas = replicas</div><div class="line">      @ring = &#123;&#125;</div><div class="line">      @nodes = []</div><div class="line">      @sorted_keys = []</div><div class="line">      nodes.each <span class="keyword">do</span> <span class="params">|node|</span></div><div class="line">        add_node(node)</div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="comment"># Adds a `node` to the hash ring (including a number of replicas).</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_node</span><span class="params">(node)</span></span></div><div class="line">      @nodes &lt;&lt; node</div><div class="line">      @replicas.times <span class="keyword">do</span> <span class="params">|i|</span></div><div class="line">        key = Zlib.crc32(<span class="string">"<span class="subst">#&#123;node.id&#125;</span>:<span class="subst">#&#123;i&#125;</span>"</span>)</div><div class="line">        @ring[key] = node</div><div class="line">        @sorted_keys &lt;&lt; key</div><div class="line">      <span class="keyword">end</span></div><div class="line">      @sorted_keys.sort!</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remove_node</span><span class="params">(node)</span></span></div><div class="line">      @nodes.reject!&#123;<span class="params">|n|</span> n.id == node.id&#125;</div><div class="line">      @replicas.times <span class="keyword">do</span> <span class="params">|i|</span></div><div class="line">        key = Zlib.crc32(<span class="string">"<span class="subst">#&#123;node.id&#125;</span>:<span class="subst">#&#123;i&#125;</span>"</span>)</div><div class="line">        @ring.delete(key)</div><div class="line">        @sorted_keys.reject! &#123;<span class="params">|k|</span> k == key&#125;</div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="comment"># get the node in the hash ring for this key</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_node</span><span class="params">(key)</span></span></div><div class="line">      get_node_pos(key)[<span class="number">0</span>]</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_node_pos</span><span class="params">(key)</span></span></div><div class="line">      <span class="keyword">return</span> [<span class="literal">nil</span>,<span class="literal">nil</span>] <span class="keyword">if</span> @ring.size == <span class="number">0</span></div><div class="line">      crc = Zlib.crc32(key)</div><div class="line">      idx = HashRing.binary_search(@sorted_keys, crc)</div><div class="line">      <span class="keyword">return</span> [@ring[@sorted_keys[idx]], idx]</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">iter_nodes</span><span class="params">(key)</span></span></div><div class="line">      <span class="keyword">return</span> [<span class="literal">nil</span>,<span class="literal">nil</span>] <span class="keyword">if</span> @ring.size == <span class="number">0</span></div><div class="line">      <span class="number">_</span>, pos = get_node_pos(key)</div><div class="line">      @sorted_keys[pos..-<span class="number">1</span>].each <span class="keyword">do</span> <span class="params">|k|</span></div><div class="line">        <span class="keyword">yield</span> @ring[k]</div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> &lt;&lt; self</span></div><div class="line"></div><div class="line">      <span class="comment"># gem install RubyInline to use this code</span></div><div class="line">      <span class="comment"># Native extension to perform the binary search within the hashring.</span></div><div class="line">      <span class="comment"># There's a pure ruby version below so this is purely optional</span></div><div class="line">      <span class="comment"># for performance.  In testing 20k gets and sets, the native</span></div><div class="line">      <span class="comment"># binary search shaved about 12% off the runtime (9sec -&gt; 8sec).</span></div><div class="line">      <span class="keyword">begin</span></div><div class="line">        <span class="keyword">require</span> <span class="string">'inline'</span></div><div class="line">        inline <span class="keyword">do</span> <span class="params">|builder|</span></div><div class="line">          builder.c &lt;&lt;-EOM</div><div class="line">          int binary_search(VALUE ary, unsigned int r) &#123;</div><div class="line">              int upper = RARRAY_LEN(ary) - <span class="number">1</span>;</div><div class="line">              int lower = <span class="number">0</span>;</div><div class="line">              int idx = <span class="number">0</span>;</div><div class="line"></div><div class="line">              <span class="keyword">while</span> (lower &lt;= upper) &#123;</div><div class="line">                  idx = (lower + upper) / <span class="number">2</span>;</div><div class="line"></div><div class="line">                  VALUE continuumValue = RARRAY_PTR(ary)[idx];</div><div class="line">                  unsigned int l = NUM2UINT(continuumValue);</div><div class="line">                  <span class="keyword">if</span> (l == r) &#123;</div><div class="line">                      <span class="keyword">return</span> idx;</div><div class="line">                  &#125;</div><div class="line">                  <span class="keyword">else</span> <span class="keyword">if</span> (l &gt; r) &#123;</div><div class="line">                      upper = idx - <span class="number">1</span>;</div><div class="line">                  &#125;</div><div class="line">                  <span class="keyword">else</span> &#123;</div><div class="line">                      lower = idx + <span class="number">1</span>;</div><div class="line">                  &#125;</div><div class="line">              &#125;</div><div class="line">              <span class="keyword">if</span> (upper &lt; <span class="number">0</span>) &#123;</div><div class="line">                upper = RARRAY_LEN(ary) - <span class="number">1</span>;</div><div class="line">              &#125;</div><div class="line">              <span class="keyword">return</span> upper;</div><div class="line">          &#125;</div><div class="line">          EOM</div><div class="line">        <span class="keyword">end</span></div><div class="line">      <span class="keyword">rescue</span> Exception</div><div class="line">        <span class="comment"># Find the closest index in HashRing with value &lt;= the given value</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">binary_search</span><span class="params">(ary, value, &amp;block)</span></span></div><div class="line">          upper = ary.size - <span class="number">1</span></div><div class="line">          lower = <span class="number">0</span></div><div class="line">          idx = <span class="number">0</span></div><div class="line"></div><div class="line">          <span class="keyword">while</span>(lower &lt;= upper) <span class="keyword">do</span></div><div class="line">            idx = (lower + upper) / <span class="number">2</span></div><div class="line">            comp = ary[idx] &lt;=&gt; value</div><div class="line"></div><div class="line">            <span class="keyword">if</span> comp == <span class="number">0</span></div><div class="line">              <span class="keyword">return</span> idx</div><div class="line">            <span class="keyword">elsif</span> comp &gt; <span class="number">0</span></div><div class="line">              upper = idx - <span class="number">1</span></div><div class="line">            <span class="keyword">else</span></div><div class="line">              lower = idx + <span class="number">1</span></div><div class="line">            <span class="keyword">end</span></div><div class="line">          <span class="keyword">end</span></div><div class="line"></div><div class="line">          <span class="keyword">if</span> upper &lt; <span class="number">0</span></div><div class="line">            upper = ary.size - <span class="number">1</span></div><div class="line">          <span class="keyword">end</span></div><div class="line">          <span class="keyword">return</span> upper</div><div class="line">        <span class="keyword">end</span></div><div class="line"></div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/redis/">redis</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
 
 
 
