@@ -255,6 +255,148 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-mysql-scale-up" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/mysql-scale-up/" class="article-date">
+      <time datetime="2010-06-16T16:30:28.000Z" itemprop="datePublished">2010-06-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mysql-scale-up/">mysql 纵向扩展性</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>mysql 纵向扩展性 优点</p>
+<ol>
+<li>处理节点少，维护相对简单</li>
+<li>所有数据都集中在一起，应用系统架构简单，开发相对容易。</li>
+</ol>
+<p>mysql 纵向扩展性 缺点</p>
+<ol>
+<li>高端设备成本高，且竞争少，容易受到厂商限制</li>
+<li>受到硬件设备发展速度的限制，单台主机的处理能力总是有极限的，容易遇到最终无法解决的性能瓶颈</li>
+<li>设备和数据集中，发生故障后影响较大</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mysql-make-configration" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/mysql-make-configration/" class="article-date">
+      <time datetime="2010-06-16T14:32:56.000Z" itemprop="datePublished">2010-06-16</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mysql-make-configration/">mysql 编译安装配置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>mysql 编译安装配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./configure --prefix=/opt/mysql --without-debug  --enable-thread-safe-client --enable-assembler --enable-profiling --with-mysqld-ldflags=-all-static --with-client-ldflags=-all-static --with-charset=utf8 --with-extra-charsets=gbk  --with-mysqld-user=mysql --without-embedded-server --with-server-suffix=-community --with-collation=utf8_general_ci --with-plugins=innobase</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-fedora-add-http" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1486,138 +1628,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-rails-redirect-to" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/rails-redirect-to/" class="article-date">
-      <time datetime="2010-05-03T16:30:35.000Z" itemprop="datePublished">2010-05-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/rails-redirect-to/">rails redirect_to</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>做了一个出错后跳转的页面，运行后发现程序进入死循环，查看日志发现页面被回指到了自己，原因是在redirect_to的时候自动继承了链接中的参数，由此得出结论，在带参数的情况下将页面回指到自己时，如果只指定了action，链接的参数会被自动继承，若要去掉参数，需要在redirect_to的时候重新定义。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ubuntu-10-04-source-list" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/ubuntu-10-04-source-list/" class="article-date">
-      <time datetime="2010-05-03T12:52:54.000Z" itemprop="datePublished">2010-05-03</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/ubuntu-10-04-source-list/">ubuntu 10.04 source.list</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">deb http://mirrors.sohu.com/ubuntu/ lucid main restricted universe multiverse</div><div class="line">deb http://mirrors.sohu.com/ubuntu/ lucid-security main restricted universe multiverse</div><div class="line">deb http://mirrors.sohu.com/ubuntu/ lucid-updates main restricted universe multiverse</div><div class="line">deb http://mirrors.sohu.com/ubuntu/ lucid-proposed main restricted universe multiverse</div><div class="line">deb http://mirrors.sohu.com/ubuntu/ lucid-backports main restricted universe multiverse</div><div class="line">deb-src http://mirrors.sohu.com/ubuntu/ lucid main restricted universe multiverse</div><div class="line">deb-src http://mirrors.sohu.com/ubuntu/ lucid-security main restricted universe multiverse</div><div class="line">deb-src http://mirrors.sohu.com/ubuntu/ lucid-updates main restricted universe multiverse</div><div class="line">deb-src http://mirrors.sohu.com/ubuntu/ lucid-proposed main restricted universe multiverse</div><div class="line">deb-src http://mirrors.sohu.com/ubuntu/ lucid-backports main restricted universe multiverse</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
     </div>
 
       

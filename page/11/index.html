@@ -255,6 +255,146 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-resque-priorities-and-queue-lists" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/resque-priorities-and-queue-lists/" class="article-date">
+      <time datetime="2012-02-21T15:26:20.000Z" itemprop="datePublished">2012-02-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/resque-priorities-and-queue-lists/">resque Priorities and Queue Lists</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Priorities and Queue Lists</p>
+<p>Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”</p>
+<p>Let’s say we add a warm_cache queue in addition to our file_serve queue. We’d now start a worker like so:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ QUEUES=file_serve,warm_cache rake <span class="symbol">resque:</span>work</div></pre></td></tr></table></figure>
+<p>When the worker looks for new jobs, it will first check file_serve. If it finds a job, it’ll process it then check file_serve again. It will keep checking file_serve until no more jobs are available. At that point, it will check warm_cache. If it finds a job it’ll process it then check file_serve (repeating the whole process).</p>
+<p>Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/resque/">resque</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ruby-regular-expression-in-sub-gsub" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-regular-expression-in-sub-gsub/" class="article-date">
+      <time datetime="2012-02-20T14:19:38.000Z" itemprop="datePublished">2012-02-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-regular-expression-in-sub-gsub/">ruby 正则表达式中的全局变量</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在使用sub,gsub 时，正则表达式不中不能使用全局变量<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">str = <span class="string">"a123b456c789"</span></div><div class="line">str.sub(<span class="regexp">/(a\d+)(b\d+)(c\d+)/</span>,<span class="string">"a=<span class="subst">#&#123;$1&#125;</span>, b=<span class="subst">#&#123;$2&#125;</span>, c=<span class="subst">#&#123;$3&#125;</span>"</span>)</div><div class="line">=&gt;</div><div class="line"><span class="string">"a=, b=, c="</span></div></pre></td></tr></table></figure></p>
+<p>可以使用<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">str = <span class="string">"a123b456c789"</span></div><div class="line">str.sub(<span class="regexp">/(a\d+)(b\d+)(c\d+)/</span>,<span class="string">'a=\1, b=\2, c=\3'</span>)</div><div class="line">=&gt;</div><div class="line"><span class="string">"a=123, b=456, c=789"</span></div></pre></td></tr></table></figure></p>
+<p>或</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">str = <span class="string">"a123b456c789"</span></div><div class="line">str.sub(<span class="regexp">/(a\d+)(b\d+)(c\d+)/</span>) &#123;<span class="string">"a=<span class="subst">#&#123;$1&#125;</span>, b=<span class="subst">#&#123;$2&#125;</span>, c=<span class="subst">#&#123;$3&#125;</span>"</span>&#125;</div><div class="line">=&gt;</div><div class="line"><span class="string">"a=123, b=456, c=789"</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-rvm-gemset-pic" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1443,138 +1583,6 @@
       
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/category/database/">数据库</a><a class="article-category-link" href="/category/database/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-tar-cvzf-folder" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/tar-cvzf-folder/" class="article-date">
-      <time datetime="2011-12-09T13:22:14.000Z" itemprop="datePublished">2011-12-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/tar-cvzf-folder/">如何使用tar对整个文件夹打包?</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>如何使用tar对整个文件夹打包?<br>tar cvzf xxx.tar.gz xxx/</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-mysql-select-my-cnf-how-to" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/mysql-select-my-cnf-how-to/" class="article-date">
-      <time datetime="2011-12-08T07:21:03.000Z" itemprop="datePublished">2011-12-08</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mysql-select-my-cnf-how-to/">mysql 编译安装选择配置文件my.cnf</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>mysql 在编译安装初始化数据库时需要读取my.cnf文件，默认读取的位置是/etc/mysql，所以如果你把my.cnf文件copy到/etc/下的话，mysql读取的是/etc/mysql下的my.cnf，而不是/etc/my.cnf。如果想要读取my.cnf，请删除/etc/mysql文件夹。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
     </div>
 
 

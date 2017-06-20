@@ -255,6 +255,146 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-redis-hyperloglog-command" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/redis-hyperloglog-command/" class="article-date">
+      <time datetime="2015-04-15T15:42:45.000Z" itemprop="datePublished">2015-04-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/redis-hyperloglog-command/">redis HyperLogLog 命令</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ol>
+<li>返回储存在给定键的 HyperLogLog 的近似基数</li>
+<li>通过 HyperLogLog 数据结构， 用户可以使用少量固定大小的内存， 来储存集合中的唯一元素 （每个 HyperLogLog 只需使用 12k 字节内存，以及几个字节的内存来储存键本身）。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">redis&gt; PFADD  databases  &quot;Redis&quot;  &quot;MongoDB&quot;  &quot;MySQL&quot;</div><div class="line">(integer) 1</div><div class="line"></div><div class="line">redis&gt; PFCOUNT  databases</div><div class="line">(integer) 3</div><div class="line"></div><div class="line">redis&gt; PFADD  databases  &quot;Redis&quot;    # Redis 已经存在，不必对估计数量进行更新</div><div class="line">(integer) 0</div><div class="line"></div><div class="line">redis&gt; PFCOUNT  databases    # 元素估计数量没有变化</div><div class="line">(integer) 3</div><div class="line"></div><div class="line">redis&gt; PFADD  databases  &quot;PostgreSQL&quot;    # 添加一个不存在的元素</div><div class="line">(integer) 1</div><div class="line"></div><div class="line">redis&gt; PFCOUNT  databases    # 估计数量增一</div><div class="line">4</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>问题思考：<br>这个是如何实现的，不存储元素的话，如何知道这个元素已经存在了。</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/redis/">redis</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-rails4-server-up-with-rack" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails4-server-up-with-rack/" class="article-date">
+      <time datetime="2015-04-14T13:59:42.000Z" itemprop="datePublished">2015-04-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails4-server-up-with-rack/">rails4  rack调用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">Rails</span></span></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Server</span> &lt; ::<span class="title">Rack::Server</span></span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">default_options</span></span></div><div class="line">      <span class="keyword">super</span>.merge(&#123;</div><div class="line">        <span class="symbol">Port:</span>               <span class="number">3000</span>,</div><div class="line">        <span class="symbol">DoNotReverseLookup:</span> <span class="literal">true</span>,</div><div class="line">        <span class="symbol">environment:</span>        (ENV[<span class="string">'RAILS_ENV'</span>] <span class="params">||</span> ENV[<span class="string">'RACK_ENV'</span>] <span class="params">||</span> <span class="string">"development"</span>).dup,</div><div class="line">        <span class="symbol">daemonize:</span>          <span class="literal">false</span>,</div><div class="line">        <span class="symbol">debugger:</span>           <span class="literal">false</span>,</div><div class="line">        <span class="symbol">pid:</span>                File.expand_path(<span class="string">"tmp/pids/server.pid"</span>),</div><div class="line">        <span class="symbol">config:</span>             File.expand_path(<span class="string">"config.ru"</span>)</div><div class="line">      &#125;)</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start</span></span></div><div class="line">      print_boot_information</div><div class="line">      trap(<span class="symbol">:INT</span>) &#123; exit &#125;</div><div class="line">      create_tmp_directories</div><div class="line">      log_to_stdout <span class="keyword">if</span> options[<span class="symbol">:log_stdout</span>]</div><div class="line"></div><div class="line">      <span class="keyword">super</span></div><div class="line">    <span class="keyword">ensure</span></div><div class="line">      <span class="comment"># The '-h' option calls exit before <span class="doctag">@options</span> is set.</span></div><div class="line">      <span class="comment"># If we call 'options' with it unset, we get double help banners.</span></div><div class="line">      puts <span class="string">'Exiting'</span> <span class="keyword">unless</span> @options &amp;&amp; options[<span class="symbol">:daemonize</span>]</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<p>可以看到和rails2相比，已经大不一样了，代码全部移动到了Rails模块中，结构也更加清晰</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-segments-for-index-in-innodb" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1430,141 +1570,6 @@
         <blockquote>
 <p><strong>redo日志应首先持久化在磁盘上，然后事务的操作结果才写入db buffer，（此时，内存中的数据和data file对应的数据不同，我们认为内存中的数据是脏数据），db buffer再选择合适的时机将数据持久化到data file中。这种顺序可以保证在需要故障恢复时恢复最后的修改操作。先持久化日志的策略叫做Write Ahead Log，即预写日志,也叫日志先行。</strong></p>
 </blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-the-record-donst-be-actually-detete" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/the-record-donst-be-actually-detete/" class="article-date">
-      <time datetime="2015-03-20T16:13:51.000Z" itemprop="datePublished">2015-03-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/the-record-donst-be-actually-detete/">数据不会被删除，除非page中的数据被重新组织</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>数据不会被删除，除非page中的数据被重新组织</p>
-<blockquote>
-<p>Of course actually deleting the record still doesn’t actually delete it — it just links the record into a “garbage” list, where record space may be reused. However nothing is guaranteed to be really removed from a page until the page is re-organized.</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-mysql-undo-flush-to-disk" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/mysql-undo-flush-to-disk/" class="article-date">
-      <time datetime="2015-03-20T13:32:07.000Z" itemprop="datePublished">2015-03-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mysql-undo-flush-to-disk/">mysql undo日志写入磁盘</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>mysql undo日志写入磁盘，以512B写入磁盘，这样就保证了写入的原子性，因为磁盘扇区的size为512B，所以写入要么成功，要么失败，不会发生只写入部分写入的情况，如只写入了100B，这种情况是绝对不会发生的。</p>
 
       
     </div>
