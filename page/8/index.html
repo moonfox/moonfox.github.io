@@ -255,6 +255,147 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-mysql-blob-text-page-type" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/mysql-blob-text-page-type/" class="article-date">
+      <time datetime="2015-02-06T14:12:50.000Z" itemprop="datePublished">2015-02-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mysql-blob-text-page-type/">mysql BLOB TEXT数据类型存储</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>对于BLOG与TEXT类型的字段，数据也不一定会放在BLOB页中。<br>如<code>create table t4(v1 blog) charset=latin1</code>插入4条数据<code>insert into t4 select repeat(&#39;a&#39;,8000);</code>其数据依然存放在数据页中。</p>
+<blockquote>
+<p>page offset 00000003, page type [B-tree Node], page level [0001]<br>page offset 00000004, page type [B-tree Node], page level [0000]<br>page offset 00000005, page type [B-tree Node], page level [0000]<br>page offset 00000006, page type [B-tree Node], page level [0000]<br>page offset 00000000, page type [Freshly Allocated Page]</p>
+</blockquote>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/mysql-blob-text-page-type/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mysql-the-server-quit-without-updating-pid" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/mysql-the-server-quit-without-updating-pid/" class="article-date">
+      <time datetime="2015-02-05T12:47:13.000Z" itemprop="datePublished">2015-02-05</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mysql-the-server-quit-without-updating-pid/">mysql the server quit without updating PID</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>mysql The server quit without updating PID，这个错误出现已经不止一次了。造成这个错误的原因有很多。这前也处理过好几次，但都是通过网上google的。</p>
+<p>这次也google了，不过问题没有解决，突然想到了mysql的错误日志，打开日志查找有[error]的字段，发现是在my.cnf配置里有一处配置写错了，修正之后，再启动mysql，一切正常了。</p>
+<p>总结：mysql会把相关启动，运行，关闭的信息记录到错误日志，所以当mysql发生异常时应该先查看错误日志，而不是上网google.</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-dropbox-proxy-set" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1479,141 +1620,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/photographer/">摄影</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-mac-time-machine-with-filevault" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/mac-time-machine-with-filevault/" class="article-date">
-      <time datetime="2014-12-14T08:51:43.000Z" itemprop="datePublished">2014-12-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mac-time-machine-with-filevault/">Mac Time Machine 加密备份</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>如果“加密”复选框可用，则您可以将其选中以保护备份磁盘。</p>
-<p>如果“加密”复选框呈灰色，则您的备份磁盘不支持加密。</p>
-<p>仅 Time Capsule 以及与电脑直接连接并使用 GPT 分区方案进行分区的分区或磁盘可以加密。如果您的磁盘不可以加密，请将鼠标指针放在呈灰色显示的复选框上，稍后会出现一个说明。如果磁盘需要重新重新格式化或重新分区以支持加密，则 Time Machine 会提示您执行此类操作。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/software/">玩转软件</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mac/">mac</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-os-x-yosemite-windows-max-size" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/os-x-yosemite-windows-max-size/" class="article-date">
-      <time datetime="2014-12-12T16:52:35.000Z" itemprop="datePublished">2014-12-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/os-x-yosemite-windows-max-size/">OS X yosemite 最大化窗口</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>OS X Yosemite中，大部分程序的“最大化”按钮默认变为了全屏显示，而不是之前的最大化窗口。<br>这种设计有时候也不是很方便，若要使用最大化窗口，可用如下方法：</p>
-<p>1、像Windows那样，双击程序标题栏<br>2、按住option键，再点最大化按钮+</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/software/">玩转软件</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mac/">mac</a></li></ul>
     </div>
 
       
