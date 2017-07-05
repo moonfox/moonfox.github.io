@@ -255,6 +255,72 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-activerecordbase-connection-executes" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/activerecordbase-connection-executes/" class="article-date">
+      <time datetime="2012-02-04T07:59:55.000Z" itemprop="datePublished">2012-02-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/activerecordbase-connection-executes/">如何查看 ActiveRecord::Base.connection.executes 的执行结果？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>拿mysql2这个gem来说：ActiveRecord::Base.connection.execute执行结果是Mysql2::Result的一个实例，这个类提供很多将执行结果解析出来的方法，例如：to_set、each、collect等，Mysql2::Result这些返回的一般都是数组，直接里面的元素的排序是按照数据库中字段的顺序排列的，按照数组的index直接取。 例如:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">results = ActiveRecord::Base.connection(<span class="string">"SELECT * FROM `users`"</span>)</div><div class="line">results.each <span class="keyword">do</span> <span class="params">|result|</span></div><div class="line">   (<span class="number">0</span>..(result.size -<span class="number">1</span>) <span class="keyword">do</span> <span class="params">|index|</span></div><div class="line">      puts result[index]</div><div class="line">   <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-ruby-p3p-def" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1533,72 +1599,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/people/">人物</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/funny/">有趣</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-redis-store-editor" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/redis-store-editor/" class="article-date">
-      <time datetime="2011-11-20T07:41:22.000Z" itemprop="datePublished">2011-11-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/redis-store-editor/">redis-store的开发首选编辑器</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>无意中看了一下redis-store项目的.gitignore文件，发现上面居然有.idea。看来redis-store的作者也在用rubymine作为开发的首选编辑器啊。不知道他们用的是不是正版的呢～～～。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/redis/">redis</a></li></ul>
     </div>
 
       

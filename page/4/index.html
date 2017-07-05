@@ -255,6 +255,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-migrate-blog-to-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/migrate-blog-to-hexo/" class="article-date">
+      <time datetime="2016-08-21T17:59:40.000Z" itemprop="datePublished">2016-08-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/migrate-blog-to-hexo/">博客又从aws迁移到Hexo</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>把博客又从aws迁移到Hexo了，真是折腾啊，迁移中处理了几个问题</p>
+<ol>
+<li>由于主题原因引起的单篇文章体积过大的问题</li>
+<li>highlight 代码块空白行不显示问题</li>
+<li>图片迁移到七牛</li>
+<li>对原有主题做了小小的修改。最最关键的是，不用为空间的事情担心了，因为已经全是不要钱的了</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/hexo/">hexo</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-chinese-women-volleybal-win" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1549,75 +1621,6 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rspec/">rspec</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-delegation-be-enhance-by-active-support-in-module" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/delegation-be-enhance-by-active-support-in-module/" class="article-date">
-      <time datetime="2015-04-24T15:54:33.000Z" itemprop="datePublished">2015-04-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/delegation-be-enhance-by-active-support-in-module/">Delegation be enhance by active support in module</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>基本思想是:</p>
-<blockquote>
-<ul>
-<li>当访问一个对象的方法时，如果这个方法不存，则转发这个方法给委托的对象</li>
-<li>Delegation is particularly useful with Active Record associations:</li>
-</ul>
-</blockquote>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span> &lt; ActiveRecord::Base</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hello</span></span></div><div class="line">    <span class="string">'hello'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">goodbye</span></span></div><div class="line">    <span class="string">'goodbye'</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &lt; ActiveRecord::Base</span></div><div class="line">  belongs_to <span class="symbol">:greeter</span></div><div class="line">  delegate <span class="symbol">:hello</span>, <span class="symbol">to:</span> <span class="symbol">:greeter</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Foo.new.hello   <span class="comment"># =&gt; "hello"</span></div><div class="line">Foo.new.goodbye <span class="comment"># =&gt; NoMethodError: undefined method `goodbye' for #&lt;Foo:0x1af30c&gt;</span></div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
       
       <div class="clearfix"></div>
     </div>

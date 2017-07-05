@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.gagahappy.com/"/>
-  <updated>2017-07-05T08:47:02.000Z</updated>
+  <updated>2017-07-05T11:03:14.000Z</updated>
   <id>http://www.gagahappy.com/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>deploy with mina</title>
+    <link href="http://www.gagahappy.com/deploy-with-mina/"/>
+    <id>http://www.gagahappy.com/deploy-with-mina/</id>
+    <published>2017-07-05T10:51:15.000Z</published>
+    <updated>2017-07-05T11:03:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>博客使用mina部署了，之前从编写到发布要打好几命令，而且还要登录的EC2上，执行的命令比较多</p>
+<p>有以下几个问题</p>
+<ul>
+<li>每次发布产生的新版本<code>./release/xxx</code>，文件的生成时间更新为当前时间</li>
+<li>这造成了每次向S3同步的时候，都会同步所有文件，因为本地文件的时间戳已经改变，这样会使本来没有发生更改的文件也会被再次同步一次，浪费了拉取数据的次数</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      deploy with mina
+    
+    </summary>
+    
+      <category term="程序开发" scheme="http://www.gagahappy.com/category/development/"/>
+    
+    
+      <category term="s3" scheme="http://www.gagahappy.com/tag/s3/"/>
+    
+  </entry>
   
   <entry>
     <title>mina 部署配置</title>
@@ -232,65 +260,6 @@ cook-pig-claw.jpg_b1" alt="茶香猪手" title="茶香猪手"></p>
     
     
       <category term="做滴菜" scheme="http://www.gagahappy.com/tag/mycook/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Kindle降级</title>
-    <link href="http://www.gagahappy.com/reset-kindle-firmware/"/>
-    <id>http://www.gagahappy.com/reset-kindle-firmware/</id>
-    <published>2017-06-16T15:22:15.000Z</published>
-    <updated>2017-06-17T02:56:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>把Kindle降级了，降到刚入手时的版本，果然恢复神速了！付出的代价就是不能使用Amazon的服务了～简单说就是你不能再为设备添加新书了，原因是Amazon不为低版本固件提供服务。解决方法是先发送到电脑（需要先选择注册的设备，当然是选Kindle），再USB到设备，所以千万不要把你的设备注销或登出账号</p>
-<h2 id="开始降级"><a href="#开始降级" class="headerlink" title="开始降级"></a>开始降级</h2><p>准备工作</p>
-<ul>
-<li>设备: kindle Pagewhite 一代</li>
-<li>固件: update_kindle_5.3.5.bin</li>
-<li><strong>备份:</strong> documents文件夹</li>
-</ul>
-<p>降级过程</p>
-<ol>
-<li>kindle连接电脑，update_kindle_5.3.5.bin复制到kindle设备的根目录下</li>
-<li>按住电源键30秒，直到出现重启画面。这个过程保持数据线连接电脑，不要拔掉。如果30秒后还没有反应，可以松开手，或观察电源指示灯是否息灭，如果息灭，可以松手，这时应该也可以进入重启画面</li>
-<li>等待自动更新完毕，查看固件版本为5.3.5，降级成功</li>
-</ol>
-<p>关于固件</p>
-<p>在网上搜索你要降级到的版本即可，本博降级的版本是刚入手时的 5.3.5，目前一代最新是5.6.1.1版，KP一代运行起来很卡</p>
-<p><strong>关于降级</strong><br>网上有说降级后变砖的，无法降级，本博没有遇到，本博只在kindle Pagewhite 一代上进行了降级，尚不清楚其它版本能否成功降级</p>
-<p>如何查看固件版本</p>
-<ol>
-<li>在主页点击右上角三个横线图标</li>
-<li>在弹出窗口点击设备信息</li>
-<li>弹出窗口上显示有固件版本号</li>
-</ol>
-<h2 id="降级后可能遇到的问题"><a href="#降级后可能遇到的问题" class="headerlink" title="降级后可能遇到的问题"></a>降级后可能遇到的问题</h2><ol>
-<li><p>Amazon的服务不能使用了</p>
-<ul>
-<li>带来的影响是你不能为设备添加新书了（所以降级前最好把你要看的书都下载)，解决方法前文已经提到</li>
-<li>要是你不小心把账号从设备上注销或是Reset了设备，是没有办法从降级的设备绑定账号的，Amazon会拒绝注册你的账号，这样也就无法使用上文提到的USB大法了，唯一解决的方法是你只能先升级到最新版，绑定账号后再降回来。</li>
-</ul>
-</li>
-<li><p>又自动升级了<br>网上说是在kindle根目录建立update.bin.tmp.partial文件夹，可以起到禁止自动更新的作用，本博没有试</p>
-</li>
-<li><p>书的封面不显示<br>可能你没有连网，连网后过一会就会更新</p>
-</li>
-<li><p>书中的图片不显示<br>只能重新下载这本书了</p>
-</li>
-</ol>
-<p><img src="http://img.gagahappy.com/blog/2017/06/reset-kindle-firmware.jpg_b1" alt="Kindle降级" title="Kindle降级"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;把Kindle降级了，降到刚入手时的版本，果然恢复神速了！付出的代价就是不能使用Amazon的服务了～简单说就是你不能再为设备添加新书了，原因是Amazon不为低版本固件提供服务。解决方法是先发送到电脑（需要先选择注册的设备，当然是选Kindle），再USB到设备，所以千万
-    
-    </summary>
-    
-      <category term="意识流" scheme="http://www.gagahappy.com/category/consciousness/"/>
-    
-    
-      <category term="随笔" scheme="http://www.gagahappy.com/tag/journal/"/>
     
   </entry>
   
