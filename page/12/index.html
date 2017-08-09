@@ -255,6 +255,547 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ruby-match-pre-post-match" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-match-pre-post-match/" class="article-date">
+      <time datetime="2012-02-13T14:41:11.000Z" itemprop="datePublished">2012-02-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-match-pre-post-match/">ruby 正则表达式获取匹配字符串前后部分</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>ruby 正则表达式获取匹配字符串前后部分</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">a = <span class="string">"Hello gagahappy Hi"</span></div><div class="line">refs = a.match(<span class="regexp">/gagahappy/</span>)</div><div class="line">refs.pre_match  <span class="comment"># =&gt; "Hello "</span></div><div class="line">refs.post_match <span class="comment"># =&gt; " Hi"</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ubuntu-11-10-rvm-ruby-openssl" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ubuntu-11-10-rvm-ruby-openssl/" class="article-date">
+      <time datetime="2012-02-12T05:54:28.000Z" itemprop="datePublished">2012-02-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ubuntu-11-10-rvm-ruby-openssl/">ubuntu 11.10 rvm 安装版ruby openssl解决</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>用rvm 安装ruby1.9.1时，需要openssl的版本为0.98，而系统自带为1.0，造成RUNERR,解决方法如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rvm pkg install openssl</div><div class="line">rvm remove 1.9.2</div><div class="line">rvm install 1.9.2 --with-openssl-dir=<span class="variable">$rvm_path</span>/usr</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rvm/">rvm</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-error-loading-gem-paths-on-load-path-in-gem-prelude" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/error-loading-gem-paths-on-load-path-in-gem-prelude/" class="article-date">
+      <time datetime="2012-02-11T09:03:16.000Z" itemprop="datePublished">2012-02-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/error-loading-gem-paths-on-load-path-in-gem-prelude/">Error loading gem paths on load path in gem_prelude</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在用rvm安装ruby后运行gem，出现</p>
+<blockquote>
+<p>Error loading gem paths on load path in gem_prelude<br>can’t modify frozen string</p>
+<p><internal:gem_prelude>:69:in `force_encoding’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:69:in `set_home’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:38:in `dir’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:76:in `set_paths’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:47:in `path’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:286:in `push_all_highest_version_gems_on_load_path’</internal:gem_prelude></p>
+<p><internal:gem_prelude>:355:in `<compiled>‘</compiled></internal:gem_prelude></p>
+</blockquote>
+<p>解决方法：找到 your/home/.rvm/src/ruby-your-version/gem_prelude.rb文件 编辑<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">set_home</span><span class="params">(home)</span></span></div><div class="line"> home = home.gsub File::ALT_SEPARATOR, File::SEPARATOR <span class="keyword">if</span> File::ALT_SEPARATOR</div><div class="line">- @gem_home = home.force_encoding(Encoding.find(<span class="string">'filesystem'</span>))</div><div class="line">+ @gem_home = home.dup.force_encoding(Encoding.find(<span class="string">'filesystem'</span>)</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-rackbuilder-rackup" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rackbuilder-rackup/" class="article-date">
+      <time datetime="2012-02-09T09:29:27.000Z" itemprop="datePublished">2012-02-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rackbuilder-rackup/">Rack::Builder  rackup</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>rackup converts the supplied rack config file to an instance of Rack::Builder. This is how is happens under the hood ( just so you get an idea ) :<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">config_file = File.read(config)</div><div class="line">rack_application = eval(<span class="string">"Rack::Builder.new &#123; <span class="subst">#&#123;config_file&#125;</span> &#125;"</span>)</div></pre></td></tr></table></figure></p>
+<p>And then rackup supplies rack_application to the respective webserver :</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">server.run rack_application, options</div></pre></td></tr></table></figure>
+<p>Very straight forward! In short, rack config files are evaluated within the context of a Rack::Builder object. So if we convert infinity to a rack config file which rackup can understand :<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># infinity.ru</span></div><div class="line"></div><div class="line">infinity = Proc.new &#123;<span class="params">|env|</span> [<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span> =&gt; <span class="string">"text/html"</span>&#125;, env.inspect]&#125;</div><div class="line"></div><div class="line">use Rack::CommonLogger</div><div class="line"></div><div class="line">map <span class="string">'/'</span> <span class="keyword">do</span></div><div class="line">  run infinity</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">map <span class="string">'/version'</span> <span class="keyword">do</span></div><div class="line">  map <span class="string">'/'</span> <span class="keyword">do</span></div><div class="line">    run Proc.new &#123;<span class="params">|env|</span> [<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span> =&gt; <span class="string">"text/html"</span>&#125;, <span class="string">"infinity 0.1"</span>] &#125;</div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  map <span class="string">'/last'</span> <span class="keyword">do</span></div><div class="line">    run Proc.new &#123;<span class="params">|env|</span> [<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span> =&gt; <span class="string">"text/html"</span>&#125;, <span class="string">"infinity beta 0.0"</span>] &#125;</div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure></p>
+<p>And now run it :<br><code>rackup infinity.ru</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rack/">rack</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-eager-load-application-classes" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/eager-load-application-classes/" class="article-date">
+      <time datetime="2012-02-08T03:22:28.000Z" itemprop="datePublished">2012-02-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/eager-load-application-classes/">Eager load application classes</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Eager load application classes</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_application_classes</span></span></div><div class="line">  <span class="keyword">return</span> <span class="keyword">if</span> $rails_rake_task</div><div class="line">  <span class="keyword">if</span> configuration.cache_classes</div><div class="line">    configuration.eager_load_paths.each <span class="keyword">do</span> <span class="params">|load_path|</span></div><div class="line">      matcher = <span class="regexp">/\A<span class="subst">#&#123;Regexp.escape(load_path)&#125;</span>(.*)\.rb\Z/</span></div><div class="line">      Dir.glob(<span class="string">"<span class="subst">#&#123;load_path&#125;</span>/**/*.rb"</span>).sort.each <span class="keyword">do</span> <span class="params">|file|</span></div><div class="line">        require_dependency file.sub(matcher, <span class="string">'\1'</span>)</div><div class="line">      <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-rails-railsorderedoptions" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails-railsorderedoptions/" class="article-date">
+      <time datetime="2012-02-07T10:19:21.000Z" itemprop="datePublished">2012-02-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails-railsorderedoptions/">rails Rails::OrderedOptions</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rails::OrderedOptions</span> &lt; Array <span class="comment">#:nodoc:</span></span></div><div class="line">  <span class="function"><span class="keyword">def</span> []=<span class="params">(key, value)</span></span></div><div class="line">    key = key.to_sym</div><div class="line"></div><div class="line">    <span class="keyword">if</span> pair = find_pair(key)</div><div class="line">      pair.pop</div><div class="line">      pair &lt;&lt; value</div><div class="line">    <span class="keyword">else</span></div><div class="line">      <span class="keyword">self</span> &lt;&lt; [key, value]</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> []<span class="params">(key)</span></span></div><div class="line">    pair = find_pair(key.to_sym)</div><div class="line">    pair ? pair.last : <span class="literal">nil</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">method_missing</span><span class="params">(name, *args)</span></span></div><div class="line">    <span class="keyword">if</span> name.to_s =~ <span class="regexp">/(.*)=$/</span></div><div class="line">      <span class="keyword">self</span>[$1.to_sym] = args.first</div><div class="line">    <span class="keyword">else</span></div><div class="line">      <span class="keyword">self</span>[name]</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  private</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_pair</span><span class="params">(key)</span></span></div><div class="line">      <span class="keyword">self</span>.each &#123; <span class="params">|i|</span> <span class="keyword">return</span> i <span class="keyword">if</span> i.first == key &#125;</div><div class="line">      <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ruby-escape" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-escape/" class="article-date">
+      <time datetime="2012-02-06T02:32:47.000Z" itemprop="datePublished">2012-02-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-escape/">ruby escape</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'cgi'</span></div><div class="line">url = <span class="string">'http://www.gagahappy.com/美食大下'</span></div><div class="line">url_escape = CGI::escape(url)</div><div class="line">url_unescape = CGI::unescape(url_escape)</div><div class="line">puts url_escape</div><div class="line">puts url_unescape</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ruby-file-name-file" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-file-name-file/" class="article-date">
+      <time datetime="2012-02-05T08:03:38.000Z" itemprop="datePublished">2012-02-05</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-file-name-file/">如何理解ruby中的__FILE__？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> File.expand_path(__FILE_<span class="number">_</span> + <span class="string">'/../filename'</span>)</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-activerecordbase-connection-executes" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1071,558 +1612,9 @@
 
 
   
-    <article id="post-git-how-to-merge" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/git-how-to-merge/" class="article-date">
-      <time datetime="2011-12-05T14:49:55.000Z" itemprop="datePublished">2011-12-05</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/git-how-to-merge/">git 如何自动合并文件内容？</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>git可以自动进行文件合并</p>
-<p>情况1 ：文件A在第一次提交成功后，分别被A用户和B用户编辑后提交，A用户pull B用户的提交，这时，git判断两个文件是否冲突，如果不冲突则进行合并</p>
-<p>情况2 ：文件A在第一次提交成功后，B用户对其进行了编辑提交，A用户没有对文件做出任何修改，pull B用户的提交，这时，git会自动用B用户的修改去覆盖A用户的文件，即使A文件同一行的内容不同</p>
-<p>思考：git是如何判断什么情况可以直接进行覆盖，什么情况需要进行合并。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/git/">git</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-git-new-repo" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/git-new-repo/" class="article-date">
-      <time datetime="2011-12-04T15:41:19.000Z" itemprop="datePublished">2011-12-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/git-new-repo/">新建git 版本库</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mkdir test_demo</div><div class="line"><span class="built_in">cd</span> test_demo</div><div class="line">git init</div><div class="line">touch README</div><div class="line">git add README</div><div class="line">git commit -m <span class="string">'first commit'</span></div><div class="line">git remote add origin git@github.com:youname/test_demo.git</div><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/git/">git</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-adwords-account-is-disabled" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/adwords-account-is-disabled/" class="article-date">
-      <time datetime="2011-12-03T01:09:53.000Z" itemprop="datePublished">2011-12-03</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/adwords-account-is-disabled/">adwords帐号屡次被停用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>以下是来自adwords的账号停用邮件</p>
-<blockquote>
-<p>我们注意到，您的 Google AdWords 帐户不符合我们的服务条款和广告政策要求。因<br>此，您的帐户以及所有相关帐户均已被停用，您的广告将不会继续在 Google 上投放。<br>请注意，不论现在还是今后，我们都禁止您拥有或创建其他任何 AdWords 帐户。</p>
-</blockquote>
-<p>用了200元血的教训才知道，adwords不做用来做taobao的广告～～～呃，我是血泪纵流啊~</p>
-<blockquote>
-<p>所谓的相关账号指的是什么呢。如果你两个账号都用同一个银行卡，则被视为相关账号，悲惧啊</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/adwords/">adwords</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-google-checkout" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/google-checkout/" class="article-date">
-      <time datetime="2011-12-02T03:32:42.000Z" itemprop="datePublished">2011-12-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/google-checkout/">Google 电子钱包</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>关于 Google 电子钱包</p>
-<p>Google 电子钱包会存储您的付款信息、交易记录、优惠等信息。所有信息都会同步到云。这样，无论您使用什么设备，钱包中的信息都会保持一致，便于您在实体店购物或在线购物。您可以通过下载 Google 电子钱包应用程序（Android 版）或在线使用 Google 电子钱包来访问您的 Google 电子钱包。<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/information/">让资讯飞</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/google/">google</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/google-checkout/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-whats-the-most-happiness-for-northern-europe" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/whats-the-most-happiness-for-northern-europe/" class="article-date">
-      <time datetime="2011-11-27T05:51:48.000Z" itemprop="datePublished">2011-11-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/whats-the-most-happiness-for-northern-europe/">北欧人为什么最幸福</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>下午的四、五点钟，北欧人已经下班开着车到湖边或山上，恣意地划船或攀岩；此刻的中国CBD区，上班族仍卖力地冲业绩，继续吃著各种方便食品。不成文的加班文化，让中国夜晚的办公大楼依旧灯火通明，晚餐的应酬又变相地延长了工作的时间。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/life/">生活</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/whats-the-most-happiness-for-northern-europe/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-thanksgiving-day-mac-price" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/thanksgiving-day-mac-price/" class="article-date">
-      <time datetime="2011-11-25T06:10:09.000Z" itemprop="datePublished">2011-11-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/thanksgiving-day-mac-price/">感恩节mac价格</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>apple.com<br><a href="http://img.gagahappy.com/blog/2011/11/B01BF349-39A7-4A98-9945-027F8CF416EB.png" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/11/B01BF349-39A7-4A98-9945-027F8CF416EB.png" alt="" title="mac pro"></a></p>
-<p>apple.cn<br><a href="http://img.gagahappy.com/blog/2011/11/95282F28-09ED-4F33-85A1-E489E539BCEF1.png" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/11/95282F28-09ED-4F33-85A1-E489E539BCEF1.png" alt="" title="95282F28-09ED-4F33-85A1-E489E539BCEF"></a></p>
-<p>amazon.cn<br><a href="http://img.gagahappy.com/blog/2011/11/D1B6B6EA-D43D-4760-826F-A43EF1AEC5BF.png" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/11/D1B6B6EA-D43D-4760-826F-A43EF1AEC5BF.png" alt="" title="mac pro"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/information/">让资讯飞</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mac/">mac</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-what-is-dup" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/what-is-dup/" class="article-date">
-      <time datetime="2011-11-22T08:35:59.000Z" itemprop="datePublished">2011-11-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/what-is-dup/">what is dup</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>dup returns a copy (duplicate) of the object. In the above code, it is<br>used to let you get back a shuffled copy of the Array, without<br>shuffling the original.</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-how-to-start-a-movement" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/how-to-start-a-movement/" class="article-date">
-      <time datetime="2011-11-21T15:09:19.000Z" itemprop="datePublished">2011-11-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/how-to-start-a-movement/">How to start a movement</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Derek Sivers 谈如何开启欢乐时刻</p>
-<embed src="http://player.youku.com/player.php/sid/XMTkyMTcyNjk2/v.swf" allowfullscreen="true" quality="high" width="480" height="400" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash">
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/people/">人物</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/funny/">有趣</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/43/">43</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
     </nav>
   
 </div>
