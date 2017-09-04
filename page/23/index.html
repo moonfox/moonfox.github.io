@@ -255,6 +255,959 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ubuntu-10-04-restart-network-manger-repair" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ubuntu-10-04-restart-network-manger-repair/" class="article-date">
+      <time datetime="2010-10-17T03:01:09.000Z" itemprop="datePublished">2010-10-17</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ubuntu-10-04-restart-network-manger-repair/">解决Ubuntu10.04“网络已禁用”的问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>本博在<a href="http://www.gagahappy.com/ubuntu-10-04-restart-network-manger/">ubuntu 10.04 重启网络服务</a>一文中介绍了怎样重启网络服务，后来在使用过程中发现此方法并不正确，后经网上搜索，更正如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo service network-manager stop</div><div class="line">sudo rm /var/lib/NetworkManager/NetworkManager.state</div><div class="line">sudo service network-manager start</div><div class="line">sudo gedit /etc/NetworkManager/nm-system-settings.conf</div><div class="line"><span class="comment"># 把false改成true</span></div><div class="line">sudo service network-manager restart</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ubuntu-10-04-restart-network-manger" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ubuntu-10-04-restart-network-manger/" class="article-date">
+      <time datetime="2010-10-16T12:27:26.000Z" itemprop="datePublished">2010-10-16</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ubuntu-10-04-restart-network-manger/">ubuntu 10.04 重启网络服务</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>ubuntu 10.04 重启网络服务<br>sudo restart network-manager</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-rails3-passwd-must-to-be-string-format" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails3-passwd-must-to-be-string-format/" class="article-date">
+      <time datetime="2010-10-15T15:28:34.000Z" itemprop="datePublished">2010-10-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails3-passwd-must-to-be-string-format/">rails3.0怪异的数据库密码配置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>发现rails3.0在配置数据库密码这里有一个要注意的地方，当你的密码完全是纯数字的时候，会引发can’t convert Fixnum into String 错误，这时如果你非要用数字做密码，请给数字密码加上引号。当密码是以字母开头的时候，不会出现这种现象，rails会顺利的启动。</p>
+<p><a href="http://img.gagahappy.com/blog/2010/10/sendpix1.jpg" title="rails3" target="_blank" rel="external"></a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-software-engineering-about-high-cohesion-and-loose-coupling" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/software-engineering-about-high-cohesion-and-loose-coupling/" class="article-date">
+      <time datetime="2010-10-14T12:51:28.000Z" itemprop="datePublished">2010-10-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/software-engineering-about-high-cohesion-and-loose-coupling/">软件工程--高内聚,低耦合</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ul>
+<li>高内聚,低耦合在软件工程里有,主要是说模块之间和模块内部之间的关系紧密程度</li>
+<li>高内聚就是提高模块内部的关联程度,低耦合当然就是降低模块之间的关联程度</li>
+<li>耦合性比较高的话，模块代码不易分离，是不好的编程模式</li>
+<li>内聚是越高越好，内聚个人认为是只是实现一个功能，不是很多的功能</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/software/">玩转软件</a>
+    </div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-macbuntu-make-ubuntu-to-mac-osx" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/macbuntu-make-ubuntu-to-mac-osx/" class="article-date">
+      <time datetime="2010-10-13T12:44:48.000Z" itemprop="datePublished">2010-10-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/macbuntu-make-ubuntu-to-mac-osx/">Macbuntu，Ubuntu变身苹果</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>记得以前把ubuntu美化成mac要安装许多软件，不但时间长，而且相当的复杂，上手比较困难，使得许多人望而却步，其中也包括本博，终于Macbuntu的出现使得这一问题变得相当简单，下载后一健安装就可以完成ubuntu界面向MAC OSX的转变。</p>
+<p>目前，Macbuntu有两种版本，分别针对ubuntu10.04和ubuntu10.10，下载的时候一定要选对版本，否则不能正常安装。</p>
+<p>安装步骤：</p>
+<ol>
+<li>下载：<a href="http://sourceforge.net/projects/macbuntu/files/macbuntu-10.04/v2.3/Macbuntu-10.04.tar.gz/download" target="_blank" rel="external">http://sourceforge.net/projects/macbuntu/files/macbuntu-10.04/v2.3/Macbuntu-10.04.tar.gz/download</a></li>
+<li>安装：解压后进入文件夹，执行./install.sh。注意，这里不用加sudo</li>
+<li>选择安装内容：<br><img src="http://img.gagahappy.com/blog/2010/10/sendpix0.jpg" alt="" title="Macbuntu"></li>
+</ol>
+<p>在这个过程中会让你选择一些特效，例如show desktop，scale等类似Mac os X的Expose特效。</p>
+<p>等待安装完成后，界面会自动变成MAC OSX，怎么样，简单吧，相信你已经安装好了，尽情的使用吧！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-think-about-hun-yin-bao-wei-zhan-an-mo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/think-about-hun-yin-bao-wei-zhan-an-mo/" class="article-date">
+      <time datetime="2010-10-12T14:00:43.000Z" itemprop="datePublished">2010-10-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/think-about-hun-yin-bao-wei-zhan-an-mo/">婚姻保卫战–感悟按摩</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在重温婚姻保卫战，又得出一条：丈夫还要会一项技能，按摩，给老婆按摩，啊啊啊！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/tv/">电视剧</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-buy-seagate-freeagent-goflex-500g" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/buy-seagate-freeagent-goflex-500g/" class="article-date">
+      <time datetime="2010-10-11T12:30:30.000Z" itemprop="datePublished">2010-10-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/buy-seagate-freeagent-goflex-500g/">购得500G移动硬盘一块</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>买了希捷 freeagent goflex-500G的移动硬盘，现在这东西做的真轻啊，才150g，感觉包装盒里没有东西一样，哇卡卡！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/shopping/">购物</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-shuai-cong-song-begin-1974" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/shuai-cong-song-begin-1974/" class="article-date">
+      <time datetime="2010-10-10T15:11:26.000Z" itemprop="datePublished">2010-10-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/shuai-cong-song-begin-1974/">初音甩葱歌1974年原始版</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>1974年原始版的初音甩葱歌，四人合音无乐器的，B-Box呀~~~！</p>
+<embed src="http://player.youku.com/player.php/sid/XMjAxODY1MzYw/v.swf" quality="high" width="480" height="400" align="middle" allowscriptaccess="sameDomain" type="application/x-shockwave-flash">
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/funny/">有趣</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-google-reader-view-change" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/google-reader-view-change/" class="article-date">
+      <time datetime="2010-10-10T14:57:56.000Z" itemprop="datePublished">2010-10-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/google-reader-view-change/">google reader 阅读方式改变</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>这段时间没怎么上google reader ，发现阅读方式发生了变化，新的阅读方式只显示未读条目，不再显示已读条目了，对于新的阅读方式这一上来还真有点不适应。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/software/">玩转软件</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/google/">google</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-history-of-100-greatest-britons-part-2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/history-of-100-greatest-britons-part-2/" class="article-date">
+      <time datetime="2010-10-10T14:34:04.000Z" itemprop="datePublished">2010-10-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/history-of-100-greatest-britons-part-2/">历史上100位最伟大的英国人 part 2</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>51. 亚瑟王（King Arthur）：传说中的凯尔特人首领。<br><img src="http://img.gagahappy.com/blog/2010/10/King-Arthur.jpg" alt="" title="King Arthur"><br>52. 弗洛伦丝·南丁格尔（Florence Nightingale，1820－1910）：著名护士，慈善家。</p>
+<p>53. T·E·劳伦斯（T. E. Lawrence，1888－1935）：军人，即“阿拉伯的劳伦斯”。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/information/">让资讯飞</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/people/">人物</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/history-of-100-greatest-britons-part-2/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-history-of-100-greatest-britons-part-1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/history-of-100-greatest-britons-part-1/" class="article-date">
+      <time datetime="2010-10-08T15:48:38.000Z" itemprop="datePublished">2010-10-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/history-of-100-greatest-britons-part-1/">历史上100位最伟大的英国人 part 1</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>1. 温斯顿·邱吉尔爵士（Sir Winston Churchill，1874－1965）：政治家，曾担任联合王国首相（1940－1945、1951－1955），二战“三巨头”之一。</p>
+<p>2. 伊赞巴德·金顿·布鲁内尔（Isambard Kingdom Brunel，1806–1859）：工程师，英国铁路体系的奠基人。</p>
+<p>3.戴安娜王妃（ Princess Diana，1961－1997）：王室，威尔士王妃（1981－1996）</p>
+<p><img src="http://img.gagahappy.com/blog/2010/10/2246451789128890769.jpg" alt="" title="戴安娜王妃"></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/information/">让资讯飞</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/people/">人物</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/history-of-100-greatest-britons-part-1/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-roger-federer-ad-of-gillette-show" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/roger-federer-ad-of-gillette-show/" class="article-date">
+      <time datetime="2010-10-08T14:52:01.000Z" itemprop="datePublished">2010-10-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/roger-federer-ad-of-gillette-show/">费德勒拍广告间歇用网球打水瓶</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>费德勒身为吉列剃须刀的代言人，这是为吉列拍广告片时网上流传出来的花絮。神啊！网球王子那些是真的啊！</p>
+<embed src="http://player.youku.com/player.php/sid/XMTk5MTM5Nzc2/v.swf" quality="high" width="480" height="400" align="middle" allowscriptaccess="sameDomain" type="application/x-shockwave-flash">
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/funny/">有趣</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-how-to-change-firefox-3-cache-postion" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/how-to-change-firefox-3-cache-postion/" class="article-date">
+      <time datetime="2010-10-07T14:19:24.000Z" itemprop="datePublished">2010-10-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/how-to-change-firefox-3-cache-postion/">如何修改Firefox 3缓存Cache的位置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>如何修改Firefox 3缓存Cache的位置<br>安装了firefox，在进行设置的时候，发现没有临时文件夹位置的修改.<br>通过搜索引擎发现Firefox 3的缓存Cache原来是放在系统盘(C:)＼Documents and Settings＼[你的用户名]＼Local Settings＼Application Data＼Mozilla＼Firefox＼Profiles＼[随机数].default＼Cache</p>
+<p>为了避免使系统盘产生磁盘碎片，我们最好把所有临时文件夹都放到非系统盘，如E盘。<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/software/">玩转软件</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/firefox/">firefox</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/how-to-change-firefox-3-cache-postion/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-zhuangxiu-order-efang-furniture" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/zhuangxiu-order-efang-furniture/" class="article-date">
+      <time datetime="2010-10-07T12:53:41.000Z" itemprop="datePublished">2010-10-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/zhuangxiu-order-efang-furniture/">装修笔记——第60天，订购意风家具</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>利用十一的最后一个节假日，把家具订了下来，意风的家具，十一期间7,5折，还是不错的。客厅和卧室由于地面颜色的不同，对应的选择了不同颜色的家具，也不知道效果会怎么样，期待中。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-change-firefox-profile-postion" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -640,999 +1593,6 @@
       
           
         <p>请来了保洁，把所有的活都包了是120元，贵了20元，保洁师傅从早上8:30一直干到下午1:30，总体效果还是不错的。保洁完成后，又在每个房间的正中央放了一盆水，房间也是需要喝水的。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-stop-wordpress-more-jump-link" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/stop-wordpress-more-jump-link/" class="article-date">
-      <time datetime="2010-09-27T12:02:13.000Z" itemprop="datePublished">2010-09-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/stop-wordpress-more-jump-link/">阻止wordpress more链接跳转到页面的中间</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>阻止wordpress more链接跳转到页面的中间</p>
-<p>默认情况下，点击more链接将会将读者带到单篇文章浏览的形式，并且会转到more标签指定的位置。这样，如果你使用默认的more标签功能，读者点击more链接之后将会被带入到文章的半中间。曾经一段时间，大家比较接受这样的做法，不过，现在越来越人觉得还是直接打开文章页面不跳转到其他位置比较好。</p>
-<p>总之一句话，如果你希望点击more标签后，打开进入的是文章页面的顶部，那么请在当前主题的functions.php文件，添加下面的代码:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> remove_more_jump_link(<span class="variable">$link</span>) &#123;</div><div class="line"><span class="variable">$offset</span>  = strpos(<span class="variable">$link</span>, <span class="string">'#more-'</span>);</div><div class="line"><span class="keyword">if</span>  (<span class="variable">$offset</span>) &#123;</div><div class="line"><span class="variable">$end</span>  = strpos(<span class="variable">$link</span>, <span class="string">'"'</span>,<span class="variable">$offset</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span>  (<span class="variable">$end</span>) &#123;</div><div class="line"><span class="variable">$link</span>  = substr_replace(<span class="variable">$link</span>, <span class="string">''</span>, <span class="variable">$offset</span>, <span class="variable">$end</span>-<span class="variable">$offset</span>);</div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span>  <span class="variable">$link</span>;</div><div class="line">&#125;</div><div class="line">add_filter(<span class="string">'the_content_more_link'</span>,  <span class="string">'remove_more_jump_link'</span>);</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>原文地址：<a href="http://www.wordpress.la/WordPress-more-tag-tips.html" target="_blank" rel="external">http://www.wordpress.la/WordPress-more-tag-tips.html</a></p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/software/">玩转软件</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/wordpress/">wordpress</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-install-shexiang-diban" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-install-shexiang-diban/" class="article-date">
-      <time datetime="2010-09-26T14:40:47.000Z" itemprop="datePublished">2010-09-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-install-shexiang-diban/">装修笔记——第49天，地板安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>感觉东方家园的安装送货还是比较准时的，约了10点钟安装地板，10点半左右到达，您可能会说晚了半个小时，但比起其他安装队伍来说，这已经是比较准时的了。</p>
-<p>安装地板前最好把地面用吸尘器吸一遍，彻底把地面上的灰尘打扫干净，这样在地板上行走的时候就不会把地面上的灰带上来，虽然在地板下面已经有一层膜对地板进行了保护，但效果不如把地面打扫干净的好。</p>
-<p>东方家园安装地板的收费情况如下：</p>
-<blockquote>
-<p>安装费用<br>地板：12元/平米<br>踢脚线：3元/平米<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/zhuangxiu-install-shexiang-diban/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-install-jieju-faenza" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-install-jieju-faenza/" class="article-date">
-      <time datetime="2010-09-25T15:05:56.000Z" itemprop="datePublished">2010-09-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-install-jieju-faenza/">装修笔记——第48天，洁具安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>买了法恩莎的洁具，经过一番讨价还价后，免去了安装时所需要的所有五金的钱，安装过程还算顺利，就是安装的师傅来得太晚了，约好的下午2点，结果都5点了才来，不过师傅的活很认真，一直安到7点钟，但是还是没有安完，直到第二天的上午才算是大功告成。</p>
-<p>在洁具安装好后要做的工作就是检查是否漏水，漏水有的时候在试水的时候是不会马上出现的，有的时候需要等上一会，才能发现漏水，特别是洗脸池的下水管，我当时检查时就没有查出来，结果过了没有三分钟，就发生了漏水，又让安装师傅给重新调整了下，问题算是解决了。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-install-ao-chubao" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-install-ao-chubao/" class="article-date">
-      <time datetime="2010-09-25T14:41:40.000Z" itemprop="datePublished">2010-09-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-install-ao-chubao/">装修笔记——第48天，厨宝安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>苏宁电器对于六环外的客户，采用第一天送货，第二天安装的方式，分两次进行，对于六环以内的客户，送货与安装则是同一天。</p>
-<p>先说一下厨宝的费用，一般情况下是160-180元，厨宝的安装是免费的，但配件却是收费的，而且价格不菲。如果你自备了配件，要是以后发生漏水后，他们是不负责维修的。</p>
-<p>综上所综，在安装厨宝前，最好把接水龙头和厨宝的这两个冷水口事先留好，这样在安装的时候可以节约一大笔费用，因为配件主要的费用全在安装两个冷水口所用的配件上面。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-xiaomo-send-me-a-xichenqi-for-my-new-home" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/xiaomo-send-me-a-xichenqi-for-my-new-home/" class="article-date">
-      <time datetime="2010-09-24T15:20:53.000Z" itemprop="datePublished">2010-09-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/xiaomo-send-me-a-xichenqi-for-my-new-home/">收到礼物啦</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在中秋节假日的最的后一天，小莫两口子在百忙中抽出时间来到我家，为我的新家买了一个很牛X的吸尘器，还买了我最爱喝的可乐，还给买了一大箱果汁，真是太谢谢你们啦，爱死你们啦，很hight很happy</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/taandme/">Ta们的我</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-chugui-install" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-chugui-install/" class="article-date">
-      <time datetime="2010-09-20T13:47:24.000Z" itemprop="datePublished">2010-09-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-chugui-install/">装修笔记——第43天，厨柜安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>厨柜安装时最好在地上铺一层比较厚的纸板，以防地砖被电锤等重物在拿放的过程中碰坏，建议纸板铺放的面积大一些，最好能覆盖住所有工作区域。</p>
-<p>厨柜安装的最大特点就是安装后屋子、地面都会变得特别脏，和安门时有一拼。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-install-door" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-install-door/" class="article-date">
-      <time datetime="2010-09-19T15:09:07.000Z" itemprop="datePublished">2010-09-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-install-door/">装修笔记——第42天，门安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>我家买的是免漆复合实木门，颜色是铁胡桃，门挺重的，搬了搬大概有100斤左右的样子，房间里安上门这装修看着就有点样子啦。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-install-yakou" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-install-yakou/" class="article-date">
-      <time datetime="2010-09-18T15:12:36.000Z" itemprop="datePublished">2010-09-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-install-yakou/">装修笔记——第41天，哑口安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>安装门及包哑口工序，前几步都基本一样，只有最后一步不一样，如果是安装门，在包好哑口后才能安装</p>
-<p>1、在墙上打孔，以便安装木楔子，打孔时要让安装师傅轻一些，避免把墙体打坏，我家的墙就掉了一小块，事后只能用腻子被<br>2、在打好的孔里安装木楔子，以便固定基本框架，也就是通常说的”打底“<br>3、制做门框的基底，也就是用三块大芯拼成一个门洞的框架<br>4、将门框和墙上的木楔子用钉子固定，然后再打上发泡胶使其更牢固<br>5、在木门框上用胶粘上哑口所用材料<br><!--more +阅读全文+ --><br>6、在木门框与墙体之间贴上门条，再用钉子固定<br>7、在门条上面贴上门线，挡住门条上打钉子的部位，起到美观的效果，至此包哑口完成，哑口的标准宽度是6厘米<br>8、把门安装在哑口上即可<br>9、安装门锁<br>10、安装挡风门条，这个名字是自己起的，具体叫什么忘记了，作用就是挡住门锁，不让门开过头<br>11、安装门吸</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-children-different-chinese-with-foreign" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/children-different-chinese-with-foreign/" class="article-date">
-      <time datetime="2010-09-17T15:56:25.000Z" itemprop="datePublished">2010-09-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/children-different-chinese-with-foreign/">咱们小时候与外国孩子的差距</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>1．在家里墙上乱涂乱画。</p>
-<blockquote>
-<p>外国小孩：这是绘画天性的体现，值得鼓励。<br>咱小时候：一顿毒打。</p>
-</blockquote>
-<p>2．放学家长来接的晚了，自己先直接回家了。</p>
-<blockquote>
-<p>外国小孩：这是探索精神的体现，值得鼓励。<br>咱小时候：一顿毒打。</p>
-</blockquote>
-<p>3．玩得一身全是泥土很脏的回到家。</p>
-<blockquote>
-<p>外国小孩：这是孩子的天性，值得鼓励。<br>咱小时候：一顿毒打。</p>
-</blockquote>
-<p>4．带异性小朋友回家玩被家长发现。</p>
-<blockquote>
-<p>外国小孩：这么早就学会和异性沟通，值得鼓励。<br>咱小时候：一顿毒打。</p>
-</blockquote>
-<p>5．考试成绩不理想。</p>
-<blockquote>
-<p>外国小孩：人难免有失误的时候，值得鼓励。<br>咱小时候：一顿毒打</p>
-</blockquote>
-<p>6．在外面和别的小朋友打架了。</p>
-<blockquote>
-<p>外国小孩：孩子嘛，不懂事很正常。<br>咱小时候：一顿毒打。</p>
-</blockquote>
-<p>7．吃饭时掉的哪哪儿都是。</p>
-<blockquote>
-<p>外国小孩：告诉他不能浪费，都捡起来吃了就好。<br>咱小时候：一顿毒打。</p>
-</blockquote>
-<p>8．痴迷于某些兴趣爱好，废寝忘食。</p>
-<blockquote>
-<p>外国小孩：多些爱好是好事情，值得鼓励。<br>咱小时候：一顿毒打。</p>
-</blockquote>
-<p>9．看课外书影响休息。</p>
-<blockquote>
-<p>外国小孩：没事的，不要打扰孩子的专注，值得鼓励。<br>咱小时候：一顿毒打。</p>
-</blockquote>
-<p>10. 和父母意见不统一，发生争执时。</p>
-<blockquote>
-<p>外国小孩：大家公平讨论，各抒己见。<br>咱小时候：一顿毒打。</p>
-</blockquote>
-<p>最后：强调声明咱绝对不是崇洋媚外，但咱的教育方式确实需要改进。</p>
-<p>不过话说回来，我们虽然从小就遭到不断地毒打，我们还是依然的茁壮成长！</p>
-<blockquote>
-<p>原文链接：<a href="http://hexie.me/2010/09/15/cha-ju-wai/" target="_blank" rel="external">http://hexie.me/2010/09/15/cha-ju-wai/</a></p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/funny/">有趣</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-beauty-huning-duty-of-cto" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/beauty-huning-duty-of-cto/" class="article-date">
-      <time datetime="2010-09-16T15:26:00.000Z" itemprop="datePublished">2010-09-16</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/beauty-huning-duty-of-cto/">美女总监，原谷歌技术总监胡宁加盟上海聚胜万合出任CTO</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p><img src="http://img.gagahappy.com/blog/2010/09/201098112616.jpg" alt="" title="胡宁"></p>
-<p>新浪科技讯 9月8日上午消息，原谷歌技术总监胡宁已正式加盟上海聚胜万合广告有限公司(简称：MediaV)，并出任该公司首席技术官。</p>
-<p>胡宁于清华大学计算机科学与技术系本科毕业，后赴美国卡耐基梅隆大学攻读并获得娱乐技术硕士，计算机科学硕士、博士学位。2005年加入Google，先后在Google纽约、硅谷总部、北京分部工作，历任工程师、高级工程师、主任工程师、技术总监。</p>
-<p>2005年起任移动搜索质量的技术带头人，主持开发数十项创新及改进功能，拥有搜索算法的美国和全球专利，负责多个世界重量级运营商的移动搜索产品发布，包括中国移动、欧洲Vodafone、日本DoCoMo和KDDI；2007年被派往中国领导音乐产品研发，2009年3月发布谷歌音乐，推出相似歌曲、音乐泡泡、个性推荐等多个代表技术最前沿的创新功能，胡宁2010年起负责Android服务开发。</p>
-<p>MediaV由前好耶总裁杨炯纬创办，定位互联网营销解决方案提供商，2009年10月，MediaV完成首轮融资，投资方为光速创投基金。今年8月份MediaV宣布又获得纪源资本和光速创投的联合投资。</p>
-<blockquote>
-<p>原文：<a href="http://tech.sina.com.cn/i/2010-09-08/10244633159.shtml" target="_blank" rel="external">http://tech.sina.com.cn/i/2010-09-08/10244633159.shtml</a></p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/information/">让资讯飞</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/news/">新闻</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-dengju-install" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-dengju-install/" class="article-date">
-      <time datetime="2010-09-16T13:42:17.000Z" itemprop="datePublished">2010-09-16</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-dengju-install/">装修笔记——第39天，灯具安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>一共买了八个灯，分别是客厅三个，主卧次卧各一个，厨房一个，主卧阳台厨房阳台各一个。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-chazuo-kaiguan-install" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-chazuo-kaiguan-install/" class="article-date">
-      <time datetime="2010-09-15T13:37:05.000Z" itemprop="datePublished">2010-09-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-chazuo-kaiguan-install/">装修笔记——第38天，插座开关安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>一共安装了45个开关和插座，发现不带开关的插座自己也能安装。最好把卫生间和厨房的插座都装上防溅盒。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/zhuangxiu/">装修</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-go-to-the-different-places-in-morning" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/go-to-the-different-places-in-morning/" class="article-date">
-      <time datetime="2010-09-14T04:16:04.000Z" itemprop="datePublished">2010-09-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/go-to-the-different-places-in-morning/">一上午去了两个不认识的地方</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>一上午去了两个不认识的地方，哈哈，还是很迅速的啊，发现找路的能力还是相当的好的啊！就是有的时候反应慢了一些，有些认识的地方居然没有想起来，叵测了啊！</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/weibo/">微博</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-zhuangxiu-install-diaoding" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/zhuangxiu-install-diaoding/" class="article-date">
-      <time datetime="2010-09-13T15:00:06.000Z" itemprop="datePublished">2010-09-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/zhuangxiu-install-diaoding/">装修笔记——第36天，吊顶安装</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>安装师傅说我家的板子比较硬，不好切割，这是意味着我家的板子比较好吗？哈哈哈</p>
 
       
     </div>

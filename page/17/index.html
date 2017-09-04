@@ -255,6 +255,995 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-apr-util-wasnt-linked-against-berkeley-db" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/apr-util-wasnt-linked-against-berkeley-db/" class="article-date">
+      <time datetime="2011-04-15T07:46:46.000Z" itemprop="datePublished">2011-04-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/apr-util-wasnt-linked-against-berkeley-db/">APR-UTIL wasn&#39;t linked against Berkeley DB</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Subversion仓库的存储可以用Berkley DB数据库（一般叫做Berkley DB 类型）或者普通的文件系统（一般叫做FSFS 类型）来实现。</p>
+<p>FSFS 类型subversion在安装编译安装时默认安装，支持Berkley DB 类型需要在编译安装时指定 –with-berkeley-db 选项，并且在安装apr-util时必须把 –with-berkeley-db 一起编译进去。</p>
+<p>安装subversion提示APR-UTIL wasn’t linked against Berkeley DB，在安装时已经指明 –with-berkeley-db 所在路径，但依然没有找到。</p>
+<p>berkeley-db安装版本为5.1.25，怀疑是berkeley-db版本太高造成apr-util无法识别，更换为4.8.30后，重新编译apr-util，Subversion 编译顺利通过。</p>
+<p>经验总结：1、不能太追新了～～～2、遇到问题时要仔细看错误提示。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a><a class="article-category-link" href="/category/linux/software/">玩转软件</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/subversion/">Subversion</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-fedora-apache-can-not-access-subversion-repository" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/fedora-apache-can-not-access-subversion-repository/" class="article-date">
+      <time datetime="2011-04-14T08:29:31.000Z" itemprop="datePublished">2011-04-14</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/fedora-apache-can-not-access-subversion-repository/">fedora 14 apache不能访问 subversion 仓库</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>使用apache访问svn仓库目录时，仓库文件放在/home/主目录下，用户及用户组与apache用户一至，apache配置也没有问题，却总是提示无法访问format文件，很是无奈。</p>
+<p>随后把仓库目录放到/下，问题消失。但把仓库目录再次移回到主目录下，问题依然存在。可以确定就是权限不对造成apache无法访问。</p>
+<p>最后在/home/主目录/ 文件夹上找到问题，其权限是700，难怪apache无法访问，改成755后，问题解决。</p>
+<p>总结：fedora 默认主目录文件夹的权限是700，所以如果想让apache访问在主目录下的站点，第一步要做的工作就是设置权限为755。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/fedora/">fedora</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-delete-fedora-kernel" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/delete-fedora-kernel/" class="article-date">
+      <time datetime="2011-04-13T08:36:37.000Z" itemprop="datePublished">2011-04-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/delete-fedora-kernel/">fedora 删除旧内核</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>由于Fedora更新升级非常的频繁， 所以， 非常有必要清除陈旧的内核，方法如下：</p>
+<ol>
+<li><p>查看当前系统中已安装的内核相关包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rpm -qa | grep kernel</div><div class="line">kernel-2.6.35.6-45.fc14.i686</div><div class="line">kernel-2.6.35.12-88.fc14.i686</div><div class="line">abrt-addon-kerneloops-1.1.17-1.fc14.i686</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前系统内核<br>shell&gt; uname -r<br>kernel-2.6.35.12-88.fc14.i686</p>
+</li>
+<li><p>确定要删除的内核：<br>这里为：kernel-2.6.35.6-45.fc14.i686</p>
+</li>
+<li><p>删除内核：<br><code>yum remove kernel-2.6.35.6-45.fc14.i686</code></p>
+</li>
+</ol>
+<p>说明：</p>
+<blockquote>
+<p>没有直接使用: rpm -e 的方法删除内核包， 而是使用 yum remove 进行删除，<br>因为使用yum remove删除， yum 会自动移除 ： /boot/grub/menu.lst 中的相关启动项。</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/fedora/">fedora</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-fedora-14-install-nvidia-drives" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/fedora-14-install-nvidia-drives/" class="article-date">
+      <time datetime="2011-04-12T13:26:39.000Z" itemprop="datePublished">2011-04-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/fedora-14-install-nvidia-drives/">Fedora 14  安装 NVIDIA 显卡驱</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>首先，安装 RPM Fusion 软件仓库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">su -c <span class="string">'rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm'</span></div><div class="line">su -c <span class="string">'rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm'</span></div><div class="line">su -c <span class="string">'yum update'</span></div></pre></td></tr></table></figure></p>
+<p>然后，安装 NVIDIA 显卡驱动</p>
+<ol>
+<li>确定显卡类型（当然，如果你知道你的显卡类型，就没必要执行这一步了）<br><code>su -c &#39;/sbin/lspci | grep VGA&#39;</code></li>
+<li>安装nvidia驱动<blockquote>
+<ul>
+<li>如果是 GeForce 6, 7, 8, 9, 200, 300, 400 &amp; 500 系列显卡：<br><code>su -c &#39;yum install kmod-nvidia xorg-x11-drv-nvidia-libs&#39;</code></li>
+<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-PAE&#39;</code></li>
+<li>或者：<br><code>su -c &#39;yum install akmod-nvidia xorg-x11-drv-nvidia-libs&#39;</code></li>
+<li>如果是 GeForce Fx 显卡：<br>yum install kmod-nvidia-173xx xorg-x11-drv-nvidia-173xx-libs</li>
+<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-173xx-PAE&#39;</code></li>
+<li>或者：<br><code>su -c &#39;yum install akmod-nvidia-173xxxorg-x11-drv-nvidia-173xx-libs&#39;</code></li>
+<li>如果是 GeForce 4 或者更低系列的显卡：<br><code>su -c &#39;yum install kmod-nvidia-96xx</code> xorg-x11-drv-nvidia-96xx-libs’</li>
+<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-96xx-PAE&#39;</code></li>
+<li>或者：<br><code>su -c &#39;yum install akmod-nvidia-96xxxorg-x11-drv-nvidia-96xx-libs&#39;</code></li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<p>最后，重启系统</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/fedora/">fedora</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-gong-yi-kuai-shan" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/gong-yi-kuai-shan/" class="article-date">
+      <time datetime="2011-04-11T09:23:52.000Z" itemprop="datePublished">2011-04-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/gong-yi-kuai-shan/">国外公益快闪活动</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <embed src="http://player.youku.com/player.php/sid/XMjUyNjUwMjk2/v.swf" quality="high" width="480" height="400" align="middle" allowscriptaccess="sameDomain" type="application/x-shockwave-flash">
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/entertainment/">娱乐</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-i-donot-give-avril-lavigne" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/i-donot-give-avril-lavigne/" class="article-date">
+      <time datetime="2011-04-09T13:33:27.000Z" itemprop="datePublished">2011-04-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/i-donot-give-avril-lavigne/">I don’t give–Avril Lavigne</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>I don’t give(a damn)是一张在2005年发行的专集B-sides里面的歌曲,而这张专集在内地被禁了,其实大家经常听到的,在Baidu,Sogua上面搜到的都是个Clean Version,原版副歌部分唱的是I don’t give a damn,I don’t give a shit,常见版本改成了I don’t give it up,I don’t give a damn.出现了shit,这个不雅的词汇,从而,这张专集被扼杀了…里面的歌曲大多数都是VV出道前的作品,很纯净,本色的感觉,里面还有Things I’ll never say的第一版.</p>
+<p><a href="http://img.gagahappy.com/blog/2011/04/s300_15fc3c7076f1d8ccd83a0924ffcbfb2d.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/04/s300_15fc3c7076f1d8ccd83a0924ffcbfb2d.jpg" alt="" title="Avril Lavigne"></a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/avril/">Avril</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/people/">人物</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-xi-hong-shi-ji-dan-tang" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/xi-hong-shi-ji-dan-tang/" class="article-date">
+      <time datetime="2011-04-08T13:09:34.000Z" itemprop="datePublished">2011-04-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/xi-hong-shi-ji-dan-tang/">西红柿鸡蛋汤</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <blockquote>
+<p>原文地址：<a href="http://blog.sina.com.cn/s/blog_54a625bf0100gts1.html">http://blog.sina.com.cn/s/blog_54a625bf0100gts1.html</a></p>
+</blockquote>
+<p>西红柿鸡蛋汤<br><a href="http://img.gagahappy.com/blog/2011/04/54a625bft7c9d6af473496906901.jpg"><img src="http://img.gagahappy.com/blog/2011/04/54a625bft7c9d6af473496906901.jpg" alt="" title="西红柿鸡蛋汤"></a></p>
+<p>原料：</p>
+<blockquote>
+<p>大西红柿1个（小的2个）<br>鸡蛋1只<br>香菜1根<br>香葱1根</p>
+</blockquote>
+<p>调料：</p>
+<blockquote>
+<p>盐1/2茶匙<br>香油少许1/2茶匙（3ml）<br>水淀粉1汤匙（15ml）</p>
+</blockquote>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/food/">美食么么</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/cate/">美食</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/xi-hong-shi-ji-dan-tang/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-how-to-get-ubuntu-11-04" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/how-to-get-ubuntu-11-04/" class="article-date">
+      <time datetime="2011-04-04T12:06:28.000Z" itemprop="datePublished">2011-04-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/how-to-get-ubuntu-11-04/">How to get Ubuntu 11.04</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Upgrade from Ubuntu 10.10<br><a href="http://img.gagahappy.com/blog/2011/04/U_11.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/04/U_11.jpg" alt="" title="Ubuntu 11.04"></a></p>
+<p>To upgrade from Ubuntu 10.10 on a desktop system, press Alt+F2, type in “update-manager -d” (without the quotes), and press Enter. Update Manager will open up and display the message, “New distribution release ‘11.04’ is available.” Click Upgrade and follow the on-screen instructions.</p>
+<p>To upgrade from Ubuntu 10.10 on a server system, install the package update-manager-core if it is not already installed. Then execute the command sudo do-release-upgrade -d, and follow the on-screen instructions. Note that the server upgrade is now more robust, and thus will utilize GNU screen and automatically re-attach in case unexpected problems arise, e.g. dropped connection problems.</p>
+<p>The same instructions apply to all other editions of Ubuntu (such as Kubuntu, Xubuntu, etc.)</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-is-not-that-you-want-to-it-before-you-do" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/is-not-that-you-want-to-it-before-you-do/" class="article-date">
+      <time datetime="2011-04-03T15:29:52.000Z" itemprop="datePublished">2011-04-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/is-not-that-you-want-to-it-before-you-do/">在没有实际动手操作之前，结果往往不是你所想象的那样</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在没有实际动手操作之前，结果往往不是你所想象的那样<br><a href="http://img.gagahappy.com/blog/2011/04/49b1aaf5tw1dgfa0hvescj1.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/04/49b1aaf5tw1dgfa0hvescj1.jpg" alt="" title="1"></a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/weibo/">微博</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-avril-lavigne-live-with-out-music" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/avril-lavigne-live-with-out-music/" class="article-date">
+      <time datetime="2011-04-02T12:15:30.000Z" itemprop="datePublished">2011-04-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/avril-lavigne-live-with-out-music/">艾薇儿不插电清唱演唱会</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>艾薇儿不插电清唱演唱会</p>
+<embed src="http://player.56.com/v_57011589.swf" type="application/x-shockwave-flash" width="480" height="405" allownetworking="all" allowscriptaccess="always">
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/avril/">Avril</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/people/">人物</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-to-park-by-tree-step" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/to-park-by-tree-step/" class="article-date">
+      <time datetime="2011-03-29T14:15:52.000Z" itemprop="datePublished">2011-03-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/to-park-by-tree-step/">教你三招倒车入位的旷世绝</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>教你三招倒车入位的旷世绝学</p>
+<embed src="http://player.youku.com/player.php/sid/XMTU4NTE2MTA0/v.swf" quality="high" width="480" height="400" align="middle" allowscriptaccess="sameDomain" type="application/x-shockwave-flash">
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/youknow/">小知识</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-nginx-config-option" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/nginx-config-option/" class="article-date">
+      <time datetime="2011-03-26T15:17:19.000Z" itemprop="datePublished">2011-03-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/nginx-config-option/">nginx编译选项</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">./configure --prefix=/opt/nginx \</div><div class="line">--conf-path=/etc/nginx/nginx.conf \</div><div class="line">--error-log-path=/var/<span class="built_in">log</span>/nginx/error.log  \</div><div class="line">--pid-path=/var/tmp/nginx/nginx.pid  \</div><div class="line">--lock-path=/var/lock/nginx.lock  \</div><div class="line">--user=nginx  \</div><div class="line">--group=nginx  \</div><div class="line">--with-http_flv_module   \</div><div class="line">--with-http_ssl_module  \</div><div class="line">--add-module=<span class="string">'/opt/passenger/ext/nginx'</span> \</div><div class="line">--with-http_gzip_static_module  \</div><div class="line">--http-log-path=/var/<span class="built_in">log</span>/nginx/access.log  \</div><div class="line">--http-client-body-temp-path=/var/tmp/nginx/client/  \</div><div class="line">--http-proxy-temp-path=/var/tmp/nginx/proxy/  \</div><div class="line">--http-fastcgi-temp-path=/var/tmp/nginx/fastcgi/  \</div><div class="line">--http-scgi-temp-path=/var/tmp/nginx/scgi/  \</div><div class="line">--http-uwsgi-temp-path=/var/tmp/nginx/uwsgi/</div></pre></td></tr></table></figure>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a><a class="article-category-link" href="/category/linux/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ubuntu/">ubuntu</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/nginx-config-option/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-find-all-is-error-in-rails-2-0-up" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/find-all-is-error-in-rails-2-0-up/" class="article-date">
+      <time datetime="2011-03-25T13:09:49.000Z" itemprop="datePublished">2011-03-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/find-all-is-error-in-rails-2-0-up/">find_all终成大患了</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>正如之前预料的那样，升级到rails2.3后，find_all终成大患了。其实早在rails 1.2时就已经提示，find_all方法将在2.0版本的时候被移除，所以当时最稳妥的做法就是使用find(:all)这样的原生方法。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># In rails2.0 up can not work</span></div><div class="line">find_all(<span class="symbol">:all</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># In rails2.0  still work</span></div><div class="line">find(<span class="symbol">:all</span>)</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-planing-use-xianguo-for-rss" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/planing-use-xianguo-for-rss/" class="article-date">
+      <time datetime="2011-03-24T13:23:51.000Z" itemprop="datePublished">2011-03-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/planing-use-xianguo-for-rss/">计划使用鲜果订阅</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>迫于google reader 不稳的无奈，打算使用鲜果订阅</p>
+<p><a href="http://img.gagahappy.com/blog/2011/03/20008113244848.gif" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/03/20008113244848.gif" alt="" title="RSS"></a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/google/">google</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-rewrite-module-requires-the-pcre-library" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -640,994 +1629,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/funny/">有趣</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-angelina-jolie" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/angelina-jolie/" class="article-date">
-      <time datetime="2011-03-10T13:51:48.000Z" itemprop="datePublished">2011-03-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/angelina-jolie/">安吉丽娜·朱莉</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>安吉丽娜·朱莉（Angelina Jolie，1975年6月4日－），美国好莱坞著名演员，社会活动家。毕业于美国纽约大学电影学系。安吉丽娜·朱莉2005年当选世界著名男性杂志《男人帮》一年一度的百大性感女星排行榜第1位。</p>
-<p><a href="http://img.gagahappy.com/blog/2011/03/default1.jpg"><img src="http://img.gagahappy.com/blog/2011/03/default1.jpg" alt="" title="安吉丽娜·朱莉"></a></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/relax/">非常娱乐</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/people/">人物</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/angelina-jolie/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-chrome-10-release" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/chrome-10-release/" class="article-date">
-      <time datetime="2011-03-09T06:46:31.000Z" itemprop="datePublished">2011-03-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/chrome-10-release/">Chrome 10发布！全新Crankshaft V8引擎</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>距离Chrome 9正式版发布才刚刚一个月，谷歌今天宣布，Chrome 10也正式发布，其版本号进入两位数行列，在浏览器历史上史无前例。Chrome 10的首个稳定版本为Build 10.0.648.127，Chrome用户可以检查最新版本并自动升级。</p>
-<p><a href="http://img.gagahappy.com/blog/2011/03/111.jpg"><img src="http://img.gagahappy.com/blog/2011/03/111.jpg" alt="" title="chrome 10"></a></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/information/">让资讯飞</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/chrome/">chrome</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/google/">google</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/chrome-10-release/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-rj-45-standard" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/rj-45-standard/" class="article-date">
-      <time datetime="2011-03-08T13:15:02.000Z" itemprop="datePublished">2011-03-08</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/rj-45-standard/">RJ-45水晶头制做标准</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>RJ-45水晶头制做标准，网卡工作时用到1、2，3、6线，其它线可以给电话线使用。</p>
-<p><a href="http://img.gagahappy.com/blog/2011/03/0804031653559912.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/03/0804031653559912.jpg" alt="" title="RJ-45 标准"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/youknow/">小知识</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-the-task-need-to-be-finished-in-the-sprint-that-is-non-programming" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/the-task-need-to-be-finished-in-the-sprint-that-is-non-programming/" class="article-date">
-      <time datetime="2011-03-07T14:59:33.000Z" itemprop="datePublished">2011-03-07</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/the-task-need-to-be-finished-in-the-sprint-that-is-non-programming/">在sprint中需要完成的非编程性任务</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <ul>
-<li>搭建测试环境。</li>
-<li>明确需求。</li>
-<li>与运营部门讨论部署的操作细节。</li>
-<li>编写部署文档（版本说明，RFC，或任何在你们组织中要写的东西）。</li>
-<li>和外界的资源进行联系（例如GUI设计师）。</li>
-<li>改进构建脚本。</li>
-<li>将故事进一步拆分成任务。</li>
-<li>标识出来自开发人员的核心问题，并帮助解决这些问题。</li>
-</ul>
-<p><a href="http://img.gagahappy.com/blog/2011/03/sprint_planning1.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/03/sprint_planning1.jpg" alt="" title="sprint_planning"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/scrum/">scrum</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/agile/">敏捷</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-scrum-advantages-over-the-traditional-development-model" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/scrum-advantages-over-the-traditional-development-model/" class="article-date">
-      <time datetime="2011-03-05T14:11:20.000Z" itemprop="datePublished">2011-03-05</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/scrum-advantages-over-the-traditional-development-model/">Scrum较传统开发模型的优点</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>Scrum模型的一个显著特点就是响应变化，它能够尽快地响应变化。下面的图片使用传统的软件开发模型(瀑布模型、螺旋模型或迭代模型)。随着系统因素（内部和外部因素）的复杂度增加，项目成功的可能性就迅速降低。<br><a href="http://img.gagahappy.com/blog/2011/03/1256169664.gif"><img src="http://img.gagahappy.com/blog/2011/03/1256169664.gif" alt=""></a><br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/scrum/">scrum</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/agile/">敏捷</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/scrum-advantages-over-the-traditional-development-model/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-what-is-scrum" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/what-is-scrum/" class="article-date">
-      <time datetime="2011-03-04T14:00:51.000Z" itemprop="datePublished">2011-03-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/what-is-scrum/">什么是Scrum</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>Scrum的原始含义</p>
-<p><a href="http://img.gagahappy.com/blog/2011/03/12822075301.jpg"><img src="http://img.gagahappy.com/blog/2011/03/12822075301.jpg" alt="" title="Scrum"></a><br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/scrum/">scrum</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/agile/">敏捷</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/what-is-scrum/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-shuan-yang-rou-zhi-ma-jiang-xiao-liao-without-jiu-cai-hua" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/shuan-yang-rou-zhi-ma-jiang-xiao-liao-without-jiu-cai-hua/" class="article-date">
-      <time datetime="2011-03-03T15:06:27.000Z" itemprop="datePublished">2011-03-03</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/shuan-yang-rou-zhi-ma-jiang-xiao-liao-without-jiu-cai-hua/">涮羊肉之芝麻酱小料</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>涮羊肉时芝麻酱小料自然是少不了的，本博比较钟爱自己调的芝麻酱小料，经过多次尝试，发现韭菜花这一味调味料不太友好，那怕你只放了一丁点在料里面，料本身那鲜美的味道就会被韭菜花味全部代替掉，开始讨厌那种绿色了呃~~~</p>
-<p>所以本博以后调味时就再也不放韭菜花了，如果有愿意吃的童鞋可以自己调入~~</p>
-<p><a href="http://img.gagahappy.com/blog/2011/03/1_100911202401_11.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/03/1_100911202401_11.jpg" alt="" title="芝麻酱小料"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/food/">美食么么</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/cate/">美食</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ten-chrome-shortcut-keys" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/ten-chrome-shortcut-keys/" class="article-date">
-      <time datetime="2011-03-02T04:48:16.000Z" itemprop="datePublished">2011-03-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/ten-chrome-shortcut-keys/">Chrome 快捷键</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <ul>
-<li>Alt+F 或 Alt+E – 打开扳手工具菜单，之后就可以用上下箭头键来进入你想要的功能了</li>
-<li>Ctrl+Shift+B — 切换收藏工具条是否显示</li>
-<li>Ctrl+D – 将当前标签页加入收藏</li>
-<li>Ctrl+Shift+D – 将现在所有打开的标签页都放到同一个收藏夹目录里</li>
-<li>Ctrl+J – 打开“下载”标签页</li>
-<li>Shift+Esc — 打开“任务管理器”，在这里你可以关闭无响应的标签页</li>
-<li>Ctrl+Shift+J — 打开 Chrome 开发工具</li>
-<li>Ctrl+L – 选中当前标签页的URL地址，好直接输入新网址</li>
-<li>Ctrl+Backspace — 删除地址栏里光标左边的一个词</li>
-<li>Ctrl+G – 找到通过Ctrl+F查找的下一个词，Ctrl+Shift+G则是查找上一个词</li>
-<li>Ctrl+U — 查看当前标签页的源代码</li>
-<li>Ctrl+R — 跟F5一样都是刷新当前标签页</li>
-<li>Ctrl+1(2, 3, 4等等) — 切换到第几个标签页（从左数）</li>
-<li>Ctrl+Shift+T — 重新打开刚刚关闭的标签页</li>
-</ul>
-<p><a href="http://img.gagahappy.com/blog/2011/03/chromelogo.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/03/chromelogo.jpg" alt="" title="chrome"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/software/">玩转软件</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/chrome/">chrome</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-mysql-select-strange-syntax" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/mysql-select-strange-syntax/" class="article-date">
-      <time datetime="2011-03-01T12:58:31.000Z" itemprop="datePublished">2011-03-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mysql-select-strange-syntax/">mysql select 蹩脚的语法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>发现mysql对于处理这样相同的查询，居然有两种截然不同的结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT *,slug FROM wp_terms;</div></pre></td></tr></table></figure>
-<p>执行正确</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT slug,* FROM wp_terms;</div></pre></td></tr></table></figure>
-<p>执行错误：You have an error in your SQL syntax</p>
-<p>费解啊~~~，在MSSQL中不会出现此现象</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-sort-out-wordpress-tags" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/sort-out-wordpress-tags/" class="article-date">
-      <time datetime="2011-02-28T13:10:58.000Z" itemprop="datePublished">2011-02-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/sort-out-wordpress-tags/">整理wordpress标签</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>整理网站的标签，发现要改的太多了，不得不数据库一下了，无奈之下硬着头皮把wordpress的数据库的相关表研究了下<del>呃</del>~~</p>
-<p><a href="http://img.gagahappy.com/blog/2011/02/wordpress.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/02/wordpress.jpg" alt="" title="wordpress"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/software/">玩转软件</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/wordpress/">wordpress</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-how-to-use-yet-another-related-posts-plugin" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/how-to-use-yet-another-related-posts-plugin/" class="article-date">
-      <time datetime="2011-02-27T02:18:08.000Z" itemprop="datePublished">2011-02-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/how-to-use-yet-another-related-posts-plugin/">Yet Another Related Posts Plugin 简单教程</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>YARPP在首次使用时往往会出现无法显示关联文章的情况（即，没有找到和当前浏览文章相关的文章）</p>
-<p>大多数原因都是由于“Relatedness options”选项没有设置正确造成的。</p>
-<p><a href="http://img.gagahappy.com/blog/2011/02/112.jpg"><img src="http://img.gagahappy.com/blog/2011/02/112.jpg" alt="" title="Relatedness option"></a></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/software/">玩转软件</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/wordpress/">wordpress</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/how-to-use-yet-another-related-posts-plugin/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-pao-cai-ya-xiong" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/pao-cai-ya-xiong/" class="article-date">
-      <time datetime="2011-02-26T10:02:53.000Z" itemprop="datePublished">2011-02-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/pao-cai-ya-xiong/">泡菜鸭胸</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>原文地址：<a href="http://bugu.cntv.cn/news/C19277/classpage/video/20110107/100664.shtml" target="_blank" rel="external">http://bugu.cntv.cn/news/C19277/classpage/video/20110107/100664.shtml</a></p>
-<p><a href="http://img.gagahappy.com/blog/2011/02/221.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/02/221.jpg" alt="" title="泡菜鸭胸"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/food/">美食么么</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/cate/">美食</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-mix-enumerable-into-your-class" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/mix-enumerable-into-your-class/" class="article-date">
-      <time datetime="2011-02-26T08:36:47.000Z" itemprop="datePublished">2011-02-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mix-enumerable-into-your-class/">为你的类混入Enumerable</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在你的聚合类中混入Enumerable后，如果实现了 each 方法，并且为每个成员实现在了&lt;=&gt;，那么你的类瞬间就拥有了 sort，max， min等方法，如果没有实现&lt;=&gt;，你的类也具有了include，any，all等方法!</p>
-<p><a href="http://img.gagahappy.com/blog/2011/02/111.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/02/111.jpg" alt="" title="Enumerable"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-wordpress-3-1-category-url-bug" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/wordpress-3-1-category-url-bug/" class="article-date">
-      <time datetime="2011-02-25T14:35:36.000Z" itemprop="datePublished">2011-02-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/wordpress-3-1-category-url-bug/">wordpress 3.1 分类链接不正确</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>怀着激动的心情把wordpress升级到了3.1，新的变化是在首页顶部为登录用户添加了后台工具栏，可以让用户在前台快速访问后台经常要使用的操作。</p>
-<p>但美中不足的是，这次升级后，分类链连指向不正确，点击后全部指向了首页，如果不启用重定向，则不会出现问题，不知道是什么原因，头痛中。</p>
-<p><a href="http://img.gagahappy.com/blog/2011/02/wordpress.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.com/blog/2011/02/wordpress.jpg" alt="" title="wordpress"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/software/">玩转软件</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/wordpress/">wordpress</a></li></ul>
     </div>
 
       
