@@ -255,6 +255,76 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-how-to-use-crontab-in-your-xos" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/how-to-use-crontab-in-your-xos/" class="article-date">
+      <time datetime="2015-07-21T02:20:04.000Z" itemprop="datePublished">2015-07-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/how-to-use-crontab-in-your-xos/">苹果系统 xos 使用crontab定时任务</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在苹果系统 xos 使用crontab定时任务时，出现<code>/usr/bin/vi exited with status 1</code></p>
+<p>解决方法</p>
+<blockquote>
+<p>The issue turned out to be vi and nothing to do with cron. Doing <code>export EDITOR=vim</code> fixed it</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/linux/">linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-postgis-install-issues" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1545,76 +1615,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rspec/">rspec</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-native-extension-to-perform-the-binary-search-within-the-hashring" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/native-extension-to-perform-the-binary-search-within-the-hashring/" class="article-date">
-      <time datetime="2015-04-19T07:59:39.000Z" itemprop="datePublished">2015-04-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/native-extension-to-perform-the-binary-search-within-the-hashring/">Native extension to perform the binary search within the hashring</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <ul>
-<li>可以看到为了提高查询性能，采用C去实现，如果安装了RubyInline,会启动C扩展实现的同名方法，加速binary_search查询性能</li>
-<li>也可以发现，从客户端分配键到哪个redis节点是通过比较节点的crc32与key的crc32的大小的方式，进行分配的<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> &lt;&lt; self</span></div><div class="line">  <span class="comment"># gem install RubyInline to use this code</span></div><div class="line">  <span class="comment"># Native extension to perform the binary search within the hashring.</span></div><div class="line">  <span class="comment"># There's a pure ruby version below so this is purely optional</span></div><div class="line">  <span class="comment"># for performance.  In testing 20k gets and sets, the native</span></div><div class="line">  <span class="comment"># binary search shaved about 12% off the runtime (9sec -&gt; 8sec).</span></div><div class="line">  <span class="keyword">begin</span></div><div class="line">    <span class="keyword">require</span> <span class="string">'inline'</span></div><div class="line">    inline <span class="keyword">do</span> <span class="params">|builder|</span></div><div class="line">      builder.c &lt;&lt;-EOM</div><div class="line">      int binary_search(VALUE ary, unsigned int r) &#123;</div><div class="line">          int upper = RARRAY_LEN(ary) - <span class="number">1</span>;</div><div class="line">          int lower = <span class="number">0</span>;</div><div class="line">          int idx = <span class="number">0</span>;</div><div class="line"></div><div class="line">          <span class="keyword">while</span> (lower &lt;= upper) &#123;</div><div class="line">              idx = (lower + upper) / <span class="number">2</span>;</div><div class="line"></div><div class="line">              VALUE continuumValue = RARRAY_PTR(ary)[idx];</div><div class="line">              unsigned int l = NUM2UINT(continuumValue);</div><div class="line">              <span class="keyword">if</span> (l == r) &#123;</div><div class="line">                  <span class="keyword">return</span> idx;</div><div class="line">              &#125;</div><div class="line">              <span class="keyword">else</span> <span class="keyword">if</span> (l &gt; r) &#123;</div><div class="line">                  upper = idx - <span class="number">1</span>;</div><div class="line">              &#125;</div><div class="line">              <span class="keyword">else</span> &#123;</div><div class="line">                  lower = idx + <span class="number">1</span>;</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">if</span> (upper &lt; <span class="number">0</span>) &#123;</div><div class="line">            upper = RARRAY_LEN(ary) - <span class="number">1</span>;</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">return</span> upper;</div><div class="line">      &#125;</div><div class="line">      EOM</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">rescue</span> Exception</div><div class="line">    <span class="comment"># Find the closest index in HashRing with value &lt;= the given value</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">binary_search</span><span class="params">(ary, value, &amp;block)</span></span></div><div class="line">      .....</div><div class="line">    <span class="keyword">end</span></div><div class="line"></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/redis/">redis</a></li></ul>
     </div>
 
       
