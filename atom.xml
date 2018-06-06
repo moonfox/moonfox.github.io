@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.gagahappy.com/"/>
-  <updated>2018-06-05T05:44:15.000Z</updated>
+  <updated>2018-06-06T06:13:36.000Z</updated>
   <id>http://www.gagahappy.com/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>让Aws S3 只同步 Hexo 内容有变化的文章</title>
+    <link href="http://www.gagahappy.com/aws-s3-sync-and-hexo/"/>
+    <id>http://www.gagahappy.com/aws-s3-sync-and-hexo/</id>
+    <published>2018-06-06T04:55:25.000Z</published>
+    <updated>2018-06-06T06:13:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>发现Aws S3 sync 在同步Hexo 生成的网站内容时，几乎总是同步所有文件，那些内容没有发生改变但文件最后修改时间发生改变的文件也被同步了，造成了Aws S3写操作流量的浪费，原因如下</p>
+<ol>
+<li><p>Aws S3 sync 命令的同步的策略</p>
+<ol>
+<li>判断文件大小是否发生变化</li>
+<li>比较文件最后的修改日期</li>
+</ol>
+<p>如果某个文件的这两项中的其中一项发生变化，则这个文件被同步</p>
+</li>
+<li><p>Hexo生成文章</p>
+<p>即使仅更新一篇文章，使用<code>hexo g</code>命令后，几乎所有文件的最后修改时间都被更新了。目前来看，Hexo更新内容的算法还有待改进，有些地方还是有优化空间的</p>
+</li>
+</ol>
+<p>由于以上两点，造成了Aws S3写流量的浪费</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>只同步内容有改变的文件</p>
+<ol>
+<li>通过<code>git diff</code> 命令找出此次提交发生变化的文件。这里不用<code>git log</code>的原因是log命令会有多余的输出，不利于后面编写脚本</li>
+<li>使用<code>aws s3 cp</code>把发生变化的文件同步到Aws S3，这样就大大节省了Aws S3写操作的流量</li>
+</ol>
+<h3 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line">git diff HEAD~1 HEAD --stat --name-only | awk <span class="string">'&#123;cmd="aws s3 cp "$1" s3://your-butket/"$1" --exclude '</span>.gitignore<span class="string">'";system(cmd)&#125;'</span></div></pre></td></tr></table></figure>
+<p>放到项目根目录执行，此脚本只会同步那些内容有修改的文件，内容没有修改，但最后修改时间被更新的文件不会被同步，大大节省了Aws S3的写流量</p>
+<h3 id="后记，奇怪的git-diff输出"><a href="#后记，奇怪的git-diff输出" class="headerlink" title="后记，奇怪的git diff输出"></a>后记，奇怪的git diff输出</h3><p>发现<code>git diff --stat</code>输出时，如果输出到屏幕，那些长路径名是可以正常显示的，但如果输出到文件，则长路径就会被省略显示。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 长路径名</span></div><div class="line">looooooooooong_path_name/index.html</div><div class="line"></div><div class="line"><span class="comment"># 在输出到屏幕时是可以正常显示的</span></div><div class="line">&gt; git diff --stat</div><div class="line">&gt; looooooooooong_path_name/index.html</div><div class="line"></div><div class="line"><span class="comment"># 但如果输出到文件，路径名就变成了:".../index.html"</span></div><div class="line">&gt; git diff --stat &gt; diff.log</div><div class="line">&gt; cat diff.log</div><div class="line">&gt; .../index.html</div></pre></td></tr></table></figure>
+<p>为了解决这个问题，需要执行 <code>git diff --stat --name-only</code>， 输出到文件也可以正常显示长路径名了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; git diff --stat --name-only &gt; diff.log</div><div class="line">&gt; cat diff.log</div><div class="line">&gt; looooooooooong_path_name/index.html</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      aws s3 sync and hexo
+    
+    </summary>
+    
+      <category term="程序开发" scheme="http://www.gagahappy.com/category/development/"/>
+    
+    
+      <category term="s3" scheme="http://www.gagahappy.com/tag/s3/"/>
+    
+  </entry>
   
   <entry>
     <title>香菇鸡肉焖饭</title>
@@ -240,29 +287,6 @@
     <summary type="html">
     
       终于可以下一字马了，虽然还有些翻跨
-    
-    </summary>
-    
-      <category term="意识流" scheme="http://www.gagahappy.com/category/consciousness/"/>
-    
-    
-      <category term="随笔" scheme="http://www.gagahappy.com/tag/journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>左腿一字马比右腿要先成了</title>
-    <link href="http://www.gagahappy.com/split-feel-better/"/>
-    <id>http://www.gagahappy.com/split-feel-better/</id>
-    <published>2018-03-20T15:24:05.000Z</published>
-    <updated>2018-05-30T07:27:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>左腿一字马比右腿要先成了，屁股着地坚持了30秒，等右大腿根也完全着地时，左腿的一字马就算是成了，右腿的一字马还是没有摆脱翻跨的困扰，估计要纠正好长时间了，其实左腿一字马也有翻跨，但不算严重</p>
-]]></content>
-    
-    <summary type="html">
-    
-      左腿一字马比右腿要先成了
     
     </summary>
     

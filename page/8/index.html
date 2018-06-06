@@ -255,6 +255,74 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-bundler-specify-gem-versions" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/bundler-specify-gem-versions/" class="article-date">
+      <time datetime="2015-04-21T07:29:52.000Z" itemprop="datePublished">2015-04-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/bundler-specify-gem-versions/">bundler Specify gem versions</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>Most of the version specifiers, like &gt;= 1.0, are self-explanatory. The specifier ~&gt; has a special meaning, best shown by example. ~&gt; 2.0.3 is identical to &gt;= 2.0.3 and &lt; 2.1. ~&gt; 2.1 is identical to &gt;= 2.1 and &lt; 3.0. ~&gt; 2.2.beta will match prerelease versions like 2.2.beta.12.</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-rspec-exception-types-classes-response" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1529,71 +1597,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/sublime/">sublime</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-when-run-of-block-in-mehtod" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/when-run-of-block-in-mehtod/" class="article-date">
-      <time datetime="2015-03-27T13:52:04.000Z" itemprop="datePublished">2015-03-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/when-run-of-block-in-mehtod/">测试块中的代码什么时候被执行</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 目标1:</span></div><div class="line"><span class="comment"># 1、测试块中的代码什么时候被执行</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line"><span class="comment"># 结论</span></div><div class="line"><span class="comment"># 1、只有在块被真正调用的时候才会被执行:对块调用方法yield/call</span></div><div class="line"><span class="comment"># 说明: 一般方法中都会用yield去调用块，使得传入方法的块中的代码马上执行,这难免会让人产生代码只要被放在do..end或&#123;&#125;</span></div><div class="line"><span class="comment"># 就会被马上执行的错觉。</span></div><div class="line"><span class="comment"># 下面的代码只有当去掉注释时，块中的代码才会被执行</span></div><div class="line"><span class="comment"># 2、调用yield后，就一定要传入块，否则就产生错误，除非在加入了block_given?判断</span></div><div class="line"><span class="comment"># =============================</span></div><div class="line">lambda &#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span><span class="params">(&amp;block)</span></span></div><div class="line">    <span class="comment"># yield</span></div><div class="line">    <span class="comment"># block.call</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"></div><div class="line">  my_method <span class="keyword">do</span></div><div class="line">    lastname = <span class="string">"Caroline"</span></div><div class="line">    puts lastname <span class="comment"># =&gt;这里不会有输出，除非去掉方法中的注释</span></div><div class="line">  <span class="keyword">end</span></div><div class="line">&#125;.call</div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
     </div>
 
       

@@ -255,6 +255,73 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-rails-validate-uniqueness-multiple-columns" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails-validate-uniqueness-multiple-columns/" class="article-date">
+      <time datetime="2015-07-24T15:53:54.000Z" itemprop="datePublished">2015-07-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails-validate-uniqueness-multiple-columns/">rails validate uniqueness multiple columns</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>rails 2<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">validates_uniqueness_of <span class="symbol">:user_id</span>, <span class="symbol">scope:</span> [<span class="symbol">:friend_id</span>, <span class="symbol">:something_else</span>]</div></pre></td></tr></table></figure></p>
+<p>rails 3<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">validates <span class="symbol">:user_id</span>, <span class="symbol">:uniqueness</span> =&gt; &#123;<span class="symbol">:scope</span> =&gt; [<span class="symbol">:friend_id</span>, <span class="symbol">:something_else</span>]&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-rails-cache-column-deleted-exception" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1532,74 +1599,6 @@
       
           
         <p>ruby hash 排序<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">h = &#123;<span class="string">"sa"</span>=&gt;<span class="number">1</span>, <span class="string">"ab"</span>=&gt;<span class="number">2</span>, <span class="string">"x3"</span>=&gt;<span class="number">3</span>, <span class="string">"de"</span>=&gt;, <span class="symbol">:de=&gt;</span><span class="number">5</span>&#125;</div><div class="line">h.sort_by&#123;<span class="params">|k,v|</span>k.to_s&#125;</div><div class="line"><span class="comment">#=&gt; [["ab", 2], [:de, 5], ["de", 6], ["sa", 1], ["x3", 3]]</span></div><div class="line"></div><div class="line">h.sort_by&#123;<span class="params">|k,v|</span>v.to_s&#125;</div><div class="line"><span class="comment">#=&gt;[["sa", 1], ["ab", 2], ["x3", 3], [:de, 5], ["de", 6]]</span></div><div class="line"></div><div class="line">h.sort_by&#123;<span class="params">|k|</span>k[<span class="number">0</span>].to_s&#125;</div><div class="line"><span class="comment">#=&gt;[["ab", 2], [:de, 5], ["de", 6], ["sa", 1], ["x3", 3]]</span></div><div class="line"></div><div class="line">h.sort_by&#123;<span class="params">|k|</span>k[<span class="number">1</span>].to_s&#125;</div><div class="line"><span class="comment">#=&gt;[["sa", 1], ["ab", 2], ["x3", 3], [:de, 5], ["de", 6]]</span></div><div class="line"></div><div class="line">h = &#123;<span class="string">"sa"</span>=&gt;<span class="number">1</span>, <span class="string">"ab"</span>=&gt;<span class="number">2</span>, <span class="string">"x3"</span>=&gt;<span class="number">3</span>, <span class="string">"de"</span>=&gt;<span class="number">6</span>, <span class="symbol">:de=&gt;</span><span class="number">5</span>&#125;</div><div class="line">h.sort</div><div class="line"><span class="comment">#=&gt;argumentError: comparison of Array with Array failed,因为:de=&gt;5与"de"＝&gt;6 Key类型不一样,键类型一样，才可以直接用sort,按键排序，否则要把键处理为一致的数据(可以比较的数据类型)</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-bundler-specify-gem-versions" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/bundler-specify-gem-versions/" class="article-date">
-      <time datetime="2015-04-21T07:29:52.000Z" itemprop="datePublished">2015-04-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/bundler-specify-gem-versions/">bundler Specify gem versions</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <blockquote>
-<p>Most of the version specifiers, like &gt;= 1.0, are self-explanatory. The specifier ~&gt; has a special meaning, best shown by example. ~&gt; 2.0.3 is identical to &gt;= 2.0.3 and &lt; 2.1. ~&gt; 2.1 is identical to &gt;= 2.1 and &lt; 3.0. ~&gt; 2.2.beta will match prerelease versions like 2.2.beta.12.</p>
-</blockquote>
 
       
     </div>
