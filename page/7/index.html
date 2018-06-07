@@ -255,6 +255,73 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-webapp-migrate-to-docker" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/webapp-migrate-to-docker/" class="article-date">
+      <time datetime="2016-05-08T12:24:57.000Z" itemprop="datePublished">2016-05-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/webapp-migrate-to-docker/">成功迁移到docker</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>搞了两天，终于迁移到docker了，docker确实优点挺多的，比如直接提供了应用程序的运行环境，当然还有很多，初次接触还不是很了解。这次迁移用到了两个docker:wordpress与mysql，使用这两个dock, 省去了安装mysql和php环境的工作</p>
+<p>一下步的工作就是制作一个本站的docker image,这样以后随便放到那里就都可以使用了。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/internet/">互联网</a><a class="article-category-link" href="/category/internet/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/docker/">docker</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-rails-validate-uniqueness-multiple-columns" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1548,72 +1615,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/postgresql/">postgresql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ruby-hash-sort" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/ruby-hash-sort/" class="article-date">
-      <time datetime="2015-04-21T16:04:33.000Z" itemprop="datePublished">2015-04-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/ruby-hash-sort/">ruby hash 排序</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>ruby hash 排序<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">h = &#123;<span class="string">"sa"</span>=&gt;<span class="number">1</span>, <span class="string">"ab"</span>=&gt;<span class="number">2</span>, <span class="string">"x3"</span>=&gt;<span class="number">3</span>, <span class="string">"de"</span>=&gt;, <span class="symbol">:de=&gt;</span><span class="number">5</span>&#125;</div><div class="line">h.sort_by&#123;<span class="params">|k,v|</span>k.to_s&#125;</div><div class="line"><span class="comment">#=&gt; [["ab", 2], [:de, 5], ["de", 6], ["sa", 1], ["x3", 3]]</span></div><div class="line"></div><div class="line">h.sort_by&#123;<span class="params">|k,v|</span>v.to_s&#125;</div><div class="line"><span class="comment">#=&gt;[["sa", 1], ["ab", 2], ["x3", 3], [:de, 5], ["de", 6]]</span></div><div class="line"></div><div class="line">h.sort_by&#123;<span class="params">|k|</span>k[<span class="number">0</span>].to_s&#125;</div><div class="line"><span class="comment">#=&gt;[["ab", 2], [:de, 5], ["de", 6], ["sa", 1], ["x3", 3]]</span></div><div class="line"></div><div class="line">h.sort_by&#123;<span class="params">|k|</span>k[<span class="number">1</span>].to_s&#125;</div><div class="line"><span class="comment">#=&gt;[["sa", 1], ["ab", 2], ["x3", 3], [:de, 5], ["de", 6]]</span></div><div class="line"></div><div class="line">h = &#123;<span class="string">"sa"</span>=&gt;<span class="number">1</span>, <span class="string">"ab"</span>=&gt;<span class="number">2</span>, <span class="string">"x3"</span>=&gt;<span class="number">3</span>, <span class="string">"de"</span>=&gt;<span class="number">6</span>, <span class="symbol">:de=&gt;</span><span class="number">5</span>&#125;</div><div class="line">h.sort</div><div class="line"><span class="comment">#=&gt;argumentError: comparison of Array with Array failed,因为:de=&gt;5与"de"＝&gt;6 Key类型不一样,键类型一样，才可以直接用sort,按键排序，否则要把键处理为一致的数据(可以比较的数据类型)</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/ruby/">Ruby</a></li></ul>
     </div>
 
       

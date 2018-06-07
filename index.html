@@ -255,6 +255,101 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-git-rebase-vs-git-reset" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/git-rebase-vs-git-reset/" class="article-date">
+      <time datetime="2018-06-07T06:13:19.000Z" itemprop="datePublished">2018-06-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/git-rebase-vs-git-reset/">git rebase 与 git reset的应用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="常用的应用场景"><a href="#常用的应用场景" class="headerlink" title="常用的应用场景"></a>常用的应用场景</h3><ol>
+<li><p>合并提交</p>
+</li>
+<li><p>去除不要的提交</p>
+</li>
+</ol>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><h3 id="场景1，合并多个提交"><a href="#场景1，合并多个提交" class="headerlink" title="场景1，合并多个提交"></a>场景1，合并多个提交</h3><p>有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交</p>
+<ol>
+<li>方法一: <code>git reset</code></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reset B --soft</div><div class="line">git ci -m <span class="string">"merge C to F"</span></div></pre></td></tr></table></figure>
+<ol>
+<li>方法二: <code>git rebase</code></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase --onto B C^ develop</div></pre></td></tr></table></figure>
+<h3 id="场景2，去掉D提交"><a href="#场景2，去掉D提交" class="headerlink" title="场景2，去掉D提交"></a>场景2，去掉D提交</h3><p>此时，<code>git reset</code>已经不再适合这个场景</p>
+<p>使用<code>git rebase</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase --onto C E^ develop</div></pre></td></tr></table></figure>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ol>
+<li><p><code>git rebase</code> 语法</p>
+<p><code>git rebase --onto &lt;onbase&gt; &lt;since&gt; &lt;till&gt;</code><br><code>git rebase --onto &lt;onbase&gt; &lt;since&gt;</code><br><code>git rebase &lt;since&gt; &lt;till&gt;</code><br><code>git rebase &lt;since&gt;</code><br><code>git rebase -i</code></p>
+<p>onbase为要架接到的commit, since表示不包括自身到till的所有提交</p>
+<p><code>git rebase --continue</code> # 解决冲突后使用，以完成rebase<br><code>git rebase --skip</code>     # 跳过当前commit，进行下一个commit的合并<br><code>git rebase --abort</code>    # 放弃此次操作，还原工作区</p>
+</li>
+<li><p><code>git rebase</code>的莫名冲突</p>
+<p>对于场景二： 使用<code>git rebase</code>可能出现冲突（感觉不应该出现冲突的，对此不是很理解，难道是因为丢弃D后使查找链C-D-E-F断裂造成git认为这两个commit需要合并，是因为E无法知道C是它的祖先吗）</p>
+<p>在解决冲突后，使用<code>git rebase --continue</code>完成rebase操作</p>
+</li>
+</ol>
+
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/category/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-aws-s3-sync-and-hexo" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -274,7 +369,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/aws-s3-sync-and-hexo/">让Aws S3 只同步 Hexo 内容有变化的文章</a>
+      <a class="article-title" href="/aws-s3-sync-and-hexo/">让Aws S3 只同步 Hexo 内容有变化的文件</a>
     </h1>
   
 
@@ -1599,73 +1694,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/mycook/">做滴菜</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-research-freehealthcase" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/research-freehealthcase/" class="article-date">
-      <time datetime="2018-01-11T14:03:17.000Z" itemprop="datePublished">2018-01-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/research-freehealthcase/">研究了下医保的大病统筹</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>研究了下医保的大病统筹，算了下除去自费部分和自付部分，以及起付费用，个人自付部分是4.5左右，不知道有没有规定具体报销比例的相关政策说明</p>
-
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/category/consciousness/">意识流</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tag/journal/">随笔</a></li></ul>
     </div>
 
       
