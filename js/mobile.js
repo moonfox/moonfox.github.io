@@ -79,7 +79,7 @@ define([], function(){
     //第四步 -- 绑定 DOM 事件
     var bindDOM = function(){
         var scaleW = scaleW;
-        
+
         //滑动隐藏
         document.getElementById("viewer-box").addEventListener("webkitTransitionEnd", function(){
 
@@ -88,13 +88,13 @@ define([], function(){
                 _isShow = true;
             }else{
             }
-            
+
         }, false);
 
         //点击展示和隐藏
-        ctn.addEventListener("touchend", function(){
-            show();
-        }, false);
+        // ctn.addEventListener("touchend", function(){
+        //     show();
+        // }, false);
 
         var $right = document.getElementsByClassName("viewer-box-r")[0];
         var touchStartTime;
@@ -111,9 +111,9 @@ define([], function(){
             touchEndTime = 0;
         }, false);
 
-        $(".slider-trigger").click(function(){
-            show();
-        })
+        // $(".slider-trigger").click(function(){
+        //     show();
+        // })
         $(".viewer-box-r").click(function(){
             hide();
         })
@@ -142,7 +142,7 @@ define([], function(){
     return{
         init: function(){
             //构造函数需要的参数
-            ctn = document.getElementsByClassName("slider-trigger")[0];
+            // ctn = document.getElementsByClassName("slider-trigger")[0];
             //构造四步
             reset();
             renderDOM();
