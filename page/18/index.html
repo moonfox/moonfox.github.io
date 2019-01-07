@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
 
     <!--[if lt IE 9]>
         <style>body {display: none; background: none !important} </style>
@@ -8,15 +8,15 @@
     <![endif]-->
 
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="戛戛Happy" />
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="戛戛Happy">
 
 
     
      
-        <meta name="google-site-verification" content="mRjQM6azHRnllmCObIorLO1p8dqt92U33mbEzoA2HnU" />
+        <meta name="google-site-verification" content="mRjQM6azHRnllmCObIorLO1p8dqt92U33mbEzoA2HnU">
     
 
 
@@ -26,11 +26,12 @@
 <meta property="og:url" content="http://www.gagahappy.com/page/18/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漂自己的移，让别人都撞墙去吧">
 <meta name="twitter:description" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
 
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 
     <link rel="alternate" href="/atom.xml" title="漂自己的移，让别人都撞墙去吧" type="application/atom+xml">
@@ -76,7 +77,7 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
+        search: false
     }
 </script>
 
@@ -92,7 +93,7 @@
 
 
 
-</head>
+</head></html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -202,16 +203,16 @@
             </nav>
         </header>
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
 
       <div class="body-wrap">
   
-    <article id="post-git-commit-object" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-how-rails-caches-page-work" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/git-commit-object/" class="article-date">
-      <time datetime="2011-07-23T15:52:04.000Z" itemprop="datePublished">2011-07-23</time>
+      <a href="/how-rails-caches-page-work/" class="article-date">
+      <time datetime="2011-08-02T00:01:36.000Z" itemprop="datePublished">2011-08-02</time>
 </a>
 
 
@@ -219,7 +220,1034 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/how-rails-caches-page-work/">rails 页面缓存路径</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>如果使用默认页面缓存设置，在生产环境下，web服务器可以直接访问生成的缓存页面，不再去调用rails。</p>
+<p>但是如果修改了默认页面缓的存放位置，又没对web服务器设置相应的规则，web服务器会因找不到页面而再次把请求转发给rails。从而使缓存变得没有意义。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">Rails</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-mysql-manager-of-pid-file-quit-without-updating-file" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/mysql-manager-of-pid-file-quit-without-updating-file/" class="article-date">
+      <time datetime="2011-08-01T12:34:10.000Z" itemprop="datePublished">2011-08-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/mysql-manager-of-pid-file-quit-without-updating-file/">mysql不能启动 Manager of pid-file quit without updating file.</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>启动mysql失败，提示Manager of pid-file quit without updating file.错误。从网上直接搜索错误信息，感觉出错原因及解决方案都不适用于本机的情况。</p>
+<p>本着出错要查出其原因的原则，查看了mysql的出错日志（出错日志所在路径，请根据您自己机子的实际情况查找），发现错误信息：File ‘./mysql-bin.index’ not found (Errcode: 13)，查看数据库文件，mysql-bin.index确实存在。</p>
+<p>查看数据库文件的权限，发现全都变成了 drwx—— 2  1001 1001。突然想起之前重建过mysql用户，造成数据库文件的权限用户信息丢失。重新授权即可。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R  mysql var/</span><br><span class="line">sudo chgrp -R  mysql var/</span><br></pre></td></tr></table></figure></p>
+<p>再次启动mysql，成功！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-rspec-it-describe-same-and-run" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rspec-it-describe-same-and-run/" class="article-date">
+      <time datetime="2011-07-30T01:17:17.000Z" itemprop="datePublished">2011-07-30</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rspec-it-describe-same-and-run/">rspec it 描述相同也可以正常执行测试</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>目前实践的环境是:同样的it描述在不同的context分组中可以执行各自的测试。如果换成是rails自带的test_开头的方法测试，如果同名肯定会异常。通过这一点又证明了rspec比test更好用的另一个方面。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rspec/">rspec</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-tdd-and-bdd" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/tdd-and-bdd/" class="article-date">
+      <time datetime="2011-07-29T00:27:39.000Z" itemprop="datePublished">2011-07-29</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/tdd-and-bdd/">TDD 和 BDD</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ul>
+<li>TDD 用 test 思維,測試程式的結果</li>
+<li>BDD 用 spec 思維,描述程式應該有什麼行為</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bdd/">BDD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tdd/">TDD</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-rspec-check-kind-of-and-method" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rspec-check-kind-of-and-method/" class="article-date">
+      <time datetime="2011-07-28T17:07:54.000Z" itemprop="datePublished">2011-07-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rspec-check-kind-of-and-method/">rspec  检查类别方法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>rspec  检查类别方法<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">target.should be_a_kind_of(Array)</span><br><span class="line"><span class="comment"># target.class.should == Array</span></span><br><span class="line"></span><br><span class="line">target.should be_an_instance_of(Array)</span><br><span class="line"><span class="comment"># target.class.should == Array</span></span><br><span class="line"></span><br><span class="line">target.should response_to(<span class="symbol">:foo</span>)</span><br><span class="line"><span class="comment"># target.response_to?(:foo).should == true</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rspec/">rspec</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-git-reset-error-on-git-cn" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/git-reset-error-on-git-cn/" class="article-date">
+      <time datetime="2011-07-27T13:09:36.000Z" itemprop="datePublished">2011-07-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/git-reset-error-on-git-cn/">git 撤消文件修改</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>对于 “修复未提交文件中的错误” 时我们可以使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset -- yourfile</span><br></pre></td></tr></table></figure></p>
+<p>这条命令会把文件恢复到index中的版本，而不是恢复到  HEAD revision。<br>当然，如果你没有把修改后的文件内容添加到index ,这个命令还是可以把你所做的修改恢复成你本地最初始的状态。</p>
+<p>建议最好还是能看一下英文版，可以更准确的理解原著中要表达的意思。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-git-checkout-file" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/git-checkout-file/" class="article-date">
+      <time datetime="2011-07-26T23:26:41.000Z" itemprop="datePublished">2011-07-26</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/git-checkout-file/">git 恢复单个文件</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>如果你只是要恢复一个文件(修复未提交文件中的错误),如”hello.rb”, 你就要使用 git checkout<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- hello.rb</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-rspec-controller-erro" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rspec-controller-erro/" class="article-date">
+      <time datetime="2011-07-25T23:39:12.000Z" itemprop="datePublished">2011-07-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rspec-controller-erro/">rspec controller 出错</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>运行 spec/controller下的测试时，如果进入到spec/controller 目录下运行相关的spec，会出现undefined method <code>get for #&lt;ActiveSupport::TestCase::Subclass_1::Subclass_1:0xb6ec8cd4&gt;</code>这样类似的错误，解决方法居然是从项目的根目录运行，即<code>spec spec/controller/action_controller_spec.rb</code>。然后everything is ok.</p>
+<p>解决方法是从一个老外的网站上找到，这里引用一下他的原话，看着这英文真是解气啊！</p>
+<blockquote>
+<p>The problem was exactly in the path. I run my tests from spec/controllers folder where they didn’t work. From root folder everything goes right.</p>
+<p>I found the solution, but i still don’t understand why, especially that my models tests works fine from user@user:~/application_folder/spec/models$ path</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rspec/">rspec</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-rspec-in-controller-integration-with-views" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rspec-in-controller-integration-with-views/" class="article-date">
+      <time datetime="2011-07-25T21:37:52.000Z" itemprop="datePublished">2011-07-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rspec-in-controller-integration-with-views/">rspec in controller integration with views</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>If you prefer to integrate views (a la rails functional testing) you can by including<br>the keyword/commmand “integrate_views”.</p>
+<pre><code class="ruby">describe ArticlesController <span class="keyword">do</span>
+  integrate_views
+  ...
+<span class="keyword">end</span>
+</code></pre>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rspec/">rspec</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-git-remote-sort" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/git-remote-sort/" class="article-date">
+      <time datetime="2011-07-25T15:49:35.000Z" itemprop="datePublished">2011-07-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/git-remote-sort/">git 建立远程分支缩写</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>git 建立远程分支缩写<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add bob /home/bob/myrepo</span><br><span class="line">$ git <span class="built_in">log</span> -p master..bob/master</span><br></pre></td></tr></table></figure></p>
+<p>上面的命令把Bob从Alice的主分支(master)中签出后所做的修改全部显示出来。<br>当检查完修改后,Alice就可以把修改合并到她的主分支中。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git merge bob/master</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-how-to-push-git-branch" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/how-to-push-git-branch/" class="article-date">
+      <time datetime="2011-07-25T00:19:19.000Z" itemprop="datePublished">2011-07-25</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/how-to-push-git-branch/">git 如何推送分支</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>git 如何 推送分支</p>
+<p>1、能否把自己建立的分支推送到服务器仓库？<br>2、在分支里修改文件，直接进行合并，会怎么样？（即，在分支修改后，没有提交）</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-git-diff-head" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/git-diff-head/" class="article-date">
+      <time datetime="2011-07-24T00:51:30.000Z" itemprop="datePublished">2011-07-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/git-diff-head/">git diff HEAD</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git diff HEAD</span><br></pre></td></tr></table></figure>
+<p>上面这条命令会显示你工作目录与上次提交时之间的所有差别，这条命令所显示的 内容都会在执行”git commit -a”命令时被提交。</p>
+<p>这句等同于svn中的 svn diff。即比较工作副本与服务器之间的差异。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-git-tag-object" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/git-tag-object/" class="article-date">
+      <time datetime="2011-07-24T00:04:05.000Z" itemprop="datePublished">2011-07-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/git-tag-object/">git tag 对象</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="http://img.gagahappy.cn/blog/2011/07/tag.jpg" target="_blank" rel="noopener"><img src="http://img.gagahappy.cn/blog/2011/07/tag.jpg" alt="" title="tag"></a></p>
+<p>一个标签对象包一个对象名(译者注:就是SHA1签名), 对象类型, 标签名, 标签创建人的名字(“tagger”), 还有一条可能包含有签名(signature)的消息.</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-git-blob-object" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/git-blob-object/" class="article-date">
+      <time datetime="2011-07-23T23:59:49.000Z" itemprop="datePublished">2011-07-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/git-blob-object/">git blob 对象</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="http://img.gagahappy.cn/blog/2011/07/blob.jpg" target="_blank" rel="noopener"><img src="http://img.gagahappy.cn/blog/2011/07/blob.jpg" alt="" title="blob"></a><br>一个”blob对象”就是一块二进制数据，它没有指向任何东西或有任何其它属性，甚至连文件名都没有.</p>
+<p>因为blob对象内容全部都是数据，如两个文件在一个目录树（或是一个版本仓库）中有同样的数据内容，那么它们将会共享同一个blob对象。Blob对象和其所对应的文件所在路径、文件名是否改被更改都完全没有关系。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-git-tree-object" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/git-tree-object/" class="article-date">
+      <time datetime="2011-07-23T23:58:03.000Z" itemprop="datePublished">2011-07-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/git-tree-object/">git tree 对象</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>git tree 对象<br><a href="http://img.gagahappy.cn/blog/2011/07/tree.jpg" target="_blank" rel="noopener"><img src="http://img.gagahappy.cn/blog/2011/07/tree.jpg" alt="" title="tree"></a></p>
+<p>一个tree对象可以指向(reference): 一个包含文件内容的blob对象, 也可以是其它包含某个子目录内容的其它tree对象.</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-git-commit-object" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/git-commit-object/" class="article-date">
+      <time datetime="2011-07-23T23:52:04.000Z" itemprop="datePublished">2011-07-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -236,7 +1264,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Commit对象<br><a href="http://img.gagahappy.cn/blog/2011/07/commit.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.cn/blog/2011/07/commit.jpg" alt="" title="commit"></a></p>
+        <p>Commit对象<br><a href="http://img.gagahappy.cn/blog/2011/07/commit.jpg" target="_blank" rel="noopener"><img src="http://img.gagahappy.cn/blog/2011/07/commit.jpg" alt="" title="commit"></a></p>
 <p>注：合并的提交(merge commits)可能会有不只一个父对象. 如果一个提交没有父对象, 那么我们就叫它“根提交”(root commit), 它就代表着项目最初的一个版本(revision).</p>
 
       
@@ -275,11 +1303,11 @@
 
 
   
-    <article id="post-git-set-your-name" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-git-set-your-name" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/git-set-your-name/" class="article-date">
-      <time datetime="2011-07-22T11:28:30.000Z" itemprop="datePublished">2011-07-22</time>
+      <time datetime="2011-07-22T19:28:30.000Z" itemprop="datePublished">2011-07-22</time>
 </a>
 
 
@@ -287,7 +1315,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -304,7 +1332,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"Scott Chacon"</span></div><div class="line">$ git config --global user.email <span class="string">"schacon@gmail.com"</span></div></pre></td></tr></table></figure>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"Scott Chacon"</span></span><br><span class="line">$ git config --global user.email <span class="string">"schacon@gmail.com"</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -342,11 +1370,11 @@
 
 
   
-    <article id="post-git-commit-flow" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-git-commit-flow" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/git-commit-flow/" class="article-date">
-      <time datetime="2011-07-22T07:14:50.000Z" itemprop="datePublished">2011-07-22</time>
+      <time datetime="2011-07-22T15:14:50.000Z" itemprop="datePublished">2011-07-22</time>
 </a>
 
 
@@ -354,7 +1382,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -371,7 +1399,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>提交流程大致如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> lyr@192.168.0.7:~/work/m2ge</div><div class="line"><span class="comment">#... 项目开发 ...</span></div><div class="line">$ git add 改动的文件</div><div class="line">$ git commit</div><div class="line">$ git pull</div><div class="line"><span class="comment">#... 解决版本合并问题 ...</span></div><div class="line">$ git push</div></pre></td></tr></table></figure></p>
+        <p>提交流程大致如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> lyr@192.168.0.7:~/work/m2ge</span><br><span class="line"><span class="comment">#... 项目开发 ...</span></span><br><span class="line">$ git add 改动的文件</span><br><span class="line">$ git commit</span><br><span class="line">$ git pull</span><br><span class="line"><span class="comment">#... 解决版本合并问题 ...</span></span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -409,11 +1437,11 @@
 
 
   
-    <article id="post-git-init-on-server" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-git-init-on-server" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/git-init-on-server/" class="article-date">
-      <time datetime="2011-07-22T07:07:28.000Z" itemprop="datePublished">2011-07-22</time>
+      <time datetime="2011-07-22T15:07:28.000Z" itemprop="datePublished">2011-07-22</time>
 </a>
 
 
@@ -421,7 +1449,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -438,10 +1466,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>git 协同开发<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p ~/project/m2ge.git</div><div class="line">$ <span class="built_in">cd</span> ~/project/m2ge.git</div><div class="line">$ git --bare init --shared</div></pre></td></tr></table></figure></p>
+        <p>git 协同开发<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p ~/project/m2ge.git</span><br><span class="line">$ <span class="built_in">cd</span> ~/project/m2ge.git</span><br><span class="line">$ git --bare init --shared</span><br></pre></td></tr></table></figure></p>
 <p>上述操作中,git-init 命令的 –bare 选项可以让 m2ge.git 目录等价于一个仓<br>库。</p>
 <p>也就是说m2ge.git 本来是一个工作树，但是 –bare 选项将本应当存放在m2ge.git/.git 中的仓库内容全部放置在 m2ge.git 目录下，就好像仓库完全的裸露在工作树中，所以称之为赤裸的仓库。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> ~/work/m2ge</div><div class="line">$ git push m2@192.168.0.2:~/project/m2ge.git master</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/work/m2ge</span><br><span class="line">$ git push m2@192.168.0.2:~/project/m2ge.git master</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -479,11 +1507,11 @@
 
 
   
-    <article id="post-rspec-expect-to-change-value-or-raise-error" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-rspec-expect-to-change-value-or-raise-error" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/rspec-expect-to-change-value-or-raise-error/" class="article-date">
-      <time datetime="2011-07-19T09:16:58.000Z" itemprop="datePublished">2011-07-19</time>
+      <time datetime="2011-07-19T17:16:58.000Z" itemprop="datePublished">2011-07-19</time>
 </a>
 
 
@@ -491,7 +1519,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -509,7 +1537,7 @@
       
           
         <p>期望改变值或抛出异常</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">expect &#123;&#125;.to change &#123;&#125;.from().to()</div><div class="line"></div><div class="line">expect &#123;&#125;.to raise_error(YourMenthodError)</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expect &#123;&#125;.to change &#123;&#125;.from().to()</span><br><span class="line"></span><br><span class="line">expect &#123;&#125;.to raise_error(YourMenthodError)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -546,1101 +1574,9 @@
 
 
   
-    <article id="post-the-different-between-include-and-extend-in-ruby" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/the-different-between-include-and-extend-in-ruby/" class="article-date">
-      <time datetime="2011-07-18T15:36:38.000Z" itemprop="datePublished">2011-07-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/the-different-between-include-and-extend-in-ruby/">ruby 中 include 与 extend 区别</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>那么include和extend究竟有什么区别的？</p>
-<p>引用如下</p>
-<blockquote>
-<p>include : mixes in specified module methods as instance methods in the target class<br>extend : mixes in specified module methods as class methods in the target class</p>
-</blockquote>
-<p>记得有看过的，被用到的时候居然忘记了。杯具啊！</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/the-different-between-include-and-extend-in-ruby/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-install-openssh" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/install-openssh/" class="article-date">
-      <time datetime="2011-07-15T12:22:45.000Z" itemprop="datePublished">2011-07-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/install-openssh/">安装OpenSSH</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>安装OpenSSH<br>Ubuntu缺省没有安装SSH Server，使用以下命令安装：</p>
-<p>sudo apt-get install openssh-server openssh-client</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-rmagick-install" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/rmagick-install/" class="article-date">
-      <time datetime="2011-07-14T12:21:21.000Z" itemprop="datePublished">2011-07-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/rmagick-install/">安装Rmagick</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>首先下载imagemagick， 进入安装目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> imagemagick</div><div class="line">./configure --prefix=/opt/imagemagick</div><div class="line">make</div><div class="line">sudo make install</div></pre></td></tr></table></figure>
-<p>如果出现<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ld: cannot find -lperl</div></pre></td></tr></table></figure></p>
-<p>请安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install libperl-dev</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-apache-svn-config" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/apache-svn-config/" class="article-date">
-      <time datetime="2011-07-12T10:26:23.000Z" itemprop="datePublished">2011-07-12</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/apache-svn-config/">apache 配置文件</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;Location /svn&gt;</div><div class="line">DAV svn</div><div class="line">SVNParentPath D:\SVN</div><div class="line">AuthType Basic</div><div class="line">AuthName <span class="string">"Subversion repositories"</span></div><div class="line">AuthUserFile D:\passwd</div><div class="line"><span class="comment">#AuthzSVNAccessFile D:\svnaccessfile</span></div><div class="line">Require valid-user</div><div class="line">&lt;/Location&gt;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/subversion/">Subversion</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-rubymine-font-beauty" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/rubymine-font-beauty/" class="article-date">
-      <time datetime="2011-07-08T10:13:39.000Z" itemprop="datePublished">2011-07-08</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/rubymine-font-beauty/">rubymine 字体反锯齿</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>让所有的Java程序都使用反锯齿，就是在~/.profile后面再加上<br>export _JAVA_OPTIONS=’-Dawt.useSystemAAFontSettings=on’</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rubymine/">rubymine</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-jdk6-install-by-manual" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/jdk6-install-by-manual/" class="article-date">
-      <time datetime="2011-07-05T10:02:37.000Z" itemprop="datePublished">2011-07-05</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/jdk6-install-by-manual/">手动安装jdk6</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <ol>
-<li><p>下载</p>
-<blockquote>
-<p>到<a href="http://java.sum.com" target="_blank" rel="external">http://java.sum.com</a> 下载jdk6.bin 下载位置/home/g/jdk.bin</p>
-</blockquote>
-</li>
-<li><p>建立安装目</p>
-<blockquote>
-<p><code>mkdir /usr/local/java</code></p>
-</blockquote>
-</li>
-<li><p>进行安装目录</p>
-<blockquote>
-<p><code>cd /usr/lcoal/java</code></p>
-</blockquote>
-</li>
-<li><p>安装</p>
-<blockquote>
-<p><code>/home/g/jdk.bin 点击同意。一路回车</code></p>
-</blockquote>
-</li>
-<li><p>编辑环境变量</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">JAVA_HOME=/usr/<span class="built_in">local</span>/java/jdk6/jdk1.6.0_11</div><div class="line">CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></div><div class="line"><span class="built_in">export</span> CLASSPATH</div><div class="line"><span class="comment"># 上面写法不一定正确</span></div><div class="line"><span class="built_in">export</span> MYSQL_HOME=/opt/mysql</div><div class="line"><span class="built_in">export</span> RUBY_HOME=/opt/ruby</div><div class="line"><span class="built_in">export</span> JAVA_HOME=/opt/java/jdk1.6.0_11</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$MYSQL_HOME</span>/bin:<span class="variable">$RUBY_HOME</span>/bin</div><div class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</div><div class="line">java -version <span class="comment">#如果出现版本号，则说明安装成功。</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-rails2-2-2-can-not-connect-mysql-drive-bug" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/rails2-2-2-can-not-connect-mysql-drive-bug/" class="article-date">
-      <time datetime="2011-07-03T09:56:36.000Z" itemprop="datePublished">2011-07-03</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/rails2-2-2-can-not-connect-mysql-drive-bug/">解决rails2.2.2不能连接mysql 数据库驱动问题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gem install mysql -- --with-mysql-config=/usr/<span class="built_in">local</span>/mysql/bin/mysql_config</div><div class="line"></div><div class="line">gem install mysql --no-rdoc --no-ri \</div><div class="line">-- --with-mysql-include=/usr/<span class="built_in">local</span>/mysql/include \</div><div class="line">--with-mysql-lib=/usr/<span class="built_in">local</span>/mysql/lib \</div><div class="line">--with-mysql-config=/usr/<span class="built_in">local</span>/mysql/bin/mysql_config</div><div class="line"></div><div class="line"><span class="string">"/usr/local/mysql/lib"</span> to /etc/ld.so.conf and ran ldconfig</div></pre></td></tr></table></figure>
-<p>修改 <code>/etc/ld.so.conf</code>， 加入<code>include /opt/mysql/lib</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem install mysql -- --with-mysql-lib=/opt/mysql/lib/mysql --with-mysql-include=/opt/mysql/include/mysql/</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-fedora-install-urar" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/fedora-install-urar/" class="article-date">
-      <time datetime="2011-05-10T06:00:46.000Z" itemprop="datePublished">2011-05-10</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/fedora-install-urar/">fedora 解压 rar文件</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>yum install unrar</p>
-<p>unrar是免费软件，看来是可以免费解压的，但如果要压缩成rar文件的话，就要收费了。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fedora/">fedora</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-fedor-uml-software-dia" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/fedor-uml-software-dia/" class="article-date">
-      <time datetime="2011-05-05T08:35:22.000Z" itemprop="datePublished">2011-05-05</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/fedor-uml-software-dia/">fedora下使用UML</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Dia是一款可以在linux下进入UML设计的软件，它能很方便地加入文字，还能画电路图、ER图、CISCO系列设计图等几十种图。</p>
-<p><a href="http://img.gagahappy.cn/blog/2011/05/pngScreenshot-1.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.cn/blog/2011/05/pngScreenshot-1.jpg" alt="" title="decorator"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fedora/">fedora</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-linux-modify-default-rights-by-umask" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/linux-modify-default-rights-by-umask/" class="article-date">
-      <time datetime="2011-04-19T08:10:10.000Z" itemprop="datePublished">2011-04-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/linux-modify-default-rights-by-umask/">fedora 设置文件默认权限</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>linux默认的权限可用umask命令修改，用法非常简单，只需执行umask 777 命令，便代表屏蔽所有的权限，因而之后建立的文件或目录，其权限都变成000，依次类推。通常root帐号搭配umask命令的数值为022、027和 077，普通用户则是采用002，这样所产生的权限依次为755、750、700、775。</p>
-<p>用户登录系统时，用户环境就会自动执行rmask命令来决定文件、目录的默认权限。</p>
-<p><a href="http://img.gagahappy.cn/blog/2011/04/fedora-2103061.jpg" target="_blank" rel="external"><img src="http://img.gagahappy.cn/blog/2011/04/fedora-2103061.jpg" alt="" title="fedora"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fedora/">fedora</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-fedora-default-right-changed" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/fedora-default-right-changed/" class="article-date">
-      <time datetime="2011-04-18T08:10:43.000Z" itemprop="datePublished">2011-04-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/fedora-default-right-changed/">fedora 14文件默认权限莫明变更</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>fedora14下用个人帐户登录系统建立目录时，默认权限变成了drwxrwxr-x，而不是我们通常设置的drwxr-xr-x。另建其他帐户问题依然存在，很是奇怪，经过一番的查找，问题出在了系统环境文件里。具体解决方法如下</p>
-<p>打开系统环境文件，发现文件中多了以下几行，怀疑是升级时系统加入的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> [ <span class="variable">$UID</span> <span class="_">-gt</span> 199 ] &amp;&amp; [ <span class="string">"`id -gn`"</span> = <span class="string">"`id -un`"</span> ]; <span class="keyword">then</span></div><div class="line">    <span class="built_in">umask</span> 002</div><div class="line"><span class="keyword">else</span></div><div class="line">    <span class="built_in">umask</span> 022</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure></p>
-<p>umask把普通用户登录后文件及目录的默认权限设置为775了，改回755问题即可解决。在文件尾端加入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">umask</span> 022</div></pre></td></tr></table></figure></p>
-<p>移步<a href="http://www.gagahappy.com/linux-modify-default-rights-by-umask/"> fedora 设置文件默认权限</a>了解相关umask知识</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fedora/">fedora</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-apr-util-wasnt-linked-against-berkeley-db" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/apr-util-wasnt-linked-against-berkeley-db/" class="article-date">
-      <time datetime="2011-04-15T07:46:46.000Z" itemprop="datePublished">2011-04-15</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/apr-util-wasnt-linked-against-berkeley-db/">APR-UTIL wasn&#39;t linked against Berkeley DB</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Subversion仓库的存储可以用Berkley DB数据库（一般叫做Berkley DB 类型）或者普通的文件系统（一般叫做FSFS 类型）来实现。</p>
-<p>FSFS 类型subversion在安装编译安装时默认安装，支持Berkley DB 类型需要在编译安装时指定 –with-berkeley-db 选项，并且在安装apr-util时必须把 –with-berkeley-db 一起编译进去。</p>
-<p>安装subversion提示APR-UTIL wasn’t linked against Berkeley DB，在安装时已经指明 –with-berkeley-db 所在路径，但依然没有找到。</p>
-<p>berkeley-db安装版本为5.1.25，怀疑是berkeley-db版本太高造成apr-util无法识别，更换为4.8.30后，重新编译apr-util，Subversion 编译顺利通过。</p>
-<p>经验总结：1、不能太追新了～～～2、遇到问题时要仔细看错误提示。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/subversion/">Subversion</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-fedora-apache-can-not-access-subversion-repository" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/fedora-apache-can-not-access-subversion-repository/" class="article-date">
-      <time datetime="2011-04-14T08:29:31.000Z" itemprop="datePublished">2011-04-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/fedora-apache-can-not-access-subversion-repository/">fedora 14 apache不能访问 subversion 仓库</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>使用apache访问svn仓库目录时，仓库文件放在/home/主目录下，用户及用户组与apache用户一至，apache配置也没有问题，却总是提示无法访问format文件，很是无奈。</p>
-<p>随后把仓库目录放到/下，问题消失。但把仓库目录再次移回到主目录下，问题依然存在。可以确定就是权限不对造成apache无法访问。</p>
-<p>最后在/home/主目录/ 文件夹上找到问题，其权限是700，难怪apache无法访问，改成755后，问题解决。</p>
-<p>总结：fedora 默认主目录文件夹的权限是700，所以如果想让apache访问在主目录下的站点，第一步要做的工作就是设置权限为755。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fedora/">fedora</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-delete-fedora-kernel" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/delete-fedora-kernel/" class="article-date">
-      <time datetime="2011-04-13T08:36:37.000Z" itemprop="datePublished">2011-04-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/delete-fedora-kernel/">fedora 删除旧内核</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>由于Fedora更新升级非常的频繁， 所以， 非常有必要清除陈旧的内核，方法如下：</p>
-<ol>
-<li><p>查看当前系统中已安装的内核相关包：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rpm -qa | grep kernel</div><div class="line">kernel-2.6.35.6-45.fc14.i686</div><div class="line">kernel-2.6.35.12-88.fc14.i686</div><div class="line">abrt-addon-kerneloops-1.1.17-1.fc14.i686</div></pre></td></tr></table></figure>
-</li>
-<li><p>查看当前系统内核<br>shell&gt; uname -r<br>kernel-2.6.35.12-88.fc14.i686</p>
-</li>
-<li><p>确定要删除的内核：<br>这里为：kernel-2.6.35.6-45.fc14.i686</p>
-</li>
-<li><p>删除内核：<br><code>yum remove kernel-2.6.35.6-45.fc14.i686</code></p>
-</li>
-</ol>
-<p>说明：</p>
-<blockquote>
-<p>没有直接使用: rpm -e 的方法删除内核包， 而是使用 yum remove 进行删除，<br>因为使用yum remove删除， yum 会自动移除 ： /boot/grub/menu.lst 中的相关启动项。</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fedora/">fedora</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-fedora-14-install-nvidia-drives" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/fedora-14-install-nvidia-drives/" class="article-date">
-      <time datetime="2011-04-12T13:26:39.000Z" itemprop="datePublished">2011-04-12</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/fedora-14-install-nvidia-drives/">Fedora 14  安装 NVIDIA 显卡驱</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>首先，安装 RPM Fusion 软件仓库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">su -c <span class="string">'rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm'</span></div><div class="line">su -c <span class="string">'rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm'</span></div><div class="line">su -c <span class="string">'yum update'</span></div></pre></td></tr></table></figure></p>
-<p>然后，安装 NVIDIA 显卡驱动</p>
-<ol>
-<li>确定显卡类型（当然，如果你知道你的显卡类型，就没必要执行这一步了）<br><code>su -c &#39;/sbin/lspci | grep VGA&#39;</code></li>
-<li>安装nvidia驱动<blockquote>
-<ul>
-<li>如果是 GeForce 6, 7, 8, 9, 200, 300, 400 &amp; 500 系列显卡：<br><code>su -c &#39;yum install kmod-nvidia xorg-x11-drv-nvidia-libs&#39;</code></li>
-<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-PAE&#39;</code></li>
-<li>或者：<br><code>su -c &#39;yum install akmod-nvidia xorg-x11-drv-nvidia-libs&#39;</code></li>
-<li>如果是 GeForce Fx 显卡：<br>yum install kmod-nvidia-173xx xorg-x11-drv-nvidia-173xx-libs</li>
-<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-173xx-PAE&#39;</code></li>
-<li>或者：<br><code>su -c &#39;yum install akmod-nvidia-173xxxorg-x11-drv-nvidia-173xx-libs&#39;</code></li>
-<li>如果是 GeForce 4 或者更低系列的显卡：<br><code>su -c &#39;yum install kmod-nvidia-96xx</code> xorg-x11-drv-nvidia-96xx-libs’</li>
-<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-96xx-PAE&#39;</code></li>
-<li>或者：<br><code>su -c &#39;yum install akmod-nvidia-96xxxorg-x11-drv-nvidia-96xx-libs&#39;</code></li>
-</ul>
-</blockquote>
-</li>
-</ol>
-<p>最后，重启系统</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fedora/">fedora</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/17/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/19/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/17/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/19/">Next &raquo;</a>
     </nav>
   
 </div>
@@ -1649,7 +1585,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i>
-                2009~2018 戛戛Happy
+                2009~2019 戛戛Happy
                 
                     <i class="fa fa-check-circle-o"></i>
                     京ICP备10044755

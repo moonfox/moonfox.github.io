@@ -2,10 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>漂自己的移，让别人都撞墙去吧</title>
   
+  
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.gagahappy.com/"/>
-  <updated>2018-06-07T08:40:54.000Z</updated>
+  <updated>2019-01-06T14:27:29.000Z</updated>
   <id>http://www.gagahappy.com/</id>
   
   <author>
@@ -16,117 +17,83 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>git rebase 与 git reset的应用</title>
-    <link href="http://www.gagahappy.com/git-rebase-vs-git-reset/"/>
-    <id>http://www.gagahappy.com/git-rebase-vs-git-reset/</id>
-    <published>2018-06-07T06:13:19.000Z</published>
-    <updated>2018-06-07T08:40:54.000Z</updated>
+    <title>First try handstand</title>
+    <link href="http://www.gagahappy.com/first-try-handstand/"/>
+    <id>http://www.gagahappy.com/first-try-handstand/</id>
+    <published>2019-01-06T14:27:04.000Z</published>
+    <updated>2019-01-06T14:27:29.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="常用的应用场景"><a href="#常用的应用场景" class="headerlink" title="常用的应用场景"></a>常用的应用场景</h3><ol>
-<li><p>合并提交</p>
-</li>
-<li><p>去除不要的提交</p>
-</li>
-</ol>
-<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><h3 id="场景1，合并多个提交"><a href="#场景1，合并多个提交" class="headerlink" title="场景1，合并多个提交"></a>场景1，合并多个提交</h3><p>有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交</p>
-<ol>
-<li>方法一: <code>git reset</code></li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git reset B --soft</div><div class="line">git ci -m <span class="string">"merge C to F"</span></div></pre></td></tr></table></figure>
-<ol>
-<li>方法二: <code>git rebase</code></li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase --onto B C^ develop</div></pre></td></tr></table></figure>
-<h3 id="场景2，去掉D提交"><a href="#场景2，去掉D提交" class="headerlink" title="场景2，去掉D提交"></a>场景2，去掉D提交</h3><p>此时，<code>git reset</code>已经不再适合这个场景</p>
-<p>使用<code>git rebase</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase --onto C E^ develop</div></pre></td></tr></table></figure>
-<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ol>
-<li><p><code>git rebase</code> 语法</p>
-<p><code>git rebase --onto &lt;onbase&gt; &lt;since&gt; &lt;till&gt;</code><br><code>git rebase --onto &lt;onbase&gt; &lt;since&gt;</code><br><code>git rebase &lt;since&gt; &lt;till&gt;</code><br><code>git rebase &lt;since&gt;</code><br><code>git rebase -i</code></p>
-<p>onbase为要架接到的commit, since表示不包括自身到till的所有提交</p>
-<p><code>git rebase --continue</code> # 解决冲突后使用，以完成rebase<br><code>git rebase --skip</code>     # 跳过当前commit，进行下一个commit的合并<br><code>git rebase --abort</code>    # 放弃此次操作，还原工作区</p>
-</li>
-<li><p><code>git rebase</code>的莫名冲突</p>
-<p>对于场景二： 使用<code>git rebase</code>可能出现冲突（感觉不应该出现冲突的，对此不是很理解，难道是因为丢弃D后使查找链C-D-E-F断裂造成git认为这两个commit需要合并，是因为E无法知道C是它的祖先吗）</p>
-<p>在解决冲突后，使用<code>git rebase --continue</code>完成rebase操作</p>
-</li>
-</ol>
-]]></content>
+    <content type="html"><![CDATA[<p>手倒立臂力不足，立了一半就掉下来了，还是要克服恐惧心理，明明头倒立都可以了，为什么到了手倒立就又害怕了呢 ​​</p>]]></content>
     
     <summary type="html">
     
-      git rebase 与 git reset的应用
+      first try handstand
     
     </summary>
     
-      <category term="程序开发" scheme="http://www.gagahappy.com/categories/development/"/>
+      <category term="意识流" scheme="http://www.gagahappy.com/categories/consciousness/"/>
     
     
-      <category term="git" scheme="http://www.gagahappy.com/tags/git/"/>
+      <category term="随笔" scheme="http://www.gagahappy.com/tags/journal/"/>
     
   </entry>
   
   <entry>
-    <title>让Aws S3 只同步 Hexo 内容有变化的文件</title>
-    <link href="http://www.gagahappy.com/aws-s3-sync-and-hexo/"/>
-    <id>http://www.gagahappy.com/aws-s3-sync-and-hexo/</id>
-    <published>2018-06-06T04:55:25.000Z</published>
-    <updated>2018-06-06T12:08:00.000Z</updated>
+    <title>其实我是想看这部</title>
+    <link href="http://www.gagahappy.com/exec-zero/"/>
+    <id>http://www.gagahappy.com/exec-zero/</id>
+    <published>2018-11-09T21:33:40.000Z</published>
+    <updated>2019-01-06T14:38:22.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>发现Aws S3 sync 在同步Hexo 生成的网站内容时，几乎总是同步所有文件，那些内容没有发生改变但文件最后修改时间发生改变的文件也被同步了，造成了Aws S3写操作流量的浪费，原因如下</p>
-<ol>
-<li><p>Aws S3 sync 命令的同步的策略</p>
-<ol>
-<li>判断文件大小是否发生变化</li>
-<li>比较文件最后的修改日期</li>
-</ol>
-<p>如果某个文件的这两项中的其中一项发生变化，则这个文件被同步</p>
-</li>
-<li><p>Hexo生成文章</p>
-<p>即使仅更新一篇文章，使用<code>hexo g</code>命令后，几乎所有文件的最后修改时间都被更新了。目前来看，Hexo更新内容的算法还有待改进，有些地方还是有优化空间的</p>
-</li>
-</ol>
-<p>由于以上两点，造成了Aws S3写流量的浪费</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>只同步内容有改变的文件</p>
-<ol>
-<li>通过<code>git diff</code> 命令找出此次提交发生变化的文件。这里不用<code>git log</code>的原因是log命令会有多余的输出，不利于后面编写脚本</li>
-<li>使用<code>aws s3 cp</code>把发生变化的文件同步到Aws S3，这样就大大节省了Aws S3写操作的流量</li>
-</ol>
-<h3 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line">git diff HEAD~1 HEAD --stat --name-only | awk <span class="string">'&#123;cmd="aws s3 cp "$1" s3://your-butket/"$1" --exclude '</span>.gitignore<span class="string">'";system(cmd)&#125;'</span></div></pre></td></tr></table></figure>
-<p>放到项目根目录执行，此脚本只会同步那些内容有修改的文件，内容没有修改，但最后修改时间被更新的文件不会被同步，大大节省了Aws S3的写流量</p>
-<h3 id="后记，奇怪的git-diff输出"><a href="#后记，奇怪的git-diff输出" class="headerlink" title="后记，奇怪的git diff输出"></a>后记，奇怪的git diff输出</h3><p>发现<code>git diff --stat</code>输出时，如果输出到屏幕，那些长路径名是可以正常显示的，但如果输出到文件，则长路径就会被省略显示。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 长路径名</span></div><div class="line">looooooooooong_path_name/index.html</div><div class="line"></div><div class="line"><span class="comment"># 在输出到屏幕时是可以正常显示的</span></div><div class="line">&gt; git diff --stat</div><div class="line">&gt; looooooooooong_path_name/index.html</div><div class="line"></div><div class="line"><span class="comment"># 但如果输出到文件，路径名就变成了:".../index.html"</span></div><div class="line">&gt; git diff --stat &gt; diff.log</div><div class="line">&gt; cat diff.log</div><div class="line">&gt; .../index.html</div></pre></td></tr></table></figure>
-<p>为了解决这个问题，需要执行 <code>git diff --stat --name-only</code>， 输出到文件也可以正常显示长路径名了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; git diff --stat --name-only &gt; diff.log</div><div class="line">&gt; cat diff.log</div><div class="line">&gt; looooooooooong_path_name/index.html</div></pre></td></tr></table></figure>
-]]></content>
+    <content type="html"><![CDATA[<p><img src="http://img.gagahappy.cn/blog/2018/11/exec-zero.jpg_b1" alt="其实我是想看这部" title="其实我是想看这部"></p>]]></content>
     
     <summary type="html">
     
-      让Aws S3 只同步 Hexo 内容有变化的文件
+      其实我是想看这部
     
     </summary>
     
-      <category term="程序开发" scheme="http://www.gagahappy.com/categories/development/"/>
+      <category term="非常娱乐" scheme="http://www.gagahappy.com/categories/relax/"/>
     
     
-      <category term="s3" scheme="http://www.gagahappy.com/tags/s3/"/>
+      <category term="电影" scheme="http://www.gagahappy.com/tags/movie/"/>
     
   </entry>
   
   <entry>
-    <title>香菇鸡肉焖饭</title>
-    <link href="http://www.gagahappy.com/cook-xianggu-jirou-menfan/"/>
-    <id>http://www.gagahappy.com/cook-xianggu-jirou-menfan/</id>
-    <published>2018-06-05T05:33:29.000Z</published>
-    <updated>2018-06-23T13:58:10.000Z</updated>
+    <title>想起了独自去看疯狂动物城 ​​​​</title>
+    <link href="http://www.gagahappy.com/see-zootropolis/"/>
+    <id>http://www.gagahappy.com/see-zootropolis/</id>
+    <published>2018-10-06T23:45:54.000Z</published>
+    <updated>2019-01-06T14:33:33.000Z</updated>
     
-    <content type="html"><![CDATA[<p>香菇鸡肉焖饭 #做滴菜#</p>
-<p><img src="http://img.gagahappy.cn/blog/2018/06/cook-xianggu-jirou-menfan.jpg_b1" alt="香菇鸡肉焖饭" title="香菇鸡肉焖饭"></p>
-]]></content>
+    <content type="html"><![CDATA[<p><img src="http://img.gagahappy.cn/blog/2018/10/see-zootropolis.jpg_b1" alt="想起了独自去看疯狂动物城" title="想起了独自去看疯狂动物城"></p>]]></content>
     
     <summary type="html">
     
-      香菇鸡肉焖饭
+      想起了独自去看疯狂动物城 ​​​​
+    
+    </summary>
+    
+      <category term="非常娱乐" scheme="http://www.gagahappy.com/categories/relax/"/>
+    
+    
+      <category term="电影" scheme="http://www.gagahappy.com/tags/movie/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>橘香排骨</title>
+    <link href="http://www.gagahappy.com/cook-ju-xiang-pai-gu/"/>
+    <id>http://www.gagahappy.com/cook-ju-xiang-pai-gu/</id>
+    <published>2018-09-21T18:24:37.000Z</published>
+    <updated>2019-01-06T14:02:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本来要做橘香排骨的，结果给做成芒香排骨了，不过味道不错也。#做滴菜# ​​​​</p><p><img src="http://img.gagahappy.cn/blog/2018/09/cook-ju-xiang-pai-gu.jpg_b1" alt="橘香排骨" title="橘香排骨"></p>]]></content>
+    
+    <summary type="html">
+    
+      橘香排骨
     
     </summary>
     
@@ -138,58 +105,17 @@
   </entry>
   
   <entry>
-    <title>SERENA V MARIA, THE LATEST CHAPTER</title>
-    <link href="http://www.gagahappy.com/williams-sharapova-roland-garros-france-2018/"/>
-    <id>http://www.gagahappy.com/williams-sharapova-roland-garros-france-2018/</id>
-    <published>2018-06-04T14:40:19.000Z</published>
-    <updated>2018-06-23T13:58:10.000Z</updated>
+    <title>Life is too short to wake up</title>
+    <link href="http://www.gagahappy.com/share-life-is-too-short/"/>
+    <id>http://www.gagahappy.com/share-life-is-too-short/</id>
+    <published>2018-09-19T15:00:02.000Z</published>
+    <updated>2019-01-06T14:08:14.000Z</updated>
     
-    <content type="html"><![CDATA[<p>The last chapter, Rivalry or not, all eyes will be on Maria Sharapova vs Serena Williams.</p>
-<p>Unfortunately, Serena Williams was forced to pull out of Roland Garros due to an injury on Monday, giving Maria Sharapova a walkover into the quarterfinals.</p>
-<p><img src="http://img.gagahappy.cn/blog/2018/06/williams-sharapova-roland-garros-france-2018.jpg_b1" alt="Sharapova vs Williams" title="Sharapova vs Williams"></p>
-<p>Serena Williams Interview</p>
-<blockquote>
-<ul>
-<li>I’m beyond disappointed. I gave up so much, from time with my daughter to<br>time with my family. I put everything on the court. All for this moment.</li>
-<li>Every match has been getting better for me. Physically, I’m doing great…I can only take solace in the fact that I’m going to get better.</li>
-<li>It’s very difficult because I love playing Maria.</li>
-<li>it’s a match I always get up for and her game matches up against mine.</li>
-</ul>
-</blockquote>
-<p>Maria Sharapove Interview</p>
-<blockquote>
-<ul>
-<li>I was looking forward to my match against Serena today and am disappointed that she had to withdraw. I wish her a speedy recovery and hope she returns to the tour soon.</li>
-</ul>
-</blockquote>
-]]></content>
+    <content type="html"><![CDATA[<p>Life is too short to wake up in the morning with regrets.</p><p><img src="http://img.gagahappy.cn/blog/2018/09/share-life-is-too-short.jpg_b1" alt="Life is too short to wake up" title="Life is too short to wake up"></p>]]></content>
     
     <summary type="html">
     
-      The last chapter, Rivalry or not, all eyes will be on Maria Sharapova vs Serena Williams
-    
-    </summary>
-    
-      <category term="非常娱乐" scheme="http://www.gagahappy.com/categories/relax/"/>
-    
-    
-      <category term="人物" scheme="http://www.gagahappy.com/tags/people/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>上到热门首页啦 ​​</title>
-    <link href="http://www.gagahappy.com/get-hot-top-on-keep/"/>
-    <id>http://www.gagahappy.com/get-hot-top-on-keep/</id>
-    <published>2018-05-18T23:35:01.000Z</published>
-    <updated>2018-06-23T13:58:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://img.gagahappy.cn/blog/2018/05/get-hot-top-on-keep.jpg_b1" alt="上到热门首页啦" title="上到热门首页啦"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      上到热门首页啦 ​​
+      Life is too short to wake up
     
     </summary>
     
@@ -201,20 +127,17 @@
   </entry>
   
   <entry>
-    <title>一字马进步一点点</title>
-    <link href="http://www.gagahappy.com/split-improve/"/>
-    <id>http://www.gagahappy.com/split-improve/</id>
-    <published>2018-05-06T12:27:55.000Z</published>
-    <updated>2018-06-23T13:58:10.000Z</updated>
+    <title>a special gift from you</title>
+    <link href="http://www.gagahappy.com/a-special-gift-from-you/"/>
+    <id>http://www.gagahappy.com/a-special-gift-from-you/</id>
+    <published>2018-09-08T22:36:26.000Z</published>
+    <updated>2019-01-06T14:07:53.000Z</updated>
     
-    <content type="html"><![CDATA[<p>终于可以双手向上举了，希望以后每天都可以下去一字马</p>
-<p>一字马在你离地还很高的时候是不会疼的，就算疼，也不是那么的疼，是可以忍受的疼。真正开始疼的时候是你刚刚可以坐到地上（一字马初成），这个时候才是最疼的，疼到你连多1秒也不想忍受，是那种无法忍受的疼。这时才开始拉伸到你大腿根的筋，从这时起才会一点一点的练成真正的一字马</p>
-<p><img src="http://img.gagahappy.cn/blog/2018/05/split-improve.jpg_b1" alt="一字马进步一点点" title="一字马进步一点点"></p>
-]]></content>
+    <content type="html"><![CDATA[<p>你送我阿拉蕾我能理解，送阿拉蕾＋一只狗我也能理解，但你送我阿拉蕾＋6只狗是什么意思？是说加上我就凑够，阿拉蕾和7只单身汪了么？你以为这是白雪公主和七个小矮人呀？</p><p><img src="http://img.gagahappy.cn/blog/2018/09/a-special-gift-from-you.jpg_b1" alt="a special gift from you" title="a special gift from you"></p>]]></content>
     
     <summary type="html">
     
-      一字马进步一点点
+      a special gift from you
     
     </summary>
     
@@ -226,22 +149,61 @@
   </entry>
   
   <entry>
-    <title>你加我不跟我聊天</title>
-    <link href="http://www.gagahappy.com/are-you-kidding-me/"/>
-    <id>http://www.gagahappy.com/are-you-kidding-me/</id>
-    <published>2018-05-05T02:10:01.000Z</published>
-    <updated>2018-05-30T09:00:12.000Z</updated>
+    <title>油焖笋烧鸡</title>
+    <link href="http://www.gagahappy.com/cook-you-men-sun-shao-ji/"/>
+    <id>http://www.gagahappy.com/cook-you-men-sun-shao-ji/</id>
+    <published>2018-08-13T18:07:40.000Z</published>
+    <updated>2019-01-06T13:39:16.000Z</updated>
     
-    <content type="html"><![CDATA[<p>你加我</p>
-<p>不跟我聊天</p>
-<p>不给我点赞</p>
-<p>也不来勾搭我</p>
-<p>你tm是要找机会来暗算我啊</p>
-]]></content>
+    <content type="html"><![CDATA[<p>油焖笋烧鸡 #做滴菜# ​​​​</p><p><img src="http://img.gagahappy.cn/blog/2018/08/cook-you-men-sun-shao-ji.jpg_b1" alt="油焖笋烧鸡" title="油焖笋烧鸡"></p>]]></content>
     
     <summary type="html">
     
-      你加我不跟我聊天
+      油焖笋烧鸡
+    
+    </summary>
+    
+      <category term="美食么么" scheme="http://www.gagahappy.com/categories/food/"/>
+    
+    
+      <category term="做滴菜" scheme="http://www.gagahappy.com/tags/mycook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>仔姜爆鸡块</title>
+    <link href="http://www.gagahappy.com/cook-zi-jiang-bao-ji-kuai/"/>
+    <id>http://www.gagahappy.com/cook-zi-jiang-bao-ji-kuai/</id>
+    <published>2018-08-08T18:22:16.000Z</published>
+    <updated>2019-01-06T14:03:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>仔姜爆鸡块 #做滴菜# ​​</p><p><img src="http://img.gagahappy.cn/blog/2018/08/cook-zi-jiang-bao-ji-kuai.jpg_b1" alt="仔姜爆鸡块" title="仔姜爆鸡块"></p>]]></content>
+    
+    <summary type="html">
+    
+      仔姜爆鸡块
+    
+    </summary>
+    
+      <category term="美食么么" scheme="http://www.gagahappy.com/categories/food/"/>
+    
+    
+      <category term="做滴菜" scheme="http://www.gagahappy.com/tags/mycook/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>some little things</title>
+    <link href="http://www.gagahappy.com/some-little-things-2018-08-02/"/>
+    <id>http://www.gagahappy.com/some-little-things-2018-08-02/</id>
+    <published>2018-08-02T21:47:30.000Z</published>
+    <updated>2019-01-06T13:29:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>有时候退而求其次也是一种很好的选择</li><li>今天就有一小时是属于我的，那就是跳操，然后就是一直在忙，直到现在终于把所有的网口都换成8根线的了，之前拿出2根做电话线真不是什么明智之举，网络的事情也算是都好了。可以享受200兆的宽带了。呀！还有一件事没有完成，就是给座机开通市内电话免费的业务 ​​​​</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      some little things
     
     </summary>
     
@@ -253,74 +215,24 @@
   </entry>
   
   <entry>
-    <title>HIIT 结合 Tabata 可以达到很好的燃脂效果</title>
-    <link href="http://www.gagahappy.com/keep-hiit-and-tabata/"/>
-    <id>http://www.gagahappy.com/keep-hiit-and-tabata/</id>
-    <published>2018-04-21T15:04:03.000Z</published>
-    <updated>2018-05-30T08:58:09.000Z</updated>
+    <title>清爽酥排骨</title>
+    <link href="http://www.gagahappy.com/cook-qing-shuang-su-pai-gu/"/>
+    <id>http://www.gagahappy.com/cook-qing-shuang-su-pai-gu/</id>
+    <published>2018-07-19T13:20:06.000Z</published>
+    <updated>2019-01-06T13:27:23.000Z</updated>
     
-    <content type="html"><![CDATA[<p>HIIT 结合 Tabata 可以达到很好的燃脂效果。HIIT 20分钟刚好达到开始燃脂的时间，再接上10～20分钟的Tabata ，刚好起到了继续燃脂的效果，开始减脂</p>
-]]></content>
-    
-    <summary type="html">
-    
-      HIIT 结合 Tabata 可以达到很好的燃脂效果
-    
-    </summary>
-    
-      <category term="意识流" scheme="http://www.gagahappy.com/categories/consciousness/"/>
-    
-    
-      <category term="随笔" scheme="http://www.gagahappy.com/tags/journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>How I Met Your Mother</title>
-    <link href="http://www.gagahappy.com/watching-h-i-m-y-m/"/>
-    <id>http://www.gagahappy.com/watching-h-i-m-y-m/</id>
-    <published>2018-04-12T15:44:42.000Z</published>
-    <updated>2018-06-23T13:58:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>发现How I Met Your Mother真是挺好看的，虽然已经出到第10季了，但每一集很快可以吸引你，基本上都是一个独立的故事，所以不用追剧也可以看得懂</p>
-<p>觉得 How I Met Your Mother 比 Broken Girls 要好看的多，且单词也不是很难，句型也不是很难</p>
-<p>感觉 How I Met Your Mother 的那些笑点，不是看了就觉得好笑的，而是需要你想一下，然后你会 Sly Smile</p>
-<p><img src="http://img.gagahappy.cn/blog/2018/04/watching-h-i-m-y-m.jpg_b1" alt="How I Met Your Mother" title="How I Met Your Mother"></p>
-]]></content>
+    <content type="html"><![CDATA[<p>清爽酥排骨 #做滴菜# ​​​​</p><p><img src="http://img.gagahappy.cn/blog/2018/07/cook-qing-shuang-su-pai-gu.jpg_b1" alt="清爽酥排骨" title="清爽酥排骨"></p>]]></content>
     
     <summary type="html">
     
-      How I Met Your Mother
+      清爽酥排骨
     
     </summary>
     
-      <category term="意识流" scheme="http://www.gagahappy.com/categories/consciousness/"/>
+      <category term="美食么么" scheme="http://www.gagahappy.com/categories/food/"/>
     
     
-      <category term="随笔" scheme="http://www.gagahappy.com/tags/journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>英文连读</title>
-    <link href="http://www.gagahappy.com/link-read-about-english/"/>
-    <id>http://www.gagahappy.com/link-read-about-english/</id>
-    <published>2018-04-06T10:57:09.000Z</published>
-    <updated>2018-05-30T08:50:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>英文句子有连读也就算了，单个单词内居然也有连读，我就真是醉了。面对随处可见的连读，即使你每个单词都发音正确切听的懂，面对整个句子时你依然听不懂也就不奇怪了，因为发音变了，这就是口语</p>
-]]></content>
-    
-    <summary type="html">
-    
-      英文连读
-    
-    </summary>
-    
-      <category term="意识流" scheme="http://www.gagahappy.com/categories/consciousness/"/>
-    
-    
-      <category term="随笔" scheme="http://www.gagahappy.com/tags/journal/"/>
+      <category term="做滴菜" scheme="http://www.gagahappy.com/tags/mycook/"/>
     
   </entry>
   

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
 
     <!--[if lt IE 9]>
         <style>body {display: none; background: none !important} </style>
@@ -8,28 +8,27 @@
     <![endif]-->
 
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="戛戛Happy" />
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="戛戛Happy">
 
 
 
-<meta name="description" content="因为需要了解底层设备访问的原理，所以惯用高层应用语言的我，需要了解一下Linux的设备访问机制，尤其是处理一组非阻塞IO的原理方法，标准的术语好像是叫多路复用。以下文章部分句子有引用之处，恕没有一一指出出处。
-对于接触过Linux内核或设备驱动开发的读者，一定清楚poll和select系统调用，以及从2.5版本引入的epoll机制（epoll机制包含三个系统调用）。网上关于它们的文章，有说用法的">
+<meta name="description" content="因为需要了解底层设备访问的原理，所以惯用高层应用语言的我，需要了解一下Linux的设备访问机制，尤其是处理一组非阻塞IO的原理方法，标准的术语好像是叫多路复用。以下文章部分句子有引用之处，恕没有一一指出出处。   对于接触过Linux内核或设备驱动开发的读者，一定清楚poll和select系统调用，以及从2.5版本引入的epoll机制（epoll机制包含三个系统调用）。网上关于它们的文章，有说用">
+<meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="POLL, SELECT  EPOLL 原理比较分析">
 <meta property="og:url" content="http://www.gagahappy.com/compare-poll-select-epoll/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="因为需要了解底层设备访问的原理，所以惯用高层应用语言的我，需要了解一下Linux的设备访问机制，尤其是处理一组非阻塞IO的原理方法，标准的术语好像是叫多路复用。以下文章部分句子有引用之处，恕没有一一指出出处。
-对于接触过Linux内核或设备驱动开发的读者，一定清楚poll和select系统调用，以及从2.5版本引入的epoll机制（epoll机制包含三个系统调用）。网上关于它们的文章，有说用法的">
-<meta property="og:updated_time" content="2017-01-20T12:28:53.000Z">
+<meta property="og:description" content="因为需要了解底层设备访问的原理，所以惯用高层应用语言的我，需要了解一下Linux的设备访问机制，尤其是处理一组非阻塞IO的原理方法，标准的术语好像是叫多路复用。以下文章部分句子有引用之处，恕没有一一指出出处。   对于接触过Linux内核或设备驱动开发的读者，一定清楚poll和select系统调用，以及从2.5版本引入的epoll机制（epoll机制包含三个系统调用）。网上关于它们的文章，有说用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-04T11:31:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="POLL, SELECT  EPOLL 原理比较分析">
-<meta name="twitter:description" content="因为需要了解底层设备访问的原理，所以惯用高层应用语言的我，需要了解一下Linux的设备访问机制，尤其是处理一组非阻塞IO的原理方法，标准的术语好像是叫多路复用。以下文章部分句子有引用之处，恕没有一一指出出处。
-对于接触过Linux内核或设备驱动开发的读者，一定清楚poll和select系统调用，以及从2.5版本引入的epoll机制（epoll机制包含三个系统调用）。网上关于它们的文章，有说用法的">
+<meta name="twitter:description" content="因为需要了解底层设备访问的原理，所以惯用高层应用语言的我，需要了解一下Linux的设备访问机制，尤其是处理一组非阻塞IO的原理方法，标准的术语好像是叫多路复用。以下文章部分句子有引用之处，恕没有一一指出出处。   对于接触过Linux内核或设备驱动开发的读者，一定清楚poll和select系统调用，以及从2.5版本引入的epoll机制（epoll机制包含三个系统调用）。网上关于它们的文章，有说用">
 
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 
     <link rel="alternate" href="/atom.xml" title="漂自己的移，让别人都撞墙去吧" type="application/atom+xml">
@@ -73,7 +72,7 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
+        search: false
     }
 </script>
 
@@ -89,7 +88,7 @@
 
 
 
-</head>
+</head></html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -199,14 +198,14 @@
             </nav>
         </header>
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
 
-      <div class="body-wrap"><article id="post-compare-poll-select-epoll" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-compare-poll-select-epoll" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/compare-poll-select-epoll/" class="article-date">
-      <time datetime="2012-09-14T17:04:12.000Z" itemprop="datePublished">2012-09-15</time>
+      <time datetime="2012-09-15T01:04:12.000Z" itemprop="datePublished">2012-09-15</time>
 </a>
 
 
@@ -214,7 +213,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -248,12 +247,16 @@
           
         <blockquote>
 <p>因为需要了解底层设备访问的原理，所以惯用高层应用语言的我，需要了解一下Linux的设备访问机制，尤其是处理一组非阻塞IO的原理方法，标准的术语好像是叫多路复用。以下文章部分句子有引用之处，恕没有一一指出出处。</p>
+</blockquote>
+<blockquote>
 <p>对于接触过Linux内核或设备驱动开发的读者，一定清楚poll和select系统调用，以及从2.5版本引入的epoll机制（epoll机制包含三个系统调用）。网上关于它们的文章，有说用法的，甚为详细，更有分析源代码的，又比较深入，且枝节颇多。经过几篇文章的阅读，我把觉得比较核心的东西写下来吧。我的用意是尽可能以简单的概念，比对他们三者的异同。<br><a id="more"></a></p>
 </blockquote>
 <p>几经查找我才确定下来，poll和select应该被归类为这样的系统调用，它们可以阻塞地同时探测一组支持非阻塞的IO设备，是否有事件发生（如可读，可写，有高优先级的错误输出，出现错误等等），直至某一个设备触发了事件或者超过了指定的等待时间——也就是它们的职责不是做IO，而是帮助调用者寻找当前就绪的设备。同类型的产品是Windows的IOCP，它也是处理多路复用，只是把IO和探测封装在了一起了。</p>
 <p>准备的知识有两点：1、fd；2、op-&gt;poll。</p>
 <blockquote>
 <p>在Linux里面，设备都被抽象为文件，一系列的设备文件就有自己独立的虚拟文件系统，所以，设备在系统调用参数中的表示就是file description。fd其实就是一个整数（特别地，标准输入，输出，错误输出分别对应的fd是0，1，2）。与内核打交道的时候，传递整数的fd可以在自己的文件系统中作进一步的检查是否合法，如果只是返回指针就不能这样操作了，毕竟指针是无差别无意义的。</p>
+</blockquote>
+<blockquote>
 <p>通过fd访问file，通过file可以访问其fileOperator，这里面我们要关心的一个fileOp就是poll。因为系统调用poll和select，就是依靠这个文件操作poll实现的。poll文件操作有两个参数，一个是文件本身，一个可以看做是当设备尚未就绪时调用的回调函数，这个函数是把设备自己特有的等待队列传给内核，让内核把当前的进程挂载到其中（因为当设备就绪时，设备就应该去唤醒在自己特有等待队列中的所有节点，这样当前进程就获取了完成的信号了）。poll文件操作返回的必须是一组标准的掩码，其中的各个位指示当前的不同的就绪状态（全0为没有任何事件触发）。</p>
 </blockquote>
 <p>再谈谈早期多路复用的版本poll和select。</p>
@@ -279,7 +282,7 @@
 <p>这种机制或者说模式，我想在Java的FutureTask里面应该也会用到的，一堆在线程池里面跑着的线程（当然这是任务，不是线程，接口是Callable<v>，不是Runnable.run，是Callable.call，它是可以返回结果的），谁先做好就应该先处理呀，可是难道得一个个问吗？干脆就谁好了，谁就按照既定的操作暴露自己，这样FutureTask的get方法就可以马上知道当前最先完成的线程了，就可以取此线程返回结果了。</v></p>
 <p>epoll由三个系统调用组成，分别是epoll_create，epoll_ctl和epoll_wait。epoll_create用于创建和初始化一些内部使用的数据结构；epoll_ctl用于添加，删除或者修改指定的fd及其期待的事件，epoll_wait就是用于等待任何先前指定的fd事件。</p>
 <blockquote>
-<p>原文地址：<a href="http://www.cnblogs.com/sharra/archive/2010/12/30/1921287.html" target="_blank" rel="external">http://www.cnblogs.com/sharra/archive/2010/12/30/1921287.html</a></p>
+<p>原文地址：<a href="http://www.cnblogs.com/sharra/archive/2010/12/30/1921287.html" target="_blank" rel="noopener">http://www.cnblogs.com/sharra/archive/2010/12/30/1921287.html</a></p>
 </blockquote>
 
       
@@ -299,7 +302,7 @@
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -338,7 +341,7 @@
             <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
             <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
             <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
         </div>
         <script>
             window._bd_share_config={
@@ -371,7 +374,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i>
-                2009~2018 戛戛Happy
+                2009~2019 戛戛Happy
                 
                     <i class="fa fa-check-circle-o"></i>
                     京ICP备10044755

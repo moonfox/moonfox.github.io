@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
 
     <!--[if lt IE 9]>
         <style>body {display: none; background: none !important} </style>
@@ -8,15 +8,15 @@
     <![endif]-->
 
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="戛戛Happy" />
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="戛戛Happy">
 
 
     
      
-        <meta name="google-site-verification" content="mRjQM6azHRnllmCObIorLO1p8dqt92U33mbEzoA2HnU" />
+        <meta name="google-site-verification" content="mRjQM6azHRnllmCObIorLO1p8dqt92U33mbEzoA2HnU">
     
 
 
@@ -26,11 +26,12 @@
 <meta property="og:url" content="http://www.gagahappy.com/page/15/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漂自己的移，让别人都撞墙去吧">
 <meta name="twitter:description" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
 
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 
     <link rel="alternate" href="/atom.xml" title="漂自己的移，让别人都撞墙去吧" type="application/atom+xml">
@@ -76,7 +77,7 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
+        search: false
     }
 </script>
 
@@ -92,7 +93,7 @@
 
 
 
-</head>
+</head></html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -202,16 +203,16 @@
             </nav>
         </header>
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
 
       <div class="body-wrap">
   
-    <article id="post-scent-of-a-woman-tango-old" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-nginx-proxy-configration" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/scent-of-a-woman-tango-old/" class="article-date">
-      <time datetime="2012-01-09T13:28:45.000Z" itemprop="datePublished">2012-01-09</time>
+      <a href="/nginx-proxy-configration/" class="article-date">
+      <time datetime="2012-04-14T16:36:25.000Z" itemprop="datePublished">2012-04-14</time>
 </a>
 
 
@@ -219,7 +220,1029 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/nginx-proxy-configration/">nginx proxy configration</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">proxy_redirect <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (-f <span class="variable">$request_filename</span>/index.html) &#123;</span><br><span class="line">rewrite (.*) <span class="variable">$1</span>/index.html <span class="built_in">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (-f <span class="variable">$request_filename</span>.html) &#123;</span><br><span class="line">rewrite (.*) <span class="variable">$1</span>.html <span class="built_in">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!-f <span class="variable">$request_filename</span>) &#123;</span><br><span class="line">proxy_pass http://thin_cluster;</span><br><span class="line"><span class="built_in">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-resque-priorities-and-queue-lists" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/resque-priorities-and-queue-lists/" class="article-date">
+      <time datetime="2012-02-21T23:26:20.000Z" itemprop="datePublished">2012-02-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/resque-priorities-and-queue-lists/">resque Priorities and Queue Lists</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Priorities and Queue Lists</p>
+<p>Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”</p>
+<p>Let’s say we add a warm_cache queue in addition to our file_serve queue. We’d now start a worker like so:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ QUEUES=file_serve,warm_cache rake <span class="symbol">resque:</span>work</span><br></pre></td></tr></table></figure>
+<p>When the worker looks for new jobs, it will first check file_serve. If it finds a job, it’ll process it then check file_serve again. It will keep checking file_serve until no more jobs are available. At that point, it will check warm_cache. If it finds a job it’ll process it then check file_serve (repeating the whole process).</p>
+<p>Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resque/">resque</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-ruby-regular-expression-in-sub-gsub" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-regular-expression-in-sub-gsub/" class="article-date">
+      <time datetime="2012-02-20T22:19:38.000Z" itemprop="datePublished">2012-02-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-regular-expression-in-sub-gsub/">ruby 正则表达式中的全局变量</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在使用sub,gsub 时，正则表达式不中不能使用全局变量<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">"a123b456c789"</span></span><br><span class="line">str.sub(<span class="regexp">/(a\d+)(b\d+)(c\d+)/</span>,<span class="string">"a=<span class="subst">#&#123;$1&#125;</span>, b=<span class="subst">#&#123;$2&#125;</span>, c=<span class="subst">#&#123;$3&#125;</span>"</span>)</span><br><span class="line">=&gt;</span><br><span class="line"><span class="string">"a=, b=, c="</span></span><br></pre></td></tr></table></figure></p>
+<p>可以使用<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">"a123b456c789"</span></span><br><span class="line">str.sub(<span class="regexp">/(a\d+)(b\d+)(c\d+)/</span>,<span class="string">'a=\1, b=\2, c=\3'</span>)</span><br><span class="line">=&gt;</span><br><span class="line"><span class="string">"a=123, b=456, c=789"</span></span><br></pre></td></tr></table></figure></p>
+<p>或</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">"a123b456c789"</span></span><br><span class="line">str.sub(<span class="regexp">/(a\d+)(b\d+)(c\d+)/</span>) &#123;<span class="string">"a=<span class="subst">#&#123;$1&#125;</span>, b=<span class="subst">#&#123;$2&#125;</span>, c=<span class="subst">#&#123;$3&#125;</span>"</span>&#125;</span><br><span class="line">=&gt;</span><br><span class="line"><span class="string">"a=123, b=456, c=789"</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-rvm-gemset-pic" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rvm-gemset-pic/" class="article-date">
+      <time datetime="2012-02-16T22:30:17.000Z" itemprop="datePublished">2012-02-16</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rvm-gemset-pic/">rvm gemset </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><code>rvm gemset</code></p>
+<p><a href="http://img.gagahappy.cn/blog/2012/02/Screenshot-at-2012-02-20-222952.png" target="_blank" rel="noopener"><img src="http://img.gagahappy.cn/blog/2012/02/Screenshot-at-2012-02-20-222952.png" alt="" title="Screenshot at 2012-02-20 22:29:52"></a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rvm/">rvm</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-ruby-character-class-up" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-character-class-up/" class="article-date">
+      <time datetime="2012-02-15T22:49:27.000Z" itemprop="datePublished">2012-02-15</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-character-class-up/">ruby 正则表达式脱字符</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re = <span class="regexp">/[^aeiou]/</span></span><br><span class="line"><span class="comment"># Match any character except a, e, i, o, u</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-ruby-match-pre-post-match" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-match-pre-post-match/" class="article-date">
+      <time datetime="2012-02-13T22:41:11.000Z" itemprop="datePublished">2012-02-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-match-pre-post-match/">ruby 正则表达式获取匹配字符串前后部分</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>ruby 正则表达式获取匹配字符串前后部分</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">"Hello gagahappy Hi"</span></span><br><span class="line">refs = a.match(<span class="regexp">/gagahappy/</span>)</span><br><span class="line">refs.pre_match  <span class="comment"># =&gt; "Hello "</span></span><br><span class="line">refs.post_match <span class="comment"># =&gt; " Hi"</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-ubuntu-11-10-rvm-ruby-openssl" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ubuntu-11-10-rvm-ruby-openssl/" class="article-date">
+      <time datetime="2012-02-12T13:54:28.000Z" itemprop="datePublished">2012-02-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ubuntu-11-10-rvm-ruby-openssl/">ubuntu 11.10 rvm 安装版ruby openssl解决</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>用rvm 安装ruby1.9.1时，需要openssl的版本为0.98，而系统自带为1.0，造成RUNERR,解决方法如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rvm pkg install openssl</span><br><span class="line">rvm remove 1.9.2</span><br><span class="line">rvm install 1.9.2 --with-openssl-dir=<span class="variable">$rvm_path</span>/usr</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rvm/">rvm</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-error-loading-gem-paths-on-load-path-in-gem-prelude" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/error-loading-gem-paths-on-load-path-in-gem-prelude/" class="article-date">
+      <time datetime="2012-02-11T17:03:16.000Z" itemprop="datePublished">2012-02-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/error-loading-gem-paths-on-load-path-in-gem-prelude/">Error loading gem paths on load path in gem_prelude</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在用rvm安装ruby后运行gem，出现</p>
+<blockquote>
+<p>Error loading gem paths on load path in gem_prelude<br>can’t modify frozen string<br><a href="internal:gem_prelude" target="_blank" rel="noopener">internal:gem_prelude</a>:69:in <code>force_encoding&#39;
+&lt;internal:gem_prelude&gt;:69:in</code>set_home’<br><a href="internal:gem_prelude" target="_blank" rel="noopener">internal:gem_prelude</a>:38:in <code>dir&#39;
+&lt;internal:gem_prelude&gt;:76:in</code>set_paths’<br><a href="internal:gem_prelude" target="_blank" rel="noopener">internal:gem_prelude</a>:47:in <code>path&#39;
+&lt;internal:gem_prelude&gt;:286:in</code>push_all_highest_version_gems_on_load_path’<br><a href="internal:gem_prelude" target="_blank" rel="noopener">internal:gem_prelude</a>:355:in `<compiled>‘</compiled></p>
+</blockquote>
+<p>解决方法：找到 your/home/.rvm/src/ruby-your-version/gem_prelude.rb文件 编辑<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">set_home</span><span class="params">(home)</span></span></span><br><span class="line"> home = home.gsub File::ALT_SEPARATOR, File::SEPARATOR <span class="keyword">if</span> File::ALT_SEPARATOR</span><br><span class="line">- @gem_home = home.force_encoding(Encoding.find(<span class="string">'filesystem'</span>))</span><br><span class="line">+ @gem_home = home.dup.force_encoding(Encoding.find(<span class="string">'filesystem'</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-rackbuilder-rackup" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rackbuilder-rackup/" class="article-date">
+      <time datetime="2012-02-09T17:29:27.000Z" itemprop="datePublished">2012-02-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rackbuilder-rackup/">Rack::Builder  rackup</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>rackup converts the supplied rack config file to an instance of Rack::Builder. This is how is happens under the hood ( just so you get an idea ) :<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config_file = File.read(config)</span><br><span class="line">rack_application = eval(<span class="string">"Rack::Builder.new &#123; <span class="subst">#&#123;config_file&#125;</span> &#125;"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>And then rackup supplies rack_application to the respective webserver :</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.run rack_application, options</span><br></pre></td></tr></table></figure>
+<p>Very straight forward! In short, rack config files are evaluated within the context of a Rack::Builder object. So if we convert infinity to a rack config file which rackup can understand :<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># infinity.ru</span></span><br><span class="line"></span><br><span class="line">infinity = Proc.new &#123;<span class="params">|env|</span> [<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span> =&gt; <span class="string">"text/html"</span>&#125;, env.inspect]&#125;</span><br><span class="line"></span><br><span class="line">use Rack::CommonLogger</span><br><span class="line"></span><br><span class="line">map <span class="string">'/'</span> <span class="keyword">do</span></span><br><span class="line">  run infinity</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">map <span class="string">'/version'</span> <span class="keyword">do</span></span><br><span class="line">  map <span class="string">'/'</span> <span class="keyword">do</span></span><br><span class="line">    run Proc.new &#123;<span class="params">|env|</span> [<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span> =&gt; <span class="string">"text/html"</span>&#125;, <span class="string">"infinity 0.1"</span>] &#125;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  map <span class="string">'/last'</span> <span class="keyword">do</span></span><br><span class="line">    run Proc.new &#123;<span class="params">|env|</span> [<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span> =&gt; <span class="string">"text/html"</span>&#125;, <span class="string">"infinity beta 0.0"</span>] &#125;</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>And now run it :<br><code>rackup infinity.ru</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rack/">rack</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-eager-load-application-classes" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/eager-load-application-classes/" class="article-date">
+      <time datetime="2012-02-08T11:22:28.000Z" itemprop="datePublished">2012-02-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/eager-load-application-classes/">Eager load application classes</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Eager load application classes</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_application_classes</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">if</span> $rails_rake_task</span><br><span class="line">  <span class="keyword">if</span> configuration.cache_classes</span><br><span class="line">    configuration.eager_load_paths.each <span class="keyword">do</span> <span class="params">|load_path|</span></span><br><span class="line">      matcher = <span class="regexp">/\A<span class="subst">#&#123;Regexp.escape(load_path)&#125;</span>(.*)\.rb\Z/</span></span><br><span class="line">      Dir.glob(<span class="string">"<span class="subst">#&#123;load_path&#125;</span>/**/*.rb"</span>).sort.each <span class="keyword">do</span> <span class="params">|file|</span></span><br><span class="line">        require_dependency file.sub(matcher, <span class="string">'\1'</span>)</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-rails-railsorderedoptions" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails-railsorderedoptions/" class="article-date">
+      <time datetime="2012-02-07T18:19:21.000Z" itemprop="datePublished">2012-02-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails-railsorderedoptions/">rails Rails::OrderedOptions</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rails::OrderedOptions</span> &lt; Array <span class="comment">#:nodoc:</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> []=<span class="params">(key, value)</span></span></span><br><span class="line">    key = key.to_sym</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> pair = find_pair(key)</span><br><span class="line">      pair.pop</span><br><span class="line">      pair &lt;&lt; value</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">self</span> &lt;&lt; [key, value]</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> []<span class="params">(key)</span></span></span><br><span class="line">    pair = find_pair(key.to_sym)</span><br><span class="line">    pair ? pair.last : <span class="literal">nil</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">method_missing</span><span class="params">(name, *args)</span></span></span><br><span class="line">    <span class="keyword">if</span> name.to_s =~ <span class="regexp">/(.*)=$/</span></span><br><span class="line">      <span class="keyword">self</span>[$1.to_sym] = args.first</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">self</span>[name]</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  private</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_pair</span><span class="params">(key)</span></span></span><br><span class="line">      <span class="keyword">self</span>.each &#123; <span class="params">|i|</span> <span class="keyword">return</span> i <span class="keyword">if</span> i.first == key &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-ruby-escape" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-escape/" class="article-date">
+      <time datetime="2012-02-06T10:32:47.000Z" itemprop="datePublished">2012-02-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-escape/">ruby escape</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">'cgi'</span></span><br><span class="line">url = <span class="string">'http://www.gagahappy.com/美食大下'</span></span><br><span class="line">url_escape = CGI::escape(url)</span><br><span class="line">url_unescape = CGI::unescape(url_escape)</span><br><span class="line">puts url_escape</span><br><span class="line">puts url_unescape</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-ruby-file-name-file" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-file-name-file/" class="article-date">
+      <time datetime="2012-02-05T16:03:38.000Z" itemprop="datePublished">2012-02-05</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-file-name-file/">如何理解ruby中的__FILE__？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> File.expand_path(__FILE_<span class="number">_</span> + <span class="string">'/../filename'</span>)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-activerecordbase-connection-executes" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/activerecordbase-connection-executes/" class="article-date">
+      <time datetime="2012-02-04T15:59:55.000Z" itemprop="datePublished">2012-02-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/activerecordbase-connection-executes/">如何查看 ActiveRecord::Base.connection.executes 的执行结果？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>拿mysql2这个gem来说：ActiveRecord::Base.connection.execute执行结果是Mysql2::Result的一个实例，这个类提供很多将执行结果解析出来的方法，例如：to_set、each、collect等，Mysql2::Result这些返回的一般都是数组，直接里面的元素的排序是按照数据库中字段的顺序排列的，按照数组的index直接取。 例如:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">results = ActiveRecord::Base.connection(<span class="string">"SELECT * FROM `users`"</span>)</span><br><span class="line">results.each <span class="keyword">do</span> <span class="params">|result|</span></span><br><span class="line">   (<span class="number">0</span>..(result.size -<span class="number">1</span>) <span class="keyword">do</span> <span class="params">|index|</span></span><br><span class="line">      puts result[index]</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-ruby-p3p-def" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-p3p-def/" class="article-date">
+      <time datetime="2012-01-31T10:54:36.000Z" itemprop="datePublished">2012-01-31</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-p3p-def/">ruby p3p协议</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">p3p</span></span></span><br><span class="line">  headers[<span class="string">'P3P'</span>] = <span class="string">"policyref=\"/w3c/p3p.xml\", CP=\"ALL DSP COR CURa ADMa DEVa TAIa OUR BUS IND UNI COM NAV INT\""</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-scent-of-a-woman-tango-old" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/scent-of-a-woman-tango-old/" class="article-date">
+      <time datetime="2012-01-09T21:28:45.000Z" itemprop="datePublished">2012-01-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -274,11 +1297,11 @@
 
 
   
-    <article id="post-macbook-fail-to-power-on" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-macbook-fail-to-power-on" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/macbook-fail-to-power-on/" class="article-date">
-      <time datetime="2011-12-30T02:22:19.000Z" itemprop="datePublished">2011-12-30</time>
+      <time datetime="2011-12-30T10:22:19.000Z" itemprop="datePublished">2011-12-30</time>
 </a>
 
 
@@ -286,7 +1309,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -350,11 +1373,11 @@
 
 
   
-    <article id="post-thin-configuration" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-thin-configuration" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/thin-configuration/" class="article-date">
-      <time datetime="2011-12-25T13:16:16.000Z" itemprop="datePublished">2011-12-25</time>
+      <time datetime="2011-12-25T21:16:16.000Z" itemprop="datePublished">2011-12-25</time>
 </a>
 
 
@@ -362,7 +1385,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -379,10 +1402,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; <span class="_">-e</span> &lt;environment&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">thin config -C /etc/thin/redmine.yml -c /var/www/redmine --servers 5 <span class="_">-e</span> production</div><div class="line">thin config -C /etc/thin/myapp.yml -c /var/rails/myapp --servers 5 --socket /tmp/thin.myapp.sock <span class="_">-e</span> production</div></pre></td></tr></table></figure>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; -e &lt;environment&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thin config -C /etc/thin/redmine.yml -c /var/www/redmine --servers 5 -e production</span><br><span class="line">thin config -C /etc/thin/myapp.yml -c /var/rails/myapp --servers 5 --socket /tmp/thin.myapp.sock -e production</span><br></pre></td></tr></table></figure>
 <!--more+阅读全文+-->
-<p>当执行第一条config命令，可能得到/etc/thin/redmine.yml内容如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">address: localhost</div><div class="line">pid: tmp/pids/thin.pid</div><div class="line"><span class="built_in">wait</span>: 30</div><div class="line">port: 3000</div><div class="line">timeout: 30</div><div class="line"><span class="built_in">log</span>: <span class="built_in">log</span>/thin.log</div><div class="line">max_conns: 1024</div><div class="line">require: []</div><div class="line"></div><div class="line">environment: production</div><div class="line">max_persistent_conns: 512</div><div class="line">servers: 5</div><div class="line">daemonize: <span class="literal">true</span></div><div class="line"><span class="built_in">chdir</span>: /var/www/redmine</div></pre></td></tr></table></figure></p>
+<p>当执行第一条config命令，可能得到/etc/thin/redmine.yml内容如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">address: localhost</span><br><span class="line">pid: tmp/pids/thin.pid</span><br><span class="line"><span class="built_in">wait</span>: 30</span><br><span class="line">port: 3000</span><br><span class="line">timeout: 30</span><br><span class="line"><span class="built_in">log</span>: <span class="built_in">log</span>/thin.log</span><br><span class="line">max_conns: 1024</span><br><span class="line">require: []</span><br><span class="line"></span><br><span class="line">environment: production</span><br><span class="line">max_persistent_conns: 512</span><br><span class="line">servers: 5</span><br><span class="line">daemonize: <span class="literal">true</span></span><br><span class="line"><span class="built_in">chdir</span>: /var/www/redmine</span><br></pre></td></tr></table></figure></p>
 <p>启动应用<br><code>sevice thin start</code><br>将会启动3000~3004共5个端口。<br>如果你有Nginx就可以设置一个代理转发了</p>
 
       
@@ -421,11 +1444,11 @@
 
 
   
-    <article id="post-rails-load-schema" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-rails-load-schema" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/rails-load-schema/" class="article-date">
-      <time datetime="2011-12-19T16:06:23.000Z" itemprop="datePublished">2011-12-20</time>
+      <time datetime="2011-12-20T00:06:23.000Z" itemprop="datePublished">2011-12-20</time>
 </a>
 
 
@@ -433,7 +1456,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -488,11 +1511,11 @@
 
 
   
-    <article id="post-make-resque-work" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-make-resque-work" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/make-resque-work/" class="article-date">
-      <time datetime="2011-12-13T14:38:21.000Z" itemprop="datePublished">2011-12-13</time>
+      <time datetime="2011-12-13T22:38:21.000Z" itemprop="datePublished">2011-12-13</time>
 </a>
 
 
@@ -500,7 +1523,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -555,1051 +1578,9 @@
 
 
   
-    <article id="post-ubuntu-intall-mysql-fatal-error-could-not-find-mysqld" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/ubuntu-intall-mysql-fatal-error-could-not-find-mysqld/" class="article-date">
-      <time datetime="2011-12-11T07:20:47.000Z" itemprop="datePublished">2011-12-11</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/ubuntu-intall-mysql-fatal-error-could-not-find-mysqld/">ubuntu下安装mysql出现FATAL ERROR: Could not find mysqld的处理</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>错误信息:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#./bin/mysql_install_db –user=mysql</span></div><div class="line">FATAL ERROR: Could not find mysqld</div><div class="line"></div><div class="line"></div><div class="line">The following directories were searched:</div><div class="line">/usr/libexec</div><div class="line">/usr/sbin</div><div class="line">/usr/bin</div><div class="line"></div><div class="line">If you compiled from <span class="built_in">source</span>, you need to run ‘make install’to copy the software into the correct location ready <span class="keyword">for</span> operation.</div><div class="line"></div><div class="line">If you are using a binary release, you must either be at the top of the level of the extracted archivem or pass the –basedir option pointing to that location.</div></pre></td></tr></table></figure></p>
-<p>解决办法：<br><code>scripts/mysql_install_db --user=mysql --basedir=/usr/local/mysql</code><br>（这里mysql是所使用的用户名，basedir是mysql的安装目录）</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-tar-cvzf-folder" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/tar-cvzf-folder/" class="article-date">
-      <time datetime="2011-12-09T13:22:14.000Z" itemprop="datePublished">2011-12-09</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/tar-cvzf-folder/">如何使用tar对整个文件夹打包?</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>如何使用tar对整个文件夹打包?<br>tar cvzf xxx.tar.gz xxx/</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-mysql-select-my-cnf-how-to" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/mysql-select-my-cnf-how-to/" class="article-date">
-      <time datetime="2011-12-08T07:21:03.000Z" itemprop="datePublished">2011-12-08</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mysql-select-my-cnf-how-to/">mysql 编译安装选择配置文件my.cnf</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>mysql 在编译安装初始化数据库时需要读取my.cnf文件，默认读取的位置是/etc/mysql，所以如果你把my.cnf文件copy到/etc/下的话，mysql读取的是/etc/mysql下的my.cnf，而不是/etc/my.cnf。如果想要读取my.cnf，请删除/etc/mysql文件夹。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-redis-store-hash" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/redis-store-hash/" class="article-date">
-      <time datetime="2011-12-07T14:51:23.000Z" itemprop="datePublished">2011-12-07</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/redis-store-hash/">redis 存入hash值</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>redis&gt;  HMSET myhash field1 “Hello” field2 “World”</p>
-<p>redis&gt;  HMGET myhash field1 field2</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-git-reset-how-to-show-index-info" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/git-reset-how-to-show-index-info/" class="article-date">
-      <time datetime="2011-12-06T15:17:32.000Z" itemprop="datePublished">2011-12-06</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/git-reset-how-to-show-index-info/">git reset 暂存区如何信息提示</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>当对一个已经添加到暂存区的文件进行撤销<br><code>git add file</code><br>然后进行撤销<br><code>git reset HEAD -- file</code><br>这时，暂存区中没有任何被添加的文件<br>如果把某个历史提交（非HEAD指向的提示）中的 file添加到暂存区<br><code>git reset commit -- file</code><br>暂存区中则会显示file文件已经被加入，并且合本地文件不同</p>
-<p>思考</p>
-<blockquote>
-<p>如果把HEAD对应的文件放入暂存区，是否因为文件是HEAD中的，所以暂存区认为文件已经提交过了，所以没有已添加，待提交的提示。</p>
-<p>而其它非HEAD中的文件则认为是还没有提交的，所以显示为已添加，待提交。</p>
-</blockquote>
-<p>试验：</p>
-<blockquote>
-<p>如果历史提交中的file文件内容与工作区中的file文件内容一样,执行<br><code>git reset commit -- file</code><br>则暂存区应该显示已添加，待提交的提示，但不会显示与本地有差异。</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-git-how-to-merge" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/git-how-to-merge/" class="article-date">
-      <time datetime="2011-12-05T14:49:55.000Z" itemprop="datePublished">2011-12-05</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/git-how-to-merge/">git 如何自动合并文件内容？</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>git可以自动进行文件合并</p>
-<p>情况1 ：文件A在第一次提交成功后，分别被A用户和B用户编辑后提交，A用户pull B用户的提交，这时，git判断两个文件是否冲突，如果不冲突则进行合并</p>
-<p>情况2 ：文件A在第一次提交成功后，B用户对其进行了编辑提交，A用户没有对文件做出任何修改，pull B用户的提交，这时，git会自动用B用户的修改去覆盖A用户的文件，即使A文件同一行的内容不同</p>
-<p>思考：git是如何判断什么情况可以直接进行覆盖，什么情况需要进行合并。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-git-new-repo" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/git-new-repo/" class="article-date">
-      <time datetime="2011-12-04T15:41:19.000Z" itemprop="datePublished">2011-12-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/git-new-repo/">新建git 版本库</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">mkdir test_demo</div><div class="line"><span class="built_in">cd</span> test_demo</div><div class="line">git init</div><div class="line">touch README</div><div class="line">git add README</div><div class="line">git commit -m <span class="string">'first commit'</span></div><div class="line">git remote add origin git@github.com:youname/test_demo.git</div><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-adwords-account-is-disabled" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/adwords-account-is-disabled/" class="article-date">
-      <time datetime="2011-12-03T01:09:53.000Z" itemprop="datePublished">2011-12-03</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/adwords-account-is-disabled/">adwords帐号屡次被停用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>以下是来自adwords的账号停用邮件</p>
-<blockquote>
-<p>我们注意到，您的 Google AdWords 帐户不符合我们的服务条款和广告政策要求。因<br>此，您的帐户以及所有相关帐户均已被停用，您的广告将不会继续在 Google 上投放。<br>请注意，不论现在还是今后，我们都禁止您拥有或创建其他任何 AdWords 帐户。</p>
-</blockquote>
-<p>用了200元血的教训才知道，adwords不做用来做taobao的广告～～～呃，我是血泪纵流啊~</p>
-<blockquote>
-<p>所谓的相关账号指的是什么呢。如果你两个账号都用同一个银行卡，则被视为相关账号，悲惧啊</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/gossip/">杂七杂八</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adwords/">adwords</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-google-checkout" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/google-checkout/" class="article-date">
-      <time datetime="2011-12-02T03:32:42.000Z" itemprop="datePublished">2011-12-02</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/google-checkout/">Google 电子钱包</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>关于 Google 电子钱包</p>
-<p>Google 电子钱包会存储您的付款信息、交易记录、优惠等信息。所有信息都会同步到云。这样，无论您使用什么设备，钱包中的信息都会保持一致，便于您在实体店购物或在线购物。您可以通过下载 Google 电子钱包应用程序（Android 版）或在线使用 Google 电子钱包来访问您的 Google 电子钱包。<br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/information/">让资讯飞</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google/">google</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/google-checkout/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-whats-the-most-happiness-for-northern-europe" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/whats-the-most-happiness-for-northern-europe/" class="article-date">
-      <time datetime="2011-11-27T05:51:48.000Z" itemprop="datePublished">2011-11-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/whats-the-most-happiness-for-northern-europe/">北欧人为什么最幸福</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>下午的四、五点钟，北欧人已经下班开着车到湖边或山上，恣意地划船或攀岩；此刻的中国CBD区，上班族仍卖力地冲业绩，继续吃著各种方便食品。不成文的加班文化，让中国夜晚的办公大楼依旧灯火通明，晚餐的应酬又变相地延长了工作的时间。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/relax/">非常娱乐</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/life/">生活</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/whats-the-most-happiness-for-northern-europe/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-thanksgiving-day-mac-price" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/thanksgiving-day-mac-price/" class="article-date">
-      <time datetime="2011-11-25T06:10:09.000Z" itemprop="datePublished">2011-11-25</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/thanksgiving-day-mac-price/">感恩节mac价格</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>apple.com<br><a href="http://img.gagahappy.cn/blog/2011/11/B01BF349-39A7-4A98-9945-027F8CF416EB.png" target="_blank" rel="external"><img src="http://img.gagahappy.cn/blog/2011/11/B01BF349-39A7-4A98-9945-027F8CF416EB.png" alt="" title="mac pro"></a></p>
-<p>apple.cn<br><a href="http://img.gagahappy.cn/blog/2011/11/95282F28-09ED-4F33-85A1-E489E539BCEF1.png" target="_blank" rel="external"><img src="http://img.gagahappy.cn/blog/2011/11/95282F28-09ED-4F33-85A1-E489E539BCEF1.png" alt="" title="95282F28-09ED-4F33-85A1-E489E539BCEF"></a></p>
-<p>amazon.cn<br><a href="http://img.gagahappy.cn/blog/2011/11/D1B6B6EA-D43D-4760-826F-A43EF1AEC5BF.png" target="_blank" rel="external"><img src="http://img.gagahappy.cn/blog/2011/11/D1B6B6EA-D43D-4760-826F-A43EF1AEC5BF.png" alt="" title="mac pro"></a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/information/">让资讯飞</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-what-is-dup" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/what-is-dup/" class="article-date">
-      <time datetime="2011-11-22T08:35:59.000Z" itemprop="datePublished">2011-11-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/what-is-dup/">what is dup</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>dup returns a copy (duplicate) of the object. In the above code, it is<br>used to let you get back a shuffled copy of the Array, without<br>shuffling the original.</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-how-to-start-a-movement" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/how-to-start-a-movement/" class="article-date">
-      <time datetime="2011-11-21T15:09:19.000Z" itemprop="datePublished">2011-11-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/how-to-start-a-movement/">How to start a movement</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Derek Sivers 谈如何开启欢乐时刻</p>
-<embed src="http://player.youku.com/player.php/sid/XMTkyMTcyNjk2/v.swf" allowfullscreen="true" quality="high" width="480" height="400" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash">
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/relax/">非常娱乐</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/people/">人物</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/funny/">有趣</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-redis-store-editor" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/redis-store-editor/" class="article-date">
-      <time datetime="2011-11-20T07:41:22.000Z" itemprop="datePublished">2011-11-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/redis-store-editor/">redis-store的开发首选编辑器</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>无意中看了一下redis-store项目的.gitignore文件，发现上面居然有.idea。看来redis-store的作者也在用rubymine作为开发的首选编辑器啊。不知道他们用的是不是正版的呢～～～。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-rspec-mock-more-time" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/rspec-mock-more-time/" class="article-date">
-      <time datetime="2011-11-16T06:25:06.000Z" itemprop="datePublished">2011-11-16</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/rspec-mock-more-time/">rspec mock 多次</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>rspec mock 同一个方法多次</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">mock_1</span></span></div><div class="line">  Car.should.receive(<span class="symbol">:new</span>)</div><div class="line"><span class="keyword">end</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">mock_2</span></span></div><div class="line">  Car.should.receive(<span class="symbol">:new</span>)</div><div class="line"><span class="keyword">end</span></div><div class="line">mock_1</div><div class="line">mock_2</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Peo</span></span></div><div class="line"> car = Car.new</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-<p>实际代码里只调用一次Car.new，但mock的时候用了2次，运行时提示expected :new with (any args) once, but received it 0 times</p>
-<blockquote>
-<p>解决方法，mock一次Car.new即可。<br>以上程序运行环境rspec 1.3.2</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rspec/">rspec</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/14/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/46/">46</a><a class="extend next" rel="next" href="/page/16/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/14/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/47/">47</a><a class="extend next" rel="next" href="/page/16/">Next &raquo;</a>
     </nav>
   
 </div>
@@ -1608,7 +1589,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i>
-                2009~2018 戛戛Happy
+                2009~2019 戛戛Happy
                 
                     <i class="fa fa-check-circle-o"></i>
                     京ICP备10044755

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
 
     <!--[if lt IE 9]>
         <style>body {display: none; background: none !important} </style>
@@ -8,25 +8,27 @@
     <![endif]-->
 
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="戛戛Happy" />
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="戛戛Happy">
 
 
 
 <meta name="description" content="让Aws S3 只同步 Hexo 内容有变化的文件">
+<meta name="keywords" content="s3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="让Aws S3 只同步 Hexo 内容有变化的文件">
 <meta property="og:url" content="http://www.gagahappy.com/aws-s3-sync-and-hexo/index.html">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="让Aws S3 只同步 Hexo 内容有变化的文件">
-<meta property="og:updated_time" content="2018-06-06T12:08:00.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-04T11:31:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="让Aws S3 只同步 Hexo 内容有变化的文件">
 <meta name="twitter:description" content="让Aws S3 只同步 Hexo 内容有变化的文件">
 
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 
     <link rel="alternate" href="/atom.xml" title="漂自己的移，让别人都撞墙去吧" type="application/atom+xml">
@@ -70,7 +72,7 @@
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
         scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
+        search: false
     }
 </script>
 
@@ -86,7 +88,7 @@
 
 
 
-</head>
+</head></html>
 <body>
   <div id="container">
     <div class="left-col">
@@ -196,14 +198,14 @@
             </nav>
         </header>
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
 </nav>
 
-      <div class="body-wrap"><article id="post-aws-s3-sync-and-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-aws-s3-sync-and-hexo" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/aws-s3-sync-and-hexo/" class="article-date">
-      <time datetime="2018-06-06T04:55:25.000Z" itemprop="datePublished">2018-06-06</time>
+      <time datetime="2018-06-06T12:55:25.000Z" itemprop="datePublished">2018-06-06</time>
 </a>
 
 
@@ -211,7 +213,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
+      <input type="hidden" class="isFancy">
     
     
       <header class="article-header">
@@ -262,12 +264,12 @@
 <li>通过<code>git diff</code> 命令找出此次提交发生变化的文件。这里不用<code>git log</code>的原因是log命令会有多余的输出，不利于后面编写脚本</li>
 <li>使用<code>aws s3 cp</code>把发生变化的文件同步到Aws S3，这样就大大节省了Aws S3写操作的流量</li>
 </ol>
-<h3 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line">git diff HEAD~1 HEAD --stat --name-only | awk <span class="string">'&#123;cmd="aws s3 cp "$1" s3://your-butket/"$1" --exclude '</span>.gitignore<span class="string">'";system(cmd)&#125;'</span></div></pre></td></tr></table></figure>
+<h3 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">git diff HEAD~1 HEAD --<span class="built_in">stat</span> --name-only | awk <span class="string">'&#123;cmd="aws s3 cp "$1" s3://your-butket/"$1" --exclude '</span>.gitignore<span class="string">'";system(cmd)&#125;'</span></span><br></pre></td></tr></table></figure>
 <p>放到项目根目录执行，此脚本只会同步那些内容有修改的文件，内容没有修改，但最后修改时间被更新的文件不会被同步，大大节省了Aws S3的写流量</p>
 <h3 id="后记，奇怪的git-diff输出"><a href="#后记，奇怪的git-diff输出" class="headerlink" title="后记，奇怪的git diff输出"></a>后记，奇怪的git diff输出</h3><p>发现<code>git diff --stat</code>输出时，如果输出到屏幕，那些长路径名是可以正常显示的，但如果输出到文件，则长路径就会被省略显示。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 长路径名</span></div><div class="line">looooooooooong_path_name/index.html</div><div class="line"></div><div class="line"><span class="comment"># 在输出到屏幕时是可以正常显示的</span></div><div class="line">&gt; git diff --stat</div><div class="line">&gt; looooooooooong_path_name/index.html</div><div class="line"></div><div class="line"><span class="comment"># 但如果输出到文件，路径名就变成了:".../index.html"</span></div><div class="line">&gt; git diff --stat &gt; diff.log</div><div class="line">&gt; cat diff.log</div><div class="line">&gt; .../index.html</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 长路径名</span></span><br><span class="line">looooooooooong_path_name/index.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在输出到屏幕时是可以正常显示的</span></span><br><span class="line">&gt; git diff --<span class="built_in">stat</span></span><br><span class="line">&gt; looooooooooong_path_name/index.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># 但如果输出到文件，路径名就变成了:".../index.html"</span></span><br><span class="line">&gt; git diff --<span class="built_in">stat</span> &gt; diff.log</span><br><span class="line">&gt; cat diff.log</span><br><span class="line">&gt; .../index.html</span><br></pre></td></tr></table></figure>
 <p>为了解决这个问题，需要执行 <code>git diff --stat --name-only</code>， 输出到文件也可以正常显示长路径名了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; git diff --stat --name-only &gt; diff.log</div><div class="line">&gt; cat diff.log</div><div class="line">&gt; looooooooooong_path_name/index.html</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; git diff --<span class="built_in">stat</span> --name-only &gt; diff.log</span><br><span class="line">&gt; cat diff.log</span><br><span class="line">&gt; looooooooooong_path_name/index.html</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -286,7 +288,7 @@
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -325,7 +327,7 @@
             <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
             <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
             <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
         </div>
         <script>
             window._bd_share_config={
@@ -358,7 +360,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i>
-                2009~2018 戛戛Happy
+                2009~2019 戛戛Happy
                 
                     <i class="fa fa-check-circle-o"></i>
                     京ICP备10044755
