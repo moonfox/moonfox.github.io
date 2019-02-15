@@ -208,6 +208,349 @@
 
       <div class="body-wrap">
   
+    <article id="post-webapp-migrate-to-docker" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/webapp-migrate-to-docker/" class="article-date">
+      <time datetime="2016-05-08T20:24:57.000Z" itemprop="datePublished">2016-05-08</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/webapp-migrate-to-docker/">成功迁移到docker</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>搞了两天，终于迁移到docker了，docker确实优点挺多的，比如直接提供了应用程序的运行环境，当然还有很多，初次接触还不是很了解。这次迁移用到了两个docker:wordpress与mysql，使用这两个dock, 省去了安装mysql和php环境的工作</p>
+<p>一下步的工作就是制作一个本站的docker image,这样以后随便放到那里就都可以使用了。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-rails-validate-uniqueness-multiple-columns" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails-validate-uniqueness-multiple-columns/" class="article-date">
+      <time datetime="2015-07-24T23:53:54.000Z" itemprop="datePublished">2015-07-24</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails-validate-uniqueness-multiple-columns/">rails validate uniqueness multiple columns</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>rails 2<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">validates_uniqueness_of <span class="symbol">:user_id</span>, <span class="symbol">scope:</span> [<span class="symbol">:friend_id</span>, <span class="symbol">:something_else</span>]</span><br></pre></td></tr></table></figure></p>
+<p>rails 3<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">validates <span class="symbol">:user_id</span>, <span class="symbol">:uniqueness</span> =&gt; &#123;<span class="symbol">:scope</span> =&gt; [<span class="symbol">:friend_id</span>, <span class="symbol">:something_else</span>]&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-rails-cache-column-deleted-exception" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rails-cache-column-deleted-exception/" class="article-date">
+      <time datetime="2015-07-23T10:11:56.000Z" itemprop="datePublished">2015-07-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rails-cache-column-deleted-exception/">rails 缓存字段异常</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>rails 启动后，会cached表的字段，如果在删除了某个字段，而没有重新启动rails,则rails依然加载这个字段，造成异常，开发模式也是如此</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rails/">Rails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-how-to-use-crontab-in-your-xos" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/how-to-use-crontab-in-your-xos/" class="article-date">
+      <time datetime="2015-07-21T10:20:04.000Z" itemprop="datePublished">2015-07-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/how-to-use-crontab-in-your-xos/">苹果系统 xos 使用crontab定时任务</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在苹果系统 xos 使用crontab定时任务时，出现<code>/usr/bin/vi exited with status 1</code></p>
+<p>解决方法</p>
+<blockquote>
+<p>The issue turned out to be vi and nothing to do with cron. Doing <code>export EDITOR=vim</code> fixed it</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/linux/">我爱Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-postgis-install-issues" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/postgis-install-issues/" class="article-date">
+      <time datetime="2015-05-31T22:03:37.000Z" itemprop="datePublished">2015-05-31</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/postgis-install-issues/">PostGIS安装问题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>用brew 安装 postgis （环境：postgre用的是mac版的postgre.app，psql用的是brew版的)</p>
+<p>这样问题就来了，在安装postgis时，会查找psql，由于psql在/usr/sbin下，即用的是brew的，安装postgis时总是报错（具体错误大概是说不能解释postgre sql）。搞了半天没弄好。</p>
+<p>决定把postgre.app的路径放到加载路径的最前面，/Applications/Postgres93.app/Contents/MacOS,放到路径最前面，再次安装postgis，一切安好。但undefined method `point’ for #&lt;ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::TableDefinition:错误还是没有解决</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/database/">数据库</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/">postgresql</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
     <article id="post-ruby-hash-sort-by-key-be-case-of-key-type" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
@@ -1244,347 +1587,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postgresql/">postgresql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-ruby-hash-sort" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/ruby-hash-sort/" class="article-date">
-      <time datetime="2015-04-22T00:04:33.000Z" itemprop="datePublished">2015-04-22</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/ruby-hash-sort/">ruby hash 排序</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>ruby hash 排序<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">h = &#123;<span class="string">"sa"</span>=&gt;<span class="number">1</span>, <span class="string">"ab"</span>=&gt;<span class="number">2</span>, <span class="string">"x3"</span>=&gt;<span class="number">3</span>, <span class="string">"de"</span>=&gt;, <span class="symbol">:de=&gt;</span><span class="number">5</span>&#125;</span><br><span class="line">h.sort_by&#123;<span class="params">|k,v|</span>k.to_s&#125;</span><br><span class="line"><span class="comment">#=&gt; [["ab", 2], [:de, 5], ["de", 6], ["sa", 1], ["x3", 3]]</span></span><br><span class="line"></span><br><span class="line">h.sort_by&#123;<span class="params">|k,v|</span>v.to_s&#125;</span><br><span class="line"><span class="comment">#=&gt;[["sa", 1], ["ab", 2], ["x3", 3], [:de, 5], ["de", 6]]</span></span><br><span class="line"></span><br><span class="line">h.sort_by&#123;<span class="params">|k|</span>k[<span class="number">0</span>].to_s&#125;</span><br><span class="line"><span class="comment">#=&gt;[["ab", 2], [:de, 5], ["de", 6], ["sa", 1], ["x3", 3]]</span></span><br><span class="line"></span><br><span class="line">h.sort_by&#123;<span class="params">|k|</span>k[<span class="number">1</span>].to_s&#125;</span><br><span class="line"><span class="comment">#=&gt;[["sa", 1], ["ab", 2], ["x3", 3], [:de, 5], ["de", 6]]</span></span><br><span class="line"></span><br><span class="line">h = &#123;<span class="string">"sa"</span>=&gt;<span class="number">1</span>, <span class="string">"ab"</span>=&gt;<span class="number">2</span>, <span class="string">"x3"</span>=&gt;<span class="number">3</span>, <span class="string">"de"</span>=&gt;<span class="number">6</span>, <span class="symbol">:de=&gt;</span><span class="number">5</span>&#125;</span><br><span class="line">h.sort</span><br><span class="line"><span class="comment">#=&gt;argumentError: comparison of Array with Array failed,因为:de=&gt;5与"de"＝&gt;6 Key类型不一样,键类型一样，才可以直接用sort,按键排序，否则要把键处理为一致的数据(可以比较的数据类型)</span></span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-bundler-specify-gem-versions" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/bundler-specify-gem-versions/" class="article-date">
-      <time datetime="2015-04-21T15:29:52.000Z" itemprop="datePublished">2015-04-21</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/bundler-specify-gem-versions/">bundler Specify gem versions</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <blockquote>
-<p>Most of the version specifiers, like &gt;= 1.0, are self-explanatory. The specifier ~&gt; has a special meaning, best shown by example. ~&gt; 2.0.3 is identical to &gt;= 2.0.3 and &lt; 2.1. ~&gt; 2.1 is identical to &gt;= 2.1 and &lt; 3.0. ~&gt; 2.2.beta will match prerelease versions like 2.2.beta.12.</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-rspec-exception-types-classes-response" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/rspec-exception-types-classes-response/" class="article-date">
-      <time datetime="2015-04-20T00:08:16.000Z" itemprop="datePublished">2015-04-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/rspec-exception-types-classes-response/">rspec exception types classes response</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Types/classes/response</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expect(actual).to be_instance_of(expected)</span><br><span class="line">expect(actual).to be_kind_of(expected)</span><br><span class="line">expect(actual).to respond_to(expected)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rspec/">rspec</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-native-extension-to-perform-the-binary-search-within-the-hashring" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/native-extension-to-perform-the-binary-search-within-the-hashring/" class="article-date">
-      <time datetime="2015-04-19T15:59:39.000Z" itemprop="datePublished">2015-04-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/native-extension-to-perform-the-binary-search-within-the-hashring/">Native extension to perform the binary search within the hashring</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <ul>
-<li>可以看到为了提高查询性能，采用C去实现，如果安装了RubyInline,会启动C扩展实现的同名方法，加速binary_search查询性能</li>
-<li>也可以发现，从客户端分配键到哪个redis节点是通过比较节点的crc32与key的crc32的大小的方式，进行分配的<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> &lt;&lt; self</span></span><br><span class="line">  <span class="comment"># gem install RubyInline to use this code</span></span><br><span class="line">  <span class="comment"># Native extension to perform the binary search within the hashring.</span></span><br><span class="line">  <span class="comment"># There's a pure ruby version below so this is purely optional</span></span><br><span class="line">  <span class="comment"># for performance.  In testing 20k gets and sets, the native</span></span><br><span class="line">  <span class="comment"># binary search shaved about 12% off the runtime (9sec -&gt; 8sec).</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">require</span> <span class="string">'inline'</span></span><br><span class="line">    inline <span class="keyword">do</span> <span class="params">|builder|</span></span><br><span class="line">      builder.c <span class="string">&lt;&lt;-EOM</span></span><br><span class="line"><span class="string">      int binary_search(VALUE ary, unsigned int r) &#123;</span></span><br><span class="line"><span class="string">          int upper = RARRAY_LEN(ary) - 1;</span></span><br><span class="line"><span class="string">          int lower = 0;</span></span><br><span class="line"><span class="string">          int idx = 0;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">          while (lower &lt;= upper) &#123;</span></span><br><span class="line"><span class="string">              idx = (lower + upper) / 2;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">              VALUE continuumValue = RARRAY_PTR(ary)[idx];</span></span><br><span class="line"><span class="string">              unsigned int l = NUM2UINT(continuumValue);</span></span><br><span class="line"><span class="string">              if (l == r) &#123;</span></span><br><span class="line"><span class="string">                  return idx;</span></span><br><span class="line"><span class="string">              &#125;</span></span><br><span class="line"><span class="string">              else if (l &gt; r) &#123;</span></span><br><span class="line"><span class="string">                  upper = idx - 1;</span></span><br><span class="line"><span class="string">              &#125;</span></span><br><span class="line"><span class="string">              else &#123;</span></span><br><span class="line"><span class="string">                  lower = idx + 1;</span></span><br><span class="line"><span class="string">              &#125;</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">          if (upper &lt; 0) &#123;</span></span><br><span class="line"><span class="string">            upper = RARRAY_LEN(ary) - 1;</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">          return upper;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      EOM</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">rescue</span> Exception</span><br><span class="line">    <span class="comment"># Find the closest index in HashRing with value &lt;= the given value</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">binary_search</span><span class="params">(ary, value, &amp;block)</span></span></span><br><span class="line">      .....</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-rspec-exception-comparisons" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/rspec-exception-comparisons/" class="article-date">
-      <time datetime="2015-04-18T00:05:24.000Z" itemprop="datePublished">2015-04-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/rspec-exception-comparisons/">rspec exception comparisons</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>rspec exception comparisons</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">expect(actual).to be &gt;  expected</span><br><span class="line">expect(actual).to be &gt;= expected</span><br><span class="line">expect(actual).to be &lt;= expected</span><br><span class="line">expect(actual).to be &lt;  expected</span><br><span class="line">expect(actual).to be_between(minimum, maximum).inclusive</span><br><span class="line">expect(actual).to be_between(minimum, maximum).exclusive</span><br><span class="line">expect(actual).to match(<span class="regexp">/expression/</span>)</span><br><span class="line">expect(actual).to be_within(delta).of(expected)</span><br><span class="line">expect(actual).to start_with expected</span><br><span class="line">expect(actual).to end_with expected</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rspec/">rspec</a></li></ul>
     </div>
 
       

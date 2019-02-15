@@ -208,6 +208,347 @@
 
       <div class="body-wrap">
   
+    <article id="post-ruby-hash-sort" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/ruby-hash-sort/" class="article-date">
+      <time datetime="2015-04-22T00:04:33.000Z" itemprop="datePublished">2015-04-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/ruby-hash-sort/">ruby hash 排序</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>ruby hash 排序<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">h = &#123;<span class="string">"sa"</span>=&gt;<span class="number">1</span>, <span class="string">"ab"</span>=&gt;<span class="number">2</span>, <span class="string">"x3"</span>=&gt;<span class="number">3</span>, <span class="string">"de"</span>=&gt;, <span class="symbol">:de=&gt;</span><span class="number">5</span>&#125;</span><br><span class="line">h.sort_by&#123;<span class="params">|k,v|</span>k.to_s&#125;</span><br><span class="line"><span class="comment">#=&gt; [["ab", 2], [:de, 5], ["de", 6], ["sa", 1], ["x3", 3]]</span></span><br><span class="line"></span><br><span class="line">h.sort_by&#123;<span class="params">|k,v|</span>v.to_s&#125;</span><br><span class="line"><span class="comment">#=&gt;[["sa", 1], ["ab", 2], ["x3", 3], [:de, 5], ["de", 6]]</span></span><br><span class="line"></span><br><span class="line">h.sort_by&#123;<span class="params">|k|</span>k[<span class="number">0</span>].to_s&#125;</span><br><span class="line"><span class="comment">#=&gt;[["ab", 2], [:de, 5], ["de", 6], ["sa", 1], ["x3", 3]]</span></span><br><span class="line"></span><br><span class="line">h.sort_by&#123;<span class="params">|k|</span>k[<span class="number">1</span>].to_s&#125;</span><br><span class="line"><span class="comment">#=&gt;[["sa", 1], ["ab", 2], ["x3", 3], [:de, 5], ["de", 6]]</span></span><br><span class="line"></span><br><span class="line">h = &#123;<span class="string">"sa"</span>=&gt;<span class="number">1</span>, <span class="string">"ab"</span>=&gt;<span class="number">2</span>, <span class="string">"x3"</span>=&gt;<span class="number">3</span>, <span class="string">"de"</span>=&gt;<span class="number">6</span>, <span class="symbol">:de=&gt;</span><span class="number">5</span>&#125;</span><br><span class="line">h.sort</span><br><span class="line"><span class="comment">#=&gt;argumentError: comparison of Array with Array failed,因为:de=&gt;5与"de"＝&gt;6 Key类型不一样,键类型一样，才可以直接用sort,按键排序，否则要把键处理为一致的数据(可以比较的数据类型)</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-bundler-specify-gem-versions" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/bundler-specify-gem-versions/" class="article-date">
+      <time datetime="2015-04-21T15:29:52.000Z" itemprop="datePublished">2015-04-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/bundler-specify-gem-versions/">bundler Specify gem versions</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>Most of the version specifiers, like &gt;= 1.0, are self-explanatory. The specifier ~&gt; has a special meaning, best shown by example. ~&gt; 2.0.3 is identical to &gt;= 2.0.3 and &lt; 2.1. ~&gt; 2.1 is identical to &gt;= 2.1 and &lt; 3.0. ~&gt; 2.2.beta will match prerelease versions like 2.2.beta.12.</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-rspec-exception-types-classes-response" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rspec-exception-types-classes-response/" class="article-date">
+      <time datetime="2015-04-20T00:08:16.000Z" itemprop="datePublished">2015-04-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rspec-exception-types-classes-response/">rspec exception types classes response</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Types/classes/response</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expect(actual).to be_instance_of(expected)</span><br><span class="line">expect(actual).to be_kind_of(expected)</span><br><span class="line">expect(actual).to respond_to(expected)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rspec/">rspec</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-native-extension-to-perform-the-binary-search-within-the-hashring" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/native-extension-to-perform-the-binary-search-within-the-hashring/" class="article-date">
+      <time datetime="2015-04-19T15:59:39.000Z" itemprop="datePublished">2015-04-19</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/native-extension-to-perform-the-binary-search-within-the-hashring/">Native extension to perform the binary search within the hashring</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <ul>
+<li>可以看到为了提高查询性能，采用C去实现，如果安装了RubyInline,会启动C扩展实现的同名方法，加速binary_search查询性能</li>
+<li>也可以发现，从客户端分配键到哪个redis节点是通过比较节点的crc32与key的crc32的大小的方式，进行分配的<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> &lt;&lt; self</span></span><br><span class="line">  <span class="comment"># gem install RubyInline to use this code</span></span><br><span class="line">  <span class="comment"># Native extension to perform the binary search within the hashring.</span></span><br><span class="line">  <span class="comment"># There's a pure ruby version below so this is purely optional</span></span><br><span class="line">  <span class="comment"># for performance.  In testing 20k gets and sets, the native</span></span><br><span class="line">  <span class="comment"># binary search shaved about 12% off the runtime (9sec -&gt; 8sec).</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">require</span> <span class="string">'inline'</span></span><br><span class="line">    inline <span class="keyword">do</span> <span class="params">|builder|</span></span><br><span class="line">      builder.c <span class="string">&lt;&lt;-EOM</span></span><br><span class="line"><span class="string">      int binary_search(VALUE ary, unsigned int r) &#123;</span></span><br><span class="line"><span class="string">          int upper = RARRAY_LEN(ary) - 1;</span></span><br><span class="line"><span class="string">          int lower = 0;</span></span><br><span class="line"><span class="string">          int idx = 0;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">          while (lower &lt;= upper) &#123;</span></span><br><span class="line"><span class="string">              idx = (lower + upper) / 2;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">              VALUE continuumValue = RARRAY_PTR(ary)[idx];</span></span><br><span class="line"><span class="string">              unsigned int l = NUM2UINT(continuumValue);</span></span><br><span class="line"><span class="string">              if (l == r) &#123;</span></span><br><span class="line"><span class="string">                  return idx;</span></span><br><span class="line"><span class="string">              &#125;</span></span><br><span class="line"><span class="string">              else if (l &gt; r) &#123;</span></span><br><span class="line"><span class="string">                  upper = idx - 1;</span></span><br><span class="line"><span class="string">              &#125;</span></span><br><span class="line"><span class="string">              else &#123;</span></span><br><span class="line"><span class="string">                  lower = idx + 1;</span></span><br><span class="line"><span class="string">              &#125;</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">          if (upper &lt; 0) &#123;</span></span><br><span class="line"><span class="string">            upper = RARRAY_LEN(ary) - 1;</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">          return upper;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      EOM</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">rescue</span> Exception</span><br><span class="line">    <span class="comment"># Find the closest index in HashRing with value &lt;= the given value</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">binary_search</span><span class="params">(ary, value, &amp;block)</span></span></span><br><span class="line">      .....</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
+    <article id="post-rspec-exception-comparisons" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/rspec-exception-comparisons/" class="article-date">
+      <time datetime="2015-04-18T00:05:24.000Z" itemprop="datePublished">2015-04-18</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/rspec-exception-comparisons/">rspec exception comparisons</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>rspec exception comparisons</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">expect(actual).to be &gt;  expected</span><br><span class="line">expect(actual).to be &gt;= expected</span><br><span class="line">expect(actual).to be &lt;= expected</span><br><span class="line">expect(actual).to be &lt;  expected</span><br><span class="line">expect(actual).to be_between(minimum, maximum).inclusive</span><br><span class="line">expect(actual).to be_between(minimum, maximum).exclusive</span><br><span class="line">expect(actual).to match(<span class="regexp">/expression/</span>)</span><br><span class="line">expect(actual).to be_within(delta).of(expected)</span><br><span class="line">expect(actual).to start_with expected</span><br><span class="line">expect(actual).to end_with expected</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/development/">程序开发</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rspec/">rspec</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+<div class="scroll" id="post-nav-button"></div>
+
+
+
+
+
+  
     <article id="post-secret-token-issues" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
@@ -1222,346 +1563,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-sublime-text-load-rvm-ruby-version" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/sublime-text-load-rvm-ruby-version/" class="article-date">
-      <time datetime="2015-03-28T21:32:08.000Z" itemprop="datePublished">2015-03-28</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/sublime-text-load-rvm-ruby-version/">sublime text 加载 rvm 指定的ruby版本</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>在sublime中用cmd+b运行代码时，其运行环境往往和你正在使用的rvm指定的ruby版本不一样，安装RVM switch for sublime插件可以较好的解决这个问题。</p>
-<p>在安装后，你可以选择</p>
-<ul>
-<li>RVM Auto Ruby:设置当前环境和你的RVM一致（最好在cmd下先用rvm指定ruby版本,再用cmd打开sublime）</li>
-<li>RVM Default Ruby</li>
-<li>RVM System Ruby</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/software/">玩转软件</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sublime/">sublime</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-when-run-of-block-in-mehtod" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/when-run-of-block-in-mehtod/" class="article-date">
-      <time datetime="2015-03-27T21:52:04.000Z" itemprop="datePublished">2015-03-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/when-run-of-block-in-mehtod/">测试块中的代码什么时候被执行</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 1、测试块中的代码什么时候被执行</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、只有在块被真正调用的时候才会被执行:对块调用方法yield/call</span></span><br><span class="line"><span class="comment"># 说明: 一般方法中都会用yield去调用块，使得传入方法的块中的代码马上执行,这难免会让人产生代码只要被放在do..end或&#123;&#125;</span></span><br><span class="line"><span class="comment"># 就会被马上执行的错觉。</span></span><br><span class="line"><span class="comment"># 下面的代码只有当去掉注释时，块中的代码才会被执行</span></span><br><span class="line"><span class="comment"># 2、调用yield后，就一定要传入块，否则就产生错误，除非在加入了block_given?判断</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span><span class="params">(&amp;block)</span></span></span><br><span class="line">    <span class="comment"># yield</span></span><br><span class="line">    <span class="comment"># block.call</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  my_method <span class="keyword">do</span></span><br><span class="line">    lastname = <span class="string">"Caroline"</span></span><br><span class="line">    puts lastname <span class="comment"># =&gt;这里不会有输出，除非去掉方法中的注释</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">&#125;.call</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-thoughtful-ruby-block-and-variable" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/thoughtful-ruby-block-and-variable/" class="article-date">
-      <time datetime="2015-03-26T20:56:48.000Z" itemprop="datePublished">2015-03-26</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/thoughtful-ruby-block-and-variable/">ruby 块与局部变量绑定的思考</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>文章已经修改，之前的结论有误，现已经修改<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 重要结论:</span></span><br><span class="line"><span class="comment"># 1、块绑定局部变量的时间:在块被定义的时开始绑定的,绑定局部变量只是名子绑定,块内绑定的同名局部变量的值还可以在块外被修改</span></span><br><span class="line"><span class="comment">#（在块绑定局部变量后，如果块外部的同名局部变量改变了其值，则块中绑定的同名变量的值会被改变）</span></span><br><span class="line"><span class="comment"># 以下测试的局部绑定都证明了绑定是从块被定义时开始的</span></span><br><span class="line"><span class="comment"># 2、注意那些在块中初始化的变量，是否这些变量也出现在块定义外部的前后，不同位置的同名局部变量会对块内的变量产生不同的影响</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 测试方法中的局部变量firstname,lastname是否会影响到块中的被绑定的同名变量的值</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、块会绑定局部变量firstname,lastname,把它们以块的方式传到my_method方法</span></span><br><span class="line"><span class="comment"># 它们的值不会受到方法中同名变量的影响（闭包特性）</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">"Maria"</span></span><br><span class="line">    lastname = <span class="string">"Sharapova"</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">"Hi! I'm"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">"Max"</span></span><br><span class="line">  lastname = <span class="string">"Black"</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> puts <span class="string">"test1: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span>"</span> &#125;</span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I'm Max Black</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># &lt;!-- more --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标2:</span></span><br><span class="line"><span class="comment"># 1、测试块可以绑定局部变量的范围</span></span><br><span class="line"><span class="comment"># 2、在块后面出现的局部变量是否会覆盖其块内已经绑定的同名局部变量的值（块中已经绑定的局部变量的值是否会被改变）</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、块会绑定在它定义时出现在它前面的局部变量firstname,lastname.</span></span><br><span class="line"><span class="comment"># 2、块中last变量的值为lastname="wang"，因为块在定义时绑定了lastname,块中同名的lastname对上下文中的其它成员</span></span><br><span class="line"><span class="comment"># 是可见的，所以对局部变量赋值lastname="Wang"，也就改变了块内lastname的值。它覆盖了前面lastname="Black"的值。</span></span><br><span class="line"><span class="comment"># 3、局部变量lastname＝"Green"出现在块被调用以后，块调用在赋值语句之前执行，对lastname="Green"的赋值不会影响到</span></span><br><span class="line"><span class="comment"># 块内部的同名变量lastname,此时块内部的lastname＝"wang"</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">"Maria"</span></span><br><span class="line">    lastname = <span class="string">"Sharapova"</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">"Hi! I'm"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">"Max"</span></span><br><span class="line">  lastname = <span class="string">"Black"</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> puts <span class="string">"test2: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span>"</span> &#125;</span><br><span class="line">  lastname = <span class="string">"Wang"</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I'm Max Wang</span></span><br><span class="line">  lastname = <span class="string">"Green"</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标3:</span></span><br><span class="line"><span class="comment"># 测试在块中定义的已经初始化的变量的值是否受外部的同名局部变量值的影响:(局部变量的定义在块定义的前面)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、局部变量不能影响块中同名变量的值</span></span><br><span class="line"><span class="comment"># 2、局部变量的值会随块中同名变量的值在执行过程中的改变而改变,day_changed的值为被改变的值:Mon</span></span><br><span class="line"><span class="comment"># 3、发生1、2情况的原因是，在块被执行时，它会先看到块内的say="Mon"，而不再去看被绑定的局部变量say的值("Sun")</span></span><br><span class="line"><span class="comment"># 因为局部变量day已经被绑定到块，块中的day对其上下文可见，在块执行后，块中同名变量day的值会改变局部</span></span><br><span class="line"><span class="comment"># 变量day的值，此时局部变量day的值为"Mon"</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">"Maria"</span></span><br><span class="line">    lastname = <span class="string">"Sharapova"</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">"Hi! I'm"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">"Max"</span></span><br><span class="line">  lastname = <span class="string">"Black"</span></span><br><span class="line">  day = <span class="string">"Sun"</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> day = <span class="string">"Mon"</span>; puts <span class="string">"test3: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span> at <span class="subst">#&#123;day&#125;</span>"</span>&#125;</span><br><span class="line">  <span class="comment">#day = "Sun"</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I'm Max Black at Mon</span></span><br><span class="line">  day_changed = day</span><br><span class="line">  puts <span class="string">"test3: day:<span class="subst">#&#123;day_changed&#125;</span>"</span></span><br><span class="line">  <span class="comment"># day = "Wed"</span></span><br><span class="line">  <span class="comment"># my_method &amp;myname #＝&gt; Hi! I'm Max Black at Mon</span></span><br><span class="line">  <span class="comment"># day_changed = day</span></span><br><span class="line">  <span class="comment"># puts "test3: day:#&#123;day_changed&#125;"</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标4:</span></span><br><span class="line"><span class="comment"># 测试在块中定义的已经初始化的变量的值是否受外部的同名局部变量值的影响:(局部变量的定义在块定义的后面)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、最终的值是块中变量的值，局部变量不能影响块中同名变量的值</span></span><br><span class="line"><span class="comment"># 2、局部变量的值会不随块中同名变量的值在执行过程中的改变而改变,day_changed的值:Sun</span></span><br><span class="line"><span class="comment"># 3、发生1、2情况的原因是：因为day局部变量的定义出现在块定义的后面，这就导致了块根本没有绑定day这个局部变量</span></span><br><span class="line"><span class="comment"># 块内的变量day是块内部附加的变量，此时块内部的day与块外部的day没有任何关系</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">"Maria"</span></span><br><span class="line">    lastname = <span class="string">"Sharapova"</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">"Hi! I'm"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">"Max"</span></span><br><span class="line">  lastname = <span class="string">"Black"</span></span><br><span class="line">  <span class="comment"># day = "Sun"</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> day = <span class="string">"Mon"</span>; puts <span class="string">"test4: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span> at <span class="subst">#&#123;day&#125;</span>"</span>&#125;</span><br><span class="line">  day = <span class="string">"Sun"</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I'm Max Black at Mon</span></span><br><span class="line">  day_changed = day</span><br><span class="line">  puts <span class="string">"test4: day:<span class="subst">#&#123;day_changed&#125;</span>"</span></span><br><span class="line">  <span class="comment"># day = "Wed"</span></span><br><span class="line">  <span class="comment"># my_method &amp;myname #＝&gt; Hi! I'm Max Black at Mon</span></span><br><span class="line">  <span class="comment"># day_changed = day</span></span><br><span class="line">  <span class="comment"># puts "test5: day:#&#123;day_changed&#125;" # =&gt; Web</span></span><br><span class="line">&#125;.call</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/development/">程序开发</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ruby/">Ruby</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-redo-log-record-type-and-function" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/redo-log-record-type-and-function/" class="article-date">
-      <time datetime="2015-03-24T20:30:28.000Z" itemprop="datePublished">2015-03-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/redo-log-record-type-and-function/">redo log record type and function</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>So each redo log record has a type. A redo log record type helps to identify the function that will be used to apply or execute the redo log during recovery. The contents of the redo log record must then contain all the arguments or parameters needed by the function</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/innodb/">innodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-<div class="scroll" id="post-nav-button"></div>
-
-
-
-
-
-  
-    <article id="post-mysql-mac-auto-attempt-restart-when-start-fail" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/mysql-mac-auto-attempt-restart-when-start-fail/" class="article-date">
-      <time datetime="2015-03-23T23:27:00.000Z" itemprop="datePublished">2015-03-23</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mysql-mac-auto-attempt-restart-when-start-fail/">mysql  mac 环境启动失败后会自动尝试多次启动</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>mysql mac 环境下启动失败后会自动尝试多次启动，mysql是用brew安装的，启动命令用的是launchctl，不知道是不是和launchctl命令有关，还是说mysql本身启动就是这样的。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/database/">数据库</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
     </div>
 
       
