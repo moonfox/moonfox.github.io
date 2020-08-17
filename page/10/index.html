@@ -14,11 +14,12 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"flat"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
   <meta name="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
@@ -32,10 +33,11 @@
 <meta property="article:tag" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
 <meta name="twitter:card" content="summary">
 
+
 <link rel="canonical" href="http://www.gagahappy.com/page/10/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -64,24 +66,36 @@
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
@@ -89,25 +103,25 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
-    <div class="headband"></div>
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">漂自己的移，让别人都撞墙去吧</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
   </div>
 
@@ -120,17 +134,11 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">952</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -146,6 +154,11 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">952</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -174,7 +187,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -182,9 +195,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container">
+  <div class="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -192,18 +205,68 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="戛戛Happy"
+      src="/huitailang.jpg">
+  <p class="site-author-name" itemprop="name">戛戛Happy</p>
+  <div class="site-description" itemprop="description">喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="Rss → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>Rss</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content index posts-expand">
-            
+    <div class="main-inner index posts-expand">
+      
+
+      
       
   
   
@@ -219,6 +282,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -249,14 +315,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -267,8 +333,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <ul>
 <li>可以看到为了提高查询性能，采用C去实现，如果安装了RubyInline,会启动C扩展实现的同名方法，加速binary_search查询性能</li>
 <li>也可以发现，从客户端分配键到哪个redis节点是通过比较节点的crc32与key的crc32的大小的方式，进行分配的<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> &lt;&lt; self</span></span><br><span class="line">  <span class="comment"># gem install RubyInline to use this code</span></span><br><span class="line">  <span class="comment"># Native extension to perform the binary search within the hashring.</span></span><br><span class="line">  <span class="comment"># There&#x27;s a pure ruby version below so this is purely optional</span></span><br><span class="line">  <span class="comment"># for performance.  In testing 20k gets and sets, the native</span></span><br><span class="line">  <span class="comment"># binary search shaved about 12% off the runtime (9sec -&gt; 8sec).</span></span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">require</span> <span class="string">&#x27;inline&#x27;</span></span><br><span class="line">    inline <span class="keyword">do</span> <span class="params">|builder|</span></span><br><span class="line">      builder.c &lt;&lt;-EOM</span><br><span class="line">      int binary_search(VALUE ary, unsigned int r) &#123;</span><br><span class="line">          int upper = RARRAY_LEN(ary) - <span class="number">1</span>;</span><br><span class="line">          int lower = <span class="number">0</span>;</span><br><span class="line">          int idx = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">while</span> (lower &lt;= upper) &#123;</span><br><span class="line">              idx = (lower + upper) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">              VALUE continuumValue = RARRAY_PTR(ary)[idx];</span><br><span class="line">              unsigned int l = NUM2UINT(continuumValue);</span><br><span class="line">              <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">                  <span class="keyword">return</span> idx;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">else</span> <span class="keyword">if</span> (l &gt; r) &#123;</span><br><span class="line">                  upper = idx - <span class="number">1</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">else</span> &#123;</span><br><span class="line">                  lower = idx + <span class="number">1</span>;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (upper &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            upper = RARRAY_LEN(ary) - <span class="number">1</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span> upper;</span><br><span class="line">      &#125;</span><br><span class="line">      EOM</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">rescue</span> Exception</span><br><span class="line">    <span class="comment"># Find the closest index in HashRing with value &lt;= the given value</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">binary_search</span><span class="params">(ary, value, &amp;block)</span></span></span><br><span class="line">      .....</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
@@ -304,6 +368,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -334,14 +401,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>420</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -352,8 +419,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>rspec exception comparisons</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">expect(actual).to be &gt;  expected</span><br><span class="line">expect(actual).to be &gt;= expected</span><br><span class="line">expect(actual).to be &lt;= expected</span><br><span class="line">expect(actual).to be &lt;  expected</span><br><span class="line">expect(actual).to be_between(minimum, maximum).inclusive</span><br><span class="line">expect(actual).to be_between(minimum, maximum).exclusive</span><br><span class="line">expect(actual).to match(<span class="regexp">/expression/</span>)</span><br><span class="line">expect(actual).to be_within(delta).of(expected)</span><br><span class="line">expect(actual).to start_with expected</span><br><span class="line">expect(actual).to end_with expected</span><br></pre></td></tr></table></figure>
       
@@ -385,6 +450,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -415,14 +483,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>326</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -433,8 +501,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>secret_token:问题</p>
 <blockquote>
 <p>A secret is required to generate an integrity hash for cookie session data. Use config.secret_token = “some secret phrase of at least 30 characters”in config/initializers/secret_token.rb</p>
@@ -474,6 +540,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -504,14 +573,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>514</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -522,8 +591,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <ol>
 <li>返回储存在给定键的 HyperLogLog 的近似基数</li>
 <li>通过 HyperLogLog 数据结构， 用户可以使用少量固定大小的内存， 来储存集合中的唯一元素 （每个 HyperLogLog 只需使用 12k 字节内存，以及几个字节的内存来储存键本身）。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">redis&gt; PFADD  databases  &quot;Redis&quot;  &quot;MongoDB&quot;  &quot;MySQL&quot;</span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line">redis&gt; PFCOUNT  databases</span><br><span class="line">(integer) 3</span><br><span class="line"></span><br><span class="line">redis&gt; PFADD  databases  &quot;Redis&quot;    # Redis 已经存在，不必对估计数量进行更新</span><br><span class="line">(integer) 0</span><br><span class="line"></span><br><span class="line">redis&gt; PFCOUNT  databases    # 元素估计数量没有变化</span><br><span class="line">(integer) 3</span><br><span class="line"></span><br><span class="line">redis&gt; PFADD  databases  &quot;PostgreSQL&quot;    # 添加一个不存在的元素</span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line">redis&gt; PFCOUNT  databases    # 估计数量增一</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
@@ -563,6 +630,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -593,14 +663,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>756</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -611,8 +681,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">Rails</span></span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Server</span> &lt; ::<span class="title">Rack::Server</span></span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">default_options</span></span></span><br><span class="line">      <span class="keyword">super</span>.merge(&#123;</span><br><span class="line">        <span class="symbol">Port:</span>               <span class="number">3000</span>,</span><br><span class="line">        <span class="symbol">DoNotReverseLookup:</span> <span class="literal">true</span>,</span><br><span class="line">        <span class="symbol">environment:</span>        (ENV[<span class="string">&#x27;RAILS_ENV&#x27;</span>] <span class="params">||</span> ENV[<span class="string">&#x27;RACK_ENV&#x27;</span>] <span class="params">||</span> <span class="string">&quot;development&quot;</span>).dup,</span><br><span class="line">        <span class="symbol">daemonize:</span>          <span class="literal">false</span>,</span><br><span class="line">        <span class="symbol">debugger:</span>           <span class="literal">false</span>,</span><br><span class="line">        <span class="symbol">pid:</span>                File.expand_path(<span class="string">&quot;tmp/pids/server.pid&quot;</span>),</span><br><span class="line">        <span class="symbol">config:</span>             File.expand_path(<span class="string">&quot;config.ru&quot;</span>)</span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start</span></span></span><br><span class="line">      print_boot_information</span><br><span class="line">      trap(<span class="symbol">:INT</span>) &#123; exit &#125;</span><br><span class="line">      create_tmp_directories</span><br><span class="line">      log_to_stdout <span class="keyword">if</span> options[<span class="symbol">:log_stdout</span>]</span><br><span class="line"></span><br><span class="line">      <span class="keyword">super</span></span><br><span class="line">    <span class="keyword">ensure</span></span><br><span class="line">      <span class="comment"># The &#x27;-h&#x27; option calls exit before <span class="doctag">@options</span> is set.</span></span><br><span class="line">      <span class="comment"># If we call &#x27;options&#x27; with it unset, we get double help banners.</span></span><br><span class="line">      puts <span class="string">&#x27;Exiting&#x27;</span> <span class="keyword">unless</span> @options &amp;&amp; options[<span class="symbol">:daemonize</span>]</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
 <p>可以看到和rails2相比，已经大不一样了，代码全部移动到了Rails模块中，结构也更加清晰</p>
@@ -646,6 +714,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -676,14 +747,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>255</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -694,8 +765,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>Two segments are allocated for each index in InnoDB. One is for nonleaf nodes of the B-tree, the other is for the leaf nodes. Keeping the leaf nodes contiguous on disk enables better sequential I/O operations, because these leaf nodes contain the actual table data.</p>
 <p>每个索引拥有2个segment，一个用于非叶结点，另一个用于叶子结点</p>
 
@@ -728,6 +797,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -758,14 +830,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>279</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -776,8 +848,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>InnoDB does not guarantee that it uses free pages sequentially, and many optimizations around bulk data loading will cause pages to be used out of order. (More on page splitting and these optimizations)</p>
 <p>1、Innodb不保证连续的使用空闲空间保存数据，这么做的原因有(页的分裂和一些优化)<br>2、在为新数据分配extent时，可以看到有种情况发生：一个index后面是多个free page(63个),然后再是一个index.</p>
 
@@ -810,6 +880,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -840,14 +913,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>120</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -858,8 +931,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>B+树索引本身并不能找到一条记录，只能找到记录所在的页。详细见具本章节中的内容，及查看本机数据内容。找到所在页后，把页载入内存，</p>
 <p>在内存中对Page Directory进行binary search。依次类推，最终找到记录(通过n_owned)。</p>
 
@@ -892,6 +963,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -922,14 +996,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>2 mins.</span>
             </span>
 
@@ -940,8 +1014,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">&#x27;zlib&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Redis</span></span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">HashRing</span></span></span><br><span class="line"></span><br><span class="line">    POINTS_PER_SERVER = <span class="number">160</span> <span class="comment"># this is the default in libmemcached</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">attr_reader</span> <span class="symbol">:ring</span>, <span class="symbol">:sorted_keys</span>, <span class="symbol">:replicas</span>, <span class="symbol">:nodes</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># nodes is a list of objects that have a proper to_s representation.</span></span><br><span class="line">    <span class="comment"># replicas indicates how many virtual points should be used pr. node,</span></span><br><span class="line">    <span class="comment"># replicas are required to improve the distribution.</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initialize</span><span class="params">(nodes=[], replicas=POINTS_PER_SERVER)</span></span></span><br><span class="line">      @replicas = replicas</span><br><span class="line">      @ring = &#123;&#125;</span><br><span class="line">      @nodes = []</span><br><span class="line">      @sorted_keys = []</span><br><span class="line">      nodes.each <span class="keyword">do</span> <span class="params">|node|</span></span><br><span class="line">        add_node(node)</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Adds a `node` to the hash ring (including a number of replicas).</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_node</span><span class="params">(node)</span></span></span><br><span class="line">      @nodes &lt;&lt; node</span><br><span class="line">      @replicas.times <span class="keyword">do</span> <span class="params">|i|</span></span><br><span class="line">        key = Zlib.crc32(<span class="string">&quot;<span class="subst">#&#123;node.id&#125;</span>:<span class="subst">#&#123;i&#125;</span>&quot;</span>)</span><br><span class="line">        @ring[key] = node</span><br><span class="line">        @sorted_keys &lt;&lt; key</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">      @sorted_keys.sort!</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remove_node</span><span class="params">(node)</span></span></span><br><span class="line">      @nodes.reject!&#123;<span class="params">|n|</span> n.id == node.id&#125;</span><br><span class="line">      @replicas.times <span class="keyword">do</span> <span class="params">|i|</span></span><br><span class="line">        key = Zlib.crc32(<span class="string">&quot;<span class="subst">#&#123;node.id&#125;</span>:<span class="subst">#&#123;i&#125;</span>&quot;</span>)</span><br><span class="line">        @ring.delete(key)</span><br><span class="line">        @sorted_keys.reject! &#123;<span class="params">|k|</span> k == key&#125;</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get the node in the hash ring for this key</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_node</span><span class="params">(key)</span></span></span><br><span class="line">      get_node_pos(key)[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_node_pos</span><span class="params">(key)</span></span></span><br><span class="line">      <span class="keyword">return</span> [<span class="literal">nil</span>,<span class="literal">nil</span>] <span class="keyword">if</span> @ring.size == <span class="number">0</span></span><br><span class="line">      crc = Zlib.crc32(key)</span><br><span class="line">      idx = HashRing.binary_search(@sorted_keys, crc)</span><br><span class="line">      <span class="keyword">return</span> [@ring[@sorted_keys[idx]], idx]</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">iter_nodes</span><span class="params">(key)</span></span></span><br><span class="line">      <span class="keyword">return</span> [<span class="literal">nil</span>,<span class="literal">nil</span>] <span class="keyword">if</span> @ring.size == <span class="number">0</span></span><br><span class="line">      <span class="number">_</span>, pos = get_node_pos(key)</span><br><span class="line">      @sorted_keys[pos..-<span class="number">1</span>].each <span class="keyword">do</span> <span class="params">|k|</span></span><br><span class="line">        <span class="keyword">yield</span> @ring[k]</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> &lt;&lt; self</span></span><br><span class="line"></span><br><span class="line">      <span class="comment"># gem install RubyInline to use this code</span></span><br><span class="line">      <span class="comment"># Native extension to perform the binary search within the hashring.</span></span><br><span class="line">      <span class="comment"># There&#x27;s a pure ruby version below so this is purely optional</span></span><br><span class="line">      <span class="comment"># for performance.  In testing 20k gets and sets, the native</span></span><br><span class="line">      <span class="comment"># binary search shaved about 12% off the runtime (9sec -&gt; 8sec).</span></span><br><span class="line">      <span class="keyword">begin</span></span><br><span class="line">        <span class="keyword">require</span> <span class="string">&#x27;inline&#x27;</span></span><br><span class="line">        inline <span class="keyword">do</span> <span class="params">|builder|</span></span><br><span class="line">          builder.c &lt;&lt;-EOM</span><br><span class="line">          int binary_search(VALUE ary, unsigned int r) &#123;</span><br><span class="line">              int upper = RARRAY_LEN(ary) - <span class="number">1</span>;</span><br><span class="line">              int lower = <span class="number">0</span>;</span><br><span class="line">              int idx = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">              <span class="keyword">while</span> (lower &lt;= upper) &#123;</span><br><span class="line">                  idx = (lower + upper) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">                  VALUE continuumValue = RARRAY_PTR(ary)[idx];</span><br><span class="line">                  unsigned int l = NUM2UINT(continuumValue);</span><br><span class="line">                  <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">                      <span class="keyword">return</span> idx;</span><br><span class="line">                  &#125;</span><br><span class="line">                  <span class="keyword">else</span> <span class="keyword">if</span> (l &gt; r) &#123;</span><br><span class="line">                      upper = idx - <span class="number">1</span>;</span><br><span class="line">                  &#125;</span><br><span class="line">                  <span class="keyword">else</span> &#123;</span><br><span class="line">                      lower = idx + <span class="number">1</span>;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">if</span> (upper &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                upper = RARRAY_LEN(ary) - <span class="number">1</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">return</span> upper;</span><br><span class="line">          &#125;</span><br><span class="line">          EOM</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">rescue</span> Exception</span><br><span class="line">        <span class="comment"># Find the closest index in HashRing with value &lt;= the given value</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">binary_search</span><span class="params">(ary, value, &amp;block)</span></span></span><br><span class="line">          upper = ary.size - <span class="number">1</span></span><br><span class="line">          lower = <span class="number">0</span></span><br><span class="line">          idx = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">          <span class="keyword">while</span>(lower &lt;= upper) <span class="keyword">do</span></span><br><span class="line">            idx = (lower + upper) / <span class="number">2</span></span><br><span class="line">            comp = ary[idx] &lt;=&gt; value</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> comp == <span class="number">0</span></span><br><span class="line">              <span class="keyword">return</span> idx</span><br><span class="line">            <span class="keyword">elsif</span> comp &gt; <span class="number">0</span></span><br><span class="line">              upper = idx - <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">              lower = idx + <span class="number">1</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">          <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> upper &lt; <span class="number">0</span></span><br><span class="line">            upper = ary.size - <span class="number">1</span></span><br><span class="line">          <span class="keyword">end</span></span><br><span class="line">          <span class="keyword">return</span> upper</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
       
@@ -973,6 +1045,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1003,14 +1078,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>22</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1021,8 +1096,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>mac 查看端口占用程序<br>lsof -i :9001</p>
 
       
@@ -1054,6 +1127,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1084,14 +1160,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>707</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1102,8 +1178,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <blockquote>
 <p>An approach I’ve long taken to understanding something that is complex and poorly documented is the following three steps:</p>
 <ol>
@@ -1145,6 +1219,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1175,14 +1252,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1193,8 +1270,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>复活节（主复活日）是一个西方的重要节日，在每年春分月圆之后第一个星期日。基督徒认为，复活节象征着重生与希望，为纪念耶稣基督于公元30到33年之间被钉死在十字架之后第三天复活的日子。天主教/新教和东正教复活节的计算略有差异，根据罗马教会传统，在春分(3月21日)当日见到满月或过了春分见到第一个满月后，遇到的第一个星期日即为复活节。东正教会则规定，如果满月恰好出现在这第一个星期日，则复活节再推迟一周。因此，复活节的日期大致在公历3月22日至4月25日之间。</p>
 <p>　　复活节那一天，是经由三个历法（分别是西历、中国阴历、星期）合并出来的，怪不得它会如此飘忽不定了。有些年份三个教派的复活节是重合的，而有些年份又不同，进而它们耶稣受难日的日期也有所差异，2015年的天主教、新教的复活节是2015年4月5日。</p>
           <!--noindex-->
@@ -1234,6 +1309,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1264,14 +1342,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>432</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1282,8 +1360,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 1、测试eval的filename,与lineno参数使用</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、可以自定义程序出错时的出错信息（出错的文件名，程序在哪行执行的,方便出错日志的查询,错误的定位)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    string = <span class="string">&quot;1/0&quot;</span></span><br><span class="line">    <span class="comment"># eval(string, nil, __FILE__, __LINE__)</span></span><br><span class="line">    eval(string, <span class="literal">nil</span>, <span class="string">&quot;custom_file.rb&quot;</span>, <span class="number">60</span>)</span><br><span class="line">    <span class="comment"># eval(string)</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">MyClass.new.my_method <span class="comment"># custom_file.rb:60:in `/&#x27;: divided by 0 (ZeroDivisionError)</span></span><br></pre></td></tr></table></figure>
       
     </div>
@@ -1314,6 +1390,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1344,14 +1423,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>2.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>3 mins.</span>
             </span>
 
@@ -1362,8 +1441,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 1、load文件参数为false时，对变量，实例变量,常量的影响</span></span><br><span class="line"><span class="comment"># 2、load文件参数为false时，类是否被重新打开</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、变量不会被加载的文件影响，实例变量和常量会被影响。因为被加载文件中的变量会在文件加载完成后，掉出加载文件的作用域</span></span><br><span class="line"><span class="comment">#    而实例变量和常量不会掉出作用域</span></span><br><span class="line"><span class="comment"># 2、类可以被重新打开，因为被加载文件中类也没有掉出作用域（因为类也是常量）</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  var  = <span class="number">2</span></span><br><span class="line">  @var = <span class="number">2</span></span><br><span class="line">  VAR  = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">      <span class="string">&quot;i&#x27;m in load_2 file&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  puts <span class="string">&quot;==========Test1:OUTPUT==========&quot;</span></span><br><span class="line"></span><br><span class="line">  load File.expand_path(<span class="string">&#x27;load_file.rb&#x27;</span>, File.dirname(__FILE_<span class="number">_</span>))</span><br><span class="line"></span><br><span class="line">  puts <span class="string">&#x27;==========load_2.rb=======&#x27;</span></span><br><span class="line">  puts <span class="string">&quot;var :<span class="subst">#&#123;var &#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;@var:<span class="subst">#&#123;@var&#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;VAR :<span class="subst">#&#123;VAR &#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;my_method:<span class="subst">#&#123;MyClass.new.my_method&#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&#x27;==========load_2.rb=======&#x27;</span></span><br><span class="line">  puts <span class="string">&quot;==========Test1:OUTPUT==========&quot;</span></span><br><span class="line">  <span class="comment"># &lt;!-- more --&gt;</span></span><br><span class="line">  <span class="comment"># ==========Test1:OUTPUT==========</span></span><br><span class="line">  <span class="comment"># ==========load_1.rb=======</span></span><br><span class="line">  <span class="comment"># var :1</span></span><br><span class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></span><br><span class="line">  <span class="comment"># VAR :1</span></span><br><span class="line">  <span class="comment"># my_method:i&#x27;m in load_1 file</span></span><br><span class="line">  <span class="comment"># ==========load_1.rb=======</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># ==========load_2.rb=======</span></span><br><span class="line">  <span class="comment"># var :2</span></span><br><span class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></span><br><span class="line">  <span class="comment"># VAR :1</span></span><br><span class="line">  <span class="comment"># my_method:i&#x27;m in load_1 file</span></span><br><span class="line">  <span class="comment"># ==========load_2.rb=======</span></span><br><span class="line">  <span class="comment"># ==========Test1:OUTPUT==========</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标2:</span></span><br><span class="line"><span class="comment"># 1、load文件参数为true时，对变量，实例变量,常量的影响</span></span><br><span class="line"><span class="comment"># 2、load文件参数为true时，类是否被重新打开</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、变量不会被加载的文件影响，实例变量和常量也不会被影响</span></span><br><span class="line"><span class="comment"># 2、类不会被影响</span></span><br><span class="line"><span class="comment"># 因为ruby会在load文件时为其创建匿名模块，让其文件中的实例变量、常量、类落在其自身范围内，且在load完成后，销毁这个</span></span><br><span class="line"><span class="comment"># 匿名模块（即加载文件中的所有内容），加入true参数的这种做法无法让加载它的文件使用其文件中代码，仅仅是起到了运行load</span></span><br><span class="line"><span class="comment"># 文件的代码的作用</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  var  = <span class="number">2</span></span><br><span class="line">  @var = <span class="number">2</span></span><br><span class="line">  VAR  = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">      <span class="string">&quot;i&#x27;m in load_2 file&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  puts <span class="string">&quot;==========Test2:OUTPUT==========&quot;</span></span><br><span class="line"></span><br><span class="line">  load File.expand_path(<span class="string">&#x27;load_file.rb&#x27;</span>, File.dirname(__FILE_<span class="number">_</span>)), <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  puts <span class="string">&#x27;==========load_2.rb=======&#x27;</span></span><br><span class="line">  puts <span class="string">&quot;var :<span class="subst">#&#123;var &#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;@var:<span class="subst">#&#123;@var&#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;VAR :<span class="subst">#&#123;VAR &#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;my_method:<span class="subst">#&#123;MyClass.new.my_method&#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&#x27;==========load_2.rb=======&#x27;</span></span><br><span class="line">  puts <span class="string">&quot;==========Test2:OUTPUT==========&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># ==========Test2:OUTPUT==========</span></span><br><span class="line">  <span class="comment"># ==========load_1.rb=======</span></span><br><span class="line">  <span class="comment"># var :1</span></span><br><span class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></span><br><span class="line">  <span class="comment"># VAR :1</span></span><br><span class="line">  <span class="comment"># my_method:i&#x27;m in load_1 file</span></span><br><span class="line">  <span class="comment"># ==========load_1.rb=======</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># ==========load_2.rb=======</span></span><br><span class="line">  <span class="comment"># var :2</span></span><br><span class="line">  <span class="comment"># <span class="doctag">@var</span>:2</span></span><br><span class="line">  <span class="comment"># VAR :2</span></span><br><span class="line">  <span class="comment"># my_method:i&#x27;m in load_2 file</span></span><br><span class="line">  <span class="comment"># ==========load_2.rb=======</span></span><br><span class="line">  <span class="comment"># ==========Test2:OUTPUT==========</span></span><br><span class="line">&#125;.call</span><br></pre></td></tr></table></figure>
 
 <p>load_file.rb</p>
@@ -1398,6 +1475,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1428,14 +1508,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>969</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1446,8 +1526,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 1、测试顶级上下文中定义的实例变量的作用域</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、顶级上下文中定义的实例变量只能被main对象访问，因为实例变量暴露在toplevel的context中，self为main</span></span><br><span class="line"><span class="comment">#    相当于运行main.instance_eval&#123;<span class="doctag">@toplevel</span>_variate=&quot;toplevel variate&quot;&#125;</span></span><br><span class="line"><span class="comment"># 2、私有方法不属于instance_methods的集合，它属于private_instance_methods</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"></span><br><span class="line">@toplevel_variate = <span class="string">&quot;toplevel variate&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">  <span class="string">&quot;@toplevel_variate in my_method which define in toplevel:<span class="subst">#&#123;@toplevel_variate&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">Object.class_eval <span class="keyword">do</span> <span class="params">|variable|</span></span><br><span class="line">  puts <span class="string">&quot;Object can acccess @toplevel_variate:<span class="subst">#&#123;@var&#125;</span>&quot;</span> <span class="comment"># nil</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">self</span>.instance_eval <span class="keyword">do</span></span><br><span class="line">  puts <span class="string">&quot;@toplevel_variate in self object:<span class="subst">#&#123;@toplevel_variate&#125;</span>&quot;</span> <span class="comment"># toplevel variate</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts my_method</span><br><span class="line">puts <span class="string">&quot;Object.private_instance_methods:&quot;</span> + Object.private_instance_methods(<span class="literal">false</span>).grep(<span class="symbol">:my_method</span>).to_s <span class="comment"># :my_method</span></span><br><span class="line">puts <span class="string">&quot;Object.instance_methods:&quot;</span> + Object.instance_methods(<span class="literal">false</span>).grep(<span class="symbol">:my_method</span>).to_s <span class="comment">#nil</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
@@ -1478,6 +1556,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1508,14 +1589,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>2 mins.</span>
             </span>
 
@@ -1526,8 +1607,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 1、类扩展:使用include,让模块中定义的方法分别插入类方法与实例方法中</span></span><br><span class="line"><span class="comment"># 2、obj实例对象调用extend,则模块中定义的方法为？</span></span><br><span class="line"><span class="comment"># 3、在模块中定义的实例变量能否被包含它的类的实例对象看到</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、通过重定义横块中的self.included方法，并对参数(receiver),使用关键字extend/include,分别向包含它的类中插入了</span></span><br><span class="line"><span class="comment">#    类方法(定义在ClassMethods模块中的方法)和实例方法(定义在InstanceMethod模块中)</span></span><br><span class="line"><span class="comment"># 2、obj实例对象调用extend,则模块中定义的方法为这个obj的单例方法，可以通过把方法定义在module中，让实例对象调用extend</span></span><br><span class="line"><span class="comment">#    来方便快速的增加自身的单例方法</span></span><br><span class="line"><span class="comment"># 3、可以。在模块中定义的实例变量可以被包含它的类的实例对象看到,因为被include的模块相当于当前类的父类，当前对象的</span></span><br><span class="line"><span class="comment">#    实例变量对其所有实例方法可见</span></span><br><span class="line"><span class="comment"># 4、extend方法的实质就是把module中定义的方法插入到对象的单件类中</span></span><br><span class="line"><span class="comment"># 5、调用MyClass.instance_methods(false)可以发现，在它的实例方法中并不包含实例方法instance_method，而MyClass</span></span><br><span class="line"><span class="comment">#    的实例对象可以调用这个方法，这正说明了类中include的模块(被代理类封装)充当这个类的父类。也验证了结论4</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="class"><span class="keyword">module</span> <span class="title">M</span></span></span><br><span class="line">    <span class="class"><span class="keyword">module</span> <span class="title">ClassMethods</span></span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">class_method</span></span></span><br><span class="line">        <span class="string">&quot;i am a class method&quot;</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">module</span> <span class="title">InstanceMethods</span></span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">instance_method</span><span class="params">(from)</span></span></span><br><span class="line">        @instance_variate = <span class="string">&quot;i am a instance variate in M&quot;</span></span><br><span class="line">        <span class="string">&quot;i am a instance method from:<span class="subst">#&#123;from&#125;</span>&quot;</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">included</span><span class="params">(receiver)</span></span></span><br><span class="line">      receiver.extend         ClassMethods</span><br><span class="line">      receiver.send <span class="symbol">:include</span>, InstanceMethods</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#&lt;!-- more --&gt;</span></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line">    <span class="keyword">include</span> M</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_instance_variate_from_module</span><span class="params">(from)</span></span></span><br><span class="line">      <span class="string">&quot;<span class="subst">#&#123;@instance_variate&#125;</span> from: <span class="subst">#&#123;from&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  obj = Object.new</span><br><span class="line">  obj.extend M::InstanceMethods</span><br><span class="line">  my = MyClass.new</span><br><span class="line"></span><br><span class="line">  puts <span class="string">&quot;================test1 OUTPUT================&quot;</span></span><br><span class="line">  puts MyClass.class_method</span><br><span class="line">  puts my.instance_method(<span class="string">&quot;MyClass.new obj&quot;</span>)</span><br><span class="line">  puts my.get_instance_variate_from_module(<span class="string">&quot;MyClass.new&quot;</span>)</span><br><span class="line">  puts obj.instance_method(<span class="string">&quot;Object.new&quot;</span>)</span><br><span class="line">  puts obj.instance_eval(<span class="string">&quot;@instance_variate&quot;</span>)</span><br><span class="line">  puts <span class="string">&quot;MyClass.instance_methods:&quot;</span>+MyClass.instance_methods(<span class="literal">false</span>).to_s</span><br><span class="line">  puts <span class="string">&quot;================test1 OUTPUT================&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># ================test1 OUTPUT================</span></span><br><span class="line">  <span class="comment"># i am a class method</span></span><br><span class="line">  <span class="comment"># i am a instance method from:MyClass.new obj</span></span><br><span class="line">  <span class="comment"># i am a instance variate in M from: MyClass.new</span></span><br><span class="line">  <span class="comment"># i am a instance method from:Object.new</span></span><br><span class="line">  <span class="comment"># i am a instance variate in M</span></span><br><span class="line">  <span class="comment"># MyClass.instance_methods:[:get_instance_variate_from_module]</span></span><br><span class="line">  <span class="comment"># ================test1 OUTPUT================</span></span><br><span class="line"></span><br><span class="line">&#125;.call</span><br></pre></td></tr></table></figure>
 
       
@@ -1559,6 +1638,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1589,14 +1671,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>2 mins.</span>
             </span>
 
@@ -1607,8 +1689,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 1、Kernel模块内定义实例方法，哪些对象可以使用</span></span><br><span class="line"><span class="comment"># 2、Kernel的单件方法哪些对象可以使用</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、Kernel模块内定义实例方法,ruby的所有对象都可以使用，因为Kernel会被Mixin入Object,其实例方法(用def定义的),可以</span></span><br><span class="line"><span class="comment">#    被所有ruby对象使用(MyClass/&quot;string&quot;)</span></span><br><span class="line"><span class="comment"># 2、Kernel的单件方法只能被其自己使用,其它类和方法都不能使用(MyClass/MyClass.new)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="class"><span class="keyword">module</span> <span class="title">Kernel</span></span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">im_singleton_method</span></span></span><br><span class="line">      <span class="string">&quot;i&#x27;m a singleton method of Kernel define in Kernel&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">im_instance_method</span><span class="params">(from=<span class="string">&quot;Kernel&quot;</span>)</span></span></span><br><span class="line">      <span class="string">&quot;i&#x27;m a instance method define in Kernel and call from <span class="subst">#&#123;from&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>;</span> <span class="keyword">end</span></span><br><span class="line">  puts Kernel.im_singleton_method</span><br><span class="line">  puts <span class="string">&quot;Kernel.singleton_methods:&quot;</span> + Kernel.singleton_methods(<span class="literal">false</span>).grep(<span class="regexp">/im_singleton_method/</span>).to_s</span><br><span class="line">  puts <span class="string">&quot;Kernel.im_instance_method:&quot;</span> + Kernel.instance_methods(<span class="literal">false</span>).grep(<span class="regexp">/im_instance_method/</span>).to_s</span><br><span class="line">  puts MyClass.new.im_instance_method(<span class="string">&quot;obj&quot;</span>)</span><br><span class="line">  puts MyClass.im_instance_method(<span class="string">&quot;MyClass&quot;</span>)</span><br><span class="line">  puts <span class="keyword">begin</span> MyClass.im_singleton_method <span class="keyword">rescue</span> <span class="string">&quot;undefined method `im_singleton_method&#x27; for MyClass:Class&quot;</span> <span class="keyword">end</span></span><br><span class="line">  puts <span class="keyword">begin</span> MyClass.new.im_singleton_method <span class="keyword">rescue</span> <span class="string">&quot;undefined method `im_singleton_method&#x27; for #&lt;MyClass:0x007fbb22813640&gt;&quot;</span> <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># ================test1 OUTPUT================</span></span><br><span class="line">  <span class="comment"># i&#x27;m a singleton method of Kernel define in Kernel</span></span><br><span class="line">  <span class="comment"># Kernel.singleton_methods:[:im_singleton_method]</span></span><br><span class="line">  <span class="comment"># Kernel.im_instance_method:[:im_instance_method]</span></span><br><span class="line">  <span class="comment"># i&#x27;m a instance method define in Kernel and call from obj</span></span><br><span class="line">  <span class="comment"># i&#x27;m a instance method define in Kernel and call from MyClass</span></span><br><span class="line">  <span class="comment"># undefined method `im_singleton_method&#x27; for MyClass:Class</span></span><br><span class="line">  <span class="comment"># undefined method `im_singleton_method&#x27; for #&lt;MyClass:0x007fbb22813640&gt;</span></span><br><span class="line">  <span class="comment"># ================test1 OUTPUT================</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
@@ -1639,6 +1719,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1669,14 +1752,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>186</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1687,8 +1770,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>在sublime中用cmd+b运行代码时，其运行环境往往和你正在使用的rvm指定的ruby版本不一样，安装RVM switch for sublime插件可以较好的解决这个问题。</p>
 <p>在安装后，你可以选择</p>
 <ul>
@@ -1726,6 +1807,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1756,14 +1840,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>494</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1774,8 +1858,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 1、测试块中的代码什么时候被执行</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、只有在块被真正调用的时候才会被执行:对块调用方法yield/call</span></span><br><span class="line"><span class="comment"># 说明: 一般方法中都会用yield去调用块，使得传入方法的块中的代码马上执行,这难免会让人产生代码只要被放在do..end或&#123;&#125;</span></span><br><span class="line"><span class="comment"># 就会被马上执行的错觉。</span></span><br><span class="line"><span class="comment"># 下面的代码只有当去掉注释时，块中的代码才会被执行</span></span><br><span class="line"><span class="comment"># 2、调用yield后，就一定要传入块，否则就产生错误，除非在加入了block_given?判断</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span><span class="params">(&amp;block)</span></span></span><br><span class="line">    <span class="comment"># yield</span></span><br><span class="line">    <span class="comment"># block.call</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  my_method <span class="keyword">do</span></span><br><span class="line">    lastname = <span class="string">&quot;Caroline&quot;</span></span><br><span class="line">    puts lastname <span class="comment"># =&gt;这里不会有输出，除非去掉方法中的注释</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
@@ -1806,6 +1888,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1836,14 +1921,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>4 mins.</span>
             </span>
 
@@ -1854,8 +1939,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
           <p>文章已经修改，之前的结论有误，现已经修改</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 重要结论:</span></span><br><span class="line"><span class="comment"># 1、块绑定局部变量的时间:在块被定义的时开始绑定的,绑定局部变量只是名子绑定,块内绑定的同名局部变量的值还可以在块外被修改</span></span><br><span class="line"><span class="comment">#（在块绑定局部变量后，如果块外部的同名局部变量改变了其值，则块中绑定的同名变量的值会被改变）</span></span><br><span class="line"><span class="comment"># 以下测试的局部绑定都证明了绑定是从块被定义时开始的</span></span><br><span class="line"><span class="comment"># 2、注意那些在块中初始化的变量，是否这些变量也出现在块定义外部的前后，不同位置的同名局部变量会对块内的变量产生不同的影响</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 测试方法中的局部变量firstname,lastname是否会影响到块中的被绑定的同名变量的值</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、块会绑定局部变量firstname,lastname,把它们以块的方式传到my_method方法</span></span><br><span class="line"><span class="comment"># 它们的值不会受到方法中同名变量的影响（闭包特性）</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> puts <span class="string">&quot;test1: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span>&quot;</span> &#125;</span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Black</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># &lt;!-- more --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标2:</span></span><br><span class="line"><span class="comment"># 1、测试块可以绑定局部变量的范围</span></span><br><span class="line"><span class="comment"># 2、在块后面出现的局部变量是否会覆盖其块内已经绑定的同名局部变量的值（块中已经绑定的局部变量的值是否会被改变）</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、块会绑定在它定义时出现在它前面的局部变量firstname,lastname.</span></span><br><span class="line"><span class="comment"># 2、块中last变量的值为lastname=&quot;wang&quot;，因为块在定义时绑定了lastname,块中同名的lastname对上下文中的其它成员</span></span><br><span class="line"><span class="comment"># 是可见的，所以对局部变量赋值lastname=&quot;Wang&quot;，也就改变了块内lastname的值。它覆盖了前面lastname=&quot;Black&quot;的值。</span></span><br><span class="line"><span class="comment"># 3、局部变量lastname＝&quot;Green&quot;出现在块被调用以后，块调用在赋值语句之前执行，对lastname=&quot;Green&quot;的赋值不会影响到</span></span><br><span class="line"><span class="comment"># 块内部的同名变量lastname,此时块内部的lastname＝&quot;wang&quot;</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> puts <span class="string">&quot;test2: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span>&quot;</span> &#125;</span><br><span class="line">  lastname = <span class="string">&quot;Wang&quot;</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Wang</span></span><br><span class="line">  lastname = <span class="string">&quot;Green&quot;</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标3:</span></span><br><span class="line"><span class="comment"># 测试在块中定义的已经初始化的变量的值是否受外部的同名局部变量值的影响:(局部变量的定义在块定义的前面)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、局部变量不能影响块中同名变量的值</span></span><br><span class="line"><span class="comment"># 2、局部变量的值会随块中同名变量的值在执行过程中的改变而改变,day_changed的值为被改变的值:Mon</span></span><br><span class="line"><span class="comment"># 3、发生1、2情况的原因是，在块被执行时，它会先看到块内的say=&quot;Mon&quot;，而不再去看被绑定的局部变量say的值(&quot;Sun&quot;)</span></span><br><span class="line"><span class="comment"># 因为局部变量day已经被绑定到块，块中的day对其上下文可见，在块执行后，块中同名变量day的值会改变局部</span></span><br><span class="line"><span class="comment"># 变量day的值，此时局部变量day的值为&quot;Mon&quot;</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  day = <span class="string">&quot;Sun&quot;</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> day = <span class="string">&quot;Mon&quot;</span>; puts <span class="string">&quot;test3: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span> at <span class="subst">#&#123;day&#125;</span>&quot;</span>&#125;</span><br><span class="line">  <span class="comment">#day = &quot;Sun&quot;</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  day_changed = day</span><br><span class="line">  puts <span class="string">&quot;test3: day:<span class="subst">#&#123;day_changed&#125;</span>&quot;</span></span><br><span class="line">  <span class="comment"># day = &quot;Wed&quot;</span></span><br><span class="line">  <span class="comment"># my_method &amp;myname #＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  <span class="comment"># day_changed = day</span></span><br><span class="line">  <span class="comment"># puts &quot;test3: day:#&#123;day_changed&#125;&quot;</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标4:</span></span><br><span class="line"><span class="comment"># 测试在块中定义的已经初始化的变量的值是否受外部的同名局部变量值的影响:(局部变量的定义在块定义的后面)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、最终的值是块中变量的值，局部变量不能影响块中同名变量的值</span></span><br><span class="line"><span class="comment"># 2、局部变量的值会不随块中同名变量的值在执行过程中的改变而改变,day_changed的值:Sun</span></span><br><span class="line"><span class="comment"># 3、发生1、2情况的原因是：因为day局部变量的定义出现在块定义的后面，这就导致了块根本没有绑定day这个局部变量</span></span><br><span class="line"><span class="comment"># 块内的变量day是块内部附加的变量，此时块内部的day与块外部的day没有任何关系</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  <span class="comment"># day = &quot;Sun&quot;</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> day = <span class="string">&quot;Mon&quot;</span>; puts <span class="string">&quot;test4: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span> at <span class="subst">#&#123;day&#125;</span>&quot;</span>&#125;</span><br><span class="line">  day = <span class="string">&quot;Sun&quot;</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  day_changed = day</span><br><span class="line">  puts <span class="string">&quot;test4: day:<span class="subst">#&#123;day_changed&#125;</span>&quot;</span></span><br><span class="line">  <span class="comment"># day = &quot;Wed&quot;</span></span><br><span class="line">  <span class="comment"># my_method &amp;myname #＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  <span class="comment"># day_changed = day</span></span><br><span class="line">  <span class="comment"># puts &quot;test5: day:#&#123;day_changed&#125;&quot; # =&gt; Web</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -1881,8 +1964,7 @@
 
 
 
-          </div>
-          
+      
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -1891,7 +1973,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -1900,71 +1982,20 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="戛戛Happy"
-      src="/huitailang.jpg">
-  <p class="site-author-name" itemprop="name">戛戛Happy</p>
-  <div class="site-description" itemprop="description">喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</div>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="/atom.xml" title="Rss → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>Rss</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
+      
   <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备10044755号 </a>
   </div>
 
@@ -1976,89 +2007,64 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">戛戛Happy</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
     <span title="Symbols count total">297k</span>
-    <span class="post-meta-divider">|</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
     <span title="Reading time total">4:30</span>
+  </span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
 
-        
-
-
-  <div style="display: none;">
-    <script src="//s95.cnzz.com/z_stat.php?id=2325808&web_id=2325808"></script>
-  </div>
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
 
   
   <script>
     (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
   </script>
 
 
 
 
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
   
-<script src="/js/local-search.js"></script>
 
 
-
-
-
-
-
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=2325808&web_id=2325808"></script>
+  </div>
 
 
 

@@ -14,11 +14,12 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"flat"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
   <meta name="description" content="文章已经修改，之前的结论有误，现已经修改 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394">
@@ -34,10 +35,11 @@
 <meta property="article:tag" content="Ruby">
 <meta name="twitter:card" content="summary">
 
+
 <link rel="canonical" href="http://www.gagahappy.com/thoughtful-ruby-block-and-variable/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -66,24 +68,36 @@
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
@@ -91,25 +105,25 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
-    <div class="headband"></div>
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">漂自己的移，让别人都撞墙去吧</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
   </div>
 
@@ -122,17 +136,11 @@
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">952</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -148,6 +156,11 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">952</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -176,7 +189,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -184,9 +197,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container">
+  <div class="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -194,18 +207,68 @@
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="戛戛Happy"
+      src="/huitailang.jpg">
+  <p class="site-author-name" itemprop="name">戛戛Happy</p>
+  <div class="site-description" itemprop="description">喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="Rss → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>Rss</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
+      
+
+      
 
     
   
@@ -222,6 +285,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
+
+    
+    
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           ruby 块与局部变量绑定的思考
@@ -251,14 +317,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
               <span>4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>4 mins.</span>
             </span>
 
@@ -269,8 +335,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <p>文章已经修改，之前的结论有误，现已经修改</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 重要结论:</span></span><br><span class="line"><span class="comment"># 1、块绑定局部变量的时间:在块被定义的时开始绑定的,绑定局部变量只是名子绑定,块内绑定的同名局部变量的值还可以在块外被修改</span></span><br><span class="line"><span class="comment">#（在块绑定局部变量后，如果块外部的同名局部变量改变了其值，则块中绑定的同名变量的值会被改变）</span></span><br><span class="line"><span class="comment"># 以下测试的局部绑定都证明了绑定是从块被定义时开始的</span></span><br><span class="line"><span class="comment"># 2、注意那些在块中初始化的变量，是否这些变量也出现在块定义外部的前后，不同位置的同名局部变量会对块内的变量产生不同的影响</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 测试方法中的局部变量firstname,lastname是否会影响到块中的被绑定的同名变量的值</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、块会绑定局部变量firstname,lastname,把它们以块的方式传到my_method方法</span></span><br><span class="line"><span class="comment"># 它们的值不会受到方法中同名变量的影响（闭包特性）</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> puts <span class="string">&quot;test1: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span>&quot;</span> &#125;</span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Black</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># &lt;!-- more --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标2:</span></span><br><span class="line"><span class="comment"># 1、测试块可以绑定局部变量的范围</span></span><br><span class="line"><span class="comment"># 2、在块后面出现的局部变量是否会覆盖其块内已经绑定的同名局部变量的值（块中已经绑定的局部变量的值是否会被改变）</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、块会绑定在它定义时出现在它前面的局部变量firstname,lastname.</span></span><br><span class="line"><span class="comment"># 2、块中last变量的值为lastname=&quot;wang&quot;，因为块在定义时绑定了lastname,块中同名的lastname对上下文中的其它成员</span></span><br><span class="line"><span class="comment"># 是可见的，所以对局部变量赋值lastname=&quot;Wang&quot;，也就改变了块内lastname的值。它覆盖了前面lastname=&quot;Black&quot;的值。</span></span><br><span class="line"><span class="comment"># 3、局部变量lastname＝&quot;Green&quot;出现在块被调用以后，块调用在赋值语句之前执行，对lastname=&quot;Green&quot;的赋值不会影响到</span></span><br><span class="line"><span class="comment"># 块内部的同名变量lastname,此时块内部的lastname＝&quot;wang&quot;</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> puts <span class="string">&quot;test2: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span>&quot;</span> &#125;</span><br><span class="line">  lastname = <span class="string">&quot;Wang&quot;</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Wang</span></span><br><span class="line">  lastname = <span class="string">&quot;Green&quot;</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标3:</span></span><br><span class="line"><span class="comment"># 测试在块中定义的已经初始化的变量的值是否受外部的同名局部变量值的影响:(局部变量的定义在块定义的前面)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、局部变量不能影响块中同名变量的值</span></span><br><span class="line"><span class="comment"># 2、局部变量的值会随块中同名变量的值在执行过程中的改变而改变,day_changed的值为被改变的值:Mon</span></span><br><span class="line"><span class="comment"># 3、发生1、2情况的原因是，在块被执行时，它会先看到块内的say=&quot;Mon&quot;，而不再去看被绑定的局部变量say的值(&quot;Sun&quot;)</span></span><br><span class="line"><span class="comment"># 因为局部变量day已经被绑定到块，块中的day对其上下文可见，在块执行后，块中同名变量day的值会改变局部</span></span><br><span class="line"><span class="comment"># 变量day的值，此时局部变量day的值为&quot;Mon&quot;</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  day = <span class="string">&quot;Sun&quot;</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> day = <span class="string">&quot;Mon&quot;</span>; puts <span class="string">&quot;test3: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span> at <span class="subst">#&#123;day&#125;</span>&quot;</span>&#125;</span><br><span class="line">  <span class="comment">#day = &quot;Sun&quot;</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  day_changed = day</span><br><span class="line">  puts <span class="string">&quot;test3: day:<span class="subst">#&#123;day_changed&#125;</span>&quot;</span></span><br><span class="line">  <span class="comment"># day = &quot;Wed&quot;</span></span><br><span class="line">  <span class="comment"># my_method &amp;myname #＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  <span class="comment"># day_changed = day</span></span><br><span class="line">  <span class="comment"># puts &quot;test3: day:#&#123;day_changed&#125;&quot;</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标4:</span></span><br><span class="line"><span class="comment"># 测试在块中定义的已经初始化的变量的值是否受外部的同名局部变量值的影响:(局部变量的定义在块定义的后面)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、最终的值是块中变量的值，局部变量不能影响块中同名变量的值</span></span><br><span class="line"><span class="comment"># 2、局部变量的值会不随块中同名变量的值在执行过程中的改变而改变,day_changed的值:Sun</span></span><br><span class="line"><span class="comment"># 3、发生1、2情况的原因是：因为day局部变量的定义出现在块定义的后面，这就导致了块根本没有绑定day这个局部变量</span></span><br><span class="line"><span class="comment"># 块内的变量day是块内部附加的变量，此时块内部的day与块外部的day没有任何关系</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  <span class="comment"># day = &quot;Sun&quot;</span></span><br><span class="line">  myname = lambda &#123; <span class="params">|say|</span> day = <span class="string">&quot;Mon&quot;</span>; puts <span class="string">&quot;test4: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span> at <span class="subst">#&#123;day&#125;</span>&quot;</span>&#125;</span><br><span class="line">  day = <span class="string">&quot;Sun&quot;</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  day_changed = day</span><br><span class="line">  puts <span class="string">&quot;test4: day:<span class="subst">#&#123;day_changed&#125;</span>&quot;</span></span><br><span class="line">  <span class="comment"># day = &quot;Wed&quot;</span></span><br><span class="line">  <span class="comment"># my_method &amp;myname #＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  <span class="comment"># day_changed = day</span></span><br><span class="line">  <span class="comment"># puts &quot;test5: day:#&#123;day_changed&#125;&quot; # =&gt; Web</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -298,25 +362,24 @@
 
 
       <footer class="post-footer">
-          
           <div class="post-tags">
               <a href="/tags/ruby/" rel="tag"><i class="fa fa-tag"></i> Ruby</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/when-run-of-block-in-mehtod/" rel="prev" title="测试块中的代码什么时候被执行">
-      <i class="fa fa-chevron-left"></i> 测试块中的代码什么时候被执行
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/redo-log-record-type-and-function/" rel="next" title="redo log record type and function">
-      redo log record type and function <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/when-run-of-block-in-mehtod/" rel="prev" title="测试块中的代码什么时候被执行">
+                  <i class="fa fa-chevron-left"></i> 测试块中的代码什么时候被执行
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/redo-log-record-type-and-function/" rel="next" title="redo log record type and function">
+                  redo log record type and function <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
       </footer>
     
   </article>
@@ -326,8 +389,7 @@
 
 
 
-          </div>
-          
+      
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -336,7 +398,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -345,71 +407,20 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="戛戛Happy"
-      src="/huitailang.jpg">
-  <p class="site-author-name" itemprop="name">戛戛Happy</p>
-  <div class="site-description" itemprop="description">喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</div>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="/atom.xml" title="Rss → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>Rss</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
+      
   <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备10044755号 </a>
   </div>
 
@@ -421,89 +432,64 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">戛戛Happy</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
     <span title="Symbols count total">297k</span>
-    <span class="post-meta-divider">|</span>
+  </span>
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
     <span title="Reading time total">4:30</span>
+  </span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
 
-        
-
-
-  <div style="display: none;">
-    <script src="//s95.cnzz.com/z_stat.php?id=2325808&web_id=2325808"></script>
-  </div>
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   
-  <script src="/lib/anime.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
 
   
   <script>
     (function(){
-      var canonicalURL, curProtocol;
-      //Get the <link> tag
-      var x=document.getElementsByTagName("link");
-		//Find the last canonical URL
-		if(x.length > 0){
-			for (i=0;i<x.length;i++){
-				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
-					canonicalURL=x[i].href;
-				}
-			}
-		}
-    //Get protocol
-	    if (!canonicalURL){
-	    	curProtocol = window.location.protocol.split(':')[0];
-	    }
-	    else{
-	    	curProtocol = canonicalURL.split(':')[0];
-	    }
-      //Get current URL if the canonical URL does not exist
-	    if (!canonicalURL) canonicalURL = window.location.href;
-	    //Assign script content. Replace current URL with the canonical URL
-      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
   </script>
 
 
 
 
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
   
-<script src="/js/local-search.js"></script>
 
 
-
-
-
-
-
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=2325808&web_id=2325808"></script>
+  </div>
 
 
 
