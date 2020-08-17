@@ -14,12 +14,11 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
-
-<script class="hexo-configurations">
+<script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"flat"},"back2top":{"enable":false,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
@@ -33,11 +32,10 @@
 <meta property="article:tag" content="互联网, 程序开发, 一镜色影, 互联网, 我爱Linux, 数据库, 杂七杂八, 玩转软件, 美食么么, 计算机, 让资讯飞, 非常娱乐, 意识流, Ta们的我, 人物, 前端, 娱乐, 婚礼, 小知识, 彩票, 微博, 摄影, 操作系统, 敏捷, 新闻, 有趣, 浏览器, 生活, 电影, 电视剧, 美食, 装修, 财经, 购物, 魔方, 随笔, 做滴菜">
 <meta name="twitter:card" content="summary">
 
-
 <link rel="canonical" href="http://www.gagahappy.com/page/44/">
 
 
-<script class="page-configurations">
+<script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -66,36 +64,24 @@
 
   <noscript>
   <style>
-  body { margin-top: 2rem; }
-
+  .use-motion .brand,
   .use-motion .menu-item,
-  .use-motion .sidebar,
+  .sidebar-inner,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
+  .use-motion .site-subtitle {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
   </style>
 </noscript>
 
@@ -103,25 +89,25 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="headband"></div>
+  <div class="container">
+    <div class="headband"></div>
 
-  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
+      <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">漂自己的移，让别人都撞墙去吧</h1>
-      <i class="logo-line"></i>
+      <span class="logo-line-after"><i></i></span>
     </a>
   </div>
 
@@ -134,11 +120,17 @@
 
 
 
+
 <nav class="site-nav">
-  <ul class="main-menu menu">
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">952</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -154,11 +146,6 @@
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">952</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -187,7 +174,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
+    <input autocomplete="off" autocapitalize="off"
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -195,9 +182,9 @@
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div class="search-result-container">
-  <div class="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
   </div>
 </div>
 
@@ -205,63 +192,18 @@
   </div>
 
 </div>
-        
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-overview-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <section class="post-toc-wrap sidebar-panel">
-      </section>
-      <!--/noindex-->
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="戛戛Happy"
-      src="/huitailang.jpg">
-  <p class="site-author-name" itemprop="name">戛戛Happy</p>
-  <div class="site-description" itemprop="description">喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</div>
-</div>
-  <div class="cc-license animated" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
-
-
-
-      </section>
-    </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
     </header>
 
     
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
 
-    <div class="main-inner index posts-expand">
-      
-
-      
+          <div class="content index posts-expand">
+            
       
   
   
@@ -277,9 +219,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -310,14 +249,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>2 mins.</span>
             </span>
 
@@ -328,6 +267,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>在SQL Server数据库中事务日志起着至关重要的作用：</p>
 <blockquote>
 <p>它持续记录数据库所有的事务和这些事务对数据库所做的修改;一旦数据库出现灾难事件，就需要事务日志来进行近期数据的恢复操作。</p>
@@ -373,9 +314,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -406,14 +344,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -424,6 +362,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>刚刚看完了非常完美(sophie’s revenge)，感觉相当的棒，无论是演员、剧情、摄影、视觉特效、剪切、配乐都棒及了。在一个爱情故事片里加入了漫画的元素，非常吸引眼球，给人们一种全新的感觉。这里还是要说一下章子怡，可以算是成功的挑战了新的戏路。整个影片是一部不可多得的爱情喜剧片。赞一个。</p>
 <p>PS：真后悔没去电影院看啊！</p>
 <p><img src="http://img.gagahappy.cn/blog/2009/09/s3877416.jpg" alt="s3877416" title="s3877416"></p>
@@ -464,9 +404,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -497,14 +434,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>376</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -515,6 +452,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>升级firefox的一般的安装方式是去firefox的官方网站下载tar.bz2包，解压后直接运行即可。另一种安装方式是通过apt-get 方式安装。</p>
 <p>第一步、添加下列源<br>deb <a target="_blank" rel="noopener" href="http://ppa.launchpad.net/ubuntu-mozilla-security/ppa/ubuntu">http://ppa.launchpad.net/ubuntu-mozilla-security/ppa/ubuntu</a> jaunty main<br>deb-src <a target="_blank" rel="noopener" href="http://ppa.launchpad.net/ubuntu-mozilla-security/ppa/ubuntu">http://ppa.launchpad.net/ubuntu-mozilla-security/ppa/ubuntu</a> jaunty main</p>
 <p>第二步、获取key<br>sudo apt-key adv –keyserver keyserver.ubuntu.com –recv-keys 12345678</p>
@@ -551,9 +490,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -584,14 +520,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>63</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -602,6 +538,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>Opera 发布预告</p>
 <p><img src="http://img.gagahappy.cn/blog/2009/09/Screenshotaaa.png" alt="Screenshotaaa" title="Screenshotaaa"></p>
 <p><a target="_blank" rel="noopener" href="http://www.opera.com/next">http://www.opera.com/next</a></p>
@@ -636,9 +574,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -669,14 +604,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>185</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -687,6 +622,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p> mobilepress 是一款非常优秀的wordpress插件，安装之后可以让你的blog瞬间支持wap手机版，并且手机版的页面也是相当的美观，有iphone和default两种主题供你选择。</p>
 <p>现在越来越多的年青人喜欢用手机上网，mobilepress可以让你的blog轻松的支持，而又不至于花掉他们大量的流量。</p>
 <p><img src="http://img.gagahappy.cn/blog/2009/09/wordpress_wap.png" alt="wordpress_wap" title="wordpress_wap"></p>
@@ -721,9 +658,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -754,14 +688,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -772,6 +706,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>opera10默认设置的中文字体在显示时忽大忽小，而且还有些模糊，极其难看，需要将其美化一下。</p>
 <p>解决方法<br>1、修改/usr/share/opera/defaults/font.ini<br>2、将日文和韩文都注释掉</p>
           <!--noindex-->
@@ -811,9 +747,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -844,14 +777,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>211</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -862,6 +795,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>由于ubuntu9.04是英文环境，导致在flash中的文本字体全是乱码，请注意，这里所指的乱码不是一个个方框的那种，而是一些符号。网上的解决办法大都是删除/etc/fonts/conf.d/49-sansserif.conf文件、要么就是把此文件的倒数第4行的字体设置为系统所支持的中文字体，这种办法只对ubuntu是中文环境的情况下起作用，在英文环境下依旧不能解决问题。如果有谁解决了，麻烦请告之方法。在这里先谢谢了！</p>
 
       
@@ -893,9 +828,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -926,14 +858,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>136</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -944,6 +876,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>在升级opera时，请先卸载掉以前的旧版本，不要直接升级或重新安装，应将其完全卸载后，再进行安装。否则会出现lock锁定提示，安装将失败！安装好后，最好进行一下字体的设置，大多数情况下，opera默认的字体非常难看，在这里建议使用微软雅黑的字体（纯属个人意见），比较漂亮。</p>
 <p><img src="http://img.gagahappy.cn/blog/2009/09/Screenshot1.png" alt="Screenshot" title="Screenshot"></p>
 
@@ -976,9 +910,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1009,14 +940,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>96</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1027,6 +958,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>使用chrome有一段时间了。发现没有设置字体的地方，其默认显示的字体不太好看。所以暂时放弃使用了。其他方面还是另人满意的。如启动速度、页面加载时间（明显比FF快了不少），还是十分令人满意的。</p>
 
       
@@ -1058,9 +991,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1091,14 +1021,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>302</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1109,6 +1039,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>谷歌CEO埃里克·施密特在苹果2009年秋季新品发布会上现身。一个月前施密特刚刚辞去苹果董事一职。 施密特2006年加入苹果董事会，随着谷歌与苹果业务竞争的加剧，尤其在手机和操作系统领域，施密特不得不于今年8月3日退出苹果董事会。目前该董事席位依然空缺。</p>
 <p><img src="http://img.gagahappy.cn/blog/2009/09/12544001995521687.jpg" alt="12544001995521687" title="12544001995521687"></p>
           <!--noindex-->
@@ -1148,9 +1080,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1181,14 +1110,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>10</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1199,6 +1128,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>备份mysql数据库</p>
 
       
@@ -1230,9 +1161,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1263,14 +1191,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1281,6 +1209,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <blockquote>
 <p>Google Chrome 快捷键，发现许多地方和firefox的一样，这样挺好。可以直接上手。也希望各大浏览器统一快捷键。实在没有必要各搞一套，用户使用起来顺手才是第一。</p>
 </blockquote>
@@ -1344,9 +1274,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1377,14 +1304,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>995</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1395,6 +1322,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>安装chromium后遇到flash视频不能显示的问题，其实在安装chromium结束，会弹出一个相关页面，上面就有解决flash不显示的方法。（刚刚发现的），感觉这一点比opera做的要好，opera在安装后也存在相同的问题，但没有给出相关的解决办法，只好去网上搜了。<br>This is an in-progress build of Chromium on Linux.</p>
           <!--noindex-->
             <div class="post-button">
@@ -1433,9 +1362,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1466,14 +1392,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>854</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1484,6 +1410,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>第一步、获取key<br>sudo apt-key adv –recv-keys –keyserver keyserver.ubuntu.com 4E5E17B5 (注意：-为“–”两个减号)</p>
 <p>第二步、添加源<br>Ubuntu 9.10<br>deb <a target="_blank" rel="noopener" href="http://ppa.launchpad.net/chromium-daily/ppa/ubuntu">http://ppa.launchpad.net/chromium-daily/ppa/ubuntu</a> karmic main<br>deb-src <a target="_blank" rel="noopener" href="http://ppa.launchpad.net/chromium-daily/ppa/ubuntu">http://ppa.launchpad.net/chromium-daily/ppa/ubuntu</a> karmic main</p>
           <!--noindex-->
@@ -1523,9 +1451,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1556,14 +1481,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>253</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1574,6 +1499,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>在安装完chrome、opera后，默认情况下不能显示flash视频</p>
 <p>解决方法</p>
 <ol>
@@ -1613,9 +1540,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1646,14 +1570,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>61</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1664,6 +1588,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>刚刚看邮件时看到jaiku发来的确认邮件，终于可以登录jaiku了。界面看着还可以，不过目前还没有找到从哪里follow?</p>
 <p><img src="http://img.gagahappy.cn/blog/2009/09/jaiku.png" alt="jaiku" title="jaiku"></p>
 
@@ -1696,9 +1622,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1729,14 +1652,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>156</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1747,6 +1670,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>为了让网站更加快速的被收录，不得不重新修改文章的标题链接，wordpress默认以文章标题生成，可咱的文章标题一般都是中文的啊。只好手动加入英文的。发现还有好多文章的标题没改呢，只好一天天的慢慢来了。睡觉去了。</p>
 <p>PS:不知道是中文被收录的快还是英文被收录的快，是不是如果不考虑给老外看的话，直接默认用中文的就行了？</p>
 
@@ -1779,9 +1704,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1812,14 +1734,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>206</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1830,6 +1752,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>记得刚刚安上wordpress时，就设置了永久链接，可那时不知道为什么，设置总是失败，上网查了后说是服务器不支持htaccess。我汗！今天又想起了这件事。于是就想使用hostmonster，不过考虑到付费（＄）及可能被封IP的情况，终穷做罢。可是心里始终是不甘于心啊，于是又对永久链接进行了设置。没想到居然成功了。查看目录文件，果然生成了.htaccess。哈哈哈。我再汗！</p>
 <p><img src="http://img.gagahappy.cn/blog/2009/09/sendpix01.jpg" alt="sendpix0" title="sendpix0"></p>
 <p><a href="http://www.gagahappy.com/permalink/sendpix0/"></a></p>
@@ -1864,9 +1788,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -1897,14 +1818,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -1915,6 +1836,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>廖菁中国广播艺术团演员、译制导演、配音演员，从事配音工作20年来，曾在数百部集外国影视片中担任女主角，她用自己的声音塑造了许多栩栩如生的不同身份、不同年龄、性格迥异的人物形象。</p>
 <p>著名代表作：</p>
 <ul>
@@ -1971,9 +1894,6 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
     </span>
-
-    
-    
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
@@ -2004,14 +1924,14 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
               </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
               <span>18</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               <span>1 mins.</span>
             </span>
 
@@ -2022,6 +1942,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
+
+      
           <p>开复···一路走好～～我们会想念你的</p>
 <p><img src="http://img.gagahappy.cn/blog/2009/09/2ef1f6ae0a5f7fb9fb78b09311eca9a663b5f5d3.jpeg" alt="2ef1f6ae0a5f7fb9fb78b09311eca9a663b5f5d3" title="2ef1f6ae0a5f7fb9fb78b09311eca9a663b5f5d3"></p>
 
@@ -2047,7 +1969,8 @@
 
 
 
-      
+          </div>
+          
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -2056,7 +1979,7 @@
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -2065,20 +1988,71 @@
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
+      let commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="戛戛Happy"
+      src="/huitailang.jpg">
+  <p class="site-author-name" itemprop="name">戛戛Happy</p>
+  <div class="site-description" itemprop="description">喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="Rss → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>Rss</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
     </div>
-  </main>
+  </aside>
+  <div id="sidebar-dimmer"></div>
 
-  <footer class="footer">
-    <div class="footer-inner">
-      
 
-      
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
   <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备10044755号 </a>
   </div>
 
@@ -2090,64 +2064,89 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">戛戛Happy</span>
-</div>
-<div class="wordcount">
-  <span class="post-meta-item">
+    <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
+      <i class="fa fa-chart-area"></i>
     </span>
     <span title="Symbols count total">297k</span>
-  </span>
-  <span class="post-meta-item">
+    <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
     <span title="Reading time total">4:30</span>
-  </span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
 
-    </div>
-  </footer>
-
-  
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
-
-  
-  <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
-
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-  
+        
 
 
   <div style="display: none;">
     <script src="//s95.cnzz.com/z_stat.php?id=2325808&web_id=2325808"></script>
   </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
 
 
 
