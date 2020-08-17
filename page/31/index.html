@@ -288,7 +288,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/fedora-installsubvision/" class="post-title-link" itemprop="url">fedora 编译安装subvision configure: error: Subversion requires SQLite</a>
+            <a href="/fedora-installsubvision/" class="post-title-link" itemprop="url">fedora 编译安装subvision error</a>
         </h2>
 
         <div class="post-meta">
@@ -645,7 +645,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/fedora13-mysql-no-cursestermcap-library-found/" class="post-title-link" itemprop="url">fedora13 编译安装 mysql no curses/termcap library found</a>
+            <a href="/fedora13-mysql-no-cursestermcap-library-found/" class="post-title-link" itemprop="url">fedora13 编译安装 mysql no curses termcap library found</a>
         </h2>
 
         <div class="post-meta">
@@ -1373,7 +1373,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>341</span>
+              <span>342</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1391,7 +1391,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>在编译安装httpd后，将其放到/etc/init.d/目录下，使其可以随开机自动启动，命令如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add httpd，执行此命令后报错，提示“service apache does not support chkconfig“，这是因为在httpd中没有相关的chkconfig信息，导致chkconfig不能识别，所以要在httpd中添chkconfig的描述信息。</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add httpd，执行此命令后报错，提示“service apache does not support chkconfig“</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这是因为在httpd中没有相关的chkconfig信息，导致chkconfig不能识别，所以要在httpd中添chkconfig的描述信息</span></span><br></pre></td></tr></table></figure>
 
 <p>方法如下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">编辑httpd文件。加入chkconfig描述信息:</span><br><span class="line"><span class="comment"># description:http apache  service</span></span><br><span class="line"><span class="comment"># chkconfig: 2345 98 98</span></span><br><span class="line">以上信息均为注释信息，前面一定要有<span class="comment">#</span></span><br><span class="line">这时，再次执行chkconfig --add httpd，httpd被成功加入服务，可以随机自动启动了。</span><br></pre></td></tr></table></figure>
