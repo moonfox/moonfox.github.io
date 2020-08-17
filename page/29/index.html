@@ -148,7 +148,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">90</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -158,7 +158,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">952</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">899</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -271,7 +271,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/wordpress-advanced-random-posts/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/ubuntu-auto-mount-ntfs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -288,7 +288,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/wordpress-advanced-random-posts/" class="post-title-link" itemprop="url">wordpress随机显示日志插件</a>
+            <a href="/ubuntu-auto-mount-ntfs/" class="post-title-link" itemprop="url">ubuntu 自动加载ntfs分区</a>
         </h2>
 
         <div class="post-meta">
@@ -298,7 +298,179 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-27 22:50:12" itemprop="dateCreated datePublished" datetime="2010-08-27T22:50:12+08:00">2010-08-27</time>
+              <time title="Created: 2010-08-03 00:01:22" itemprop="dateCreated datePublished" datetime="2010-08-03T00:01:22+08:00">2010-08-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">我爱Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>613</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>自动挂载的目的在于可以方便的访问windows 下的分区，例如把C盘挂载到/mnt/windows/c下，这样直接录入路径就可以访问到C盘了，虽然ubuntu可以通过开机后手动点击加载分区，系统会为点击的分区自动分配一个十分难看的字符串去标识，本博对这一点就十分的讨厌，而且每次点击后分配的标识都不一样， 这样对于类似virtualbox这样的软件在读取光盘镜像这样的文件时，会因标识符的变化而无法加载。</p>
+<p>如何加载：</p>
+<ol>
+<li>首先要建立挂载的目标文件夹，也就是你要把分区挂载到哪个文件夹下面。本博全部分别挂载到/mnt/windows/c、d、e、f下面。如果你也要挂载到/mnt下面，请自行新建文件夹</li>
+<li>记录分区UUID值。每个分区都有UUID值。使用ls -l /dev/disk/by-uuid进行查看，会得到类似<code>3458F2ABXXXXXX4E -&gt; ../../sda1</code> 这样的值，很明显，sda1对应的就是C盘，其UUID值是3458F2ABXXXXXX4E。</li>
+<li>编辑/etc/fstab文件，在最后一行加入<code>UUID=3458F2ABXXXXXX4E /mnt/windows/c  ntfs-3g  uid=1000,gid=0,umask=133,dmask=022,utf8 0 0</code>。这样在开机的时候，系统会自动把C分区挂载到 /mnt/windows/c目录下。</li>
+<li>重新启动电脑，在地址栏里直接录入 /mnt/windows/c就应该可以看到C盘的内容了。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/ubuntu-10-04-local/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ubuntu-10-04-local/" class="post-title-link" itemprop="url">ubuntu 10.04 地址栏</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2010-08-02 23:12:42" itemprop="dateCreated datePublished" datetime="2010-08-02T23:12:42+08:00">2010-08-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">我爱Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>163</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>ubuntu 10.04发布后在界面和操作中有着不少细节处的变化，如文件管理器中不在有地址栏，要进入到某一个文件夹只能通过点击的方式进入，如果文件目录较深，有的时候还不如直接输入地址来的快，但地址栏已经被去掉了，我们如何把它找回来，也就是把文件管理器中地址栏从按钮还原成文字模式，其实方法很简单，使用Ctrl+L组合键就可以了。</p>
+<p><img src="http://img.gagahappy.cn/blog/2010/08/ubuntu_local.png" alt="ubuntu_local" title="ubuntu_local"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/svnadmin-create-berkeley-db/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/svnadmin-create-berkeley-db/" class="post-title-link" itemprop="url">创建Berkeley DB数据仓库</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2010-08-02 00:03:58" itemprop="dateCreated datePublished" datetime="2010-08-02T00:03:58+08:00">2010-08-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -316,7 +488,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>43</span>
+              <span>77</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -333,7 +505,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>为本博的#wordpress#侧边栏及日志添加了随机显示日志插件，感觉本博更丰满了呢！</p>
+          <p>创建Berkeley DB 数据仓库，首先确定系统中已经安装了Berkeley DB ，执行<br>svnadmin create –fs-type bdb  repository</p>
 
       
     </div>
@@ -353,7 +525,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/google-analytic-change/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhang-bao-gang-in-versiona-story-of-lalas-promotion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -370,7 +542,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/google-analytic-change/" class="post-title-link" itemprop="url">google analytic change 值 终于有变化了</a>
+            <a href="/zhang-bao-gang-in-versiona-story-of-lalas-promotion/" class="post-title-link" itemprop="url">果然没有看错啊</a>
         </h2>
 
         <div class="post-meta">
@@ -380,7 +552,175 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-27 20:29:51" itemprop="dateCreated datePublished" datetime="2010-08-27T20:29:51+08:00">2010-08-27</time>
+              <time title="Created: 2010-08-01 22:42:42" itemprop="dateCreated datePublished" datetime="2010-08-01T22:42:42+08:00">2010-08-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/relax/" itemprop="url" rel="index"><span itemprop="name">非常娱乐</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>46</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>网才重新看了一徐静蕾版的杜拉拉升职记，影片中拉拉以前那个单位的领导果然是赵宝刚导演客串的啊。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/ubuntu-berkeley-db-not-found/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/ubuntu-berkeley-db-not-found/" class="post-title-link" itemprop="url">ubuntu configure: error: Berkeley DB not found</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2010-08-01 18:55:58" itemprop="dateCreated datePublished" datetime="2010-08-01T18:55:58+08:00">2010-08-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">我爱Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>283</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>为了让svn 支持Berkeley DB，在编译安装时必须在安装apr-util时加入 –with-berkeley-db，将 Berkeley DB编译进去，在configure时出现<code>configure: error: Berkeley DB not found</code>错误，原因是系统没有找到libdb-yourversion.so文件，如果你已经安装了Berkeley DB ，在安装目录的lib库里找到此文件，链接到/usr/lib下即可。</p>
+<p>以本人的机子为例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/lib</span><br><span class="line">ln -s /opt/bdb/lib/libdb-4.7.so</span><br><span class="line">ldconfig</span><br></pre></td></tr></table></figure>
+
+<p>在重新配置一下就好了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/douban-i-come-in/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/douban-i-come-in/" class="post-title-link" itemprop="url">豆瓣 我来啦</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2010-07-31 23:39:11" itemprop="dateCreated datePublished" datetime="2010-07-31T23:39:11+08:00">2010-07-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -398,7 +738,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>85</span>
+              <span>30</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -415,9 +755,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在把wordpress的guid统一更新为新域名后，一直没有发生变化的 google analytic change 值终于有变化了。#wordpress#</p>
-<p><img src="http://img.gagahappy.cn/blog/2010/08/14.jpg" title="google analytic change "></p>
-<p>哈哈，是上升的趋势呢！</p>
+          <p>早些时候注册了豆瓣，但一直没有用，从现在起决定开始豆瓣之旅了</p>
 
       
     </div>
@@ -437,7 +775,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/my-blog-index-onload-time/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-2010-07-30/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -454,7 +792,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/my-blog-index-onload-time/" class="post-title-link" itemprop="url">首页加载时间</a>
+            <a href="/zhuangxiu-2010-07-30/" class="post-title-link" itemprop="url">装修——瓷砖</a>
         </h2>
 
         <div class="post-meta">
@@ -464,7 +802,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-27 00:23:33" itemprop="dateCreated datePublished" datetime="2010-08-27T00:23:33+08:00">2010-08-27</time>
+              <time title="Created: 2010-07-30 23:40:30" itemprop="dateCreated datePublished" datetime="2010-07-30T23:40:30+08:00">2010-07-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -482,7 +820,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>60</span>
+              <span>114</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -499,7 +837,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>测试了本博首页加载时间，共花去1.69秒，此数据在清除浏览器缓存后测得，速度还是可以的呀。#页面速度#， #页面加载速度#</p>
+          <p>装修的另一大块瓷砖还没有买，打算地砖从东方家园买，先前看好的一款地砖的价格已经有88涨到111了，突然感觉这款砖的花纹不好看，放弃之。重新挑选的地砖又都不打折，买不起。还有瓷砖（打算从建材市场买了）、门一直没定下来。甚是烦恼啊。</p>
 
       
     </div>
@@ -519,7 +857,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-select-renzaodalishi-method/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/happy-birthday-to-my-great-mother/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -536,7 +874,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/zhuangxiu-select-renzaodalishi-method/" class="post-title-link" itemprop="url">装修——人造大理石选购</a>
+            <a href="/happy-birthday-to-my-great-mother/" class="post-title-link" itemprop="url">happy birthday to my great mother</a>
         </h2>
 
         <div class="post-meta">
@@ -546,350 +884,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-25 22:37:16" itemprop="dateCreated datePublished" datetime="2010-08-25T22:37:16+08:00">2010-08-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>212</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在人造大理石选购比较：</p>
-<ul>
-<li>看样品的颜色</li>
-<li>样品的颜色要清纯不混浊，表面无类似塑料胶质感，板材反面无细小气孔。</li>
-<li>仔细闻闻样品</li>
-<li>样品用鼻子闻，应该是没有刺激的化学气味。</li>
-<li>用手摸样品表面</li>
-<li>样品的表面应该有如丝绸般的光滑感，无涩感、无明显高低不平感。</li>
-<li>用指甲划板材表面，无明显划痕。</li>
-<li>相同两块样品相互敲击，不易破碎。</li>
-<li>检查产品有无ISO质量体系认证、质检报告，有无产品质保卡及相关防伪标志。</li>
-<li>表面颜色均匀、清纯，无胶质感。</li>
-<li>从侧面也能看到它的内部和气孔情况。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-select-dalishi-method/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/zhuangxiu-select-dalishi-method/" class="post-title-link" itemprop="url">装修——选购大理石材的方法与注意事项</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2010-08-25 21:46:02" itemprop="dateCreated datePublished" datetime="2010-08-25T21:46:02+08:00">2010-08-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>120</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>一、是厚薄要均匀，四个角要准确分明，切边要整齐，各个直角要相互对应；<br>二、是表面要光滑明亮，光亮在80度以上，且不要有凹坑；<br>三、是花纹要均匀，图案鲜明，没有杂色，色差也要一致；<br>四、是内部结构紧密，没有裂缝；<br>五、是承重厚度不能小于9至10毫米。 </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-buy-dianyuan-kaiguan/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/zhuangxiu-buy-dianyuan-kaiguan/" class="post-title-link" itemprop="url">装修笔记——第16天，电源插座，开关选购</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2010-08-24 19:28:44" itemprop="dateCreated datePublished" datetime="2010-08-24T19:28:44+08:00">2010-08-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>78</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>电源插座和开关买了，西门子远景系列的，电源插座，开关，有线，电话线，网线，平板加起来一共44个,共花费1001.9元。没想到买电源插座，开关居然要这么多钱。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-select-dalishi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/zhuangxiu-select-dalishi/" class="post-title-link" itemprop="url">装修——做飘窗用天然大理石还是人造石</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2010-08-24 00:28:50" itemprop="dateCreated datePublished" datetime="2010-08-24T00:28:50+08:00">2010-08-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>252</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>著名设计师吴刚表示，目前装修选择自然大理石的越来越多，跟人造石比较，自然大理石结实耐磨，一般不会渗污渍，阳光直射不会变色。人造石不够耐用，轻易划伤、断裂、老化，有的长时间使用还会变形。很多人以为自然大理石的辐射对人体有害，实在现在市道市情上常见的大理石辐射很小，都是可以放心使用的，并且白色浅色辐射非常小，彩色的则稍大。</p>
-<p>现在装修飘窗的材料不仅仅是大理石、人造石，还能用瓷砖、实木、桑拿板等等，可以根据个人喜好选择。这里需要提醒消费者的是，购买材料时一定要选择品牌的，否则会造成很多麻烦。</p>
-<p>以上内容转自互联网</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/happy-birthday-to-pingping/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/happy-birthday-to-pingping/" class="post-title-link" itemprop="url">happy birthday to pingping</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2010-08-23 16:28:49" itemprop="dateCreated datePublished" datetime="2010-08-23T16:28:49+08:00">2010-08-23</time>
+              <time title="Created: 2010-07-30 00:51:14" itemprop="dateCreated datePublished" datetime="2010-07-30T00:51:14+08:00">2010-07-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -924,7 +919,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>祝平平生日快乐！</p>
+          <p>祝老妈生日快乐！</p>
 
       
     </div>
@@ -944,7 +939,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-chufang-pu-qiangzhuan/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-2010-07-29/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -961,7 +956,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/zhuangxiu-chufang-pu-qiangzhuan/" class="post-title-link" itemprop="url">装修笔记——第13天，厨房贴墙砖</a>
+            <a href="/zhuangxiu-2010-07-29/" class="post-title-link" itemprop="url">装修——界面剂、墙固与墙腻子，三者之间的关系</a>
         </h2>
 
         <div class="post-meta">
@@ -971,7 +966,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-21 16:15:07" itemprop="dateCreated datePublished" datetime="2010-08-21T16:15:07+08:00">2010-08-21</time>
+              <time title="Created: 2010-07-29 23:44:08" itemprop="dateCreated datePublished" datetime="2010-07-29T23:44:08+08:00">2010-07-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -989,7 +984,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>236</span>
+              <span>71</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1006,347 +1001,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>终于又开始新的工程了，铺砖，瓦工先从厨房的墙砖开始铺起，这个时候你还可以检验一下你家墙砖的质量，当墙砖被贴到墙上后，它的质量问题就很容易暴露出来了，如果上下的砖缝间隔距离不一样，有二种情况，第一种是您的瓦工铺砖水平不行，第二种情况，就是您的砖的质量不行，上下或左右砖缝间隔距离不一样，是上下或左右墙砖的大小（长度或宽度不一样）造成的。</p>
-<p>检查墙砖的平整度，可以把两块砖的正面相对，放在一个平面上，查看四边的缝隙间距，如果太大或间距不一至，说明砖面是拱型的，平整度存在质量问题。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/sinatair/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/sinatair/" class="post-title-link" itemprop="url">SinaTair</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2010-08-21 00:01:06" itemprop="dateCreated datePublished" datetime="2010-08-21T00:01:06+08:00">2010-08-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">玩转软件</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>191</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>大家快去用SinaTair，相当好用呢！</p>
-<p>SinaTair 是基于AIR平台的微博桌面客户端，界面简洁，功能实用，支持动态表情显示，支持GIF动画显示，还有涂鸦板，让你“画”说微博。最小化时会常驻系统托盘，气泡提示最新微博、评论、私信。让您在工作、聊天、看球、游戏的同时，享受微博！</p>
-<p><a target="_blank" rel="noopener" href="http://img.gagahappy.cn/blog/2010/08/13.jpg" title="sinatair">sinatair</a></p>
-<blockquote>
-<p>转自新浪：<a target="_blank" rel="noopener" href="http://rm.sina.com.cn/emarket/sinatair/">http://rm.sina.com.cn/emarket/sinatair/</a></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-weishengji-chufang-fangshui-finish/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/zhuangxiu-weishengji-chufang-fangshui-finish/" class="post-title-link" itemprop="url">装修笔记——第12天，卫生间厨房防水成功</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2010-08-20 15:56:16" itemprop="dateCreated datePublished" datetime="2010-08-20T15:56:16+08:00">2010-08-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>131</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>卫生间厨房防水是否成功，要到楼下去看（这不废话吗），约了楼下的到他家查看是否有漏水情况，谢天谢地，检查结果是没有，主要看的地方是上下楼水管的地方，因为那里有接缝，水容易从那里流下来，是重点检查的对象，检查的时候还可以用手触摸屋顶，如果感到潮湿说明防水也没有做好。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-weishengjian-jieju/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/zhuangxiu-weishengjian-jieju/" class="post-title-link" itemprop="url">装修笔记——卫生间洁具</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2010-08-20 00:06:37" itemprop="dateCreated datePublished" datetime="2010-08-20T00:06:37+08:00">2010-08-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>35</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>正在装修中，谁能告诉我卫生间里都需要哪些洁具啊？ 如花撒啊，镜子啊之类。</p>
-<p><img src="http://img.gagahappy.cn/blog/2010/08/12.jpg" alt="卫生间洁具" title="卫生间洁具"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-ci-zhuan-change-back/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/zhuangxiu-ci-zhuan-change-back/" class="post-title-link" itemprop="url">装修笔记——第10天，墙砖已换</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2010-08-18 21:32:19" itemprop="dateCreated datePublished" datetime="2010-08-18T21:32:19+08:00">2010-08-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>275</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>墙砖已经换了，但还是没有想象中的理想！不可能把每个砖都看得那么仔细。</p>
-<p>总结的经验是</p>
-<ol>
-<li>为了避免类这样的问题，可以考虑到东方家园之样的建材超市去买，消费者面对的是超市，不是个人，类似问题相对好解决（遇到过由于不同批次造成瓷砖色差问题给退/换货的，其实不同批次的瓷砖有色差是正常现象，如果是面对个人经营的话恐怕很难给退/换货了）</li>
-<li>看墙砖的时候一定要仔细看好样砖，我这个就属于当时没有仔细看，结果今天找过去的时候再次看购买的墙砖，发现样砖上也有黑点。</li>
-<li>一分价钱一分货，绝对的！虽然我买的墙砖上面有小黑点，最多就是对美观造成那么一点点的小影响，但砖的质量还是相当好的。</li>
+          <ol>
+<li>界面剂的全称是混凝土界面处理剂，是一种胶粘剂。</li>
+<li>墙锢是美巢生产的界面剂的商标。</li>
+<li>腻子是用来进行墙面找平的，在界面剂之后刮涂，刮了腻子之后开始刷漆。</li>
 </ol>
 
       
@@ -1367,7 +1025,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-weishengji-chufang-fangshui/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/fedora13-openssl1-0-0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1384,7 +1042,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/zhuangxiu-weishengji-chufang-fangshui/" class="post-title-link" itemprop="url">装修笔记——第10天，卫生间厨房防水实验</a>
+            <a href="/fedora13-openssl1-0-0/" class="post-title-link" itemprop="url">fedora13 openssl1.0.0 兼容性</a>
         </h2>
 
         <div class="post-meta">
@@ -1394,7 +1052,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-18 15:30:51" itemprop="dateCreated datePublished" datetime="2010-08-18T15:30:51+08:00">2010-08-18</time>
+              <time title="Created: 2010-07-28 00:31:15" itemprop="dateCreated datePublished" datetime="2010-07-28T00:31:15+08:00">2010-07-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1402,7 +1060,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">我爱Linux</span></a>
                 </span>
             </span>
 
@@ -1412,7 +1070,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>82</span>
+              <span>211</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1429,7 +1087,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>卫生间和厨房的地面做防水，特别是卫生间，如果预算充足，最好把每面墙的防水都做到1.8m，做防水要刷三遍防水涂料，每次刷都必须等上一次防水干了以后，然后再做闭水实验。</p>
+          <p>fedora13将 openssl的版本由0.98升级到了1.0，自从这东西出现后，许多软件都不好用了。</p>
+<ol>
+<li>subversion与apache不能集成，subversion感觉在编译安装时就有问题，虽然可以成功安装，但与apache集成在一起时，svn仓库不能访问。</li>
+<li>ruby1.8.7中安装openssl库编译出错。</li>
+</ol>
+<p>openssl1.0.0实在是令人太痛苦了，暂时决定不使用fedora13，先回到ubuntu10.04上面吧。</p>
 
       
     </div>
@@ -1449,7 +1112,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/guodegang-2010-08-17/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/three-versiona-story-of-lalas-promotion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1466,7 +1129,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/guodegang-2010-08-17/" class="post-title-link" itemprop="url">郭德纲事件：北大教授孔庆东，力挺郭德纲民族英雄</a>
+            <a href="/three-versiona-story-of-lalas-promotion/" class="post-title-link" itemprop="url">杜拉拉升职记</a>
         </h2>
 
         <div class="post-meta">
@@ -1476,7 +1139,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-17 23:22:40" itemprop="dateCreated datePublished" datetime="2010-08-17T23:22:40+08:00">2010-08-17</time>
+              <time title="Created: 2010-07-26 02:26:04" itemprop="dateCreated datePublished" datetime="2010-07-26T02:26:04+08:00">2010-07-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1494,7 +1157,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>23</span>
+              <span>222</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1511,8 +1174,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>郭德纲事件：北大教授孔庆东，力挺郭德纲民族英雄</p>
-<p><embed src="http://www.tudou.com/v/0cksXpWjr74/v.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" wmode="opaque" width="480" height="400"></embed></p>
+          <p>分别看了《杜拉拉升职记》的小说版（李可著），电影版（徐静蕾饰），电视剧版（王珞丹饰），还有没看过的话剧版（姚晨饰）。同一个人物被不同的演员扮演，最喜欢原著版里的“拉拉”，其次是徐静蕾版的“拉拉”，感觉徐静蕾版的拉拉更接近原著（故事情节除外），王珞丹版的拉拉动不动就哭，不怎么喜欢，她演的其它几个电视剧里的角色还是挺喜欢的。也比较喜欢电影版里的王伟，感觉比电视剧版的王伟强多了，更有男子气概！</p>
+<p>话剧版（姚晨饰）<br><img src="http://img.gagahappy.cn/blog/2010/07/hj.jpg" alt="话剧版（姚晨饰）" title="话剧版（姚晨饰）"></p>
+<p>电视剧版（王珞丹饰）<br><img src="http://img.gagahappy.cn/blog/2010/07/ds.jpg" alt="电视剧版（王珞丹饰）" title="电视剧版（王珞丹饰）"></p>
+<p>电影版（徐静蕾饰）<br><img src="http://img.gagahappy.cn/blog/2010/07/dy1.jpg" alt="电影版（徐静蕾饰）" title="电影版（徐静蕾饰）"></p>
 
       
     </div>
@@ -1532,7 +1197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-ci-zhuan-some-bug/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-2010-07-25-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1549,7 +1214,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/zhuangxiu-ci-zhuan-some-bug/" class="post-title-link" itemprop="url">装修笔记——第8天，瓷砖进场</a>
+            <a href="/zhuangxiu-2010-07-25-01/" class="post-title-link" itemprop="url">装修——如何选择居室门</a>
         </h2>
 
         <div class="post-meta">
@@ -1559,7 +1224,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-16 21:31:04" itemprop="dateCreated datePublished" datetime="2010-08-16T21:31:04+08:00">2010-08-16</time>
+              <time title="Created: 2010-07-25 23:34:55" itemprop="dateCreated datePublished" datetime="2010-07-25T23:34:55+08:00">2010-07-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1577,7 +1242,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>97</span>
+              <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1594,7 +1259,112 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>约了马可菠萝的来送砖，说的是11点，结果11点打过电话过去，说是刚装货，12点的时候终于来了，发现厨房墙砖每块上面居然差不都有个小黑点（拆了二箱进行检查），联系了厂家，说是明天来给看看。郁闷啊。</p>
+          <p>分类：</p>
+<ol>
+<li><p>模压门:</p>
+<blockquote>
+<p>是用一种具有各种凹凸图案及光面的高密度纤维板做门面的门，门面采用木材纤维一次模压成型。<br>此类居室门在加工时，胶水应达到环保要求，否则会影响健康。模压门是工厂一次模压成型的，价格便宜，质感差，隔音效果不好，款式比较单一，属中低档产品。模压门只适宜做混油门，尤其是白色混油。</p>
+</blockquote>
+</li>
+<li><p>实木门:</p>
+<blockquote>
+<p>实木门的说法有两种:由内至外全部为实木或芯材为多层板制作的都叫实木门。实木门采用传统工艺加工而成，以烘干的松木、铁杉木、楸木、水曲柳等为基材，其结构主要为门框榫连接，镶嵌门芯板，在市场上属于中高档产品。全实木门在北方的气候条件下使用存在一定的缺陷，主要表现为门扇变形，榫连接处风干开裂，门芯板收缩露白。</p>
+</blockquote>
+</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/zhuangxiu-2010-07-25-01/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/redirect-301-apache/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/redirect-301-apache/" class="post-title-link" itemprop="url">网站301重定向</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2010-07-24 23:54:50" itemprop="dateCreated datePublished" datetime="2010-07-24T23:54:50+08:00">2010-07-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">我爱Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>237</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>gagahappy.com这个域名已经用了一段时间了，想把gagahappy.cn自动重定向到gagahappy.com上面，本来打算用万网的服务去做（收费要200元），想到自己的主机是apache的，可以用其自身的重定向功能。</p>
+<p>由于用的是虚拟主机，修改.htaccess文件即可。</p>
+<blockquote>
+<p>RewriteCond %{HTTP_HOST} ^<a target="_blank" rel="noopener" href="http://www.gagahappy.cn/">www.gagahappy.cn</a> [NC]<br>RewriteRule ^(.*)$ <a href="http://www.gagahappy.com/$1">http://www.gagahappy.com/$1</a> [L,R=301]</p>
+</blockquote>
 
       
     </div>
@@ -1614,7 +1384,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-weishengjia-daya-test/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/happy-birthday-to-gn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1631,7 +1401,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/zhuangxiu-weishengjia-daya-test/" class="post-title-link" itemprop="url">装修笔记——第8天，改水打压测试</a>
+            <a href="/happy-birthday-to-gn/" class="post-title-link" itemprop="url">happy birthday to gn</a>
         </h2>
 
         <div class="post-meta">
@@ -1641,7 +1411,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-16 15:40:00" itemprop="dateCreated datePublished" datetime="2010-08-16T15:40:00+08:00">2010-08-16</time>
+              <time title="Created: 2010-07-24 01:58:00" itemprop="dateCreated datePublished" datetime="2010-07-24T01:58:00+08:00">2010-07-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1659,7 +1429,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>174</span>
+              <span>10</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1676,7 +1446,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在改完水电后，要做的工作就是对所有改水的地方进行打压测试，正常的压力测试是0.8pa，我家做了1个小时，看网上说有做一天的，做打压测试的目的是检查水路有无漏水，水管接口出是否紧密，PPR管是否有开裂的情况，打压试验结束时，如果指针还指在0.8pa处，说明水路没有问题，如果小于0.8pa，则水路改造有问题，这时就要查找问题出在以上环节的哪个地方了。</p>
+          <p>祝gn同学生日快乐！</p>
 
       
     </div>
@@ -1696,7 +1466,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-day-gai-dian-finish/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-2010-07-23/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1713,7 +1483,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/zhuangxiu-day-gai-dian-finish/" class="post-title-link" itemprop="url">装修笔记——第7天，改电完成</a>
+            <a href="/zhuangxiu-2010-07-23/" class="post-title-link" itemprop="url">装修——外墙和顶棚的抹灰层与基层之间及各抹灰层之间必须粘结牢固</a>
         </h2>
 
         <div class="post-meta">
@@ -1723,7 +1493,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-15 21:14:34" itemprop="dateCreated datePublished" datetime="2010-08-15T21:14:34+08:00">2010-08-15</time>
+              <time title="Created: 2010-07-23 13:47:06" itemprop="dateCreated datePublished" datetime="2010-07-23T13:47:06+08:00">2010-07-23</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1741,7 +1511,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>56</span>
+              <span>141</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1758,7 +1528,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>装修改电改水完成了，用了6天的时间！总共花了4053，其中包括25个插座盒。在这期间又对改电的位置做了不少调整。</p>
+          <p>经调研发现混凝土（包括预制混凝土）顶棚基体抹灰，由于各种因素的影响，抹灰层脱落的质量事故时有发生，严重危及人身安全，引起了有关部门的重视，如北京市为解决混凝土顶棚基体表面抹灰层脱落的质量问题，要求各建筑施工单位，不得在混凝土顶棚基体表面抹灰，用腻子找平即可，5年来取得了良好的效果。</p>
 
       
     </div>
@@ -1778,7 +1548,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/sina-change-index-color-to-gray/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/gravatar/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1795,7 +1565,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/sina-change-index-color-to-gray/" class="post-title-link" itemprop="url">新浪已经提前把首页变成灰色的了</a>
+            <a href="/gravatar/" class="post-title-link" itemprop="url">Gravatar 服务</a>
         </h2>
 
         <div class="post-meta">
@@ -1805,7 +1575,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-14 23:43:37" itemprop="dateCreated datePublished" datetime="2010-08-14T23:43:37+08:00">2010-08-14</time>
+              <time title="Created: 2010-07-22 22:19:44" itemprop="dateCreated datePublished" datetime="2010-07-22T22:19:44+08:00">2010-07-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1813,7 +1583,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
+                  <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">玩转软件</span></a>
                 </span>
             </span>
 
@@ -1823,7 +1593,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>15</span>
+              <span>513</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1840,7 +1610,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>新浪已经提前把首页变成灰色的了</p>
+          <p>Gravatar(Globally Recognized Avatar的缩写) 是一项用于提供在全球范围内使用的头像服务。只要你在Gravatar的服务器上上传了你自己的头像，你便可以在其他任何支持Gravatar的博客、论坛等地方使用它。</p>
+<p>在Gravatar上，用户可以用他们的电子邮件注册一个帐号，并且上传一个与之绑定的头像。 许多流行的博客程序都支持Gravatar， 当用户发布一个评论并填写了他的电子邮件地址时，博客程序会自动查找在Gravatar上是否有与之绑定的头像。如果有，则这个头像将会与评论一起显示出来。WordPress v2.5  开始原生地提供对Gravatar的支持。此外还有许多程序通过插件来支持Gravatar，例如国内的著名论坛程序Discuz!。</p>
+<p>一个Gravatar头像可以使用高达512像素的图片,并且默认地以80*80的尺寸显示出来。 如果上传的头像大了或了小了，它会自动地进行跳转。每个头像都会按照MPAA分级制度来进行平等，这样网站管理员可以控制在他们的站点上显示合适的头像。</p>
+<p>为了防止用户的电子邮件地址遭到泄漏而收到大量垃圾邮件，Gravatar在传递用户的邮箱地址时采用的是通过MD5加密的邮件地址。</p>
 
       
     </div>
@@ -1860,7 +1633,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/pc-change-graphics-card/">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/suiyue-2010-07-23/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1877,7 +1650,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/pc-change-graphics-card/" class="post-title-link" itemprop="url">是不是应该换个显卡了呢</a>
+            <a href="/suiyue-2010-07-23/" class="post-title-link" itemprop="url">岁月穿帮镜头</a>
         </h2>
 
         <div class="post-meta">
@@ -1887,7 +1660,89 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2010-08-14 23:31:40" itemprop="dateCreated datePublished" datetime="2010-08-14T23:31:40+08:00">2010-08-14</time>
+              <time title="Created: 2010-07-21 23:40:48" itemprop="dateCreated datePublished" datetime="2010-07-21T23:40:48+08:00">2010-07-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/relax/" itemprop="url" rel="index"><span itemprop="name">非常娱乐</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>60</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>电视剧《岁月》的第一集里，有这样一个镜头，许小曼在看电影前买了两听可乐，这是部80年代的片子，那个时候有可乐吗？没有吧！</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-keting-color/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/zhuangxiu-keting-color/" class="post-title-link" itemprop="url">装修——客厅颜色搭配</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2010-07-20 00:07:11" itemprop="dateCreated datePublished" datetime="2010-07-20T00:07:11+08:00">2010-07-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1905,7 +1760,7 @@
                 <i class="far fa-file-word"></i>
               </span>
               <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>33</span>
+              <span>176</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1922,7 +1777,179 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>电脑的风扇总是时不时的就噪音大作，是不是显卡的问题呢，换个好点的？</p>
+          <p>颜色搭配，是在看了许多客厅的效果图后产生的个人看法。<br>1、    颜色尽量少，初步定为使用三种颜色。<br>2、    电视柜与餐桌可以使用以种颜色，但一定要与地面颜色区分开来。<br>3、    地面颜色与沙发颜色可以靠近。<br>4、    茶几颜色要与沙发颜色区分开来。茶几颜色可以考虑和餐桌颜色一致，茶几颜色应该突出，所以。我们不要透明茶几。<br>5、    感觉沙发颜色应融入地面颜色中，不应使用与地面颜色相反色。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-2010-07-19/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/zhuangxiu-2010-07-19/" class="post-title-link" itemprop="url">装修——木制品柜体的保护</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2010-07-19 01:01:06" itemprop="dateCreated datePublished" datetime="2010-07-19T01:01:06+08:00">2010-07-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>305</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="http://img.gagahappy.cn/blog/2010/07/11.jpg" alt="木制品柜体的保护" title="木制品柜体的保护 "></p>
+<p>我们常常在客厅、卧室等处现场制作柜子，这种柜子一般为固定死的，不能移动。施工中最为普遍的现象是柜体下部在做地面施工时，经常会受到水的侵害而受潮。如图所示，柜体木材在施工前没有做封油处理，还有线管穿过，在做地面找平时再没有任何保护措施，可以想象到柜体底部会出现什么样子的问题。从我们监理要求木材需做好封油处理，在水泥砂浆找平前，使用塑料布对柜体进行保护，塑料布的铺法是，柜体上部塑料布要高于水泥砂浆5cm为好，地面部分应延展柜体外部15cm方可，保证水不能阴湿柜体。这是装修施工的常见问题，大家切记呀。</p>
+<blockquote>
+<p>原文：<a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_487e337e0100lppv.html">http://blog.sina.com.cn/s/blog_487e337e0100lppv.html</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/zhuangxiu-2010-07-18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/zhuangxiu-2010-07-18/" class="post-title-link" itemprop="url">装修——非耐水腻子不得在家装中使用 （转）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2010-07-18 01:09:52" itemprop="dateCreated datePublished" datetime="2010-07-18T01:09:52+08:00">2010-07-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>341</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="http://img.gagahappy.cn/blog/2010/07/2.jpg" alt="非耐水腻子不得在家装中使用" title="非耐水腻子不得在家装中使用"></p>
+<p>自2001年北京市规定了住宅装修施工的墙面腻子必须使用耐水腻子以来，在家装中使用非耐水腻子仍然是一种常态。上面的图片是昨天受业主委托对施工过程验收所看到的现象，由于使用了非耐水腻子，腻子开始气泡、开裂了。当然，这个工地的施工顺序也不对，施工顺序的原则是先上后下、先里后外、先湿后干，这个工地违反了先湿后干的原则，造成腻子的问题并且还污染了墙面。之所以北京市规定住宅必须使用耐水腻子是基于住宅的使用环境要比办公环境恶劣的多，极易造成各个部位受潮现象。施工人员为减少材料成本使用非耐水腻子，业主也有为降低装修成本而使用的。所以不管施工方还是业主方遵守规范的原则是最基本的保证。</p>
+<blockquote>
+<p>原文：<a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_487e337e0100loq0.html">http://blog.sina.com.cn/s/blog_487e337e0100loq0.html</a></p>
+</blockquote>
 
       
     </div>
@@ -1941,7 +1968,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/48/">48</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/28/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><a class="extend next" rel="next" href="/page/30/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1995,13 +2022,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">297k</span>
+    <span title="Symbols count total">288k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">4:30</span>
+    <span title="Reading time total">4:22</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
