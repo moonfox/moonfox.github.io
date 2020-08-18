@@ -99,7 +99,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="漂自己的移，让别人都撞墙去吧" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="漂自己的移，让别人都撞墙去吧" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -148,7 +148,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">90</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -158,7 +158,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">899</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">900</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -237,11 +237,23 @@
   <p class="site-author-name" itemprop="name">戛戛Happy</p>
   <div class="site-description" itemprop="description">喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</div>
 </div>
-  <div class="links-of-author animated">
-      <span class="links-of-author-item">
-        <a href="/atom.xml" title="Rss → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>Rss</a>
-      </span>
+  
+
+  <div class="">
+    <div class="">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/rss2.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
   </div>
+
   <div class="cc-license animated" itemprop="license">
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
@@ -267,6 +279,90 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-subpartition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/mysql-subpartition/" class="post-title-link" itemprop="url">mysql 子分区</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-02-09 23:23:46" itemprop="dateCreated datePublished" datetime="2015-02-09T23:23:46+08:00">2015-02-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>287</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>mysql 子分区<br>在range/list分区的基础上，还可以创建key/hash子分区。子分区的文件直接保存在表名目录下，而不是嵌套在父目录下。</p>
+<p>如果为一个分区指定了子分区的名称，那么所有分区都要指定子分区的名称，且子分区的名称必须唯一，不能与其它分区的名称相同，每个子分区的数据必须相同。</p>
+<p>子分区一般应用在特别大的表上，在多个磁盘上分别分配数据文件与索引文件。这种方式不适用于innodb引擎，因为innodb的数据与索引保存在一个文件里。使用data directory =’’，index directory =’’分别设置数据与索引文件，可以使用myisam引擎实现此种需求的表。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1901,97 +1997,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/quickly-master-natural-light-portraiture/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/quickly-master-natural-light-portraiture/" class="post-title-link" itemprop="url">Quickly Master Natural Light Portraiture</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-12-15 23:53:21" itemprop="dateCreated datePublished" datetime="2014-12-15T23:53:21+08:00">2014-12-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/photography/" itemprop="url" rel="index"><span itemprop="name">一镜色影</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>382</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Key skills to take from this photography tutorial</p>
-<p><img src="http://img.gagahappy.cn/blog/2014/12/flare1-e1418659577762.jpg" alt="flare1"></p>
-<ul>
-<li>Spend time choosing the right location for your shoot</li>
-<li>Build a rapport with your model – this can really help achieve the results you’re after</li>
-<li>Select the correct lens for your camera (You might have seen my <a target="_blank" rel="noopener" href="http://www.karltaylorphotography.com/blog/buying-second-hand-lenses/">second hand lenses</a> video already)</li>
-<li>What apertures are best for portrait photography</li>
-<li>When to and how to fill light into the shadows</li>
-<li>Oh Yes! And always remove the lens cap before beginning – Very important :-0</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2049,13 +2054,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">288k</span>
+    <span title="Symbols count total">290k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">4:22</span>
+    <span title="Reading time total">4:24</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>

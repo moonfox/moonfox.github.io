@@ -99,7 +99,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="漂自己的移，让别人都撞墙去吧" type="application/atom+xml">
+<link rel="alternate" href="/rss2.xml" title="漂自己的移，让别人都撞墙去吧" type="application/rss+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -148,7 +148,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">90</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -158,7 +158,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">899</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">900</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -237,11 +237,23 @@
   <p class="site-author-name" itemprop="name">戛戛Happy</p>
   <div class="site-description" itemprop="description">喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</div>
 </div>
-  <div class="links-of-author animated">
-      <span class="links-of-author-item">
-        <a href="/atom.xml" title="Rss → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>Rss</a>
-      </span>
+  
+
+  <div class="">
+    <div class="">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/rss2.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
   </div>
+
   <div class="cc-license animated" itemprop="license">
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
@@ -267,6 +279,94 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/transaction-acid-rule/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/transaction-acid-rule/" class="post-title-link" itemprop="url">ACID原则</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-03-04 11:06:33" itemprop="dateCreated datePublished" datetime="2015-03-04T11:06:33+08:00">2015-03-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>225</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>ACID原则</p>
+<ul>
+<li>原子性(Atomicity): 要进行的操作一般为一系列的操作，这些操作要么都被完成，要么都不被完成。这些操作是不可被分割的。<br>如果事务是是执行一系列的操作，其中的一条sql执行失败，那么其它那些执行成功的sql要进行撤消操作。</li>
+<li>一致性(consistency):数据库从一种一致的状态变成下一种一致的状态。</li>
+<li>隔离性(isolation):这个事务中操作的对象，在这个事务提交前，对其它事物都不可见。</li>
+<li>持久性(durability):数据被写入磁盘</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1843,90 +1943,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-subpartition/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/mysql-subpartition/" class="post-title-link" itemprop="url">mysql 子分区</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-02-09 23:23:46" itemprop="dateCreated datePublished" datetime="2015-02-09T23:23:46+08:00">2015-02-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>287</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>mysql 子分区<br>在range/list分区的基础上，还可以创建key/hash子分区。子分区的文件直接保存在表名目录下，而不是嵌套在父目录下。</p>
-<p>如果为一个分区指定了子分区的名称，那么所有分区都要指定子分区的名称，且子分区的名称必须唯一，不能与其它分区的名称相同，每个子分区的数据必须相同。</p>
-<p>子分区一般应用在特别大的表上，在多个磁盘上分别分配数据文件与索引文件。这种方式不适用于innodb引擎，因为innodb的数据与索引保存在一个文件里。使用data directory =’’，index directory =’’分别设置数据与索引文件，可以使用myisam引擎实现此种需求的表。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1984,13 +2000,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">288k</span>
+    <span title="Symbols count total">290k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">4:22</span>
+    <span title="Reading time total">4:24</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
