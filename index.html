@@ -158,7 +158,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">905</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">906</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -279,6 +279,113 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-bluk-insert/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/mysql-bluk-insert/" class="post-title-link" itemprop="url">Mysql 批量插入数据</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-19 21:11:19" itemprop="dateCreated datePublished" datetime="2020-08-19T21:11:19+08:00">2020-08-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="导入大数据到表"><a href="#导入大数据到表" class="headerlink" title="导入大数据到表"></a>导入大数据到表</h1><p>向数据库中插入3万条数据</p>
+<h2 id="单个插入数据"><a href="#单个插入数据" class="headerlink" title="单个插入数据"></a>单个插入数据</h2><p>如果每个数据单独插入，效率很低，每个插入都产生一个事务，写入效率低</p>
+<h2 id="批量插入数据"><a href="#批量插入数据" class="headerlink" title="批量插入数据"></a>批量插入数据</h2><ul>
+<li><p>每1000条插入一次，只产生一个事件，降低了事务的生成，提高了效率</p>
+</li>
+<li><p>具体方法</p>
+<ol>
+<li><p>把多条插入语句拼成一条</p>
+</li>
+<li><p>手动开启一个事务，在插入1000条数据后，提交事务。</p>
+<p>这样做可以减少<code>binlog</code>的生成次数，但<code>redolog</code>不一定减少</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="批量-vs-单个插入"><a href="#批量-vs-单个插入" class="headerlink" title="批量 vs 单个插入"></a>批量 vs 单个插入</h2><ul>
+<li><p>单个插入效率很低，30 * 1000 条记录用时 1分钟</p>
+</li>
+<li><p>批量插入， 每1000条插入一次，效率很高，用时7.99秒</p>
+<p><code>5.54s user 0.54s system 77% cpu 7.799 total</code></p>
+<p><code>5.38s user 0.48s system 78% cpu 7.452 total</code></p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>插入大量数据时，应减少事务的提交，让多个插入在一个事务中完成，从而提高插入数据的效率</p>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImportTradelog</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">import</span><span class="params">(date)</span></span></span><br><span class="line">    <span class="comment"># 导入30天的数据</span></span><br><span class="line">    <span class="number">30</span>.times <span class="keyword">do</span> <span class="params">|offset|</span></span><br><span class="line">      datas = init_data(date + (<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>) * offset)</span><br><span class="line">      puts datas</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 批量插入， 每1000条插入一次，效率很高，用时7.99秒</span></span><br><span class="line">      <span class="comment"># 5.54s user 0.54s system 77% cpu 7.799 total</span></span><br><span class="line">      <span class="comment"># 5.38s user 0.48s system 78% cpu 7.452 total</span></span><br><span class="line">      Tradelog.bulk_insert <span class="symbol">set_size:</span> <span class="number">1000</span>, <span class="symbol">values:</span> datas</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 每天导入1000条数据</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">init_data</span><span class="params">(day)</span></span></span><br><span class="line">    datas = []</span><br><span class="line">    <span class="number">1000</span>.times <span class="keyword">do</span> <span class="params">|index|</span></span><br><span class="line">      <span class="comment"># 插入效率很低，30 * 1000 条记录用时 1分钟</span></span><br><span class="line">      <span class="comment"># date = &#123;tradeid: tradeid, operator: operator, t_modified: t_modified&#125;</span></span><br><span class="line">      <span class="comment"># Tradelog.create(date)</span></span><br><span class="line">      datas &lt;&lt; &#123;</span><br><span class="line">        <span class="symbol">tradeid:</span> <span class="string">&quot;<span class="subst">#&#123;day.strftime(<span class="string">&#x27;%Y%m%d&#x27;</span>)&#125;</span><span class="subst">#&#123;format(<span class="string">&#x27;%04d&#x27;</span>, (index + <span class="number">1</span>))&#125;</span>&quot;</span>,</span><br><span class="line">        <span class="symbol">operator:</span> rand(<span class="number">50</span>),</span><br><span class="line">        <span class="symbol">t_modified:</span> (day + <span class="number">60</span> * index)</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    datas</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -506,7 +613,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/study-eng-participle-2020-7-23/" class="post-title-link" itemprop="url">非谓语 taken</a>
+            <a href="/study-eng-participle-2020-7-23/" class="post-title-link" itemprop="url">非谓语 Taken</a>
         </h2>
 
         <div class="post-meta">
@@ -758,7 +865,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/eng-grammar-until/" class="post-title-link" itemprop="url">until 用法</a>
+            <a href="/eng-grammar-until/" class="post-title-link" itemprop="url">Until 用法</a>
         </h2>
 
         <div class="post-meta">
@@ -840,7 +947,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/eng-grammar-will/" class="post-title-link" itemprop="url">这里没有用will</a>
+            <a href="/eng-grammar-will/" class="post-title-link" itemprop="url">这里没有用Will</a>
         </h2>
 
         <div class="post-meta">
@@ -1006,7 +1113,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/if-you-understand-a-bug/" class="post-title-link" itemprop="url">If you understand a bug</a>
+            <a href="/if-you-understand-a-bug/" class="post-title-link" itemprop="url">If You Understand a Bug</a>
         </h2>
 
         <div class="post-meta">
@@ -1088,7 +1195,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/poverty-and-property/" class="post-title-link" itemprop="url">Poverty and property</a>
+            <a href="/poverty-and-property/" class="post-title-link" itemprop="url">Poverty and Property</a>
         </h2>
 
         <div class="post-meta">
@@ -1255,7 +1362,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/maria-sharapova-retirement-from-tennis/" class="post-title-link" itemprop="url">Maria sharapova retirement from tennis</a>
+            <a href="/maria-sharapova-retirement-from-tennis/" class="post-title-link" itemprop="url">Maria Sharapova Retirement From Tennis</a>
         </h2>
 
         <div class="post-meta">
@@ -1670,7 +1777,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/do-you-love-me-ha/" class="post-title-link" itemprop="url">Do you love me</a>
+            <a href="/do-you-love-me-ha/" class="post-title-link" itemprop="url">Do You Love Me</a>
         </h2>
 
         <div class="post-meta">
@@ -1898,90 +2005,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/i-cant-abide/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/i-cant-abide/" class="post-title-link" itemprop="url">I cant abide</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-06-20 19:35:35" itemprop="dateCreated datePublished" datetime="2019-06-20T19:35:35+08:00">2019-06-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/consciousness/" itemprop="url" rel="index"><span itemprop="name">意识流</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>92</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>I can’t abide people with no sense of humor</p>
-<p>三星新的UI好看多了，更新后的导航操作好用极了</p>
-<p>准备冲击一字马横叉，感觉比竖叉难多了，需要貌似至少两个方向的筋要拉伸</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2039,13 +2062,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">291k</span>
+    <span title="Symbols count total">292k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">4:24</span>
+    <span title="Reading time total">4:25</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>

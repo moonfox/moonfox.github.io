@@ -158,7 +158,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">905</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">906</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -283,6 +283,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/thin-configuration/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/thin-configuration/" class="post-title-link" itemprop="url">Thin 配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2011-12-25 21:16:16" itemprop="dateCreated datePublished" datetime="2011-12-25T21:16:16+08:00">2011-12-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>625</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; -e &lt;environment&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thin config -C /etc/thin/redmine.yml -c /var/www/redmine --servers 5 -e production</span><br><span class="line">thin config -C /etc/thin/myapp.yml -c /var/rails/myapp --servers 5 --socket /tmp/thin.myapp.sock -e production</span><br></pre></td></tr></table></figure>
+<!--more+阅读全文+-->
+
+<p>当执行第一条config命令，可能得到/etc/thin/redmine.yml内容如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">address: localhost</span><br><span class="line">pid: tmp/pids/thin.pid</span><br><span class="line"><span class="built_in">wait</span>: 30</span><br><span class="line">port: 3000</span><br><span class="line">timeout: 30</span><br><span class="line"><span class="built_in">log</span>: <span class="built_in">log</span>/thin.log</span><br><span class="line">max_conns: 1024</span><br><span class="line">require: []</span><br><span class="line"></span><br><span class="line">environment: production</span><br><span class="line">max_persistent_conns: 512</span><br><span class="line">servers: 5</span><br><span class="line">daemonize: <span class="literal">true</span></span><br><span class="line"><span class="built_in">chdir</span>: /var/www/redmine</span><br></pre></td></tr></table></figure>
+
+<p>启动应用<br><code>sevice thin start</code><br>将会启动3000~3004共5个端口。<br>如果你有Nginx就可以设置一个代理转发了</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/rails-load-schema/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -300,7 +390,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/rails-load-schema/" class="post-title-link" itemprop="url">rails 加载schema到指定环境</a>
+            <a href="/rails-load-schema/" class="post-title-link" itemprop="url">Rails 加载Schema到指定环境</a>
         </h2>
 
         <div class="post-meta">
@@ -464,7 +554,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ubuntu-intall-mysql-fatal-error-could-not-find-mysqld/" class="post-title-link" itemprop="url">ubuntu 安装mysql Could not find mysqld</a>
+            <a href="/ubuntu-intall-mysql-fatal-error-could-not-find-mysqld/" class="post-title-link" itemprop="url">Ubuntu 安装Mysql Could Not Find Mysqld</a>
         </h2>
 
         <div class="post-meta">
@@ -549,7 +639,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/tar-cvzf-folder/" class="post-title-link" itemprop="url">如何使用tar对整个文件夹打包</a>
+            <a href="/tar-cvzf-folder/" class="post-title-link" itemprop="url">如何使用Tar对整个文件夹打包</a>
         </h2>
 
         <div class="post-meta">
@@ -631,7 +721,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/mysql-select-my-cnf-how-to/" class="post-title-link" itemprop="url">mysql 编译安装选择配置文件my.cnf</a>
+            <a href="/mysql-select-my-cnf-how-to/" class="post-title-link" itemprop="url">Mysql 编译安装选择配置文件my.cnf</a>
         </h2>
 
         <div class="post-meta">
@@ -713,7 +803,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/redis-store-hash/" class="post-title-link" itemprop="url">redis 存入hash值</a>
+            <a href="/redis-store-hash/" class="post-title-link" itemprop="url">Redis 存入Hash值</a>
         </h2>
 
         <div class="post-meta">
@@ -796,7 +886,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/git-reset-how-to-show-index-info/" class="post-title-link" itemprop="url">git reset 暂存区如何信息提示</a>
+            <a href="/git-reset-how-to-show-index-info/" class="post-title-link" itemprop="url">Git Reset 暂存区如何信息提示</a>
         </h2>
 
         <div class="post-meta">
@@ -889,7 +979,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/git-how-to-merge/" class="post-title-link" itemprop="url">git 如何自动合并文件内容</a>
+            <a href="/git-how-to-merge/" class="post-title-link" itemprop="url">Git 如何自动合并文件内容</a>
         </h2>
 
         <div class="post-meta">
@@ -974,7 +1064,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/git-new-repo/" class="post-title-link" itemprop="url">新建git 版本库</a>
+            <a href="/git-new-repo/" class="post-title-link" itemprop="url">新建Git 版本库</a>
         </h2>
 
         <div class="post-meta">
@@ -1056,7 +1146,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/adwords-account-is-disabled/" class="post-title-link" itemprop="url">adwords帐号屡次被停用</a>
+            <a href="/adwords-account-is-disabled/" class="post-title-link" itemprop="url">Adwords帐号屡次被停用</a>
         </h2>
 
         <div class="post-meta">
@@ -1324,7 +1414,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/thanksgiving-day-mac-price/" class="post-title-link" itemprop="url">感恩节mac价格</a>
+            <a href="/thanksgiving-day-mac-price/" class="post-title-link" itemprop="url">感恩节Mac价格</a>
         </h2>
 
         <div class="post-meta">
@@ -1408,7 +1498,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/what-is-dup/" class="post-title-link" itemprop="url">what is dup</a>
+            <a href="/what-is-dup/" class="post-title-link" itemprop="url">What Is Dup</a>
         </h2>
 
         <div class="post-meta">
@@ -1490,7 +1580,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/redis-store-editor/" class="post-title-link" itemprop="url">redis-store的开发首选编辑器</a>
+            <a href="/redis-store-editor/" class="post-title-link" itemprop="url">Redis-Store的开发首选编辑器</a>
         </h2>
 
         <div class="post-meta">
@@ -1572,7 +1662,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/rspec-mock-more-time/" class="post-title-link" itemprop="url">rspec mock 多次</a>
+            <a href="/rspec-mock-more-time/" class="post-title-link" itemprop="url">Rspec Mock 多次</a>
         </h2>
 
         <div class="post-meta">
@@ -1660,7 +1750,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/git-cherry-pick/" class="post-title-link" itemprop="url">git cherry-pick</a>
+            <a href="/git-cherry-pick/" class="post-title-link" itemprop="url">Git Cherry-Pick</a>
         </h2>
 
         <div class="post-meta">
@@ -1744,7 +1834,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/https-security-alert/" class="post-title-link" itemprop="url">https协议security alert</a>
+            <a href="/https-security-alert/" class="post-title-link" itemprop="url">Https协议security Alert</a>
         </h2>
 
         <div class="post-meta">
@@ -1888,102 +1978,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/vim-split-window/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/vim-split-window/" class="post-title-link" itemprop="url">VIM分屏功能</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2011-09-27 22:27:40" itemprop="dateCreated datePublished" datetime="2011-09-27T22:27:40+08:00">2011-09-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">玩转软件</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>579</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>分屏启动Vim</p>
-<blockquote>
-<p>使用大写的O参数来垂直分屏。<br>vim -On file1 file2 …<br>使用小写的o参数来水平分屏。<br>vim -on file1 file2 …<br>注释: n是数字，表示分成几个屏。</p>
-</blockquote>
-<p>关闭分屏</p>
-<blockquote>
-<p>关闭当前窗口。<br>Ctrl+W c<br>关闭当前窗口，如果只剩最后一个了，则退出Vim。<br>Ctrl+W q</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/vim-split-window/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2041,13 +2035,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">291k</span>
+    <span title="Symbols count total">292k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">4:24</span>
+    <span title="Reading time total">4:25</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>

@@ -158,7 +158,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">905</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">906</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -283,6 +283,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/deploy-nginx-thin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/deploy-nginx-thin/" class="post-title-link" itemprop="url">部署Thin + Nginx</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-04-28 13:46:16" itemprop="dateCreated datePublished" datetime="2015-04-28T13:46:16+08:00">2015-04-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>部署thin + nginx<br>生成配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; -e &lt;environment&gt;</span><br><span class="line"></span><br><span class="line">thin config -C /etc/thin/myapp.yml -c /var/rails/myapp --servers 5 --socket /tmp/thin.myapp.sock -e development</span><br><span class="line"></span><br><span class="line">替换&lt;config-name&gt;为自己的应用名称，替换&lt;rails-app-root-path&gt;为应用的根目录，替换&lt;number-of-threads&gt;为启动的线程数，也就是启动多少个Thin服务，替换&lt;environment&gt;为运行环境。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">thin:</span></span><br><span class="line"><span class="symbol">environment:</span> development</span><br><span class="line"><span class="symbol">address:</span> <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span></span><br><span class="line"><span class="symbol">port:</span> <span class="number">3001</span></span><br><span class="line"><span class="symbol">timeout:</span> <span class="number">30</span></span><br><span class="line"><span class="symbol">log:</span> log/thin.log</span><br><span class="line"><span class="symbol">pid:</span> tmp/pids/thin.pid</span><br><span class="line"><span class="symbol">max_conns:</span> <span class="number">1024</span></span><br><span class="line"><span class="symbol">max_persistent_conns:</span> <span class="number">512</span></span><br><span class="line"><span class="symbol">wait:</span> <span class="number">30</span></span><br><span class="line"><span class="symbol">servers:</span> <span class="number">2</span></span><br><span class="line"><span class="symbol">daemonize:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># require: []</span></span><br></pre></td></tr></table></figure>
+<p>启动: <code>thin start -C config/thin.yml</code><br>停止: <code>thin stop -C config/thin.yml</code></p>
+<p>nginx:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">     listen 3001;</span><br><span class="line">     charset utf-8;</span><br><span class="line">     root /var/rails/mysapp/public;</span><br><span class="line">     access_log logs/access.log;</span><br><span class="line">     error_log  logs/error.log;</span><br><span class="line"></span><br><span class="line">     location / &#123;</span><br><span class="line">         <span class="comment"># proxy_pass          http://rails_servers;</span></span><br><span class="line">         <span class="comment"># proxy_redirect      default;</span></span><br><span class="line">         proxy_redirect      <span class="literal">false</span>;</span><br><span class="line">         proxy_set_header    X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">         proxy_set_header    X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">         proxy_set_header    Host <span class="variable">$http_host</span>;</span><br><span class="line">         proxy_next_upstream http_502 http_504 error timeout invalid_header;</span><br><span class="line">         proxy_pass <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (-f <span class="variable">$request_filename</span>/index.html)</span><br><span class="line">        &#123;</span><br><span class="line">          rewrite (.*) <span class="variable">$1</span>/index.html <span class="built_in">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (-f <span class="variable">$request_filename</span>.html) &#123;</span><br><span class="line">          rewrite (.*) <span class="variable">$1</span>.html <span class="built_in">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!-f <span class="variable">$request_filename</span>) &#123;</span><br><span class="line">          proxy_pass http://rails_servers;</span><br><span class="line">          <span class="built_in">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> upstream rails_servers&#123;</span><br><span class="line">        server 127.0.0.1:3002;</span><br><span class="line">        server 127.0.0.1:3003;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/rspec-exception-identity-or-equivalence/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -300,7 +388,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/rspec-exception-identity-or-equivalence/" class="post-title-link" itemprop="url">rspec exception identity or equivalence</a>
+            <a href="/rspec-exception-identity-or-equivalence/" class="post-title-link" itemprop="url">Rspec Exception Identity or Equivalence</a>
         </h2>
 
         <div class="post-meta">
@@ -383,7 +471,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/delegation-be-enhance-by-active-support-in-module/" class="post-title-link" itemprop="url">Delegation be enhance by active support in module</a>
+            <a href="/delegation-be-enhance-by-active-support-in-module/" class="post-title-link" itemprop="url">Delegation Be Enhance by Active Support in Module</a>
         </h2>
 
         <div class="post-meta">
@@ -472,7 +560,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/pg-connection-bad/" class="post-title-link" itemprop="url">pg连接错误</a>
+            <a href="/pg-connection-bad/" class="post-title-link" itemprop="url">Pg连接错误</a>
         </h2>
 
         <div class="post-meta">
@@ -559,7 +647,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/ruby-hash-sort/" class="post-title-link" itemprop="url">ruby hash 排序</a>
+            <a href="/ruby-hash-sort/" class="post-title-link" itemprop="url">Ruby Hash 排序</a>
         </h2>
 
         <div class="post-meta">
@@ -641,7 +729,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/bundler-specify-gem-versions/" class="post-title-link" itemprop="url">bundler Specify gem versions</a>
+            <a href="/bundler-specify-gem-versions/" class="post-title-link" itemprop="url">Bundler Specify Gem Versions</a>
         </h2>
 
         <div class="post-meta">
@@ -725,7 +813,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/rspec-exception-types-classes-response/" class="post-title-link" itemprop="url">rspec exception types classes response</a>
+            <a href="/rspec-exception-types-classes-response/" class="post-title-link" itemprop="url">Rspec Exception Types Classes Response</a>
         </h2>
 
         <div class="post-meta">
@@ -807,7 +895,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/native-extension-to-perform-the-binary-search-within-the-hashring/" class="post-title-link" itemprop="url">Native extension to perform the binary search within the hashring</a>
+            <a href="/native-extension-to-perform-the-binary-search-within-the-hashring/" class="post-title-link" itemprop="url">Native Extension to Perform the Binary Search Within the Hashring</a>
         </h2>
 
         <div class="post-meta">
@@ -893,7 +981,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/rspec-exception-comparisons/" class="post-title-link" itemprop="url">rspec exception comparisons</a>
+            <a href="/rspec-exception-comparisons/" class="post-title-link" itemprop="url">Rspec Exception Comparisons</a>
         </h2>
 
         <div class="post-meta">
@@ -975,7 +1063,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/secret-token-issues/" class="post-title-link" itemprop="url">secret_token:问题</a>
+            <a href="/secret-token-issues/" class="post-title-link" itemprop="url">Secret_token:问题</a>
         </h2>
 
         <div class="post-meta">
@@ -1065,7 +1153,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/redis-hyperloglog-command/" class="post-title-link" itemprop="url">redis HyperLogLog 命令</a>
+            <a href="/redis-hyperloglog-command/" class="post-title-link" itemprop="url">Redis HyperLogLog 命令</a>
         </h2>
 
         <div class="post-meta">
@@ -1155,7 +1243,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/rails4-server-up-with-rack/" class="post-title-link" itemprop="url">rails4  rack调用</a>
+            <a href="/rails4-server-up-with-rack/" class="post-title-link" itemprop="url">Rails4  Rack调用</a>
         </h2>
 
         <div class="post-meta">
@@ -1239,7 +1327,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/segments-for-index-in-innodb/" class="post-title-link" itemprop="url">segments for index in innodb</a>
+            <a href="/segments-for-index-in-innodb/" class="post-title-link" itemprop="url">Segments for Index in Innodb</a>
         </h2>
 
         <div class="post-meta">
@@ -1488,7 +1576,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/redis-hashring/" class="post-title-link" itemprop="url">Redis::HashRing source code</a>
+            <a href="/redis-hashring/" class="post-title-link" itemprop="url">Redis::HashRing Source Code</a>
         </h2>
 
         <div class="post-meta">
@@ -1570,7 +1658,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/mac-use-lsof-to-show-which-process-use-the-port/" class="post-title-link" itemprop="url">mac 查看端口占用程序</a>
+            <a href="/mac-use-lsof-to-show-which-process-use-the-port/" class="post-title-link" itemprop="url">Mac 查看端口占用程序</a>
         </h2>
 
         <div class="post-meta">
@@ -1652,7 +1740,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/how-to-understanding-something-that-is-complex-and-poorly-documented/" class="post-title-link" itemprop="url">how to understanding something</a>
+            <a href="/how-to-understanding-something-that-is-complex-and-poorly-documented/" class="post-title-link" itemprop="url">How to Understanding Something</a>
         </h2>
 
         <div class="post-meta">
@@ -1834,7 +1922,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/how-to-use-eval-args-filename-and-lineno/" class="post-title-link" itemprop="url">测试eval的filename,与lineno参数使用</a>
+            <a href="/how-to-use-eval-args-filename-and-lineno/" class="post-title-link" itemprop="url">测试Eval的filename,与lineno参数使用</a>
         </h2>
 
         <div class="post-meta">
@@ -1880,91 +1968,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 1、测试eval的filename,与lineno参数使用</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、可以自定义程序出错时的出错信息（出错的文件名，程序在哪行执行的,方便出错日志的查询,错误的定位)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    string = <span class="string">&quot;1/0&quot;</span></span><br><span class="line">    <span class="comment"># eval(string, nil, __FILE__, __LINE__)</span></span><br><span class="line">    eval(string, <span class="literal">nil</span>, <span class="string">&quot;custom_file.rb&quot;</span>, <span class="number">60</span>)</span><br><span class="line">    <span class="comment"># eval(string)</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">MyClass.new.my_method <span class="comment"># custom_file.rb:60:in `/&#x27;: divided by 0 (ZeroDivisionError)</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/load-secondary-args-true-or-false/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/load-secondary-args-true-or-false/" class="post-title-link" itemprop="url">load文件参数为false或true时,对变量,实例变量,常量的影响</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-04-04 22:06:30" itemprop="dateCreated datePublished" datetime="2015-04-04T22:06:30+08:00">2015-04-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.8k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 1、load文件参数为false时，对变量，实例变量,常量的影响</span></span><br><span class="line"><span class="comment"># 2、load文件参数为false时，类是否被重新打开</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、变量不会被加载的文件影响，实例变量和常量会被影响。因为被加载文件中的变量会在文件加载完成后，掉出加载文件的作用域</span></span><br><span class="line"><span class="comment">#    而实例变量和常量不会掉出作用域</span></span><br><span class="line"><span class="comment"># 2、类可以被重新打开，因为被加载文件中类也没有掉出作用域（因为类也是常量）</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  var  = <span class="number">2</span></span><br><span class="line">  @var = <span class="number">2</span></span><br><span class="line">  VAR  = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">      <span class="string">&quot;i&#x27;m in load_2 file&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  puts <span class="string">&quot;==========Test1:OUTPUT==========&quot;</span></span><br><span class="line"></span><br><span class="line">  load File.expand_path(<span class="string">&#x27;load_file.rb&#x27;</span>, File.dirname(__FILE_<span class="number">_</span>))</span><br><span class="line"></span><br><span class="line">  puts <span class="string">&#x27;==========load_2.rb=======&#x27;</span></span><br><span class="line">  puts <span class="string">&quot;var :<span class="subst">#&#123;var &#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;@var:<span class="subst">#&#123;@var&#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;VAR :<span class="subst">#&#123;VAR &#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;my_method:<span class="subst">#&#123;MyClass.new.my_method&#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&#x27;==========load_2.rb=======&#x27;</span></span><br><span class="line">  puts <span class="string">&quot;==========Test1:OUTPUT==========&quot;</span></span><br><span class="line">  <span class="comment"># &lt;!-- more --&gt;</span></span><br><span class="line">  <span class="comment"># ==========Test1:OUTPUT==========</span></span><br><span class="line">  <span class="comment"># ==========load_1.rb=======</span></span><br><span class="line">  <span class="comment"># var :1</span></span><br><span class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></span><br><span class="line">  <span class="comment"># VAR :1</span></span><br><span class="line">  <span class="comment"># my_method:i&#x27;m in load_1 file</span></span><br><span class="line">  <span class="comment"># ==========load_1.rb=======</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># ==========load_2.rb=======</span></span><br><span class="line">  <span class="comment"># var :2</span></span><br><span class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></span><br><span class="line">  <span class="comment"># VAR :1</span></span><br><span class="line">  <span class="comment"># my_method:i&#x27;m in load_1 file</span></span><br><span class="line">  <span class="comment"># ==========load_2.rb=======</span></span><br><span class="line">  <span class="comment"># ==========Test1:OUTPUT==========</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标2:</span></span><br><span class="line"><span class="comment"># 1、load文件参数为true时，对变量，实例变量,常量的影响</span></span><br><span class="line"><span class="comment"># 2、load文件参数为true时，类是否被重新打开</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、变量不会被加载的文件影响，实例变量和常量也不会被影响</span></span><br><span class="line"><span class="comment"># 2、类不会被影响</span></span><br><span class="line"><span class="comment"># 因为ruby会在load文件时为其创建匿名模块，让其文件中的实例变量、常量、类落在其自身范围内，且在load完成后，销毁这个</span></span><br><span class="line"><span class="comment"># 匿名模块（即加载文件中的所有内容），加入true参数的这种做法无法让加载它的文件使用其文件中代码，仅仅是起到了运行load</span></span><br><span class="line"><span class="comment"># 文件的代码的作用</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line">lambda &#123;</span><br><span class="line">  var  = <span class="number">2</span></span><br><span class="line">  @var = <span class="number">2</span></span><br><span class="line">  VAR  = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">      <span class="string">&quot;i&#x27;m in load_2 file&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  puts <span class="string">&quot;==========Test2:OUTPUT==========&quot;</span></span><br><span class="line"></span><br><span class="line">  load File.expand_path(<span class="string">&#x27;load_file.rb&#x27;</span>, File.dirname(__FILE_<span class="number">_</span>)), <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  puts <span class="string">&#x27;==========load_2.rb=======&#x27;</span></span><br><span class="line">  puts <span class="string">&quot;var :<span class="subst">#&#123;var &#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;@var:<span class="subst">#&#123;@var&#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;VAR :<span class="subst">#&#123;VAR &#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;my_method:<span class="subst">#&#123;MyClass.new.my_method&#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&#x27;==========load_2.rb=======&#x27;</span></span><br><span class="line">  puts <span class="string">&quot;==========Test2:OUTPUT==========&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># ==========Test2:OUTPUT==========</span></span><br><span class="line">  <span class="comment"># ==========load_1.rb=======</span></span><br><span class="line">  <span class="comment"># var :1</span></span><br><span class="line">  <span class="comment"># <span class="doctag">@var</span>:1</span></span><br><span class="line">  <span class="comment"># VAR :1</span></span><br><span class="line">  <span class="comment"># my_method:i&#x27;m in load_1 file</span></span><br><span class="line">  <span class="comment"># ==========load_1.rb=======</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># ==========load_2.rb=======</span></span><br><span class="line">  <span class="comment"># var :2</span></span><br><span class="line">  <span class="comment"># <span class="doctag">@var</span>:2</span></span><br><span class="line">  <span class="comment"># VAR :2</span></span><br><span class="line">  <span class="comment"># my_method:i&#x27;m in load_2 file</span></span><br><span class="line">  <span class="comment"># ==========load_2.rb=======</span></span><br><span class="line">  <span class="comment"># ==========Test2:OUTPUT==========</span></span><br><span class="line">&#125;.call</span><br></pre></td></tr></table></figure>
-
-<p>load_file.rb</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># module Load1</span></span><br><span class="line"></span><br><span class="line">var = <span class="number">1</span></span><br><span class="line">@var = <span class="number">1</span></span><br><span class="line">VAR = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    <span class="string">&quot;i&#x27;m in load_1 file&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts <span class="string">&#x27;==========load_1.rb=======&#x27;</span></span><br><span class="line">puts <span class="string">&quot;var :<span class="subst">#&#123;var &#125;</span>&quot;</span></span><br><span class="line">puts <span class="string">&quot;@var:<span class="subst">#&#123;@var&#125;</span>&quot;</span></span><br><span class="line">puts <span class="string">&quot;VAR :<span class="subst">#&#123;VAR &#125;</span>&quot;</span></span><br><span class="line">puts <span class="string">&quot;my_method:<span class="subst">#&#123;MyClass.new.my_method&#125;</span>&quot;</span></span><br><span class="line">puts <span class="string">&#x27;==========load_1.rb=======&#x27;</span></span><br><span class="line">puts</span><br><span class="line"></span><br><span class="line"><span class="comment"># end</span></span><br></pre></td></tr></table></figure>
-
       
     </div>
 
@@ -2036,13 +2039,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">291k</span>
+    <span title="Symbols count total">292k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">4:24</span>
+    <span title="Reading time total">4:25</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
