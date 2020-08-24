@@ -158,7 +158,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">906</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">908</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -279,6 +279,179 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/scope-of-instance-variable-in-rake-block/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/scope-of-instance-variable-in-rake-block/" class="post-title-link" itemprop="url">Rake 实例变量作用范围</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-04-30 13:20:05" itemprop="dateCreated datePublished" datetime="2015-04-30T13:20:05+08:00">2015-04-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>269</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>rake 实例变量作用范围,可以看到在task的block中，当前self为main，所以@people可以在say方法中访问。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">desc <span class="string">&quot;test instance variable&quot;</span></span><br><span class="line">task <span class="symbol">:hello_world</span> =&gt; <span class="symbol">:environment</span> <span class="keyword">do</span></span><br><span class="line">  @people = <span class="string">&quot;Jone&quot;</span></span><br><span class="line">  puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say</span></span></span><br><span class="line">    puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></span><br><span class="line">    puts @people</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  say</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#=&gt;main</span></span><br><span class="line"><span class="comment">#=&gt;main</span></span><br><span class="line"><span class="comment">#=&gt;Jone</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/issues-of-install-memcached-reds-postgresql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/issues-of-install-memcached-reds-postgresql/" class="post-title-link" itemprop="url">安装Memcached、redis、postgresql问题总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-04-29 23:53:38" itemprop="dateCreated datePublished" datetime="2015-04-29T23:53:38+08:00">2015-04-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>467</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>编译 <code>./configure --prefix=/srv/memcached/memcached145 --with-libevent=/usr/</code><br>需要安装 libevent ，安装时要确保知道安装路径</p>
+<p>启动memcached<br><code>memcached -d -u root -m 200 -P /tmp/memcached.pid</code></p>
+<p>安装redis<br><code>make PREFIX=/srv/redis/redis2815 install</code></p>
+<p>启动:daemonize yes: Make redis run as a daemon<br><code>redis-server /usr/etc/redis.conf</code></p>
+<p>安装postgresql，遇到问题:Can’t find the ‘libpq-fe.h header<br>解决方法:</p>
+<ol>
+<li>`gem install pg -v ‘0.18.1’ – –with-pg-config=/path/config</li>
+</ol>
+<p>–with-pg=/path/pg –with-pg-lib=/path/<code>2.</code>yum install postgresql-devel<code>最终用方法2解决</code>yum list installed | grep postgres`</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1797,177 +1970,6 @@
 </ol>
 </blockquote>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/which-day-is-easter-in-2015/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/which-day-is-easter-in-2015/" class="post-title-link" itemprop="url">复活节的由来,2015年复活节是哪一天几月几日</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-04-06 12:23:06" itemprop="dateCreated datePublished" datetime="2015-04-06T12:23:06+08:00">2015-04-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/gossip/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>复活节（主复活日）是一个西方的重要节日，在每年春分月圆之后第一个星期日。基督徒认为，复活节象征着重生与希望，为纪念耶稣基督于公元30到33年之间被钉死在十字架之后第三天复活的日子。天主教/新教和东正教复活节的计算略有差异，根据罗马教会传统，在春分(3月21日)当日见到满月或过了春分见到第一个满月后，遇到的第一个星期日即为复活节。东正教会则规定，如果满月恰好出现在这第一个星期日，则复活节再推迟一周。因此，复活节的日期大致在公历3月22日至4月25日之间。</p>
-<p>　　复活节那一天，是经由三个历法（分别是西历、中国阴历、星期）合并出来的，怪不得它会如此飘忽不定了。有些年份三个教派的复活节是重合的，而有些年份又不同，进而它们耶稣受难日的日期也有所差异，2015年的天主教、新教的复活节是2015年4月5日。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/which-day-is-easter-in-2015/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/how-to-use-eval-args-filename-and-lineno/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/how-to-use-eval-args-filename-and-lineno/" class="post-title-link" itemprop="url">测试Eval的filename,与lineno参数使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-04-05 23:22:09" itemprop="dateCreated datePublished" datetime="2015-04-05T23:22:09+08:00">2015-04-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>432</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 1、测试eval的filename,与lineno参数使用</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、可以自定义程序出错时的出错信息（出错的文件名，程序在哪行执行的,方便出错日志的查询,错误的定位)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    string = <span class="string">&quot;1/0&quot;</span></span><br><span class="line">    <span class="comment"># eval(string, nil, __FILE__, __LINE__)</span></span><br><span class="line">    eval(string, <span class="literal">nil</span>, <span class="string">&quot;custom_file.rb&quot;</span>, <span class="number">60</span>)</span><br><span class="line">    <span class="comment"># eval(string)</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">MyClass.new.my_method <span class="comment"># custom_file.rb:60:in `/&#x27;: divided by 0 (ZeroDivisionError)</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
