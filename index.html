@@ -158,7 +158,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">908</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">909</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -279,6 +279,114 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/what-does-kill-0-do/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/what-does-kill-0-do/" class="post-title-link" itemprop="url">What Does Kill 0 Do</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-17 14:53:25" itemprop="dateCreated datePublished" datetime="2020-09-17T14:53:25+08:00">2020-09-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="What-does-kill-0-do"><a href="#What-does-kill-0-do" class="headerlink" title="What does kill -0 ... do?"></a>What does <code>kill -0 ...</code> do?</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(cat /path/to/file.pid); <span class="keyword">then</span></span><br><span class="line">    ... <span class="keyword">do</span> something ...</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="kill-1"><a href="#kill-1" class="headerlink" title="kill(1)"></a><em>kill(1)</em></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ man 1 <span class="built_in">kill</span></span><br><span class="line">...</span><br><span class="line">If sig is 0, <span class="keyword">then</span> no signal is sent, but error checking is still performed.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h4 id="kill-2"><a href="#kill-2" class="headerlink" title="kill(2)"></a><em>kill(2)</em></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ man 2 <span class="built_in">kill</span></span><br><span class="line">...</span><br><span class="line">If sig is 0, <span class="keyword">then</span> no signal is sent, but error checking is still performed; </span><br><span class="line">this can be used to check <span class="keyword">for</span> the existence of a process ID or process </span><br><span class="line">group ID.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>So signal 0 will not actually in fact send anything to your process’s PID, but will check whether you have permissions to do so.</p>
+<h3 id="Where-might-this-be-useful"><a href="#Where-might-this-be-useful" class="headerlink" title="Where might this be useful?"></a>Where might this be useful?</h3><p>One obvious place would be if you were trying to determine if you had permissions to send signals to a running process via <code>kill</code>. You could check prior to sending the actual <code>kill</code> signal that you want, by wrapping a check to make sure that <code>kill -0 &lt;PID&gt;</code> was first allowed.</p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Say a process was being run by root as follows:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sleep 2500 &amp;</span><br><span class="line">[1] 15693</span><br></pre></td></tr></table></figure>
+
+<p>Now in another window if we run this command we can confirm that that PID is running.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pgrep sleep</span><br><span class="line">15693</span><br></pre></td></tr></table></figure>
+
+<p>Now let’s try this command to see if we have access to send that PID signals via <code>kill</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(pgrep sleep); <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;You&#x27;re weak!&quot;</span>; <span class="keyword">fi</span></span><br><span class="line">bash: <span class="built_in">kill</span>: (15693) - Operation not permitted</span><br><span class="line">You<span class="string">&#x27;re weak!</span></span><br></pre></td></tr></table></figure>
+
+<p>So it works, but the output is leaking a message from the <code>kill</code> command that we don’t have permissions. Not a big deal, simply catch STDERR and send it to <code>/dev/null</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(pgrep sleep) 2&gt;/dev/null; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;You&#x27;re weak!&quot;</span>; <span class="keyword">fi</span></span><br><span class="line">You<span class="string">&#x27;re weak!</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Complete-example"><a href="#Complete-example" class="headerlink" title="Complete example"></a>Complete example</h3><p>So then we could do something like this, <code>killer.bash</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">PID=$(pgrep sleep)</span><br><span class="line"><span class="keyword">if</span> ! <span class="built_in">kill</span> -0 <span class="variable">$PID</span> 2&gt;/dev/null; <span class="keyword">then</span> </span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;you don&#x27;t have permissions to kill PID:<span class="variable">$PID</span>&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">kill</span> -9 <span class="variable">$PID</span></span><br></pre></td></tr></table></figure>
+
+<p>Now when I run the above as a non-root user:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ~/killer.bash </span><br><span class="line">you don<span class="string">&#x27;t have permissions to kill PID:15693</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ echo $?</span></span><br><span class="line"><span class="string">1</span></span><br></pre></td></tr></table></figure>
+
+<p>However when it’s run as root:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ~/killer.bash </span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> $?</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">$ pgrep sleep</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1922,88 +2030,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/do-you-love-me-ha/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/do-you-love-me-ha/" class="post-title-link" itemprop="url">Do You Love Me</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-07-10 13:21:50" itemprop="dateCreated datePublished" datetime="2019-07-10T13:21:50+08:00">2019-07-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/consciousness/" itemprop="url" rel="index"><span itemprop="name">意识流</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>69</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Do you love me?<br>Yea, I do<br>How much?<br>I love you more than yesterday but as than tomorrow</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2061,13 +2087,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">292k</span>
+    <span title="Symbols count total">293k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">4:25</span>
+    <span title="Reading time total">4:27</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
