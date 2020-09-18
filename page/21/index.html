@@ -158,7 +158,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">910</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">912</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -279,6 +279,205 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/delete-fedora-kernel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/delete-fedora-kernel/" class="post-title-link" itemprop="url">Fedora 删除旧内核</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2011-04-13 16:36:37" itemprop="dateCreated datePublished" datetime="2011-04-13T16:36:37+08:00">2011-04-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">我爱Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>404</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>由于Fedora更新升级非常的频繁， 所以， 非常有必要清除陈旧的内核，方法如下：</p>
+<ol>
+<li><p>查看当前系统中已安装的内核相关包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep kernel</span><br><span class="line">kernel-2.6.35.6-45.fc14.i686</span><br><span class="line">kernel-2.6.35.12-88.fc14.i686</span><br><span class="line">abrt-addon-kerneloops-1.1.17-1.fc14.i686</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看当前系统内核<br>shell&gt; uname -r<br>kernel-2.6.35.12-88.fc14.i686</p>
+</li>
+<li><p>确定要删除的内核：<br>这里为：kernel-2.6.35.6-45.fc14.i686</p>
+</li>
+<li><p>删除内核：<br><code>yum remove kernel-2.6.35.6-45.fc14.i686</code></p>
+</li>
+</ol>
+<p>说明：</p>
+<blockquote>
+<p>没有直接使用: rpm -e 的方法删除内核包， 而是使用 yum remove 进行删除，<br>因为使用yum remove删除， yum 会自动移除 ： /boot/grub/menu.lst 中的相关启动项。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/fedora-14-install-nvidia-drives/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/fedora-14-install-nvidia-drives/" class="post-title-link" itemprop="url">Fedora 14  安装 NVIDIA 显卡驱</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2011-04-12 21:26:39" itemprop="dateCreated datePublished" datetime="2011-04-12T21:26:39+08:00">2011-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">我爱Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>首先，安装 RPM Fusion 软件仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su -c <span class="string">&#x27;rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm&#x27;</span></span><br><span class="line">su -c <span class="string">&#x27;rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm&#x27;</span></span><br><span class="line">su -c <span class="string">&#x27;yum update&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>然后，安装 NVIDIA 显卡驱动</p>
+<ol>
+<li>确定显卡类型（当然，如果你知道你的显卡类型，就没必要执行这一步了）<br><code>su -c &#39;/sbin/lspci | grep VGA&#39;</code></li>
+<li>安装nvidia驱动<blockquote>
+<ul>
+<li>如果是 GeForce 6, 7, 8, 9, 200, 300, 400 &amp; 500 系列显卡：<br><code>su -c &#39;yum install kmod-nvidia xorg-x11-drv-nvidia-libs&#39;</code></li>
+<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-PAE&#39;</code></li>
+<li>或者：<br><code>su -c &#39;yum install akmod-nvidia xorg-x11-drv-nvidia-libs&#39;</code></li>
+<li>如果是 GeForce Fx 显卡：<br>yum install kmod-nvidia-173xx xorg-x11-drv-nvidia-173xx-libs</li>
+<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-173xx-PAE&#39;</code></li>
+<li>或者：<br><code>su -c &#39;yum install akmod-nvidia-173xxxorg-x11-drv-nvidia-173xx-libs&#39;</code></li>
+<li>如果是 GeForce 4 或者更低系列的显卡：<br><code>su -c &#39;yum install kmod-nvidia-96xx</code> xorg-x11-drv-nvidia-96xx-libs’</li>
+<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-96xx-PAE&#39;</code></li>
+<li>或者：<br><code>su -c &#39;yum install akmod-nvidia-96xxxorg-x11-drv-nvidia-96xx-libs&#39;</code></li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<p>最后，重启系统</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1842,188 +2041,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/shuan-yang-rou-zhi-ma-jiang-xiao-liao-without-jiu-cai-hua/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/shuan-yang-rou-zhi-ma-jiang-xiao-liao-without-jiu-cai-hua/" class="post-title-link" itemprop="url">涮羊肉之芝麻酱小料</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2011-03-03 23:06:27" itemprop="dateCreated datePublished" datetime="2011-03-03T23:06:27+08:00">2011-03-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/food/" itemprop="url" rel="index"><span itemprop="name">美食么么</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>139</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>涮羊肉时芝麻酱小料自然是少不了的，本博比较钟爱自己调的芝麻酱小料，经过多次尝试，发现韭菜花这一味调味料不太友好，那怕你只放了一丁点在料里面，料本身那鲜美的味道就会被韭菜花味全部代替掉，开始讨厌那种绿色了呃<del>~</del></p>
-<p>所以本博以后调味时就再也不放韭菜花了，如果有愿意吃的童鞋可以自己调入~~</p>
-<p><a target="_blank" rel="noopener" href="http://img.gagahappy.cn/blog/2011/03/1_100911202401_11.jpg"><img src="http://img.gagahappy.cn/blog/2011/03/1_100911202401_11.jpg" title="芝麻酱小料"></a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/ten-chrome-shortcut-keys/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ten-chrome-shortcut-keys/" class="post-title-link" itemprop="url">Chrome 快捷键</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2011-03-02 12:48:16" itemprop="dateCreated datePublished" datetime="2011-03-02T12:48:16+08:00">2011-03-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">玩转软件</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-              <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>392</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-              <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li>Alt+F 或 Alt+E – 打开扳手工具菜单，之后就可以用上下箭头键来进入你想要的功能了</li>
-<li>Ctrl+Shift+B — 切换收藏工具条是否显示</li>
-<li>Ctrl+D – 将当前标签页加入收藏</li>
-<li>Ctrl+Shift+D – 将现在所有打开的标签页都放到同一个收藏夹目录里</li>
-<li>Ctrl+J – 打开“下载”标签页</li>
-<li>Shift+Esc — 打开“任务管理器”，在这里你可以关闭无响应的标签页</li>
-<li>Ctrl+Shift+J — 打开 Chrome 开发工具</li>
-<li>Ctrl+L – 选中当前标签页的URL地址，好直接输入新网址</li>
-<li>Ctrl+Backspace — 删除地址栏里光标左边的一个词</li>
-<li>Ctrl+G – 找到通过Ctrl+F查找的下一个词，Ctrl+Shift+G则是查找上一个词</li>
-<li>Ctrl+U — 查看当前标签页的源代码</li>
-<li>Ctrl+R — 跟F5一样都是刷新当前标签页</li>
-<li>Ctrl+1(2, 3, 4等等) — 切换到第几个标签页（从左数）</li>
-<li>Ctrl+Shift+T — 重新打开刚刚关闭的标签页</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="http://img.gagahappy.cn/blog/2011/03/chromelogo.jpg"><img src="http://img.gagahappy.cn/blog/2011/03/chromelogo.jpg" title="chrome"></a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2081,13 +2098,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">295k</span>
+    <span title="Symbols count total">296k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">4:28</span>
+    <span title="Reading time total">4:29</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
