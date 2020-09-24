@@ -15474,4 +15474,41 @@ end</code></pre>
         <tag>随笔</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Git 知识补充</title>
+    <url>/git-learning-supplement/</url>
+    <content><![CDATA[<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ol>
+<li><p>git 可以只提交文件的部分内容， git add -p,称之为hunk, sourcetree也可以进行设置</p>
+</li>
+<li><p>分支改名<br>git branch -m cat tiger</p>
+</li>
+<li><p>分支合并后产生的commit, A合并B，commit 信息中，父提交记录顺序，parents : A, B</p>
+<p>A在前，B在后，表示是A 合并的B</p>
+</li>
+<li><p>git如何判断分支是否可以删除<br>当前分支所指向的commit ，没有其它commit指向它（这个提交(分支)还没有被合并），或只有当前分支指向它，没有其它分支指向它时，在删除这个分支时就会有提示不能直接删除</p>
+</li>
+<li><p>rebase 后，对应commit 值是否发生变化<br>看情况，嫁接到其它commit 之上的commit 的值会发生变化，因为其父提交发生了变化，同理，在这个commit 之后的提交的值也发生变化<br>A B C D E F，把F嫁接到其它 COMMIT后，A到E的COMMIT的值都发生变化</p>
+<p>修改现有COMMIT 的注释，也会发生这样的连锁反应</p>
+</li>
+<li><p>rebase 的其他用途<br>修改历史提交注释 r选项<br>合并多个提交 s 选项<br>把一个提交拆分成多个commit 在操作列表使用使用 edit<br>在commit 之间添加新的commit edit选项<br>调整commit 之间的顺序 直接在列表里调整，<br>删除commit 在列表里删除相关行过使用drop,删除后对它之后commit 的影响如何</p>
+</li>
+<li><p>空目录无法被添加到git<br>因为根据算法，添加的对象必须要有内容，以供sha1算法使用</p>
+</li>
+<li><p>合并后再使用 <code>git rebase </code> 使提交成为一条直线</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge master</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line">Merge made by the <span class="string">&#x27;recursive&#x27;</span> strategy.</span><br><span class="line"> layout/_partials/header/menu-item.njk      | 5 +----</span><br><span class="line"> layout/_partials/page/breadcrumb.njk       | 6 +-----</span><br><span class="line"> layout/_partials/post/post-followme.njk    | 2 +-</span><br><span class="line"> layout/_partials/sidebar/site-overview.njk | 2 +-</span><br><span class="line"> </span><br><span class="line">git slog --graph</span><br><span class="line">*   b1b3e13 (HEAD -&gt; release) Merge branch <span class="string">&#x27;upstream-master&#x27;</span> into release</span><br><span class="line">|\</span><br><span class="line">| * d51ca0e (upstream/master, upstream-master) Fix: handle invalid config</span><br><span class="line">* | 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts</span><br><span class="line">|/</span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br><span class="line"> </span><br><span class="line">git rebase</span><br><span class="line">First, rewinding head to replay your work on top of it...</span><br><span class="line">Applying: Fix: handle invalid config</span><br><span class="line">Using index info to reconstruct a base tree...</span><br><span class="line">M    layout/_partials/post/post-followme.njk</span><br><span class="line">M    layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Falling back to patching base and 3-way merge...</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">* 217e224 (HEAD -&gt; release) Fix: handle invalid config</span><br><span class="line">* 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts <span class="comment"># 以这个提交做为 rebase</span></span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>使用merge出现了分支线路</li>
+<li>rebase后，分支线路消失，成为一条直线。 是 以当前分支的最TOP的那个提交做为rebase，重放合并进来的分支上的提交的</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>玩转软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
 </search>
