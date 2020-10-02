@@ -15,7 +15,7 @@
     <atom:link href="http://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</description>
-    <pubDate>Thu, 24 Sep 2020 12:58:44 GMT</pubDate>
+    <pubDate>Thu, 24 Sep 2020 13:04:44 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -34,6 +34,8 @@
         
       
       
+      
+      <content:encoded><![CDATA[<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ol><li><p>git 可以只提交文件的部分内容， git add -p,称之为hunk, sourcetree也可以进行设置</p></li><li><p>分支改名<br>git branch -m cat tiger</p></li><li><p>分支合并后产生的commit, A合并B，commit 信息中，父提交记录顺序，parents : A, B</p><p>A在前，B在后，表示是A 合并的B</p></li><li><p>git如何判断分支是否可以删除<br>当前分支所指向的commit ，没有其它commit指向它（这个提交(分支)还没有被合并），或只有当前分支指向它，没有其它分支指向它时，在删除这个分支时就会有提示不能直接删除</p></li><li><p>rebase 后，对应commit 值是否发生变化<br>看情况，嫁接到其它commit 之上的commit 的值会发生变化，因为其父提交发生了变化，同理，在这个commit 之后的提交的值也发生变化<br>A B C D E F，把F嫁接到其它 COMMIT后，A到E的COMMIT的值都发生变化</p><p>修改现有COMMIT 的注释，也会发生这样的连锁反应</p></li><li><p>rebase 的其他用途<br>修改历史提交注释 r选项<br>合并多个提交 s 选项<br>把一个提交拆分成多个commit 在操作列表使用使用 edit<br>在commit 之间添加新的commit edit选项<br>调整commit 之间的顺序 直接在列表里调整，<br>删除commit 在列表里删除相关行过使用drop,删除后对它之后commit 的影响如何</p></li><li><p>空目录无法被添加到git<br>因为根据算法，添加的对象必须要有内容，以供sha1算法使用</p></li><li><p>合并后再使用 <code>git rebase </code> 使提交成为一条直线</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">git merge master</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line">Merge made by the <span class="string">&#x27;recursive&#x27;</span> strategy.</span><br><span class="line"> layout/_partials/header/menu-item.njk      | 5 +----</span><br><span class="line"> layout/_partials/page/breadcrumb.njk       | 6 +-----</span><br><span class="line"> layout/_partials/post/post-followme.njk    | 2 +-</span><br><span class="line"> layout/_partials/sidebar/site-overview.njk | 2 +-</span><br><span class="line"> </span><br><span class="line">git slog --graph</span><br><span class="line">*   b1b3e13 (HEAD -&gt; release) Merge branch <span class="string">&#x27;upstream-master&#x27;</span> into release</span><br><span class="line">|\</span><br><span class="line">| * d51ca0e (upstream/master, upstream-master) Fix: handle invalid config</span><br><span class="line">* | 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts</span><br><span class="line">|/</span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br><span class="line"> </span><br><span class="line">git rebase</span><br><span class="line">First, rewinding head to replay your work on top of it...</span><br><span class="line">Applying: Fix: handle invalid config</span><br><span class="line">Using index info to reconstruct a base tree...</span><br><span class="line">M    layout/_partials/post/post-followme.njk</span><br><span class="line">M    layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Falling back to patching base and 3-way merge...</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">* 217e224 (HEAD -&gt; release) Fix: handle invalid config</span><br><span class="line">* 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts <span class="comment"># 以这个提交做为 rebase</span></span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br></pre></td></tr></table></figure><ol><li>使用merge出现了分支线路</li><li>rebase后，分支线路消失，成为一条直线。 是 以当前分支的最TOP的那个提交做为rebase，重放合并进来的分支上的提交的</li></ol></li></ol>]]></content:encoded>
       
       
       <category domain="http://www.gagahappy.com/categories/software/">玩转软件</category>
@@ -60,6 +62,8 @@
       
       
       
+      <content:encoded><![CDATA[<h3 id="What-does-kill-0-do"><a href="#What-does-kill-0-do" class="headerlink" title="What does kill -0 ... do?"></a>What does <code>kill -0 ...</code> do?</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(cat /path/to/file.pid); <span class="keyword">then</span></span><br><span class="line">    ... <span class="keyword">do</span> something ...</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure><h4 id="kill-1"><a href="#kill-1" class="headerlink" title="kill(1)"></a><em>kill(1)</em></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ man 1 <span class="built_in">kill</span></span><br><span class="line">...</span><br><span class="line">If sig is 0, <span class="keyword">then</span> no signal is sent, but error checking is still performed.</span><br><span class="line">...</span><br></pre></td></tr></table></figure><h4 id="kill-2"><a href="#kill-2" class="headerlink" title="kill(2)"></a><em>kill(2)</em></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ man 2 <span class="built_in">kill</span></span><br><span class="line">...</span><br><span class="line">If sig is 0, <span class="keyword">then</span> no signal is sent, but error checking is still performed; </span><br><span class="line">this can be used to check <span class="keyword">for</span> the existence of a process ID or process </span><br><span class="line">group ID.</span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>So signal 0 will not actually in fact send anything to your process’s PID, but will check whether you have permissions to do so.</p><h3 id="Where-might-this-be-useful"><a href="#Where-might-this-be-useful" class="headerlink" title="Where might this be useful?"></a>Where might this be useful?</h3><p>One obvious place would be if you were trying to determine if you had permissions to send signals to a running process via <code>kill</code>. You could check prior to sending the actual <code>kill</code> signal that you want, by wrapping a check to make sure that <code>kill -0 &lt;PID&gt;</code> was first allowed.</p><h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Say a process was being run by root as follows:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sleep 2500 &amp;</span><br><span class="line">[1] 15693</span><br></pre></td></tr></table></figure><p>Now in another window if we run this command we can confirm that that PID is running.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pgrep sleep</span><br><span class="line">15693</span><br></pre></td></tr></table></figure><p>Now let’s try this command to see if we have access to send that PID signals via <code>kill</code>.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(pgrep sleep); <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;You&#x27;re weak!&quot;</span>; <span class="keyword">fi</span></span><br><span class="line">bash: <span class="built_in">kill</span>: (15693) - Operation not permitted</span><br><span class="line">You<span class="string">&#x27;re weak!</span></span><br></pre></td></tr></table></figure><p>So it works, but the output is leaking a message from the <code>kill</code> command that we don’t have permissions. Not a big deal, simply catch STDERR and send it to <code>/dev/null</code>.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(pgrep sleep) 2&gt;/dev/null; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;You&#x27;re weak!&quot;</span>; <span class="keyword">fi</span></span><br><span class="line">You<span class="string">&#x27;re weak!</span></span><br></pre></td></tr></table></figure><h3 id="Complete-example"><a href="#Complete-example" class="headerlink" title="Complete example"></a>Complete example</h3><p>So then we could do something like this, <code>killer.bash</code>:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">PID=$(pgrep sleep)</span><br><span class="line"><span class="keyword">if</span> ! <span class="built_in">kill</span> -0 <span class="variable">$PID</span> 2&gt;/dev/null; <span class="keyword">then</span> </span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;you don&#x27;t have permissions to kill PID:<span class="variable">$PID</span>&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">kill</span> -9 <span class="variable">$PID</span></span><br></pre></td></tr></table></figure><p>Now when I run the above as a non-root user:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ~/killer.bash </span><br><span class="line">you don<span class="string">&#x27;t have permissions to kill PID:15693</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ echo $?</span></span><br><span class="line"><span class="string">1</span></span><br></pre></td></tr></table></figure><p>However when it’s run as root:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ~/killer.bash </span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> $?</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">$ pgrep sleep</span><br><span class="line">$</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
       
       <category domain="http://www.gagahappy.com/categories/development/">程序开发</category>
       
@@ -85,6 +89,8 @@
       
       
       
+      <content:encoded><![CDATA[<h3 id="binlog-index文件内容"><a href="#binlog-index文件内容" class="headerlink" title="binlog.index文件内容"></a><code>binlog.index</code>文件内容</h3><p>记录了<code>binlog</code>文件的具体路径，在MySQL启动时，会找到<code>binlog.index</code>文件，然后读取它里面的条目，从而读取<code>binlog</code>文件。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat /mysql/3306/data/master.index</span><br><span class="line"></span><br><span class="line">/mysql/3306/data/master.000001</span><br><span class="line">/mysql/3306/data/master.000002</span><br><span class="line">/mysql/3306/data/master.000003</span><br><span class="line">./master.000004</span><br><span class="line">./master.000005</span><br></pre></td></tr></table></figure><ol><li><code>binlog</code>文件的路径可以是相对路径，也可以是绝对路径</li><li>如果是绝对路径，当文件被移动到其它地方时，只能手动修改对应的路径，否则MySQL在启动时，会报找不到文件路径的错误</li></ol><h3 id="设置binlog文件路径"><a href="#设置binlog文件路径" class="headerlink" title="设置binlog文件路径"></a>设置<code>binlog</code>文件路径</h3><p>可以在 <code>my.cnf</code>中设置<code>binlog</code>的文件路径</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin&#x3D;master</span><br></pre></td></tr></table></figure><p>或设置为绝对路径</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"><span class="built_in">log</span>-bin=/mysql/3306/data/master</span><br></pre></td></tr></table></figure><h3 id="参数-log-bin身兼多职"><a href="#参数-log-bin身兼多职" class="headerlink" title="参数 log-bin身兼多职"></a>参数 <code>log-bin</code>身兼多职</h3><p>设置后生效多个参数</p><ol><li>表示启用 <code>binlog</code>功能</li><li>同时设置 <code>binlog.index</code>的文件名</li><li>同时设置<code>binlog</code>的文件名</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;%log_bin%&#39;;</span><br><span class="line">+---------------------------------+----------------------------------------------+</span><br><span class="line">| Variable_name                   | Value                                        |</span><br><span class="line">+---------------------------------+----------------------------------------------+</span><br><span class="line">| log_bin                         | ON                                           |</span><br><span class="line">| log_bin_basename                | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master       |</span><br><span class="line">| log_bin_index                   | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master.index |</span><br><span class="line">| log_bin_trust_function_creators | OFF                                          |</span><br><span class="line">| log_bin_use_v1_row_events       | OFF                                          |</span><br><span class="line">| sql_log_bin                     | ON                                           |</span><br><span class="line">+---------------------------------+----------------------------------------------+</span><br></pre></td></tr></table></figure><h3 id="binlog文件的读取"><a href="#binlog文件的读取" class="headerlink" title="binlog文件的读取"></a><code>binlog</code>文件的读取</h3><p>MySQL在启动时会读取<code>data</code>目录下的所有以<code>.index</code>后缀的文件(默认值)，然后在读取每个<code>index</code>文件中的条目</p><h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><blockquote><p>The default location for binary log files and the binary log index file is the data directory. You can use the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_log-bin"><code>--log-bin</code></a> option to specify an alternative location, by adding a leading absolute path name to the base name to specify a different directory. When the server reads an entry from the binary log index file, which tracks the binary log files that have been used, it checks whether the entry contains a relative path. If it does, the relative part of the path is replaced with the absolute path set using the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_log-bin"><code>--log-bin</code></a> option. An absolute path recorded in the binary log index file remains unchanged; in such a case, the index file must be edited manually to enable a new path or paths to be used. The binary log file base name and any specified path are available as the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_log_bin_basename"><code>log_bin_basename</code></a> system variable.</p></blockquote><p>只摘录了一部分，更全面的内容可到官网查看</p>]]></content:encoded>
+      
       
       <category domain="http://www.gagahappy.com/categories/database/">数据库</category>
       
@@ -109,6 +115,8 @@
         
       
       
+      
+      <content:encoded><![CDATA[<p>Salute to the heroes! China held a ceremony this morning in Beijing to commend role models in the country’s fight against the COVID-19 epidemic.</p><p>The medal of Republic was conferred on renowned respiratory disease expert Zhong Nanshan. </p><p><img src="http://img.gagahappy.cn/blog/2020/09/salute-to-the-heroes.jpg_b1" alt="Salute to the heroes" title="Salute to the heroes"></p>]]></content:encoded>
       
       
       <category domain="http://www.gagahappy.com/categories/information/">让资讯飞</category>
@@ -136,400 +144,13 @@
       
       
       
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/journal/">随笔</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>公园恢复跑</title>
-      <link>http://www.gagahappy.com/trainng-for-running-at-park/</link>
-      <guid>http://www.gagahappy.com/trainng-for-running-at-park/</guid>
-      <pubDate>Mon, 24 Aug 2020 14:13:08 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;公园恢复跑，被人套圈了居然，给我等着的，等我恢复了，看我怎么套你。哇哈哈哈哈哈！跑步还是在空间大的场地跑好呀，不枯燥。家门口不到170米一圈的场地简直太枯燥了，体力没疲惫，我精神先疲惫了。难怪马拉松都选风景美丽的线路呢，让人看了身心愉悦精神焕发可以跑出好成绩呀！</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/running/">running</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>酱肉包</title>
-      <link>http://www.gagahappy.com/cook-sauce-meat-baozi/</link>
-      <guid>http://www.gagahappy.com/cook-sauce-meat-baozi/</guid>
-      <pubDate>Sat, 22 Aug 2020 11:35:18 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;酱肉包，不够酱，不够咸，剩的馅明天包饺子呀，馅还可以再调一下 &lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.gagahappy.cn/blog/2020/08/cook-sauce-meat-baozi.jpg_b1&quot; alt=&quot;酱肉包&quot;</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/food/">美食么么</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/mycook/">做滴菜</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>Mysql 批量插入数据</title>
-      <link>http://www.gagahappy.com/mysql-bluk-insert/</link>
-      <guid>http://www.gagahappy.com/mysql-bluk-insert/</guid>
-      <pubDate>Wed, 19 Aug 2020 13:11:19 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h2 id=&quot;导入大数据到表&quot;&gt;&lt;a href=&quot;#导入大数据到表&quot; class=&quot;headerlink&quot; title=&quot;导入大数据到表&quot;&gt;&lt;/a&gt;导入大数据到表&lt;/h2&gt;&lt;p&gt;向数据库中插入3万条数据&lt;/p&gt;
-&lt;h3 id=&quot;单个插入数据&quot;&gt;&lt;a</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/database/">数据库</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/mysql/">mysql</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>Hexo安装Next主题 Rss 侧边栏</title>
-      <link>http://www.gagahappy.com/use-next-theme/</link>
-      <guid>http://www.gagahappy.com/use-next-theme/</guid>
-      <pubDate>Tue, 18 Aug 2020 07:47:49 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;无意间发现 &lt;code&gt;Hexo&lt;/code&gt; 的 &lt;code&gt;Next&lt;/code&gt; 主题也很好看，之前的 &lt;code&gt;Yelee&lt;/code&gt; 主题使用了好久，决定换成</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/software/">玩转软件</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/hexo/">hexo</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>感觉佳明的心率又飘了</title>
-      <link>http://www.gagahappy.com/running-heart-rate-176/</link>
-      <guid>http://www.gagahappy.com/running-heart-rate-176/</guid>
-      <pubDate>Mon, 10 Aug 2020 14:04:12 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;感觉佳明的心率又飘了，因为最大心率下很难坚持，可能是表戴的太松了。跑了不到4公里，配速633，真的是退步很多，想想之前的5公里，配速都不到5分钟呀。慢慢恢复跑呗，先从提高步频开始，恢复到180先&lt;/p&gt;
-&lt;p&gt;&lt;img</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/running/">running</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>非谓语 Taken</title>
-      <link>http://www.gagahappy.com/study-eng-participle-2020-7-23/</link>
-      <guid>http://www.gagahappy.com/study-eng-participle-2020-7-23/</guid>
-      <pubDate>Thu, 23 Jul 2020 13:53:39 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;The 13 people taken hostage on a bus in western Ukraine were freed&lt;/p&gt;
-&lt;p&gt;容易犯的错误是翻译为13人劫持人质，把taken 做谓语使用，认为the 13 people</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/eng/">eng</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>每次倒啤酒的时候</title>
-      <link>http://www.gagahappy.com/after-tt-video-update/</link>
-      <guid>http://www.gagahappy.com/after-tt-video-update/</guid>
-      <pubDate>Mon, 08 Jun 2020 14:21:37 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;blockquote&gt;
-&lt;p&gt;晚饭后拉肚子，然后饿，好饿呀，腾讯视频升级后，居然需要安装QQ才能登录&lt;/p&gt;
-&lt;p&gt;每次倒啤酒的时候上面都会有一层厚厚的泡沫，看起来庞大，实际都是空气，你给的爱也是&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-          
-        
-      
-      
+      <content:encoded><![CDATA[<p>看了一个奥斯卡的颁奖系列，发现每个颁奖人都是有口音的，比如Oscar 这个词每个人的都不一样。And the Oscar goes to Tilda Swinton.</p><p>加一个自己喜欢的: And the People Choice award goes to Emma Watson</p><p><img src="http://img.gagahappy.cn/blog/2020/09/the-award-of-oscar.jpg_b1" alt="The award of oscar" title="The award of oscar"></p>]]></content:encoded>
       
       
       <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
       
       
       <category domain="http://www.gagahappy.com/tags/journal/">随笔</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>虽然配速不快</title>
-      <link>http://www.gagahappy.com/running-stride-frequency-172/</link>
-      <guid>http://www.gagahappy.com/running-stride-frequency-172/</guid>
-      <pubDate>Tue, 19 May 2020 14:03:07 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;虽然配速不快，但各项指标都趋于正常：每公里配速逐步提高，步频稳定，心率167偏高，体力也还可以，只能慢慢恢复了，刷小圈实在是个挑战。遇到之前的一个跑友，说疫情期间也停练了，也退步不少，哎，心肺锻炼就是这样呀，一旦长时间不练，就都白练了&lt;/p&gt;
-&lt;p&gt;&lt;img</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/running/">running</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>Until 用法</title>
-      <link>http://www.gagahappy.com/eng-grammar-until/</link>
-      <guid>http://www.gagahappy.com/eng-grammar-until/</guid>
-      <pubDate>Mon, 11 May 2020 01:41:02 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;&lt;img src=&quot;http://img.gagahappy.cn/blog/2020/05/eng-grammar-until.jpg_b1&quot; alt=&quot;until 用法&quot; title=&quot;until</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/eng/">eng</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>这里没有用Will</title>
-      <link>http://www.gagahappy.com/eng-grammar-will/</link>
-      <guid>http://www.gagahappy.com/eng-grammar-will/</guid>
-      <pubDate>Sat, 09 May 2020 13:08:42 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;这里没有用will,如果用了will表示有人会相信，显然这与事实相反&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.gagahappy.cn/blog/2020/05/eng-grammar-will.jpg_b1&quot; alt=&quot;这里没有用will&quot;</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/eng/">eng</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>发现一个关于虚拟语句很好的例句</title>
-      <link>http://www.gagahappy.com/eng-grammar-were/</link>
-      <guid>http://www.gagahappy.com/eng-grammar-were/</guid>
-      <pubDate>Thu, 07 May 2020 06:49:35 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;发现一个关于虚拟语句很好的例句，结构也很典型，主句和从句都是对现在的虚拟。如果是作为考试的话，要把从句中的was改成were。&lt;code&gt;if I were boy&lt;/code&gt; 这首歌的歌词用的就是were，也是对现在的虚拟，因为歌手是女的呀&lt;/p&gt;
-&lt;p&gt;&lt;img</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/eng/">eng</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>If You Understand a Bug</title>
-      <link>http://www.gagahappy.com/if-you-understand-a-bug/</link>
-      <guid>http://www.gagahappy.com/if-you-understand-a-bug/</guid>
-      <pubDate>Tue, 28 Apr 2020 11:26:19 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;&lt;img src=&quot;http://img.gagahappy.cn/blog/2020/04/if-you-understand-a-bug.jpg_b1&quot; alt=&quot;If you understand a bug&quot; title=&quot;If you understand a</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/journal/">随笔</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>Poverty and Property</title>
-      <link>http://www.gagahappy.com/poverty-and-property/</link>
-      <guid>http://www.gagahappy.com/poverty-and-property/</guid>
-      <pubDate>Mon, 20 Apr 2020 14:17:03 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;poverty 和 property 这两个词长得好像呀，贫穷，属性/财产&lt;/p&gt;
-&lt;p&gt;没有看书的一天是很慌张的一天，是很restless的一天，I’m restless without reading books&lt;/p&gt;
-&lt;p&gt;China’s strategy of</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/eng/">eng</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>Go语言第7章</title>
-      <link>http://www.gagahappy.com/study-go-programming-ch7/</link>
-      <guid>http://www.gagahappy.com/study-go-programming-ch7/</guid>
-      <pubDate>Sun, 05 Apr 2020 15:43:54 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;发现自己在看GoPL的时候，居然上来就选择从一个最长的章节开始(by</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/development/">程序开发</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/golang/">golang</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>Maria Sharapova Retirement From Tennis</title>
-      <link>http://www.gagahappy.com/maria-sharapova-retirement-from-tennis/</link>
-      <guid>http://www.gagahappy.com/maria-sharapova-retirement-from-tennis/</guid>
-      <pubDate>Thu, 27 Feb 2020 13:45:53 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;莎拉波娃官宣退役，俄罗斯网坛美女Maria Sharapova，32岁结束职业生涯，5座大满贯加身，世界上收入最高的女运动员之一，再见女神，怀念你和你那有特色的叫喊声！&lt;/p&gt;
-&lt;p&gt;&lt;img</description>
-          
-        
-      
-      
-      
-      
-      <category domain="http://www.gagahappy.com/categories/information/">让资讯飞</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/people/">人物</category>
       
       
     </item>
