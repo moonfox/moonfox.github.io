@@ -15,144 +15,144 @@
     <atom:link href="http://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</description>
-    <pubDate>Sat, 03 Apr 2021 10:13:48 GMT</pubDate>
+    <pubDate>Mon, 05 Apr 2021 12:45:20 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>790 Consecutive Weeks</title>
-      <link>http://www.gagahappy.com/790-consecutive-weeks/</link>
-      <guid>http://www.gagahappy.com/790-consecutive-weeks/</guid>
-      <pubDate>Tue, 10 Nov 2020 10:07:31 GMT</pubDate>
+      <title>MySQL自增值申请策略</title>
+      <link>http://www.gagahappy.com/mysql-auto-increment-strategy/</link>
+      <guid>http://www.gagahappy.com/mysql-auto-increment-strategy/</guid>
+      <pubDate>Sat, 27 Mar 2021 10:43:33 GMT</pubDate>
       
         
         
           
           
-      <description>&lt;p&gt;790 consecutive weeks in the APT Rankings TOP 10&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.gagahappy.cn/blog/2020/11/790-consecutive-weeks.jpg_b1&quot;</description>
+      <description>&lt;h1 id=&quot;自增值申请策略&quot;&gt;&lt;a href=&quot;#自增值申请策略&quot; class=&quot;headerlink&quot;</description>
           
         
       
       
       
-      <content:encoded><![CDATA[<p>790 consecutive weeks in the APT Rankings TOP 10</p><p><img src="http://img.gagahappy.cn/blog/2020/11/790-consecutive-weeks.jpg_b1" alt="790 consecutive weeks" title="790 consecutive weeks"></p>]]></content:encoded>
+      <content:encoded><![CDATA[<h1 id="自增值申请策略"><a href="#自增值申请策略" class="headerlink" title="自增值申请策略"></a>自增值申请策略</h1><ol><li><p>能否先查ID，再查入数据？</p><p>不能，如果每次插入前，都要在主键的索引树上查询要插入的id是否存在，会大大降低插入插入的效率。</p></li><li><p>能否等事务完成后，再释放自增值的锁？</p><p>不能，如果需要等待当前事务完成，其它事务先能获取自增值的锁，就会大大降低并发。</p></li></ol><h2 id="innodb-autoinc-lock-mode"><a href="#innodb-autoinc-lock-mode" class="headerlink" title="innodb_autoinc_lock_mode"></a><code>innodb_autoinc_lock_mode</code></h2><p>MySQL通过参数<code>innodb_autoinc_lock_mode</code>，来设置自值锁的行为，默认值为1</p><ol><li><p>0值 ：等事务完成才释放锁</p></li><li><p>1值 ：</p><ul><li>对于普通的<code>insert into table</code>，申请到自增锁后就释放，不用等插入语句的完成。</li><li>对于批量插入，类似<code>insert ... select</code>，一直持有自增锁，直到事务执行完成。这样也保证了id的连续性。</li></ul></li><li><p>2值：所有插入操作在申请到自增锁后就释放，包括<code>insert ... select </code>这种</p></li></ol>]]></content:encoded>
       
       
-      <category domain="http://www.gagahappy.com/categories/information/">让资讯飞</category>
+      <category domain="http://www.gagahappy.com/categories/database/">数据库</category>
       
       
-      <category domain="http://www.gagahappy.com/tags/people/">人物</category>
+      <category domain="http://www.gagahappy.com/tags/mysql/">mysql</category>
       
       
     </item>
     
     <item>
-      <title>恢复短信息</title>
-      <link>http://www.gagahappy.com/luckily-recovered-text/</link>
-      <guid>http://www.gagahappy.com/luckily-recovered-text/</guid>
-      <pubDate>Mon, 09 Nov 2020 10:03:30 GMT</pubDate>
+      <title>Go 主程序退出时会进行一些额外工作</title>
+      <link>http://www.gagahappy.com/go-main-do-something-when-quit/</link>
+      <guid>http://www.gagahappy.com/go-main-do-something-when-quit/</guid>
+      <pubDate>Fri, 05 Mar 2021 12:28:56 GMT</pubDate>
       
         
         
           
           
-      <description>&lt;p&gt;之前总是觉得系统自动备份功就是在侵犯个人隐私，比如访问通话记录，短信之类，所以给关闭了，直到刚才通过这个功能恢复了一条误删除且有用的短信，简直庆幸这个功能又被系统默默的打开了，突然觉得这个功能简直太重要了&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;主goroutine先执行完,子goroutine居然还可以运行&lt;/p&gt;
+&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
           
         
       
       
       
-      <content:encoded><![CDATA[<p>之前总是觉得系统自动备份功就是在侵犯个人隐私，比如访问通话记录，短信之类，所以给关闭了，直到刚才通过这个功能恢复了一条误删除且有用的短信，简直庆幸这个功能又被系统默默的打开了，突然觉得这个功能简直太重要了</p>]]></content:encoded>
-      
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/journal/">随笔</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>清理Hhkb键盘</title>
-      <link>http://www.gagahappy.com/clean-my-hhkb/</link>
-      <guid>http://www.gagahappy.com/clean-my-hhkb/</guid>
-      <pubDate>Mon, 26 Oct 2020 09:51:45 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;清理hhkb键盘，由于它的内部构造，比机械键盘要好清理100倍&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://img.gagahappy.cn/blog/2020/10/clean-my-hhkb.jpg_b1&quot; alt=&quot;clean my hhkb&quot;</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>清理hhkb键盘，由于它的内部构造，比机械键盘要好清理100倍</p><p><img src="http://img.gagahappy.cn/blog/2020/10/clean-my-hhkb.jpg_b1" alt="clean my hhkb" title="clean my hhkb"></p>]]></content:encoded>
-      
-      
-      <category domain="http://www.gagahappy.com/categories/consciousness/">意识流</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/journal/">随笔</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>Git 知识补充</title>
-      <link>http://www.gagahappy.com/git-learning-supplement/</link>
-      <guid>http://www.gagahappy.com/git-learning-supplement/</guid>
-      <pubDate>Thu, 24 Sep 2020 12:54:25 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h3 id=&quot;补充&quot;&gt;&lt;a href=&quot;#补充&quot; class=&quot;headerlink&quot; title=&quot;补充&quot;&gt;&lt;/a&gt;补充&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;git 可以只提交文件的部分内容， git add -p,称之为hunk,</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ol><li><p>git 可以只提交文件的部分内容， git add -p,称之为hunk, sourcetree也可以进行设置</p></li><li><p>分支改名<br>git branch -m cat tiger</p></li><li><p>分支合并后产生的commit, A合并B，commit 信息中，父提交记录顺序，parents : A, B</p><p>A在前，B在后，表示是A 合并的B</p></li><li><p>git如何判断分支是否可以删除<br>当前分支所指向的commit ，没有其它commit指向它（这个提交(分支)还没有被合并），或只有当前分支指向它，没有其它分支指向它时，在删除这个分支时就会有提示不能直接删除</p></li><li><p>rebase 后，对应commit 值是否发生变化<br>看情况，嫁接到其它commit 之上的commit 的值会发生变化，因为其父提交发生了变化，同理，在这个commit 之后的提交的值也发生变化<br>A B C D E F，把F嫁接到其它 COMMIT后，A到E的COMMIT的值都发生变化</p><p>修改现有COMMIT 的注释，也会发生这样的连锁反应</p></li><li><p>rebase 的其他用途<br>修改历史提交注释 r选项<br>合并多个提交 s 选项<br>把一个提交拆分成多个commit 在操作列表使用使用 edit<br>在commit 之间添加新的commit edit选项<br>调整commit 之间的顺序 直接在列表里调整，<br>删除commit 在列表里删除相关行过使用drop,删除后对它之后commit 的影响如何</p></li><li><p>空目录无法被添加到git<br>因为根据算法，添加的对象必须要有内容，以供sha1算法使用</p></li><li><p>合并后再使用 <code>git rebase </code> 使提交成为一条直线</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">git merge master</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line">Merge made by the <span class="string">&#x27;recursive&#x27;</span> strategy.</span><br><span class="line"> layout/_partials/header/menu-item.njk      | 5 +----</span><br><span class="line"> layout/_partials/page/breadcrumb.njk       | 6 +-----</span><br><span class="line"> layout/_partials/post/post-followme.njk    | 2 +-</span><br><span class="line"> layout/_partials/sidebar/site-overview.njk | 2 +-</span><br><span class="line"> </span><br><span class="line">git slog --graph</span><br><span class="line">*   b1b3e13 (HEAD -&gt; release) Merge branch <span class="string">&#x27;upstream-master&#x27;</span> into release</span><br><span class="line">|\</span><br><span class="line">| * d51ca0e (upstream/master, upstream-master) Fix: handle invalid config</span><br><span class="line">* | 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts</span><br><span class="line">|/</span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br><span class="line"> </span><br><span class="line">git rebase</span><br><span class="line">First, rewinding head to replay your work on top of it...</span><br><span class="line">Applying: Fix: handle invalid config</span><br><span class="line">Using index info to reconstruct a base tree...</span><br><span class="line">M    layout/_partials/post/post-followme.njk</span><br><span class="line">M    layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Falling back to patching base and 3-way merge...</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">* 217e224 (HEAD -&gt; release) Fix: handle invalid config</span><br><span class="line">* 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts <span class="comment"># 以这个提交做为 rebase</span></span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br></pre></td></tr></table></figure><ol><li>使用merge出现了分支线路</li><li>rebase后，分支线路消失，成为一条直线。 是 以当前分支的最TOP的那个提交做为rebase，重放合并进来的分支上的提交的</li></ol></li></ol>]]></content:encoded>
-      
-      
-      <category domain="http://www.gagahappy.com/categories/software/">玩转软件</category>
-      
-      
-      <category domain="http://www.gagahappy.com/tags/git/">git</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>What Does Kill 0 Do</title>
-      <link>http://www.gagahappy.com/what-does-kill-0-do/</link>
-      <guid>http://www.gagahappy.com/what-does-kill-0-do/</guid>
-      <pubDate>Thu, 17 Sep 2020 06:53:25 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h3 id=&quot;What-does-kill-0-do&quot;&gt;&lt;a href=&quot;#What-does-kill-0-do&quot; class=&quot;headerlink&quot; title=&quot;What does kill -0 ... do?&quot;&gt;&lt;/a&gt;What does &lt;code&gt;kill</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h3 id="What-does-kill-0-do"><a href="#What-does-kill-0-do" class="headerlink" title="What does kill -0 ... do?"></a>What does <code>kill -0 ...</code> do?</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(cat /path/to/file.pid); <span class="keyword">then</span></span><br><span class="line">    ... <span class="keyword">do</span> something ...</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure><h4 id="kill-1"><a href="#kill-1" class="headerlink" title="kill(1)"></a><em>kill(1)</em></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ man 1 <span class="built_in">kill</span></span><br><span class="line">...</span><br><span class="line">If sig is 0, <span class="keyword">then</span> no signal is sent, but error checking is still performed.</span><br><span class="line">...</span><br></pre></td></tr></table></figure><h4 id="kill-2"><a href="#kill-2" class="headerlink" title="kill(2)"></a><em>kill(2)</em></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ man 2 <span class="built_in">kill</span></span><br><span class="line">...</span><br><span class="line">If sig is 0, <span class="keyword">then</span> no signal is sent, but error checking is still performed; </span><br><span class="line">this can be used to check <span class="keyword">for</span> the existence of a process ID or process </span><br><span class="line">group ID.</span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>So signal 0 will not actually in fact send anything to your process’s PID, but will check whether you have permissions to do so.</p><h3 id="Where-might-this-be-useful"><a href="#Where-might-this-be-useful" class="headerlink" title="Where might this be useful?"></a>Where might this be useful?</h3><p>One obvious place would be if you were trying to determine if you had permissions to send signals to a running process via <code>kill</code>. You could check prior to sending the actual <code>kill</code> signal that you want, by wrapping a check to make sure that <code>kill -0 &lt;PID&gt;</code> was first allowed.</p><h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Say a process was being run by root as follows:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sleep 2500 &amp;</span><br><span class="line">[1] 15693</span><br></pre></td></tr></table></figure><p>Now in another window if we run this command we can confirm that that PID is running.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pgrep sleep</span><br><span class="line">15693</span><br></pre></td></tr></table></figure><p>Now let’s try this command to see if we have access to send that PID signals via <code>kill</code>.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(pgrep sleep); <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;You&#x27;re weak!&quot;</span>; <span class="keyword">fi</span></span><br><span class="line">bash: <span class="built_in">kill</span>: (15693) - Operation not permitted</span><br><span class="line">You<span class="string">&#x27;re weak!</span></span><br></pre></td></tr></table></figure><p>So it works, but the output is leaking a message from the <code>kill</code> command that we don’t have permissions. Not a big deal, simply catch STDERR and send it to <code>/dev/null</code>.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(pgrep sleep) 2&gt;/dev/null; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;You&#x27;re weak!&quot;</span>; <span class="keyword">fi</span></span><br><span class="line">You<span class="string">&#x27;re weak!</span></span><br></pre></td></tr></table></figure><h3 id="Complete-example"><a href="#Complete-example" class="headerlink" title="Complete example"></a>Complete example</h3><p>So then we could do something like this, <code>killer.bash</code>:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">PID=$(pgrep sleep)</span><br><span class="line"><span class="keyword">if</span> ! <span class="built_in">kill</span> -0 <span class="variable">$PID</span> 2&gt;/dev/null; <span class="keyword">then</span> </span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;you don&#x27;t have permissions to kill PID:<span class="variable">$PID</span>&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">kill</span> -9 <span class="variable">$PID</span></span><br></pre></td></tr></table></figure><p>Now when I run the above as a non-root user:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ~/killer.bash </span><br><span class="line">you don<span class="string">&#x27;t have permissions to kill PID:15693</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ echo $?</span></span><br><span class="line"><span class="string">1</span></span><br></pre></td></tr></table></figure><p>However when it’s run as root:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ~/killer.bash </span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> $?</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">$ pgrep sleep</span><br><span class="line">$</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      <content:encoded><![CDATA[<p>主goroutine先执行完,子goroutine居然还可以运行</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">    log.Println(<span class="string">&quot;===========&quot;</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        log.Println(<span class="string">&quot;doing in sub goroutine&quot;</span>)</span><br><span class="line">        <span class="comment">// 主程序向通道发送数据，但此时由于 主 gor 行速度慢</span></span><br><span class="line">        <span class="comment">// 程序还没有执行到 fmt.Println(&quot;x in ch is:&quot;, &lt;-ch)，</span></span><br><span class="line">        <span class="comment">// 通道还没有接收数据，所以此时发生 阻塞</span></span><br><span class="line">        ch &lt;- <span class="number">1</span></span><br><span class="line">        log.Println(<span class="string">&quot;done in sub goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模拟执行速度慢</span></span><br><span class="line">    time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line"></span><br><span class="line">    log.Println(<span class="string">&quot;doing in main goroutine&quot;</span>)</span><br><span class="line">    <span class="comment">// 1. 执行到这里时发生，由于子 gor 已经在等待向通道发送数据</span></span><br><span class="line">    <span class="comment">//    所以此处的 从通道接收数据的 &lt;-ch 立即执行</span></span><br><span class="line">    <span class="comment">// 2. 子 gor 被唤酲, 立即向通道发送数据</span></span><br><span class="line">    <span class="comment">// 3. &lt;-ch 开始接收数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当从通道中取出数据时，数据是通道中复制的，这需要花费一定的时间</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;x in ch is:&quot;</span>, &lt;-ch)      <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">    log.Println(<span class="string">&quot;done in main goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>  output：这个比较奇怪,主 先执行完,子居然还可以运行</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2021/03/04 16:26:35 doing in sub goroutine</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 doing in main goroutine</span></span><br><span class="line"><span class="comment">// x in ch is: 1</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 done in main goroutine (主 先执行完)</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 done in sub goroutine （子居然还可以运行）</span></span><br></pre></td></tr></table></figure><p>关于原因</p><ol><li><p>Stack Overflow上的答案是 在主 gor 的最后一行代码</p><p><code>log.Println(&quot;done in main goroutine&quot;)</code> 执行完成后，main 所在的 goroutine 还有一些在 <code>runtime</code> 时</p><p>需要完成一些扫尾工作，这些扫尾工作会花费非常少的时间，在这段时间里，子 gor 依然可以运行</p><p>所以可以执行 <code>log.Println(&quot;done in sub goroutine&quot;)</code></p></li><li><p>这也说明了 此次 主 gor 运行的比较慢，给子gor 留下了运行完所有代码的时间</p><p>如果主 gor 运行的特别快，即使扫尾工作需要花费一定的时间，但整体速度依然比</p><p>子 gor 快，则 <code>log.Println(&quot;done in sub goroutine&quot;)</code> 不能被执行</p></li></ol>]]></content:encoded>
       
       
       <category domain="http://www.gagahappy.com/categories/development/">程序开发</category>
       
       
-      <category domain="http://www.gagahappy.com/tags/linux/">linux</category>
+      <category domain="http://www.gagahappy.com/tags/golang/">golang</category>
+      
+      
+    </item>
+    
+    <item>
+      <title>MySQL 行锁两阶段</title>
+      <link>http://www.gagahappy.com/mysql-recordlock-2phase/</link>
+      <guid>http://www.gagahappy.com/mysql-recordlock-2phase/</guid>
+      <pubDate>Tue, 16 Feb 2021 11:19:23 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;行锁&quot;&gt;&lt;a href=&quot;#行锁&quot; class=&quot;headerlink&quot; title=&quot;行锁&quot;&gt;&lt;/a&gt;行锁&lt;/h1&gt;&lt;p&gt;优点：&lt;/p&gt;
+&lt;p&gt;比起表锁，可以支持更大的并发&lt;/p&gt;
+&lt;h1 id=&quot;行锁的实现&quot;&gt;&lt;a href=&quot;#行锁的实现&quot;</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h1><p>优点：</p><p>比起表锁，可以支持更大的并发</p><h1 id="行锁的实现"><a href="#行锁的实现" class="headerlink" title="行锁的实现"></a>行锁的实现</h1><p>由存储引擎自已实现，每个存储引擎实现的方式都不一样</p><p> MyISAM 引擎不支持行锁</p><h1 id="两阶段锁"><a href="#两阶段锁" class="headerlink" title="两阶段锁"></a>两阶段锁</h1><p>在更新数据时，需要对数据所在行加锁，但更新数据完成后，锁并不会马上释放，而是要等到事务提交才释放</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table t_07_recordlock(</span><br><span class="line">    id int not null auto_increment primary key,</span><br><span class="line">  c int,</span><br><span class="line">  d int,</span><br><span class="line">     key c (c) </span><br><span class="line">) engine&#x3D;innodb;</span><br><span class="line"></span><br><span class="line">insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);</span><br></pre></td></tr></table></figure><table><thead><tr><th></th><th>Session A</th><th>Session B</th></tr></thead><tbody><tr><td>T1</td><td>Begin;</td><td>begin;</td></tr><tr><td>T2</td><td>update t_07_recordlock set d=d+1 where id = 1;</td><td></td></tr><tr><td></td><td>update t_07_recordlock set d=d+1 where id = 2;</td><td></td></tr><tr><td>T3</td><td></td><td>update t_07_recordlock set d=d+1 where id = 1;</td></tr><tr><td>T4</td><td>Commit</td><td></td></tr></tbody></table><ul><li>T2时刻，SessionA已经完成了对两行数据的更新，但没有提交</li><li>T3时候，SessionB对id=1的行进行更新，由于Session A没有提交，其依然持有id=1上的写锁，与Session B要加的写锁互斥，所以SessionB被阻塞，直到Session A提交，释放锁，才能对执行更新语句</li></ul>]]></content:encoded>
+      
+      
+      <category domain="http://www.gagahappy.com/categories/database/">数据库</category>
+      
+      
+      <category domain="http://www.gagahappy.com/tags/mysql/">mysql</category>
+      
+      
+    </item>
+    
+    <item>
+      <title>MySQL自增值不能回退</title>
+      <link>http://www.gagahappy.com/mysql-auto-increment/</link>
+      <guid>http://www.gagahappy.com/mysql-auto-increment/</guid>
+      <pubDate>Tue, 12 Jan 2021 12:11:32 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;MySql</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>MySql 主键不连续的原因之一是自增值不能回退</p><p>设当前自增值=2，此时并发两个事务T1,T2。T1先申请到自增值，插入ID=3，自增值更为4</p><table><thead><tr><th></th><th>Tx1</th><th>Tx2</th></tr></thead><tbody><tr><td>T1</td><td>申请到自增值=2，set id =2, 更新自增值=3</td><td></td></tr><tr><td>T2</td><td>插入数据失败</td><td>申请到自增值=3，set id=3，更新自增值=4</td></tr><tr><td>T3</td><td>如果让自增值回退到=2</td><td>插入数据成功</td></tr><tr><td>T4</td><td>申请到自增值=2，set id =2, 更新自增值=3</td><td></td></tr><tr><td>T5</td><td>插入数据成功</td><td>申请到自增值=3，set id=3，更新自增值=4</td></tr><tr><td>T6</td><td></td><td>插入数据失败，插入语句报错“主键冲突” id=3已经存在</td></tr></tbody></table>]]></content:encoded>
+      
+      
+      <category domain="http://www.gagahappy.com/categories/database/">数据库</category>
+      
+      
+      <category domain="http://www.gagahappy.com/tags/mysql/">mysql</category>
+      
+      
+    </item>
+    
+    <item>
+      <title>无缓冲通道的Cap是零</title>
+      <link>http://www.gagahappy.com/unbuffered-channel-no-cap/</link>
+      <guid>http://www.gagahappy.com/unbuffered-channel-no-cap/</guid>
+      <pubDate>Tue, 05 Jan 2021 11:59:39 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;无缓冲通道的cap是零&lt;/p&gt;
+&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>无缓冲通道的cap是零</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无缓冲通道的cap、len永远是0</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    noCache := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; noCache &lt;- <span class="number">6</span> &#125;()</span><br><span class="line"></span><br><span class="line">    time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">    fmt.Println(<span class="string">&quot;cap of noCache pipeline is&quot;</span>, <span class="built_in">cap</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;len of noCache pipeline is&quot;</span>, <span class="built_in">len</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">&quot;noCache &quot;</span>, &lt;-noCache)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      
+      <category domain="http://www.gagahappy.com/categories/development/">程序开发</category>
+      
+      
+      <category domain="http://www.gagahappy.com/tags/golang/">golang</category>
       
       
     </item>
