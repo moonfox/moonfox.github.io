@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/apple-touch-icon.png" color="#222">
+  <meta name="google-site-verification" content="mRjQM6azHRnllmCObIorLO1p8dqt92U33mbEzoA2HnU">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="合并还是变基合并分支时，应使用rebase合并分支而不是使用merge merge在分支很多的时候，merge会使提交变得异常混乱，查找某个提交会非常不好找，即使使用图形工具，也无法快速的查找，如果想退到某次提交更是难上加难。merge即使删除了合并过来的分支，其合并轨迹也依然被保留，所以还是很乱。  rebase在分支很多的时候，不会产生很多的分支线，实践中应该就只有master,release">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 使用 Rebase 代替 Merge">
+<meta property="og:url" content="http://www.gagahappy.com/using-rebase-instead-of-merge/">
+<meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
+<meta property="og:description" content="合并还是变基合并分支时，应使用rebase合并分支而不是使用merge merge在分支很多的时候，merge会使提交变得异常混乱，查找某个提交会非常不好找，即使使用图形工具，也无法快速的查找，如果想退到某次提交更是难上加难。merge即使删除了合并过来的分支，其合并轨迹也依然被保留，所以还是很乱。  rebase在分支很多的时候，不会产生很多的分支线，实践中应该就只有master,release">
+<meta property="og:locale">
+<meta property="og:image" content="http://img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-merge.png_b1">
+<meta property="og:image" content="http://img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-rebase.png_b1">
+<meta property="article:published_time" content="2021-04-06T08:11:18.000Z">
+<meta property="article:modified_time" content="2021-04-06T09:44:45.375Z">
+<meta property="article:author" content="戛戛Happy">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-merge.png_b1">
+
+
+<link rel="canonical" href="http://www.gagahappy.com/using-rebase-instead-of-merge/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+<title>Git 使用 Rebase 代替 Merge | 漂自己的移，让别人都撞墙去吧</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-17621945-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-17621945-1');
+      }
+    </script>
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="漂自己的移，让别人都撞墙去吧" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">漂自己的移，让别人都撞墙去吧</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">922</span></a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E8%BF%98%E6%98%AF%E5%8F%98%E5%9F%BA"><span class="nav-number">1.</span> <span class="nav-text">合并还是变基</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#merge"><span class="nav-number">1.1.</span> <span class="nav-text">merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rebase"><span class="nav-number">1.2.</span> <span class="nav-text">rebase</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8rebase%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="nav-number">2.</span> <span class="nav-text">使用rebase合并分支</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">场景分析：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.2.</span> <span class="nav-text">合并步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="戛戛Happy"
+      src="/huitailang.jpg">
+  <p class="site-author-name" itemprop="name">戛戛Happy</p>
+  <div class="site-description" itemprop="description">喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</div>
+</div>
+  <div class="">
+
+  <div class="">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/rss2.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/using-rebase-instead-of-merge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git 使用 Rebase 代替 Merge
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-06 16:11:18" itemprop="dateCreated datePublished" datetime="2021-04-06T16:11:18+08:00">2021-04-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="合并还是变基"><a href="#合并还是变基" class="headerlink" title="合并还是变基"></a>合并还是变基</h1><p>合并分支时，应使用<code>rebase</code>合并分支而不是使用<code>merge</code></p>
+<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p>在分支很多的时候，<code>merge</code>会使提交变得异常混乱，查找某个提交会非常不好找，即使使用图形工具，也无法快速的查找，如果想退到某次提交更是难上加难。<code>merge</code>即使删除了合并过来的分支，其合并轨迹也依然被保留，所以还是很乱。</p>
+<p><img src="http://img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-merge.png_b1" alt="git merge" title="git merge"></p>
+<h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><p>在分支很多的时候，不会产生很多的分支线，实践中应该就只有<code>master</code>,<code>release</code>等分支线，功能分支线在合并到<code>master</code> 上后都被删除，这样提交基本都在一条线上，十分清楚整洁。</p>
+<p><img src="http://img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-rebase.png_b1" alt="git rebase" title="git rebase"></p>
+<h1 id="使用rebase合并分支"><a href="#使用rebase合并分支" class="headerlink" title="使用rebase合并分支"></a>使用rebase合并分支</h1><h2 id="场景分析："><a href="#场景分析：" class="headerlink" title="场景分析："></a>场景分析：</h2><p>功能<code>feature1</code>与<code>feature2</code>都在开发，<code>feature1</code>先上线，合并到了master，此时，<code>feature2</code>不应使用<code>merge</code>对<code>master</code>进行合并操作，而是使用<code>rebase</code>进行合并</p>
+<ul>
+<li><p>master上的提交有：<code>[m1, m2, m3]</code></p>
+</li>
+<li><p>feature1上的提交有: <code>[f1_01, f1_02, f1_03]</code> </p>
+</li>
+<li><p>feature2上的提交有: <code>[f2_01, f2_02, f2_03]</code> </p>
+</li>
+</ul>
+<p><code>feature1</code>先被合并到master: </p>
+<ul>
+<li>master上的提交有：<code>[m1, m2, m3, f1_01, f1_02, f1_03]</code></li>
+</ul>
+<p><code>feature2</code>合并master</p>
+<ul>
+<li><code>feature2</code>上的提交有：<code>[m1, m2, m3, f1_01, f1_02, f1_03，f2_01_new, f2_02_new, f2_03_new]</code></li>
+</ul>
+<h2 id="合并步骤"><a href="#合并步骤" class="headerlink" title="合并步骤"></a>合并步骤</h2><p><code>feature2</code>要把<code>master</code>上的提交合并过来，使用<code>rebase</code> 而不是<code>merge</code>，这样就会不产生合并提交，在向<code>master</code>提交时就变成了<code>快速向前</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git co feature2</span><br><span class="line">git rebase master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果发生冲突，解决冲突后把冲突文件加入 index 区</span></span><br><span class="line">git add -u </span><br><span class="line"><span class="comment"># 运行continue 以使rebase完成</span></span><br><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>步骤1：<code>git rebase master</code>：以<code>master</code>分支做为<code>feature2</code>的基础</p>
+</li>
+<li><p>步骤2：计算出<code>feature2</code>与<code>master</code>上的差异提交，相当于<code>git log master...feture2</code>，即<code>[f2_01, f2_02, f2_03]</code> </p>
+</li>
+<li><p>步骤3：把<code>[f2_01, f2_02, f2_03]</code>在<code>master</code>上的最新提交<code>f1_03</code>上进行重放生成新的提交</p>
+<p><code>[f2_01_new, f2_02_new, f2_03_new]</code></p>
+<p>重放生成过程：</p>
+<ol>
+<li>f2_01以f1_03为基础，生成新的f2_01_new</li>
+<li>f2_02以f2_01_new为基础，生成新的f2_02_new</li>
+<li>f2_03以f2_02_new为基础，生成新的f2_03_new</li>
+</ol>
+</li>
+<li><p>步骤4：把当前分支设置为<code>feature2</code></p>
+<p>feature2<code>rebase</code>后的提交有<code>[m1, m2, m3, f1_01, f1_02, f1_03，f2_01_new, f2_02_new, f2_03_new]</code></p>
+<p>之前的旧的<code>[f2_01, f2_02, f2_03]</code> 在<code>feature2</code>上就看不到了，但依然在git中，如果没有其它分支指向它们，则会被git 回收机制删除</p>
+</li>
+</ul>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ol>
+<li>merge会让提交变得越来越混乱</li>
+<li>rebase可以使主线一直保持清晰，rebase操作可以看是剪支操作，把分支剪下来，接到主线上。这样就可以把多条分支线变为一条，使所有提交变得清晰。</li>
+<li>不要对已经<code>push</code>了的分支进行<code>rebase</code>，这会让已经存在的提交丢失，如果有人已经拉取了这个分支，也会给别人提交带来混乱</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>戛戛Happy
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://www.gagahappy.com/using-rebase-instead-of-merge/" title="Git 使用 Rebase 代替 Merge">http://www.gagahappy.com/using-rebase-instead-of-merge/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/mysql-auto-increment-strategy/" rel="next" title="MySQL自增值申请策略">
+                  MySQL自增值申请策略 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备10044755号 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戛戛Happy</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">302k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">4:35</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
