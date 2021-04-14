@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.0.2">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -21,7 +21,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 <meta name="description" content="无意间发现 Hexo 的 Next 主题也很好看，之前的 Yelee 主题使用了好久，决定换成 Next。在配置过程中遇到不少问题，主要有两点值得分享：  不要直接在主题配置文件上进行修改 修改RSS显示位置使其在首页显示  配置主题文件根据 Hexo 官方的推荐，不要直接修改主题的配置文件  The file should be placed in your site folder, both">
 <meta property="og:type" content="article">
@@ -140,7 +140,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">922</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">923</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -296,20 +296,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.9k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -330,15 +316,15 @@
 </blockquote>
 <p>根据推荐执行以下操作: </p>
 <ol>
-<li><p>配置主题为 Next 主题</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line">theme: <span class="string">&quot;next&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>配置主题为 Next 主题</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line">theme: <span class="string">&quot;next&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
 <li><p>在 site 根目录新建 <code>_config.next.yml</code>文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch _config.next.yml</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch _config.next.yml</span><br></pre></td></tr></table></figure></li>
 <li><p>打开 <code>theme/next/_config.yml</code>把需要修改的选项 copy 到 <code>_config.next.yml</code>中</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.next.yml</span></span><br><span class="line"><span class="comment"># 设置网站图标</span></span><br><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/apple-touch-icon.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/apple-touch-icon.png</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.next.yml</span></span><br><span class="line"><span class="comment"># 设置网站图标</span></span><br><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/apple-touch-icon.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/apple-touch-icon.png</span></span><br></pre></td></tr></table></figure></li>
 <li><p>hexo启动时，会自动合并 <code>_config.next.yml</code> 与<code>theme/next/_config.yml</code> 的设置内容，从而达到配置主题的作用。 </p>
 </li>
 </ol>
@@ -346,18 +332,17 @@
 <h3 id="修改RSS显示位置"><a href="#修改RSS显示位置" class="headerlink" title="修改RSS显示位置"></a>修改RSS显示位置</h3><p>看到网上说Rss的显示位置由首页侧边栏的位置移动到了每篇文章的最底部，这显然是不适合的，因为订阅不是按文章订阅，而是直接在首页中订阅。</p>
 <p>自定义RSS到侧边栏：请先确认已经安装 <code>hexo-generator-feed</code>插件</p>
 <ol>
-<li><p>删除文章底部的Rss(整个 follow me 设置都删除)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.njk</span><br><span class="line"></span><br><span class="line"># 删除以下代码</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>删除文章底部的Rss(整个 follow me 设置都删除)</li>
+</ol>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.njk</span><br><span class="line"></span><br><span class="line"># 删除以下代码</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
 <li><p>修改 Rss 样式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;post&#x2F;post-followme.njk</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;followme&quot;&gt; # 修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  &lt;span&gt;&#123;&#123; __(&#39;follow_me.welcome&#39;) &#125;&#125;&lt;&#x2F;span&gt; # 删除这一行</span><br><span class="line">  &lt;div class&#x3D;&quot;social-list&quot;&gt; # #修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  # 省略部分源码</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;post&#x2F;post-followme.njk</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;followme&quot;&gt; # 修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  &lt;span&gt;&#123;&#123; __(&#39;follow_me.welcome&#39;) &#125;&#125;&lt;&#x2F;span&gt; # 删除这一行</span><br><span class="line">  &lt;div class&#x3D;&quot;social-list&quot;&gt; # #修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  # 省略部分源码</span><br></pre></td></tr></table></figure></li>
 <li><p>添加 Rss 到侧边栏(其实就是整个的 follwe me)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;sidebar&#x2F;site-overview.njk</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;sidebar&#x2F;site-overview.njk</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>在站点配置文件中打开 Rss 设置</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="attr">follow_me:</span></span><br><span class="line">  <span class="attr">RSS:</span> <span class="string">/rss2.xml</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-rss</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="attr">follow_me:</span></span><br><span class="line">  <span class="attr">RSS:</span> <span class="string">/rss2.xml</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-rss</span></span><br></pre></td></tr></table></figure></li>
 <li><p>重启站点即可，就可以看到 Rss 显示在侧边栏了</p>
 </li>
 </ol>
@@ -451,20 +436,6 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">戛戛Happy</span>
-</div>
-<div class="wordcount">
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
-    </span>
-    <span title="Symbols count total">302k</span>
-  </span>
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="Reading time total">4:35</span>
-  </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>

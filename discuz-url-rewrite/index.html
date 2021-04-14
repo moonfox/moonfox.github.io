@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.0.2">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -21,7 +21,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 <meta name="description" content="Apache Web Server（独立主机用户） 12345678&lt;IfModule mod_rewrite.c&gt;    RewriteEngine On    RewriteRule ^(.*)&#x2F;archiver&#x2F;((fid|tid)-[\w\-]+\.html)$ $1&#x2F;archiver&#x2F;index.php?$2    RewriteRule ^(.*)&#x2F;forum-([0-9]">
 <meta property="og:type" content="article">
@@ -140,7 +140,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">922</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">923</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -295,20 +295,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -321,7 +307,7 @@
         <p>Apache Web Server（独立主机用户）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">    RewriteEngine On</span><br><span class="line">    RewriteRule ^(.*)/archiver/((fid|tid)-[\w\-]+\.html)$ <span class="variable">$1</span>/archiver/index.php?<span class="variable">$2</span></span><br><span class="line">    RewriteRule ^(.*)/forum-([0-9]+)-([0-9]+)\.html$ <span class="variable">$1</span>/forumdisplay.php?fid=<span class="variable">$2</span>&amp;page=<span class="variable">$3</span></span><br><span class="line">    RewriteRule ^(.*)/thread-([0-9]+)-([0-9]+)-([0-9]+)\.html$ <span class="variable">$1</span>/viewthread.php?tid=<span class="variable">$2</span>&amp;extra=page\%3D<span class="variable">$4</span>&amp;page=<span class="variable">$3</span></span><br><span class="line">    RewriteRule ^(.*)/space-(username|uid)-(.+)\.html$ <span class="variable">$1</span>/space.php?<span class="variable">$2</span>=<span class="variable">$3</span></span><br><span class="line">    RewriteRule ^(.*)/tag-(.+)\.html$ <span class="variable">$1</span>/tag.php?name=<span class="variable">$2</span></span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
 
-<a id="more"></a>
+<span id="more"></span>
 
 <p>Apache Web Server（虚拟主机用户）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">    <span class="comment"># 将 RewriteEngine 模式打开</span></span><br><span class="line">    RewriteEngine On</span><br><span class="line">    <span class="comment"># 修改以下语句中的/discuz 为你的论坛目录地址，如果程序放在根目录中，请将 /discuz 修改为 /</span></span><br><span class="line">    RewriteBase /discuz</span><br><span class="line">    <span class="comment"># Rewrite 系统规则请勿修改</span></span><br><span class="line">    RewriteRule ^archiver/((fid|tid)-[\w\-]+\.html)$ archiver/index.php?<span class="variable">$1</span></span><br><span class="line">    RewriteRule ^forum-([0-9]+)-([0-9]+)\.html$ forumdisplay.php?fid=<span class="variable">$1</span>&amp;page=<span class="variable">$2</span></span><br><span class="line">    RewriteRule ^thread-([0-9]+)-([0-9]+)-([0-9]+)\.html$ viewthread.php?tid=<span class="variable">$1</span>&amp;extra=page\%3D<span class="variable">$3</span>&amp;page=<span class="variable">$2</span></span><br><span class="line">    RewriteRule ^space-(username|uid)-(.+)\.html$ space.php?<span class="variable">$1</span>=<span class="variable">$2</span></span><br><span class="line">    RewriteRule ^tag-(.+)\.html$ tag.php?name=<span class="variable">$1</span></span><br></pre></td></tr></table></figure>
@@ -412,20 +398,6 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">戛戛Happy</span>
-</div>
-<div class="wordcount">
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
-    </span>
-    <span title="Symbols count total">302k</span>
-  </span>
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="Reading time total">4:35</span>
-  </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>

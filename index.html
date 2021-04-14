@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.0.2">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -21,7 +21,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 <meta name="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
 <meta property="og:type" content="website">
@@ -138,7 +138,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">922</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">923</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -255,6 +255,109 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/go-sync-wait/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/go-sync-wait/" class="post-title-link" itemprop="url">sync.Wait的使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-14 18:43:00" itemprop="dateCreated datePublished" datetime="2021-04-14T18:43:00+08:00">2021-04-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如何让主 goroutine 在所有其他 goroutine 都运行完后，再退出</p>
+<h1 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h1><p>通过 sleep 让主 goroutine 在所有子goroutine运行结束后，再退出</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">usingSleep</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">go</span> fmt.Println(i)</span><br><span class="line">	&#125;</span><br><span class="line">	time.Sleep(time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>缺点：无法判断 for 循环到底需要多长时间，导致估计sleep的时间要么不够，要么太长</p>
+<h1 id="缓冲通道"><a href="#缓冲通道" class="headerlink" title="缓冲通道"></a>缓冲通道</h1><p>通过缓冲通道让主 goroutine 在所有子goroutine运行结束后，再退出</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">usingChannel</span><span class="params">()</span></span> &#123;</span><br><span class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;, <span class="number">10</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">			fmt.Println(i)</span><br><span class="line">			c &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">		&#125;(i)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		&lt;-c</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>缺点：</p>
+<ul>
+<li>channel应该被用在goroutine间的通信</li>
+<li>如果子goroutine太多，使用通道也会消耗很多资源</li>
+</ul>
+<h1 id="sync-WaitGroup"><a href="#sync-WaitGroup" class="headerlink" title="sync.WaitGroup"></a>sync.WaitGroup</h1><p>使用 sync.WaitGroup()控制主 goroutine 在所有子goroutine运行结束后，再退出</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">waitGroup</span><span class="params">()</span></span> &#123;</span><br><span class="line">	wg := sync.WaitGroup&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		wg.Add(<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">			<span class="keyword">defer</span> wg.Done()</span><br><span class="line">			fmt.Println(i)</span><br><span class="line">		&#125;(i)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	wg.Wait() <span class="comment">// 一直阻塞主goroutine，直到wg为零</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// output</span></span><br><span class="line">	<span class="comment">// 乱序输出,并不是按1,2,3,4...</span></span><br><span class="line">	<span class="comment">// 2</span></span><br><span class="line">	<span class="comment">// 4</span></span><br><span class="line">	<span class="comment">// 7</span></span><br><span class="line">	<span class="comment">// 3</span></span><br><span class="line">	<span class="comment">// 1</span></span><br><span class="line">	<span class="comment">// 0</span></span><br><span class="line">	<span class="comment">// 9</span></span><br><span class="line">	<span class="comment">// 5</span></span><br><span class="line">	<span class="comment">// 8</span></span><br><span class="line">	<span class="comment">// 6</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>Wait() 方法的功能是，阻塞当前的 goroutine，直到其所属值中的计数器归零</p>
+</li>
+<li><p>不要把增加其计数器值的操作和调用其Wait方法的代码，放在不同的 goroutine 中执行，如果同时启用的两个 goroutine ，分别调用这两个方法(add 和 wait)，那么就有可能会让这里的Add方法抛出一个 panic。最好用“先统一Add，再并发Done，最后Wait”这种标准方式，来使用WaitGroup值</p>
+</li>
+<li><p>计数器不能为负值，发生为负的情况是：不适当地调用Done方法和Add方法都会如此。</p>
+</li>
+<li><p>Done()是Add(-1)的别名</p>
+</li>
+<li><p>计数不为0, 阻塞Wait()的运行</p>
+</li>
+</ul>
+<h1 id="WaitGroup对象不是一个引用类型"><a href="#WaitGroup对象不是一个引用类型" class="headerlink" title="WaitGroup对象不是一个引用类型"></a>WaitGroup对象不是一个引用类型</h1><p>在通过函数传值的时候需要使用地址，不然会出现 <code>fatal error: all goroutines are asleep - deadlock!</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">passWGByPointer</span><span class="params">()</span></span> &#123;</span><br><span class="line">	wg := sync.WaitGroup&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		wg.Add(<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">go</span> wgDone(i, &amp;wg)</span><br><span class="line">	&#125;</span><br><span class="line">	wg.Wait()</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">wgDone</span><span class="params">(i <span class="keyword">int</span>, wg *sync.WaitGroup)</span></span> &#123;</span><br><span class="line">	<span class="keyword">defer</span> wg.Done()</span><br><span class="line">	fmt.Println(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/using-rebase-instead-of-merge/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -292,20 +395,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.4k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -427,20 +516,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>350</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -534,20 +609,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -558,7 +619,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>主goroutine先执行完,子goroutine居然还可以运行</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">    log.Println(<span class="string">&quot;===========&quot;</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        log.Println(<span class="string">&quot;doing in sub goroutine&quot;</span>)</span><br><span class="line">        <span class="comment">// 主程序向通道发送数据，但此时由于 主 gor 行速度慢</span></span><br><span class="line">        <span class="comment">// 程序还没有执行到 fmt.Println(&quot;x in ch is:&quot;, &lt;-ch)，</span></span><br><span class="line">        <span class="comment">// 通道还没有接收数据，所以此时发生 阻塞</span></span><br><span class="line">        ch &lt;- <span class="number">1</span></span><br><span class="line">        log.Println(<span class="string">&quot;done in sub goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模拟执行速度慢</span></span><br><span class="line">    time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line"></span><br><span class="line">    log.Println(<span class="string">&quot;doing in main goroutine&quot;</span>)</span><br><span class="line">    <span class="comment">// 1. 执行到这里时发生，由于子 gor 已经在等待向通道发送数据</span></span><br><span class="line">    <span class="comment">//    所以此处的 从通道接收数据的 &lt;-ch 立即执行</span></span><br><span class="line">    <span class="comment">// 2. 子 gor 被唤酲, 立即向通道发送数据</span></span><br><span class="line">    <span class="comment">// 3. &lt;-ch 开始接收数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当从通道中取出数据时，数据是通道中复制的，这需要花费一定的时间</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;x in ch is:&quot;</span>, &lt;-ch)      <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">    log.Println(<span class="string">&quot;done in main goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">	log.Println(<span class="string">&quot;===========&quot;</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		log.Println(<span class="string">&quot;doing in sub goroutine&quot;</span>)</span><br><span class="line">		<span class="comment">// 主程序向通道发送数据，但此时由于 主 gor 行速度慢</span></span><br><span class="line">		<span class="comment">// 程序还没有执行到 fmt.Println(&quot;x in ch is:&quot;, &lt;-ch)，</span></span><br><span class="line">		<span class="comment">// 通道还没有接收数据，所以此时发生 阻塞</span></span><br><span class="line">		ch &lt;- <span class="number">1</span></span><br><span class="line">		log.Println(<span class="string">&quot;done in sub goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 模拟执行速度慢</span></span><br><span class="line">	time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line"></span><br><span class="line">	log.Println(<span class="string">&quot;doing in main goroutine&quot;</span>)</span><br><span class="line">	<span class="comment">// 1. 执行到这里时发生，由于子 gor 已经在等待向通道发送数据</span></span><br><span class="line">	<span class="comment">//    所以此处的 从通道接收数据的 &lt;-ch 立即执行</span></span><br><span class="line">	<span class="comment">// 2. 子 gor 被唤酲, 立即向通道发送数据</span></span><br><span class="line">	<span class="comment">// 3. &lt;-ch 开始接收数据</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当从通道中取出数据时，数据是通道中复制的，这需要花费一定的时间</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;x in ch is:&quot;</span>, &lt;-ch)      <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">	log.Println(<span class="string">&quot;done in main goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>  output：这个比较奇怪,主 先执行完,子居然还可以运行</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2021/03/04 16:26:35 doing in sub goroutine</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 doing in main goroutine</span></span><br><span class="line"><span class="comment">// x in ch is: 1</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 done in main goroutine (主 先执行完)</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 done in sub goroutine （子居然还可以运行）</span></span><br></pre></td></tr></table></figure>
@@ -638,20 +699,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>596</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -666,7 +713,7 @@
 <h1 id="行锁的实现"><a href="#行锁的实现" class="headerlink" title="行锁的实现"></a>行锁的实现</h1><p>由存储引擎自已实现，每个存储引擎实现的方式都不一样</p>
 <p> MyISAM 引擎不支持行锁</p>
 <h1 id="两阶段锁"><a href="#两阶段锁" class="headerlink" title="两阶段锁"></a>两阶段锁</h1><p>在更新数据时，需要对数据所在行加锁，但更新数据完成后，锁并不会马上释放，而是要等到事务提交才释放</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table t_07_recordlock(</span><br><span class="line">    id int not null auto_increment primary key,</span><br><span class="line">  c int,</span><br><span class="line">  d int,</span><br><span class="line">     key c (c) </span><br><span class="line">) engine&#x3D;innodb;</span><br><span class="line"></span><br><span class="line">insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table t_07_recordlock(</span><br><span class="line">	id int not null auto_increment primary key,</span><br><span class="line">  c int,</span><br><span class="line">  d int,</span><br><span class="line"> 	key c (c) </span><br><span class="line">) engine&#x3D;innodb;</span><br><span class="line"></span><br><span class="line">insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);</span><br></pre></td></tr></table></figure>
 
 <table>
 <thead>
@@ -769,20 +816,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>239</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -896,20 +929,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>394</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -920,7 +939,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>无缓冲通道的cap是零</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无缓冲通道的cap、len永远是0</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    noCache := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; noCache &lt;- <span class="number">6</span> &#125;()</span><br><span class="line"></span><br><span class="line">    time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">    fmt.Println(<span class="string">&quot;cap of noCache pipeline is&quot;</span>, <span class="built_in">cap</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;len of noCache pipeline is&quot;</span>, <span class="built_in">len</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">&quot;noCache &quot;</span>, &lt;-noCache)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无缓冲通道的cap、len永远是0</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	noCache := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; noCache &lt;- <span class="number">6</span> &#125;()</span><br><span class="line"></span><br><span class="line">	time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">	fmt.Println(<span class="string">&quot;cap of noCache pipeline is&quot;</span>, <span class="built_in">cap</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;len of noCache pipeline is&quot;</span>, <span class="built_in">len</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;noCache &quot;</span>, &lt;-noCache)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -983,20 +1002,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>40</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -1071,20 +1076,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>102</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -1158,20 +1149,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>31</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -1246,20 +1223,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>2k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -1287,11 +1250,11 @@
 <li><p>空目录无法被添加到git<br>因为根据算法，添加的对象必须要有内容，以供sha1算法使用</p>
 </li>
 <li><p>合并后再使用 <code>git rebase </code> 使提交成为一条直线</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">git merge master</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line">Merge made by the <span class="string">&#x27;recursive&#x27;</span> strategy.</span><br><span class="line"> layout/_partials/header/menu-item.njk      | 5 +----</span><br><span class="line"> layout/_partials/page/breadcrumb.njk       | 6 +-----</span><br><span class="line"> layout/_partials/post/post-followme.njk    | 2 +-</span><br><span class="line"> layout/_partials/sidebar/site-overview.njk | 2 +-</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">*   b1b3e13 (HEAD -&gt; release) Merge branch <span class="string">&#x27;upstream-master&#x27;</span> into release</span><br><span class="line">|\</span><br><span class="line">| * d51ca0e (upstream/master, upstream-master) Fix: handle invalid config</span><br><span class="line">* | 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts</span><br><span class="line">|/</span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br><span class="line"></span><br><span class="line">git rebase</span><br><span class="line">First, rewinding head to replay your work on top of it...</span><br><span class="line">Applying: Fix: handle invalid config</span><br><span class="line">Using index info to reconstruct a base tree...</span><br><span class="line">M    layout/_partials/post/post-followme.njk</span><br><span class="line">M    layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Falling back to patching base and 3-way merge...</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">* 217e224 (HEAD -&gt; release) Fix: handle invalid config</span><br><span class="line">* 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts <span class="comment"># 以这个提交做为 rebase</span></span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">git merge upstream-master</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line">Merge made by the <span class="string">&#x27;recursive&#x27;</span> strategy.</span><br><span class="line"> layout/_partials/header/menu-item.njk      | 5 +----</span><br><span class="line"> layout/_partials/page/breadcrumb.njk       | 6 +-----</span><br><span class="line"> layout/_partials/post/post-followme.njk    | 2 +-</span><br><span class="line"> layout/_partials/sidebar/site-overview.njk | 2 +-</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">*   b1b3e13 (HEAD -&gt; release) Merge branch <span class="string">&#x27;upstream-master&#x27;</span> into release</span><br><span class="line">|\</span><br><span class="line">| * d51ca0e (upstream/master, upstream-master) Fix: handle invalid config</span><br><span class="line">* | 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts</span><br><span class="line">|/</span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 把前分支作为基础分枝, 把 upstream-master 分支的提交嫁接在其上面</span></span><br><span class="line">git rebase</span><br><span class="line">First, rewinding head to replay your work on top of it...</span><br><span class="line">Applying: Fix: handle invalid config</span><br><span class="line">Using index info to reconstruct a base tree...</span><br><span class="line">M	layout/_partials/post/post-followme.njk</span><br><span class="line">M	layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Falling back to patching base and 3-way merge...</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">* 217e224 (HEAD -&gt; release) Fix: handle invalid config</span><br><span class="line">* 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts <span class="comment"># 以这个提交做为 rebase</span></span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br></pre></td></tr></table></figure>
 
 <ol>
 <li>使用merge出现了分支线路</li>
-<li>rebase后，分支线路消失，成为一条直线。 是 以当前分支的最TOP的那个提交做为rebase，重放合并进来的分支上的提交的</li>
+<li>rebase后，分支线路消失，成为一条直线。 是 以当前分支的最TOP的那个(369c5b5)提交做为rebase，重放合并进来的分支上的提交的</li>
 </ol>
 </li>
 </ol>
@@ -1358,20 +1321,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.6k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -1471,20 +1420,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.8k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -1505,7 +1440,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin&#x3D;master</span><br></pre></td></tr></table></figure>
 
 <p>或设置为绝对路径</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"><span class="built_in">log</span>-bin=/mysql/3306/data/master</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin=/mysql/3306/data/master</span><br></pre></td></tr></table></figure>
 
 <h3 id="参数-log-bin身兼多职"><a href="#参数-log-bin身兼多职" class="headerlink" title="参数 log-bin身兼多职"></a>参数 <code>log-bin</code>身兼多职</h3><p>设置后生效多个参数</p>
 <ol>
@@ -1585,20 +1520,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>198</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -1674,20 +1595,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>124</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -1763,20 +1670,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>131</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -1851,20 +1744,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>30</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -1939,20 +1818,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -1986,7 +1851,7 @@
 </li>
 </ul>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>插入大量数据时，应减少事务的提交，让多个插入在一个事务中完成，从而提高插入数据的效率</p>
-<h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImportTradelog</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">import</span><span class="params">(date)</span></span></span><br><span class="line">    <span class="comment"># 导入30天的数据</span></span><br><span class="line">    <span class="number">30</span>.times <span class="keyword">do</span> <span class="params">|offset|</span></span><br><span class="line">      datas = init_data(date + (<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>) * offset)</span><br><span class="line">      puts datas</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 批量插入， 每1000条插入一次，效率很高，用时7.99秒</span></span><br><span class="line">      <span class="comment"># 5.54s user 0.54s system 77% cpu 7.799 total</span></span><br><span class="line">      <span class="comment"># 5.38s user 0.48s system 78% cpu 7.452 total</span></span><br><span class="line">      Tradelog.bulk_insert <span class="symbol">set_size:</span> <span class="number">1000</span>, <span class="symbol">values:</span> datas</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 每天导入1000条数据</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">self</span>.<span class="title">init_data</span><span class="params">(day)</span></span></span><br><span class="line">    datas = []</span><br><span class="line">    <span class="number">1000</span>.times <span class="keyword">do</span> <span class="params">|index|</span></span><br><span class="line">      <span class="comment"># 插入效率很低，30 * 1000 条记录用时 1分钟</span></span><br><span class="line">      <span class="comment"># date = &#123;tradeid: tradeid, operator: operator, t_modified: t_modified&#125;</span></span><br><span class="line">      <span class="comment"># Tradelog.create(date)</span></span><br><span class="line">      datas &lt;&lt; &#123;</span><br><span class="line">        <span class="symbol">tradeid:</span> <span class="string">&quot;<span class="subst">#&#123;day.strftime(<span class="string">&#x27;%Y%m%d&#x27;</span>)&#125;</span><span class="subst">#&#123;format(<span class="string">&#x27;%04d&#x27;</span>, (index + <span class="number">1</span>))&#125;</span>&quot;</span>,</span><br><span class="line">        <span class="symbol">operator:</span> rand(<span class="number">50</span>),</span><br><span class="line">        <span class="symbol">t_modified:</span> (day + <span class="number">60</span> * index)</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    datas</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImportTradelog</span></span></span><br><span class="line">  def <span class="keyword">self</span>.import(date)</span><br><span class="line">    <span class="comment"># 导入30天的数据</span></span><br><span class="line">    <span class="number">30</span>.times <span class="keyword">do</span> <span class="params">|offset|</span></span><br><span class="line">      datas = init_data(date + (<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>) * offset)</span><br><span class="line">      puts datas</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 批量插入， 每1000条插入一次，效率很高，用时7.99秒</span></span><br><span class="line">      <span class="comment"># 5.54s user 0.54s system 77% cpu 7.799 total</span></span><br><span class="line">      <span class="comment"># 5.38s user 0.48s system 78% cpu 7.452 total</span></span><br><span class="line">      Tradelog.bulk_insert <span class="symbol">set_size:</span> <span class="number">1000</span>, <span class="symbol">values:</span> datas</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 每天导入1000条数据</span></span><br><span class="line">  def <span class="keyword">self</span>.init_data(day)</span><br><span class="line">    datas = []</span><br><span class="line">    <span class="number">1000</span>.times <span class="keyword">do</span> <span class="params">|index|</span></span><br><span class="line">      <span class="comment"># 插入效率很低，30 * 1000 条记录用时 1分钟</span></span><br><span class="line">      <span class="comment"># date = &#123;tradeid: tradeid, operator: operator, t_modified: t_modified&#125;</span></span><br><span class="line">      <span class="comment"># Tradelog.create(date)</span></span><br><span class="line">      datas &lt;&lt; &#123;</span><br><span class="line">        <span class="symbol">tradeid:</span> <span class="string">&quot;<span class="subst">#&#123;day.strftime(<span class="string">&#x27;%Y%m%d&#x27;</span>)&#125;</span><span class="subst">#&#123;format(<span class="string">&#x27;%04d&#x27;</span>, (index + <span class="number">1</span>))&#125;</span>&quot;</span>,</span><br><span class="line">        <span class="symbol">operator:</span> rand(<span class="number">50</span>),</span><br><span class="line">        <span class="symbol">t_modified:</span> (day + <span class="number">60</span> * index)</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    datas</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
 
       
@@ -2051,20 +1916,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.9k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -2085,15 +1936,15 @@
 </blockquote>
 <p>根据推荐执行以下操作: </p>
 <ol>
-<li><p>配置主题为 Next 主题</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line">theme: <span class="string">&quot;next&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>配置主题为 Next 主题</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line">theme: <span class="string">&quot;next&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
 <li><p>在 site 根目录新建 <code>_config.next.yml</code>文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch _config.next.yml</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch _config.next.yml</span><br></pre></td></tr></table></figure></li>
 <li><p>打开 <code>theme/next/_config.yml</code>把需要修改的选项 copy 到 <code>_config.next.yml</code>中</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.next.yml</span></span><br><span class="line"><span class="comment"># 设置网站图标</span></span><br><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/apple-touch-icon.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/apple-touch-icon.png</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.next.yml</span></span><br><span class="line"><span class="comment"># 设置网站图标</span></span><br><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/apple-touch-icon.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/apple-touch-icon.png</span></span><br></pre></td></tr></table></figure></li>
 <li><p>hexo启动时，会自动合并 <code>_config.next.yml</code> 与<code>theme/next/_config.yml</code> 的设置内容，从而达到配置主题的作用。 </p>
 </li>
 </ol>
@@ -2101,18 +1952,17 @@
 <h3 id="修改RSS显示位置"><a href="#修改RSS显示位置" class="headerlink" title="修改RSS显示位置"></a>修改RSS显示位置</h3><p>看到网上说Rss的显示位置由首页侧边栏的位置移动到了每篇文章的最底部，这显然是不适合的，因为订阅不是按文章订阅，而是直接在首页中订阅。</p>
 <p>自定义RSS到侧边栏：请先确认已经安装 <code>hexo-generator-feed</code>插件</p>
 <ol>
-<li><p>删除文章底部的Rss(整个 follow me 设置都删除)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.njk</span><br><span class="line"></span><br><span class="line"># 删除以下代码</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>删除文章底部的Rss(整个 follow me 设置都删除)</li>
+</ol>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.njk</span><br><span class="line"></span><br><span class="line"># 删除以下代码</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
 <li><p>修改 Rss 样式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;post&#x2F;post-followme.njk</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;followme&quot;&gt; # 修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  &lt;span&gt;&#123;&#123; __(&#39;follow_me.welcome&#39;) &#125;&#125;&lt;&#x2F;span&gt; # 删除这一行</span><br><span class="line">  &lt;div class&#x3D;&quot;social-list&quot;&gt; # #修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  # 省略部分源码</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;post&#x2F;post-followme.njk</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;followme&quot;&gt; # 修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  &lt;span&gt;&#123;&#123; __(&#39;follow_me.welcome&#39;) &#125;&#125;&lt;&#x2F;span&gt; # 删除这一行</span><br><span class="line">  &lt;div class&#x3D;&quot;social-list&quot;&gt; # #修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  # 省略部分源码</span><br></pre></td></tr></table></figure></li>
 <li><p>添加 Rss 到侧边栏(其实就是整个的 follwe me)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;sidebar&#x2F;site-overview.njk</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;sidebar&#x2F;site-overview.njk</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>在站点配置文件中打开 Rss 设置</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="attr">follow_me:</span></span><br><span class="line">  <span class="attr">RSS:</span> <span class="string">/rss2.xml</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-rss</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="attr">follow_me:</span></span><br><span class="line">  <span class="attr">RSS:</span> <span class="string">/rss2.xml</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-rss</span></span><br></pre></td></tr></table></figure></li>
 <li><p>重启站点即可，就可以看到 Rss 显示在侧边栏了</p>
 </li>
 </ol>
@@ -2179,20 +2029,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>97</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -2204,95 +2040,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>感觉佳明的心率又飘了，因为最大心率下很难坚持，可能是表戴的太松了。跑了不到4公里，配速633，真的是退步很多，想想之前的5公里，配速都不到5分钟呀。慢慢恢复跑呗，先从提高步频开始，恢复到180先</p>
 <p><img src="http://img.gagahappy.cn/blog/2020/08/running-heart-rate-176.jpg_b1" alt="感觉佳明的心率又飘了" title="感觉佳明的心率又飘了"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/study-eng-participle-2020-7-23/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/study-eng-participle-2020-7-23/" class="post-title-link" itemprop="url">非谓语 Taken</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-07-23 21:53:39" itemprop="dateCreated datePublished" datetime="2020-07-23T21:53:39+08:00">2020-07-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/consciousness/" itemprop="url" rel="index"><span itemprop="name">意识流</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>157</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>The 13 people taken hostage on a bus in western Ukraine were freed</p>
-<p>容易犯的错误是翻译为13人劫持人质，把taken 做谓语使用，认为the 13 people 指代劫匪。</p>
-<p>但后面的were 很明显才是谓语，所以taken 是非谓语，过去分词表被动，即13人被劫持做为人质，之后又被释放了</p>
 
       
     </div>
@@ -2353,20 +2100,6 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">戛戛Happy</span>
-</div>
-<div class="wordcount">
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
-    </span>
-    <span title="Symbols count total">302k</span>
-  </span>
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="Reading time total">4:35</span>
-  </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>

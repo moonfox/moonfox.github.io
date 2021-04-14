@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.0.2">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -21,14 +21,14 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-<meta name="description" content="主goroutine先执行完,子goroutine居然还可以运行 12345678910111213141516171819202122232425func main() &amp;#123;    ch :&#x3D; make(chan int)    log.Println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)    go func() &amp;#123;        log.Println(&amp;quo">
+<meta name="description" content="主goroutine先执行完,子goroutine居然还可以运行 12345678910111213141516171819202122232425func main() &amp;#123;	ch :&#x3D; make(chan int)	log.Println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)	go func() &amp;#123;		log.Println(&quot;doing in sub">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go 主程序退出时会进行一些额外工作">
 <meta property="og:url" content="http://www.gagahappy.com/go-main-do-something-when-quit/">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:description" content="主goroutine先执行完,子goroutine居然还可以运行 12345678910111213141516171819202122232425func main() &amp;#123;    ch :&#x3D; make(chan int)    log.Println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)    go func() &amp;#123;        log.Println(&amp;quo">
+<meta property="og:description" content="主goroutine先执行完,子goroutine居然还可以运行 12345678910111213141516171819202122232425func main() &amp;#123;	ch :&#x3D; make(chan int)	log.Println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;)	go func() &amp;#123;		log.Println(&quot;doing in sub">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-03-05T12:28:56.000Z">
 <meta property="article:modified_time" content="2021-04-05T12:49:26.369Z">
@@ -140,7 +140,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">922</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">923</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -295,20 +295,6 @@
     </span>
 
   
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
 </div>
 
         </div>
@@ -319,7 +305,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>主goroutine先执行完,子goroutine居然还可以运行</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">    log.Println(<span class="string">&quot;===========&quot;</span>)</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        log.Println(<span class="string">&quot;doing in sub goroutine&quot;</span>)</span><br><span class="line">        <span class="comment">// 主程序向通道发送数据，但此时由于 主 gor 行速度慢</span></span><br><span class="line">        <span class="comment">// 程序还没有执行到 fmt.Println(&quot;x in ch is:&quot;, &lt;-ch)，</span></span><br><span class="line">        <span class="comment">// 通道还没有接收数据，所以此时发生 阻塞</span></span><br><span class="line">        ch &lt;- <span class="number">1</span></span><br><span class="line">        log.Println(<span class="string">&quot;done in sub goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模拟执行速度慢</span></span><br><span class="line">    time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line"></span><br><span class="line">    log.Println(<span class="string">&quot;doing in main goroutine&quot;</span>)</span><br><span class="line">    <span class="comment">// 1. 执行到这里时发生，由于子 gor 已经在等待向通道发送数据</span></span><br><span class="line">    <span class="comment">//    所以此处的 从通道接收数据的 &lt;-ch 立即执行</span></span><br><span class="line">    <span class="comment">// 2. 子 gor 被唤酲, 立即向通道发送数据</span></span><br><span class="line">    <span class="comment">// 3. &lt;-ch 开始接收数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当从通道中取出数据时，数据是通道中复制的，这需要花费一定的时间</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;x in ch is:&quot;</span>, &lt;-ch)      <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">    log.Println(<span class="string">&quot;done in main goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">	log.Println(<span class="string">&quot;===========&quot;</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		log.Println(<span class="string">&quot;doing in sub goroutine&quot;</span>)</span><br><span class="line">		<span class="comment">// 主程序向通道发送数据，但此时由于 主 gor 行速度慢</span></span><br><span class="line">		<span class="comment">// 程序还没有执行到 fmt.Println(&quot;x in ch is:&quot;, &lt;-ch)，</span></span><br><span class="line">		<span class="comment">// 通道还没有接收数据，所以此时发生 阻塞</span></span><br><span class="line">		ch &lt;- <span class="number">1</span></span><br><span class="line">		log.Println(<span class="string">&quot;done in sub goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 模拟执行速度慢</span></span><br><span class="line">	time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line"></span><br><span class="line">	log.Println(<span class="string">&quot;doing in main goroutine&quot;</span>)</span><br><span class="line">	<span class="comment">// 1. 执行到这里时发生，由于子 gor 已经在等待向通道发送数据</span></span><br><span class="line">	<span class="comment">//    所以此处的 从通道接收数据的 &lt;-ch 立即执行</span></span><br><span class="line">	<span class="comment">// 2. 子 gor 被唤酲, 立即向通道发送数据</span></span><br><span class="line">	<span class="comment">// 3. &lt;-ch 开始接收数据</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当从通道中取出数据时，数据是通道中复制的，这需要花费一定的时间</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;x in ch is:&quot;</span>, &lt;-ch)      <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">	log.Println(<span class="string">&quot;done in main goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>  output：这个比较奇怪,主 先执行完,子居然还可以运行</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2021/03/04 16:26:35 doing in sub goroutine</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 doing in main goroutine</span></span><br><span class="line"><span class="comment">// x in ch is: 1</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 done in main goroutine (主 先执行完)</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 done in sub goroutine （子居然还可以运行）</span></span><br></pre></td></tr></table></figure>
@@ -426,20 +412,6 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">戛戛Happy</span>
-</div>
-<div class="wordcount">
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
-    </span>
-    <span title="Symbols count total">302k</span>
-  </span>
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="Reading time total">4:35</span>
-  </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
