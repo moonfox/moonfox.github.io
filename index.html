@@ -26,7 +26,7 @@
 <meta name="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
 <meta property="og:type" content="website">
 <meta property="og:title" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:url" content="http://www.gagahappy.com/">
+<meta property="og:url" content="https://www.gagahappy.com/">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
 <meta property="og:locale">
@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://www.gagahappy.com/">
+<link rel="canonical" href="https://www.gagahappy.com/">
 
 
 <script class="page-configurations">
@@ -138,7 +138,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">923</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">924</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -255,7 +255,94 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/go-sync-wait/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/call-method-on-nil-of-interface-value/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/call-method-on-nil-of-interface-value/" class="post-title-link" itemprop="url">在动态值为 Nil 的接口上调用方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-19 15:37:54" itemprop="dateCreated datePublished" datetime="2021-04-19T15:37:54+08:00">2021-04-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="在动态值为-nil-的接口上调用方法"><a href="#在动态值为-nil-的接口上调用方法" class="headerlink" title="在动态值为 nil 的接口上调用方法"></a>在动态值为 nil 的接口上调用方法</h1><p>把一个值为nil的某个实现类型的变量赋给了接口变量，是否可以在这个接口变量上调用该接口的方法</p>
+<p>lib/lib.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> People <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">	Age  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Superman <span class="keyword">struct</span> &#123;</span><br><span class="line">	People</span><br><span class="line">	color <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Mutant <span class="keyword">interface</span> &#123;</span><br><span class="line">	Speaking()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Fly <span class="keyword">interface</span> &#123;</span><br><span class="line">	Fly()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(sp Superman)</span> <span class="title">Speaking</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;I&#x27;m %s&quot;</span>, sp.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(sp *Superman)</span> <span class="title">Fly</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;I can fly&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>value.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">callMethodOnNil</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> mu lib.Mutant</span><br><span class="line">	<span class="keyword">var</span> xman *lib.Superman</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;xman:&quot;</span>, xman) <span class="comment">// nil</span></span><br><span class="line">	mu = xman</span><br><span class="line">	fmt.Println(<span class="string">&quot;mu:&quot;</span>, mu) <span class="comment">// nil</span></span><br><span class="line">	<span class="comment">// Panic: runtime error: invalid memory address or nil pointer dereference</span></span><br><span class="line">	<span class="comment">// 动态类值为 nil 时，不能在其上调用值方法</span></span><br><span class="line">	<span class="comment">// mu.Speaking()</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> fly lib.Fly</span><br><span class="line">	fmt.Println(<span class="string">&quot;xman:&quot;</span>, xman) <span class="comment">// nil</span></span><br><span class="line">	fly = xman</span><br><span class="line">	fmt.Println(<span class="string">&quot;fly:&quot;</span>, fly) <span class="comment">// nil</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 动态类值为 nil 时，可以在其上调用指针方法</span></span><br><span class="line">	<span class="comment">// Fly()方法可以被调用，它的接收者是 *T 类型，且方法中没有涉及到对类型属性的调用</span></span><br><span class="line">	fly.Fly() <span class="comment">// I can fly</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ol>
+<li><p>值类型(T)的方法不能被调用，无论这个方法中是否涉及了对类型属性的调用</p>
+</li>
+<li><p>指针类型(*T)的方法可以被调用，但方法中不能涉及类型属性的调用</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/go-sync-wait/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -358,7 +445,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/using-rebase-instead-of-merge/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/using-rebase-instead-of-merge/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -479,7 +566,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-auto-increment-strategy/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-auto-increment-strategy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -572,7 +659,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/go-main-do-something-when-quit/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/go-main-do-something-when-quit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -662,7 +749,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-recordlock-2phase/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-recordlock-2phase/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -779,7 +866,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-auto-increment/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-auto-increment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -892,7 +979,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/unbuffered-channel-no-cap/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/unbuffered-channel-no-cap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -965,7 +1052,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/790-consecutive-weeks/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/790-consecutive-weeks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1039,7 +1126,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/luckily-recovered-text/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/luckily-recovered-text/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1112,7 +1199,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/clean-my-hhkb/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/clean-my-hhkb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1186,7 +1273,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-learning-supplement/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-learning-supplement/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1284,7 +1371,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/what-does-kill-0-do/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/what-does-kill-0-do/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1383,7 +1470,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-binlog-index/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-binlog-index/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1483,7 +1570,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/salute-to-the-heroes/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/salute-to-the-heroes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1558,7 +1645,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/the-award-of-oscar/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/the-award-of-oscar/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1633,7 +1720,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/trainng-for-running-at-park/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/trainng-for-running-at-park/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1707,7 +1794,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/cook-sauce-meat-baozi/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/cook-sauce-meat-baozi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1781,7 +1868,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-bluk-insert/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-bluk-insert/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1879,7 +1966,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/use-next-theme/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/use-next-theme/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1966,80 +2053,6 @@
 <li><p>重启站点即可，就可以看到 Rss 显示在侧边栏了</p>
 </li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/running-heart-rate-176/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/running-heart-rate-176/" class="post-title-link" itemprop="url">感觉佳明的心率又飘了</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-08-10 22:04:12" itemprop="dateCreated datePublished" datetime="2020-08-10T22:04:12+08:00">2020-08-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/consciousness/" itemprop="url" rel="index"><span itemprop="name">意识流</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>感觉佳明的心率又飘了，因为最大心率下很难坚持，可能是表戴的太松了。跑了不到4公里，配速633，真的是退步很多，想想之前的5公里，配速都不到5分钟呀。慢慢恢复跑呗，先从提高步频开始，恢复到180先</p>
-<p><img src="http://img.gagahappy.cn/blog/2020/08/running-heart-rate-176.jpg_b1" alt="感觉佳明的心率又飘了" title="感觉佳明的心率又飘了"></p>
 
       
     </div>

@@ -26,7 +26,7 @@
 <meta name="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
 <meta property="og:type" content="website">
 <meta property="og:title" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:url" content="http://www.gagahappy.com/page/20/">
+<meta property="og:url" content="https://www.gagahappy.com/page/20/">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
 <meta property="og:locale">
@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://www.gagahappy.com/page/20/">
+<link rel="canonical" href="https://www.gagahappy.com/page/20/">
 
 
 <script class="page-configurations">
@@ -138,7 +138,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">923</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">924</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -255,7 +255,84 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/rspec-it-describe-same-and-run/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-manager-of-pid-file-quit-without-updating-file/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/mysql-manager-of-pid-file-quit-without-updating-file/" class="post-title-link" itemprop="url">Mysql不能启动 Manager of Pid-File Quit Without Updating File.</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2011-08-01 12:34:10" itemprop="dateCreated datePublished" datetime="2011-08-01T12:34:10+08:00">2011-08-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>启动mysql失败，提示Manager of pid-file quit without updating file.错误。从网上直接搜索错误信息，感觉出错原因及解决方案都不适用于本机的情况。</p>
+<p>本着出错要查出其原因的原则，查看了mysql的出错日志（出错日志所在路径，请根据您自己机子的实际情况查找），发现错误信息：File ‘./mysql-bin.index’ not found (Errcode: 13)，查看数据库文件，mysql-bin.index确实存在。</p>
+<p>查看数据库文件的权限，发现全都变成了 drwx—— 2  1001 1001。突然想起之前重建过mysql用户，造成数据库文件的权限用户信息丢失。重新授权即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R  mysql var/</span><br><span class="line">sudo chgrp -R  mysql var/</span><br></pre></td></tr></table></figure>
+<p>再次启动mysql，成功！</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/rspec-it-describe-same-and-run/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -328,7 +405,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/tdd-and-bdd/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/tdd-and-bdd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -404,7 +481,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/rspec-check-kind-of-and-method/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/rspec-check-kind-of-and-method/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -477,7 +554,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-reset-error-on-git-cn/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-reset-error-on-git-cn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -553,7 +630,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-checkout-file/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-checkout-file/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -626,7 +703,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/rspec-controller-erro/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/rspec-controller-erro/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -704,7 +781,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/rspec-in-controller-integration-with-views/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/rspec-in-controller-integration-with-views/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -777,7 +854,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-remote-sort/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-remote-sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -853,7 +930,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/how-to-push-git-branch/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/how-to-push-git-branch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -927,7 +1004,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-diff-head/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-diff-head/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1002,7 +1079,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-tag-object/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-tag-object/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1076,7 +1153,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-blob-object/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-blob-object/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1150,7 +1227,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-tree-object/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-tree-object/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1224,7 +1301,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-commit-object/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-commit-object/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1298,7 +1375,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-set-your-name/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-set-your-name/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1371,7 +1448,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-commit-flow/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-commit-flow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1445,7 +1522,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/git-init-on-server/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-init-on-server/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1523,7 +1600,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/rspec-expect-to-change-value-or-raise-error/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/rspec-expect-to-change-value-or-raise-error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1596,7 +1673,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/the-different-between-include-and-extend-in-ruby/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/the-different-between-include-and-extend-in-ruby/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1656,80 +1733,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/install-openssh/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/install-openssh/" class="post-title-link" itemprop="url">安装OpenSSH</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2011-07-15 20:22:45" itemprop="dateCreated datePublished" datetime="2011-07-15T20:22:45+08:00">2011-07-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">我爱Linux</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>安装OpenSSH<br>Ubuntu缺省没有安装SSH Server，使用以下命令安装：</p>
-<p>sudo apt-get install openssh-server openssh-client</p>
-
       
     </div>
 

@@ -26,7 +26,7 @@
 <meta name="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
 <meta property="og:type" content="website">
 <meta property="og:title" content="漂自己的移，让别人都撞墙去吧">
-<meta property="og:url" content="http://www.gagahappy.com/page/12/">
+<meta property="og:url" content="https://www.gagahappy.com/page/12/">
 <meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
 <meta property="og:description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
 <meta property="og:locale">
@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://www.gagahappy.com/page/12/">
+<link rel="canonical" href="https://www.gagahappy.com/page/12/">
 
 
 <script class="page-configurations">
@@ -138,7 +138,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">923</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">924</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -255,7 +255,80 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/define-method-in-kernel-module/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/extend-class-method-by-module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/extend-class-method-by-module/" class="post-title-link" itemprop="url">使用Include,让模块中定义的方法分别插入类方法与实例方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-31 23:55:43" itemprop="dateCreated datePublished" datetime="2015-03-31T23:55:43+08:00">2015-03-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 1、类扩展:使用include,让模块中定义的方法分别插入类方法与实例方法中</span></span><br><span class="line"><span class="comment"># 2、obj实例对象调用extend,则模块中定义的方法为？</span></span><br><span class="line"><span class="comment"># 3、在模块中定义的实例变量能否被包含它的类的实例对象看到</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、通过重定义横块中的self.included方法，并对参数(receiver),使用关键字extend/include,分别向包含它的类中插入了</span></span><br><span class="line"><span class="comment">#    类方法(定义在ClassMethods模块中的方法)和实例方法(定义在InstanceMethod模块中)</span></span><br><span class="line"><span class="comment"># 2、obj实例对象调用extend,则模块中定义的方法为这个obj的单例方法，可以通过把方法定义在module中，让实例对象调用extend</span></span><br><span class="line"><span class="comment">#    来方便快速的增加自身的单例方法</span></span><br><span class="line"><span class="comment"># 3、可以。在模块中定义的实例变量可以被包含它的类的实例对象看到,因为被include的模块相当于当前类的父类，当前对象的</span></span><br><span class="line"><span class="comment">#    实例变量对其所有实例方法可见</span></span><br><span class="line"><span class="comment"># 4、extend方法的实质就是把module中定义的方法插入到对象的单件类中</span></span><br><span class="line"><span class="comment"># 5、调用MyClass.instance_methods(false)可以发现，在它的实例方法中并不包含实例方法instance_method，而MyClass</span></span><br><span class="line"><span class="comment">#    的实例对象可以调用这个方法，这正说明了类中include的模块(被代理类封装)充当这个类的父类。也验证了结论4</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="built_in">lambda</span> &#123;</span><br><span class="line">  <span class="class"><span class="keyword">module</span> <span class="title">M</span></span></span><br><span class="line">    <span class="class"><span class="keyword">module</span> <span class="title">ClassMethods</span></span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">class_method</span></span></span><br><span class="line">        <span class="string">&quot;i am a class method&quot;</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">module</span> <span class="title">InstanceMethods</span></span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">instance_method</span><span class="params">(from)</span></span></span><br><span class="line">        <span class="variable">@instance_variate</span> = <span class="string">&quot;i am a instance variate in M&quot;</span></span><br><span class="line">        <span class="string">&quot;i am a instance method from:<span class="subst">#&#123;from&#125;</span>&quot;</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    def <span class="keyword">self</span>.included(receiver)</span><br><span class="line">      receiver.extend         ClassMethods</span><br><span class="line">      receiver.send <span class="symbol">:include</span>, InstanceMethods</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  #&lt;!-- more --&gt;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line">    <span class="keyword">include</span> M</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_instance_variate_from_module</span><span class="params">(from)</span></span></span><br><span class="line">      <span class="string">&quot;<span class="subst">#&#123;<span class="variable">@instance_variate</span>&#125;</span> from: <span class="subst">#&#123;from&#125;</span>&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  obj = Object.new</span><br><span class="line">  obj.extend M::InstanceMethods</span><br><span class="line">  my = MyClass.new</span><br><span class="line"></span><br><span class="line">  puts <span class="string">&quot;================test1 OUTPUT================&quot;</span></span><br><span class="line">  puts MyClass.class_method</span><br><span class="line">  puts my.instance_method(<span class="string">&quot;MyClass.new obj&quot;</span>)</span><br><span class="line">  puts my.get_instance_variate_from_module(<span class="string">&quot;MyClass.new&quot;</span>)</span><br><span class="line">  puts obj.instance_method(<span class="string">&quot;Object.new&quot;</span>)</span><br><span class="line">  puts obj.instance_eval(<span class="string">&quot;@instance_variate&quot;</span>)</span><br><span class="line">  puts <span class="string">&quot;MyClass.instance_methods:&quot;</span>+MyClass.instance_methods(<span class="literal">false</span>).to_s</span><br><span class="line">  puts <span class="string">&quot;================test1 OUTPUT================&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># ================test1 OUTPUT================</span></span><br><span class="line">  <span class="comment"># i am a class method</span></span><br><span class="line">  <span class="comment"># i am a instance method from:MyClass.new obj</span></span><br><span class="line">  <span class="comment"># i am a instance variate in M from: MyClass.new</span></span><br><span class="line">  <span class="comment"># i am a instance method from:Object.new</span></span><br><span class="line">  <span class="comment"># i am a instance variate in M</span></span><br><span class="line">  <span class="comment"># MyClass.instance_methods:[:get_instance_variate_from_module]</span></span><br><span class="line">  <span class="comment"># ================test1 OUTPUT================</span></span><br><span class="line"></span><br><span class="line">&#125;.call</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/define-method-in-kernel-module/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -327,7 +400,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/sublime-text-load-rvm-ruby-version/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/sublime-text-load-rvm-ruby-version/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -406,7 +479,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/when-run-of-block-in-mehtod/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/when-run-of-block-in-mehtod/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -478,7 +551,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/thoughtful-ruby-block-and-variable/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/thoughtful-ruby-block-and-variable/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -552,7 +625,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/redo-log-record-type-and-function/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/redo-log-record-type-and-function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -625,7 +698,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-mac-auto-attempt-restart-when-start-fail/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-mac-auto-attempt-restart-when-start-fail/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -698,7 +771,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-redo-writed-ahead-log/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-redo-writed-ahead-log/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -773,7 +846,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/the-record-donst-be-actually-detete/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/the-record-donst-be-actually-detete/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -849,7 +922,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-undo-flush-to-disk/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-undo-flush-to-disk/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -922,7 +995,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/undo-segment-header-page-addr/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/undo-segment-header-page-addr/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -995,7 +1068,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/how-to-create-current-real-and-snapshot/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/how-to-create-current-real-and-snapshot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1069,7 +1142,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-consistent-noblocking-read/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-consistent-noblocking-read/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1142,7 +1215,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/attribute-of-log-idempotence/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/attribute-of-log-idempotence/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1215,7 +1288,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/a-part-of-innodb-star-log/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/a-part-of-innodb-star-log/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1289,7 +1362,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/innodb-lock-2/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/innodb-lock-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1363,7 +1436,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/mysql-fillfactor/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-fillfactor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1450,7 +1523,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/innodb-btree-find-by-binary-search/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/innodb-btree-find-by-binary-search/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1531,7 +1604,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/note-of-secondary-index-non-leaf-pages/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/note-of-secondary-index-non-leaf-pages/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1604,7 +1677,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/second-key-not-save-primary-add/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/second-key-not-save-primary-add/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1652,79 +1725,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>辅助索引为何不直接保存主键地址，如果保存了主键的地址，就可以不很快的找到记录，而不用再进行二次查找。被这个问题困扰了一阵。答案来了</p>
 <p>辅助索引使用主键作为”指针” 而不是使用地址值作为指针的好处是，减少了当出现行移动或者数据页分裂时辅助索引的维护工作，使用主键值当作指针会让辅助索引占用更多的空间，换来的好处是InnoDB在移动行时无须更新辅助索引中的这个”指针”。也就是说行的位置（实现中通过16K的Page来定位，后面会涉及）会随着数据库里数据的修改而发生变化（前面的B+树节点分裂以及Page的分裂），使用聚簇索引就可以保证不管这个主键B+树的节点如何变化，辅助索引树都不受影响。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.gagahappy.com/innodb-page-heap-allocation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/innodb-page-heap-allocation/" class="post-title-link" itemprop="url">Innodb使用记录数据空间分配</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-03-08 18:12:48" itemprop="dateCreated datePublished" datetime="2015-03-08T18:12:48+08:00">2015-03-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>innodb使用记录数据空间分配，根据文件结构，在插入新数据时，heap是由上而下分配空间的，即向记录尾部追加数据，而对slot分配，是由下向上分配的。</p>
 
       
     </div>
