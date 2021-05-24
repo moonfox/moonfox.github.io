@@ -138,7 +138,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">924</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">925</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -246,6 +246,88 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/rails3-0-gem-mysql2-lmysqlclient/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/rails3-0-gem-mysql2-lmysqlclient/" class="post-title-link" itemprop="url">rails3.0 安装Mysql2 失败，发生Lmysqlclient 错误</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2010-11-03 22:54:52" itemprop="dateCreated datePublished" datetime="2010-11-03T22:54:52+08:00">2010-11-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>rails3.0使用的mysql驱动是mysql2，默认安装使用 bundle install，在安装过程中出现如下错误</p>
+<blockquote>
+<p>/opt/ruby/bin/ruby extconf.rb<br>checking for rb_thread_blocking_region()… no<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lm… yes<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lz… yes<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lsocket… no<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lnsl… yes<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lmygcc… no<br>checking for mysql_query() in -lmysqlclient… no<br>*** extconf.rb failed ***<br>Could not create Makefile due to some reason, probably lack of<br>necessary libraries and/or headers.  Check the mkmf.log file for more<br>details.  You may need configuration options.</p>
+</blockquote>
+<p>解决方法</p>
+<p>既然要安装 mysql2 驱动，我们完全可以抛开bundle，而使用传统的gem的安装方式，并指明mysql的以下几个选项即可<br><code>sudo gem install mysql2 -- --with-mysql-dir=/opt/mysql --with-mysql-include=/opt/mysql/include/mysql --with-mysql-lib=/opt/mysql/lib/mysql/</code></p>
+<p>然后再运行 bundle intall顺利完成其它gem组件的安装。看到网上有的解决方法是安装mysql-deve这个库，其实知道原因后对症下药即可，本博没有安装mysql-deve，仅是指明了mysql的相关选项，即可解决问题。</p>
+<blockquote>
+<p>PS：bundle这个gem真的被集成到rails3.0里了。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1678,87 +1760,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/history-of-100-greatest-britons-part-1/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/how-to-change-firefox-3-cache-postion/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/how-to-change-firefox-3-cache-postion/" class="post-title-link" itemprop="url">如何修改Firefox 3缓存Cache的位置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2010-10-07 22:19:24" itemprop="dateCreated datePublished" datetime="2010-10-07T22:19:24+08:00">2010-10-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">玩转软件</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如何修改Firefox 3缓存Cache的位置<br>安装了firefox，在进行设置的时候，发现没有临时文件夹位置的修改.<br>通过搜索引擎发现Firefox 3的缓存Cache原来是放在系统盘(C:)＼Documents and Settings＼[你的用户名]＼Local Settings＼Application Data＼Mozilla＼Firefox＼Profiles＼[随机数].default＼Cache</p>
-<p>为了避免使系统盘产生磁盘碎片，我们最好把所有临时文件夹都放到非系统盘，如E盘。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/how-to-change-firefox-3-cache-postion/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

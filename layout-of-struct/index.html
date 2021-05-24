@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <link rel="mask-icon" href="/apple-touch-icon.png" color="#222">
+  <meta name="google-site-verification" content="mRjQM6azHRnllmCObIorLO1p8dqt92U33mbEzoA2HnU">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="一些基础知识 字节对齐 unsafe.Sizeof unsafe.Offsetof 内存空洞  字节对齐可以使计算机在加载和保存数据时，更加的有效率 通常情况下布尔和数字类型需要对齐到它们本身的大小（最多8个字节），其它的类型对齐到机器字大小 unsafe.Sizeof返回操作数在内存中的字节大小，参数可以是任意类型的表，但不会对表达式进行求值(不求值也能知道大小，好神奇呀) unsafe.Siz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言结构体在内存中的布局">
+<meta property="og:url" content="https://www.gagahappy.com/layout-of-struct/">
+<meta property="og:site_name" content="漂自己的移，让别人都撞墙去吧">
+<meta property="og:description" content="一些基础知识 字节对齐 unsafe.Sizeof unsafe.Offsetof 内存空洞  字节对齐可以使计算机在加载和保存数据时，更加的有效率 通常情况下布尔和数字类型需要对齐到它们本身的大小（最多8个字节），其它的类型对齐到机器字大小 unsafe.Sizeof返回操作数在内存中的字节大小，参数可以是任意类型的表，但不会对表达式进行求值(不求值也能知道大小，好神奇呀) unsafe.Siz">
+<meta property="og:locale">
+<meta property="og:image" content="http://img.gagahappy.cn/blog/2021/05/layout-of-struct.png_b1">
+<meta property="article:published_time" content="2021-05-24T06:02:42.000Z">
+<meta property="article:modified_time" content="2021-05-24T07:45:45.671Z">
+<meta property="article:author" content="戛戛Happy">
+<meta property="article:tag" content="golang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.gagahappy.cn/blog/2021/05/layout-of-struct.png_b1">
+
+
+<link rel="canonical" href="https://www.gagahappy.com/layout-of-struct/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+<title>Go语言结构体在内存中的布局 | 漂自己的移，让别人都撞墙去吧</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-17621945-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-17621945-1');
+      }
+    </script>
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="漂自己的移，让别人都撞墙去吧" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">漂自己的移，让别人都撞墙去吧</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">925</span></a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">一些基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90"><span class="nav-number">1.1.</span> <span class="nav-text">字节对齐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unsafe-Sizeof"><span class="nav-number">1.2.</span> <span class="nav-text">unsafe.Sizeof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unsafe-Offsetof"><span class="nav-number">1.3.</span> <span class="nav-text">unsafe.Offsetof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%A9%BA%E6%B4%9E"><span class="nav-number">1.4.</span> <span class="nav-text">内存空洞</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80"><span class="nav-number">2.</span> <span class="nav-text">结构体内存布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A7%E7%94%9F%E7%9A%84%E7%A9%BA%E6%B4%9E"><span class="nav-number">2.1.</span> <span class="nav-text">产生的空洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E5%81%8F%E7%A7%BB%E5%88%86%E6%9E%90"><span class="nav-number">2.2.</span> <span class="nav-text">字段偏移分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%AD%97%E6%AE%B5%E9%A1%BA%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">结构体字段顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8D%A0%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">内存占用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s1%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">3.2.</span> <span class="nav-text">s1占用空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s2-%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">3.3.</span> <span class="nav-text">s2 占用空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s3%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">3.4.</span> <span class="nav-text">s3占用空间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">相关问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="戛戛Happy"
+      src="/huitailang.jpg">
+  <p class="site-author-name" itemprop="name">戛戛Happy</p>
+  <div class="site-description" itemprop="description">喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</div>
+</div>
+  <div class="">
+
+  <div class="">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/rss2.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/layout-of-struct/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Go语言结构体在内存中的布局
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-05-24 14:02:42" itemprop="dateCreated datePublished" datetime="2021-05-24T14:02:42+08:00">2021-05-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h1><ul>
+<li>字节对齐</li>
+<li>unsafe.Sizeof</li>
+<li>unsafe.Offsetof</li>
+<li>内存空洞</li>
+</ul>
+<h2 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h2><p>可以使计算机在加载和保存数据时，更加的有效率</p>
+<p>通常情况下布尔和数字类型需要对齐到它们本身的大小（最多8个字节），其它的类型对齐到机器字大小</p>
+<h2 id="unsafe-Sizeof"><a href="#unsafe-Sizeof" class="headerlink" title="unsafe.Sizeof"></a>unsafe.Sizeof</h2><p>返回操作数在内存中的字节大小，参数可以是任意类型的表，但不会对表达式进行求值(不求值也能知道大小，好神奇呀)</p>
+<p>unsafe.Sizeof 返回的大小只包含数据结构中固定的部分。如果结构体含有指针字段，不包括针指向的内容。Go语言中非聚合类型通常有一个固定的大小，而聚合类型没有固定的大小，比如 结构体类型和数组类型</p>
+<h2 id="unsafe-Offsetof"><a href="#unsafe-Offsetof" class="headerlink" title="unsafe.Offsetof"></a>unsafe.Offsetof</h2><p>函数的参数必须是一个字段 x.f，然后返回 f 字段相对于 x 起始地址的偏移量，包括可能的空洞</p>
+<h2 id="内存空洞"><a href="#内存空洞" class="headerlink" title="内存空洞"></a>内存空洞</h2><p>一个聚合类型（结构体或数组）的大小至少是所有字段或元素大小的总和，或者更大。因为可能存在内存空洞，内存空洞是编译器自动添加的没有被使用的内存空间，用于保证后面每个字段或元素的地址相对于结构或数组的开始地址能够合理地对齐。内存空洞可能会存在一些随机数据，可能会对用unsafe包直接操作内存的处理产生影响</p>
+<h1 id="结构体内存布局"><a href="#结构体内存布局" class="headerlink" title="结构体内存布局"></a>结构体内存布局</h1><p>设：机器字大小为8个字节</p>
+<h2 id="产生的空洞"><a href="#产生的空洞" class="headerlink" title="产生的空洞"></a>产生的空洞</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="keyword">struct</span> &#123;</span><br><span class="line">  a <span class="keyword">bool</span></span><br><span class="line">  b <span class="keyword">int16</span></span><br><span class="line">  c []<span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* output</span></span><br><span class="line"><span class="comment">Sizeof(x)   = 32  Alignof(x)   = 8</span></span><br><span class="line"><span class="comment">Sizeof(x.a) = 1   Alignof(x.a) = 1 Offsetof(x.a) = 0</span></span><br><span class="line"><span class="comment">Sizeof(x.b) = 2   Alignof(x.b) = 2 Offsetof(x.b) = 2</span></span><br><span class="line"><span class="comment">Sizeof(x.c) = 24  Alignof(x.c) = 8 Offsetof(x.c) = 8</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>x</code> 占用内存大小为 32字节</li>
+<li><code>x.c</code>字段是一个切片，占用24个字节(3个机器字)，<code>c.data, c.len, c.cap</code> 分别用 8个字节(1 个机器字)</li>
+<li><code>x.a + x.b</code> 总共占用 3字节。用<code>x</code>的占用总字节数 <code>32 - (1 + 2 + 24) = 5</code>， 说明有5字节的内存空洞</li>
+<li>由于<code>x.c</code>占用了3个机器字，所以空洞不是它产生的</li>
+<li> <code>x.a + x.b = 3</code>字节，不满一个机器字(8字节)，所以a和b之间，b和c之间产生了总共5字节的空洞</li>
+</ul>
+<h2 id="字段偏移分析"><a href="#字段偏移分析" class="headerlink" title="字段偏移分析"></a>字段偏移分析</h2><ul>
+<li><code>Offsetof(x.a) = 0</code> 说明 字段 a 处在结构的起始处，a与结构体起始处没有偏移(与起始处没有空洞)</li>
+<li><code>Offsetof(x.b) = 2</code> 说明 字段 b 相对于结构体 起始处 偏移了 2 字节，而<code>Sizeof(x.a) = 1</code>说明 <code>x.a</code> 占用只占用了1字节，但 b 偏移了 2 字节，说明<code>b与a</code>之间有 1 字节的空洞，否则 b 只应该偏移 1 字节，即<code>x.a</code>的大小。</li>
+<li>那么 a与b之间，总共是4字节的大小: <code>x.a</code> 1字节 + 空洞 1 字节 + <code>x.b</code> 2字节</li>
+<li>如果 <code>x.c 与 x.b</code>之前没有空洞，则<code>x.c</code>只应该偏移4字节，但实际却偏移了8字节，则 说明 <code>x.c 与 x.b</code> 之间 存在 <code>8 - 4 = 4</code> 字节的空洞</li>
+<li>所以 x 结构体的内存 分布是: x.a(1)____空洞(1)____x.b(2)____空洞(4)____x.c(24)</li>
+<li>对齐方式：按一个机器字对齐的</li>
+</ul>
+<p><img src="http://img.gagahappy.cn/blog/2021/05/layout-of-struct.png_b1" alt="layout of struck" title="layout of struck"></p>
+<h1 id="结构体字段顺序"><a href="#结构体字段顺序" class="headerlink" title="结构体字段顺序"></a>结构体字段顺序</h1><p>Go 语言中，结构内部字段的声明顺序和它们在内存中的顺序可能是不一样的。一个编译器可以随意地重新排列每个字段的内存位置，有效的包装可以使数据结构更加紧凑，从而节省内存空间</p>
+<h2 id="内存占用"><a href="#内存占用" class="headerlink" title="内存占用"></a>内存占用</h2><p>不同结构体相同字段占用内存大小也会不一样，虽然 s1，s2，s3 有着相同的字段，但s1占用了较多的内存空间</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">struct</span> &#123;a <span class="keyword">bool</span>;b <span class="keyword">float64</span>;c <span class="keyword">int16</span>&#125;&#123;&#125; <span class="comment">// 3 words</span></span><br><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">struct</span> &#123;a <span class="keyword">float64</span>;b <span class="keyword">int16</span>;c <span class="keyword">bool</span>&#125;&#123;&#125; <span class="comment">// 2 words</span></span><br><span class="line"><span class="keyword">var</span> s3 = <span class="keyword">struct</span> &#123;a <span class="keyword">bool</span>;b <span class="keyword">int16</span>;c <span class="keyword">float64</span>&#125;&#123;&#125; <span class="comment">// 2 words</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="s1占用空间"><a href="#s1占用空间" class="headerlink" title="s1占用空间"></a>s1占用空间</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sizeof(s1) =   <span class="number">24</span> Alignof(s1) =    <span class="number">8</span></span><br><span class="line">Sizeof(s1.a) =  <span class="number">1</span> Alignof(s1.a) =  <span class="number">1</span> Offsetof(s1.a) =  <span class="number">0</span></span><br><span class="line">Sizeof(s1.b) =  <span class="number">8</span> Alignof(s1.b) =  <span class="number">8</span> Offsetof(s1.b) =  <span class="number">8</span></span><br><span class="line">Sizeof(s1.c) =  <span class="number">2</span> Alignof(s1.c) =  <span class="number">2</span> Offsetof(s1.c) =  <span class="number">16</span></span><br></pre></td></tr></table></figure>
+
+<p>综上: <code>s1.a 与 s1.b</code> 之间有 7 字节 的空洞，<code>s1.c与结构体结束处</code>(尾部)有 6 字节的空洞</p>
+<p>所以: s1 总字节数是 1 + 8 + 2 + (7 + 6) 空洞 = 24 <em>byte</em>，即3个机器字，可以看出 s1 的字段与字段之间，排列的并不是很紧凑，有较大空洞，造成了内存的浪费</p>
+<p>对齐方式：按一个机器字对齐的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">|-a-|----------holes------------| 8字节，即一个机器字</span><br><span class="line">|---------------b---------------| 8字节，即一个机器字</span><br><span class="line">|---c---|---------holes---------| 8字节，也可看出是按一个机器字对齐的</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="s2-占用空间"><a href="#s2-占用空间" class="headerlink" title="s2 占用空间"></a>s2 占用空间</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sizeof(s2) =   <span class="number">16</span> Alignof(s2) =    <span class="number">8</span></span><br><span class="line">Sizeof(s2.a) =  <span class="number">8</span> Alignof(s2.a) =  <span class="number">8</span> Offsetof(s2.a) =  <span class="number">0</span></span><br><span class="line">Sizeof(s2.b) =  <span class="number">2</span> Alignof(s2.b) =  <span class="number">2</span> Offsetof(s2.b) =  <span class="number">8</span></span><br><span class="line">Sizeof(s2.c) =  <span class="number">1</span> Alignof(s2.c) =  <span class="number">1</span> Offsetof(s2.c) =  <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p>综上: <code>s2.a</code> 的大小是一个机器字，本身就是对齐的，且是所有字段中长度最大的，与 <code>s2.b</code>之间没有空洞，<code>s2.c紧贴s2.b</code>，它们之间也没有空洞，<code>s2.c与结构体结束处</code>(尾部)有 5(8-2+1) 字节的空洞</p>
+<p>所以: <code>s2</code> 总字节数是 <code>8 + 2 + 1 + (5) 空洞 = 16 byte</code>，即2个机器字，可以看出 s2 的字段与字段之间，排列是很紧凑，可以大大节省内存空间</p>
+<p>对齐方式：按一个机器字对齐的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">|---------------a---------------| 8字节，即一个机器字</span><br><span class="line">|---b---|-c-|-------holes-------| 8字节，即一个机器字</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="s3占用空间"><a href="#s3占用空间" class="headerlink" title="s3占用空间"></a>s3占用空间</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sizeof(s3) =   <span class="number">16</span> Alignof(s3) =    <span class="number">8</span></span><br><span class="line">Sizeof(s3.a) =  <span class="number">1</span> Alignof(s3.a) =  <span class="number">1</span> Offsetof(s3.a) =  <span class="number">0</span></span><br><span class="line">Sizeof(s3.b) =  <span class="number">2</span> Alignof(s3.b) =  <span class="number">2</span> Offsetof(s3.b) =  <span class="number">2</span></span><br><span class="line">Sizeof(s3.c) =  <span class="number">8</span> Alignof(s3.c) =  <span class="number">8</span> Offsetof(s3.c) =  <span class="number">8</span></span><br></pre></td></tr></table></figure>
+
+<p>对齐方式：按一个机器字对齐的</p>
+<p>s3 布局与 s2 相似，可以看成是上下两层对调了，但排列是很紧凑的，也是2个机器字</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">|-a-|---b---|-------holes-------| 8字节，即一个机器字</span><br><span class="line">|---------------c---------------| 8字节，也可看出是按一个机器字对齐的</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>未来的Go语言编译器应该会默认优化结构体的顺序，当然应该也能够指定具体的内存布局，相同讨论请参考 <a target="_blank" rel="noopener" href="https://github.com/golang/go/issues/10014">Issue10014</a> </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>戛戛Happy
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://www.gagahappy.com/layout-of-struct/" title="Go语言结构体在内存中的布局">https://www.gagahappy.com/layout-of-struct/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/golang/" rel="tag"><i class="fa fa-tag"></i> golang</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/call-method-on-nil-of-interface-value/" rel="next" title="在动态值为 Nil 的接口上调用方法">
+                  在动态值为 Nil 的接口上调用方法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备10044755号 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戛戛Happy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
