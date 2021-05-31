@@ -15,8 +15,35 @@
     <atom:link href="https://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~</description>
-    <pubDate>Mon, 24 May 2021 07:45:45 GMT</pubDate>
+    <pubDate>Mon, 31 May 2021 06:16:16 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Go 语言 buffer.truncate 分析</title>
+      <link>https://www.gagahappy.com/bytes-buffer-truncate/</link>
+      <guid>https://www.gagahappy.com/bytes-buffer-truncate/</guid>
+      <pubDate>Sun, 30 May 2021 06:50:41 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;对于Golang的初学者，&lt;code&gt;Truncate&lt;/code&gt;方法的行为使人迷惑，它不是从 &lt;code&gt;buffer&lt;/code&gt;的头部截取 &lt;code&gt;n</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>对于Golang的初学者，<code>Truncate</code>方法的行为使人迷惑，它不是从 <code>buffer</code>的头部截取 <code>n 个</code>字节，而是丢弃<code>除了前n个</code>未读取的字节之外的所有未读取的字节，也是就只保留已读取的字节和还没有读取的<code>前n个</code>字节。这种逻辑确实让人不太适应</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Truncate discards all but the first n unread bytes from the buffer</span></span><br><span class="line"><span class="comment">// but continues to use the same allocated storage.</span></span><br><span class="line"><span class="comment">// It panics if n is negative or greater than the length of the buffer.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *Buffer)</span> <span class="title">Truncate</span><span class="params">(n <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line"><span class="keyword">if</span> n == <span class="number">0</span> &#123;</span><br><span class="line">b.Reset()</span><br><span class="line"><span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line">b.lastRead = opInvalid</span><br><span class="line"><span class="keyword">if</span> n &lt; <span class="number">0</span> || n &gt; b.Len() &#123;</span><br><span class="line"><span class="built_in">panic</span>(<span class="string">&quot;bytes.Buffer: truncation out of range&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">b.buf = b.buf[:b.off+n]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>从源码的注释中还可以看到，截取后使用原 <code>buffer</code>保存保留下来的节字，不再额外占用内存空间。同时 n 的大小不能超过未读取字节的长度(第10行)</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">truncate</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="keyword">var</span> buffer bytes.Buffer</span><br><span class="line">  str := <span class="string">&quot;Simple byte buffer for marshaling data.&quot;</span></span><br><span class="line">  buffer.WriteString(str)</span><br><span class="line">  p := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">8</span>)</span><br><span class="line">  buffer.Read(p) <span class="comment">// Simple b</span></span><br><span class="line">  fmt.Println(<span class="keyword">string</span>(p))</span><br><span class="line"></span><br><span class="line">  buffer.Truncate(<span class="number">10</span>)    <span class="comment">// 截断到前10个未读节字 Simple byte buffer</span></span><br><span class="line">  buffer.Read(p)         <span class="comment">// 读取8个字节</span></span><br><span class="line">  fmt.Println(<span class="keyword">string</span>(p)) <span class="comment">// yte buff</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><code>p := make([]byte, 8)</code>先读取了8个字节</li><li><code>buffer.Truncate(10) </code>再从没有读取的字节中取出10个，丢掉其余未读取的字节，把已读取的8个字节和取出的10个字节保存到 <code>buffer</code>中，此时buffer中的内容为<code>Simple byte buffer</code></li><li><code>buffer.Read(p) </code>再读取8个字节，注意：这里不是从 buffer 的头部读取，而是从未读取处开始读取，即从<code>y</code>开始读取</li></ul>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/development/">程序开发</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
+      
+      
+    </item>
     
     <item>
       <title>Go语言结构体在内存中的布局</title>
@@ -123,33 +150,6 @@
       
       
       <category domain="https://www.gagahappy.com/tags/git/">git</category>
-      
-      
-    </item>
-    
-    <item>
-      <title>MySQL自增值申请策略</title>
-      <link>https://www.gagahappy.com/mysql-auto-increment-strategy/</link>
-      <guid>https://www.gagahappy.com/mysql-auto-increment-strategy/</guid>
-      <pubDate>Sat, 27 Mar 2021 10:43:33 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;自增值申请策略&quot;&gt;&lt;a href=&quot;#自增值申请策略&quot; class=&quot;headerlink&quot;</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="自增值申请策略"><a href="#自增值申请策略" class="headerlink" title="自增值申请策略"></a>自增值申请策略</h1><ol><li><p>能否先查ID，再查入数据？</p><p>不能，如果每次插入前，都要在主键的索引树上查询要插入的id是否存在，会大大降低插入插入的效率。</p></li><li><p>能否等事务完成后，再释放自增值的锁？</p><p>不能，如果需要等待当前事务完成，其它事务先能获取自增值的锁，就会大大降低并发。</p></li></ol><h2 id="innodb-autoinc-lock-mode"><a href="#innodb-autoinc-lock-mode" class="headerlink" title="innodb_autoinc_lock_mode"></a><code>innodb_autoinc_lock_mode</code></h2><p>MySQL通过参数<code>innodb_autoinc_lock_mode</code>，来设置自值锁的行为，默认值为1</p><ol><li><p>0值 ：等事务完成才释放锁</p></li><li><p>1值 ：</p><ul><li>对于普通的<code>insert into table</code>，申请到自增锁后就释放，不用等插入语句的完成。</li><li>对于批量插入，类似<code>insert ... select</code>，一直持有自增锁，直到事务执行完成。这样也保证了id的连续性。</li></ul></li><li><p>2值：所有插入操作在申请到自增锁后就释放，包括<code>insert ... select </code>这种</p></li></ol>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/database/">数据库</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/mysql/">mysql</category>
       
       
     </item>
