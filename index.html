@@ -447,7 +447,7 @@
 
 
 
-<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>未来的Go语言编译器应该会默认优化结构体的顺序，当然应该也能够指定具体的内存布局，相同讨论请参考 <a target="_blank" rel="noopener" href="https://github.com/golang/go/issues/10014">Issue10014</a> </p>
+<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>未来的Go语言编译器应该会默认优化结构体的顺序，当然应该也能够指定具体的内存布局，相同讨论请参考 <a target="_blank" rel="noopener" href="https://github.com/golang/go/issues/10014">Issue10014</a></p>
 
       
     </div>
@@ -719,12 +719,12 @@
 <ul>
 <li><p>master上的提交有：<code>[m1, m2, m3]</code></p>
 </li>
-<li><p>feature1上的提交有: <code>[f1_01, f1_02, f1_03]</code> </p>
+<li><p>feature1上的提交有: <code>[f1_01, f1_02, f1_03]</code></p>
 </li>
-<li><p>feature2上的提交有: <code>[f2_01, f2_02, f2_03]</code> </p>
+<li><p>feature2上的提交有: <code>[f2_01, f2_02, f2_03]</code></p>
 </li>
 </ul>
-<p><code>feature1</code>先被合并到master: </p>
+<p><code>feature1</code>先被合并到master:</p>
 <ul>
 <li>master上的提交有：<code>[m1, m2, m3, f1_01, f1_02, f1_03]</code></li>
 </ul>
@@ -733,12 +733,12 @@
 <li><code>feature2</code>上的提交有：<code>[m1, m2, m3, f1_01, f1_02, f1_03，f2_01_new, f2_02_new, f2_03_new]</code></li>
 </ul>
 <h2 id="合并步骤"><a href="#合并步骤" class="headerlink" title="合并步骤"></a>合并步骤</h2><p><code>feature2</code>要把<code>master</code>上的提交合并过来，使用<code>rebase</code> 而不是<code>merge</code>，这样就会不产生合并提交，在向<code>master</code>提交时就变成了<code>快速向前</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git co feature2</span><br><span class="line">git rebase master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果发生冲突，解决冲突后把冲突文件加入 index 区</span></span><br><span class="line">git add -u </span><br><span class="line"><span class="comment"># 运行continue 以使rebase完成</span></span><br><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git co feature2</span><br><span class="line">git rebase master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果发生冲突，解决冲突后把冲突文件加入 index 区</span></span><br><span class="line">git add -u</span><br><span class="line"><span class="comment"># 运行continue 以使rebase完成</span></span><br><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>步骤1：<code>git rebase master</code>：以<code>master</code>分支做为<code>feature2</code>的基础</p>
 </li>
-<li><p>步骤2：计算出<code>feature2</code>与<code>master</code>上的差异提交，相当于<code>git log master...feture2</code>，即<code>[f2_01, f2_02, f2_03]</code> </p>
+<li><p>步骤2：计算出<code>feature2</code>与<code>master</code>上的差异提交，相当于<code>git log master...feture2</code>，即<code>[f2_01, f2_02, f2_03]</code></p>
 </li>
 <li><p>步骤3：把<code>[f2_01, f2_02, f2_03]</code>在<code>master</code>上的最新提交<code>f1_03</code>上进行重放生成新的提交</p>
 <p><code>[f2_01_new, f2_02_new, f2_03_new]</code></p>
@@ -1019,7 +1019,7 @@
 <h1 id="行锁的实现"><a href="#行锁的实现" class="headerlink" title="行锁的实现"></a>行锁的实现</h1><p>由存储引擎自已实现，每个存储引擎实现的方式都不一样</p>
 <p> MyISAM 引擎不支持行锁</p>
 <h1 id="两阶段锁"><a href="#两阶段锁" class="headerlink" title="两阶段锁"></a>两阶段锁</h1><p>在更新数据时，需要对数据所在行加锁，但更新数据完成后，锁并不会马上释放，而是要等到事务提交才释放</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table t_07_recordlock(</span><br><span class="line">	id int not null auto_increment primary key,</span><br><span class="line">  c int,</span><br><span class="line">  d int,</span><br><span class="line"> 	key c (c) </span><br><span class="line">) engine&#x3D;innodb;</span><br><span class="line"></span><br><span class="line">insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table t_07_recordlock(</span><br><span class="line">	id int not null auto_increment primary key,</span><br><span class="line">  c int,</span><br><span class="line">  d int,</span><br><span class="line"> 	key c (c)</span><br><span class="line">) engine&#x3D;innodb;</span><br><span class="line"></span><br><span class="line">insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);</span><br></pre></td></tr></table></figure>
 
 <table>
 <thead>
@@ -1246,6 +1246,7 @@
     <div class="post-body" itemprop="articleBody">
           <p>无缓冲通道的cap是零</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无缓冲通道的cap、len永远是0</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	noCache := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; noCache &lt;- <span class="number">6</span> &#125;()</span><br><span class="line"></span><br><span class="line">	time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">	fmt.Println(<span class="string">&quot;cap of noCache pipeline is&quot;</span>, <span class="built_in">cap</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;len of noCache pipeline is&quot;</span>, <span class="built_in">len</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;noCache &quot;</span>, &lt;-noCache)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
