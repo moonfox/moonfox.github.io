@@ -138,7 +138,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">926</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">927</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -246,6 +246,83 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/use-ssh-add-add-ssh-key/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/use-ssh-add-add-ssh-key/" class="post-title-link" itemprop="url">使用Ssh-Add添加私钥到ssh-Agent</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-08-24 21:47:09" itemprop="dateCreated datePublished" datetime="2016-08-24T21:47:09+08:00">2016-08-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">我爱Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>使用ssh-add命令可以把私钥添加到ssh-agent，当登录远程主机中的程序(如:git push)请求对应的私钥时，可以由ssh-agent把本地私钥发送给远程主机(启动这个功能要在ssh配置中设置 <code>ForwardAgent yes</code>)</p>
+<p>添加私钥到ssh-agent</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ssh-add /your_ssh_key_path</span><br><span class="line"><span class="comment">#=&gt; Identity added: /Users/ga/.ssh/id</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> $? <span class="comment">#查看是否添加成功</span></span><br><span class="line"><span class="comment">#=&gt; 0 如果这里返回的不是0，则说明添加失败。如果你的key是加密的，在添加时还要输入密码</span></span><br><span class="line"></span><br><span class="line">ssh-add -l <span class="comment">#查看已经添加到ssh-agent中的key</span></span><br><span class="line"><span class="comment">#=&gt; 2048 SHA256:9GlH51tb7Oxbxxxxxxxxxxxxxxxxxx</span></span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1708,87 +1785,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>rake 实例变量作用范围,可以看到在task的block中，当前self为main，所以@people可以在say方法中访问。</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">desc <span class="string">&quot;test instance variable&quot;</span></span><br><span class="line">task <span class="symbol">:hello_world</span> =&gt; <span class="symbol">:environment</span> <span class="keyword">do</span></span><br><span class="line">  <span class="variable">@people</span> = <span class="string">&quot;Jone&quot;</span></span><br><span class="line">  puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say</span></span></span><br><span class="line">    puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></span><br><span class="line">    puts @people</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  say</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#=&gt;main</span></span><br><span class="line"><span class="comment">#=&gt;main</span></span><br><span class="line"><span class="comment">#=&gt;Jone</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/issues-of-install-memcached-reds-postgresql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="喜欢熬夜，喜欢畅游互联网，喜欢鼓捣Ubuntu，喜欢玩魔方臭显摆，喜欢小团体集体行动，喜欢餐前DQ，喜欢STARBUCKS，喜欢看着MM穿着凉快的衣服，喜欢YY~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="漂自己的移，让别人都撞墙去吧">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/issues-of-install-memcached-reds-postgresql/" class="post-title-link" itemprop="url">安装Memcached、redis、postgresql问题总结</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-04-29 23:53:38" itemprop="dateCreated datePublished" datetime="2015-04-29T23:53:38+08:00">2015-04-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">程序开发</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>编译 <code>./configure --prefix=/srv/memcached/memcached145 --with-libevent=/usr/</code><br>需要安装 libevent ，安装时要确保知道安装路径</p>
-<p>启动memcached<br><code>memcached -d -u root -m 200 -P /tmp/memcached.pid</code></p>
-<p>安装redis<br><code>make PREFIX=/srv/redis/redis2815 install</code></p>
-<p>启动:daemonize yes: Make redis run as a daemon<br><code>redis-server /usr/etc/redis.conf</code></p>
-<p>安装postgresql，遇到问题:Can’t find the ‘libpq-fe.h header<br>解决方法:</p>
-<ol>
-<li>`gem install pg -v ‘0.18.1’ – –with-pg-config=/path/config</li>
-</ol>
-<p>–with-pg=/path/pg –with-pg-lib=/path/<code>2.</code>yum install postgresql-devel<code>最终用方法2解决</code>yum list installed | grep postgres`</p>
 
       
     </div>
