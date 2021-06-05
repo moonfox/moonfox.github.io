@@ -15,8 +15,67 @@
     <atom:link href="https://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby</description>
-    <pubDate>Tue, 01 Jun 2021 11:44:08 GMT</pubDate>
+    <pubDate>Sat, 05 Jun 2021 08:54:21 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Fmt对string中零值的处理</title>
+      <link>https://www.gagahappy.com/go-fmt-string-with-zerovalue/</link>
+      <guid>https://www.gagahappy.com/go-fmt-string-with-zerovalue/</guid>
+      <pubDate>Sat, 05 Jun 2021 06:32:08 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;&lt;code&gt;fmt&lt;/code&gt;格式化含有0值的&lt;code&gt;string&lt;/code&gt;时，是如何显示的&lt;/p&gt;
+&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p><code>fmt</code>格式化含有0值的<code>string</code>时，是如何显示的</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">buf := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">10</span>)</span><br><span class="line">buf[<span class="number">8</span>] = <span class="string">&#x27;A&#x27;</span></span><br><span class="line"><span class="built_in">copy</span>(buf, []<span class="keyword">byte</span>(<span class="string">&quot;hello&quot;</span>))</span><br><span class="line">fmt.Printf(<span class="string">&quot;cap(%d),len(%d)\n&quot;</span>, <span class="built_in">cap</span>(buf), <span class="built_in">len</span>(buf))</span><br><span class="line">fmt.Println(<span class="string">&quot;buf:&quot;</span>, buf)</span><br><span class="line">fmt.Printf(<span class="string">&quot;buf:%q\n&quot;</span>, buf)</span><br><span class="line">fmt.Println(<span class="string">&quot;buf:&quot;</span>, <span class="keyword">string</span>(buf))</span><br><span class="line"></span><br><span class="line">str := <span class="keyword">string</span>(buf)</span><br><span class="line">str = str + <span class="string">&quot; world&quot;</span></span><br><span class="line">fmt.Println(<span class="built_in">len</span>(str)) <span class="comment">// =&gt; 16</span></span><br><span class="line">fmt.Println(str)      <span class="comment">// =&gt; helloA world</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* output</span></span><br><span class="line"><span class="comment">cap(10),len(10)</span></span><br><span class="line"><span class="comment">buf: [104 101 108 108 111 0 0 0 65 0]</span></span><br><span class="line"><span class="comment">buf:&quot;hello\x00\x00\x00A\x00&quot;</span></span><br><span class="line"><span class="comment">buf: helloA</span></span><br><span class="line"><span class="comment">16</span></span><br><span class="line"><span class="comment">helloA world</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure><p>1. 使用<code>fmt</code>打印<code>string(buf)</code>虽然显示为<code>helloA</code>，看上去字符数变少了，只有6个(0值没有显示，其<code>ascii码</code>是不可打印码)，但底层数据没变，依然是<code>[104 101 108 108 111 0 0 0 65 0]</code></p><p>2. 格式化参数<code>%q</code>直接对0值进行了输出<code>hello\x00\x00\x00A\x00</code>，它打印了<code>string</code>中的每一个字节，包括不可打印的字节</p><p>3. <code>str + &quot; world&quot;</code>的长度为16，也证明了<code>str</code>中的0值没有被去除(10 + 6 = 16)</p><p>4.使用<code>fmt</code>查看数据”长什么样子”有时候是不准确的</p>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
+      
+      
+      <comments>https://www.gagahappy.com/go-fmt-string-with-zerovalue/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>io.Writer 接口</title>
+      <link>https://www.gagahappy.com/go-io-writer/</link>
+      <guid>https://www.gagahappy.com/go-io-writer/</guid>
+      <pubDate>Fri, 04 Jun 2021 06:46:58 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;io-Writer接口实现要求&quot;&gt;&lt;a href=&quot;#io-Writer接口实现要求&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="io-Writer接口实现要求"><a href="#io-Writer接口实现要求" class="headerlink" title="io.Writer接口实现要求"></a><code>io.Writer</code>接口实现要求</h1><p>开始以为只是实现了<code>Write</code>方法就行，看了源码发现还有很多细节上的要求</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/io/io.go</span></span><br><span class="line"><span class="keyword">type</span> Writer <span class="keyword">interface</span> &#123;</span><br><span class="line">Write(p []<span class="keyword">byte</span>) (n <span class="keyword">int</span>, err error)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>1.要把 <code>p</code>写入实现类型的底层数据中</p><p>2.要返回实际写入的长度和在写入时遇到的错误，如果实际写入的长度小于<code>len(p)</code>，返回的<code>err</code>必须是非<code>nil</code>的</p><p>3. <code>p</code>不能在方法内部被修改，即使临时性的也不可以</p><p>4. 不能对<code>p</code>进行保存</p>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
+      
+      
+      <comments>https://www.gagahappy.com/go-io-writer/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>安装 Gitalk 评论系统</title>
@@ -102,65 +161,6 @@
       
       
       <comments>https://www.gagahappy.com/layout-of-struct/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>在动态值为 Nil 的接口上调用方法</title>
-      <link>https://www.gagahappy.com/call-method-on-nil-of-interface-value/</link>
-      <guid>https://www.gagahappy.com/call-method-on-nil-of-interface-value/</guid>
-      <pubDate>Mon, 19 Apr 2021 07:37:54 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;在动态值为-nil-的接口上调用方法&quot;&gt;&lt;a href=&quot;#在动态值为-nil-的接口上调用方法&quot; class=&quot;headerlink&quot; title=&quot;在动态值为 nil 的接口上调用方法&quot;&gt;&lt;/a&gt;在动态值为 nil</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="在动态值为-nil-的接口上调用方法"><a href="#在动态值为-nil-的接口上调用方法" class="headerlink" title="在动态值为 nil 的接口上调用方法"></a>在动态值为 nil 的接口上调用方法</h1><p>把一个值为nil的某个实现类型的变量赋给了接口变量，是否可以在这个接口变量上调用该接口的方法</p><p>lib/lib.go</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> People <span class="keyword">struct</span> &#123;</span><br><span class="line">Name <span class="keyword">string</span></span><br><span class="line">Age  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Superman <span class="keyword">struct</span> &#123;</span><br><span class="line">People</span><br><span class="line">color <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Mutant <span class="keyword">interface</span> &#123;</span><br><span class="line">Speaking()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Fly <span class="keyword">interface</span> &#123;</span><br><span class="line">Fly()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(sp Superman)</span> <span class="title">Speaking</span><span class="params">()</span></span> &#123;</span><br><span class="line">fmt.Printf(<span class="string">&quot;I&#x27;m %s&quot;</span>, sp.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(sp *Superman)</span> <span class="title">Fly</span><span class="params">()</span></span> &#123;</span><br><span class="line">fmt.Println(<span class="string">&quot;I can fly&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>value.go</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">callMethodOnNil</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="keyword">var</span> mu lib.Mutant</span><br><span class="line"><span class="keyword">var</span> xman *lib.Superman</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="string">&quot;xman:&quot;</span>, xman) <span class="comment">// nil</span></span><br><span class="line">mu = xman</span><br><span class="line">fmt.Println(<span class="string">&quot;mu:&quot;</span>, mu) <span class="comment">// nil</span></span><br><span class="line"><span class="comment">// Panic: runtime error: invalid memory address or nil pointer dereference</span></span><br><span class="line"><span class="comment">// 动态类值为 nil 时，不能在其上调用值方法</span></span><br><span class="line"><span class="comment">// mu.Speaking()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fly lib.Fly</span><br><span class="line">fmt.Println(<span class="string">&quot;xman:&quot;</span>, xman) <span class="comment">// nil</span></span><br><span class="line">fly = xman</span><br><span class="line">fmt.Println(<span class="string">&quot;fly:&quot;</span>, fly) <span class="comment">// nil</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 动态类值为 nil 时，可以在其上调用指针方法</span></span><br><span class="line"><span class="comment">// Fly()方法可以被调用，它的接收者是 *T 类型，且方法中没有涉及到对类型属性的调用</span></span><br><span class="line">fly.Fly() <span class="comment">// I can fly</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ol><li><p>值类型(T)的方法不能被调用，无论这个方法中是否涉及了对类型属性的调用</p></li><li><p>指针类型(*T)的方法可以被调用，但方法中不能涉及类型属性的调用</p></li></ol>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
-      
-      
-      <comments>https://www.gagahappy.com/call-method-on-nil-of-interface-value/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>sync.Wait的使用</title>
-      <link>https://www.gagahappy.com/go-sync-wait/</link>
-      <guid>https://www.gagahappy.com/go-sync-wait/</guid>
-      <pubDate>Wed, 14 Apr 2021 10:43:00 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;如何让主 goroutine 在所有其他 goroutine 都运行完后，再退出&lt;/p&gt;
-&lt;h1 id=&quot;sleep&quot;&gt;&lt;a href=&quot;#sleep&quot; class=&quot;headerlink&quot; title=&quot;sleep&quot;&gt;&lt;/a&gt;sleep&lt;/h1&gt;&lt;p&gt;通过 sleep</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>如何让主 goroutine 在所有其他 goroutine 都运行完后，再退出</p><h1 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h1><p>通过 sleep 让主 goroutine 在所有子goroutine运行结束后，再退出</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">usingSleep</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line"><span class="keyword">go</span> fmt.Println(i)</span><br><span class="line">&#125;</span><br><span class="line">time.Sleep(time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>缺点：无法判断 for 循环到底需要多长时间，导致估计sleep的时间要么不够，要么太长</p><h1 id="缓冲通道"><a href="#缓冲通道" class="headerlink" title="缓冲通道"></a>缓冲通道</h1><p>通过缓冲通道让主 goroutine 在所有子goroutine运行结束后，再退出</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">usingChannel</span><span class="params">()</span></span> &#123;</span><br><span class="line">c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;, <span class="number">10</span>)</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">fmt.Println(i)</span><br><span class="line">c &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">&#125;(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">&lt;-c</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>缺点：</p><ul><li>channel应该被用在goroutine间的通信</li><li>如果子goroutine太多，使用通道也会消耗很多资源</li></ul><h1 id="sync-WaitGroup"><a href="#sync-WaitGroup" class="headerlink" title="sync.WaitGroup"></a>sync.WaitGroup</h1><p>使用 sync.WaitGroup()控制主 goroutine 在所有子goroutine运行结束后，再退出</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">waitGroup</span><span class="params">()</span></span> &#123;</span><br><span class="line">wg := sync.WaitGroup&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">wg.Add(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line"><span class="keyword">defer</span> wg.Done()</span><br><span class="line">fmt.Println(i)</span><br><span class="line">&#125;(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">wg.Wait() <span class="comment">// 一直阻塞主goroutine，直到wg为零</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// output</span></span><br><span class="line"><span class="comment">// 乱序输出,并不是按1,2,3,4...</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 4</span></span><br><span class="line"><span class="comment">// 7</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 9</span></span><br><span class="line"><span class="comment">// 5</span></span><br><span class="line"><span class="comment">// 8</span></span><br><span class="line"><span class="comment">// 6</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><p>Wait() 方法的功能是，阻塞当前的 goroutine，直到其所属值中的计数器归零</p></li><li><p>不要把增加其计数器值的操作和调用其Wait方法的代码，放在不同的 goroutine 中执行，如果同时启用的两个 goroutine ，分别调用这两个方法(add 和 wait)，那么就有可能会让这里的Add方法抛出一个 panic。最好用“先统一Add，再并发Done，最后Wait”这种标准方式，来使用WaitGroup值</p></li><li><p>计数器不能为负值，发生为负的情况是：不适当地调用Done方法和Add方法都会如此。</p></li><li><p>Done()是Add(-1)的别名</p></li><li><p>计数不为0, 阻塞Wait()的运行</p></li></ul><h1 id="WaitGroup对象不是一个引用类型"><a href="#WaitGroup对象不是一个引用类型" class="headerlink" title="WaitGroup对象不是一个引用类型"></a>WaitGroup对象不是一个引用类型</h1><p>在通过函数传值的时候需要使用地址，不然会出现 <code>fatal error: all goroutines are asleep - deadlock!</code></p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">passWGByPointer</span><span class="params">()</span></span> &#123;</span><br><span class="line">wg := sync.WaitGroup&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">wg.Add(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">go</span> wgDone(i, &amp;wg)</span><br><span class="line">&#125;</span><br><span class="line">wg.Wait()</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">wgDone</span><span class="params">(i <span class="keyword">int</span>, wg *sync.WaitGroup)</span></span> &#123;</span><br><span class="line"><span class="keyword">defer</span> wg.Done()</span><br><span class="line">fmt.Println(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
-      
-      
-      <comments>https://www.gagahappy.com/go-sync-wait/#disqus_thread</comments>
       
     </item>
     

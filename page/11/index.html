@@ -92,7 +92,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">927</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">929</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -200,6 +200,186 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/pry-outline/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月飞天膏药">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/pry-outline/" class="post-title-link" itemprop="url">Pry Outline</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-05-03 21:08:51" itemprop="dateCreated datePublished" datetime="2015-05-03T21:08:51+08:00">2015-05-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li>如果你用<code>gem install rake</code>安装了10.1.0版本的rake（假设是最新的），当你直接使用调用rake时，使用的会是这个最新版本的rake。</li>
+<li>如果项目的Gemfile中指定的版本是0.9.6（或者是Gemfile.lock中是0.9.6）的话，你如果不加bundle exec，将会用rake 10.1.0的版本去执行本来应该由0.9.6版本的rake写出的Rake task。</li>
+<li>会不会出问题？可能会，可能不会。因为很有可能原作者使用0.9.6版本的rake写的Rake task中没有什么被废弃的部分，10.1.10也能正确执行。但是不兼容的情况也会发生。</li>
+</ul>
+<blockquote>
+<p><strong>bundle exec就是为了解决这样的问题而存在的：在目前的Bundle环境里执行某个操作，这样对于不同的人来说，不论系统里是什么版本的Gem，总是会使用该项目Gemfile中指定的版本来执行某个操作</strong></p>
+</blockquote>
+<p>其他<br><code>pry plugins</code> 也可以裝一下，包括：</p>
+<ol>
+<li><p>pry-stack_explorer 輸入 show-stack 的話可以看到 call stack</p>
+</li>
+<li><p>pry-debugger 可以加上 step, next, finish 和 continue 的控制</p>
+</li>
+<li><p>pry-nav:也因為 binding.pry 太好用。</p>
+<blockquote>
+<p>社群也基於 Pry 繼續做了其他的 pry 的 plugin。最 killling 的就是 pry-nav。pry-nav 做的就是可以讓你在 binding.pry 的攔節點前後，作 next、step。直接一行一行的逐一 debug。相信我，如果你在寫通訊交涉的 Library，或者是正在改複雜的 Rails View</p>
+</blockquote>
+</li>
+<li><p>pry-remote</p>
+<blockquote>
+<p>Pry 搭配 Rails，在往常的作法只有 rails s 可以叫出 debug console 而已。但很多人實際上是使用 Pow 作為開發用 HTTP Server。這樣的需求可以用 pry-remote 解決。pry-remote 的作法是把原本的 bindig.pry 改成 binding.remote_pry。而 binding.remote_pry 會開一支 DRb 起來，開發者再用 pry-remote 連到 debug console</p>
+</blockquote>
+</li>
+<li><p>sinatra使用Pry</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pry -r ./application.rb <span class="comment">#sinatra project, require  application.rb</span></span><br><span class="line">rails c <span class="comment"># rails project</span></span><br></pre></td></tr></table></figure></blockquote>
+</li>
+<li><p>pry 用法</p>
+<blockquote>
+<p><code>show-method</code> 显示当前对象的源码<br><code>show-method Author#hi</code> 显示Author#hi方法的源码<br><code>.pwd</code>前面的<code>.</code>是调用shell的命令，而非pry的本身的方法</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/scope-of-instance-variable-in-rake-block/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月飞天膏药">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/scope-of-instance-variable-in-rake-block/" class="post-title-link" itemprop="url">Rake 实例变量作用范围</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-04-30 13:20:05" itemprop="dateCreated datePublished" datetime="2015-04-30T13:20:05+08:00">2015-04-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>rake 实例变量作用范围,可以看到在task的block中，当前self为main，所以@people可以在say方法中访问。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">desc <span class="string">&quot;test instance variable&quot;</span></span><br><span class="line">task <span class="symbol">:hello_world</span> =&gt; <span class="symbol">:environment</span> <span class="keyword">do</span></span><br><span class="line">  <span class="variable">@people</span> = <span class="string">&quot;Jone&quot;</span></span><br><span class="line">  puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say</span></span></span><br><span class="line">    puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></span><br><span class="line">    puts @people</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  say</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#=&gt;main</span></span><br><span class="line"><span class="comment">#=&gt;main</span></span><br><span class="line"><span class="comment">#=&gt;Jone</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1552,170 +1732,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>mac 查看端口占用程序<br>lsof -i :9001</p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/how-to-understanding-something-that-is-complex-and-poorly-documented/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月飞天膏药">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/how-to-understanding-something-that-is-complex-and-poorly-documented/" class="post-title-link" itemprop="url">How to Understanding Something</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-04-07 20:27:04" itemprop="dateCreated datePublished" datetime="2015-04-07T20:27:04+08:00">2015-04-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>An approach I’ve long taken to understanding something that is complex and poorly documented is the following three steps:</p>
-<ol>
-<li><p>Read the existing documentation and the existing code, until a basic understanding is reached. Often there are serious misunderstandings or incorrect factorization at this step.</p>
-</li>
-<li><p>Write my own implementation, even a very basic and broken one, preferably in a completely different language (which avoids the tendency to cut and paste anything). Revise my understanding based on what works and what doesn’t.</p>
-</li>
-<li><p>Create new documentation and diagrams based on my new understanding. Refactor my implementation as necessary (the act of reviewing everything in order to document it often reveals incorrect factorizations). Correct documentation based on new understanding from refactoring code. Repeat until correct.</p>
-</li>
-</ol>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/which-day-is-easter-in-2015/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月飞天膏药">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/which-day-is-easter-in-2015/" class="post-title-link" itemprop="url">复活节的由来,2015年复活节是哪一天几月几日</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-04-06 12:23:06" itemprop="dateCreated datePublished" datetime="2015-04-06T12:23:06+08:00">2015-04-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/journal/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>复活节（主复活日）是一个西方的重要节日，在每年春分月圆之后第一个星期日。基督徒认为，复活节象征着重生与希望，为纪念耶稣基督于公元30到33年之间被钉死在十字架之后第三天复活的日子。天主教/新教和东正教复活节的计算略有差异，根据罗马教会传统，在春分(3月21日)当日见到满月或过了春分见到第一个满月后，遇到的第一个星期日即为复活节。东正教会则规定，如果满月恰好出现在这第一个星期日，则复活节再推迟一周。因此，复活节的日期大致在公历3月22日至4月25日之间。</p>
-<p>　　复活节那一天，是经由三个历法（分别是西历、中国阴历、星期）合并出来的，怪不得它会如此飘忽不定了。有些年份三个教派的复活节是重合的，而有些年份又不同，进而它们耶稣受难日的日期也有所差异，2015年的天主教、新教的复活节是2015年4月5日。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/which-day-is-easter-in-2015/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 

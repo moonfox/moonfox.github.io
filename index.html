@@ -92,7 +92,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">91</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">927</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">929</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -200,6 +200,164 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/go-fmt-string-with-zerovalue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月飞天膏药">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/go-fmt-string-with-zerovalue/" class="post-title-link" itemprop="url">Fmt对string中零值的处理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-05 14:32:08" itemprop="dateCreated datePublished" datetime="2021-06-05T14:32:08+08:00">2021-06-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>fmt</code>格式化含有0值的<code>string</code>时，是如何显示的</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	buf := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">10</span>)</span><br><span class="line">	buf[<span class="number">8</span>] = <span class="string">&#x27;A&#x27;</span></span><br><span class="line">	<span class="built_in">copy</span>(buf, []<span class="keyword">byte</span>(<span class="string">&quot;hello&quot;</span>))</span><br><span class="line">	fmt.Printf(<span class="string">&quot;cap(%d),len(%d)\n&quot;</span>, <span class="built_in">cap</span>(buf), <span class="built_in">len</span>(buf))</span><br><span class="line">	fmt.Println(<span class="string">&quot;buf:&quot;</span>, buf)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;buf:%q\n&quot;</span>, buf)</span><br><span class="line">	fmt.Println(<span class="string">&quot;buf:&quot;</span>, <span class="keyword">string</span>(buf))</span><br><span class="line"></span><br><span class="line">	str := <span class="keyword">string</span>(buf)</span><br><span class="line">	str = str + <span class="string">&quot; world&quot;</span></span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(str)) <span class="comment">// =&gt; 16</span></span><br><span class="line">	fmt.Println(str)      <span class="comment">// =&gt; helloA world</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* output</span></span><br><span class="line"><span class="comment">cap(10),len(10)</span></span><br><span class="line"><span class="comment">buf: [104 101 108 108 111 0 0 0 65 0]</span></span><br><span class="line"><span class="comment">buf:&quot;hello\x00\x00\x00A\x00&quot;</span></span><br><span class="line"><span class="comment">buf: helloA</span></span><br><span class="line"><span class="comment">16</span></span><br><span class="line"><span class="comment">helloA world</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>1. 使用<code>fmt</code>打印<code>string(buf)</code>虽然显示为<code>helloA</code>，看上去字符数变少了，只有6个(0值没有显示，其<code>ascii码</code>是不可打印码)，但底层数据没变，依然是<code>[104 101 108 108 111 0 0 0 65 0]</code></p>
+<p>2. 格式化参数<code>%q</code>直接对0值进行了输出<code>hello\x00\x00\x00A\x00</code>，它打印了<code>string</code>中的每一个字节，包括不可打印的字节</p>
+<p>3. <code>str + &quot; world&quot;</code>的长度为16，也证明了<code>str</code>中的0值没有被去除(10 + 6 = 16)</p>
+<p>4.使用<code>fmt</code>查看数据”长什么样子”有时候是不准确的</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/go-io-writer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月飞天膏药">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/go-io-writer/" class="post-title-link" itemprop="url">io.Writer 接口</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-04 14:46:58" itemprop="dateCreated datePublished" datetime="2021-06-04T14:46:58+08:00">2021-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="io-Writer接口实现要求"><a href="#io-Writer接口实现要求" class="headerlink" title="io.Writer接口实现要求"></a><code>io.Writer</code>接口实现要求</h1><p>开始以为只是实现了<code>Write</code>方法就行，看了源码发现还有很多细节上的要求</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/io/io.go</span></span><br><span class="line"><span class="keyword">type</span> Writer <span class="keyword">interface</span> &#123;</span><br><span class="line">	Write(p []<span class="keyword">byte</span>) (n <span class="keyword">int</span>, err error)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1.要把 <code>p</code>写入实现类型的底层数据中</p>
+<p>2.要返回实际写入的长度和在写入时遇到的错误，如果实际写入的长度小于<code>len(p)</code>，返回的<code>err</code>必须是非<code>nil</code>的</p>
+<p>3. <code>p</code>不能在方法内部被修改，即使临时性的也不可以</p>
+<p>4. 不能对<code>p</code>进行保存</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1897,155 +2055,6 @@
           <p>Salute to the heroes! China held a ceremony this morning in Beijing to commend role models in the country’s fight against the COVID-19 epidemic.</p>
 <p>The medal of Republic was conferred on renowned respiratory disease expert Zhong Nanshan. </p>
 <p><img src="http://img.gagahappy.cn/blog/2020/09/salute-to-the-heroes.jpg_b1" alt="Salute to the heroes" title="Salute to the heroes"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/the-award-of-oscar/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月飞天膏药">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/the-award-of-oscar/" class="post-title-link" itemprop="url">The Award of Oscar</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-09-03 23:25:51" itemprop="dateCreated datePublished" datetime="2020-09-03T23:25:51+08:00">2020-09-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/journal/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>看了一个奥斯卡的颁奖系列，发现每个颁奖人都是有口音的，比如Oscar 这个词每个人的都不一样。And the Oscar goes to Tilda Swinton.</p>
-<p>加一个自己喜欢的: And the People Choice award goes to Emma Watson</p>
-<p><img src="http://img.gagahappy.cn/blog/2020/09/the-award-of-oscar.jpg_b1" alt="The award of oscar" title="The award of oscar"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/trainng-for-running-at-park/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月飞天膏药">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/trainng-for-running-at-park/" class="post-title-link" itemprop="url">公园恢复跑</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-08-24 22:13:08" itemprop="dateCreated datePublished" datetime="2020-08-24T22:13:08+08:00">2020-08-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/journal/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>公园恢复跑，被人套圈了居然，给我等着的，等我恢复了，看我怎么套你。哇哈哈哈哈哈！跑步还是在空间大的场地跑好呀，不枯燥。家门口不到170米一圈的场地简直太枯燥了，体力没疲惫，我精神先疲惫了。难怪马拉松都选风景美丽的线路呢，让人看了身心愉悦精神焕发可以跑出好成绩呀！ </p>
-<p><img src="http://img.gagahappy.cn/blog/2020/08/trainng-for-running-at-park.jpg_b1" alt="公园恢复跑" title="公园恢复跑"></p>
 
       
     </div>
