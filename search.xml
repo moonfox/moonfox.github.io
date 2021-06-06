@@ -16109,6 +16109,16 @@
 <h1 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h1><p>为了解决<code>No symbol table is loaded</code>问题，可以在编译时加入<code>-ggdb</code></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc hello_world.c -o hello_world -ggdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用示例</span></span><br><span class="line">gdb hello_world</span><br><span class="line">(gdb) list</span><br><span class="line">1	<span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line">2</span><br><span class="line">3	int my_strlen(char *string);</span><br><span class="line">4</span><br><span class="line">5	int main(int argc, char const *argv[])</span><br><span class="line">6	&#123;</span><br><span class="line">7	  // char *string;</span><br><span class="line">8	  // string = <span class="string">&quot;hello world haha&quot;</span>;</span><br><span class="line">9	  char string[] = <span class="string">&quot;hello world haha&quot;</span>;</span><br><span class="line">10	  <span class="built_in">printf</span>(<span class="string">&quot;The string &#x27;%s&#x27; len is \&quot;%d\&quot;\n&quot;</span>, string, my_strlen(string));</span><br><span class="line">(gdb) run</span><br><span class="line">Starting program: /Users/ga/m/book/c-lang/ch02-basic/hello_world</span><br><span class="line">[New Thread 0x2603 of process 6002]</span><br><span class="line">[New Thread 0x1803 of process 6002]</span><br><span class="line">warning: unhandled dyld version (16)</span><br><span class="line">The string <span class="string">&#x27;hello world haha&#x27;</span> len is <span class="string">&quot;16&quot;</span></span><br><span class="line">[Inferior 1 (process 6002) exited normally]</span><br></pre></td></tr></table></figure>
 
+
+
+<h1 id="使用gdb调试golang"><a href="#使用gdb调试golang" class="headerlink" title="使用gdb调试golang"></a>使用gdb调试golang</h1><p>本博没有成功，一直提示错误<code>No symbol table is loaded.  Use the &quot;file&quot; command.</code> ，后来查看了Go的官方方文档，官方建议使用<code>Delve</code>进行调试。<a href="https://golang.org/doc/gdb">官方原文</a></p>
+<blockquote>
+<p><em>Note that <a href="https://github.com/go-delve/delve">Delve</a> is a better alternative to GDB when debugging Go programs built with the standard toolchain. It understands the Go runtime, data structures, and expressions better than GDB. Delve currently supports Linux, OSX, and Windows on <code>amd64</code>. For the most up-to-date list of supported platforms, please see <a href="https://github.com/go-delve/delve/tree/master/Documentation/installation">the Delve documentation</a>.</em></p>
+</blockquote>
+<p>并且在官方给出的示例中，也不保证你照着运行也可以成功</p>
+<blockquote>
+<p>In short, the instructions below should be taken only as a guide to how to use GDB when it works, not as a guarantee of success. Besides this overview you might want to consult the <a href="https://sourceware.org/gdb/current/onlinedocs/gdb/">GDB manual</a>.</p>
+</blockquote>
 <p>最后祝你一切顺利</p>
 ]]></content>
       <categories>

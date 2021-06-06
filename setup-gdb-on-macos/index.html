@@ -28,7 +28,7 @@
 <meta property="og:description" content="安装1brew install gdb  也可以从源码进安装，官网，目前GDB对下列语言进行了支持  AdaAssemblyCC++DFortranGoObjective-COpenCLModula-2PascalRust  安装后还不能直接使用，MacOS 对安全性有效高的要求，不允许没有许可的程序运行其它程序 12345gdb helloworld(gdb) runUnable to find">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-06-06T07:14:15.000Z">
-<meta property="article:modified_time" content="2021-06-06T08:53:39.589Z">
+<meta property="article:modified_time" content="2021-06-06T09:24:52.290Z">
 <meta property="article:author" content="戛戛Happy">
 <meta property="article:tag" content="gdb">
 <meta name="twitter:card" content="summary">
@@ -153,7 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAcertificate"><span class="nav-number">2.</span> <span class="nav-text">创建certificate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gdb%E7%AD%BE%E5%90%8D"><span class="nav-number">3.</span> <span class="nav-text">gdb签名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">编译文件</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAcertificate"><span class="nav-number">2.</span> <span class="nav-text">创建certificate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gdb%E7%AD%BE%E5%90%8D"><span class="nav-number">3.</span> <span class="nav-text">gdb签名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">编译文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8gdb%E8%B0%83%E8%AF%95golang"><span class="nav-number">5.</span> <span class="nav-text">使用gdb调试golang</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -298,6 +298,16 @@
 <h1 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h1><p>为了解决<code>No symbol table is loaded</code>问题，可以在编译时加入<code>-ggdb</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">gcc hello_world.c -o hello_world -ggdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用示例</span></span><br><span class="line">gdb hello_world</span><br><span class="line">(gdb) list</span><br><span class="line">1	<span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line">2</span><br><span class="line">3	int my_strlen(char *string);</span><br><span class="line">4</span><br><span class="line">5	int main(int argc, char const *argv[])</span><br><span class="line">6	&#123;</span><br><span class="line">7	  // char *string;</span><br><span class="line">8	  // string = <span class="string">&quot;hello world haha&quot;</span>;</span><br><span class="line">9	  char string[] = <span class="string">&quot;hello world haha&quot;</span>;</span><br><span class="line">10	  <span class="built_in">printf</span>(<span class="string">&quot;The string &#x27;%s&#x27; len is \&quot;%d\&quot;\n&quot;</span>, string, my_strlen(string));</span><br><span class="line">(gdb) run</span><br><span class="line">Starting program: /Users/ga/m/book/c-lang/ch02-basic/hello_world</span><br><span class="line">[New Thread 0x2603 of process 6002]</span><br><span class="line">[New Thread 0x1803 of process 6002]</span><br><span class="line">warning: unhandled dyld version (16)</span><br><span class="line">The string <span class="string">&#x27;hello world haha&#x27;</span> len is <span class="string">&quot;16&quot;</span></span><br><span class="line">[Inferior 1 (process 6002) exited normally]</span><br></pre></td></tr></table></figure>
 
+
+
+<h1 id="使用gdb调试golang"><a href="#使用gdb调试golang" class="headerlink" title="使用gdb调试golang"></a>使用gdb调试golang</h1><p>本博没有成功，一直提示错误<code>No symbol table is loaded.  Use the &quot;file&quot; command.</code> ，后来查看了Go的官方方文档，官方建议使用<code>Delve</code>进行调试。<a target="_blank" rel="noopener" href="https://golang.org/doc/gdb">官方原文</a></p>
+<blockquote>
+<p><em>Note that <a target="_blank" rel="noopener" href="https://github.com/go-delve/delve">Delve</a> is a better alternative to GDB when debugging Go programs built with the standard toolchain. It understands the Go runtime, data structures, and expressions better than GDB. Delve currently supports Linux, OSX, and Windows on <code>amd64</code>. For the most up-to-date list of supported platforms, please see <a target="_blank" rel="noopener" href="https://github.com/go-delve/delve/tree/master/Documentation/installation">the Delve documentation</a>.</em></p>
+</blockquote>
+<p>并且在官方给出的示例中，也不保证你照着运行也可以成功</p>
+<blockquote>
+<p>In short, the instructions below should be taken only as a guide to how to use GDB when it works, not as a guarantee of success. Besides this overview you might want to consult the <a target="_blank" rel="noopener" href="https://sourceware.org/gdb/current/onlinedocs/gdb/">GDB manual</a>.</p>
+</blockquote>
 <p>最后祝你一切顺利</p>
 
     </div>
