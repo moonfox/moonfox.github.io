@@ -14921,18 +14921,6 @@
       </tags>
   </entry>
   <entry>
-    <title>You Can Not Laugh at the Same Joke</title>
-    <url>/you-can-not-laugh-at-the-same-joke/</url>
-    <content><![CDATA[<p>You can’t laugh at the same joke over and over again. So why would you keep crying over the same thing over and over again</p>
-]]></content>
-      <categories>
-        <category>日志</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>有的时候并不是你运气差</title>
     <url>/you-be-restrain-on-sth/</url>
     <content><![CDATA[<p>有的时候并不是你运气差，而是机会来到时，由于自身的限制，你没能抓住它</p>
@@ -16043,6 +16031,91 @@
       </categories>
       <tags>
         <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git 创建标签</title>
+    <url>/git-create-tag/</url>
+    <content><![CDATA[<h1 id="Git-创建标签"><a href="#Git-创建标签" class="headerlink" title="Git 创建标签"></a>Git 创建标签</h1><p>Git 标签分两种</p>
+<ul>
+<li>附注标签: annotated: 是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息</li>
+<li>轻量级标签: lightweight: 像一个不会改变的分支——它只是某个特定提交的引用。在实践中不推荐使用</li>
+</ul>
+<h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 附注标签</span></span><br><span class="line">git tag -a v0.0.1 -m <span class="string">&quot;first release try&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 发布标签</span></span><br><span class="line"><span class="comment"># 标签不会随push而自动被push到远程，需要单独push</span></span><br><span class="line">git push origin v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给某个commit单独打tag</span></span><br><span class="line"><span class="comment"># 这种操作多用于给历史commit打tag,原因可能是当时没有打</span></span><br><span class="line">git tag -a v0.0.2 2234093</span><br></pre></td></tr></table></figure>
+
+<h2 id="标签操作"><a href="#标签操作" class="headerlink" title="标签操作"></a>标签操作</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某个tag的具体内容</span></span><br><span class="line">git show v0.0.1</span><br><span class="line">git cat-file -p v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除标签</span></span><br><span class="line">git tag -d v0.0.1</span><br><span class="line">=&gt; Deleted tag <span class="string">&#x27;v0.0.1&#x27;</span> (was 79db751)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程标签</span></span><br><span class="line">git push origin :v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tag的sha1</span></span><br><span class="line">cat .git/refs/tags/v5.4.1 <span class="comment"># 在标签被删除的时候会显示这个值</span></span><br><span class="line"><span class="comment"># =&gt; 79db751</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="签名tag"><a href="#签名tag" class="headerlink" title="签名tag"></a>签名tag</h2><p>前置条件：要先配置GPG</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 强制给tag 签名</span></span><br><span class="line"><span class="comment"># 直接编辑  ~/.gitconfig 也可以</span></span><br><span class="line">git config --global tag.forcesignannotated <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>You Can Not Laugh at the Same Joke</title>
+    <url>/You-can-not-laugh-at-the-same-joke/</url>
+    <content><![CDATA[<p>You can’t laugh at the same joke over and over again. So why would you keep crying over the same thing over and over again</p>
+]]></content>
+      <categories>
+        <category>日志</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mac OS 安装 Gdb</title>
+    <url>/setup-gdb-on-macos/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew install gdb</span><br></pre></td></tr></table></figure>
+
+<p>也可以从源码进安装，<a href="https://www.gnu.org/software/gdb/">官网</a>，目前GDB对下列语言进行了支持</p>
+<blockquote>
+<p>Ada<br>Assembly<br>C<br>C++<br>D<br>Fortran<br>Go<br>Objective-C<br>OpenCL<br>Modula-2<br>Pascal<br>Rust</p>
+</blockquote>
+<p>安装后还不能直接使用，MacOS 对安全性有效高的要求，不允许没有许可的程序运行其它程序</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gdb helloworld</span><br><span class="line">(gdb) run</span><br><span class="line"></span><br><span class="line">Unable to find Mach task port <span class="keyword">for</span> process-id 798: (os/kern) failure (0x5).</span><br><span class="line"> (please check gdb is codesigned - see taskgated(8))</span><br></pre></td></tr></table></figure>
+
+<p>提示<code>please check gdb is codesigned - see taskgated(8)</code>，原因是还没有为<code>gdb</code>签名，需要在系统的<code>Keychain</code>中创建用于签名的证书</p>
+<h1 id="创建certificate"><a href="#创建certificate" class="headerlink" title="创建certificate"></a>创建certificate</h1><p>步骤如下：</p>
+<ol>
+<li>Launch Keychain Access application: Applications &gt; Utilities &gt; Keychain Access.</li>
+<li>From the Keychains list on the left, right-click on the System item and select Unlock Keychain “System”.</li>
+<li>From the toolbar, go to Keychain Access &gt; Certificate Assistant &gt; Create a Certificate.</li>
+<li>Choose a name (e.g. gdb-cert).</li>
+<li>Set Identity Type to Self Signed Root.</li>
+<li>Set Certificate Type to Code Signing.</li>
+<li>Check the Let me override defaults checkbox.</li>
+<li>At this point, you can go on with the installation process until you get the Specify a Location For The Certificate dialogue box. Here you need to set Keychain to System. Finally, you can click on the Create button.</li>
+<li>After these steps, you can see the new certificate under System keychains. From the contextual menu of the newly created certificate (right-click on it) select the Get info option. In the dialogue box, expand the Trust item and set Code signing to Always Trust.</li>
+<li>Then, from the Keychains list on the left, right-click on the System item and select Lock Keychain “System”.</li>
+<li>Finally, reboot your system.</li>
+</ol>
+<h1 id="gdb签名"><a href="#gdb签名" class="headerlink" title="gdb签名"></a>gdb签名</h1><p>在创建你自己的证书后，就可以给gdb进行签名了，在签名前要先配置<code>gdb-entitlement.xml</code>文件，它允许MacOs信任gdb</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">plist</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//Apple//DTD PLIST 1.0//EN&quot;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">&quot;1.0&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.allow-jit<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.allow-unsigned-executable-memory<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.allow-dyld-environment-variables<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.disable-library-validation<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.disable-executable-page-protection<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.debugger<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.get-task-allow<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在命令行运行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">codesign --entitlements gdb-entitlement.xml -fs gdb-cert <span class="string">&quot;<span class="subst">$(which gdb)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>-fs</code>: 要填写你刚刚生成的证书的名子，<code>$(which gdb)</code>: 是gdb的安装路径</p>
+<p>接着在<code>home</code>目录创建<code>~/.gdbinit</code>文件，并写入如下内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;set startup-with-shell off&quot;</span> &gt;&gt; ~/.gdbinit</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h1><p>为了解决<code>No symbol table is loaded</code>问题，可以在编译时加入<code>-ggdb</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gcc hello_world.c -o hello_world -ggdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用示例</span></span><br><span class="line">gdb hello_world</span><br><span class="line">(gdb) list</span><br><span class="line">1	<span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line">2</span><br><span class="line">3	int my_strlen(char *string);</span><br><span class="line">4</span><br><span class="line">5	int main(int argc, char const *argv[])</span><br><span class="line">6	&#123;</span><br><span class="line">7	  // char *string;</span><br><span class="line">8	  // string = <span class="string">&quot;hello world haha&quot;</span>;</span><br><span class="line">9	  char string[] = <span class="string">&quot;hello world haha&quot;</span>;</span><br><span class="line">10	  <span class="built_in">printf</span>(<span class="string">&quot;The string &#x27;%s&#x27; len is \&quot;%d\&quot;\n&quot;</span>, string, my_strlen(string));</span><br><span class="line">(gdb) run</span><br><span class="line">Starting program: /Users/ga/m/book/c-lang/ch02-basic/hello_world</span><br><span class="line">[New Thread 0x2603 of process 6002]</span><br><span class="line">[New Thread 0x1803 of process 6002]</span><br><span class="line">warning: unhandled dyld version (16)</span><br><span class="line">The string <span class="string">&#x27;hello world haha&#x27;</span> len is <span class="string">&quot;16&quot;</span></span><br><span class="line">[Inferior 1 (process 6002) exited normally]</span><br></pre></td></tr></table></figure>
+
+<p>最后祝你一切顺利</p>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>gdb</tag>
       </tags>
   </entry>
 </search>
