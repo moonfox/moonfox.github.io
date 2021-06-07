@@ -16128,4 +16128,18 @@
         <tag>gdb</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Go语言 对指针类型接收者本身赋值</title>
+    <url>/assign_receiver_of_ptr/</url>
+    <content><![CDATA[<p><code>r</code> 是指针类型接收者，可以对其进行解引赋值。结构体的<code>0值</code>不是<code>nil</code>，而是其各个成员的<code>0值</code></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	newReader()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> reader <span class="keyword">struct</span> &#123;</span><br><span class="line">	buf  []<span class="keyword">byte</span></span><br><span class="line">	r, w <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">newReader</span><span class="params">()</span></span> &#123;</span><br><span class="line">	r := <span class="built_in">new</span>(reader)</span><br><span class="line">	fmt.Println(r) <span class="comment">// &amp;&#123;[] 0 0&#125;</span></span><br><span class="line">	r.reset(<span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">5</span>))</span><br><span class="line">	fmt.Println(r) <span class="comment">// &amp;&#123;[0 0 0 0 0] -1 -1&#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *reader)</span> <span class="title">reset</span><span class="params">(buf []<span class="keyword">byte</span>)</span></span> &#123;</span><br><span class="line">	*r = reader&#123;buf: buf, r: <span class="number">-1</span>, w: <span class="number">-1</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
 </search>

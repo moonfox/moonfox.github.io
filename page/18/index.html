@@ -92,7 +92,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">92</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">931</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">932</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -200,6 +200,79 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/rails-railsorderedoptions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月飞天膏药">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/rails-railsorderedoptions/" class="post-title-link" itemprop="url">Rails Rails::OrderedOptions</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2012-02-07 18:19:21" itemprop="dateCreated datePublished" datetime="2012-02-07T18:19:21+08:00">2012-02-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rails::OrderedOptions</span> &lt; Array <span class="comment">#:nodoc:</span></span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">[]=</span><span class="params">(key, value)</span></span></span><br><span class="line">    key = key.to_sym</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> pair = find_pair(key)</span><br><span class="line">      pair.pop</span><br><span class="line">      pair &lt;&lt; value</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">self</span> &lt;&lt; [key, value]</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">[]</span><span class="params">(key)</span></span></span><br><span class="line">    pair = find_pair(key.to_sym)</span><br><span class="line">    pair ? pair.last : <span class="literal">nil</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">method_missing</span><span class="params">(name, *args)</span></span></span><br><span class="line">    <span class="keyword">if</span> name.to_s =~ <span class="regexp">/(.*)=$/</span></span><br><span class="line">      <span class="keyword">self</span>[<span class="variable">$1</span>.to_sym] = args.first</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">self</span>[name]</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  private</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_pair</span><span class="params">(key)</span></span></span><br><span class="line">      <span class="keyword">self</span>.each &#123; <span class="params">|i|</span> <span class="keyword">return</span> i <span class="keyword">if</span> i.first == key &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1633,79 +1706,6 @@
           <p>apple.com<br><a target="_blank" rel="noopener" href="http://img.gagahappy.cn/blog/2011/11/B01BF349-39A7-4A98-9945-027F8CF416EB.png"><img src="http://img.gagahappy.cn/blog/2011/11/B01BF349-39A7-4A98-9945-027F8CF416EB.png" title="mac pro"></a></p>
 <p>apple.cn<br><a target="_blank" rel="noopener" href="http://img.gagahappy.cn/blog/2011/11/95282F28-09ED-4F33-85A1-E489E539BCEF1.png"><img src="http://img.gagahappy.cn/blog/2011/11/95282F28-09ED-4F33-85A1-E489E539BCEF1.png" title="95282F28-09ED-4F33-85A1-E489E539BCEF"></a></p>
 <p>amazon.cn<br><a target="_blank" rel="noopener" href="http://img.gagahappy.cn/blog/2011/11/D1B6B6EA-D43D-4760-826F-A43EF1AEC5BF.png"><img src="http://img.gagahappy.cn/blog/2011/11/D1B6B6EA-D43D-4760-826F-A43EF1AEC5BF.png" title="mac pro"></a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/what-is-dup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月飞天膏药">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/what-is-dup/" class="post-title-link" itemprop="url">What Is Dup</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2011-11-22 16:35:59" itemprop="dateCreated datePublished" datetime="2011-11-22T16:35:59+08:00">2011-11-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>dup returns a copy (duplicate) of the object. In the above code, it is<br>used to let you get back a shuffled copy of the Array, without<br>shuffling the original.</p>
 
       
     </div>
