@@ -15,13 +15,43 @@
     <atom:link href="https://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby</description>
-    <pubDate>Mon, 07 Jun 2021 14:54:31 GMT</pubDate>
+    <pubDate>Tue, 08 Jun 2021 10:17:10 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>Go语言 对指针类型接收者本身赋值</title>
-      <link>https://www.gagahappy.com/assign_receiver_of_ptr/</link>
-      <guid>https://www.gagahappy.com/assign_receiver_of_ptr/</guid>
+      <title>Go 语言 bufio.Peek 源码</title>
+      <link>https://www.gagahappy.com/go-bufio-reader-peek/</link>
+      <guid>https://www.gagahappy.com/go-bufio-reader-peek/</guid>
+      <pubDate>Tue, 08 Jun 2021 07:03:58 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt; &lt;code&gt;bufio.Peek(n)&lt;/code&gt;返回前N个未读字节 ，不会更改已读计数的值。在方法调用后，要查看返回参数&lt;code&gt;error&lt;/code&gt;是否为nil，以确保操作满足要求&lt;/p&gt;
+&lt;figure class=&quot;highlight</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p> <code>bufio.Peek(n)</code>返回前N个未读字节 ，不会更改已读计数的值。在方法调用后，要查看返回参数<code>error</code>是否为nil，以确保操作满足要求</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *Reader)</span> <span class="title">Peek</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line"><span class="keyword">if</span> n &lt; <span class="number">0</span> &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">nil</span>, ErrNegativeCount</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">b.lastByte = <span class="number">-1</span></span><br><span class="line">b.lastRuneSize = <span class="number">-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当未读字节数小于n，且缓冲区不满(b.w-b.r &lt; len(b.buf))，</span></span><br><span class="line"><span class="comment">// 即缓冲区中从头到尾必须都是未读字节才算是缓冲区已经满</span></span><br><span class="line"><span class="comment">// 且 b.err 为nil，这三者都满足时，开始调用b.fill()填充缓冲区</span></span><br><span class="line"><span class="comment">// fill()方法会把未读数据移动到缓冲区头部，并把后面空出来的部分写满</span></span><br><span class="line"><span class="comment">// for 保证了至少可以把缓冲区填满</span></span><br><span class="line"><span class="keyword">for</span> b.w-b.r &lt; n &amp;&amp; b.w-b.r &lt; <span class="built_in">len</span>(b.buf) &amp;&amp; b.err == <span class="literal">nil</span> &#123;</span><br><span class="line">b.fill() <span class="comment">// b.w-b.r &lt; len(b.buf) =&gt; buffer is not full</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当要读取的字节数大于缓冲区长度时，返回所有未读节字，并附带错误信息</span></span><br><span class="line"><span class="keyword">if</span> n &gt; <span class="built_in">len</span>(b.buf) &#123;</span><br><span class="line"><span class="keyword">return</span> b.buf[b.r:b.w], ErrBufferFull</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0 &lt;= n &lt;= len(b.buf)</span></span><br><span class="line"><span class="keyword">var</span> err error</span><br><span class="line"><span class="comment">// 当要读取的字节数大于所有未读节字数时，返回所有未读节字，并附带错误信息</span></span><br><span class="line"><span class="keyword">if</span> avail := b.w - b.r; avail &lt; n &#123;</span><br><span class="line"><span class="comment">// not enough data in buffer</span></span><br><span class="line">n = avail</span><br><span class="line">err = b.readErr()</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">err = ErrBufferFull</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 当 n 小于 未读字节数时，程序直接跳到这里</span></span><br><span class="line"><span class="keyword">return</span> b.buf[b.r : b.r+n], err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
+      
+      
+      <comments>https://www.gagahappy.com/go-bufio-reader-peek/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Go 语言 对指针类型接收者本身赋值</title>
+      <link>https://www.gagahappy.com/golang-assign_receiver_of_ptr/</link>
+      <guid>https://www.gagahappy.com/golang-assign_receiver_of_ptr/</guid>
       <pubDate>Mon, 07 Jun 2021 14:50:29 GMT</pubDate>
       
         
@@ -44,14 +74,14 @@
       <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
       
       
-      <comments>https://www.gagahappy.com/assign_receiver_of_ptr/#disqus_thread</comments>
+      <comments>https://www.gagahappy.com/golang-assign_receiver_of_ptr/#disqus_thread</comments>
       
     </item>
     
     <item>
       <title>Mac OS 安装 Gdb</title>
-      <link>https://www.gagahappy.com/setup-gdb-on-macos/</link>
-      <guid>https://www.gagahappy.com/setup-gdb-on-macos/</guid>
+      <link>https://www.gagahappy.com/gdb-setup-on-macos/</link>
+      <guid>https://www.gagahappy.com/gdb-setup-on-macos/</guid>
       <pubDate>Sun, 06 Jun 2021 07:14:15 GMT</pubDate>
       
         
@@ -73,7 +103,7 @@
       <category domain="https://www.gagahappy.com/tags/gdb/">gdb</category>
       
       
-      <comments>https://www.gagahappy.com/setup-gdb-on-macos/#disqus_thread</comments>
+      <comments>https://www.gagahappy.com/gdb-setup-on-macos/#disqus_thread</comments>
       
     </item>
     
@@ -109,9 +139,9 @@
     </item>
     
     <item>
-      <title>Fmt对string中零值的处理</title>
-      <link>https://www.gagahappy.com/go-fmt-string-with-zerovalue/</link>
-      <guid>https://www.gagahappy.com/go-fmt-string-with-zerovalue/</guid>
+      <title>Go 语言 Fmt对string中零值的处理</title>
+      <link>https://www.gagahappy.com/golang-fmt-string-with-zerovalue/</link>
+      <guid>https://www.gagahappy.com/golang-fmt-string-with-zerovalue/</guid>
       <pubDate>Sat, 05 Jun 2021 06:32:08 GMT</pubDate>
       
         
@@ -134,36 +164,7 @@
       <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
       
       
-      <comments>https://www.gagahappy.com/go-fmt-string-with-zerovalue/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>io.Writer 接口</title>
-      <link>https://www.gagahappy.com/go-io-writer/</link>
-      <guid>https://www.gagahappy.com/go-io-writer/</guid>
-      <pubDate>Fri, 04 Jun 2021 06:46:58 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;io-Writer接口实现要求&quot;&gt;&lt;a href=&quot;#io-Writer接口实现要求&quot; class=&quot;headerlink&quot;</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="io-Writer接口实现要求"><a href="#io-Writer接口实现要求" class="headerlink" title="io.Writer接口实现要求"></a><code>io.Writer</code>接口实现要求</h1><p>开始以为只是实现了<code>Write</code>方法就行，看了源码发现还有很多细节上的要求</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/io/io.go</span></span><br><span class="line"><span class="keyword">type</span> Writer <span class="keyword">interface</span> &#123;</span><br><span class="line">Write(p []<span class="keyword">byte</span>) (n <span class="keyword">int</span>, err error)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>1.要把 <code>p</code>写入实现类型的底层数据中</p><p>2.要返回实际写入的长度和在写入时遇到的错误，如果实际写入的长度小于<code>len(p)</code>，返回的<code>err</code>必须是非<code>nil</code>的</p><p>3. <code>p</code>不能在方法内部被修改，即使临时性的也不可以</p><p>4. 不能对<code>p</code>进行保存</p>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
-      
-      
-      <comments>https://www.gagahappy.com/go-io-writer/#disqus_thread</comments>
+      <comments>https://www.gagahappy.com/golang-fmt-string-with-zerovalue/#disqus_thread</comments>
       
     </item>
     

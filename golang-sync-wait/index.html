@@ -22,26 +22,26 @@
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="如何让主 goroutine 在所有其他 goroutine 都运行完后，再退出 sleep通过 sleep 让主 goroutine 在所有子goroutine运行结束后，再退出 123456func usingSleep() &amp;#123;	for i :&#x3D; 0; i &lt; 10; i++ &amp;#123;		go fmt.Println(i)	&amp;#125;	time.Sleep(time.Se">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sync.Wait的使用">
-<meta property="og:url" content="https://www.gagahappy.com/go-sync-wait/">
+<meta property="og:title" content="Go 语言 sync.Wait的使用">
+<meta property="og:url" content="https://www.gagahappy.com/golang-sync-wait/">
 <meta property="og:site_name" content="睡月飞天膏药">
 <meta property="og:description" content="如何让主 goroutine 在所有其他 goroutine 都运行完后，再退出 sleep通过 sleep 让主 goroutine 在所有子goroutine运行结束后，再退出 123456func usingSleep() &amp;#123;	for i :&#x3D; 0; i &lt; 10; i++ &amp;#123;		go fmt.Println(i)	&amp;#125;	time.Sleep(time.Se">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-04-14T10:43:00.000Z">
-<meta property="article:modified_time" content="2021-06-01T12:04:43.422Z">
+<meta property="article:modified_time" content="2021-06-08T06:42:40.591Z">
 <meta property="article:author" content="戛戛Happy">
 <meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://www.gagahappy.com/go-sync-wait/">
+<link rel="canonical" href="https://www.gagahappy.com/golang-sync-wait/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-Hans&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;www.gagahappy.com&#x2F;go-sync-wait&#x2F;&quot;,&quot;path&quot;:&quot;go-sync-wait&#x2F;&quot;,&quot;title&quot;:&quot;sync.Wait的使用&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-Hans&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;www.gagahappy.com&#x2F;golang-sync-wait&#x2F;&quot;,&quot;path&quot;:&quot;golang-sync-wait&#x2F;&quot;,&quot;title&quot;:&quot;Go 语言 sync.Wait的使用&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>sync.Wait的使用 | 睡月飞天膏药</title>
+<title>Go 语言 sync.Wait的使用 | 睡月飞天膏药</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-17621945-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;UA-17621945-1&quot;,&quot;only_pageview&quot;:false}</script>
@@ -94,7 +94,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">92</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">932</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">933</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -213,7 +213,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/go-sync-wait/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-sync-wait/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -226,7 +226,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          sync.Wait的使用
+          Go 语言 sync.Wait的使用
         </h1>
 
         <div class="post-meta-container">
@@ -307,7 +307,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://www.gagahappy.com/go-sync-wait/" title="sync.Wait的使用">https://www.gagahappy.com/go-sync-wait/</a>
+      <a href="https://www.gagahappy.com/golang-sync-wait/" title="Go 语言 sync.Wait的使用">https://www.gagahappy.com/golang-sync-wait/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -323,12 +323,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/call-method-on-nil-of-interface-value/" rel="prev" title="在动态值为 Nil 的接口上调用方法">
-                  <i class="fa fa-chevron-left"></i> 在动态值为 Nil 的接口上调用方法
+                <a href="/golang-call-method-on-nil-of-interface-value/" rel="prev" title="Go 语言 在动态值为 Nil 的接口上调用方法">
+                  <i class="fa fa-chevron-left"></i> Go 语言 在动态值为 Nil 的接口上调用方法
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/using-rebase-instead-of-merge/" rel="next" title="Git 使用 Rebase 代替 Merge">
+                <a href="/git-using-rebase-instead-of-merge/" rel="next" title="Git 使用 Rebase 代替 Merge">
                   Git 使用 Rebase 代替 Merge <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -385,7 +385,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{&quot;enable&quot;:true,&quot;github_id&quot;:&quot;moonfox&quot;,&quot;repo&quot;:&quot;gitalk&quot;,&quot;client_id&quot;:&quot;2a9c7ba27dd4a9376f8c&quot;,&quot;client_secret&quot;:&quot;cb4fa8779f853f735779a518c57e894a8ee30b09&quot;,&quot;admin_user&quot;:&quot;moonfox&quot;,&quot;distraction_free_mode&quot;:false,&quot;proxy&quot;:&quot;https:&#x2F;&#x2F;cors-anywhere.azm.workers.dev&#x2F;https:&#x2F;&#x2F;github.com&#x2F;login&#x2F;oauth&#x2F;access_token&quot;,&quot;language&quot;:null,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;gitalk@1.7.2&#x2F;dist&#x2F;gitalk.min.js&quot;,&quot;integrity&quot;:&quot;sha256-Pmj85ojLaPOWwRtlMJwmezB&#x2F;Qg8BzvJp5eTzvXaYAfA&#x3D;&quot;},&quot;path_md5&quot;:&quot;go-sync-wait&#x2F;&quot;}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{&quot;enable&quot;:true,&quot;github_id&quot;:&quot;moonfox&quot;,&quot;repo&quot;:&quot;gitalk&quot;,&quot;client_id&quot;:&quot;2a9c7ba27dd4a9376f8c&quot;,&quot;client_secret&quot;:&quot;cb4fa8779f853f735779a518c57e894a8ee30b09&quot;,&quot;admin_user&quot;:&quot;moonfox&quot;,&quot;distraction_free_mode&quot;:false,&quot;proxy&quot;:&quot;https:&#x2F;&#x2F;cors-anywhere.azm.workers.dev&#x2F;https:&#x2F;&#x2F;github.com&#x2F;login&#x2F;oauth&#x2F;access_token&quot;,&quot;language&quot;:null,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;gitalk@1.7.2&#x2F;dist&#x2F;gitalk.min.js&quot;,&quot;integrity&quot;:&quot;sha256-Pmj85ojLaPOWwRtlMJwmezB&#x2F;Qg8BzvJp5eTzvXaYAfA&#x3D;&quot;},&quot;path_md5&quot;:&quot;golang-sync-wait&#x2F;&quot;}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

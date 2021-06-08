@@ -92,7 +92,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">92</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">932</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">933</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -209,7 +209,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/assign_receiver_of_ptr/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/go-bufio-reader-peek/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -222,7 +222,81 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/assign_receiver_of_ptr/" class="post-title-link" itemprop="url">Go语言 对指针类型接收者本身赋值</a>
+          <a href="/go-bufio-reader-peek/" class="post-title-link" itemprop="url">Go 语言 bufio.Peek 源码</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-08 15:03:58" itemprop="dateCreated datePublished" datetime="2021-06-08T15:03:58+08:00">2021-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p> <code>bufio.Peek(n)</code>返回前N个未读字节 ，不会更改已读计数的值。在方法调用后，要查看返回参数<code>error</code>是否为nil，以确保操作满足要求</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *Reader)</span> <span class="title">Peek</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> n &lt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, ErrNegativeCount</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	b.lastByte = <span class="number">-1</span></span><br><span class="line">	b.lastRuneSize = <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当未读字节数小于n，且缓冲区不满(b.w-b.r &lt; len(b.buf))，</span></span><br><span class="line">	<span class="comment">// 即缓冲区中从头到尾必须都是未读字节才算是缓冲区已经满</span></span><br><span class="line">	<span class="comment">// 且 b.err 为nil，这三者都满足时，开始调用b.fill()填充缓冲区</span></span><br><span class="line">	<span class="comment">// fill()方法会把未读数据移动到缓冲区头部，并把后面空出来的部分写满</span></span><br><span class="line">	<span class="comment">// for 保证了至少可以把缓冲区填满</span></span><br><span class="line">	<span class="keyword">for</span> b.w-b.r &lt; n &amp;&amp; b.w-b.r &lt; <span class="built_in">len</span>(b.buf) &amp;&amp; b.err == <span class="literal">nil</span> &#123;</span><br><span class="line">		b.fill() <span class="comment">// b.w-b.r &lt; len(b.buf) =&gt; buffer is not full</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当要读取的字节数大于缓冲区长度时，返回所有未读节字，并附带错误信息</span></span><br><span class="line">	<span class="keyword">if</span> n &gt; <span class="built_in">len</span>(b.buf) &#123;</span><br><span class="line">		<span class="keyword">return</span> b.buf[b.r:b.w], ErrBufferFull</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 0 &lt;= n &lt;= len(b.buf)</span></span><br><span class="line">	<span class="keyword">var</span> err error</span><br><span class="line">	<span class="comment">// 当要读取的字节数大于所有未读节字数时，返回所有未读节字，并附带错误信息</span></span><br><span class="line">	<span class="keyword">if</span> avail := b.w - b.r; avail &lt; n &#123;</span><br><span class="line">		<span class="comment">// not enough data in buffer</span></span><br><span class="line">		n = avail</span><br><span class="line">		err = b.readErr()</span><br><span class="line">		<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">			err = ErrBufferFull</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 当 n 小于 未读字节数时，程序直接跳到这里</span></span><br><span class="line">	<span class="keyword">return</span> b.buf[b.r : b.r+n], err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-assign_receiver_of_ptr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月飞天膏药">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-assign_receiver_of_ptr/" class="post-title-link" itemprop="url">Go 语言 对指针类型接收者本身赋值</a>
         </h2>
 
         <div class="post-meta-container">
@@ -284,7 +358,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/setup-gdb-on-macos/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/gdb-setup-on-macos/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -297,7 +371,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/setup-gdb-on-macos/" class="post-title-link" itemprop="url">Mac OS 安装 Gdb</a>
+          <a href="/gdb-setup-on-macos/" class="post-title-link" itemprop="url">Mac OS 安装 Gdb</a>
         </h2>
 
         <div class="post-meta-container">
@@ -489,7 +563,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/go-fmt-string-with-zerovalue/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-fmt-string-with-zerovalue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -502,7 +576,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/go-fmt-string-with-zerovalue/" class="post-title-link" itemprop="url">Fmt对string中零值的处理</a>
+          <a href="/golang-fmt-string-with-zerovalue/" class="post-title-link" itemprop="url">Go 语言 Fmt对string中零值的处理</a>
         </h2>
 
         <div class="post-meta-container">
@@ -568,7 +642,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/go-io-writer/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-io-writer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -581,7 +655,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/go-io-writer/" class="post-title-link" itemprop="url">io.Writer 接口</a>
+          <a href="/golang-io-writer/" class="post-title-link" itemprop="url">Go 语言 io.Writer 接口</a>
         </h2>
 
         <div class="post-meta-container">
@@ -750,7 +824,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/bytes-buffer-truncate/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-bytes-buffer-truncate/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -763,7 +837,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/bytes-buffer-truncate/" class="post-title-link" itemprop="url">Go 语言 buffer.truncate 分析</a>
+          <a href="/golang-bytes-buffer-truncate/" class="post-title-link" itemprop="url">Go 语言 buffer.truncate 分析</a>
         </h2>
 
         <div class="post-meta-container">
@@ -833,7 +907,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/layout-of-struct/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-layout-of-struct/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -846,7 +920,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/layout-of-struct/" class="post-title-link" itemprop="url">Go语言结构体在内存中的布局</a>
+          <a href="/golang-layout-of-struct/" class="post-title-link" itemprop="url">Go 语言 结构体在内存中的布局</a>
         </h2>
 
         <div class="post-meta-container">
@@ -969,7 +1043,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/call-method-on-nil-of-interface-value/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-call-method-on-nil-of-interface-value/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -982,7 +1056,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/call-method-on-nil-of-interface-value/" class="post-title-link" itemprop="url">在动态值为 Nil 的接口上调用方法</a>
+          <a href="/golang-call-method-on-nil-of-interface-value/" class="post-title-link" itemprop="url">Go 语言 在动态值为 Nil 的接口上调用方法</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1056,7 +1130,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/go-sync-wait/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-sync-wait/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1069,7 +1143,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/go-sync-wait/" class="post-title-link" itemprop="url">sync.Wait的使用</a>
+          <a href="/golang-sync-wait/" class="post-title-link" itemprop="url">Go 语言 sync.Wait的使用</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1159,7 +1233,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/using-rebase-instead-of-merge/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-using-rebase-instead-of-merge/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1172,7 +1246,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/using-rebase-instead-of-merge/" class="post-title-link" itemprop="url">Git 使用 Rebase 代替 Merge</a>
+          <a href="/git-using-rebase-instead-of-merge/" class="post-title-link" itemprop="url">Git 使用 Rebase 代替 Merge</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1373,7 +1447,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/go-main-do-something-when-quit/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-main-do-something-when-quit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1386,7 +1460,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/go-main-do-something-when-quit/" class="post-title-link" itemprop="url">Go 主程序退出时会进行一些额外工作</a>
+          <a href="/golang-main-do-something-when-quit/" class="post-title-link" itemprop="url">Go 语言 主程序退出时会进行一些额外工作</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1693,7 +1767,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/unbuffered-channel-no-cap/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-unbuffered-channel-no-cap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/huitailang.jpg">
@@ -1706,7 +1780,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/unbuffered-channel-no-cap/" class="post-title-link" itemprop="url">无缓冲通道的Cap是零</a>
+          <a href="/golang-unbuffered-channel-no-cap/" class="post-title-link" itemprop="url">Go 语言 无缓冲通道的Cap是零</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1962,104 +2036,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>清理hhkb键盘，由于它的内部构造，比机械键盘要好清理100倍</p>
 <p><img src="http://img.gagahappy.cn/blog/2020/10/clean-my-hhkb.jpg_b1" alt="clean my hhkb" title="clean my hhkb"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-learning-supplement/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月飞天膏药">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/git-learning-supplement/" class="post-title-link" itemprop="url">Git 知识补充</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-09-24 20:54:25" itemprop="dateCreated datePublished" datetime="2020-09-24T20:54:25+08:00">2020-09-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ol>
-<li><p>git 可以只提交文件的部分内容， git add -p,称之为hunk, sourcetree也可以进行设置</p>
-</li>
-<li><p>分支改名<br>git branch -m cat tiger</p>
-</li>
-<li><p>分支合并后产生的commit, A合并B，commit 信息中，父提交记录顺序，parents : A, B</p>
-<p>A在前，B在后，表示是A 合并的B</p>
-</li>
-<li><p>git如何判断分支是否可以删除<br>当前分支所指向的commit ，没有其它commit指向它（这个提交(分支)还没有被合并），或只有当前分支指向它，没有其它分支指向它时，在删除这个分支时就会有提示不能直接删除</p>
-</li>
-<li><p>rebase 后，对应commit 值是否发生变化<br>看情况，嫁接到其它commit 之上的commit 的值会发生变化，因为其父提交发生了变化，同理，在这个commit 之后的提交的值也发生变化<br>A B C D E F，把F嫁接到其它 COMMIT后，A到E的COMMIT的值都发生变化</p>
-<p>修改现有COMMIT 的注释，也会发生这样的连锁反应</p>
-</li>
-<li><p>rebase 的其他用途<br>修改历史提交注释 r选项<br>合并多个提交 s 选项<br>把一个提交拆分成多个commit 在操作列表使用使用 edit<br>在commit 之间添加新的commit edit选项<br>调整commit 之间的顺序 直接在列表里调整，<br>删除commit 在列表里删除相关行过使用drop,删除后对它之后commit 的影响如何</p>
-</li>
-<li><p>空目录无法被添加到git<br>因为根据算法，添加的对象必须要有内容，以供sha1算法使用</p>
-</li>
-<li><p>合并后再使用 <code>git rebase </code> 使提交成为一条直线</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">git merge upstream-master</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line">Merge made by the <span class="string">&#x27;recursive&#x27;</span> strategy.</span><br><span class="line"> layout/_partials/header/menu-item.njk      | 5 +----</span><br><span class="line"> layout/_partials/page/breadcrumb.njk       | 6 +-----</span><br><span class="line"> layout/_partials/post/post-followme.njk    | 2 +-</span><br><span class="line"> layout/_partials/sidebar/site-overview.njk | 2 +-</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">*   b1b3e13 (HEAD -&gt; release) Merge branch <span class="string">&#x27;upstream-master&#x27;</span> into release</span><br><span class="line">|\</span><br><span class="line">| * d51ca0e (upstream/master, upstream-master) Fix: handle invalid config</span><br><span class="line">* | 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts</span><br><span class="line">|/</span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 把前分支作为基础分枝, 把 upstream-master 分支的提交嫁接在其上面</span></span><br><span class="line">git rebase</span><br><span class="line">First, rewinding head to replay your work on top of it...</span><br><span class="line">Applying: Fix: handle invalid config</span><br><span class="line">Using index info to reconstruct a base tree...</span><br><span class="line">M	layout/_partials/post/post-followme.njk</span><br><span class="line">M	layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Falling back to patching base and 3-way merge...</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">* 217e224 (HEAD -&gt; release) Fix: handle invalid config</span><br><span class="line">* 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts <span class="comment"># 以这个提交做为 rebase</span></span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>使用merge出现了分支线路</li>
-<li>rebase后，分支线路消失，成为一条直线。 是 以当前分支的最TOP的那个(369c5b5)提交做为rebase，重放合并进来的分支上的提交的</li>
-</ol>
-</li>
-</ol>
 
       
     </div>
