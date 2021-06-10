@@ -92,7 +92,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">92</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">933</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">934</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -200,6 +200,90 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/ruby-character-to-ascii/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月飞天膏药">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ruby-character-to-ascii/" class="post-title-link" itemprop="url">Ruby 字符和 Ascii 码之间的转换</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-09 17:05:03" itemprop="dateCreated datePublished" datetime="2021-06-09T17:05:03+08:00">2021-06-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="字符-转-ascii"><a href="#字符-转-ascii" class="headerlink" title="字符 转 ascii"></a>字符 转 ascii</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;a&#x27;</span>.ord <span class="comment"># =&gt; 97</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;a&quot;</span>.unpack(<span class="string">&#x27;c&#x27;</span>) <span class="comment">#=&gt; 97 `c` 提取一个字符作为整数</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;string&quot;</span>.each_byte <span class="keyword">do</span> <span class="params">|c|</span></span><br><span class="line">    puts c</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span>.each_byte.to_a</span><br><span class="line">[<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">111</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">100</span>]</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span>.bytes</span><br><span class="line">[<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">111</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">100</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Ascii-转-字符"><a href="#Ascii-转-字符" class="headerlink" title="Ascii 转 字符"></a>Ascii 转 字符</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">97</span>.chr <span class="comment"># =&gt; &quot;a&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span>.bytes <span class="comment"># =&gt; [104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100]</span></span><br><span class="line">[<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">111</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">100</span>].map&#123;<span class="params">|m|</span>m.chr&#125;</span><br><span class="line"><span class="comment"># =&gt; [&quot;h&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;, &quot; &quot;, &quot;w&quot;, &quot;o&quot;, &quot;r&quot;, &quot;l&quot;, &quot;d&quot;]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="字符转二进制"><a href="#字符转二进制" class="headerlink" title="字符转二进制"></a>字符转二进制</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;aa&quot;</span>.unpack(<span class="string">&#x27;b8B8&#x27;</span>)  <span class="comment">#=&gt; [&quot;10000110&quot;, &quot;01100001&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<p><code>B</code> 从每个字符中提取位（首先是最高有效位）</p>
+<p><code>b</code> 从每个字符中提取位（首先是最低有效位）</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1962,80 +2046,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>之前总是觉得系统自动备份功就是在侵犯个人隐私，比如访问通话记录，短信之类，所以给关闭了，直到刚才通过这个功能恢复了一条误删除且有用的短信，简直庆幸这个功能又被系统默默的打开了，突然觉得这个功能简直太重要了</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/clean-my-hhkb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月飞天膏药">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/clean-my-hhkb/" class="post-title-link" itemprop="url">清理Hhkb键盘</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-10-26 17:51:45" itemprop="dateCreated datePublished" datetime="2020-10-26T17:51:45+08:00">2020-10-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/journal/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>清理hhkb键盘，由于它的内部构造，比机械键盘要好清理100倍</p>
-<p><img src="http://img.gagahappy.cn/blog/2020/10/clean-my-hhkb.jpg_b1" alt="clean my hhkb" title="clean my hhkb"></p>
 
       
     </div>

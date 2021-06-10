@@ -15,8 +15,37 @@
     <atom:link href="https://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby</description>
-    <pubDate>Tue, 08 Jun 2021 10:17:10 GMT</pubDate>
+    <pubDate>Wed, 09 Jun 2021 09:18:55 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Ruby 字符和 Ascii 码之间的转换</title>
+      <link>https://www.gagahappy.com/ruby-character-to-ascii/</link>
+      <guid>https://www.gagahappy.com/ruby-character-to-ascii/</guid>
+      <pubDate>Wed, 09 Jun 2021 09:05:03 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;字符-转-ascii&quot;&gt;&lt;a href=&quot;#字符-转-ascii&quot; class=&quot;headerlink&quot; title=&quot;字符 转 ascii&quot;&gt;&lt;/a&gt;字符 转 ascii&lt;/h1&gt;&lt;figure class=&quot;highlight</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="字符-转-ascii"><a href="#字符-转-ascii" class="headerlink" title="字符 转 ascii"></a>字符 转 ascii</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;a&#x27;</span>.ord <span class="comment"># =&gt; 97</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;a&quot;</span>.unpack(<span class="string">&#x27;c&#x27;</span>) <span class="comment">#=&gt; 97 `c` 提取一个字符作为整数</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;string&quot;</span>.each_byte <span class="keyword">do</span> <span class="params">|c|</span></span><br><span class="line">    puts c</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span>.each_byte.to_a</span><br><span class="line">[<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">111</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">100</span>]</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span>.bytes</span><br><span class="line">[<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">111</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">100</span>]</span><br></pre></td></tr></table></figure><h1 id="Ascii-转-字符"><a href="#Ascii-转-字符" class="headerlink" title="Ascii 转 字符"></a>Ascii 转 字符</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">97</span>.chr <span class="comment"># =&gt; &quot;a&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span>.bytes <span class="comment"># =&gt; [104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100]</span></span><br><span class="line">[<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">111</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">100</span>].map&#123;<span class="params">|m|</span>m.chr&#125;</span><br><span class="line"><span class="comment"># =&gt; [&quot;h&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;, &quot; &quot;, &quot;w&quot;, &quot;o&quot;, &quot;r&quot;, &quot;l&quot;, &quot;d&quot;]</span></span><br></pre></td></tr></table></figure><h1 id="字符转二进制"><a href="#字符转二进制" class="headerlink" title="字符转二进制"></a>字符转二进制</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;aa&quot;</span>.unpack(<span class="string">&#x27;b8B8&#x27;</span>)  <span class="comment">#=&gt; [&quot;10000110&quot;, &quot;01100001&quot;]</span></span><br></pre></td></tr></table></figure><p><code>B</code> 从每个字符中提取位（首先是最高有效位）</p><p><code>b</code> 从每个字符中提取位（首先是最低有效位）</p>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/ruby/">Ruby</category>
+      
+      
+      <comments>https://www.gagahappy.com/ruby-character-to-ascii/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Go 语言 bufio.Peek 源码</title>
@@ -135,36 +164,6 @@
       
       
       <comments>https://www.gagahappy.com/git-create-tag/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Go 语言 Fmt对string中零值的处理</title>
-      <link>https://www.gagahappy.com/golang-fmt-string-with-zerovalue/</link>
-      <guid>https://www.gagahappy.com/golang-fmt-string-with-zerovalue/</guid>
-      <pubDate>Sat, 05 Jun 2021 06:32:08 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;&lt;code&gt;fmt&lt;/code&gt;格式化含有0值的&lt;code&gt;string&lt;/code&gt;时，是如何显示的&lt;/p&gt;
-&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p><code>fmt</code>格式化含有0值的<code>string</code>时，是如何显示的</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">buf := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">10</span>)</span><br><span class="line">buf[<span class="number">8</span>] = <span class="string">&#x27;A&#x27;</span></span><br><span class="line"><span class="built_in">copy</span>(buf, []<span class="keyword">byte</span>(<span class="string">&quot;hello&quot;</span>))</span><br><span class="line">fmt.Printf(<span class="string">&quot;cap(%d),len(%d)\n&quot;</span>, <span class="built_in">cap</span>(buf), <span class="built_in">len</span>(buf))</span><br><span class="line">fmt.Println(<span class="string">&quot;buf:&quot;</span>, buf)</span><br><span class="line">fmt.Printf(<span class="string">&quot;buf:%q\n&quot;</span>, buf)</span><br><span class="line">fmt.Println(<span class="string">&quot;buf:&quot;</span>, <span class="keyword">string</span>(buf))</span><br><span class="line"></span><br><span class="line">str := <span class="keyword">string</span>(buf)</span><br><span class="line">str = str + <span class="string">&quot; world&quot;</span></span><br><span class="line">fmt.Println(<span class="built_in">len</span>(str)) <span class="comment">// =&gt; 16</span></span><br><span class="line">fmt.Println(str)      <span class="comment">// =&gt; helloA world</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* output</span></span><br><span class="line"><span class="comment">cap(10),len(10)</span></span><br><span class="line"><span class="comment">buf: [104 101 108 108 111 0 0 0 65 0]</span></span><br><span class="line"><span class="comment">buf:&quot;hello\x00\x00\x00A\x00&quot;</span></span><br><span class="line"><span class="comment">buf: helloA</span></span><br><span class="line"><span class="comment">16</span></span><br><span class="line"><span class="comment">helloA world</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure><p>1. 使用<code>fmt</code>打印<code>string(buf)</code>虽然显示为<code>helloA</code>，看上去字符数变少了，只有6个(0值没有显示，其<code>ascii码</code>是不可打印码)，但底层数据没变，依然是<code>[104 101 108 108 111 0 0 0 65 0]</code></p><p>2. 格式化参数<code>%q</code>直接对0值进行了输出<code>hello\x00\x00\x00A\x00</code>，它打印了<code>string</code>中的每一个字节，包括不可打印的字节</p><p>3. <code>str + &quot; world&quot;</code>的长度为16，也证明了<code>str</code>中的0值没有被去除(10 + 6 = 16)</p><p>4.使用<code>fmt</code>查看数据”长什么样子”有时候是不准确的</p>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
-      
-      
-      <comments>https://www.gagahappy.com/golang-fmt-string-with-zerovalue/#disqus_thread</comments>
       
     </item>
     
