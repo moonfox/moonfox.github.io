@@ -13634,7 +13634,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Lorde So Beautiful and Cute ​​​​</title>
+    <title>Lorde So Beautiful and Cute</title>
     <url>/lorder-2017-06-30/</url>
     <content><![CDATA[<p><img src="http://img.gagahappy.cn/blog/2017/06/lorde-2017-06-30.jpg_b1" alt="Lorde, so beautiful and cute" title="Lorde, so beautiful and cute"></p>
 ]]></content>
@@ -13695,7 +13695,7 @@
       </tags>
   </entry>
   <entry>
-    <title>喜欢这张，素颜，珠宝，锁骨，疤痕，真我，舒淇 ​​​​</title>
+    <title>喜欢这张，素颜，珠宝，锁骨，疤痕，真我，舒淇</title>
     <url>/sqwhat-2017-06-30/</url>
     <content><![CDATA[<p><img src="http://img.gagahappy.cn/blog/2017/06/sqwhat-2017-06-30.jpg_b1" alt="喜欢这张，素颜，珠宝，锁骨，疤痕，真我，舒淇" title="喜欢这张，素颜，珠宝，锁骨，疤痕，真我，舒淇"></p>
 ]]></content>
@@ -16143,19 +16143,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 bufio.Peek 源码</title>
-    <url>/go-bufio-reader-peek/</url>
-    <content><![CDATA[<p> <code>bufio.Peek(n)</code>返回前N个未读字节 ，不会更改已读计数的值。在方法调用后，要查看返回参数<code>error</code>是否为nil，以确保操作满足要求</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *Reader)</span> <span class="title">Peek</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> n &lt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, ErrNegativeCount</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	b.lastByte = <span class="number">-1</span></span><br><span class="line">	b.lastRuneSize = <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当未读字节数小于n，且缓冲区不满(b.w-b.r &lt; len(b.buf))，</span></span><br><span class="line">	<span class="comment">// 即缓冲区中从头到尾必须都是未读字节才算是缓冲区已经满</span></span><br><span class="line">	<span class="comment">// 且 b.err 为nil，这三者都满足时，开始调用b.fill()填充缓冲区</span></span><br><span class="line">	<span class="comment">// fill()方法会把未读数据移动到缓冲区头部，并把后面空出来的部分写满</span></span><br><span class="line">	<span class="comment">// for 保证了至少可以把缓冲区填满</span></span><br><span class="line">	<span class="keyword">for</span> b.w-b.r &lt; n &amp;&amp; b.w-b.r &lt; <span class="built_in">len</span>(b.buf) &amp;&amp; b.err == <span class="literal">nil</span> &#123;</span><br><span class="line">		b.fill() <span class="comment">// b.w-b.r &lt; len(b.buf) =&gt; buffer is not full</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当要读取的字节数大于缓冲区长度时，返回所有未读节字，并附带错误信息</span></span><br><span class="line">	<span class="keyword">if</span> n &gt; <span class="built_in">len</span>(b.buf) &#123;</span><br><span class="line">		<span class="keyword">return</span> b.buf[b.r:b.w], ErrBufferFull</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 0 &lt;= n &lt;= len(b.buf)</span></span><br><span class="line">	<span class="keyword">var</span> err error</span><br><span class="line">	<span class="comment">// 当要读取的字节数大于所有未读节字数时，返回所有未读节字，并附带错误信息</span></span><br><span class="line">	<span class="keyword">if</span> avail := b.w - b.r; avail &lt; n &#123;</span><br><span class="line">		<span class="comment">// not enough data in buffer</span></span><br><span class="line">		n = avail</span><br><span class="line">		err = b.readErr()</span><br><span class="line">		<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">			err = ErrBufferFull</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 当 n 小于 未读字节数时，程序直接跳到这里</span></span><br><span class="line">	<span class="keyword">return</span> b.buf[b.r : b.r+n], err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>后端</category>
-      </categories>
-      <tags>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Ruby 字符和 Ascii 码之间的转换</title>
     <url>/ruby-character-to-ascii/</url>
     <content><![CDATA[<h1 id="字符-转-ascii"><a href="#字符-转-ascii" class="headerlink" title="字符 转 ascii"></a>字符 转 ascii</h1><figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;a&#x27;</span>.ord <span class="comment"># =&gt; 97</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;a&quot;</span>.unpack(<span class="string">&#x27;c&#x27;</span>) <span class="comment">#=&gt; 97 `c` 提取一个字符作为整数</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;string&quot;</span>.each_byte <span class="keyword">do</span> <span class="params">|c|</span></span><br><span class="line">    puts c</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span>.each_byte.to_a</span><br><span class="line">[<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">111</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">100</span>]</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span>.bytes</span><br><span class="line">[<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">111</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">100</span>]</span><br></pre></td></tr></table></figure>
@@ -16176,6 +16163,53 @@
       </categories>
       <tags>
         <tag>Ruby</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Go 语言 bufio.Peek 源码</title>
+    <url>/golang-bufio-reader-peek/</url>
+    <content><![CDATA[<p> <code>bufio.Peek(n)</code>返回前N个未读字节 ，不会更改已读计数的值。在方法调用后，要查看返回参数<code>error</code>是否为nil，以确保操作满足要求</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *Reader)</span> <span class="title">Peek</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> n &lt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, ErrNegativeCount</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	b.lastByte = <span class="number">-1</span></span><br><span class="line">	b.lastRuneSize = <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当未读字节数小于n，且缓冲区不满(b.w-b.r &lt; len(b.buf))，</span></span><br><span class="line">	<span class="comment">// 即缓冲区中从头到尾必须都是未读字节才算是缓冲区已经满</span></span><br><span class="line">	<span class="comment">// 且 b.err 为nil，这三者都满足时，开始调用b.fill()填充缓冲区</span></span><br><span class="line">	<span class="comment">// fill()方法会把未读数据移动到缓冲区头部，并把后面空出来的部分写满</span></span><br><span class="line">	<span class="comment">// for 保证了至少可以把缓冲区填满</span></span><br><span class="line">	<span class="keyword">for</span> b.w-b.r &lt; n &amp;&amp; b.w-b.r &lt; <span class="built_in">len</span>(b.buf) &amp;&amp; b.err == <span class="literal">nil</span> &#123;</span><br><span class="line">		b.fill() <span class="comment">// b.w-b.r &lt; len(b.buf) =&gt; buffer is not full</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当要读取的字节数大于缓冲区长度时，返回所有未读节字，并附带错误信息</span></span><br><span class="line">	<span class="keyword">if</span> n &gt; <span class="built_in">len</span>(b.buf) &#123;</span><br><span class="line">		<span class="keyword">return</span> b.buf[b.r:b.w], ErrBufferFull</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 0 &lt;= n &lt;= len(b.buf)</span></span><br><span class="line">	<span class="keyword">var</span> err error</span><br><span class="line">	<span class="comment">// 当要读取的字节数大于所有未读节字数时，返回所有未读节字，并附带错误信息</span></span><br><span class="line">	<span class="keyword">if</span> avail := b.w - b.r; avail &lt; n &#123;</span><br><span class="line">		<span class="comment">// not enough data in buffer</span></span><br><span class="line">		n = avail</span><br><span class="line">		err = b.readErr()</span><br><span class="line">		<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">			err = ErrBufferFull</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 当 n 小于 未读字节数时，程序直接跳到这里</span></span><br><span class="line">	<span class="keyword">return</span> b.buf[b.r : b.r+n], err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Go 语言 截取0长度的Slice</title>
+    <url>/golang-create-slice-with-zero-length/</url>
+    <content><![CDATA[<p>截取0长度的<code>slice</code></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s1 := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line">	s2 := s1[<span class="number">1</span>:<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(s2), <span class="built_in">len</span>(s2), s2) <span class="comment">// 5 0 []</span></span><br><span class="line"></span><br><span class="line">	s2 = s1[<span class="number">6</span>:<span class="number">6</span>]</span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(s2), <span class="built_in">len</span>(s2), s2) <span class="comment">// 0 0 []</span></span><br><span class="line"></span><br><span class="line">	s2 = s1[<span class="number">1</span>:<span class="number">2</span>]</span><br><span class="line">	fmt.Println(<span class="built_in">cap</span>(s2), <span class="built_in">len</span>(s2), s2) <span class="comment">// 5 1 [2]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>s1[1:1]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是5(6-1)</p>
+<p><code>s1[6:6]</code>表示截取的位置从最后一个元素最后一个字节的后面开始，到最后一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是0(6-6)</p>
+<p><code>s1[1:2]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第二个元素最后一个字节的后面结束，在这个范围内的元素只有 <code>2</code>，所以生成的<code>slice</code>的长度是1，容量是5(1-6)</p>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 中的文件描述描</title>
+    <url>/linux-fd-in-linux/</url>
+    <content><![CDATA[<h1 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h1><p>即<code>file descriptor</code>，简称<code>FD</code> ，用于指代被打开的文件，用一个非负的整数表示</p>
+<h1 id="对文件描述符的误区"><a href="#对文件描述符的误区" class="headerlink" title="对文件描述符的误区"></a>对文件描述符的误区</h1><p>每个程序启动的时候，都会打开3个文件，分别是，0标准输入，1标准输出，2标准错误，此后再打开文件的文件描述符就是3，依次类推。之前的误区是，当在进程中打开一个文件，它的文件描述符应该已经很大了，不应该是<code>3</code>，因为系统本身已经运行了很多程序。正确的应该是：进程只能看到自己的文件描述符，每个进程的文件描述符的编号都是从0开始，进程启动，默认都会打开<code>标准输入，标准输出，标准错误</code>这三个文件，之后再打开的文件的描述符从编号3开始</p>
+<h1 id="文件件描述符列表"><a href="#文件件描述符列表" class="headerlink" title="文件件描述符列表"></a>文件件描述符列表</h1><p>每个进程都有着自己的文件描述符列表。进程A启动后，拥有<code>stdin,stdout,stderr</code>这三个文件描述符 ，再打开一个文件，这个文件的文件描述符就是3。进程B启动后，拥有<code>stdin,stdout,stderr</code>这三个文件描述符，再打一个文件，它的文件描述符也是3，和进程A的一样。所以，不同进程，可以拥有相同的文件描述符。</p>
+<p>当一个文件在同一个进程中，被打开多次，那么这个文件具有不同的文件描述符，在同一个进程中，每个文件描述符只能对应一个文件。同一个进程，不同文件描述符可以指向同一个文件。</p>
+<p>不同进程，如果都打开了同一个文件(文件描述符都指向同一个文件)，那么它们都具有这个文件的句柄，其中一个进程对文件的修改，对其它进程是可见的。比如进程A对文件写入了10个字节，进程B在对文件进行写入时，是从第11个字节处开始写入的，而不是从文件头开始写入，这些操作包括<code>read(),write(),seek()</code>等</p>
+<h1 id="文件描述符限制"><a href="#文件描述符限制" class="headerlink" title="文件描述符限制"></a>文件描述符限制</h1><p>内核为了不让某个进程消耗掉所有的文件资源，会对单个进程最大打开文件数做默认值处理（称之为用户级限制），默认值一般是1024。注意：同一个文件，可以有多个文件句柄，这可能是不同进程打开了同一个文件，或者是同一个进程内，对一个文件打开了多次</p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
       </tags>
   </entry>
 </search>

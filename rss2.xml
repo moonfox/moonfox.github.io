@@ -15,8 +15,67 @@
     <atom:link href="https://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby</description>
-    <pubDate>Wed, 09 Jun 2021 09:18:55 GMT</pubDate>
+    <pubDate>Sat, 12 Jun 2021 12:04:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Linux 中的文件描述描</title>
+      <link>https://www.gagahappy.com/linux-fd-in-linux/</link>
+      <guid>https://www.gagahappy.com/linux-fd-in-linux/</guid>
+      <pubDate>Sat, 12 Jun 2021 11:08:09 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;文件描述符&quot;&gt;&lt;a href=&quot;#文件描述符&quot; class=&quot;headerlink&quot; title=&quot;文件描述符&quot;&gt;&lt;/a&gt;文件描述符&lt;/h1&gt;&lt;p&gt;即&lt;code&gt;file descriptor&lt;/code&gt;，简称&lt;code&gt;FD&lt;/code&gt;</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h1><p>即<code>file descriptor</code>，简称<code>FD</code> ，用于指代被打开的文件，用一个非负的整数表示</p><h1 id="对文件描述符的误区"><a href="#对文件描述符的误区" class="headerlink" title="对文件描述符的误区"></a>对文件描述符的误区</h1><p>每个程序启动的时候，都会打开3个文件，分别是，0标准输入，1标准输出，2标准错误，此后再打开文件的文件描述符就是3，依次类推。之前的误区是，当在进程中打开一个文件，它的文件描述符应该已经很大了，不应该是<code>3</code>，因为系统本身已经运行了很多程序。正确的应该是：进程只能看到自己的文件描述符，每个进程的文件描述符的编号都是从0开始，进程启动，默认都会打开<code>标准输入，标准输出，标准错误</code>这三个文件，之后再打开的文件的描述符从编号3开始</p><h1 id="文件件描述符列表"><a href="#文件件描述符列表" class="headerlink" title="文件件描述符列表"></a>文件件描述符列表</h1><p>每个进程都有着自己的文件描述符列表。进程A启动后，拥有<code>stdin,stdout,stderr</code>这三个文件描述符 ，再打开一个文件，这个文件的文件描述符就是3。进程B启动后，拥有<code>stdin,stdout,stderr</code>这三个文件描述符，再打一个文件，它的文件描述符也是3，和进程A的一样。所以，不同进程，可以拥有相同的文件描述符。</p><p>当一个文件在同一个进程中，被打开多次，那么这个文件具有不同的文件描述符，在同一个进程中，每个文件描述符只能对应一个文件。同一个进程，不同文件描述符可以指向同一个文件。</p><p>不同进程，如果都打开了同一个文件(文件描述符都指向同一个文件)，那么它们都具有这个文件的句柄，其中一个进程对文件的修改，对其它进程是可见的。比如进程A对文件写入了10个字节，进程B在对文件进行写入时，是从第11个字节处开始写入的，而不是从文件头开始写入，这些操作包括<code>read(),write(),seek()</code>等</p><h1 id="文件描述符限制"><a href="#文件描述符限制" class="headerlink" title="文件描述符限制"></a>文件描述符限制</h1><p>内核为了不让某个进程消耗掉所有的文件资源，会对单个进程最大打开文件数做默认值处理（称之为用户级限制），默认值一般是1024。注意：同一个文件，可以有多个文件句柄，这可能是不同进程打开了同一个文件，或者是同一个进程内，对一个文件打开了多次</p>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/os/">操作系统</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/linux/">linux</category>
+      
+      
+      <comments>https://www.gagahappy.com/linux-fd-in-linux/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Go 语言 截取0长度的Slice</title>
+      <link>https://www.gagahappy.com/golang-create-slice-with-zero-length/</link>
+      <guid>https://www.gagahappy.com/golang-create-slice-with-zero-length/</guid>
+      <pubDate>Fri, 11 Jun 2021 03:48:13 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;截取0长度的&lt;code&gt;slice&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>截取0长度的<code>slice</code></p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">s1 := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line">s2 := s1[<span class="number">1</span>:<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="built_in">cap</span>(s2), <span class="built_in">len</span>(s2), s2) <span class="comment">// 5 0 []</span></span><br><span class="line"></span><br><span class="line">s2 = s1[<span class="number">6</span>:<span class="number">6</span>]</span><br><span class="line">fmt.Println(<span class="built_in">cap</span>(s2), <span class="built_in">len</span>(s2), s2) <span class="comment">// 0 0 []</span></span><br><span class="line"></span><br><span class="line">s2 = s1[<span class="number">1</span>:<span class="number">2</span>]</span><br><span class="line">fmt.Println(<span class="built_in">cap</span>(s2), <span class="built_in">len</span>(s2), s2) <span class="comment">// 5 1 [2]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>s1[1:1]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是5(6-1)</p><p><code>s1[6:6]</code>表示截取的位置从最后一个元素最后一个字节的后面开始，到最后一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是0(6-6)</p><p><code>s1[1:2]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第二个元素最后一个字节的后面结束，在这个范围内的元素只有 <code>2</code>，所以生成的<code>slice</code>的长度是1，容量是5(1-6)</p>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
+      
+      
+      <comments>https://www.gagahappy.com/golang-create-slice-with-zero-length/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Ruby 字符和 Ascii 码之间的转换</title>
@@ -49,8 +108,8 @@
     
     <item>
       <title>Go 语言 bufio.Peek 源码</title>
-      <link>https://www.gagahappy.com/go-bufio-reader-peek/</link>
-      <guid>https://www.gagahappy.com/go-bufio-reader-peek/</guid>
+      <link>https://www.gagahappy.com/golang-bufio-reader-peek/</link>
+      <guid>https://www.gagahappy.com/golang-bufio-reader-peek/</guid>
       <pubDate>Tue, 08 Jun 2021 07:03:58 GMT</pubDate>
       
         
@@ -73,7 +132,7 @@
       <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
       
       
-      <comments>https://www.gagahappy.com/go-bufio-reader-peek/#disqus_thread</comments>
+      <comments>https://www.gagahappy.com/golang-bufio-reader-peek/#disqus_thread</comments>
       
     </item>
     
@@ -104,66 +163,6 @@
       
       
       <comments>https://www.gagahappy.com/golang-assign_receiver_of_ptr/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Mac OS 安装 Gdb</title>
-      <link>https://www.gagahappy.com/gdb-setup-on-macos/</link>
-      <guid>https://www.gagahappy.com/gdb-setup-on-macos/</guid>
-      <pubDate>Sun, 06 Jun 2021 07:14:15 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install gdb</span><br></pre></td></tr></table></figure><p>也可以从源码进安装，<a href="https://www.gnu.org/software/gdb/">官网</a>，目前GDB对下列语言进行了支持</p><blockquote><p>Ada<br>Assembly<br>C<br>C++<br>D<br>Fortran<br>Go<br>Objective-C<br>OpenCL<br>Modula-2<br>Pascal<br>Rust</p></blockquote><p>安装后还不能直接使用，MacOS 对安全性有效高的要求，不允许没有许可的程序运行其它程序</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gdb helloworld</span><br><span class="line">(gdb) run</span><br><span class="line"></span><br><span class="line">Unable to find Mach task port <span class="keyword">for</span> process-id 798: (os/kern) failure (0x5).</span><br><span class="line"> (please check gdb is codesigned - see taskgated(8))</span><br></pre></td></tr></table></figure><p>提示<code>please check gdb is codesigned - see taskgated(8)</code>，原因是还没有为<code>gdb</code>签名，需要在系统的<code>Keychain</code>中创建用于签名的证书</p><h1 id="创建certificate"><a href="#创建certificate" class="headerlink" title="创建certificate"></a>创建certificate</h1><p>步骤如下：</p><ol><li>Launch Keychain Access application: Applications &gt; Utilities &gt; Keychain Access.</li><li>From the Keychains list on the left, right-click on the System item and select Unlock Keychain “System”.</li><li>From the toolbar, go to Keychain Access &gt; Certificate Assistant &gt; Create a Certificate.</li><li>Choose a name (e.g. gdb-cert).</li><li>Set Identity Type to Self Signed Root.</li><li>Set Certificate Type to Code Signing.</li><li>Check the Let me override defaults checkbox.</li><li>At this point, you can go on with the installation process until you get the Specify a Location For The Certificate dialogue box. Here you need to set Keychain to System. Finally, you can click on the Create button.</li><li>After these steps, you can see the new certificate under System keychains. From the contextual menu of the newly created certificate (right-click on it) select the Get info option. In the dialogue box, expand the Trust item and set Code signing to Always Trust.</li><li>Then, from the Keychains list on the left, right-click on the System item and select Lock Keychain “System”.</li><li>Finally, reboot your system.</li></ol><h1 id="gdb签名"><a href="#gdb签名" class="headerlink" title="gdb签名"></a>gdb签名</h1><p>在创建你自己的证书后，就可以给gdb进行签名了，在签名前要先配置<code>gdb-entitlement.xml</code>文件，它允许MacOs信任gdb</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">plist</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//Apple//DTD PLIST 1.0//EN&quot;</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">&quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">&quot;1.0&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.allow-jit<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.allow-unsigned-executable-memory<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.allow-dyld-environment-variables<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.disable-library-validation<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.disable-executable-page-protection<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.debugger<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.get-task-allow<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure><p>在命令行运行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codesign --entitlements gdb-entitlement.xml -fs gdb-cert <span class="string">&quot;<span class="subst">$(which gdb)</span>&quot;</span></span><br></pre></td></tr></table></figure><p><code>-fs</code>: 要填写你刚刚生成的证书的名子，<code>$(which gdb)</code>: 是gdb的安装路径</p><p>接着在<code>home</code>目录创建<code>~/.gdbinit</code>文件，并写入如下内容</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;set startup-with-shell off&quot;</span> &gt;&gt; ~/.gdbinit</span><br></pre></td></tr></table></figure><h1 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h1><p>为了解决<code>No symbol table is loaded</code>问题，可以在编译时加入<code>-ggdb</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">gcc hello_world.c -o hello_world -ggdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用示例</span></span><br><span class="line">gdb hello_world</span><br><span class="line">(gdb) list</span><br><span class="line">1<span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line">2</span><br><span class="line">3int my_strlen(char *string);</span><br><span class="line">4</span><br><span class="line">5int main(int argc, char const *argv[])</span><br><span class="line">6&#123;</span><br><span class="line">7  // char *string;</span><br><span class="line">8  // string = <span class="string">&quot;hello world haha&quot;</span>;</span><br><span class="line">9  char string[] = <span class="string">&quot;hello world haha&quot;</span>;</span><br><span class="line">10  <span class="built_in">printf</span>(<span class="string">&quot;The string &#x27;%s&#x27; len is \&quot;%d\&quot;\n&quot;</span>, string, my_strlen(string));</span><br><span class="line">(gdb) run</span><br><span class="line">Starting program: /Users/ga/m/book/c-lang/ch02-basic/hello_world</span><br><span class="line">[New Thread 0x2603 of process 6002]</span><br><span class="line">[New Thread 0x1803 of process 6002]</span><br><span class="line">warning: unhandled dyld version (16)</span><br><span class="line">The string <span class="string">&#x27;hello world haha&#x27;</span> len is <span class="string">&quot;16&quot;</span></span><br><span class="line">[Inferior 1 (process 6002) exited normally]</span><br></pre></td></tr></table></figure><h1 id="使用gdb调试golang"><a href="#使用gdb调试golang" class="headerlink" title="使用gdb调试golang"></a>使用gdb调试golang</h1><p>本博没有成功，一直提示错误<code>No symbol table is loaded.  Use the &quot;file&quot; command.</code> ，后来查看了Go的官方文档，官方建议使用<code>Delve</code>进行调试。<a href="https://golang.org/doc/gdb">官方原文</a></p><blockquote><p><em>Note that <a href="https://github.com/go-delve/delve">Delve</a> is a better alternative to GDB when debugging Go programs built with the standard toolchain. It understands the Go runtime, data structures, and expressions better than GDB. Delve currently supports Linux, OSX, and Windows on <code>amd64</code>. For the most up-to-date list of supported platforms, please see <a href="https://github.com/go-delve/delve/tree/master/Documentation/installation">the Delve documentation</a>.</em></p></blockquote><p>并且在官方给出的示例中，也不保证你照着运行也可以成功</p><blockquote><p>In short, the instructions below should be taken only as a guide to how to use GDB when it works, not as a guarantee of success. Besides this overview you might want to consult the <a href="https://sourceware.org/gdb/current/onlinedocs/gdb/">GDB manual</a>.</p></blockquote><p>最后祝你一切顺利</p>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/software/">软件</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/gdb/">gdb</category>
-      
-      
-      <comments>https://www.gagahappy.com/gdb-setup-on-macos/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Git 创建标签</title>
-      <link>https://www.gagahappy.com/git-create-tag/</link>
-      <guid>https://www.gagahappy.com/git-create-tag/</guid>
-      <pubDate>Sat, 05 Jun 2021 14:16:35 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;Git-创建标签&quot;&gt;&lt;a href=&quot;#Git-创建标签&quot; class=&quot;headerlink&quot; title=&quot;Git 创建标签&quot;&gt;&lt;/a&gt;Git 创建标签&lt;/h1&gt;&lt;p&gt;Git 标签分两种&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;附注标签: annotated: 是存储在</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="Git-创建标签"><a href="#Git-创建标签" class="headerlink" title="Git 创建标签"></a>Git 创建标签</h1><p>Git 标签分两种</p><ul><li>附注标签: annotated: 是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息</li><li>轻量级标签: lightweight: 像一个不会改变的分支——它只是某个特定提交的引用。在实践中不推荐使用</li></ul><h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 附注标签</span></span><br><span class="line">git tag -a v0.0.1 -m <span class="string">&quot;first release try&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 发布标签</span></span><br><span class="line"><span class="comment"># 标签不会随push而自动被push到远程，需要单独push</span></span><br><span class="line">git push origin v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给某个commit单独打tag</span></span><br><span class="line"><span class="comment"># 这种操作多用于给历史commit打tag,原因可能是当时没有打</span></span><br><span class="line">git tag -a v0.0.2 2234093</span><br></pre></td></tr></table></figure><h2 id="标签操作"><a href="#标签操作" class="headerlink" title="标签操作"></a>标签操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某个tag的具体内容</span></span><br><span class="line">git show v0.0.1</span><br><span class="line">git cat-file -p v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除标签</span></span><br><span class="line">git tag -d v0.0.1</span><br><span class="line">=&gt; Deleted tag <span class="string">&#x27;v0.0.1&#x27;</span> (was 79db751)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程标签</span></span><br><span class="line">git push origin :v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tag的sha1</span></span><br><span class="line">cat .git/refs/tags/v5.4.1 <span class="comment"># 在标签被删除的时候会显示这个值</span></span><br><span class="line"><span class="comment"># =&gt; 79db751</span></span><br></pre></td></tr></table></figure><h2 id="签名tag"><a href="#签名tag" class="headerlink" title="签名tag"></a>签名tag</h2><p>前置条件：要先配置GPG</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 强制给tag 签名</span></span><br><span class="line"><span class="comment"># 直接编辑  ~/.gitconfig 也可以</span></span><br><span class="line">git config --global tag.forcesignannotated <span class="literal">true</span></span><br></pre></td></tr></table></figure>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/software/">软件</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/git/">git</category>
-      
-      
-      <comments>https://www.gagahappy.com/git-create-tag/#disqus_thread</comments>
       
     </item>
     
