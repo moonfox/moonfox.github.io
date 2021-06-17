@@ -22,7 +22,7 @@
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="做了一个出错后跳转的页面，运行后发现程序进入死循环，查看日志发现页面被回指到了自己，原因是在redirect_to的时候自动继承了链接中的参数，由此得出结论，在带参数的情况下将页面回指到自己时，如果只指定了action，链接的参数会被自动继承，若要去掉参数，需要在redirect_to的时候重新定义。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Rails Redirect_to">
+<meta property="og:title" content="rails redirect_to">
 <meta property="og:url" content="https://www.gagahappy.com/rails-redirect-to/">
 <meta property="og:site_name" content="睡月飞天膏药">
 <meta property="og:description" content="做了一个出错后跳转的页面，运行后发现程序进入死循环，查看日志发现页面被回指到了自己，原因是在redirect_to的时候自动继承了链接中的参数，由此得出结论，在带参数的情况下将页面回指到自己时，如果只指定了action，链接的参数会被自动继承，若要去掉参数，需要在redirect_to的时候重新定义。">
@@ -39,10 +39,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-Hans&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;www.gagahappy.com&#x2F;rails-redirect-to&#x2F;&quot;,&quot;path&quot;:&quot;rails-redirect-to&#x2F;&quot;,&quot;title&quot;:&quot;Rails Redirect_to&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-Hans&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;www.gagahappy.com&#x2F;rails-redirect-to&#x2F;&quot;,&quot;path&quot;:&quot;rails-redirect-to&#x2F;&quot;,&quot;title&quot;:&quot;rails redirect_to&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>Rails Redirect_to | 睡月飞天膏药</title>
+<title>rails redirect_to | 睡月飞天膏药</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-17621945-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;UA-17621945-1&quot;,&quot;only_pageview&quot;:false}</script>
@@ -95,7 +95,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">92</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">936</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">937</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -226,7 +226,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Rails Redirect_to
+          rails redirect_to
         </h1>
 
         <div class="post-meta-container">
@@ -277,7 +277,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://www.gagahappy.com/rails-redirect-to/" title="Rails Redirect_to">https://www.gagahappy.com/rails-redirect-to/</a>
+      <a href="https://www.gagahappy.com/rails-redirect-to/" title="rails redirect_to">https://www.gagahappy.com/rails-redirect-to/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -294,13 +294,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/mysql-string-cast-to-number/" rel="prev" title="Mysql 字符串转换成数字">
-                  <i class="fa fa-chevron-left"></i> Mysql 字符串转换成数字
+                <a href="/mysql-string-cast-to-number/" rel="prev" title="mysql 字符串转换成数字">
+                  <i class="fa fa-chevron-left"></i> mysql 字符串转换成数字
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/ubuntu-10-04-source-list/" rel="next" title="Ubuntu 10 source.list">
-                  Ubuntu 10 source.list <i class="fa fa-chevron-right"></i>
+                <a href="/ubuntu-10-04-source-list/" rel="next" title="ubuntu 10 source.list">
+                  ubuntu 10 source.list <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

@@ -22,7 +22,7 @@
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="可以看到为了提高查询性能，采用C去实现，如果安装了RubyInline,会启动C扩展实现的同名方法，加速binary_search查询性能 也可以发现，从客户端分配键到哪个redis节点是通过比较节点的crc32与key的crc32的大小的方式，进行分配的12345678910111213141516171819202122232425262728293031323334353637383940">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Native Extension to Perform the Binary Search Within the Hashring">
+<meta property="og:title" content="Native extension to perform the binary search within the hashring">
 <meta property="og:url" content="https://www.gagahappy.com/native-extension-to-perform-the-binary-search-within-the-hashring/">
 <meta property="og:site_name" content="睡月飞天膏药">
 <meta property="og:description" content="可以看到为了提高查询性能，采用C去实现，如果安装了RubyInline,会启动C扩展实现的同名方法，加速binary_search查询性能 也可以发现，从客户端分配键到哪个redis节点是通过比较节点的crc32与key的crc32的大小的方式，进行分配的12345678910111213141516171819202122232425262728293031323334353637383940">
@@ -39,10 +39,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-Hans&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;www.gagahappy.com&#x2F;native-extension-to-perform-the-binary-search-within-the-hashring&#x2F;&quot;,&quot;path&quot;:&quot;native-extension-to-perform-the-binary-search-within-the-hashring&#x2F;&quot;,&quot;title&quot;:&quot;Native Extension to Perform the Binary Search Within the Hashring&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-Hans&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;www.gagahappy.com&#x2F;native-extension-to-perform-the-binary-search-within-the-hashring&#x2F;&quot;,&quot;path&quot;:&quot;native-extension-to-perform-the-binary-search-within-the-hashring&#x2F;&quot;,&quot;title&quot;:&quot;Native extension to perform the binary search within the hashring&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>Native Extension to Perform the Binary Search Within the Hashring | 睡月飞天膏药</title>
+<title>Native extension to perform the binary search within the hashring | 睡月飞天膏药</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-17621945-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;UA-17621945-1&quot;,&quot;only_pageview&quot;:false}</script>
@@ -95,7 +95,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">92</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">936</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">937</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -226,7 +226,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Native Extension to Perform the Binary Search Within the Hashring
+          Native extension to perform the binary search within the hashring
         </h1>
 
         <div class="post-meta-container">
@@ -280,7 +280,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://www.gagahappy.com/native-extension-to-perform-the-binary-search-within-the-hashring/" title="Native Extension to Perform the Binary Search Within the Hashring">https://www.gagahappy.com/native-extension-to-perform-the-binary-search-within-the-hashring/</a>
+      <a href="https://www.gagahappy.com/native-extension-to-perform-the-binary-search-within-the-hashring/" title="Native extension to perform the binary search within the hashring">https://www.gagahappy.com/native-extension-to-perform-the-binary-search-within-the-hashring/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -297,13 +297,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/rspec-exception-types-classes-response/" rel="prev" title="Rspec Exception Types Classes Response">
-                  <i class="fa fa-chevron-left"></i> Rspec Exception Types Classes Response
+                <a href="/rspec-exception-types-classes-response/" rel="prev" title="rspec exception types classes response">
+                  <i class="fa fa-chevron-left"></i> rspec exception types classes response
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/rspec-exception-comparisons/" rel="next" title="Rspec Exception Comparisons">
-                  Rspec Exception Comparisons <i class="fa fa-chevron-right"></i>
+                <a href="/rspec-exception-comparisons/" rel="next" title="rspec exception comparisons">
+                  rspec exception comparisons <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

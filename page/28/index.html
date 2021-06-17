@@ -92,7 +92,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">92</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">936</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">937</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -200,6 +200,86 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/stop-wordpress-more-jump-link/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月飞天膏药">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/stop-wordpress-more-jump-link/" class="post-title-link" itemprop="url">阻止wordpress more链接跳转到页面的中间</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2010-09-27 20:02:13" itemprop="dateCreated datePublished" datetime="2010-09-27T20:02:13+08:00">2010-09-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>阻止wordpress more链接跳转到页面的中间</p>
+<p>默认情况下，点击more链接将会将读者带到单篇文章浏览的形式，并且会转到more标签指定的位置。这样，如果你使用默认的more标签功能，读者点击more链接之后将会被带入到文章的半中间。曾经一段时间，大家比较接受这样的做法，不过，现在越来越人觉得还是直接打开文章页面不跳转到其他位置比较好。</p>
+<p>总之一句话，如果你希望点击more标签后，打开进入的是文章页面的顶部，那么请在当前主题的functions.php文件，添加下面的代码:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> remove_more_jump_link(<span class="variable">$link</span>) &#123;</span><br><span class="line"><span class="variable">$offset</span>  = strpos(<span class="variable">$link</span>, <span class="string">&#x27;#more-&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span>  (<span class="variable">$offset</span>) &#123;</span><br><span class="line"><span class="variable">$end</span>  = strpos(<span class="variable">$link</span>, <span class="string">&#x27;&quot;&#x27;</span>,<span class="variable">$offset</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>  (<span class="variable">$end</span>) &#123;</span><br><span class="line"><span class="variable">$link</span>  = substr_replace(<span class="variable">$link</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$offset</span>, <span class="variable">$end</span>-<span class="variable">$offset</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">return</span>  <span class="variable">$link</span>;</span><br><span class="line">&#125;</span><br><span class="line">add_filter(<span class="string">&#x27;the_content_more_link&#x27;</span>,  <span class="string">&#x27;remove_more_jump_link&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>原文地址：<a target="_blank" rel="noopener" href="http://www.wordpress.la/WordPress-more-tag-tips.html">http://www.wordpress.la/WordPress-more-tag-tips.html</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1314,7 +1394,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/my-dream-just-now/" class="post-title-link" itemprop="url">My Dream Just Now</a>
+          <a href="/my-dream-just-now/" class="post-title-link" itemprop="url">my dream just now</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1657,80 +1737,6 @@
 <p>由于要刷三种颜色，白色，兰色，粉色，所以买了两把滚子。</p>
 <p>图1的这种滚子刷二种漆（先白后彩）的效果要比其他滚子好一些。<br><img src="http://img.gagahappy.cn/blog/2010/09/1.jpg" title="克里斯汀 滚子"></p>
 <p>图2用来刷另外种颜色<br><img src="http://img.gagahappy.cn/blog/2010/09/2.jpg" title="克里斯汀 滚子"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/zhuangxiu-install-dalishi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月飞天膏药">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/zhuangxiu-install-dalishi/" class="post-title-link" itemprop="url">装修笔记——第29天，大理石进场</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2010-09-06 00:10:12" itemprop="dateCreated datePublished" datetime="2010-09-06T00:10:12+08:00">2010-09-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/journal/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>大理石的安装一般在墙面没有刮腻子前，反我家是这样做的，工人师傅说要是在刮了腻子以后安，怕把腻子给碰坏了。</p>
-<p>我家总共安4条过门石，2块漂窗，2块阳台，共计10块石头，安装用了1个多小时，挺顺利的，漂窗的大理石比较重，要三个年轻力壮的小伙抬，看着还挺费劲的。</p>
 
       
     </div>

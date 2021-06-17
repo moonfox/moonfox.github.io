@@ -92,7 +92,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">92</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">936</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">937</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -209,6 +209,81 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-redo-writed-ahead-log/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月飞天膏药">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/mysql-redo-writed-ahead-log/" class="post-title-link" itemprop="url">mysql redo日志先行</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-22 17:33:11" itemprop="dateCreated datePublished" datetime="2015-03-22T17:33:11+08:00">2015-03-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p><strong>redo日志应首先持久化在磁盘上，然后事务的操作结果才写入db buffer，（此时，内存中的数据和data file对应的数据不同，我们认为内存中的数据是脏数据），db buffer再选择合适的时机将数据持久化到data file中。这种顺序可以保证在需要故障恢复时恢复最后的修改操作。先持久化日志的策略叫做Write Ahead Log，即预写日志,也叫日志先行。</strong></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/the-record-donst-be-actually-detete/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,7 +297,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/the-record-donst-be-actually-detete/" class="post-title-link" itemprop="url">数据不会被删除，除非Page中的数据被重新组织</a>
+          <a href="/the-record-donst-be-actually-detete/" class="post-title-link" itemprop="url">数据不会被删除，除非page中的数据被重新组织</a>
         </h2>
 
         <div class="post-meta-container">
@@ -298,7 +373,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/mysql-undo-flush-to-disk/" class="post-title-link" itemprop="url">Mysql Undo日志写入磁盘</a>
+          <a href="/mysql-undo-flush-to-disk/" class="post-title-link" itemprop="url">mysql undo日志写入磁盘</a>
         </h2>
 
         <div class="post-meta-container">
@@ -371,7 +446,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/undo-segment-header-page-addr/" class="post-title-link" itemprop="url">Undo Segment的头页面的址址</a>
+          <a href="/undo-segment-header-page-addr/" class="post-title-link" itemprop="url">undo segment的头页面的址址</a>
         </h2>
 
         <div class="post-meta-container">
@@ -444,7 +519,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/how-to-create-current-real-and-snapshot/" class="post-title-link" itemprop="url">Mysql 当前读与快照读如何产生</a>
+          <a href="/how-to-create-current-real-and-snapshot/" class="post-title-link" itemprop="url">mysql 当前读与快照读如何产生</a>
         </h2>
 
         <div class="post-meta-container">
@@ -518,7 +593,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/mysql-consistent-noblocking-read/" class="post-title-link" itemprop="url">Mysql 非锁定一致性读</a>
+          <a href="/mysql-consistent-noblocking-read/" class="post-title-link" itemprop="url">mysql 非锁定一致性读</a>
         </h2>
 
         <div class="post-meta-container">
@@ -664,7 +739,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/a-part-of-innodb-star-log/" class="post-title-link" itemprop="url">Innodb启动日志</a>
+          <a href="/a-part-of-innodb-star-log/" class="post-title-link" itemprop="url">innodb启动日志</a>
         </h2>
 
         <div class="post-meta-container">
@@ -738,7 +813,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/innodb-lock-2/" class="post-title-link" itemprop="url">Innodb 锁处理</a>
+          <a href="/innodb-lock-2/" class="post-title-link" itemprop="url">innodb 锁处理</a>
         </h2>
 
         <div class="post-meta-container">
@@ -980,7 +1055,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/note-of-secondary-index-non-leaf-pages/" class="post-title-link" itemprop="url">Note of Secondary Index Non-Leaf Pages</a>
+          <a href="/note-of-secondary-index-non-leaf-pages/" class="post-title-link" itemprop="url">note of secondary index non-leaf pages</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1127,7 +1202,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/innodb-page-heap-allocation/" class="post-title-link" itemprop="url">Innodb使用记录数据空间分配</a>
+          <a href="/innodb-page-heap-allocation/" class="post-title-link" itemprop="url">innodb使用记录数据空间分配</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1200,7 +1275,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/innodb-page-header-page-n-heap/" class="post-title-link" itemprop="url">Innodb-Page-Header 结构</a>
+          <a href="/innodb-page-header-page-n-heap/" class="post-title-link" itemprop="url">innodb-page-header 结构</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1273,7 +1348,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/the-supremum-record-in-index-page/" class="post-title-link" itemprop="url">The Supremum Record in Index Page</a>
+          <a href="/the-supremum-record-in-index-page/" class="post-title-link" itemprop="url">The supremum record in index page</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1347,7 +1422,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/the-infimum-record-in-index-page/" class="post-title-link" itemprop="url">The Infimum Record in Index Page</a>
+          <a href="/the-infimum-record-in-index-page/" class="post-title-link" itemprop="url">The infimum record in index page</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1499,7 +1574,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/innodb-new-record-use-old-record-space/" class="post-title-link" itemprop="url">Innodb 新增数据使用已删除数据空间</a>
+          <a href="/innodb-new-record-use-old-record-space/" class="post-title-link" itemprop="url">innodb 新增数据使用已删除数据空间</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1572,7 +1647,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/explain-using-where-should-be/" class="post-title-link" itemprop="url">Explain Using Where 含意</a>
+          <a href="/explain-using-where-should-be/" class="post-title-link" itemprop="url">explain using where 含意</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1606,79 +1681,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>using where：这说明服务器在存储引擎收到行后将进行过滤,效率不是最高的。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-innodb-ft-cache-size/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月飞天膏药">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/mysql-innodb-ft-cache-size/" class="post-title-link" itemprop="url">参数Innodb_ft_cache_size</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-02-28 16:22:47" itemprop="dateCreated datePublished" datetime="2015-02-28T16:22:47+08:00">2015-02-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>参数innodb_ft_cache_size用来控制FTS index Cache的大小，默认为32M，当缓存满时，会将其中的(word,ilist)分词信息同步到磁盘的Auxiliary table中。增大此参数可以提高全文索引的性能，但在宕机时可能需要更长的时间进行恢复。</p>
 
       
     </div>

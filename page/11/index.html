@@ -92,7 +92,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">92</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">936</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">937</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -209,6 +209,79 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/ruby-hash-sort-by-key-be-case-of-key-type/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月飞天膏药">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ruby-hash-sort-by-key-be-case-of-key-type/" class="post-title-link" itemprop="url">ruby 哈希排序注意事项</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-05-20 23:22:43" itemprop="dateCreated datePublished" datetime="2015-05-20T23:22:43+08:00">2015-05-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果key的数据类型不一致，会导致异常，其实这种情况已经不是第一次遇上了</span></span><br><span class="line"><span class="comment"># ArgumentError: comparison of Array with Array failed</span></span><br><span class="line">hash = &#123;<span class="symbol">c:</span> <span class="number">3</span>, <span class="string">&quot;a&quot;</span> =&gt; <span class="number">1</span>, <span class="symbol">b:</span><span class="number">2</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以用hash#sort_by解决,把key统一成一致的数据类型</span></span><br><span class="line">hash.sort_by&#123;<span class="params">|k,v|</span>k.to_s&#125;</span><br><span class="line"><span class="comment"># 等效于</span></span><br><span class="line">hash.sort_by&#123;<span class="params">|h|</span>h[<span class="number">0</span>].to_s&#125;</span><br><span class="line"><span class="comment"># 最终的输出结果为</span></span><br><span class="line"><span class="comment">#=&gt; [[&quot;a&quot;, 1], [:b, 2], [:c, 3]]</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/use-index-option-when-you-use-git-stash/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,7 +295,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/use-index-option-when-you-use-git-stash/" class="post-title-link" itemprop="url">在Git Stash 中使用--Index 恢复暂存区</a>
+          <a href="/use-index-option-when-you-use-git-stash/" class="post-title-link" itemprop="url">在git stash 中使用--index 恢复暂存区</a>
         </h2>
 
         <div class="post-meta-container">
@@ -296,7 +369,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/what-difference-between-type-and-p-option/" class="post-title-link" itemprop="url">Git Cat-File Type选项和p选项的区别</a>
+          <a href="/what-difference-between-type-and-p-option/" class="post-title-link" itemprop="url">git cat-file type选项和p选项的区别</a>
         </h2>
 
         <div class="post-meta-container">
@@ -369,7 +442,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/git-ls-files-show-index-files/" class="post-title-link" itemprop="url">Git Ls-Files 显示暂存区目录树</a>
+          <a href="/git-ls-files-show-index-files/" class="post-title-link" itemprop="url">git ls-files 显示暂存区目录树</a>
         </h2>
 
         <div class="post-meta-container">
@@ -443,7 +516,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/method-missing-be-careful-use/" class="post-title-link" itemprop="url">Method_missing 方法使用注意事项</a>
+          <a href="/method-missing-be-careful-use/" class="post-title-link" itemprop="url">method_missing 方法使用注意事项</a>
         </h2>
 
         <div class="post-meta-container">
@@ -517,7 +590,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/git-write-tree-generate-tree-id/" class="post-title-link" itemprop="url">Git Write-Tree 生成Tree对象</a>
+          <a href="/git-write-tree-generate-tree-id/" class="post-title-link" itemprop="url">git write-tree 生成tree对象</a>
         </h2>
 
         <div class="post-meta-container">
@@ -846,7 +919,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/scope-of-instance-variable-in-rake-block/" class="post-title-link" itemprop="url">Rake 实例变量作用范围</a>
+          <a href="/scope-of-instance-variable-in-rake-block/" class="post-title-link" itemprop="url">rake 实例变量作用范围</a>
         </h2>
 
         <div class="post-meta-container">
@@ -920,7 +993,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/issues-of-install-memcached-reds-postgresql/" class="post-title-link" itemprop="url">安装Memcached、redis、postgresql问题总结</a>
+          <a href="/issues-of-install-memcached-reds-postgresql/" class="post-title-link" itemprop="url">安装memcached、redis、postgresql问题总结</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1001,7 +1074,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/deploy-nginx-thin/" class="post-title-link" itemprop="url">部署Thin + Nginx</a>
+          <a href="/deploy-nginx-thin/" class="post-title-link" itemprop="url">部署thin + nginx</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1080,7 +1153,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/rspec-exception-identity-or-equivalence/" class="post-title-link" itemprop="url">Rspec Exception Identity or Equivalence</a>
+          <a href="/rspec-exception-identity-or-equivalence/" class="post-title-link" itemprop="url">rspec exception identity or equivalence</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1154,7 +1227,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/delegation-be-enhance-by-active-support-in-module/" class="post-title-link" itemprop="url">Delegation Be Enhance by Active Support in Module</a>
+          <a href="/delegation-be-enhance-by-active-support-in-module/" class="post-title-link" itemprop="url">Delegation be enhance by active support in module</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1234,7 +1307,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/pg-connection-bad/" class="post-title-link" itemprop="url">Pg连接错误</a>
+          <a href="/pg-connection-bad/" class="post-title-link" itemprop="url">pg连接错误</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1312,7 +1385,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/ruby-hash-sort/" class="post-title-link" itemprop="url">Ruby Hash 排序</a>
+          <a href="/ruby-hash-sort/" class="post-title-link" itemprop="url">ruby hash 排序</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1386,7 +1459,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/bundler-specify-gem-versions/" class="post-title-link" itemprop="url">Bundler Specify Gem Versions</a>
+          <a href="/bundler-specify-gem-versions/" class="post-title-link" itemprop="url">bundler Specify gem versions</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1461,7 +1534,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/rspec-exception-types-classes-response/" class="post-title-link" itemprop="url">Rspec Exception Types Classes Response</a>
+          <a href="/rspec-exception-types-classes-response/" class="post-title-link" itemprop="url">rspec exception types classes response</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1535,7 +1608,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/native-extension-to-perform-the-binary-search-within-the-hashring/" class="post-title-link" itemprop="url">Native Extension to Perform the Binary Search Within the Hashring</a>
+          <a href="/native-extension-to-perform-the-binary-search-within-the-hashring/" class="post-title-link" itemprop="url">Native extension to perform the binary search within the hashring</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1611,7 +1684,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/rspec-exception-comparisons/" class="post-title-link" itemprop="url">Rspec Exception Comparisons</a>
+          <a href="/rspec-exception-comparisons/" class="post-title-link" itemprop="url">rspec exception comparisons</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1646,87 +1719,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>rspec exception comparisons</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">expect(actual).to be &gt;  expected</span><br><span class="line">expect(actual).to be &gt;= expected</span><br><span class="line">expect(actual).to be &lt;= expected</span><br><span class="line">expect(actual).to be &lt;  expected</span><br><span class="line">expect(actual).to be_between(minimum, maximum).inclusive</span><br><span class="line">expect(actual).to be_between(minimum, maximum).exclusive</span><br><span class="line">expect(actual).to match(<span class="regexp">/expression/</span>)</span><br><span class="line">expect(actual).to be_within(delta).of(expected)</span><br><span class="line">expect(actual).to start_with expected</span><br><span class="line">expect(actual).to end_with expected</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/secret-token-issues/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月飞天膏药">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/secret-token-issues/" class="post-title-link" itemprop="url">Secret_token:问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-04-16 13:31:28" itemprop="dateCreated datePublished" datetime="2015-04-16T13:31:28+08:00">2015-04-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>secret_token:问题</p>
-<blockquote>
-<p>A secret is required to generate an integrity hash for cookie session data. Use config.secret_token = “some secret phrase of at least 30 characters”in config/initializers/secret_token.rb</p>
-</blockquote>
-<p>解决方法:</p>
-<blockquote>
-<p>运行 rake secret 生成secret_token，创建config/initializers/secret_token.rb，添加代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">YouApp::Application.config.secret_token &#x3D; &#39;用 rake secret 生成的token&#39;</span><br></pre></td></tr></table></figure>
-</blockquote>
 
       
     </div>

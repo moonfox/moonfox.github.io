@@ -92,7 +92,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">92</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">7</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">936</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">937</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -209,6 +209,80 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-unbuffered-channel-no-cap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/huitailang.jpg">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月飞天膏药">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-unbuffered-channel-no-cap/" class="post-title-link" itemprop="url">Go 语言 无缓冲通道的cap是零</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-05 19:59:39" itemprop="dateCreated datePublished" datetime="2021-01-05T19:59:39+08:00">2021-01-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>无缓冲通道的cap是零</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无缓冲通道的cap、len永远是0</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	noCache := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; noCache &lt;- <span class="number">6</span> &#125;()</span><br><span class="line"></span><br><span class="line">	time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">	fmt.Println(<span class="string">&quot;cap of noCache pipeline is&quot;</span>, <span class="built_in">cap</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;len of noCache pipeline is&quot;</span>, <span class="built_in">len</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;noCache &quot;</span>, &lt;-noCache)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/790-consecutive-weeks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,7 +296,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/790-consecutive-weeks/" class="post-title-link" itemprop="url">790 Consecutive Weeks</a>
+          <a href="/790-consecutive-weeks/" class="post-title-link" itemprop="url">790 consecutive weeks</a>
         </h2>
 
         <div class="post-meta-container">
@@ -369,7 +443,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/clean-my-hhkb/" class="post-title-link" itemprop="url">清理Hhkb键盘</a>
+          <a href="/clean-my-hhkb/" class="post-title-link" itemprop="url">清理hhkb键盘</a>
         </h2>
 
         <div class="post-meta-container">
@@ -443,7 +517,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/git-learning-supplement/" class="post-title-link" itemprop="url">Git 知识补充</a>
+          <a href="/git-learning-supplement/" class="post-title-link" itemprop="url">git 知识补充</a>
         </h2>
 
         <div class="post-meta-container">
@@ -541,7 +615,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/what-does-kill-0-do/" class="post-title-link" itemprop="url">What Does Kill 0 Do</a>
+          <a href="/what-does-kill-0-do/" class="post-title-link" itemprop="url">What does kill 0 do</a>
         </h2>
 
         <div class="post-meta-container">
@@ -741,7 +815,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/salute-to-the-heroes/" class="post-title-link" itemprop="url">Salute to the Heroes</a>
+          <a href="/salute-to-the-heroes/" class="post-title-link" itemprop="url">Salute to the heroes</a>
         </h2>
 
         <div class="post-meta-container">
@@ -816,7 +890,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/the-award-of-oscar/" class="post-title-link" itemprop="url">The Award of Oscar</a>
+          <a href="/the-award-of-oscar/" class="post-title-link" itemprop="url">The award of oscar</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1039,7 +1113,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/mysql-bluk-insert/" class="post-title-link" itemprop="url">Mysql 批量插入数据</a>
+          <a href="/mysql-bluk-insert/" class="post-title-link" itemprop="url">mysql 批量插入数据</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1324,7 +1398,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/study-eng-participle-2020-7-23/" class="post-title-link" itemprop="url">非谓语 Taken</a>
+          <a href="/study-eng-participle-2020-7-23/" class="post-title-link" itemprop="url">非谓语 taken</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1549,7 +1623,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/eng-grammar-until/" class="post-title-link" itemprop="url">Until 用法</a>
+          <a href="/eng-grammar-until/" class="post-title-link" itemprop="url">until 用法</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1622,7 +1696,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/eng-grammar-will/" class="post-title-link" itemprop="url">这里没有用Will</a>
+          <a href="/eng-grammar-will/" class="post-title-link" itemprop="url">这里没有用will</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1731,79 +1805,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>发现一个关于虚拟语句很好的例句，结构也很典型，主句和从句都是对现在的虚拟。如果是作为考试的话，要把从句中的was改成were。<code>if I were boy</code> 这首歌的歌词用的就是were，也是对现在的虚拟，因为歌手是女的呀</p>
 <p><img src="http://img.gagahappy.cn/blog/2020/05/eng-grammar-were.jpg_b1" alt="发现一个关于虚拟语句很好的例句" title="发现一个关于虚拟语句很好的例句"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/if-you-understand-a-bug/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/huitailang.jpg">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月飞天膏药">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/if-you-understand-a-bug/" class="post-title-link" itemprop="url">If You Understand a Bug</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-04-28 19:26:19" itemprop="dateCreated datePublished" datetime="2020-04-28T19:26:19+08:00">2020-04-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/journal/" itemprop="url" rel="index"><span itemprop="name">日志</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="http://img.gagahappy.cn/blog/2020/04/if-you-understand-a-bug.jpg_b1" alt="If you understand a bug" title="If you understand a bug"></p>
 
       
     </div>
