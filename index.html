@@ -1319,7 +1319,7 @@
 <li>所以 x 结构体的内存 分布是: x.a(1)____空洞(1)____x.b(2)____空洞(4)____x.c(24)</li>
 <li>对齐方式：按一个机器字对齐的</li>
 </ul>
-<p><img src="http://img.gagahappy.cn/blog/2021/05/layout-of-struct.png_b1" alt="layout of struck" title="layout of struck"></p>
+<p><img src="//img.gagahappy.cn/blog/2021/05/layout-of-struct.png_b1" alt="layout of struck" title="layout of struck"></p>
 <h1 id="结构体字段顺序"><a href="#结构体字段顺序" class="headerlink" title="结构体字段顺序"></a>结构体字段顺序</h1><p>Go 语言中，结构内部字段的声明顺序和它们在内存中的顺序可能是不一样的。一个编译器可以随意地重新排列每个字段的内存位置，有效的包装可以使数据结构更加紧凑，从而节省内存空间</p>
 <h2 id="内存占用"><a href="#内存占用" class="headerlink" title="内存占用"></a>内存占用</h2><p>不同结构体相同字段占用内存大小也会不一样，虽然 s1，s2，s3 有着相同的字段，但s1占用了较多的内存空间</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">struct</span> &#123;a <span class="keyword">bool</span>;b <span class="keyword">float64</span>;c <span class="keyword">int16</span>&#125;&#123;&#125; <span class="comment">// 3 words</span></span><br><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">struct</span> &#123;a <span class="keyword">float64</span>;b <span class="keyword">int16</span>;c <span class="keyword">bool</span>&#125;&#123;&#125; <span class="comment">// 2 words</span></span><br><span class="line"><span class="keyword">var</span> s3 = <span class="keyword">struct</span> &#123;a <span class="keyword">bool</span>;b <span class="keyword">int16</span>;c <span class="keyword">float64</span>&#125;&#123;&#125; <span class="comment">// 2 words</span></span><br></pre></td></tr></table></figure>
@@ -1617,9 +1617,9 @@
     <div class="post-body" itemprop="articleBody">
           <h1 id="合并还是变基"><a href="#合并还是变基" class="headerlink" title="合并还是变基"></a>合并还是变基</h1><p>合并分支时，应使用<code>rebase</code>合并分支而不是使用<code>merge</code></p>
 <h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p>在分支很多的时候，<code>merge</code>会使提交变得异常混乱，查找某个提交会非常不好找，即使使用图形工具，也无法快速的查找，如果想退到某次提交更是难上加难。<code>merge</code>即使删除了合并过来的分支，其合并轨迹也依然被保留，所以还是很乱。</p>
-<p><img src="http://img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-merge.png_b1" alt="git merge" title="git merge"></p>
+<p><img src="//img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-merge.png_b1" alt="git merge" title="git merge"></p>
 <h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><p>在分支很多的时候，不会产生很多的分支线，实践中应该就只有<code>master</code>,<code>release</code>等分支线，功能分支线在合并到<code>master</code> 上后都被删除，这样提交基本都在一条线上，十分清楚整洁。</p>
-<p><img src="http://img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-rebase.png_b1" alt="git rebase" title="git rebase"></p>
+<p><img src="//img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-rebase.png_b1" alt="git rebase" title="git rebase"></p>
 <h1 id="使用rebase合并分支"><a href="#使用rebase合并分支" class="headerlink" title="使用rebase合并分支"></a>使用rebase合并分支</h1><h2 id="场景分析："><a href="#场景分析：" class="headerlink" title="场景分析："></a>场景分析：</h2><p>功能<code>feature1</code>与<code>feature2</code>都在开发，<code>feature1</code>先上线，合并到了master，此时，<code>feature2</code>不应使用<code>merge</code>对<code>master</code>进行合并操作，而是使用<code>rebase</code>进行合并</p>
 <ul>
 <li><p>master上的提交有：<code>[m1, m2, m3]</code></p>
