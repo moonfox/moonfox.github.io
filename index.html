@@ -89,9 +89,9 @@
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">61</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">451</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">452</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,91 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/safari-favicon-setting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/safari-favicon-setting/" class="post-title-link" itemprop="url">Safari 网站图标 favicon 不显示</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-22 15:26:43" itemprop="dateCreated datePublished" datetime="2021-06-22T15:26:43+08:00">2021-06-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="favicon图标不显示"><a href="#favicon图标不显示" class="headerlink" title="favicon图标不显示"></a><code>favicon</code>图标不显示</h1><p>发现博客的<code>favicon</code>图标一直不能在<code>safari</code> 的标签栏上显示，只能显示在地址栏，经过一番研究后发现是Hexo 的 Next主题的设置不正确造成的</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/favicon-16x16.png</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/favicon-32x32.png</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/apple-touch-icon.png</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 不能把 safari_pinned_tab 注释掉，只能留空，表示不启用,</span></span><br><span class="line">  <span class="comment"># 注释掉会默认使用 next 主题中的设置.</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 注意: &lt;link rel=&quot;mask-icon&quot; href=&quot;logo.svg&quot;&gt; 会覆盖</span></span><br><span class="line">  <span class="comment"># &lt;link rel=&quot;icon&quot; href=&quot;favicon.png&quot;&gt; 导致safari favicon图标被替换为logo.svg</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span></span><br></pre></td></tr></table></figure>
+
+<p><code>small</code>与<code>medium</code>会生成两个与<code>favicon</code>相关的设置，用来在地址栏与标签栏显示网站图标</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/png&quot;</span> <span class="attr">sizes</span>=<span class="string">&quot;32x32&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/favicon-32x32.png&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/png&quot;</span> <span class="attr">sizes</span>=<span class="string">&quot;16x16&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/favicon-16x16.png&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>safari_pinned_tab</code>会生成<code>&lt;link rel=&quot;mask-icon&quot; href=&quot;logo.svg&quot;&gt;</code>，它会覆盖标签栏上的<code>favicon</code>图标，由于在设置这个属性的时候，错误的使用了非<code>svg</code>文件(用的是png)导致了图标不能正确显示。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>设置正确的<code>svg</code>文件，或者就不设置<code>&lt;link rel=&quot;mask-icon&quot;&gt;</code>属性，只使用<code>&lt;link rel=&quot;icon&quot; &gt;</code>设置<code>favicon</code>图标即可。如果不设置<code>&lt;link rel=&quot;mask-icon&quot;&gt;</code>属性，需要在配置文件中把<code>safari_pinned_tab</code>的值留空，而不是不设置或注释掉，这样做会使用next 主题中的默认设置，造成<code>favicon</code>图标显示为Next官网的图标</p>
+<h1 id="关于safari缓存图标的问题"><a href="#关于safari缓存图标的问题" class="headerlink" title="关于safari缓存图标的问题"></a>关于<code>safari</code>缓存图标的问题</h1><p><code>safari</code>会对图标按域名进行缓存，从而造成更新图标后不能马上更新显示的问题，需要对缓存的图标进行清理。</p>
+<ul>
+<li>首先要清理它的缓存：<code>setting</code>-&gt;<code>privacy</code>-&gt;<code>Manage Website Date</code>，搜索相关域名，删除即可。</li>
+<li>磁盘缓存文件：<code>~/Library/Safari</code>目录下，删除<code>Template Icons</code>文件夹，如果不起作用，删除<code>Favicon Cache</code>，<code>Touch Icons Cache</code>文件夹</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -951,85 +1036,6 @@
 <p>2. 格式化参数<code>%q</code>直接对0值进行了输出<code>hello\x00\x00\x00A\x00</code>，它打印了<code>string</code>中的每一个字节，包括不可打印的字节</p>
 <p>3. <code>str + &quot; world&quot;</code>的长度为16，也证明了<code>str</code>中的0值没有被去除(10 + 6 = 16)</p>
 <p>4.使用<code>fmt</code>查看数据”长什么样子”有时候是不准确的</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-io-writer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-io-writer/" class="post-title-link" itemprop="url">Go 语言 io.Writer 接口</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-04 14:46:58" itemprop="dateCreated datePublished" datetime="2021-06-04T14:46:58+08:00">2021-06-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="io-Writer接口实现要求"><a href="#io-Writer接口实现要求" class="headerlink" title="io.Writer接口实现要求"></a><code>io.Writer</code>接口实现要求</h1><p>开始以为只是实现了<code>Write</code>方法就行，看了源码发现还有很多细节上的要求</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/io/io.go</span></span><br><span class="line"><span class="keyword">type</span> Writer <span class="keyword">interface</span> &#123;</span><br><span class="line">	Write(p []<span class="keyword">byte</span>) (n <span class="keyword">int</span>, err error)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>1.要把 <code>p</code>写入实现类型的底层数据中</p>
-<p>2.要返回实际写入的长度和在写入时遇到的错误，如果实际写入的长度小于<code>len(p)</code>，返回的<code>err</code>必须是非<code>nil</code>的</p>
-<p>3. <code>p</code>不能在方法内部被修改，即使临时性的也不可以</p>
-<p>4. 不能对<code>p</code>进行保存</p>
 
       
     </div>

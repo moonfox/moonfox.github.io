@@ -89,9 +89,9 @@
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">61</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">451</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">452</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,119 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-auto-increment/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/mysql-auto-increment/" class="post-title-link" itemprop="url">MySQL自增值不能回退</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-12 20:11:32" itemprop="dateCreated datePublished" datetime="2021-01-12T20:11:32+08:00">2021-01-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>MySql 主键不连续的原因之一是自增值不能回退</p>
+<p>设当前自增值=2，此时并发两个事务T1,T2。T1先申请到自增值，插入ID=3，自增值更为4</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Tx1</th>
+<th>Tx2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>申请到自增值=2，set id =2, 更新自增值=3</td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td>插入数据失败</td>
+<td>申请到自增值=3，set id=3，更新自增值=4</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>如果让自增值回退到=2</td>
+<td>插入数据成功</td>
+</tr>
+<tr>
+<td>T4</td>
+<td>申请到自增值=2，set id =2, 更新自增值=3</td>
+<td></td>
+</tr>
+<tr>
+<td>T5</td>
+<td>插入数据成功</td>
+<td>申请到自增值=3，set id=3，更新自增值=4</td>
+</tr>
+<tr>
+<td>T6</td>
+<td></td>
+<td>插入数据失败，插入语句报错“主键冲突” id=3已经存在</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1020,103 +1133,6 @@
 </ol>
 <p>  对于场景二： 使用<code>git rebase</code>可能出现冲突（感觉不应该出现冲突的，对此不是很理解，难道是因为丢弃D后使查找链C-D-E-F断裂造成git认为这两个commit需要合并，是因为E无法知道C是它的祖先吗）</p>
 <p>  在解决冲突后，使用<code>git rebase --continue</code>完成rebase操作</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/aws-s3-sync-and-hexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/aws-s3-sync-and-hexo/" class="post-title-link" itemprop="url">让Aws S3 只同步 Hexo 内容有变化的文件</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-06-06 12:55:25" itemprop="dateCreated datePublished" datetime="2018-06-06T12:55:25+08:00">2018-06-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>发现Aws S3 sync 在同步Hexo 生成的网站内容时，几乎总是同步所有文件，那些内容没有发生改变但文件最后修改时间发生改变的文件也被同步了，造成了Aws S3写操作流量的浪费，原因如下</p>
-<ol>
-<li><p>Aws S3 sync 命令的同步的策略</p>
-</li>
-<li><p>判断文件大小是否发生变化</p>
-</li>
-<li><p>比较文件最后的修改日期</p>
-</li>
-</ol>
-<p>  如果某个文件的这两项中的其中一项发生变化，则这个文件被同步<br>2. Hexo生成文章</p>
-<p>  即使仅更新一篇文章，使用<code>hexo g</code>命令后，几乎所有文件的最后修改时间都被更新了。目前来看，Hexo更新内容的算法还有待改进，有些地方还是有优化空间的</p>
-<p>由于以上两点，造成了Aws S3写流量的浪费</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>只同步内容有改变的文件</p>
-<ol>
-<li>通过<code>git diff</code> 命令找出此次提交发生变化的文件。这里不用<code>git log</code>的原因是log命令会有多余的输出，不利于后面编写脚本</li>
-<li>使用<code>aws s3 cp</code>把发生变化的文件同步到Aws S3，这样就大大节省了Aws S3写操作的流量</li>
-</ol>
-<h3 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">git diff HEAD~1 HEAD --<span class="built_in">stat</span> --name-only | awk <span class="string">&#x27;&#123;cmd=&quot;aws s3 cp &quot;$1&quot; s3://your-butket/&quot;$1&quot; --exclude &#x27;</span>.gitignore<span class="string">&#x27;&quot;;system(cmd)&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>放到项目根目录执行，此脚本只会同步那些内容有修改的文件，内容没有修改，但最后修改时间被更新的文件不会被同步，大大节省了Aws S3的写流量</p>
-<h3 id="后记，奇怪的git-diff输出"><a href="#后记，奇怪的git-diff输出" class="headerlink" title="后记，奇怪的git diff输出"></a>后记，奇怪的git diff输出</h3><p>发现<code>git diff --stat</code>输出时，如果输出到屏幕，那些长路径名是可以正常显示的，但如果输出到文件，则长路径就会被省略显示。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 长路径名</span></span><br><span class="line">looooooooooong_path_name/index.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在输出到屏幕时是可以正常显示的</span></span><br><span class="line">&gt; git diff --<span class="built_in">stat</span></span><br><span class="line">&gt; looooooooooong_path_name/index.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># 但如果输出到文件，路径名就变成了:&quot;.../index.html&quot;</span></span><br><span class="line">&gt; git diff --<span class="built_in">stat</span> &gt; diff.log</span><br><span class="line">&gt; cat diff.log</span><br><span class="line">&gt; .../index.html</span><br></pre></td></tr></table></figure>
-
-<p>为了解决这个问题，需要执行 <code>git diff --stat --name-only</code>， 输出到文件也可以正常显示长路径名了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; git diff --<span class="built_in">stat</span> --name-only &gt; diff.log</span><br><span class="line">&gt; cat diff.log</span><br><span class="line">&gt; looooooooooong_path_name/index.html</span><br></pre></td></tr></table></figure>
 
       
     </div>

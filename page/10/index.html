@@ -89,9 +89,9 @@
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">61</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">451</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">452</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,80 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/thoughtful-ruby-block-and-variable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/thoughtful-ruby-block-and-variable/" class="post-title-link" itemprop="url">ruby 块与局部变量绑定的思考</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-03-26 20:56:48" itemprop="dateCreated datePublished" datetime="2015-03-26T20:56:48+08:00">2015-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>文章已经修改，之前的结论有误，现已经修改</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 重要结论:</span></span><br><span class="line"><span class="comment"># 1、块绑定局部变量的时间:在块被定义的时开始绑定的,绑定局部变量只是名子绑定,块内绑定的同名局部变量的值还可以在块外被修改</span></span><br><span class="line"><span class="comment">#（在块绑定局部变量后，如果块外部的同名局部变量改变了其值，则块中绑定的同名变量的值会被改变）</span></span><br><span class="line"><span class="comment"># 以下测试的局部绑定都证明了绑定是从块被定义时开始的</span></span><br><span class="line"><span class="comment"># 2、注意那些在块中初始化的变量，是否这些变量也出现在块定义外部的前后，不同位置的同名局部变量会对块内的变量产生不同的影响</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标1:</span></span><br><span class="line"><span class="comment"># 测试方法中的局部变量firstname,lastname是否会影响到块中的被绑定的同名变量的值</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、块会绑定局部变量firstname,lastname,把它们以块的方式传到my_method方法</span></span><br><span class="line"><span class="comment"># 它们的值不会受到方法中同名变量的影响（闭包特性）</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="built_in">lambda</span> &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  myname = <span class="built_in">lambda</span> &#123; <span class="params">|say|</span> puts <span class="string">&quot;test1: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span>&quot;</span> &#125;</span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Black</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># &lt;!-- more --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标2:</span></span><br><span class="line"><span class="comment"># 1、测试块可以绑定局部变量的范围</span></span><br><span class="line"><span class="comment"># 2、在块后面出现的局部变量是否会覆盖其块内已经绑定的同名局部变量的值（块中已经绑定的局部变量的值是否会被改变）</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、块会绑定在它定义时出现在它前面的局部变量firstname,lastname.</span></span><br><span class="line"><span class="comment"># 2、块中last变量的值为lastname=&quot;wang&quot;，因为块在定义时绑定了lastname,块中同名的lastname对上下文中的其它成员</span></span><br><span class="line"><span class="comment"># 是可见的，所以对局部变量赋值lastname=&quot;Wang&quot;，也就改变了块内lastname的值。它覆盖了前面lastname=&quot;Black&quot;的值。</span></span><br><span class="line"><span class="comment"># 3、局部变量lastname＝&quot;Green&quot;出现在块被调用以后，块调用在赋值语句之前执行，对lastname=&quot;Green&quot;的赋值不会影响到</span></span><br><span class="line"><span class="comment"># 块内部的同名变量lastname,此时块内部的lastname＝&quot;wang&quot;</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="built_in">lambda</span> &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  myname = <span class="built_in">lambda</span> &#123; <span class="params">|say|</span> puts <span class="string">&quot;test2: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span>&quot;</span> &#125;</span><br><span class="line">  lastname = <span class="string">&quot;Wang&quot;</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Wang</span></span><br><span class="line">  lastname = <span class="string">&quot;Green&quot;</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标3:</span></span><br><span class="line"><span class="comment"># 测试在块中定义的已经初始化的变量的值是否受外部的同名局部变量值的影响:(局部变量的定义在块定义的前面)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、局部变量不能影响块中同名变量的值</span></span><br><span class="line"><span class="comment"># 2、局部变量的值会随块中同名变量的值在执行过程中的改变而改变,day_changed的值为被改变的值:Mon</span></span><br><span class="line"><span class="comment"># 3、发生1、2情况的原因是，在块被执行时，它会先看到块内的say=&quot;Mon&quot;，而不再去看被绑定的局部变量say的值(&quot;Sun&quot;)</span></span><br><span class="line"><span class="comment"># 因为局部变量day已经被绑定到块，块中的day对其上下文可见，在块执行后，块中同名变量day的值会改变局部</span></span><br><span class="line"><span class="comment"># 变量day的值，此时局部变量day的值为&quot;Mon&quot;</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="built_in">lambda</span> &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  day = <span class="string">&quot;Sun&quot;</span></span><br><span class="line">  myname = <span class="built_in">lambda</span> &#123; <span class="params">|say|</span> day = <span class="string">&quot;Mon&quot;</span>; puts <span class="string">&quot;test3: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span> at <span class="subst">#&#123;day&#125;</span>&quot;</span>&#125;</span><br><span class="line">  <span class="comment">#day = &quot;Sun&quot;</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  day_changed = day</span><br><span class="line">  puts <span class="string">&quot;test3: day:<span class="subst">#&#123;day_changed&#125;</span>&quot;</span></span><br><span class="line">  <span class="comment"># day = &quot;Wed&quot;</span></span><br><span class="line">  <span class="comment"># my_method &amp;myname #＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  <span class="comment"># day_changed = day</span></span><br><span class="line">  <span class="comment"># puts &quot;test3: day:#&#123;day_changed&#125;&quot;</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 目标4:</span></span><br><span class="line"><span class="comment"># 测试在块中定义的已经初始化的变量的值是否受外部的同名局部变量值的影响:(局部变量的定义在块定义的后面)</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="comment"># 结论</span></span><br><span class="line"><span class="comment"># 1、最终的值是块中变量的值，局部变量不能影响块中同名变量的值</span></span><br><span class="line"><span class="comment"># 2、局部变量的值会不随块中同名变量的值在执行过程中的改变而改变,day_changed的值:Sun</span></span><br><span class="line"><span class="comment"># 3、发生1、2情况的原因是：因为day局部变量的定义出现在块定义的后面，这就导致了块根本没有绑定day这个局部变量</span></span><br><span class="line"><span class="comment"># 块内的变量day是块内部附加的变量，此时块内部的day与块外部的day没有任何关系</span></span><br><span class="line"><span class="comment"># =============================</span></span><br><span class="line"><span class="built_in">lambda</span> &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">my_method</span></span></span><br><span class="line">    firstname = <span class="string">&quot;Maria&quot;</span></span><br><span class="line">    lastname = <span class="string">&quot;Sharapova&quot;</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&quot;Hi! I&#x27;m&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  firstname = <span class="string">&quot;Max&quot;</span></span><br><span class="line">  lastname = <span class="string">&quot;Black&quot;</span></span><br><span class="line">  <span class="comment"># day = &quot;Sun&quot;</span></span><br><span class="line">  myname = <span class="built_in">lambda</span> &#123; <span class="params">|say|</span> day = <span class="string">&quot;Mon&quot;</span>; puts <span class="string">&quot;test4: <span class="subst">#&#123;say&#125;</span> <span class="subst">#&#123;firstname&#125;</span> <span class="subst">#&#123;lastname&#125;</span> at <span class="subst">#&#123;day&#125;</span>&quot;</span>&#125;</span><br><span class="line">  day = <span class="string">&quot;Sun&quot;</span></span><br><span class="line">  my_method &amp;myname <span class="comment">#＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  day_changed = day</span><br><span class="line">  puts <span class="string">&quot;test4: day:<span class="subst">#&#123;day_changed&#125;</span>&quot;</span></span><br><span class="line">  <span class="comment"># day = &quot;Wed&quot;</span></span><br><span class="line">  <span class="comment"># my_method &amp;myname #＝&gt; Hi! I&#x27;m Max Black at Mon</span></span><br><span class="line">  <span class="comment"># day_changed = day</span></span><br><span class="line">  <span class="comment"># puts &quot;test5: day:#&#123;day_changed&#125;&quot; # =&gt; Web</span></span><br><span class="line">&#125;.call</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -845,80 +919,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>在日志文件中的操作记录应该具有幂等性。幂等性，就是说同一个操作执行多次和执行一次，结果是一样的。例如，5<em>1 = 5</em>1<em>1</em>1，所以对5的乘1操作具有幂等性。日志文件在故障恢复中，可能会回放多次（比如第一次回放到一半时系统断电了，不得不再重新回放），如果操作记录不满足幂等性，会造成数据错误。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/a-part-of-innodb-star-log/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/a-part-of-innodb-star-log/" class="post-title-link" itemprop="url">innodb启动日志</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-03-15 23:36:18" itemprop="dateCreated datePublished" datetime="2015-03-15T23:36:18+08:00">2015-03-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>innodb启动日志</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">23:24:30 28434 [Note] Plugin &#39;FEDERATED&#39; is disabled.</span><br><span class="line">23:24:30 28434 [Note] InnoDB: The InnoDB memory heap is disabled</span><br><span class="line">23:24:30 28434 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins</span><br><span class="line">23:24:30 28434 [Note] InnoDB: Compressed tables use zlib 1.2.3</span><br><span class="line">23:24:30 28434 [Note] InnoDB: Using CPU crc32 instructions</span><br><span class="line">23:24:30 28434 [Note] InnoDB: Initializing buffer pool, size &#x3D; 128.0M</span><br><span class="line">23:24:30 28434 [Note] InnoDB: Completed initialization of buffer pool</span><br><span class="line">23:24:30 28434 [Note] InnoDB: Highest supported file format is Barracuda.</span><br><span class="line">23:24:30 28434 [Note] InnoDB: 128 rollback segment(s) are active.</span><br><span class="line">23:24:30 28434 [Note] InnoDB: Waiting for purge to start</span><br><span class="line">23:24:30 28434 [Note] InnoDB: 5.6.13 started; log sequence number 1287659157</span><br><span class="line">23:24:30 28434 [Note] Server hostname (bind-address): &#39;127.0.0.1&#39;; port: 3306</span><br><span class="line">23:24:30 28434 [Note]   - &#39;127.0.0.1&#39; resolves to &#39;127.0.0.1&#39;;</span><br><span class="line">23:24:30 28434 [Note] Server socket created on IP: &#39;127.0.0.1&#39;.</span><br><span class="line">23:24:30 28434 [Note] Event Scheduler: Loaded 0 events</span><br><span class="line"></span><br><span class="line">-- 可以获取不少有用的信息，如file format is Barracuda.说明了支持的行格式的兼容情况。</span><br></pre></td></tr></table></figure>
 
       
     </div>

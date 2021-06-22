@@ -15,8 +15,37 @@
     <atom:link href="https://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby</description>
-    <pubDate>Thu, 17 Jun 2021 15:49:19 GMT</pubDate>
+    <pubDate>Tue, 22 Jun 2021 08:18:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Safari 网站图标 favicon 不显示</title>
+      <link>https://www.gagahappy.com/safari-favicon-setting/</link>
+      <guid>https://www.gagahappy.com/safari-favicon-setting/</guid>
+      <pubDate>Tue, 22 Jun 2021 07:26:43 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;favicon图标不显示&quot;&gt;&lt;a href=&quot;#favicon图标不显示&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="favicon图标不显示"><a href="#favicon图标不显示" class="headerlink" title="favicon图标不显示"></a><code>favicon</code>图标不显示</h1><p>发现博客的<code>favicon</code>图标一直不能在<code>safari</code> 的标签栏上显示，只能显示在地址栏，经过一番研究后发现是Hexo 的 Next主题的设置不正确造成的</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/favicon-16x16.png</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/favicon-32x32.png</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/apple-touch-icon.png</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 不能把 safari_pinned_tab 注释掉，只能留空，表示不启用,</span></span><br><span class="line">  <span class="comment"># 注释掉会默认使用 next 主题中的设置.</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 注意: &lt;link rel=&quot;mask-icon&quot; href=&quot;logo.svg&quot;&gt; 会覆盖</span></span><br><span class="line">  <span class="comment"># &lt;link rel=&quot;icon&quot; href=&quot;favicon.png&quot;&gt; 导致safari favicon图标被替换为logo.svg</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span></span><br></pre></td></tr></table></figure><p><code>small</code>与<code>medium</code>会生成两个与<code>favicon</code>相关的设置，用来在地址栏与标签栏显示网站图标</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/png&quot;</span> <span class="attr">sizes</span>=<span class="string">&quot;32x32&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/favicon-32x32.png&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/png&quot;</span> <span class="attr">sizes</span>=<span class="string">&quot;16x16&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/favicon-16x16.png&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure><p><code>safari_pinned_tab</code>会生成<code>&lt;link rel=&quot;mask-icon&quot; href=&quot;logo.svg&quot;&gt;</code>，它会覆盖标签栏上的<code>favicon</code>图标，由于在设置这个属性的时候，错误的使用了非<code>svg</code>文件(用的是png)导致了图标不能正确显示。</p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>设置正确的<code>svg</code>文件，或者就不设置<code>&lt;link rel=&quot;mask-icon&quot;&gt;</code>属性，只使用<code>&lt;link rel=&quot;icon&quot; &gt;</code>设置<code>favicon</code>图标即可。如果不设置<code>&lt;link rel=&quot;mask-icon&quot;&gt;</code>属性，需要在配置文件中把<code>safari_pinned_tab</code>的值留空，而不是不设置或注释掉，这样做会使用next 主题中的默认设置，造成<code>favicon</code>图标显示为Next官网的图标</p><h1 id="关于safari缓存图标的问题"><a href="#关于safari缓存图标的问题" class="headerlink" title="关于safari缓存图标的问题"></a>关于<code>safari</code>缓存图标的问题</h1><p><code>safari</code>会对图标按域名进行缓存，从而造成更新图标后不能马上更新显示的问题，需要对缓存的图标进行清理。</p><ul><li>首先要清理它的缓存：<code>setting</code>-&gt;<code>privacy</code>-&gt;<code>Manage Website Date</code>，搜索相关域名，删除即可。</li><li>磁盘缓存文件：<code>~/Library/Safari</code>目录下，删除<code>Template Icons</code>文件夹，如果不起作用，删除<code>Favicon Cache</code>，<code>Touch Icons Cache</code>文件夹</li></ul>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/software/">软件</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/safari/">safari</category>
+      
+      
+      <comments>https://www.gagahappy.com/safari-favicon-setting/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Go 语言 程序性能分析</title>
@@ -132,36 +161,6 @@
       
       
       <comments>https://www.gagahappy.com/ruby-character-to-ascii/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Go 语言 bufio.Peek 源码</title>
-      <link>https://www.gagahappy.com/golang-bufio-reader-peek/</link>
-      <guid>https://www.gagahappy.com/golang-bufio-reader-peek/</guid>
-      <pubDate>Tue, 08 Jun 2021 07:03:58 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt; &lt;code&gt;bufio.Peek(n)&lt;/code&gt;返回前N个未读字节 ，不会更改已读计数的值。在方法调用后，要查看返回参数&lt;code&gt;error&lt;/code&gt;是否为nil，以确保操作满足要求&lt;/p&gt;
-&lt;figure class=&quot;highlight</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p> <code>bufio.Peek(n)</code>返回前N个未读字节 ，不会更改已读计数的值。在方法调用后，要查看返回参数<code>error</code>是否为nil，以确保操作满足要求</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *Reader)</span> <span class="title">Peek</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line"><span class="keyword">if</span> n &lt; <span class="number">0</span> &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">nil</span>, ErrNegativeCount</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">b.lastByte = <span class="number">-1</span></span><br><span class="line">b.lastRuneSize = <span class="number">-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当未读字节数小于n，且缓冲区不满(b.w-b.r &lt; len(b.buf))，</span></span><br><span class="line"><span class="comment">// 即缓冲区中从头到尾必须都是未读字节才算是缓冲区已经满</span></span><br><span class="line"><span class="comment">// 且 b.err 为nil，这三者都满足时，开始调用b.fill()填充缓冲区</span></span><br><span class="line"><span class="comment">// fill()方法会把未读数据移动到缓冲区头部，并把后面空出来的部分写满</span></span><br><span class="line"><span class="comment">// for 保证了至少可以把缓冲区填满</span></span><br><span class="line"><span class="keyword">for</span> b.w-b.r &lt; n &amp;&amp; b.w-b.r &lt; <span class="built_in">len</span>(b.buf) &amp;&amp; b.err == <span class="literal">nil</span> &#123;</span><br><span class="line">b.fill() <span class="comment">// b.w-b.r &lt; len(b.buf) =&gt; buffer is not full</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当要读取的字节数大于缓冲区长度时，返回所有未读节字，并附带错误信息</span></span><br><span class="line"><span class="keyword">if</span> n &gt; <span class="built_in">len</span>(b.buf) &#123;</span><br><span class="line"><span class="keyword">return</span> b.buf[b.r:b.w], ErrBufferFull</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0 &lt;= n &lt;= len(b.buf)</span></span><br><span class="line"><span class="keyword">var</span> err error</span><br><span class="line"><span class="comment">// 当要读取的字节数大于所有未读节字数时，返回所有未读节字，并附带错误信息</span></span><br><span class="line"><span class="keyword">if</span> avail := b.w - b.r; avail &lt; n &#123;</span><br><span class="line"><span class="comment">// not enough data in buffer</span></span><br><span class="line">n = avail</span><br><span class="line">err = b.readErr()</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">err = ErrBufferFull</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 当 n 小于 未读字节数时，程序直接跳到这里</span></span><br><span class="line"><span class="keyword">return</span> b.buf[b.r : b.r+n], err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
-      
-      
-      <comments>https://www.gagahappy.com/golang-bufio-reader-peek/#disqus_thread</comments>
       
     </item>
     
