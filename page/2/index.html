@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">452</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">453</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,85 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-fmt-string-with-zerovalue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-fmt-string-with-zerovalue/" class="post-title-link" itemprop="url">Go 语言 fmt对string中零值的处理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-05 14:32:08" itemprop="dateCreated datePublished" datetime="2021-06-05T14:32:08+08:00">2021-06-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>fmt</code>格式化含有0值的<code>string</code>时，是如何显示的</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	buf := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">10</span>)</span><br><span class="line">	buf[<span class="number">8</span>] = <span class="string">&#x27;A&#x27;</span></span><br><span class="line">	<span class="built_in">copy</span>(buf, []<span class="keyword">byte</span>(<span class="string">&quot;hello&quot;</span>))</span><br><span class="line">	fmt.Printf(<span class="string">&quot;cap(%d),len(%d)\n&quot;</span>, <span class="built_in">cap</span>(buf), <span class="built_in">len</span>(buf))</span><br><span class="line">	fmt.Println(<span class="string">&quot;buf:&quot;</span>, buf)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;buf:%q\n&quot;</span>, buf)</span><br><span class="line">	fmt.Println(<span class="string">&quot;buf:&quot;</span>, <span class="keyword">string</span>(buf))</span><br><span class="line"></span><br><span class="line">	str := <span class="keyword">string</span>(buf)</span><br><span class="line">	str = str + <span class="string">&quot; world&quot;</span></span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(str)) <span class="comment">// =&gt; 16</span></span><br><span class="line">	fmt.Println(str)      <span class="comment">// =&gt; helloA world</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* output</span></span><br><span class="line"><span class="comment">cap(10),len(10)</span></span><br><span class="line"><span class="comment">buf: [104 101 108 108 111 0 0 0 65 0]</span></span><br><span class="line"><span class="comment">buf:&quot;hello\x00\x00\x00A\x00&quot;</span></span><br><span class="line"><span class="comment">buf: helloA</span></span><br><span class="line"><span class="comment">16</span></span><br><span class="line"><span class="comment">helloA world</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>1. 使用<code>fmt</code>打印<code>string(buf)</code>虽然显示为<code>helloA</code>，看上去字符数变少了，只有6个(0值没有显示，其<code>ascii码</code>是不可打印码)，但底层数据没变，依然是<code>[104 101 108 108 111 0 0 0 65 0]</code></p>
+<p>2. 格式化参数<code>%q</code>直接对0值进行了输出<code>hello\x00\x00\x00A\x00</code>，它打印了<code>string</code>中的每一个字节，包括不可打印的字节</p>
+<p>3. <code>str + &quot; world&quot;</code>的长度为16，也证明了<code>str</code>中的0值没有被去除(10 + 6 = 16)</p>
+<p>4.使用<code>fmt</code>查看数据”长什么样子”有时候是不准确的</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1077,123 +1156,6 @@
 <p>子 gor 快，则 <code>log.Println(&quot;done in sub goroutine&quot;)</code> 不能被执行</p>
 </li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-recordlock-2phase/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/mysql-recordlock-2phase/" class="post-title-link" itemprop="url">MySQL 行锁两阶段</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-02-16 19:19:23" itemprop="dateCreated datePublished" datetime="2021-02-16T19:19:23+08:00">2021-02-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h1><p>优点：</p>
-<p>比起表锁，可以支持更大的并发</p>
-<h1 id="行锁的实现"><a href="#行锁的实现" class="headerlink" title="行锁的实现"></a>行锁的实现</h1><p>由存储引擎自已实现，每个存储引擎实现的方式都不一样</p>
-<p> MyISAM 引擎不支持行锁</p>
-<h1 id="两阶段锁"><a href="#两阶段锁" class="headerlink" title="两阶段锁"></a>两阶段锁</h1><p>在更新数据时，需要对数据所在行加锁，但更新数据完成后，锁并不会马上释放，而是要等到事务提交才释放</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table t_07_recordlock(</span><br><span class="line">	id int not null auto_increment primary key,</span><br><span class="line">  c int,</span><br><span class="line">  d int,</span><br><span class="line"> 	key c (c)</span><br><span class="line">) engine&#x3D;innodb;</span><br><span class="line"></span><br><span class="line">insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Session A</th>
-<th>Session B</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>T1</td>
-<td>Begin;</td>
-<td>begin;</td>
-</tr>
-<tr>
-<td>T2</td>
-<td>update t_07_recordlock set d=d+1 where id = 1;</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>update t_07_recordlock set d=d+1 where id = 2;</td>
-<td></td>
-</tr>
-<tr>
-<td>T3</td>
-<td></td>
-<td>update t_07_recordlock set d=d+1 where id = 1;</td>
-</tr>
-<tr>
-<td>T4</td>
-<td>Commit</td>
-<td></td>
-</tr>
-</tbody></table>
-<ul>
-<li>T2时刻，SessionA已经完成了对两行数据的更新，但没有提交</li>
-<li>T3时候，SessionB对id=1的行进行更新，由于Session A没有提交，其依然持有id=1上的写锁，与Session B要加的写锁互斥，所以SessionB被阻塞，直到Session A提交，释放锁，才能对执行更新语句</li>
-</ul>
 
       
     </div>

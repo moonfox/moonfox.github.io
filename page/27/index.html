@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">452</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">453</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,99 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/fedora-14-install-nvidia-drives/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/fedora-14-install-nvidia-drives/" class="post-title-link" itemprop="url">Fedora 14  安装 NVIDIA 显卡驱</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2011-04-12 21:26:39" itemprop="dateCreated datePublished" datetime="2011-04-12T21:26:39+08:00">2011-04-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/os/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>首先，安装 RPM Fusion 软件仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su -c <span class="string">&#x27;rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm&#x27;</span></span><br><span class="line">su -c <span class="string">&#x27;rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm&#x27;</span></span><br><span class="line">su -c <span class="string">&#x27;yum update&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>然后，安装 NVIDIA 显卡驱动</p>
+<ol>
+<li>确定显卡类型（当然，如果你知道你的显卡类型，就没必要执行这一步了）<br><code>su -c &#39;/sbin/lspci | grep VGA&#39;</code></li>
+<li>安装nvidia驱动<blockquote>
+<ul>
+<li>如果是 GeForce 6, 7, 8, 9, 200, 300, 400 &amp; 500 系列显卡：<br><code>su -c &#39;yum install kmod-nvidia xorg-x11-drv-nvidia-libs&#39;</code></li>
+<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-PAE&#39;</code></li>
+<li>或者：<br><code>su -c &#39;yum install akmod-nvidia xorg-x11-drv-nvidia-libs&#39;</code></li>
+<li>如果是 GeForce Fx 显卡：<br>yum install kmod-nvidia-173xx xorg-x11-drv-nvidia-173xx-libs</li>
+<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-173xx-PAE&#39;</code></li>
+<li>或者：<br><code>su -c &#39;yum install akmod-nvidia-173xxxorg-x11-drv-nvidia-173xx-libs&#39;</code></li>
+<li>如果是 GeForce 4 或者更低系列的显卡：<br><code>su -c &#39;yum install kmod-nvidia-96xx</code> xorg-x11-drv-nvidia-96xx-libs’</li>
+<li>如果你使用内核的是 PAE 内核：<br><code>su -c &#39;yum install kmod-nvidia-96xx-PAE&#39;</code></li>
+<li>或者：<br><code>su -c &#39;yum install akmod-nvidia-96xxxorg-x11-drv-nvidia-96xx-libs&#39;</code></li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<p>最后，重启系统</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -885,95 +978,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/ten-chrome-shortcut-keys/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ten-chrome-shortcut-keys/" class="post-title-link" itemprop="url">Chrome 快捷键</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2011-03-02 12:48:16" itemprop="dateCreated datePublished" datetime="2011-03-02T12:48:16+08:00">2011-03-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li>Alt+F 或 Alt+E – 打开扳手工具菜单，之后就可以用上下箭头键来进入你想要的功能了</li>
-<li>Ctrl+Shift+B — 切换收藏工具条是否显示</li>
-<li>Ctrl+D – 将当前标签页加入收藏</li>
-<li>Ctrl+Shift+D – 将现在所有打开的标签页都放到同一个收藏夹目录里</li>
-<li>Ctrl+J – 打开“下载”标签页</li>
-<li>Shift+Esc — 打开“任务管理器”，在这里你可以关闭无响应的标签页</li>
-<li>Ctrl+Shift+J — 打开 Chrome 开发工具</li>
-<li>Ctrl+L – 选中当前标签页的URL地址，好直接输入新网址</li>
-<li>Ctrl+Backspace — 删除地址栏里光标左边的一个词</li>
-<li>Ctrl+G – 找到通过Ctrl+F查找的下一个词，Ctrl+Shift+G则是查找上一个词</li>
-<li>Ctrl+U — 查看当前标签页的源代码</li>
-<li>Ctrl+R — 跟F5一样都是刷新当前标签页</li>
-<li>Ctrl+1(2, 3, 4等等) — 切换到第几个标签页（从左数）</li>
-<li>Ctrl+Shift+T — 重新打开刚刚关闭的标签页</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="//img.gagahappy.cn/blog/2011/03/chromelogo.jpg"><img src="//img.gagahappy.cn/blog/2011/03/chromelogo.jpg" title="chrome"></a></p>
-
       
     </div>
 

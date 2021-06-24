@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">452</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">453</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,105 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-external-test-packages/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-external-test-packages/" class="post-title-link" itemprop="url">Go 语言 外部测试包</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-24 16:29:21" itemprop="dateCreated datePublished" datetime="2021-06-24T16:29:21+08:00">2021-06-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="外部包"><a href="#外部包" class="headerlink" title="外部包"></a>外部包</h1><p>外部包使用<code>package xxx_test</code>方式来命名，比如<code>package bytes_test</code>就是<code>src/btyes/buffer_test.go</code>外部包的命名方式，<code>_test</code>后缀告诉go test工具它应该建立一个额外的包来运行测试。</p>
+<p>通过外部测试包的方式可以解决导入包循环依赖的问题，因为外部测试包是一个独立的包，所以能够导入那些<code>依赖待测代码本身</code>的其他辅助包；包内的测试代码就无法做到这点。注意：外部包不能被其它包导入</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件 src/btyes/buffer_test.go</span></span><br><span class="line"><span class="keyword">package</span> bytes_test</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	. <span class="string">&quot;bytes&quot;</span></span><br><span class="line">	... 代码片段</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestNewBuffer</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	buf := NewBuffer(testBytes)</span><br><span class="line">	check(t, <span class="string">&quot;NewBuffer&quot;</span>, buf, testString)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">... 代码片段</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">empty</span><span class="params">(t *testing.T, testname <span class="keyword">string</span>, buf *Buffer, s <span class="keyword">string</span>, fub []<span class="keyword">byte</span>)</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="测试技巧"><a href="#测试技巧" class="headerlink" title="测试技巧"></a>测试技巧</h1><p>如果在测试中，需要对包内部的没有导出的函数进行测试，可以利用包内的 <code>_test.go</code>文件，如 <code>export_test.go</code>，在这个文件中将包的内部函数、方法导出，以供外部测试包使用。<code>indexBytePortable</code>方法在 src/bytes/bytes.go 中定义</p>
+<p><code>src/bytes/bytes.go</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">indexBytePortable</span><span class="params">(s []<span class="keyword">byte</span>, c <span class="keyword">byte</span>)</span> <span class="title">int</span></span> &#123;<span class="comment">/* ... */</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>把<code>bytes</code>包中的内部方法导出，供外部包<code>package bytes_test</code>使用</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/bytes/export_test.go</span></span><br><span class="line"><span class="keyword">package</span> bytes</span><br><span class="line"><span class="comment">// Export func for testing</span></span><br><span class="line"><span class="keyword">var</span> IndexBytePortable = indexBytePortable</span><br></pre></td></tr></table></figure>
+
+<p>外部包使用导出的方法<code>IndexBytePortable</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/bytes/bytes_test.go</span></span><br><span class="line"><span class="keyword">package</span> bytes_test</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestIndexByte</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> _, tt := <span class="keyword">range</span> indexTests &#123;</span><br><span class="line">		... 代码片段</span><br><span class="line">		posp := IndexBytePortable(a, b)</span><br><span class="line">		<span class="keyword">if</span> posp != tt.i &#123;</span><br><span class="line">			t.Errorf(<span class="string">`indexBytePortable(%q, &#x27;%c&#x27;) = %v`</span>, tt.a, b, posp)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试文件<code>export_test.go</code>并没有定义测试代码，它只是通过<code>bytes.IndexBytePortable</code>简单导出了内部的<code>indexBytePortable</code>函数，这个技巧可以广泛用于位于外部测试包的白盒测试</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li><p>Go语言规范是禁止包的循环依赖</p>
+</li>
+<li><p>go list命令 查看包对应目录中哪些Go源文件</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> list -f=&#123;&#123;.GoFiles&#125;&#125; bytes <span class="comment">// =&gt; [buffer.go bytes.go reader.go]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看包内部的测试代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> list -f=&#123;&#123;.TestGoFiles&#125;&#125; bytes <span class="comment">// =&gt; [export_test.go]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>XTestGoFiles表示的是属于外部测试包的测试代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> list -f=&#123;&#123;.XTestGoFiles&#125;&#125; bytes </span><br><span class="line"><span class="comment">// =&gt; [buffer_test.go bytes_test.go compare_test.go example_test.go reader_test.go]</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -957,85 +1056,6 @@
 
 <h2 id="签名tag"><a href="#签名tag" class="headerlink" title="签名tag"></a>签名tag</h2><p>前置条件：要先配置GPG</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 强制给tag 签名</span></span><br><span class="line"><span class="comment"># 直接编辑  ~/.gitconfig 也可以</span></span><br><span class="line">git config --global tag.forcesignannotated <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-fmt-string-with-zerovalue/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-fmt-string-with-zerovalue/" class="post-title-link" itemprop="url">Go 语言 fmt对string中零值的处理</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-05 14:32:08" itemprop="dateCreated datePublished" datetime="2021-06-05T14:32:08+08:00">2021-06-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>fmt</code>格式化含有0值的<code>string</code>时，是如何显示的</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	buf := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">10</span>)</span><br><span class="line">	buf[<span class="number">8</span>] = <span class="string">&#x27;A&#x27;</span></span><br><span class="line">	<span class="built_in">copy</span>(buf, []<span class="keyword">byte</span>(<span class="string">&quot;hello&quot;</span>))</span><br><span class="line">	fmt.Printf(<span class="string">&quot;cap(%d),len(%d)\n&quot;</span>, <span class="built_in">cap</span>(buf), <span class="built_in">len</span>(buf))</span><br><span class="line">	fmt.Println(<span class="string">&quot;buf:&quot;</span>, buf)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;buf:%q\n&quot;</span>, buf)</span><br><span class="line">	fmt.Println(<span class="string">&quot;buf:&quot;</span>, <span class="keyword">string</span>(buf))</span><br><span class="line"></span><br><span class="line">	str := <span class="keyword">string</span>(buf)</span><br><span class="line">	str = str + <span class="string">&quot; world&quot;</span></span><br><span class="line">	fmt.Println(<span class="built_in">len</span>(str)) <span class="comment">// =&gt; 16</span></span><br><span class="line">	fmt.Println(str)      <span class="comment">// =&gt; helloA world</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* output</span></span><br><span class="line"><span class="comment">cap(10),len(10)</span></span><br><span class="line"><span class="comment">buf: [104 101 108 108 111 0 0 0 65 0]</span></span><br><span class="line"><span class="comment">buf:&quot;hello\x00\x00\x00A\x00&quot;</span></span><br><span class="line"><span class="comment">buf: helloA</span></span><br><span class="line"><span class="comment">16</span></span><br><span class="line"><span class="comment">helloA world</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-
-<p>1. 使用<code>fmt</code>打印<code>string(buf)</code>虽然显示为<code>helloA</code>，看上去字符数变少了，只有6个(0值没有显示，其<code>ascii码</code>是不可打印码)，但底层数据没变，依然是<code>[104 101 108 108 111 0 0 0 65 0]</code></p>
-<p>2. 格式化参数<code>%q</code>直接对0值进行了输出<code>hello\x00\x00\x00A\x00</code>，它打印了<code>string</code>中的每一个字节，包括不可打印的字节</p>
-<p>3. <code>str + &quot; world&quot;</code>的长度为16，也证明了<code>str</code>中的0值没有被去除(10 + 6 = 16)</p>
-<p>4.使用<code>fmt</code>查看数据”长什么样子”有时候是不准确的</p>
 
       
     </div>

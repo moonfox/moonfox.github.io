@@ -15,8 +15,37 @@
     <atom:link href="https://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby</description>
-    <pubDate>Tue, 22 Jun 2021 08:18:14 GMT</pubDate>
+    <pubDate>Thu, 24 Jun 2021 09:25:03 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Go 语言 外部测试包</title>
+      <link>https://www.gagahappy.com/golang-external-test-packages/</link>
+      <guid>https://www.gagahappy.com/golang-external-test-packages/</guid>
+      <pubDate>Thu, 24 Jun 2021 08:29:21 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;外部包&quot;&gt;&lt;a href=&quot;#外部包&quot; class=&quot;headerlink&quot; title=&quot;外部包&quot;&gt;&lt;/a&gt;外部包&lt;/h1&gt;&lt;p&gt;外部包使用&lt;code&gt;package xxx_test&lt;/code&gt;方式来命名，比如&lt;code&gt;package</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="外部包"><a href="#外部包" class="headerlink" title="外部包"></a>外部包</h1><p>外部包使用<code>package xxx_test</code>方式来命名，比如<code>package bytes_test</code>就是<code>src/btyes/buffer_test.go</code>外部包的命名方式，<code>_test</code>后缀告诉go test工具它应该建立一个额外的包来运行测试。</p><p>通过外部测试包的方式可以解决导入包循环依赖的问题，因为外部测试包是一个独立的包，所以能够导入那些<code>依赖待测代码本身</code>的其他辅助包；包内的测试代码就无法做到这点。注意：外部包不能被其它包导入</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件 src/btyes/buffer_test.go</span></span><br><span class="line"><span class="keyword">package</span> bytes_test</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">. <span class="string">&quot;bytes&quot;</span></span><br><span class="line">... 代码片段</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestNewBuffer</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">buf := NewBuffer(testBytes)</span><br><span class="line">check(t, <span class="string">&quot;NewBuffer&quot;</span>, buf, testString)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">... 代码片段</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">empty</span><span class="params">(t *testing.T, testname <span class="keyword">string</span>, buf *Buffer, s <span class="keyword">string</span>, fub []<span class="keyword">byte</span>)</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure><h1 id="测试技巧"><a href="#测试技巧" class="headerlink" title="测试技巧"></a>测试技巧</h1><p>如果在测试中，需要对包内部的没有导出的函数进行测试，可以利用包内的 <code>_test.go</code>文件，如 <code>export_test.go</code>，在这个文件中将包的内部函数、方法导出，以供外部测试包使用。<code>indexBytePortable</code>方法在 src/bytes/bytes.go 中定义</p><p><code>src/bytes/bytes.go</code></p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">indexBytePortable</span><span class="params">(s []<span class="keyword">byte</span>, c <span class="keyword">byte</span>)</span> <span class="title">int</span></span> &#123;<span class="comment">/* ... */</span>&#125;</span><br></pre></td></tr></table></figure><p>把<code>bytes</code>包中的内部方法导出，供外部包<code>package bytes_test</code>使用</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/bytes/export_test.go</span></span><br><span class="line"><span class="keyword">package</span> bytes</span><br><span class="line"><span class="comment">// Export func for testing</span></span><br><span class="line"><span class="keyword">var</span> IndexBytePortable = indexBytePortable</span><br></pre></td></tr></table></figure><p>外部包使用导出的方法<code>IndexBytePortable</code></p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/bytes/bytes_test.go</span></span><br><span class="line"><span class="keyword">package</span> bytes_test</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestIndexByte</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line"><span class="keyword">for</span> _, tt := <span class="keyword">range</span> indexTests &#123;</span><br><span class="line">... 代码片段</span><br><span class="line">posp := IndexBytePortable(a, b)</span><br><span class="line"><span class="keyword">if</span> posp != tt.i &#123;</span><br><span class="line">t.Errorf(<span class="string">`indexBytePortable(%q, &#x27;%c&#x27;) = %v`</span>, tt.a, b, posp)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>测试文件<code>export_test.go</code>并没有定义测试代码，它只是通过<code>bytes.IndexBytePortable</code>简单导出了内部的<code>indexBytePortable</code>函数，这个技巧可以广泛用于位于外部测试包的白盒测试</p><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul><li><p>Go语言规范是禁止包的循环依赖</p></li><li><p>go list命令 查看包对应目录中哪些Go源文件</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> list -f=&#123;&#123;.GoFiles&#125;&#125; bytes <span class="comment">// =&gt; [buffer.go bytes.go reader.go]</span></span><br></pre></td></tr></table></figure></li><li><p>查看包内部的测试代码</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> list -f=&#123;&#123;.TestGoFiles&#125;&#125; bytes <span class="comment">// =&gt; [export_test.go]</span></span><br></pre></td></tr></table></figure></li><li><p>XTestGoFiles表示的是属于外部测试包的测试代码</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> list -f=&#123;&#123;.XTestGoFiles&#125;&#125; bytes </span><br><span class="line"><span class="comment">// =&gt; [buffer_test.go bytes_test.go compare_test.go example_test.go reader_test.go]</span></span><br></pre></td></tr></table></figure></li></ul>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
+      
+      
+      <comments>https://www.gagahappy.com/golang-external-test-packages/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Safari 网站图标 favicon 不显示</title>
@@ -132,35 +161,6 @@
       
       
       <comments>https://www.gagahappy.com/golang-create-slice-with-zero-length/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>ruby 字符和 ascii 码之间的转换</title>
-      <link>https://www.gagahappy.com/ruby-character-to-ascii/</link>
-      <guid>https://www.gagahappy.com/ruby-character-to-ascii/</guid>
-      <pubDate>Wed, 09 Jun 2021 09:05:03 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;字符-转-ascii&quot;&gt;&lt;a href=&quot;#字符-转-ascii&quot; class=&quot;headerlink&quot; title=&quot;字符 转 ascii&quot;&gt;&lt;/a&gt;字符 转 ascii&lt;/h1&gt;&lt;figure class=&quot;highlight</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="字符-转-ascii"><a href="#字符-转-ascii" class="headerlink" title="字符 转 ascii"></a>字符 转 ascii</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;a&#x27;</span>.ord <span class="comment"># =&gt; 97</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;a&quot;</span>.unpack(<span class="string">&#x27;c&#x27;</span>) <span class="comment">#=&gt; 97 `c` 提取一个字符作为整数</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;string&quot;</span>.each_byte <span class="keyword">do</span> <span class="params">|c|</span></span><br><span class="line">    puts c</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span>.each_byte.to_a</span><br><span class="line">[<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">111</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">100</span>]</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span>.bytes</span><br><span class="line">[<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">111</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">100</span>]</span><br></pre></td></tr></table></figure><h1 id="Ascii-转-字符"><a href="#Ascii-转-字符" class="headerlink" title="Ascii 转 字符"></a>Ascii 转 字符</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">97</span>.chr <span class="comment"># =&gt; &quot;a&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span>.bytes <span class="comment"># =&gt; [104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100]</span></span><br><span class="line">[<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">111</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">100</span>].map&#123;<span class="params">|m|</span>m.chr&#125;</span><br><span class="line"><span class="comment"># =&gt; [&quot;h&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;, &quot; &quot;, &quot;w&quot;, &quot;o&quot;, &quot;r&quot;, &quot;l&quot;, &quot;d&quot;]</span></span><br></pre></td></tr></table></figure><h1 id="字符转二进制"><a href="#字符转二进制" class="headerlink" title="字符转二进制"></a>字符转二进制</h1><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;aa&quot;</span>.unpack(<span class="string">&#x27;b8B8&#x27;</span>)  <span class="comment">#=&gt; [&quot;10000110&quot;, &quot;01100001&quot;]</span></span><br></pre></td></tr></table></figure><p><code>B</code> 从每个字符中提取位（首先是最高有效位）</p><p><code>b</code> 从每个字符中提取位（首先是最低有效位）</p>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/ruby/">Ruby</category>
-      
-      
-      <comments>https://www.gagahappy.com/ruby-character-to-ascii/#disqus_thread</comments>
       
     </item>
     

@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">452</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">453</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,110 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-rebase-vs-git-reset/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/git-rebase-vs-git-reset/" class="post-title-link" itemprop="url">git rebase 与 git reset的应用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-06-07 14:13:19" itemprop="dateCreated datePublished" datetime="2018-06-07T14:13:19+08:00">2018-06-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="常用的应用场景"><a href="#常用的应用场景" class="headerlink" title="常用的应用场景"></a>常用的应用场景</h3><ol>
+<li><p>合并提交</p>
+</li>
+<li><p>去除不要的提交</p>
+</li>
+</ol>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><h3 id="场景1，合并多个提交"><a href="#场景1，合并多个提交" class="headerlink" title="场景1，合并多个提交"></a>场景1，合并多个提交</h3><p>有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交</p>
+<ol>
+<li>方法一: <code>git reset</code></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset B --soft</span><br><span class="line">git ci -m <span class="string">&quot;merge C to F&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>方法二: <code>git rebase</code></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --onto B C^ develop</span><br></pre></td></tr></table></figure>
+
+<h3 id="场景2，去掉D提交"><a href="#场景2，去掉D提交" class="headerlink" title="场景2，去掉D提交"></a>场景2，去掉D提交</h3><p>此时，<code>git reset</code>已经不再适合这个场景</p>
+<p>使用<code>git rebase</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --onto C E^ develop</span><br></pre></td></tr></table></figure>
+
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ol>
+<li><code>git rebase</code> 语法</li>
+</ol>
+<p>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt;</code><br>  <code>git rebase &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase &lt;since&gt;</code><br>  <code>git rebase -i</code></p>
+<p>  onbase为要架接到的commit, since表示不包括自身到till的所有提交</p>
+<p>  <code>git rebase --continue</code> # 解决冲突后使用，以完成rebase<br>  <code>git rebase --skip</code>     # 跳过当前commit，进行下一个commit的合并<br>  <code>git rebase --abort</code>    # 放弃此次操作，还原工作区</p>
+<ol start="2">
+<li><code>git rebase</code>的莫名冲突</li>
+</ol>
+<p>  对于场景二： 使用<code>git rebase</code>可能出现冲突（感觉不应该出现冲突的，对此不是很理解，难道是因为丢弃D后使查找链C-D-E-F断裂造成git认为这两个commit需要合并，是因为E无法知道C是它的祖先吗）</p>
+<p>  在解决冲突后，使用<code>git rebase --continue</code>完成rebase操作</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -884,86 +988,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>sublime3 增加了一个新的功能，可以自动提示一个方法的所在文件，且精确到行号。如果同一个方法被定义在了不同的文件，则会以下拉的方式显示，你可以选择要查看哪个文件里的这个方法。</p>
 <p><img src="//img.gagahappy.cn/blog/2016/11/sublime-3-code.png_b1" alt="sublime-3-code" title="sublime-3-code"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/disable-ios-update/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/disable-ios-update/" class="post-title-link" itemprop="url">如何关闭iOS系统自动更新提示</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2016-10-31 14:41:22" itemprop="dateCreated datePublished" datetime="2016-10-31T14:41:22+08:00">2016-10-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>苹果每次出新机都会有新的系统更新(iOS 10)，并且会一直提示你更新，直到你更新为止。对于不想升级的用户来说非常的烦人</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ol>
-<li>设置 - 通用 - 用量 - 管理存储空间 - 找到更新包(iOS 10)，点击删除</li>
-<li>设置 - iTunes&amp;App Stores, 找到Updates，关闭<br><img src="//img.gagahappy.cn/blog/2016/10/disable-update-01.jpg_b1" alt="禁止升级提示" title="禁止升级提示"></li>
-<li>安装禁止更新的文件：<a target="_blank" rel="noopener" href="https://oldcat.me/web/NOOTA9.mobileconfig">https://oldcat.me/web/NOOTA9.mobileconfig</a><br>访问后会提示安装，点击安装之后会提示需要重新启动手机(如果以后想升级到最新，只需要点击删除描述文件就可以了)<br><img src="//img.gagahappy.cn/blog/2016/10/disable-update-02.jpg_b1" alt="禁止升级提示" title="禁止升级提示"></li>
-<li>重新启动手机，会在桌面上生成一个紫色的 feedback图标，不用理会</li>
-<li>大功告成，再查看是否有更新，会显示已经是最新。可以看到系统更新停留在了9.3.5<br><img src="//img.gagahappy.cn/blog/2016/10/disable-update-03.jpg_b1" alt="禁止升级提示" title="禁止升级提示"></li>
-</ol>
 
       
     </div>

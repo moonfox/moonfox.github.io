@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">452</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">453</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,80 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/method-missing-be-careful-use/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/method-missing-be-careful-use/" class="post-title-link" itemprop="url">method_missing 方法使用注意事项</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2015-05-14 23:18:31" itemprop="dateCreated datePublished" datetime="2015-05-14T23:18:31+08:00">2015-05-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>method_missing 方法使用注意事项，其实最要应该注意的就是不能在method_missing 方法中出现找不到的方法，否则程序将掉入无限循环中</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">method_missing</span><span class="params">(method, *args)</span></span></span><br><span class="line">  not_exist_method <span class="comment">#一个不存在的方法</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当程序进入method_missing方法后，发现找不到not_exist_method方法，则又会掉入method_missing,然后又会发现找不到not_exist_method，然后又掉入method_missing,然后loop...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这种陷阱一般很难发现，所以在method_missing中编写代码时，一定要小心</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -897,80 +971,6 @@
 <blockquote>
 <p>问题环境<br>在安装postgresql_server的机器上，部署rails应用，连接时host:127.0.0.1出现以上错误，改为ip地址后，正常访问</p>
 </blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/ruby-hash-sort/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ruby-hash-sort/" class="post-title-link" itemprop="url">ruby hash 排序</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2015-04-22 00:04:33" itemprop="dateCreated datePublished" datetime="2015-04-22T00:04:33+08:00">2015-04-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>ruby hash 排序</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">h = &#123;<span class="string">&quot;sa&quot;</span>=&gt;<span class="number">1</span>, <span class="string">&quot;ab&quot;</span>=&gt;<span class="number">2</span>, <span class="string">&quot;x3&quot;</span>=&gt;<span class="number">3</span>, <span class="string">&quot;de&quot;</span>=&gt;, <span class="symbol">:de=&gt;</span><span class="number">5</span>&#125;</span><br><span class="line">h.sort_by&#123;<span class="params">|k,v|</span>k.to_s&#125;</span><br><span class="line"><span class="comment">#=&gt; [[&quot;ab&quot;, 2], [:de, 5], [&quot;de&quot;, 6], [&quot;sa&quot;, 1], [&quot;x3&quot;, 3]]</span></span><br><span class="line"></span><br><span class="line">h.sort_by&#123;<span class="params">|k,v|</span>v.to_s&#125;</span><br><span class="line"><span class="comment">#=&gt;[[&quot;sa&quot;, 1], [&quot;ab&quot;, 2], [&quot;x3&quot;, 3], [:de, 5], [&quot;de&quot;, 6]]</span></span><br><span class="line"></span><br><span class="line">h.sort_by&#123;<span class="params">|k|</span>k[<span class="number">0</span>].to_s&#125;</span><br><span class="line"><span class="comment">#=&gt;[[&quot;ab&quot;, 2], [:de, 5], [&quot;de&quot;, 6], [&quot;sa&quot;, 1], [&quot;x3&quot;, 3]]</span></span><br><span class="line"></span><br><span class="line">h.sort_by&#123;<span class="params">|k|</span>k[<span class="number">1</span>].to_s&#125;</span><br><span class="line"><span class="comment">#=&gt;[[&quot;sa&quot;, 1], [&quot;ab&quot;, 2], [&quot;x3&quot;, 3], [:de, 5], [&quot;de&quot;, 6]]</span></span><br><span class="line"></span><br><span class="line">h = &#123;<span class="string">&quot;sa&quot;</span>=&gt;<span class="number">1</span>, <span class="string">&quot;ab&quot;</span>=&gt;<span class="number">2</span>, <span class="string">&quot;x3&quot;</span>=&gt;<span class="number">3</span>, <span class="string">&quot;de&quot;</span>=&gt;<span class="number">6</span>, <span class="symbol">:de=&gt;</span><span class="number">5</span>&#125;</span><br><span class="line">h.sort</span><br><span class="line"><span class="comment">#=&gt;argumentError: comparison of Array with Array failed,因为:de=&gt;5与&quot;de&quot;＝&gt;6 Key类型不一样,键类型一样，才可以直接用sort,按键排序，否则要把键处理为一致的数据(可以比较的数据类型)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
       
     </div>

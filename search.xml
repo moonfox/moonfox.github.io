@@ -7906,4 +7906,42 @@
         <tag>mysql</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Go 语言 外部测试包</title>
+    <url>/golang-external-test-packages/</url>
+    <content><![CDATA[<h1 id="外部包"><a href="#外部包" class="headerlink" title="外部包"></a>外部包</h1><p>外部包使用<code>package xxx_test</code>方式来命名，比如<code>package bytes_test</code>就是<code>src/btyes/buffer_test.go</code>外部包的命名方式，<code>_test</code>后缀告诉go test工具它应该建立一个额外的包来运行测试。</p>
+<p>通过外部测试包的方式可以解决导入包循环依赖的问题，因为外部测试包是一个独立的包，所以能够导入那些<code>依赖待测代码本身</code>的其他辅助包；包内的测试代码就无法做到这点。注意：外部包不能被其它包导入</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 文件 src/btyes/buffer_test.go</span></span><br><span class="line"><span class="keyword">package</span> bytes_test</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	. <span class="string">&quot;bytes&quot;</span></span><br><span class="line">	... 代码片段</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestNewBuffer</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	buf := NewBuffer(testBytes)</span><br><span class="line">	check(t, <span class="string">&quot;NewBuffer&quot;</span>, buf, testString)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">... 代码片段</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">empty</span><span class="params">(t *testing.T, testname <span class="keyword">string</span>, buf *Buffer, s <span class="keyword">string</span>, fub []<span class="keyword">byte</span>)</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="测试技巧"><a href="#测试技巧" class="headerlink" title="测试技巧"></a>测试技巧</h1><p>如果在测试中，需要对包内部的没有导出的函数进行测试，可以利用包内的 <code>_test.go</code>文件，如 <code>export_test.go</code>，在这个文件中将包的内部函数、方法导出，以供外部测试包使用。<code>indexBytePortable</code>方法在 src/bytes/bytes.go 中定义</p>
+<p><code>src/bytes/bytes.go</code></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">indexBytePortable</span><span class="params">(s []<span class="keyword">byte</span>, c <span class="keyword">byte</span>)</span> <span class="title">int</span></span> &#123;<span class="comment">/* ... */</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>把<code>bytes</code>包中的内部方法导出，供外部包<code>package bytes_test</code>使用</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// src/bytes/export_test.go</span></span><br><span class="line"><span class="keyword">package</span> bytes</span><br><span class="line"><span class="comment">// Export func for testing</span></span><br><span class="line"><span class="keyword">var</span> IndexBytePortable = indexBytePortable</span><br></pre></td></tr></table></figure>
+
+<p>外部包使用导出的方法<code>IndexBytePortable</code></p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// src/bytes/bytes_test.go</span></span><br><span class="line"><span class="keyword">package</span> bytes_test</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestIndexByte</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> _, tt := <span class="keyword">range</span> indexTests &#123;</span><br><span class="line">		... 代码片段</span><br><span class="line">		posp := IndexBytePortable(a, b)</span><br><span class="line">		<span class="keyword">if</span> posp != tt.i &#123;</span><br><span class="line">			t.Errorf(<span class="string">`indexBytePortable(%q, &#x27;%c&#x27;) = %v`</span>, tt.a, b, posp)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试文件<code>export_test.go</code>并没有定义测试代码，它只是通过<code>bytes.IndexBytePortable</code>简单导出了内部的<code>indexBytePortable</code>函数，这个技巧可以广泛用于位于外部测试包的白盒测试</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li><p>Go语言规范是禁止包的循环依赖</p>
+</li>
+<li><p>go list命令 查看包对应目录中哪些Go源文件</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">go</span> list -f=&#123;&#123;.GoFiles&#125;&#125; bytes <span class="comment">// =&gt; [buffer.go bytes.go reader.go]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看包内部的测试代码</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">go</span> list -f=&#123;&#123;.TestGoFiles&#125;&#125; bytes <span class="comment">// =&gt; [export_test.go]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>XTestGoFiles表示的是属于外部测试包的测试代码</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">go</span> list -f=&#123;&#123;.XTestGoFiles&#125;&#125; bytes </span><br><span class="line"><span class="comment">// =&gt; [buffer_test.go bytes_test.go compare_test.go example_test.go reader_test.go]</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
 </search>
