@@ -255,7 +255,12 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>我们可以使用strftime（）函数将时间格式化为我们想要的格式。它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">strftime</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">char</span> *strDest,</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">size_t</span> maxsize,</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">const</span> <span class="keyword">char</span> *format,</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">const</span> struct tm *timeptr</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token class-name">size_t</span> <span class="token function">strftime</span><span class="token punctuation">(</span>
+<span class="token keyword">char</span> <span class="token operator">*</span>strDest<span class="token punctuation">,</span>
+<span class="token class-name">size_t</span> maxsize<span class="token punctuation">,</span>
+<span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>format<span class="token punctuation">,</span>
+<span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">tm</span> <span class="token operator">*</span>timeptr
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>我们可以根据format指向字符串中格式命令把timeptr中保存的时间信息放在strDest指向的字符串中，最多向strDest中存放maxsize个字符。该函数返回向strDest指向的字符串中放置的字符数。</p>
           <!--noindex-->

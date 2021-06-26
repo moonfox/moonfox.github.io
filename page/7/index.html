@@ -329,7 +329,13 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>method_missing 方法使用注意事项，其实最要应该注意的就是不能在method_missing 方法中出现找不到的方法，否则程序将掉入无限循环中</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">method_missing</span><span class="params">(method, *args)</span></span></span><br><span class="line">  not_exist_method <span class="comment">#一个不存在的方法</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当程序进入method_missing方法后，发现找不到not_exist_method方法，则又会掉入method_missing,然后又会发现找不到not_exist_method，然后又掉入method_missing,然后loop...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这种陷阱一般很难发现，所以在method_missing中编写代码时，一定要小心</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">def</span> <span class="token method-definition"><span class="token function">method_missing</span></span><span class="token punctuation">(</span>method<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">)</span>
+  not_exist_method <span class="token comment">#一个不存在的方法</span>
+<span class="token keyword">end</span>
+
+<span class="token comment"># 当程序进入method_missing方法后，发现找不到not_exist_method方法，则又会掉入method_missing,然后又会发现找不到not_exist_method，然后又掉入method_missing,然后loop...</span>
+
+<span class="token comment"># 这种陷阱一般很难发现，所以在method_missing中编写代码时，一定要小心</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -404,7 +410,8 @@
     <div class="post-body" itemprop="articleBody">
           <p>可以用git write-tree 为暂存区生成tree对象，以便可以用ls-tree对暂存区进行查看</p>
 <p>执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git write-tree</span><br><span class="line">git ls_tree &lt;git write-tree 的输出&gt;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> write-tree
+<span class="token function">git</span> ls_tree <span class="token operator">&lt;</span>git write-tree 的输出<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -478,7 +485,8 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>可以调用to_sql方法察看实际ORM输出出來的SQL，例如Event.open_public.recent_three_days.to_sql</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Post.where(<span class="symbol">author_id:</span> <span class="number">1</span>).order(<span class="string">&quot;id desc&quot;</span>).limit(<span class="number">3</span>).to_sql</span><br><span class="line"><span class="comment"># SELECT  `posts`.* FROM `posts`  WHERE `posts`.`author_id` = 1 ORDER BY id desc LIMIT 3</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token constant">Post</span><span class="token punctuation">.</span>where<span class="token punctuation">(</span>author_id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>order<span class="token punctuation">(</span><span class="token string">"id desc"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>limit<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to_sql
+<span class="token comment"># SELECT  `posts`.* FROM `posts`  WHERE `posts`.`author_id` = 1 ORDER BY id desc LIMIT 3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -552,7 +560,12 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>向Scope传递参数</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span> &lt; ActiveRecord::Base</span></span><br><span class="line">    scope <span class="symbol">:recent</span>, -&gt; &#123; <span class="params">|date|</span> where([<span class="string">&quot;created_at &gt; ? &quot;</span>, date ]) &#125;</span><br><span class="line">    <span class="comment"># 等同于 scope :recent, lambda&#123; |date| where([&quot;created_at &gt; ? &quot;, date ]) &#125;</span></span><br><span class="line">    <span class="comment"># 或 scope :recent, Proc.new&#123; |t| where([&quot;created_at &gt; ? &quot;, t ]) &#125;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">Event.recent( Time.now - <span class="number">7</span>.days )</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">class</span> <span class="token class-name">Event</span> <span class="token operator">&lt;</span> <span class="token constant">ActiveRecord</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Base</span>
+    scope <span class="token symbol">:recent</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">&#123;</span> <span class="token operator">|</span>date<span class="token operator">|</span> where<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"created_at > ? "</span><span class="token punctuation">,</span> date <span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+    <span class="token comment"># 等同于 scope :recent, lambda&#123; |date| where(["created_at > ? ", date ]) &#125;</span>
+    <span class="token comment"># 或 scope :recent, Proc.new&#123; |t| where(["created_at > ? ", t ]) &#125;</span>
+<span class="token keyword">end</span>
+<span class="token constant">Event</span><span class="token punctuation">.</span>recent<span class="token punctuation">(</span> <span class="token builtin">Time</span><span class="token punctuation">.</span>now <span class="token operator">-</span> <span class="token number">7.</span>days <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -651,7 +664,8 @@
 </li>
 <li><p>sinatra使用Pry</p>
 <blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pry -r ./application.rb <span class="comment">#sinatra project, require  application.rb</span></span><br><span class="line">rails c <span class="comment"># rails project</span></span><br></pre></td></tr></table></figure></blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pry -r ./application.rb <span class="token comment">#sinatra project, require  application.rb</span>
+rails c <span class="token comment"># rails project</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></blockquote>
 </li>
 <li><p>pry 用法</p>
 <blockquote>
@@ -732,7 +746,20 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>rake 实例变量作用范围,可以看到在task的block中，当前self为main，所以@people可以在say方法中访问。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">desc <span class="string">&quot;test instance variable&quot;</span></span><br><span class="line">task <span class="symbol">:hello_world</span> =&gt; <span class="symbol">:environment</span> <span class="keyword">do</span></span><br><span class="line">  <span class="variable">@people</span> = <span class="string">&quot;Jone&quot;</span></span><br><span class="line">  puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">say</span></span></span><br><span class="line">    puts <span class="keyword">self</span> <span class="comment">#=&gt;main</span></span><br><span class="line">    puts @people</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  say</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#=&gt;main</span></span><br><span class="line"><span class="comment">#=&gt;main</span></span><br><span class="line"><span class="comment">#=&gt;Jone</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">desc <span class="token string">"test instance variable"</span>
+task <span class="token symbol">:hello_world</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token symbol">:environment</span> <span class="token keyword">do</span>
+  <span class="token variable">@people</span> <span class="token operator">=</span> <span class="token string">"Jone"</span>
+  puts <span class="token keyword">self</span> <span class="token comment">#=>main</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">say</span></span>
+    puts <span class="token keyword">self</span> <span class="token comment">#=>main</span>
+    puts <span class="token variable">@people</span>
+  <span class="token keyword">end</span>
+  say
+<span class="token keyword">end</span>
+
+<span class="token comment">#=>main</span>
+<span class="token comment">#=>main</span>
+<span class="token comment">#=>Jone</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -887,12 +914,61 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>部署thin + nginx<br>生成配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">thin config -C /etc/thin/&lt;config-name&gt;.yml -c &lt;rails-app-root-path&gt; --servers &lt;number-of-threads&gt; -e &lt;environment&gt;</span><br><span class="line"></span><br><span class="line">thin config -C /etc/thin/myapp.yml -c /var/rails/myapp --servers 5 --socket /tmp/thin.myapp.sock -e development</span><br><span class="line"></span><br><span class="line">替换&lt;config-name&gt;为自己的应用名称，替换&lt;rails-app-root-path&gt;为应用的根目录，替换&lt;number-of-threads&gt;为启动的线程数，也就是启动多少个Thin服务，替换&lt;environment&gt;为运行环境。</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">thin config -C /etc/thin/<span class="token operator">&lt;</span>config-name<span class="token operator">></span>.yml -c <span class="token operator">&lt;</span>rails-app-root-path<span class="token operator">></span> --servers <span class="token operator">&lt;</span>number-of-threads<span class="token operator">></span> -e <span class="token operator">&lt;</span>environment<span class="token operator">></span>
 
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">thin:</span></span><br><span class="line"><span class="symbol">environment:</span> development</span><br><span class="line"><span class="symbol">address:</span> <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"><span class="symbol">port:</span> <span class="number">3001</span></span><br><span class="line"><span class="symbol">timeout:</span> <span class="number">30</span></span><br><span class="line"><span class="symbol">log:</span> log/thin.log</span><br><span class="line"><span class="symbol">pid:</span> tmp/pids/thin.pid</span><br><span class="line"><span class="symbol">max_conns:</span> <span class="number">1024</span></span><br><span class="line"><span class="symbol">max_persistent_conns:</span> <span class="number">512</span></span><br><span class="line"><span class="symbol">wait:</span> <span class="number">30</span></span><br><span class="line"><span class="symbol">servers:</span> <span class="number">2</span></span><br><span class="line"><span class="symbol">daemonize:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># require: []</span></span><br></pre></td></tr></table></figure>
+thin config -C /etc/thin/myapp.yml -c /var/rails/myapp --servers <span class="token number">5</span> --socket /tmp/thin.myapp.sock -e development
+
+替换<span class="token operator">&lt;</span>config-name<span class="token operator">></span>为自己的应用名称，替换<span class="token operator">&lt;</span>rails-app-root-path<span class="token operator">></span>为应用的根目录，替换<span class="token operator">&lt;</span>number-of-threads<span class="token operator">></span>为启动的线程数，也就是启动多少个Thin服务，替换<span class="token operator">&lt;</span>environment<span class="token operator">></span>为运行环境。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">thin<span class="token punctuation">:</span>
+environment<span class="token punctuation">:</span> development
+address<span class="token punctuation">:</span> <span class="token number">0.0</span><span class="token number">.0</span><span class="token number">.0</span>
+port<span class="token punctuation">:</span> <span class="token number">3001</span>
+timeout<span class="token punctuation">:</span> <span class="token number">30</span>
+log<span class="token punctuation">:</span> log<span class="token operator">/</span>thin<span class="token punctuation">.</span>log
+pid<span class="token punctuation">:</span> tmp<span class="token operator">/</span>pids<span class="token operator">/</span>thin<span class="token punctuation">.</span>pid
+max_conns<span class="token punctuation">:</span> <span class="token number">1024</span>
+max_persistent_conns<span class="token punctuation">:</span> <span class="token number">512</span>
+wait<span class="token punctuation">:</span> <span class="token number">30</span>
+servers<span class="token punctuation">:</span> <span class="token number">2</span>
+daemonize<span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token comment"># require: []</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>启动: <code>thin start -C config/thin.yml</code><br>停止: <code>thin stop -C config/thin.yml</code></p>
 <p>nginx:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">     listen 3001;</span><br><span class="line">     charset utf-8;</span><br><span class="line">     root /var/rails/mysapp/public;</span><br><span class="line">     access_log logs/access.log;</span><br><span class="line">     error_log  logs/error.log;</span><br><span class="line"></span><br><span class="line">     location / &#123;</span><br><span class="line">         <span class="comment"># proxy_pass          http://rails_servers;</span></span><br><span class="line">         <span class="comment"># proxy_redirect      default;</span></span><br><span class="line">         proxy_redirect      <span class="literal">false</span>;</span><br><span class="line">         proxy_set_header    X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">         proxy_set_header    X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">         proxy_set_header    Host <span class="variable">$http_host</span>;</span><br><span class="line">         proxy_next_upstream http_502 http_504 error timeout invalid_header;</span><br><span class="line">         proxy_pass <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (-f <span class="variable">$request_filename</span>/index.html)</span><br><span class="line">        &#123;</span><br><span class="line">          rewrite (.*) <span class="variable">$1</span>/index.html <span class="built_in">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (-f <span class="variable">$request_filename</span>.html) &#123;</span><br><span class="line">          rewrite (.*) <span class="variable">$1</span>.html <span class="built_in">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!-f <span class="variable">$request_filename</span>) &#123;</span><br><span class="line">          proxy_pass http://rails_servers;</span><br><span class="line">          <span class="built_in">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> upstream rails_servers&#123;</span><br><span class="line">        server 127.0.0.1:3002;</span><br><span class="line">        server 127.0.0.1:3003;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">server <span class="token punctuation">&#123;</span>
+     listen <span class="token number">3001</span><span class="token punctuation">;</span>
+     charset utf-8<span class="token punctuation">;</span>
+     root /var/rails/mysapp/public<span class="token punctuation">;</span>
+     access_log logs/access.log<span class="token punctuation">;</span>
+     error_log  logs/error.log<span class="token punctuation">;</span>
+
+     location / <span class="token punctuation">&#123;</span>
+         <span class="token comment"># proxy_pass          http://rails_servers;</span>
+         <span class="token comment"># proxy_redirect      default;</span>
+         proxy_redirect      <span class="token boolean">false</span><span class="token punctuation">;</span>
+         proxy_set_header    X-Forwarded-For <span class="token variable">$proxy_add_x_forwarded_for</span><span class="token punctuation">;</span>
+         proxy_set_header    X-Real-IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span>
+         proxy_set_header    Host <span class="token variable">$http_host</span><span class="token punctuation">;</span>
+         proxy_next_upstream http_502 http_504 error <span class="token function">timeout</span> invalid_header<span class="token punctuation">;</span>
+         proxy_pass <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>-f <span class="token variable">$request_filename</span>/index.html<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+          rewrite <span class="token punctuation">(</span>.*<span class="token punctuation">)</span> <span class="token variable">$1</span>/index.html <span class="token builtin class-name">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>-f <span class="token variable">$request_filename</span>.html<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          rewrite <span class="token punctuation">(</span>.*<span class="token punctuation">)</span> <span class="token variable">$1</span>.html <span class="token builtin class-name">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>-f <span class="token variable">$request_filename</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          proxy_pass http://rails_servers<span class="token punctuation">;</span>
+          <span class="token builtin class-name">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+ <span class="token punctuation">&#125;</span>
+ upstream rails_servers<span class="token punctuation">&#123;</span>
+        server <span class="token number">127.0</span>.0.1:3002<span class="token punctuation">;</span>
+        server <span class="token number">127.0</span>.0.1:3003<span class="token punctuation">;</span>
+ <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -966,7 +1042,10 @@
     
     <div class="post-body" itemprop="articleBody">
           <p><code>expect</code> does not support <code>==</code> matcher.</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">expect(actual).to eql(expected)   <span class="comment"># passes if actual.eql?(expected)</span></span><br><span class="line">expect(actual).to equal(expected) <span class="comment"># passes if actual.equal?(expected)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> `expect` does not support `==` matcher.</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">expect<span class="token punctuation">(</span>actual<span class="token punctuation">)</span><span class="token punctuation">.</span>to eql<span class="token punctuation">(</span>expected<span class="token punctuation">)</span>   <span class="token comment"># passes if actual.eql?(expected)</span>
+expect<span class="token punctuation">(</span>actual<span class="token punctuation">)</span><span class="token punctuation">.</span>to equal<span class="token punctuation">(</span>expected<span class="token punctuation">)</span> <span class="token comment"># passes if actual.equal?(expected)</span>
+
+<span class="token comment"># NOTE: `expect` does not support `==` matcher.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>

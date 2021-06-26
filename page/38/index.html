@@ -330,7 +330,11 @@
           <p>升级gem提示 no such file to load zlib，按照以前的经验，马上安装了zlib1g-dev，运行后问题依旧存在，无奈。突然起ruby source中包含zlib文件，最终解决办法如下。</p>
 <ol>
 <li>进行ruby源码包</li>
-<li>安装ruby自身提供的zlib包<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ext/zlib</span><br><span class="line">ruby ./extconf.rb</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br><span class="line">sudo gem update --system</span><br></pre></td></tr></table></figure></li>
+<li>安装ruby自身提供的zlib包<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ext/zlib
+ruby ./extconf.rb
+<span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+<span class="token function">sudo</span> gem update --system<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
 
       
@@ -483,7 +487,13 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>安装scim输入法后，有时候会出现光标不能自动跟随录入框的现象，即没有开启动光标自动跟随的功能。解决办法如下。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打开/etc/X11/xinit/xinput.d/scim文件，找到其中的</span></span><br><span class="line">GTK_IM_MODULE=xim</span><br><span class="line">QT_IM_MODULE=xim</span><br><span class="line"><span class="comment"># 把它们改成</span></span><br><span class="line">GTK_IM_MODULE=scim</span><br><span class="line">QT_IM_MODULE=scim</span><br><span class="line"><span class="comment">#即可。最后注销一下或者是重启X。</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 打开/etc/X11/xinit/xinput.d/scim文件，找到其中的</span>
+<span class="token assign-left variable">GTK_IM_MODULE</span><span class="token operator">=</span>xim
+<span class="token assign-left variable">QT_IM_MODULE</span><span class="token operator">=</span>xim
+<span class="token comment"># 把它们改成</span>
+<span class="token assign-left variable">GTK_IM_MODULE</span><span class="token operator">=</span>scim
+<span class="token assign-left variable">QT_IM_MODULE</span><span class="token operator">=</span>scim
+<span class="token comment">#即可。最后注销一下或者是重启X。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>

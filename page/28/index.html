@@ -425,9 +425,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>发现mysql对于处理这样相同的查询，居然有两种截然不同的结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT *,slug FROM wp_terms;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT *,slug FROM wp_terms;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>执行正确</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT slug,* FROM wp_terms;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT slug,* FROM wp_terms;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>执行错误：You have an error in your SQL syntax</p>
 <p>费解啊~~~，在MSSQL中不会出现此现象</p>
 
@@ -809,7 +809,15 @@
     <div class="post-body" itemprop="articleBody">
           <p>上传安装phpMyAdmin后，出现”配置文件现在需要一个短语密码“的错误提示，上网查找，解决方法如下</p>
 <p>修改phpmyadmin/libraries/config.default.php中的$cfg[‘blowfish_secret’]的值为任意字符串</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The &#x27;cookie&#x27; auth_type uses blowfish algorithm to encrypt the password. If</span></span><br><span class="line"><span class="comment"> * at least one server configuration uses &#x27;cookie&#x27; auth_type, enter here a</span></span><br><span class="line"><span class="comment"> * pass phrase that will be used by blowfish. The maximum length seems to be 46</span></span><br><span class="line"><span class="comment"> * characters.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@global</span> string $cfg[&#x27;blowfish_secret&#x27;]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="variable">$cfg</span>[<span class="string">&#x27;blowfish_secret&#x27;</span>] = <span class="string">&#x27;yourpassword&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">/**
+ * The 'cookie' auth_type uses blowfish algorithm to encrypt the password. If
+ * at least one server configuration uses 'cookie' auth_type, enter here a
+ * pass phrase that will be used by blowfish. The maximum length seems to be 46
+ * characters.
+ *
+ * @global string $cfg['blowfish_secret']
+ */</span>
+<span class="token variable">$cfg</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'blowfish_secret'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'yourpassword'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>

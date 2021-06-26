@@ -255,7 +255,8 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>使用haccess限制ip访问，可以用于那些进行sql注入或发垃圾评论的ip</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Order Deny,Allow</span><br><span class="line">Deny from 192.187.126.42</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">Order Deny,Allow
+Deny from 192.187.126.42<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>注意:Deny,Allow之间的逗号前后不能有空格，否则配置信息报错。</p>
 <p>使用</p>
 <blockquote>
@@ -562,7 +563,26 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>linux split 命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">功能说明：切割文件。</span><br><span class="line"></span><br><span class="line">语法：split [--<span class="built_in">help</span>][--version][-&lt;行数&gt;][-b &lt;字节&gt;][-C &lt;字节&gt;][-l &lt;行数&gt;][要切割的文件][输出文件名]</span><br><span class="line"></span><br><span class="line">补充说明：split可将文件切成较小的文件，预设每1000行会切成一个小文件。</span><br><span class="line"></span><br><span class="line">参数：</span><br><span class="line"></span><br><span class="line">-&lt;行数&gt;或-l&lt;行数&gt; 　指定每多少行就要切成一个小文件。</span><br><span class="line"></span><br><span class="line">-b&lt;字节&gt; 　指定每多少字就要切成一个小文件。支持单位:m,k</span><br><span class="line"></span><br><span class="line">-C&lt;字节&gt; 　与-b参数类似，但切割时尽量维持每行的完整性。</span><br><span class="line"></span><br><span class="line">--<span class="built_in">help</span> 　显示帮助。</span><br><span class="line"></span><br><span class="line">--version 　显示版本信息。</span><br><span class="line"></span><br><span class="line">[输出文件名] 　设置切割后文件的前置文件名，split会自动在前置文件名后再加上编号。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">功能说明：切割文件。
+
+语法：split <span class="token punctuation">[</span>--help<span class="token punctuation">]</span><span class="token punctuation">[</span>--version<span class="token punctuation">]</span><span class="token punctuation">[</span>-<span class="token operator">&lt;</span>行数<span class="token operator">></span><span class="token punctuation">]</span><span class="token punctuation">[</span>-b <span class="token operator">&lt;</span>字节<span class="token operator">></span><span class="token punctuation">]</span><span class="token punctuation">[</span>-C <span class="token operator">&lt;</span>字节<span class="token operator">></span><span class="token punctuation">]</span><span class="token punctuation">[</span>-l <span class="token operator">&lt;</span>行数<span class="token operator">></span><span class="token punctuation">]</span><span class="token punctuation">[</span>要切割的文件<span class="token punctuation">]</span><span class="token punctuation">[</span>输出文件名<span class="token punctuation">]</span>
+
+补充说明：split可将文件切成较小的文件，预设每1000行会切成一个小文件。
+
+参数：
+
+-<span class="token operator">&lt;</span>行数<span class="token operator">></span>或-l<span class="token operator">&lt;</span>行数<span class="token operator">></span> 　指定每多少行就要切成一个小文件。
+
+-b<span class="token operator">&lt;</span>字节<span class="token operator">></span> 　指定每多少字就要切成一个小文件。支持单位:m,k
+
+-C<span class="token operator">&lt;</span>字节<span class="token operator">></span> 　与-b参数类似，但切割时尽量维持每行的完整性。
+
+--help 　显示帮助。
+
+--version 　显示版本信息。
+
+<span class="token punctuation">[</span>输出文件名<span class="token punctuation">]</span> 　设置切割后文件的前置文件名，split会自动在前置文件名后再加上编号。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>使用例子：<br><code>split -b 100m filename</code></p>
 
@@ -868,7 +888,20 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">proxy_redirect <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (-f <span class="variable">$request_filename</span>/index.html) &#123;</span><br><span class="line">rewrite (.*) <span class="variable">$1</span>/index.html <span class="built_in">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (-f <span class="variable">$request_filename</span>.html) &#123;</span><br><span class="line">rewrite (.*) <span class="variable">$1</span>.html <span class="built_in">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!-f <span class="variable">$request_filename</span>) &#123;</span><br><span class="line">proxy_pass http://thin_cluster;</span><br><span class="line"><span class="built_in">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">proxy_set_header Host <span class="token variable">$http_host</span><span class="token punctuation">;</span>
+proxy_redirect <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>-f <span class="token variable">$request_filename</span>/index.html<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+rewrite <span class="token punctuation">(</span>.*<span class="token punctuation">)</span> <span class="token variable">$1</span>/index.html <span class="token builtin class-name">break</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>-f <span class="token variable">$request_filename</span>.html<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+rewrite <span class="token punctuation">(</span>.*<span class="token punctuation">)</span> <span class="token variable">$1</span>.html <span class="token builtin class-name">break</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>-f <span class="token variable">$request_filename</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+proxy_pass http://thin_cluster<span class="token punctuation">;</span>
+<span class="token builtin class-name">break</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -944,7 +977,7 @@
           <p>Priorities and Queue Lists</p>
 <p>Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”</p>
 <p>Let’s say we add a warm_cache queue in addition to our file_serve queue. We’d now start a worker like so:</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>QUEUES=file_serve,warm_cache rake <span class="symbol">resque:</span>work</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">$ <span class="token constant">QUEUES</span><span class="token operator">=</span>file_serve<span class="token punctuation">,</span>warm_cache rake resque<span class="token symbol">:work</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>When the worker looks for new jobs, it will first check file_serve. If it finds a job, it’ll process it then check file_serve again. It will keep checking file_serve until no more jobs are available. At that point, it will check warm_cache. If it finds a job it’ll process it then check file_serve (repeating the whole process).</p>
 <p>Resque doesn’t support numeric priorities but instead uses the order of queues you give it. We call this list of queues the “queue list.”</p>

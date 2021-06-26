@@ -476,7 +476,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;Scott Chacon&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;schacon@gmail.com&quot;</span></span><br></pre></td></tr></table></figure>
+          <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> config --global user.name <span class="token string">"Scott Chacon"</span>
+$ <span class="token function">git</span> config --global user.email <span class="token string">"schacon@gmail.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -550,7 +551,13 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>提交流程大致如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> lyr@192.168.0.7:~/work/m2ge</span><br><span class="line"><span class="comment">#... 项目开发 ...</span></span><br><span class="line">$ git add 改动的文件</span><br><span class="line">$ git commit</span><br><span class="line">$ git pull</span><br><span class="line"><span class="comment">#... 解决版本合并问题 ...</span></span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> clone lyr@192.168.0.7:~/work/m2ge
+<span class="token comment">#... 项目开发 ...</span>
+$ <span class="token function">git</span> <span class="token function">add</span> 改动的文件
+$ <span class="token function">git</span> commit
+$ <span class="token function">git</span> pull
+<span class="token comment">#... 解决版本合并问题 ...</span>
+$ <span class="token function">git</span> push<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -624,11 +631,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>git 协同开发</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p ~/project/m2ge.git</span><br><span class="line">$ <span class="built_in">cd</span> ~/project/m2ge.git</span><br><span class="line">$ git --bare init --shared</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">mkdir</span> -p ~/project/m2ge.git
+$ <span class="token builtin class-name">cd</span> ~/project/m2ge.git
+$ <span class="token function">git</span> --bare init --shared<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>上述操作中,git-init 命令的 –bare 选项可以让 m2ge.git 目录等价于一个仓<br>库。</p>
 <p>也就是说m2ge.git 本来是一个工作树，但是 –bare 选项将本应当存放在m2ge.git/.git 中的仓库内容全部放置在 m2ge.git 目录下，就好像仓库完全的裸露在工作树中，所以称之为赤裸的仓库。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/work/m2ge</span><br><span class="line">$ git push m2@192.168.0.2:~/project/m2ge.git master</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token builtin class-name">cd</span> ~/work/m2ge
+$ <span class="token function">git</span> push m2@192.168.0.2:~/project/m2ge.git master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -702,7 +712,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>期望改变值或抛出异常</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">expect &#123;&#125;.to change &#123;&#125;.from().to()</span><br><span class="line"></span><br><span class="line">expect &#123;&#125;.to raise_error(YourMenthodError)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">expect <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">.</span>to change <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">.</span>from<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+expect <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">.</span>to raise_error<span class="token punctuation">(</span><span class="token constant">YourMenthodError</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -935,13 +947,16 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>首先下载imagemagick， 进入安装目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> imagemagick</span><br><span class="line">./configure --prefix=/opt/imagemagick</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> imagemagick
+./configure --prefix<span class="token operator">=</span>/opt/imagemagick
+<span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>如果出现</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ld: cannot find -lperl</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/usr/bin/ld: cannot <span class="token function">find</span> -lperl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>请安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libperl-dev</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libperl-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
       
     </div>

@@ -275,14 +275,28 @@
 <li>通过<code>git diff</code> 命令找出此次提交发生变化的文件。这里不用<code>git log</code>的原因是log命令会有多余的输出，不利于后面编写脚本</li>
 <li>使用<code>aws s3 cp</code>把发生变化的文件同步到Aws S3，这样就大大节省了Aws S3写操作的流量</li>
 </ol>
-<h3 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">git diff HEAD~1 HEAD --<span class="built_in">stat</span> --name-only | awk <span class="string">&#x27;&#123;cmd=&quot;aws s3 cp &quot;$1&quot; s3://your-butket/&quot;$1&quot; --exclude &#x27;</span>.gitignore<span class="string">&#x27;&quot;;system(cmd)&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token function">git</span> <span class="token function">diff</span> HEAD~1 HEAD --stat --name-only <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'&#123;cmd="aws s3 cp "<span class="token variable">$1</span>" s3://your-butket/"<span class="token variable">$1</span>" --exclude '</span>.gitignore<span class="token string">'";system(cmd)&#125;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>放到项目根目录执行，此脚本只会同步那些内容有修改的文件，内容没有修改，但最后修改时间被更新的文件不会被同步，大大节省了Aws S3的写流量</p>
 <h3 id="后记，奇怪的git-diff输出"><a href="#后记，奇怪的git-diff输出" class="headerlink" title="后记，奇怪的git diff输出"></a>后记，奇怪的git diff输出</h3><p>发现<code>git diff --stat</code>输出时，如果输出到屏幕，那些长路径名是可以正常显示的，但如果输出到文件，则长路径就会被省略显示。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 长路径名</span></span><br><span class="line">looooooooooong_path_name/index.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在输出到屏幕时是可以正常显示的</span></span><br><span class="line">&gt; git diff --<span class="built_in">stat</span></span><br><span class="line">&gt; looooooooooong_path_name/index.html</span><br><span class="line"></span><br><span class="line"><span class="comment"># 但如果输出到文件，路径名就变成了:&quot;.../index.html&quot;</span></span><br><span class="line">&gt; git diff --<span class="built_in">stat</span> &gt; diff.log</span><br><span class="line">&gt; cat diff.log</span><br><span class="line">&gt; .../index.html</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 长路径名</span>
+looooooooooong_path_name/index.html
+
+<span class="token comment"># 在输出到屏幕时是可以正常显示的</span>
+<span class="token operator">></span> <span class="token function">git</span> <span class="token function">diff</span> --stat
+<span class="token operator">></span> looooooooooong_path_name/index.html
+
+<span class="token comment"># 但如果输出到文件，路径名就变成了:".../index.html"</span>
+<span class="token operator">></span> <span class="token function">git</span> <span class="token function">diff</span> --stat <span class="token operator">></span> diff.log
+<span class="token operator">></span> <span class="token function">cat</span> diff.log
+<span class="token operator">></span> <span class="token punctuation">..</span>./index.html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>为了解决这个问题，需要执行 <code>git diff --stat --name-only</code>， 输出到文件也可以正常显示长路径名了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; git diff --<span class="built_in">stat</span> --name-only &gt; diff.log</span><br><span class="line">&gt; cat diff.log</span><br><span class="line">&gt; looooooooooong_path_name/index.html</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">></span> <span class="token function">git</span> <span class="token function">diff</span> --stat --name-only <span class="token operator">></span> diff.log
+<span class="token operator">></span> <span class="token function">cat</span> diff.log
+<span class="token operator">></span> looooooooooong_path_name/index.html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
     </div>
 

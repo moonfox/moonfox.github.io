@@ -476,7 +476,18 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>mysql 创建触发器，好久没看望触发器了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">delimiter $$</span><br><span class="line">create trigger tgr_userinfo_update before update on userinfo</span><br><span class="line">for each row</span><br><span class="line">begin</span><br><span class="line">if new.income &lt; old.income then</span><br><span class="line">insert into userinfo_err</span><br><span class="line">select old.userid,old.income,new.income,user(),now();</span><br><span class="line">set new.income &#x3D; old.income;</span><br><span class="line">end if;</span><br><span class="line">end;</span><br><span class="line">$$</span><br><span class="line">delimiter ;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">delimiter $$
+create trigger tgr_userinfo_update before update on userinfo
+for each row
+begin
+if new.income &lt; old.income then
+insert into userinfo_err
+select old.userid,old.income,new.income,user(),now();
+set new.income &#x3D; old.income;
+end if;
+end;
+$$
+delimiter ;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>

@@ -19,12 +19,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Ubuntu的命令行是可以定制的，可以使用下面的命令来显示当前的提示符设置： 123456789echo $PS1echo $PS2修改~&#x2F;.bashrc文件中的PS1行即可,默认为$&amp;#123;debian_chroot:+($debian_chroot)&amp;#125;\u@\h:\w\$$PS1是主要的提示符设置，在ubuntu一般为：$&amp;#123;debian_chroot:+($debian">
+<meta name="description" content="Ubuntu的命令行是可以定制的，可以使用下面的命令来显示当前的提示符设置： echo $PS1 echo $PS2 修改~&#x2F;.bashrc文件中的PS1行即可,默认为$&amp;#123;debian_chroot:+($debian_chroot)&amp;#125;\u@\h:\w\$  $PS1是主要的提示符设置，在ubuntu一般为：  $&amp;#123;debian_chroot:+($debian_ch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu命令行提示符参数">
 <meta property="og:url" content="https://www.gagahappy.com/ubuntu-cmd-shell-args/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="Ubuntu的命令行是可以定制的，可以使用下面的命令来显示当前的提示符设置： 123456789echo $PS1echo $PS2修改~&#x2F;.bashrc文件中的PS1行即可,默认为$&amp;#123;debian_chroot:+($debian_chroot)&amp;#125;\u@\h:\w\$$PS1是主要的提示符设置，在ubuntu一般为：$&amp;#123;debian_chroot:+($debian">
+<meta property="og:description" content="Ubuntu的命令行是可以定制的，可以使用下面的命令来显示当前的提示符设置： echo $PS1 echo $PS2 修改~&#x2F;.bashrc文件中的PS1行即可,默认为$&amp;#123;debian_chroot:+($debian_chroot)&amp;#125;\u@\h:\w\$  $PS1是主要的提示符设置，在ubuntu一般为：  $&amp;#123;debian_chroot:+($debian_ch">
 <meta property="og:locale">
 <meta property="article:published_time" content="2011-01-01T14:39:14.000Z">
 <meta property="article:modified_time" content="2021-06-05T13:16:53.126Z">
@@ -258,12 +258,48 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>Ubuntu的命令行是可以定制的，可以使用下面的命令来显示当前的提示符设置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$PS1</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PS2</span></span><br><span class="line">修改~/.bashrc文件中的PS1行即可,默认为<span class="variable">$&#123;debian_chroot:+($debian_chroot)&#125;</span>\u@\h:\w\$</span><br><span class="line"></span><br><span class="line"><span class="variable">$PS1</span>是主要的提示符设置，在ubuntu一般为：</span><br><span class="line"></span><br><span class="line"><span class="variable">$&#123;debian_chroot:+($debian_chroot)&#125;</span>\u@\h:\w\$</span><br><span class="line"></span><br><span class="line"><span class="variable">$PS2</span>是次要提示符，一般为“&gt;”。</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token environment constant">$PS1</span>
+<span class="token builtin class-name">echo</span> <span class="token environment constant">$PS2</span>
+修改~/.bashrc文件中的<span class="token environment constant">PS1</span>行即可,默认为<span class="token variable">$&#123;debian_chroot<span class="token operator">:+</span>($debian_chroot)&#125;</span><span class="token punctuation">\</span>u@<span class="token punctuation">\</span>h:<span class="token punctuation">\</span>w<span class="token punctuation">\</span>$
+
+<span class="token environment constant">$PS1</span>是主要的提示符设置，在ubuntu一般为：
+
+<span class="token variable">$&#123;debian_chroot<span class="token operator">:+</span>($debian_chroot)&#125;</span><span class="token punctuation">\</span>u@<span class="token punctuation">\</span>h:<span class="token punctuation">\</span>w<span class="token punctuation">\</span>$
+
+<span class="token environment constant">$PS2</span>是次要提示符，一般为“<span class="token operator">></span>”。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <span id="more"></span>
 
 <p>具体的提示符，按分类含义如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">\u 当前登录用户名</span><br><span class="line">\h 当前计算机名称（譬如ubuntu）</span><br><span class="line">\H 当前计算机的域名全程，譬如（ubuntu.ubuntu.com)</span><br><span class="line">\w 当前目录</span><br><span class="line">\W 当前目录的basename</span><br><span class="line">\$ 一般用户为$，root用户为&gt;</span><br><span class="line"></span><br><span class="line">（可以看到Ubuntu缺省的提示符设置）</span><br><span class="line"></span><br><span class="line">时间显示</span><br><span class="line">\t 当前时间（24小时制，HH:MM:SS 分别代表 小时：分钟：秒）</span><br><span class="line">\T 当前时间（12小时制）</span><br><span class="line">\@ 当前时间（AM/PM显示）</span><br><span class="line">\d 当前日期</span><br><span class="line">Shell信息：</span><br><span class="line">\v Bash版本</span><br><span class="line">\V Bash的发布版本号</span><br><span class="line">\S Shell名称</span><br><span class="line">\! Bash命令的历史编号</span><br><span class="line">\j job序号</span><br><span class="line">\l Shell的终端名称</span><br><span class="line"></span><br><span class="line">控制符：</span><br><span class="line">\\ \</span><br><span class="line">\n 换行</span><br><span class="line">\r</span><br><span class="line">\] ]</span><br><span class="line">\e Esc</span><br><span class="line">\[ [</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">\</span>u 当前登录用户名
+<span class="token punctuation">\</span>h 当前计算机名称（譬如ubuntu）
+<span class="token punctuation">\</span>H 当前计算机的域名全程，譬如（ubuntu.ubuntu.com<span class="token punctuation">)</span>
+<span class="token punctuation">\</span>w 当前目录
+<span class="token punctuation">\</span>W 当前目录的basename
+<span class="token punctuation">\</span>$ 一般用户为$，root用户为<span class="token operator">></span>
+
+（可以看到Ubuntu缺省的提示符设置）
+
+时间显示
+<span class="token punctuation">\</span>t 当前时间（24小时制，HH:MM:SS 分别代表 小时：分钟：秒）
+<span class="token punctuation">\</span>T 当前时间（12小时制）
+<span class="token punctuation">\</span>@ 当前时间（AM/PM显示）
+<span class="token punctuation">\</span>d 当前日期
+Shell信息：
+<span class="token punctuation">\</span>v Bash版本
+<span class="token punctuation">\</span>V Bash的发布版本号
+<span class="token punctuation">\</span>S Shell名称
+<span class="token punctuation">\</span><span class="token operator">!</span> Bash命令的历史编号
+<span class="token punctuation">\</span>j job序号
+<span class="token punctuation">\</span>l Shell的终端名称
+
+控制符：
+<span class="token punctuation">\</span><span class="token punctuation">\</span> <span class="token punctuation">\</span>
+<span class="token punctuation">\</span>n 换行
+<span class="token punctuation">\</span>r
+<span class="token punctuation">\</span><span class="token punctuation">]</span> <span class="token punctuation">]</span>
+<span class="token punctuation">\</span>e Esc
+<span class="token punctuation">\</span><span class="token punctuation">[</span> <span class="token punctuation">[</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     </div>
 

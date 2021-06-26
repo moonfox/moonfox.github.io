@@ -19,12 +19,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="rails2.0快速体验 1、 新建一个Rails程序 123rails todo# 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入rails todo -d mysql">
+<meta name="description" content="rails2.0快速体验 1、 新建一个Rails程序 rails todo # 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入 rails todo -d mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rails2.0快速体验">
 <meta property="og:url" content="https://www.gagahappy.com/rails-2-quick-show/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="rails2.0快速体验 1、 新建一个Rails程序 123rails todo# 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入rails todo -d mysql">
+<meta property="og:description" content="rails2.0快速体验 1、 新建一个Rails程序 rails todo # 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入 rails todo -d mysql">
 <meta property="og:locale">
 <meta property="article:published_time" content="2009-12-07T06:48:45.000Z">
 <meta property="article:modified_time" content="2021-06-05T13:16:52.883Z">
@@ -259,17 +259,40 @@
     <div class="post-body" itemprop="articleBody">
         <p>rails2.0快速体验</p>
 <p>1、 新建一个Rails程序</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rails todo</span><br><span class="line"><span class="comment"># 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入</span></span><br><span class="line">rails todo -d mysql</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rails todo
+<span class="token comment"># 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入</span>
+rails todo -d mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <span id="more"></span>
 
 <p>2、 修改数据库配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> todo</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> todo<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>进入项目所在文件夹，找config目录下的database.yml 数据库配置文件,修改数据库用户名与密码配置</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">development:</span></span><br><span class="line">   <span class="symbol">adapter:</span> mysql</span><br><span class="line">   <span class="symbol">encoding:</span> utf8</span><br><span class="line">   <span class="symbol">database:</span> todo_development</span><br><span class="line">   <span class="symbol">username:</span> root</span><br><span class="line">   <span class="symbol">password:</span> root</span><br><span class="line"></span><br><span class="line"><span class="symbol">test:</span></span><br><span class="line">  <span class="symbol">adapter:</span> mysql</span><br><span class="line">   <span class="symbol">encoding:</span> utf8</span><br><span class="line">   <span class="symbol">database:</span> todo_test</span><br><span class="line">   <span class="symbol">username:</span> root</span><br><span class="line">   <span class="symbol">password:</span> root</span><br><span class="line"></span><br><span class="line"><span class="symbol">production:</span></span><br><span class="line">   <span class="symbol">adapter:</span> mysql</span><br><span class="line">   <span class="symbol">encoding:</span> utf8</span><br><span class="line">   <span class="symbol">database:</span> todo_production</span><br><span class="line">   <span class="symbol">username:</span> root</span><br><span class="line">   <span class="symbol">password:</span> root</span><br><span class="line"><span class="comment">#注意：“：”与后面的字符串之间要有一个空格</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">development<span class="token punctuation">:</span>
+   adapter<span class="token punctuation">:</span> mysql
+   encoding<span class="token punctuation">:</span> utf8
+   database<span class="token punctuation">:</span> todo_development
+   username<span class="token punctuation">:</span> root
+   password<span class="token punctuation">:</span> root
+
+test<span class="token punctuation">:</span>
+  adapter<span class="token punctuation">:</span> mysql
+   encoding<span class="token punctuation">:</span> utf8
+   database<span class="token punctuation">:</span> todo_test
+   username<span class="token punctuation">:</span> root
+   password<span class="token punctuation">:</span> root
+
+production<span class="token punctuation">:</span>
+   adapter<span class="token punctuation">:</span> mysql
+   encoding<span class="token punctuation">:</span> utf8
+   database<span class="token punctuation">:</span> todo_production
+   username<span class="token punctuation">:</span> root
+   password<span class="token punctuation">:</span> root
+<span class="token comment">#注意：“：”与后面的字符串之间要有一个空格</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>3、创建数据库</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rake <span class="symbol">db:</span><span class="symbol">create:</span>all</span><br><span class="line"><span class="comment"># 又一个新东西“rake db:create:all”，它将给你建立起各个数据库，现在不需要你自己去手工搞了。是不是比以前爽了。</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby">rake db<span class="token symbol">:create</span><span class="token symbol">:all</span>
+<span class="token comment"># 又一个新东西“rake db:create:all”，它将给你建立起各个数据库，现在不需要你自己去手工搞了。是不是比以前爽了。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>后如果什么反应都没有，则说明数据库创建成功。</p>
 <p>4、rails的魔法就在这里开始。</p>
 <blockquote>

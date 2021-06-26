@@ -276,7 +276,40 @@
 <li><p>空目录无法被添加到git<br>因为根据算法，添加的对象必须要有内容，以供sha1算法使用</p>
 </li>
 <li><p>合并后再使用 <code>git rebase </code> 使提交成为一条直线</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">git merge upstream-master</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line">Merge made by the <span class="string">&#x27;recursive&#x27;</span> strategy.</span><br><span class="line"> layout/_partials/header/menu-item.njk      | 5 +----</span><br><span class="line"> layout/_partials/page/breadcrumb.njk       | 6 +-----</span><br><span class="line"> layout/_partials/post/post-followme.njk    | 2 +-</span><br><span class="line"> layout/_partials/sidebar/site-overview.njk | 2 +-</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">*   b1b3e13 (HEAD -&gt; release) Merge branch <span class="string">&#x27;upstream-master&#x27;</span> into release</span><br><span class="line">|\</span><br><span class="line">| * d51ca0e (upstream/master, upstream-master) Fix: handle invalid config</span><br><span class="line">* | 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts</span><br><span class="line">|/</span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 把前分支作为基础分枝, 把 upstream-master 分支的提交嫁接在其上面</span></span><br><span class="line">git rebase</span><br><span class="line">First, rewinding head to replay your work on top of it...</span><br><span class="line">Applying: Fix: handle invalid config</span><br><span class="line">Using index info to reconstruct a base tree...</span><br><span class="line">M	layout/_partials/post/post-followme.njk</span><br><span class="line">M	layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Falling back to patching base and 3-way merge...</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">* 217e224 (HEAD -&gt; release) Fix: handle invalid config</span><br><span class="line">* 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts <span class="comment"># 以这个提交做为 rebase</span></span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge upstream-master
+Auto-merging layout/_partials/sidebar/site-overview.njk
+Auto-merging layout/_partials/post/post-followme.njk
+Merge made by the <span class="token string">'recursive'</span> strategy.
+ layout/_partials/header/menu-item.njk      <span class="token operator">|</span> <span class="token number">5</span> +----
+ layout/_partials/page/breadcrumb.njk       <span class="token operator">|</span> <span class="token number">6</span> +-----
+ layout/_partials/post/post-followme.njk    <span class="token operator">|</span> <span class="token number">2</span> +-
+ layout/_partials/sidebar/site-overview.njk <span class="token operator">|</span> <span class="token number">2</span> +-
+
+<span class="token function">git</span> slog --graph
+*   b1b3e13 <span class="token punctuation">(</span>HEAD -<span class="token operator">></span> release<span class="token punctuation">)</span> Merge branch <span class="token string">'upstream-master'</span> into release
+<span class="token operator">|</span><span class="token punctuation">\</span>
+<span class="token operator">|</span> * d51ca0e <span class="token punctuation">(</span>upstream/master, upstream-master<span class="token punctuation">)</span> Fix: handle invalid config
+* <span class="token operator">|</span> 369c5b5 <span class="token punctuation">(</span>origin/release, origin/master, origin/HEAD, master<span class="token punctuation">)</span> Resolve conflicts
+<span class="token operator">|</span>/
+* d6f344f Refactor sidebar-panel using flex layout
+* edefcda Add NProgress <span class="token punctuation">(</span><span class="token comment">#79)</span>
+
+<span class="token comment"># 把前分支作为基础分枝, 把 upstream-master 分支的提交嫁接在其上面</span>
+<span class="token function">git</span> rebase
+First, rewinding <span class="token function">head</span> to replay your work on <span class="token function">top</span> of it<span class="token punctuation">..</span>.
+Applying: Fix: handle invalid config
+Using index info to reconstruct a base tree<span class="token punctuation">..</span>.
+M	layout/_partials/post/post-followme.njk
+M	layout/_partials/sidebar/site-overview.njk
+Falling back to patching base and <span class="token number">3</span>-way merge<span class="token punctuation">..</span>.
+Auto-merging layout/_partials/sidebar/site-overview.njk
+Auto-merging layout/_partials/post/post-followme.njk
+
+<span class="token function">git</span> slog --graph
+* 217e224 <span class="token punctuation">(</span>HEAD -<span class="token operator">></span> release<span class="token punctuation">)</span> Fix: handle invalid config
+* 369c5b5 <span class="token punctuation">(</span>origin/release, origin/master, origin/HEAD, master<span class="token punctuation">)</span> Resolve conflicts <span class="token comment"># 以这个提交做为 rebase</span>
+* d6f344f Refactor sidebar-panel using flex layout
+* edefcda Add NProgress <span class="token punctuation">(</span><span class="token comment">#79)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol>
 <li>使用merge出现了分支线路</li>

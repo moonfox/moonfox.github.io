@@ -490,7 +490,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>查找 包含alias字符串的*.conf的文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name <span class="string">&quot;*.conf&quot;</span> | xargs grep <span class="string">&quot;alias&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> / -name <span class="token string">"*.conf"</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">grep</span> <span class="token string">"alias"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ol>
 <li>grep -R -l 一些也可以实现，但是通过管道 | 比单纯用grep 复杂的参数更有效率。</li>
@@ -570,7 +570,9 @@
     <div class="post-body" itemprop="articleBody">
           <p>rails2.0快速体验</p>
 <p>1、 新建一个Rails程序</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rails todo</span><br><span class="line"><span class="comment"># 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入</span></span><br><span class="line">rails todo -d mysql</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rails todo
+<span class="token comment"># 这时使用的是默认的sqlite3做数据库。如果你希望使用mysql，则输入</span>
+rails todo -d mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/rails-2-quick-show/#more" rel="contents">
@@ -651,7 +653,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>发现如果要把两个字符串连接在一起。如</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;abc&quot;</span></span><br><span class="line">b = a + <span class="string">&quot;de&quot;</span></span><br><span class="line"><span class="comment"># 此时b的值为&quot;abcde&quot;, 但如果a = nil时，就会抛出未定义“+”的异常，因为此时a为nil。但如果我们改变一下b右边的表达式，将其改为b = &quot;#&#123;a&#125;de&quot;。这时就不会抛出错误了，此时b=&gt; &quot;de&quot;。</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">a <span class="token operator">=</span> <span class="token string">"abc"</span>
+b <span class="token operator">=</span> a + <span class="token string">"de"</span>
+<span class="token comment"># 此时b的值为"abcde", 但如果a = nil时，就会抛出未定义“+”的异常，因为此时a为nil。但如果我们改变一下b右边的表达式，将其改为b = "#&#123;a&#125;de"。这时就不会抛出错误了，此时b=> "de"。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
       
     </div>

@@ -19,12 +19,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="mysql 创建触发器，好久没看望触发器了 123456789101112delimiter $$create trigger tgr_userinfo_update before update on userinfofor each rowbeginif new.income &lt; old.income theninsert into userinfo_errselect old.useri">
+<meta name="description" content="mysql 创建触发器，好久没看望触发器了 delimiter $$ create trigger tgr_userinfo_update before update on userinfo for each row begin if new.income &lt; old.income then insert into userinfo_err select old.userid,old.inc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql 创建触发器">
 <meta property="og:url" content="https://www.gagahappy.com/mysql-create-trigger/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="mysql 创建触发器，好久没看望触发器了 123456789101112delimiter $$create trigger tgr_userinfo_update before update on userinfofor each rowbeginif new.income &lt; old.income theninsert into userinfo_errselect old.useri">
+<meta property="og:description" content="mysql 创建触发器，好久没看望触发器了 delimiter $$ create trigger tgr_userinfo_update before update on userinfo for each row begin if new.income &lt; old.income then insert into userinfo_err select old.userid,old.inc">
 <meta property="og:locale">
 <meta property="article:published_time" content="2015-02-07T17:03:33.000Z">
 <meta property="article:modified_time" content="2020-08-16T06:52:50.323Z">
@@ -258,7 +258,18 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>mysql 创建触发器，好久没看望触发器了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">delimiter $$</span><br><span class="line">create trigger tgr_userinfo_update before update on userinfo</span><br><span class="line">for each row</span><br><span class="line">begin</span><br><span class="line">if new.income &lt; old.income then</span><br><span class="line">insert into userinfo_err</span><br><span class="line">select old.userid,old.income,new.income,user(),now();</span><br><span class="line">set new.income &#x3D; old.income;</span><br><span class="line">end if;</span><br><span class="line">end;</span><br><span class="line">$$</span><br><span class="line">delimiter ;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">delimiter $$
+create trigger tgr_userinfo_update before update on userinfo
+for each row
+begin
+if new.income &lt; old.income then
+insert into userinfo_err
+select old.userid,old.income,new.income,user(),now();
+set new.income &#x3D; old.income;
+end if;
+end;
+$$
+delimiter ;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     </div>
 

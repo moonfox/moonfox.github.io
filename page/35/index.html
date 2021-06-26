@@ -328,7 +328,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libmagick9-dev ruby1.8-dev</span><br><span class="line">sudo apt-get install imagemagick</span><br><span class="line">sudo gem install rmagick</span><br></pre></td></tr></table></figure>
+          <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libmagick9-dev ruby1.8-dev
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> imagemagick
+<span class="token function">sudo</span> gem <span class="token function">install</span> rmagick<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -402,7 +404,19 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>ruby中的条件判断语句case我们都不应该陌生吧，在view层使用时出现了这样一个怪现象。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果这样写</span></span><br><span class="line">&lt;% <span class="keyword">case</span> 条件表达示 %&gt;</span><br><span class="line">&lt;% <span class="keyword">when</span> <span class="string">&quot;条件1&quot;</span>%&gt;</span><br><span class="line">标题</span><br><span class="line">&lt;% <span class="keyword">when</span> <span class="string">&quot;条件2&quot;</span>%&gt;</span><br><span class="line">标题</span><br><span class="line">&lt;% <span class="keyword">end</span> %&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 被告知有语法错误。 如果写成</span></span><br><span class="line">&lt;%</span><br><span class="line"><span class="keyword">case</span> 条件表达示</span><br><span class="line"><span class="keyword">when</span> <span class="string">&quot;条件1&quot;</span></span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># 如果这样写</span>
+<span class="token operator">&lt;</span><span class="token operator">%</span> <span class="token keyword">case</span> 条件表达示 <span class="token string">%>
+&lt;% when "条件1"%></span>
+标题
+<span class="token operator">&lt;</span><span class="token operator">%</span> <span class="token keyword">when</span> <span class="token string">"条件2"</span><span class="token string">%>
+标题
+&lt;% end %></span>
+
+<span class="token comment"># 被告知有语法错误。 如果写成</span>
+<span class="token operator">&lt;</span><span class="token operator">%</span>
+<span class="token keyword">case</span> 条件表达示
+<span class="token keyword">when</span> <span class="token string">"条件1"</span>
+<span class="token operator">%</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>程序顺利通过。即将case 与第一个when写在一起，这时程序不会出错。难道分开放在<code>&lt;%%&gt;</code>里会出错。差点被这个bug折腾死！ORG</p>
 
@@ -697,7 +711,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.sohu.com/ubuntu/ lucid main restricted universe multiverse</span><br><span class="line">deb http://mirrors.sohu.com/ubuntu/ lucid-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.sohu.com/ubuntu/ lucid-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.sohu.com/ubuntu/ lucid-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.sohu.com/ubuntu/ lucid-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.sohu.com/ubuntu/ lucid main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.sohu.com/ubuntu/ lucid-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.sohu.com/ubuntu/ lucid-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.sohu.com/ubuntu/ lucid-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.sohu.com/ubuntu/ lucid-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+          <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">deb http://mirrors.sohu.com/ubuntu/ lucid main restricted universe multiverse
+deb http://mirrors.sohu.com/ubuntu/ lucid-security main restricted universe multiverse
+deb http://mirrors.sohu.com/ubuntu/ lucid-updates main restricted universe multiverse
+deb http://mirrors.sohu.com/ubuntu/ lucid-proposed main restricted universe multiverse
+deb http://mirrors.sohu.com/ubuntu/ lucid-backports main restricted universe multiverse
+deb-src http://mirrors.sohu.com/ubuntu/ lucid main restricted universe multiverse
+deb-src http://mirrors.sohu.com/ubuntu/ lucid-security main restricted universe multiverse
+deb-src http://mirrors.sohu.com/ubuntu/ lucid-updates main restricted universe multiverse
+deb-src http://mirrors.sohu.com/ubuntu/ lucid-proposed main restricted universe multiverse
+deb-src http://mirrors.sohu.com/ubuntu/ lucid-backports main restricted universe multiverse<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -917,7 +940,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER yy IDENTIFIED BY <span class="string">&#x27;123&#x27;</span>;</span><br><span class="line"></span><br><span class="line">如果要限制在固定地址登陆，比如localhost 登陆：</span><br><span class="line">CREATE USER yy@localhost IDENTIFIED BY <span class="string">&#x27;123&#x27;</span>;</span><br><span class="line"></span><br><span class="line">grant:</span><br><span class="line">GRANT ALL PRIVILEGES ON *.* TO user@localhost;</span><br><span class="line"></span><br><span class="line">grant select,insert,update,delete on *.* to test1@<span class="string">&quot;%&quot;</span> Identified by <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">格式：grant select on 数据库.* to 用户名@登录主机 identified by <span class="string">&quot;密码&quot;</span></span><br></pre></td></tr></table></figure>
+          <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">CREATE <span class="token environment constant">USER</span> yy IDENTIFIED BY <span class="token string">'123'</span><span class="token punctuation">;</span>
+
+如果要限制在固定地址登陆，比如localhost 登陆：
+CREATE <span class="token environment constant">USER</span> yy@localhost IDENTIFIED BY <span class="token string">'123'</span><span class="token punctuation">;</span>
+
+grant:
+GRANT ALL PRIVILEGES ON *.* TO user@localhost<span class="token punctuation">;</span>
+
+grant select,insert,update,delete on *.* to test1@<span class="token string">"%"</span> Identified by <span class="token string">"abc"</span><span class="token punctuation">;</span>
+格式：grant <span class="token keyword">select</span> on 数据库.* to 用户名@登录主机 identified by <span class="token string">"密码"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>

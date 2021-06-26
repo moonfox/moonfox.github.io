@@ -266,7 +266,15 @@
 </ol>
 <span id="more"></span>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/share/fonts/mac/</span><br><span class="line">sudo mkfontscale</span><br><span class="line">（创建字体的fonts.scale文件，它用来控制字体旋转缩放）</span><br><span class="line">sudo mkfontdir</span><br><span class="line">（创建字体的fonts.dir文件，它用来控制字体粗斜体产生）</span><br><span class="line">sudo fc-cache -fv sudo fc-cache -fv</span><br><span class="line">（建立字体缓存信息，也就是让系统认识字体）</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后再重新登录系统，就可以在netbeans中使用monaco字体。注：monaco的字体只有在调到18号字的时候才能完美显示，否则是相当的难看的。</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /usr/share/fonts/mac/
+<span class="token function">sudo</span> mkfontscale
+（创建字体的fonts.scale文件，它用来控制字体旋转缩放）
+<span class="token function">sudo</span> mkfontdir
+（创建字体的fonts.dir文件，它用来控制字体粗斜体产生）
+<span class="token function">sudo</span> fc-cache -fv <span class="token function">sudo</span> fc-cache -fv
+（建立字体缓存信息，也就是让系统认识字体）
+
+<span class="token comment"># 然后再重新登录系统，就可以在netbeans中使用monaco字体。注：monaco的字体只有在调到18号字的时候才能完美显示，否则是相当的难看的。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 <p>删除字体，直接删除mac文件夹，然后 <code>sudo fc-cache -fv</code>如果你的代码中不需要对中文进行支持，那么你就不用再往下看了。由于monaco并不支持中文，所以页面中的中文字体全都变成了方块。解决方法如下</p>

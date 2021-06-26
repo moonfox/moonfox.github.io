@@ -779,10 +779,13 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>MySQL导出的SQL语句在导入时有可能会非常非常慢。在导出时合理使用几个参数，可以大大加快导 入的速度。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-e 使用包括几个VALUES列表的多行INSERT语法;</span><br><span class="line">--max_allowed_packet=XXX 客户端/服务器之间通信的缓存区的最大大小;</span><br><span class="line">--net_buffer_length=XXX  TCP/IP和套接字通信缓冲区大小,创建长度达net_buffer_length的行。</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">-e 使用包括几个VALUES列表的多行INSERT语法<span class="token punctuation">;</span>
+--max_allowed_packet<span class="token operator">=</span>XXX 客户端/服务器之间通信的缓存区的最大大小<span class="token punctuation">;</span>
+--net_buffer_length<span class="token operator">=</span>XXX  TCP/IP和套接字通信缓冲区大小,创建长度达net_buffer_length的行。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>注意：max_allowed_packet和net_buffer_length不能比目标数据库的设定数值 大，否则可能出错。</p>
 <p>首先确定目标库的参数值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;max_allowed_packet&#39;;</span><br><span class="line">show variables like &#39;net_buffer_length&#39;;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">show variables like &#39;max_allowed_packet&#39;;
+show variables like &#39;net_buffer_length&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>根据参数值书写mysqldump命令，如：<br><code>mysqldump -uroot -p eis_db goodclassification -e --max_allowed_packet=1048576 --net_buffer_length=16384 &gt;good3.sql</code></p>
 
@@ -952,7 +955,13 @@
 </blockquote>
 </li>
 <li><p>生成deb包，进入安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">安装必须的库文件：</span><br><span class="line">sudo apt-get install debhelper</span><br><span class="line">进入解压后的文件夹</span><br><span class="line"><span class="built_in">cd</span> fcitx-3.6.3</span><br><span class="line">fakeroot debian/rules binary</span><br><span class="line">待程序运行结束后，会在当前目录的上层生成fcitx_3.6~rc-1_i386.deb文件，双击安装即可，然后再重新登入下，即可使用。</span><br><span class="line">优点：安装相对简单，易上手</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">安装必须的库文件：
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> debhelper
+进入解压后的文件夹
+<span class="token builtin class-name">cd</span> fcitx-3.6.3
+fakeroot debian/rules binary
+待程序运行结束后，会在当前目录的上层生成fcitx_3.6~rc-1_i386.deb文件，双击安装即可，然后再重新登入下，即可使用。
+优点：安装相对简单，易上手<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
 <blockquote>
 <p>使用感受：fcitx-3.6.3还是比较另人满意的，在输入速度和界面美观上表现的都不错。</p>

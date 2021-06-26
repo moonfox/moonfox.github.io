@@ -414,7 +414,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir test_demo</span><br><span class="line"><span class="built_in">cd</span> test_demo</span><br><span class="line">git init</span><br><span class="line">touch README</span><br><span class="line">git add README</span><br><span class="line">git commit -m <span class="string">&#x27;first commit&#x27;</span></span><br><span class="line">git remote add origin git@github.com:youname/test_demo.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+          <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> test_demo
+<span class="token builtin class-name">cd</span> test_demo
+<span class="token function">git</span> init
+<span class="token function">touch</span> README
+<span class="token function">git</span> <span class="token function">add</span> README
+<span class="token function">git</span> commit -m <span class="token string">'first commit'</span>
+<span class="token function">git</span> remote <span class="token function">add</span> origin git@github.com:youname/test_demo.git
+<span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -634,7 +641,17 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>rspec mock 同一个方法多次</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mock_1</span></span></span><br><span class="line">  Car.should.receive(<span class="symbol">:new</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mock_2</span></span></span><br><span class="line">  Car.should.receive(<span class="symbol">:new</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">mock_1</span><br><span class="line">mock_2</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Peo</span></span></span><br><span class="line"> car = Car.new</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">def</span> <span class="token method-definition"><span class="token function">mock_1</span></span>
+  <span class="token constant">Car</span><span class="token punctuation">.</span>should<span class="token punctuation">.</span>receive<span class="token punctuation">(</span><span class="token symbol">:new</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+<span class="token keyword">def</span> <span class="token method-definition"><span class="token function">mock_2</span></span>
+  <span class="token constant">Car</span><span class="token punctuation">.</span>should<span class="token punctuation">.</span>receive<span class="token punctuation">(</span><span class="token symbol">:new</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+mock_1
+mock_2
+<span class="token keyword">class</span> <span class="token class-name">Peo</span>
+ car <span class="token operator">=</span> <span class="token constant">Car</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>实际代码里只调用一次Car.new，但mock的时候用了2次，运行时提示expected :new with (any args) once, but received it 0 times</p>
 <blockquote>

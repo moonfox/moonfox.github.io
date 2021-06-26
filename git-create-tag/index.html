@@ -19,12 +19,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Git 创建标签Git 标签分两种  附注标签: annotated: 是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息 轻量级标签: lightweight: 像一个不会改变的分支——它只是某个特定提交的引用。在实践中不推荐使用  打标签12345678910# 附注标签git tag -a v0.0.1 -m">
+<meta name="description" content="Git 创建标签Git 标签分两种  附注标签: annotated: 是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息 轻量级标签: lightweight: 像一个不会改变的分支——它只是某个特定提交的引用。在实践中不推荐使用  打标签# 附注标签 git tag -a v0.0.1 -m &quot;fir">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 创建标签">
 <meta property="og:url" content="https://www.gagahappy.com/git-create-tag/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="Git 创建标签Git 标签分两种  附注标签: annotated: 是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息 轻量级标签: lightweight: 像一个不会改变的分支——它只是某个特定提交的引用。在实践中不推荐使用  打标签12345678910# 附注标签git tag -a v0.0.1 -m">
+<meta property="og:description" content="Git 创建标签Git 标签分两种  附注标签: annotated: 是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息 轻量级标签: lightweight: 像一个不会改变的分支——它只是某个特定提交的引用。在实践中不推荐使用  打标签# 附注标签 git tag -a v0.0.1 -m &quot;fir">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-06-05T14:16:35.000Z">
 <meta property="article:modified_time" content="2021-06-06T08:54:34.600Z">
@@ -263,12 +263,38 @@
 <li>附注标签: annotated: 是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息</li>
 <li>轻量级标签: lightweight: 像一个不会改变的分支——它只是某个特定提交的引用。在实践中不推荐使用</li>
 </ul>
-<h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 附注标签</span></span><br><span class="line">git tag -a v0.0.1 -m <span class="string">&quot;first release try&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 发布标签</span></span><br><span class="line"><span class="comment"># 标签不会随push而自动被push到远程，需要单独push</span></span><br><span class="line">git push origin v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给某个commit单独打tag</span></span><br><span class="line"><span class="comment"># 这种操作多用于给历史commit打tag,原因可能是当时没有打</span></span><br><span class="line">git tag -a v0.0.2 2234093</span><br></pre></td></tr></table></figure>
+<h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 附注标签
+git tag -a v0.0.1 -m &quot;first release try&quot;
 
-<h2 id="标签操作"><a href="#标签操作" class="headerlink" title="标签操作"></a>标签操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某个tag的具体内容</span></span><br><span class="line">git show v0.0.1</span><br><span class="line">git cat-file -p v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除标签</span></span><br><span class="line">git tag -d v0.0.1</span><br><span class="line">=&gt; Deleted tag <span class="string">&#x27;v0.0.1&#x27;</span> (was 79db751)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程标签</span></span><br><span class="line">git push origin :v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tag的sha1</span></span><br><span class="line">cat .git/refs/tags/v5.4.1 <span class="comment"># 在标签被删除的时候会显示这个值</span></span><br><span class="line"><span class="comment"># =&gt; 79db751</span></span><br></pre></td></tr></table></figure>
+# 发布标签
+# 标签不会随push而自动被push到远程，需要单独push
+git push origin v0.0.1
+
+# 给某个commit单独打tag
+# 这种操作多用于给历史commit打tag,原因可能是当时没有打
+git tag -a v0.0.2 2234093<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="标签操作"><a href="#标签操作" class="headerlink" title="标签操作"></a>标签操作</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> tag
+
+<span class="token comment"># 查看某个tag的具体内容</span>
+<span class="token function">git</span> show v0.0.1
+<span class="token function">git</span> cat-file -p v0.0.1
+
+<span class="token comment"># 删除标签</span>
+<span class="token function">git</span> tag -d v0.0.1
+<span class="token operator">=</span><span class="token operator">></span> Deleted tag <span class="token string">'v0.0.1'</span> <span class="token punctuation">(</span>was 79db751<span class="token punctuation">)</span>
+
+<span class="token comment"># 删除远程标签</span>
+<span class="token function">git</span> push origin :v0.0.1
+
+<span class="token comment"># 查看tag的sha1</span>
+<span class="token function">cat</span> .git/refs/tags/v5.4.1 <span class="token comment"># 在标签被删除的时候会显示这个值</span>
+<span class="token comment"># => 79db751</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="签名tag"><a href="#签名tag" class="headerlink" title="签名tag"></a>签名tag</h2><p>前置条件：要先配置GPG</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 强制给tag 签名</span></span><br><span class="line"><span class="comment"># 直接编辑  ~/.gitconfig 也可以</span></span><br><span class="line">git config --global tag.forcesignannotated <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 强制给tag 签名</span>
+<span class="token comment"># 直接编辑  ~/.gitconfig 也可以</span>
+<span class="token function">git</span> config --global tag.forcesignannotated <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
     </div>
 

@@ -284,7 +284,13 @@
 <li><code>feature2</code>上的提交有：<code>[m1, m2, m3, f1_01, f1_02, f1_03，f2_01_new, f2_02_new, f2_03_new]</code></li>
 </ul>
 <h2 id="合并步骤"><a href="#合并步骤" class="headerlink" title="合并步骤"></a>合并步骤</h2><p><code>feature2</code>要把<code>master</code>上的提交合并过来，使用<code>rebase</code> 而不是<code>merge</code>，这样就会不产生合并提交，在向<code>master</code>提交时就变成了<code>快速向前</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git co feature2</span><br><span class="line">git rebase master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果发生冲突，解决冲突后把冲突文件加入 index 区</span></span><br><span class="line">git add -u</span><br><span class="line"><span class="comment"># 运行continue 以使rebase完成</span></span><br><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> co feature2
+<span class="token function">git</span> rebase master
+
+<span class="token comment"># 如果发生冲突，解决冲突后把冲突文件加入 index 区</span>
+<span class="token function">git</span> <span class="token function">add</span> -u
+<span class="token comment"># 运行continue 以使rebase完成</span>
+<span class="token function">git</span> rebase --continue<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
 <li><p>步骤1：<code>git rebase master</code>：以<code>master</code>分支做为<code>feature2</code>的基础</p>

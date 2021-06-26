@@ -260,7 +260,8 @@
         <p>启动mysql失败，提示Manager of pid-file quit without updating file.错误。从网上直接搜索错误信息，感觉出错原因及解决方案都不适用于本机的情况。</p>
 <p>本着出错要查出其原因的原则，查看了mysql的出错日志（出错日志所在路径，请根据您自己机子的实际情况查找），发现错误信息：File ‘./mysql-bin.index’ not found (Errcode: 13)，查看数据库文件，mysql-bin.index确实存在。</p>
 <p>查看数据库文件的权限，发现全都变成了 drwx—— 2  1001 1001。突然想起之前重建过mysql用户，造成数据库文件的权限用户信息丢失。重新授权即可。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R  mysql var/</span><br><span class="line">sudo chgrp -R  mysql var/</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">chown</span> -R  mysql var/
+<span class="token function">sudo</span> <span class="token function">chgrp</span> -R  mysql var/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>再次启动mysql，成功！</p>
 
     </div>

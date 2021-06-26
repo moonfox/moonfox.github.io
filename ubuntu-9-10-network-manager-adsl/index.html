@@ -282,7 +282,12 @@
 <p>升级至ubuntu 9.10后，启用network-manager，adsl无法上网，网上说这是ubuntu升级至9.10后的一个bug，解决方法如下</p>
 <blockquote>
 <ol>
-<li>从PPA更新network-manager<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BC8EBFE8</span><br><span class="line">在/etc/apt/sources.list最后加上</span><br><span class="line">deb http://ppa.launchpad.net/network-manager/trunk/ubuntu karmic main</span><br><span class="line">deb-src http://ppa.launchpad.net/network-manager/trunk/ubuntu karmic main</span><br><span class="line">sudo aptitude update</span><br><span class="line">sudo aptitude safe-upgrade</span><br></pre></td></tr></table></figure></li>
+<li>从PPA更新network-manager<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BC8EBFE8
+在/etc/apt/sources.list最后加上
+deb http://ppa.launchpad.net/network-manager/trunk/ubuntu karmic main
+deb-src http://ppa.launchpad.net/network-manager/trunk/ubuntu karmic main
+<span class="token function">sudo</span> <span class="token function">aptitude</span> update
+<span class="token function">sudo</span> <span class="token function">aptitude</span> safe-upgrade<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
 </blockquote>
 <blockquote>

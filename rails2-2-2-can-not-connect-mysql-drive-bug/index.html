@@ -19,18 +19,18 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="12345678gem install mysql -- --with-mysql-config&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;bin&#x2F;mysql_configgem install mysql --no-rdoc --no-ri \-- --with-mysql-include&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;include \--with-mysql-lib&#x3D;&#x2F;usr&#x2F;local&#x2F;mys">
+<meta name="description" content="gem install mysql -- --with-mysql-config&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;bin&#x2F;mysql_config  gem install mysql --no-rdoc --no-ri \ -- --with-mysql-include&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;include \ --with-mysql-lib&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;l">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决rails2.2.2不能连接mysql 数据库驱动问题">
 <meta property="og:url" content="https://www.gagahappy.com/rails2-2-2-can-not-connect-mysql-drive-bug/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="12345678gem install mysql -- --with-mysql-config&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;bin&#x2F;mysql_configgem install mysql --no-rdoc --no-ri \-- --with-mysql-include&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;include \--with-mysql-lib&#x3D;&#x2F;usr&#x2F;local&#x2F;mys">
+<meta property="og:description" content="gem install mysql -- --with-mysql-config&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;bin&#x2F;mysql_config  gem install mysql --no-rdoc --no-ri \ -- --with-mysql-include&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;include \ --with-mysql-lib&#x3D;&#x2F;usr&#x2F;local&#x2F;mysql&#x2F;l">
 <meta property="og:locale">
 <meta property="article:published_time" content="2011-07-03T09:56:36.000Z">
 <meta property="article:modified_time" content="2021-06-05T13:16:53.187Z">
 <meta property="article:author" content="戛戛Happy">
-<meta property="article:tag" content="Rails">
 <meta property="article:tag" content="mysql">
+<meta property="article:tag" content="Rails">
 <meta name="twitter:card" content="summary">
 
 
@@ -258,10 +258,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gem install mysql -- --with-mysql-config=/usr/<span class="built_in">local</span>/mysql/bin/mysql_config</span><br><span class="line"></span><br><span class="line">gem install mysql --no-rdoc --no-ri \</span><br><span class="line">-- --with-mysql-include=/usr/<span class="built_in">local</span>/mysql/include \</span><br><span class="line">--with-mysql-lib=/usr/<span class="built_in">local</span>/mysql/lib \</span><br><span class="line">--with-mysql-config=/usr/<span class="built_in">local</span>/mysql/bin/mysql_config</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;/usr/local/mysql/lib&quot;</span> to /etc/ld.so.conf and ran ldconfig</span><br></pre></td></tr></table></figure>
+        <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gem <span class="token function">install</span> mysql -- --with-mysql-config<span class="token operator">=</span>/usr/local/mysql/bin/mysql_config
+
+gem <span class="token function">install</span> mysql --no-rdoc --no-ri <span class="token punctuation">\</span>
+-- --with-mysql-include<span class="token operator">=</span>/usr/local/mysql/include <span class="token punctuation">\</span>
+--with-mysql-lib<span class="token operator">=</span>/usr/local/mysql/lib <span class="token punctuation">\</span>
+--with-mysql-config<span class="token operator">=</span>/usr/local/mysql/bin/mysql_config
+
+<span class="token string">"/usr/local/mysql/lib"</span> to /etc/ld.so.conf and ran ldconfig<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>修改 <code>/etc/ld.so.conf</code>， 加入<code>include /opt/mysql/lib</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install mysql -- --with-mysql-lib=/opt/mysql/lib/mysql --with-mysql-include=/opt/mysql/include/mysql/</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gem <span class="token function">install</span> mysql -- --with-mysql-lib<span class="token operator">=</span>/opt/mysql/lib/mysql --with-mysql-include<span class="token operator">=</span>/opt/mysql/include/mysql/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
     </div>
 
@@ -288,8 +295,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/rails/" rel="tag"><i class="fa fa-tag"></i> Rails</a>
               <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
+              <a href="/tags/rails/" rel="tag"><i class="fa fa-tag"></i> Rails</a>
           </div>
 
         

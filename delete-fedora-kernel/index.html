@@ -19,12 +19,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="由于Fedora更新升级非常的频繁， 所以， 非常有必要清除陈旧的内核，方法如下：  查看当前系统中已安装的内核相关包： 1234rpm -qa | grep kernelkernel-2.6.35.6-45.fc14.i686kernel-2.6.35.12-88.fc14.i686abrt-addon-kerneloops-1.1.17-1.fc14.i686 查看当前系统内核shell&amp;gt">
+<meta name="description" content="由于Fedora更新升级非常的频繁， 所以， 非常有必要清除陈旧的内核，方法如下：  查看当前系统中已安装的内核相关包： rpm -qa | grep kernel kernel-2.6.35.6-45.fc14.i686 kernel-2.6.35.12-88.fc14.i686 abrt-addon-kerneloops-1.1.17-1.fc14.i686 查看当前系统内核shell&gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fedora 删除旧内核">
 <meta property="og:url" content="https://www.gagahappy.com/delete-fedora-kernel/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="由于Fedora更新升级非常的频繁， 所以， 非常有必要清除陈旧的内核，方法如下：  查看当前系统中已安装的内核相关包： 1234rpm -qa | grep kernelkernel-2.6.35.6-45.fc14.i686kernel-2.6.35.12-88.fc14.i686abrt-addon-kerneloops-1.1.17-1.fc14.i686 查看当前系统内核shell&amp;gt">
+<meta property="og:description" content="由于Fedora更新升级非常的频繁， 所以， 非常有必要清除陈旧的内核，方法如下：  查看当前系统中已安装的内核相关包： rpm -qa | grep kernel kernel-2.6.35.6-45.fc14.i686 kernel-2.6.35.12-88.fc14.i686 abrt-addon-kerneloops-1.1.17-1.fc14.i686 查看当前系统内核shell&gt;">
 <meta property="og:locale">
 <meta property="article:published_time" content="2011-04-13T08:36:37.000Z">
 <meta property="article:modified_time" content="2021-06-05T13:16:53.164Z">
@@ -260,7 +260,10 @@
         <p>由于Fedora更新升级非常的频繁， 所以， 非常有必要清除陈旧的内核，方法如下：</p>
 <ol>
 <li><p>查看当前系统中已安装的内核相关包：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep kernel</span><br><span class="line">kernel-2.6.35.6-45.fc14.i686</span><br><span class="line">kernel-2.6.35.12-88.fc14.i686</span><br><span class="line">abrt-addon-kerneloops-1.1.17-1.fc14.i686</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> -qa <span class="token operator">|</span> <span class="token function">grep</span> kernel
+kernel-2.6.35.6-45.fc14.i686
+kernel-2.6.35.12-88.fc14.i686
+abrt-addon-kerneloops-1.1.17-1.fc14.i686<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>查看当前系统内核<br>shell&gt; uname -r<br>kernel-2.6.35.12-88.fc14.i686</p>
 </li>
 <li><p>确定要删除的内核：<br>这里为：kernel-2.6.35.6-45.fc14.i686</p>

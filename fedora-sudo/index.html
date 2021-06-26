@@ -269,7 +269,11 @@
 </li>
 <li><p>然后visudo</p>
 <blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这个和vi的用法一样，移动光标，到最后一行，按a，进入append模式，输入以下这行内容</span></span><br><span class="line">yourname ALL=(ALL)</span><br><span class="line"><span class="comment"># 然后按Esc，再输入:wq保存文件并退出，这样就把自己加入了sudo组，可以使用sudo命令了。</span></span><br><span class="line"><span class="comment"># 如果不想在sudo的时候输入密码，干脆就把上面那行换成下面这行即可：</span></span><br><span class="line">yourname ALL=(ALL)NOPASSWD: ALL</span><br></pre></td></tr></table></figure></blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 这个和vi的用法一样，移动光标，到最后一行，按a，进入append模式，输入以下这行内容</span>
+yourname <span class="token assign-left variable">ALL</span><span class="token operator">=</span><span class="token punctuation">(</span>ALL<span class="token punctuation">)</span>
+<span class="token comment"># 然后按Esc，再输入:wq保存文件并退出，这样就把自己加入了sudo组，可以使用sudo命令了。</span>
+<span class="token comment"># 如果不想在sudo的时候输入密码，干脆就把上面那行换成下面这行即可：</span>
+yourname <span class="token assign-left variable">ALL</span><span class="token operator">=</span><span class="token punctuation">(</span>ALL<span class="token punctuation">)</span>NOPASSWD: ALL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></blockquote>
 </li>
 <li><p>测试 sudo</p>
 <blockquote>

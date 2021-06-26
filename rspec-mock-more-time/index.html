@@ -19,12 +19,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="rspec mock 同一个方法多次 1234567891011def mock_1  Car.should.receive(:new)enddef mock_2  Car.should.receive(:new)endmock_1mock_2class Peo car &#x3D; Car.newend  实际代码里只调用一次Car.new，但mock的时候用了2次，运行时提示expected :new">
+<meta name="description" content="rspec mock 同一个方法多次 def mock_1   Car.should.receive(:new) end def mock_2   Car.should.receive(:new) end mock_1 mock_2 class Peo  car &#x3D; Car.new end  实际代码里只调用一次Car.new，但mock的时候用了2次，运行时提示expected :new wit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rspec mock 多次">
 <meta property="og:url" content="https://www.gagahappy.com/rspec-mock-more-time/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="rspec mock 同一个方法多次 1234567891011def mock_1  Car.should.receive(:new)enddef mock_2  Car.should.receive(:new)endmock_1mock_2class Peo car &#x3D; Car.newend  实际代码里只调用一次Car.new，但mock的时候用了2次，运行时提示expected :new">
+<meta property="og:description" content="rspec mock 同一个方法多次 def mock_1   Car.should.receive(:new) end def mock_2   Car.should.receive(:new) end mock_1 mock_2 class Peo  car &#x3D; Car.new end  实际代码里只调用一次Car.new，但mock的时候用了2次，运行时提示expected :new wit">
 <meta property="og:locale">
 <meta property="article:published_time" content="2011-11-16T06:25:06.000Z">
 <meta property="article:modified_time" content="2021-06-05T13:16:53.217Z">
@@ -258,7 +258,17 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>rspec mock 同一个方法多次</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mock_1</span></span></span><br><span class="line">  Car.should.receive(<span class="symbol">:new</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mock_2</span></span></span><br><span class="line">  Car.should.receive(<span class="symbol">:new</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">mock_1</span><br><span class="line">mock_2</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Peo</span></span></span><br><span class="line"> car = Car.new</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">def</span> <span class="token method-definition"><span class="token function">mock_1</span></span>
+  <span class="token constant">Car</span><span class="token punctuation">.</span>should<span class="token punctuation">.</span>receive<span class="token punctuation">(</span><span class="token symbol">:new</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+<span class="token keyword">def</span> <span class="token method-definition"><span class="token function">mock_2</span></span>
+  <span class="token constant">Car</span><span class="token punctuation">.</span>should<span class="token punctuation">.</span>receive<span class="token punctuation">(</span><span class="token symbol">:new</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+mock_1
+mock_2
+<span class="token keyword">class</span> <span class="token class-name">Peo</span>
+ car <span class="token operator">=</span> <span class="token constant">Car</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>实际代码里只调用一次Car.new，但mock的时候用了2次，运行时提示expected :new with (any args) once, but received it 0 times</p>
 <blockquote>

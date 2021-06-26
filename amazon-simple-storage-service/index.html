@@ -270,12 +270,25 @@
 </blockquote>
 </li>
 <li><p>设置bucket的权限策略，添加新的策略，权限为公开，这样才能让别人访问你的网站内容</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;Version&quot;</span>: <span class="string">&quot;2012-10-17&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;Statement&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;Sid&quot;</span>: <span class="string">&quot;PublicReadForGetBucketObjects&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Effect&quot;</span>: <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Principal&quot;</span>: <span class="string">&quot;*&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Action&quot;</span>: <span class="string">&quot;s3:GetObject&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Resource&quot;</span>: <span class="string">&quot;arn:aws:s3:::www.youdomain.com/*&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"Version"</span><span class="token operator">:</span> <span class="token string">"2012-10-17"</span><span class="token punctuation">,</span>
+  <span class="token property">"Statement"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token property">"Sid"</span><span class="token operator">:</span> <span class="token string">"PublicReadForGetBucketObjects"</span><span class="token punctuation">,</span>
+      <span class="token property">"Effect"</span><span class="token operator">:</span> <span class="token string">"Allow"</span><span class="token punctuation">,</span>
+      <span class="token property">"Principal"</span><span class="token operator">:</span> <span class="token string">"*"</span><span class="token punctuation">,</span>
+      <span class="token property">"Action"</span><span class="token operator">:</span> <span class="token string">"s3:GetObject"</span><span class="token punctuation">,</span>
+      <span class="token property">"Resource"</span><span class="token operator">:</span> <span class="token string">"arn:aws:s3:::www.youdomain.com/*"</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>上传文件到s3</p>
 </li>
 </ol>
 <p>使用aws s3命令行工具进行上传</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aws s3 sync . s3://www.youdomain.com --exclude <span class="string">&quot;.git/*&quot;</span> --delete</span><br><span class="line"></span><br><span class="line"><span class="comment"># 参数delete的作用是：删除目标路径中，源路径不存的文件、文件夹</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">aws s3 <span class="token function">sync</span> <span class="token builtin class-name">.</span> s3://www.youdomain.com --exclude <span class="token string">".git/*"</span> --delete
+
+<span class="token comment"># 参数delete的作用是：删除目标路径中，源路径不存的文件、文件夹</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>进入你的网站存放路径，输入以上命令，文件就会被同步到s3了，如果一切正常，你就可以通过你的域名进行访问了。当然，你也可以使用分配给你的桶路径进行访问</p>
 

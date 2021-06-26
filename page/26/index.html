@@ -254,7 +254,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;Location /svn&gt;</span><br><span class="line">DAV svn</span><br><span class="line">SVNParentPath D:\SVN</span><br><span class="line">AuthType Basic</span><br><span class="line">AuthName <span class="string">&quot;Subversion repositories&quot;</span></span><br><span class="line">AuthUserFile D:\passwd</span><br><span class="line"><span class="comment">#AuthzSVNAccessFile D:\svnaccessfile</span></span><br><span class="line">Require valid-user</span><br><span class="line">&lt;/Location&gt;</span><br></pre></td></tr></table></figure>
+          <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">&lt;</span>Location /svn<span class="token operator">></span>
+DAV svn
+SVNParentPath D:<span class="token punctuation">\</span>SVN
+AuthType Basic
+AuthName <span class="token string">"Subversion repositories"</span>
+AuthUserFile D:<span class="token punctuation">\</span>passwd
+<span class="token comment">#AuthzSVNAccessFile D:\svnaccessfile</span>
+Require valid-user
+<span class="token operator">&lt;</span>/Location<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -422,7 +430,17 @@
 </blockquote>
 </li>
 <li><p>编辑环境变量</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/<span class="built_in">local</span>/java/jdk6/jdk1.6.0_11</span><br><span class="line">CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> CLASSPATH</span><br><span class="line"><span class="comment"># 上面写法不一定正确</span></span><br><span class="line"><span class="built_in">export</span> MYSQL_HOME=/opt/mysql</span><br><span class="line"><span class="built_in">export</span> RUBY_HOME=/opt/ruby</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/opt/java/jdk1.6.0_11</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$MYSQL_HOME</span>/bin:<span class="variable">$RUBY_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line">java -version <span class="comment">#如果出现版本号，则说明安装成功。</span></span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span>/usr/local/java/jdk6/jdk1.6.0_11
+<span class="token assign-left variable">CLASSPATH</span><span class="token operator">=</span>.:<span class="token variable">$JAVA_HOME</span>/lib/tools.jar
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token variable">$JAVA_HOME</span>/bin:<span class="token environment constant">$PATH</span>
+<span class="token builtin class-name">export</span> CLASSPATH
+<span class="token comment"># 上面写法不一定正确</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MYSQL_HOME</span><span class="token operator">=</span>/opt/mysql
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">RUBY_HOME</span><span class="token operator">=</span>/opt/ruby
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span>/opt/java/jdk1.6.0_11
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span><span class="token builtin class-name">:</span><span class="token variable">$JAVA_HOME</span>/bin:<span class="token variable">$MYSQL_HOME</span>/bin:<span class="token variable">$RUBY_HOME</span>/bin
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">CLASSPATH</span><span class="token operator">=</span>.:<span class="token variable">$JAVA_HOME</span>/lib/tools.jar
+java -version <span class="token comment">#如果出现版本号，则说明安装成功。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
 
       
@@ -496,10 +514,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gem install mysql -- --with-mysql-config=/usr/<span class="built_in">local</span>/mysql/bin/mysql_config</span><br><span class="line"></span><br><span class="line">gem install mysql --no-rdoc --no-ri \</span><br><span class="line">-- --with-mysql-include=/usr/<span class="built_in">local</span>/mysql/include \</span><br><span class="line">--with-mysql-lib=/usr/<span class="built_in">local</span>/mysql/lib \</span><br><span class="line">--with-mysql-config=/usr/<span class="built_in">local</span>/mysql/bin/mysql_config</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;/usr/local/mysql/lib&quot;</span> to /etc/ld.so.conf and ran ldconfig</span><br></pre></td></tr></table></figure>
+          <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gem <span class="token function">install</span> mysql -- --with-mysql-config<span class="token operator">=</span>/usr/local/mysql/bin/mysql_config
+
+gem <span class="token function">install</span> mysql --no-rdoc --no-ri <span class="token punctuation">\</span>
+-- --with-mysql-include<span class="token operator">=</span>/usr/local/mysql/include <span class="token punctuation">\</span>
+--with-mysql-lib<span class="token operator">=</span>/usr/local/mysql/lib <span class="token punctuation">\</span>
+--with-mysql-config<span class="token operator">=</span>/usr/local/mysql/bin/mysql_config
+
+<span class="token string">"/usr/local/mysql/lib"</span> to /etc/ld.so.conf and ran ldconfig<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>修改 <code>/etc/ld.so.conf</code>， 加入<code>include /opt/mysql/lib</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install mysql -- --with-mysql-lib=/opt/mysql/lib/mysql --with-mysql-include=/opt/mysql/include/mysql/</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gem <span class="token function">install</span> mysql -- --with-mysql-lib<span class="token operator">=</span>/opt/mysql/lib/mysql --with-mysql-include<span class="token operator">=</span>/opt/mysql/include/mysql/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
       
     </div>
@@ -797,10 +822,14 @@
     <div class="post-body" itemprop="articleBody">
           <p>fedora14下用个人帐户登录系统建立目录时，默认权限变成了drwxrwxr-x，而不是我们通常设置的drwxr-xr-x。另建其他帐户问题依然存在，很是奇怪，经过一番的查找，问题出在了系统环境文件里。具体解决方法如下</p>
 <p>打开系统环境文件，发现文件中多了以下几行，怀疑是升级时系统加入的</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ <span class="variable">$UID</span> -gt 199 ] &amp;&amp; [ <span class="string">&quot;`id -gn`&quot;</span> = <span class="string">&quot;`id -un`&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">umask</span> 002</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">umask</span> 022</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token environment constant">$UID</span> -gt <span class="token number">199</span> <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> <span class="token string">"<span class="token variable"><span class="token variable">`</span><span class="token function">id</span> -gn<span class="token variable">`</span></span>"</span> <span class="token operator">=</span> <span class="token string">"<span class="token variable"><span class="token variable">`</span><span class="token function">id</span> -un<span class="token variable">`</span></span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">umask</span> 002
+<span class="token keyword">else</span>
+    <span class="token builtin class-name">umask</span> 022
+<span class="token keyword">fi</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>umask把普通用户登录后文件及目录的默认权限设置为775了，改回755问题即可解决。在文件尾端加入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">umask</span> 022</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">umask</span> 022<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>移步<a href="http://www.gagahappy.com/linux-modify-default-rights-by-umask/"> fedora 设置文件默认权限</a>了解相关umask知识</p>
 

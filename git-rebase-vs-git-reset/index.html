@@ -19,12 +19,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="常用的应用场景 合并提交  去除不要的提交   实际应用场景1，合并多个提交有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交  方法一: git reset  12git reset B --softgit ci -m &quot;merge C to F&quot;">
+<meta name="description" content="常用的应用场景 合并提交  去除不要的提交   实际应用场景1，合并多个提交有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交  方法一: git reset  git reset B --soft git ci -m &quot;merge C to F&quot;   方法二: git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git rebase 与 git reset的应用">
 <meta property="og:url" content="https://www.gagahappy.com/git-rebase-vs-git-reset/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="常用的应用场景 合并提交  去除不要的提交   实际应用场景1，合并多个提交有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交  方法一: git reset  12git reset B --softgit ci -m &quot;merge C to F&quot;">
+<meta property="og:description" content="常用的应用场景 合并提交  去除不要的提交   实际应用场景1，合并多个提交有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交  方法一: git reset  git reset B --soft git ci -m &quot;merge C to F&quot;   方法二: git">
 <meta property="og:locale">
 <meta property="article:published_time" content="2018-06-07T06:13:19.000Z">
 <meta property="article:modified_time" content="2021-06-05T13:16:53.453Z">
@@ -268,16 +268,17 @@
 <ol>
 <li>方法一: <code>git reset</code></li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset B --soft</span><br><span class="line">git ci -m <span class="string">&quot;merge C to F&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset B --soft
+<span class="token function">git</span> ci -m <span class="token string">"merge C to F"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <ol start="2">
 <li>方法二: <code>git rebase</code></li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --onto B C^ develop</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto B C^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="场景2，去掉D提交"><a href="#场景2，去掉D提交" class="headerlink" title="场景2，去掉D提交"></a>场景2，去掉D提交</h3><p>此时，<code>git reset</code>已经不再适合这个场景</p>
 <p>使用<code>git rebase</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase --onto C E^ develop</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto C E^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ol>
 <li><code>git rebase</code> 语法</li>

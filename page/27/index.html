@@ -257,7 +257,10 @@
           <p>由于Fedora更新升级非常的频繁， 所以， 非常有必要清除陈旧的内核，方法如下：</p>
 <ol>
 <li><p>查看当前系统中已安装的内核相关包：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep kernel</span><br><span class="line">kernel-2.6.35.6-45.fc14.i686</span><br><span class="line">kernel-2.6.35.12-88.fc14.i686</span><br><span class="line">abrt-addon-kerneloops-1.1.17-1.fc14.i686</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> -qa <span class="token operator">|</span> <span class="token function">grep</span> kernel
+kernel-2.6.35.6-45.fc14.i686
+kernel-2.6.35.12-88.fc14.i686
+abrt-addon-kerneloops-1.1.17-1.fc14.i686<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>查看当前系统内核<br>shell&gt; uname -r<br>kernel-2.6.35.12-88.fc14.i686</p>
 </li>
 <li><p>确定要删除的内核：<br>这里为：kernel-2.6.35.6-45.fc14.i686</p>
@@ -342,7 +345,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>首先，安装 RPM Fusion 软件仓库</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su -c <span class="string">&#x27;rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm&#x27;</span></span><br><span class="line">su -c <span class="string">&#x27;rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm&#x27;</span></span><br><span class="line">su -c <span class="string">&#x27;yum update&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">su</span> -c <span class="token string">'rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm'</span>
+<span class="token function">su</span> -c <span class="token string">'rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm'</span>
+<span class="token function">su</span> -c <span class="token string">'yum update'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>然后，安装 NVIDIA 显卡驱动</p>
 <ol>
 <li>确定显卡类型（当然，如果你知道你的显卡类型，就没必要执行这一步了）<br><code>su -c &#39;/sbin/lspci | grep VGA&#39;</code></li>
@@ -510,7 +515,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/opt/nginx \</span><br><span class="line">--conf-path=/etc/nginx/nginx.conf \</span><br><span class="line">--error-log-path=/var/<span class="built_in">log</span>/nginx/error.log  \</span><br><span class="line">--pid-path=/var/tmp/nginx/nginx.pid  \</span><br><span class="line">--lock-path=/var/lock/nginx.lock  \</span><br><span class="line">--user=nginx  \</span><br><span class="line">--group=nginx  \</span><br><span class="line">--with-http_flv_module   \</span><br><span class="line">--with-http_ssl_module  \</span><br><span class="line">--add-module=<span class="string">&#x27;/opt/passenger/ext/nginx&#x27;</span> \</span><br><span class="line">--with-http_gzip_static_module  \</span><br><span class="line">--http-log-path=/var/<span class="built_in">log</span>/nginx/access.log  \</span><br><span class="line">--http-client-body-temp-path=/var/tmp/nginx/client/  \</span><br><span class="line">--http-proxy-temp-path=/var/tmp/nginx/proxy/  \</span><br><span class="line">--http-fastcgi-temp-path=/var/tmp/nginx/fastcgi/  \</span><br><span class="line">--http-scgi-temp-path=/var/tmp/nginx/scgi/  \</span><br><span class="line">--http-uwsgi-temp-path=/var/tmp/nginx/uwsgi/</span><br></pre></td></tr></table></figure>
+          <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./configure --prefix<span class="token operator">=</span>/opt/nginx <span class="token punctuation">\</span>
+--conf-path<span class="token operator">=</span>/etc/nginx/nginx.conf <span class="token punctuation">\</span>
+--error-log-path<span class="token operator">=</span>/var/log/nginx/error.log  <span class="token punctuation">\</span>
+--pid-path<span class="token operator">=</span>/var/tmp/nginx/nginx.pid  <span class="token punctuation">\</span>
+--lock-path<span class="token operator">=</span>/var/lock/nginx.lock  <span class="token punctuation">\</span>
+--user<span class="token operator">=</span>nginx  <span class="token punctuation">\</span>
+--group<span class="token operator">=</span>nginx  <span class="token punctuation">\</span>
+--with-http_flv_module   <span class="token punctuation">\</span>
+--with-http_ssl_module  <span class="token punctuation">\</span>
+--add-module<span class="token operator">=</span><span class="token string">'/opt/passenger/ext/nginx'</span> <span class="token punctuation">\</span>
+--with-http_gzip_static_module  <span class="token punctuation">\</span>
+--http-log-path<span class="token operator">=</span>/var/log/nginx/access.log  <span class="token punctuation">\</span>
+--http-client-body-temp-path<span class="token operator">=</span>/var/tmp/nginx/client/  <span class="token punctuation">\</span>
+--http-proxy-temp-path<span class="token operator">=</span>/var/tmp/nginx/proxy/  <span class="token punctuation">\</span>
+--http-fastcgi-temp-path<span class="token operator">=</span>/var/tmp/nginx/fastcgi/  <span class="token punctuation">\</span>
+--http-scgi-temp-path<span class="token operator">=</span>/var/tmp/nginx/scgi/  <span class="token punctuation">\</span>
+--http-uwsgi-temp-path<span class="token operator">=</span>/var/tmp/nginx/uwsgi/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/nginx-config-option/#more" rel="contents">
@@ -591,9 +612,11 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>正如之前预料的那样，升级到rails2.3后，find_all终成大患了。其实早在rails 1.2时就已经提示，find_all方法将在2.0版本的时候被移除，所以当时最稳妥的做法就是使用find(:all)这样的原生方法。</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In rails2.0 up can not work</span></span><br><span class="line">find_all(<span class="symbol">:all</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># In rails2.0 up can not work</span>
+find_all<span class="token punctuation">(</span><span class="token symbol">:all</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># In rails2.0  still work</span></span><br><span class="line">find(<span class="symbol">:all</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token comment"># In rails2.0  still work</span>
+find<span class="token punctuation">(</span><span class="token symbol">:all</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -742,10 +765,10 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>在启动nginx之前还需要添加nginx用户组，否则会提示</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[emerg]: getpwnam(“nginx”) failed</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>emerg<span class="token punctuation">]</span>: getpwnam<span class="token punctuation">(</span>“nginx”<span class="token punctuation">)</span> failed<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>添加用户组</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser --system --no-create-home --disabled-password --group nginx</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> adduser --system --no-create-home --disabled-password --group nginx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
       
     </div>

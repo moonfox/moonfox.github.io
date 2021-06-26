@@ -255,9 +255,17 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>linux 重定向 标准输出 标准输入到文件，测试程序用C语言，执行程序名为test_out</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;%s\n&quot;</span>, <span class="string">&quot;this is stderr&quot;</span>);</span><br><span class="line">  <span class="built_in">fprintf</span>(<span class="built_in">stdout</span>, <span class="string">&quot;%s\n&quot;</span>, <span class="string">&quot;this is stdout&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token keyword">const</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"%s\n"</span><span class="token punctuation">,</span> <span class="token string">"this is stderr"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stdout</span><span class="token punctuation">,</span> <span class="token string">"%s\n"</span><span class="token punctuation">,</span> <span class="token string">"this is stdout"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>测试1</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&gt; test_out</span><br><span class="line">=&gt; <span class="built_in">stderr</span></span><br><span class="line">=&gt; <span class="built_in">stdout</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">$<span class="token operator">></span> test_out
+<span class="token operator">=</span><span class="token operator">></span> <span class="token constant">stderr</span>
+<span class="token operator">=</span><span class="token operator">></span> <span class="token constant">stdout</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/linux-redirect-stdout-stderr/#more" rel="contents">
@@ -503,7 +511,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>使用 ftp 命令行删除多个文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdelete files</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">mdelete files<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
       
     </div>
@@ -651,7 +659,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>linux awk 内置字符串函数</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -e <span class="string">&#x27;192.187.126.42.*POST&#x27;</span> apache_20141117.log | awk <span class="string">&#x27;&#123;print substr($4,14,2)&#125;&#x27;</span> | sort | uniq -c</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">grep</span> -e <span class="token string">'192.187.126.42.*POST'</span> apache_20141117.log <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'&#123;print substr(<span class="token variable">$4</span>,14,2)&#125;'</span> <span class="token operator">|</span> <span class="token function">sort</span> <span class="token operator">|</span> <span class="token function">uniq</span> -c<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
       
     </div>
@@ -725,7 +733,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>使用命令行简单统计网站日志，$1为ip地址，统计前20位来访最多的IP</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span> apache_20141115.log  | sort | uniq -c | sort -k 1 -n -r | head -20</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">awk</span> <span class="token string">'&#123;print <span class="token variable">$1</span>&#125;'</span> apache_20141115.log  <span class="token operator">|</span> <span class="token function">sort</span> <span class="token operator">|</span> <span class="token function">uniq</span> -c <span class="token operator">|</span> <span class="token function">sort</span> -k <span class="token number">1</span> -n -r <span class="token operator">|</span> <span class="token function">head</span> -20<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>注意：</p>
 <blockquote>
@@ -884,7 +892,8 @@
 <p>在Discussion中去掉 Allow link notifications from other blogs (pingbacks and trackbacks) 前面的勾选</p>
 </blockquote>
 <p>并在数据库中执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE wp_posts SET ping_status &#x3D; &#39;closed&#39; WHERE &#39;你要关闭的相关文章的&#39;;</span><br><span class="line"># 注：where部分可以不要，但最好选出有效的文章和附件，把它们的trackback和ping关闭就可以了。</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">UPDATE wp_posts SET ping_status &#x3D; &#39;closed&#39; WHERE &#39;你要关闭的相关文章的&#39;;
+# 注：where部分可以不要，但最好选出有效的文章和附件，把它们的trackback和ping关闭就可以了。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -957,7 +966,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM xxx WHERE 内容 LIKE &#39;%\%%&#39;;</span><br><span class="line"></span><br><span class="line">-- 用\%转义</span><br></pre></td></tr></table></figure>
+          <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM xxx WHERE 内容 LIKE &#39;%\%%&#39;;
+
+-- 用\%转义<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
       
     </div>
 

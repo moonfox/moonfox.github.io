@@ -790,7 +790,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>在ubuntu中，当你通过源更新系统时，如果此源比较慢的话，可以考虑使用axel ，它可以进行分段下载，从而加快你的下载速度。本人在更新某个国外源软件时下载速度非常慢，大概10K左右，在使用axel后，下载速度为56K（本人ADSL 512），效果还是相当明显滴！</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get --print-uris -y dist-upgrade | grep http | awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span> | sed <span class="string">&quot;s/&#x27;//g&quot;</span> | xargs -l1 sudo axel -n5 -a -o /var/cache/apt/archives/</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> --print-uris -y dist-upgrade <span class="token operator">|</span> <span class="token function">grep</span> http <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'&#123;print <span class="token variable">$1</span>&#125;'</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">"s/'//g"</span> <span class="token operator">|</span> <span class="token function">xargs</span> -l1 <span class="token function">sudo</span> axel -n5 -a -o /var/cache/apt/archives/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
       
     </div>
@@ -864,7 +864,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>在配置bashrc文件后，如果想使其立即生效，可以不用采用登出的方法，而直接键入下列命令即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ./.bashrc</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> ./.bashrc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
       
     </div>

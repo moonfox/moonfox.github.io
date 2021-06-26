@@ -19,12 +19,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="本博在ubuntu 10.04 重启网络服务一文中介绍了怎样重启网络服务，后来在使用过程中发现此方法并不正确，后经网上搜索，更正如下 123456sudo service network-manager stopsudo rm &#x2F;var&#x2F;lib&#x2F;NetworkManager&#x2F;NetworkManager.statesudo service network-manager startsudo ged">
+<meta name="description" content="本博在ubuntu 10.04 重启网络服务一文中介绍了怎样重启网络服务，后来在使用过程中发现此方法并不正确，后经网上搜索，更正如下 sudo service network-manager stop sudo rm &#x2F;var&#x2F;lib&#x2F;NetworkManager&#x2F;NetworkManager.state sudo service network-manager start sudo gedit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决Ubuntu10.04“网络已禁用”的问题">
 <meta property="og:url" content="https://www.gagahappy.com/ubuntu-10-04-restart-network-manger-repair/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="本博在ubuntu 10.04 重启网络服务一文中介绍了怎样重启网络服务，后来在使用过程中发现此方法并不正确，后经网上搜索，更正如下 123456sudo service network-manager stopsudo rm &#x2F;var&#x2F;lib&#x2F;NetworkManager&#x2F;NetworkManager.statesudo service network-manager startsudo ged">
+<meta property="og:description" content="本博在ubuntu 10.04 重启网络服务一文中介绍了怎样重启网络服务，后来在使用过程中发现此方法并不正确，后经网上搜索，更正如下 sudo service network-manager stop sudo rm &#x2F;var&#x2F;lib&#x2F;NetworkManager&#x2F;NetworkManager.state sudo service network-manager start sudo gedit">
 <meta property="og:locale">
 <meta property="article:published_time" content="2010-10-17T03:01:09.000Z">
 <meta property="article:modified_time" content="2021-06-05T13:16:53.087Z">
@@ -258,7 +258,12 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>本博在<a href="http://www.gagahappy.com/ubuntu-10-04-restart-network-manger/">ubuntu 10.04 重启网络服务</a>一文中介绍了怎样重启网络服务，后来在使用过程中发现此方法并不正确，后经网上搜索，更正如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo service network-manager stop</span><br><span class="line">sudo rm /var/lib/NetworkManager/NetworkManager.state</span><br><span class="line">sudo service network-manager start</span><br><span class="line">sudo gedit /etc/NetworkManager/nm-system-settings.conf</span><br><span class="line"><span class="comment"># 把false改成true</span></span><br><span class="line">sudo service network-manager restart</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">service</span> network-manager stop
+<span class="token function">sudo</span> <span class="token function">rm</span> /var/lib/NetworkManager/NetworkManager.state
+<span class="token function">sudo</span> <span class="token function">service</span> network-manager start
+<span class="token function">sudo</span> gedit /etc/NetworkManager/nm-system-settings.conf
+<span class="token comment"># 把false改成true</span>
+<span class="token function">sudo</span> <span class="token function">service</span> network-manager restart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     </div>
 

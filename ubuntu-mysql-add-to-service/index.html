@@ -19,18 +19,18 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="编译安装mysql后，用chkconfig令命将其加入随机启动 123cp mysql.server &#x2F;etc&#x2F;init.d&#x2F;mysqlchmod +x &#x2F;etc&#x2F;init.d&#x2F;mysqlchkconfig --add mysql 出现下面的错误">
+<meta name="description" content="编译安装mysql后，用chkconfig令命将其加入随机启动 cp mysql.server &#x2F;etc&#x2F;init.d&#x2F;mysql chmod +x &#x2F;etc&#x2F;init.d&#x2F;mysql chkconfig --add mysql 出现下面的错误">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu mysql 自动启动">
 <meta property="og:url" content="https://www.gagahappy.com/ubuntu-mysql-add-to-service/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="编译安装mysql后，用chkconfig令命将其加入随机启动 123cp mysql.server &#x2F;etc&#x2F;init.d&#x2F;mysqlchmod +x &#x2F;etc&#x2F;init.d&#x2F;mysqlchkconfig --add mysql 出现下面的错误">
+<meta property="og:description" content="编译安装mysql后，用chkconfig令命将其加入随机启动 cp mysql.server &#x2F;etc&#x2F;init.d&#x2F;mysql chmod +x &#x2F;etc&#x2F;init.d&#x2F;mysql chkconfig --add mysql 出现下面的错误">
 <meta property="og:locale">
 <meta property="article:published_time" content="2009-11-05T14:29:40.000Z">
 <meta property="article:modified_time" content="2021-06-05T13:16:52.863Z">
 <meta property="article:author" content="戛戛Happy">
-<meta property="article:tag" content="ubuntu">
 <meta property="article:tag" content="mysql">
+<meta property="article:tag" content="ubuntu">
 <meta name="twitter:card" content="summary">
 
 
@@ -259,14 +259,19 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>编译安装mysql后，用chkconfig令命将其加入随机启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp mysql.server /etc/init.d/mysql</span><br><span class="line">chmod +x /etc/init.d/mysql</span><br><span class="line">chkconfig --add mysql</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cp</span> mysql.server /etc/init.d/mysql
+<span class="token function">chmod</span> +x /etc/init.d/mysql
+<span class="token function">chkconfig</span> --add mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>出现下面的错误</p>
 <span id="more"></span>
 <blockquote>
 <p><code>insserv: warning: script &#39;K20acpi-support&#39; missing LSB tags and overrides insserv: warning: current start runlevel(s) (0 6) of script umountfs&#39; overwrites defaults (empty). insserv: warning: current start runlevel(s) (0 6) of script sendsigs&#39; overwrites defaults (empty). insserv: warning: script &#39;gdm&#39; missing LSB tags and overrides insserv: warning: script &#39;acpid&#39; missing LSB tags and overrides insserv: warning: script &#39;hal&#39; missing LSB tags and overrides insserv: warning: script &#39;udevmonitor&#39; missing LSB tags and overrides insserv: warning: script &#39;cron&#39; missing LSB tags and overrides insserv: warning: script &#39;sreadahead&#39; missing LSB tags and overrides insserv: warning: script &#39;anacron&#39; missing LSB tags and overrides insserv: warning: script &#39;httpd2&#39; missing LSB tags and overrides insserv: warning: script &#39;procps&#39; missing LSB tags and overrides insserv: warning: script &#39;hwclock&#39; missing LSB tags and overrides insserv: warning: script &#39;usplash&#39; missing LSB tags and overrides insserv: warning: script &#39;hwclock-save&#39; missing LSB tags and overrides insserv: warning: script &#39;dbus&#39; missing LSB tags and overrides insserv: warning: script &#39;apport&#39; missing LSB tags and overrides insserv: warning: current start runlevel(s) (6) of script reboot&#39; overwrites defaults (empty). insserv: warning: current start runlevel(s) (0 6) of script umountnfs.sh&#39; overwrites defaults (empty). insserv: warning: script &#39;ufw&#39; missing LSB tags and overrides insserv: warning: current start runlevel(s) (0 6) of script umountroot&#39; overwrites defaults (empty). insserv: warning: script &#39;avahi-daemon&#39; missing LSB tags and overrides insserv: warning: script &#39;network-manager&#39; missing LSB tags and overrides insserv: warning: script &#39;atd&#39; missing LSB tags and overrides insserv: warning: script &#39;module-init-tools&#39; missing LSB tags and overrides</code></p>
 </blockquote>
 <p>很明显，加入自动启动失败。到网上查询无果，最终用ubuntu自带的update-rc.d解决（chkconfig为linux自带，在部分ubuntu版本中（如8.04）被移去）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo update-rc.d mysql defaults</span><br><span class="line">chkconfig --list mysql</span><br><span class="line"></span><br><span class="line">=&gt; mysql 0:off  1:off  2:on   3:on   4:on   5:on   6:off</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> update-rc.d mysql defaults
+<span class="token function">chkconfig</span> --list mysql
+
+<span class="token operator">=</span><span class="token operator">></span> mysql <span class="token number">0</span>:off  <span class="token number">1</span>:off  <span class="token number">2</span>:on   <span class="token number">3</span>:on   <span class="token number">4</span>:on   <span class="token number">5</span>:on   <span class="token number">6</span>:off<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>终于正常了。</p>
 <p>疑问：在虚拟机中可以成功用chkconfig将mysql加入到随机启动中，不知道为什么在主机中不能实现，以前在主机上也可以成功将mysql加入随机启动的啊（现在用的是ubuntu9.10）</p>
@@ -296,8 +301,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/ubuntu/" rel="tag"><i class="fa fa-tag"></i> ubuntu</a>
               <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
+              <a href="/tags/ubuntu/" rel="tag"><i class="fa fa-tag"></i> ubuntu</a>
           </div>
 
         

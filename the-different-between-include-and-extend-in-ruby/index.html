@@ -266,7 +266,33 @@
 <p>记得有看过的，被用到的时候居然忘记了。杯具啊！</p>
 <span id="more"></span>
 
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">module</span> <span class="title">A</span></span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">klass_method</span></span></span><br><span class="line">        puts <span class="string">&#x27;klass method&#x27;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">ins_method</span></span></span><br><span class="line">        puts <span class="string">&#x27;instance method&#x27;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">B.class_eval <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">include</span> A</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">B.new.ins_method <span class="comment"># &#x27;should puts instance method&#x27;</span></span><br><span class="line"><span class="comment">#B.klass_method # &#x27;not define&#x27;</span></span><br><span class="line"></span><br><span class="line">B.class_eval <span class="keyword">do</span></span><br><span class="line">    extend A</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">B.klass_method <span class="comment"># &#x27;klass method&#x27;</span></span><br><span class="line">B.ins_method <span class="comment"># also as class method</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">module</span> <span class="token constant">A</span>
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">klass_method</span></span>
+        puts <span class="token string">'klass method'</span>
+    <span class="token keyword">end</span>
+
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">ins_method</span></span>
+        puts <span class="token string">'instance method'</span>
+    <span class="token keyword">end</span>
+
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">B</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">B</span><span class="token punctuation">.</span>class_eval <span class="token keyword">do</span>
+    <span class="token keyword">include</span> <span class="token constant">A</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">B</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">.</span>ins_method <span class="token comment"># 'should puts instance method'</span>
+<span class="token comment">#B.klass_method # 'not define'</span>
+
+<span class="token constant">B</span><span class="token punctuation">.</span>class_eval <span class="token keyword">do</span>
+    <span class="token keyword">extend</span> <span class="token constant">A</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">B</span><span class="token punctuation">.</span>klass_method <span class="token comment"># 'klass method'</span>
+<span class="token constant">B</span><span class="token punctuation">.</span>ins_method <span class="token comment"># also as class method</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     </div>
 

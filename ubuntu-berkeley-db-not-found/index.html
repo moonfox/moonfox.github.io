@@ -259,7 +259,9 @@
     <div class="post-body" itemprop="articleBody">
         <p>为了让svn 支持Berkeley DB，在编译安装时必须在安装apr-util时加入 –with-berkeley-db，将 Berkeley DB编译进去，在configure时出现<code>configure: error: Berkeley DB not found</code>错误，原因是系统没有找到libdb-yourversion.so文件，如果你已经安装了Berkeley DB ，在安装目录的lib库里找到此文件，链接到/usr/lib下即可。</p>
 <p>以本人的机子为例</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/lib</span><br><span class="line">ln -s /opt/bdb/lib/libdb-4.7.so</span><br><span class="line">ldconfig</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /usr/local/lib
+<span class="token function">ln</span> -s /opt/bdb/lib/libdb-4.7.so
+ldconfig<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>在重新配置一下就好了。</p>
 

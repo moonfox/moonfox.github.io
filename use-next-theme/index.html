@@ -271,13 +271,20 @@
 <ol>
 <li>配置主题为 Next 主题</li>
 </ol>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line">theme: <span class="string">&quot;next&quot;</span></span><br></pre></td></tr></table></figure>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># _config.yml</span>
+theme: <span class="token string">"next"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <ol start="2">
 <li><p>在 site 根目录新建 <code>_config.next.yml</code>文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch _config.next.yml</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">touch</span> _config.next.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p>打开 <code>theme/next/_config.yml</code>把需要修改的选项 copy 到 <code>_config.next.yml</code>中</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.next.yml</span></span><br><span class="line"><span class="comment"># 设置网站图标</span></span><br><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/apple-touch-icon.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/apple-touch-icon.png</span></span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"># _config.next.yml
+# 设置网站图标
+favicon:
+  small: &#x2F;favicon.ico
+  medium: &#x2F;favicon.ico
+  apple_touch_icon: &#x2F;apple-touch-icon.png
+  safari_pinned_tab: &#x2F;apple-touch-icon.png<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>hexo启动时，会自动合并 <code>_config.next.yml</code> 与<code>theme/next/_config.yml</code> 的设置内容，从而达到配置主题的作用。 </p>
 </li>
 </ol>
@@ -287,15 +294,30 @@
 <ol>
 <li>删除文章底部的Rss(整个 follow me 设置都删除)</li>
 </ol>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.njk</span><br><span class="line"></span><br><span class="line"># 删除以下代码</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
+  <pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.njk
+
+# 删除以下代码
+&#123;%- if theme.follow_me %&#125;
+  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;
+&#123;%- endif %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="2">
 <li><p>修改 Rss 样式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;post&#x2F;post-followme.njk</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;followme&quot;&gt; # 修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  &lt;span&gt;&#123;&#123; __(&#39;follow_me.welcome&#39;) &#125;&#125;&lt;&#x2F;span&gt; # 删除这一行</span><br><span class="line">  &lt;div class&#x3D;&quot;social-list&quot;&gt; # #修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  # 省略部分源码</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;post&#x2F;post-followme.njk
+
+&lt;div class&#x3D;&quot;followme&quot;&gt; # 修改为 &lt;div class&#x3D;&quot;&quot;&gt;
+  &lt;span&gt;&#123;&#123; __(&#39;follow_me.welcome&#39;) &#125;&#125;&lt;&#x2F;span&gt; # 删除这一行
+  &lt;div class&#x3D;&quot;social-list&quot;&gt; # #修改为 &lt;div class&#x3D;&quot;&quot;&gt;
+  # 省略部分源码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>添加 Rss 到侧边栏(其实就是整个的 follwe me)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;sidebar&#x2F;site-overview.njk</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;sidebar&#x2F;site-overview.njk
+&#123;%- if theme.follow_me %&#125;
+  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;
+&#123;%- endif %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>在站点配置文件中打开 Rss 设置</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="attr">follow_me:</span></span><br><span class="line">  <span class="attr">RSS:</span> <span class="string">/rss2.xml</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-rss</span></span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># _config.yml</span>
+<span class="token key atrule">follow_me</span><span class="token punctuation">:</span>
+  <span class="token key atrule">RSS</span><span class="token punctuation">:</span> /rss2.xml <span class="token punctuation">|</span><span class="token punctuation">|</span> fa fa<span class="token punctuation">-</span>rss<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 <li><p>重启站点即可，就可以看到 Rss 显示在侧边栏了</p>
 </li>
 </ol>

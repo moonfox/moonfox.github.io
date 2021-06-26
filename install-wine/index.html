@@ -19,12 +19,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="安装 wineUbuntu 官方自带了 wine ， 但是推荐用 winehq 官方提供的最新版本 wine ， 新版本解决了很多以前显得麻烦的问题， 请照下边说的来安装 先增加签名:: 1wget -q http:&#x2F;&#x2F;wine.budgetdedicated.com&#x2F;apt&#x2F;387EE263.gpg? -O- | sudo apt-key add -">
+<meta name="description" content="安装 wineUbuntu 官方自带了 wine ， 但是推荐用 winehq 官方提供的最新版本 wine ， 新版本解决了很多以前显得麻烦的问题， 请照下边说的来安装 先增加签名:: wget -q http:&#x2F;&#x2F;wine.budgetdedicated.com&#x2F;apt&#x2F;387EE263.gpg? -O- | sudo apt-key add -">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装 wine">
 <meta property="og:url" content="https://www.gagahappy.com/install-wine/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="安装 wineUbuntu 官方自带了 wine ， 但是推荐用 winehq 官方提供的最新版本 wine ， 新版本解决了很多以前显得麻烦的问题， 请照下边说的来安装 先增加签名:: 1wget -q http:&#x2F;&#x2F;wine.budgetdedicated.com&#x2F;apt&#x2F;387EE263.gpg? -O- | sudo apt-key add -">
+<meta property="og:description" content="安装 wineUbuntu 官方自带了 wine ， 但是推荐用 winehq 官方提供的最新版本 wine ， 新版本解决了很多以前显得麻烦的问题， 请照下边说的来安装 先增加签名:: wget -q http:&#x2F;&#x2F;wine.budgetdedicated.com&#x2F;apt&#x2F;387EE263.gpg? -O- | sudo apt-key add -">
 <meta property="og:locale">
 <meta property="article:published_time" content="2009-07-15T15:41:02.000Z">
 <meta property="article:modified_time" content="2021-06-05T13:16:52.762Z">
@@ -260,13 +260,34 @@
     <div class="post-body" itemprop="articleBody">
         <h4 id="安装-wine"><a href="#安装-wine" class="headerlink" title="安装 wine"></a>安装 wine</h4><p>Ubuntu 官方自带了 wine ， 但是推荐用 winehq 官方提供的最新版本 wine ， 新版本解决了很多以前显得麻烦的问题， 请照下边说的来安装</p>
 <p>先增加签名::</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -q http://wine.budgetdedicated.com/apt/387EE263.gpg? -O- | sudo apt-key add -</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> -q http://wine.budgetdedicated.com/apt/387EE263.gpg? -O- <span class="token operator">|</span> <span class="token function">sudo</span> apt-key <span class="token function">add</span> -<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <span id="more"></span>
 
-<h4 id="增加-wine-源，按你的-Ubuntu-版本执行下边相应的程序"><a href="#增加-wine-源，按你的-Ubuntu-版本执行下边相应的程序" class="headerlink" title="增加 wine 源，按你的 Ubuntu 版本执行下边相应的程序"></a>增加 wine 源，按你的 Ubuntu 版本执行下边相应的程序</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu Jaunty (9.04) 请执行这个::</span><br><span class="line"></span><br><span class="line">sudo wget http://wine.budgetdedicated.com/apt/sources.list.d/jaunty.list? -O /etc/apt/sources.list.d/winehq.list</span><br><span class="line">Ubuntu Intrepid (8.10) 请执行这个::</span><br><span class="line"></span><br><span class="line">sudo wget http://wine.budgetdedicated.com/apt/sources.list.d/intrepid.list? -O /etc/apt/sources.list.d/winehq.list</span><br><span class="line">Ubuntu Hardy (8.04) 请执行这个::</span><br><span class="line"></span><br><span class="line">sudo wget http://wine.budgetdedicated.com/apt/sources.list.d/hardy.list? -O /etc/apt/sources.list.d/winehq.list</span><br><span class="line">Ubuntu Gutsy (7.10) 请执行这个::</span><br><span class="line"></span><br><span class="line">sudo wget http://wine.budgetdedicated.com/apt/sources.list.d/gutsy.list? -O /etc/apt/sources.list.d/winehq.list</span><br><span class="line">Ubuntu Feisty (7.04) 请执行这个::</span><br><span class="line"></span><br><span class="line">sudo wget http://wine.budgetdedicated.com/apt/sources.list.d/feisty.list -O /etc/apt/sources.list.d/winehq.list</span><br><span class="line">Ubuntu Edgy (6.10) 请执行这个::</span><br><span class="line"></span><br><span class="line">sudo wget http://wine.budgetdedicated.com/apt/sources.list.d/edgy.list? -O /etc/apt/sources.list.d/winehq.list</span><br><span class="line">Ubuntu Dapper (6.06) 请执行这个::</span><br><span class="line"></span><br><span class="line">sudo wget http://wine.budgetdedicated.com/apt/sources.list.d/dapper.list? -O /etc/apt/sources.list.d/winehq.list</span><br></pre></td></tr></table></figure>
+<h4 id="增加-wine-源，按你的-Ubuntu-版本执行下边相应的程序"><a href="#增加-wine-源，按你的-Ubuntu-版本执行下边相应的程序" class="headerlink" title="增加 wine 源，按你的 Ubuntu 版本执行下边相应的程序"></a>增加 wine 源，按你的 Ubuntu 版本执行下边相应的程序</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Ubuntu Jaunty <span class="token punctuation">(</span><span class="token number">9.04</span><span class="token punctuation">)</span> 请执行这个::
+
+<span class="token function">sudo</span> <span class="token function">wget</span> http://wine.budgetdedicated.com/apt/sources.list.d/jaunty.list? -O /etc/apt/sources.list.d/winehq.list
+Ubuntu Intrepid <span class="token punctuation">(</span><span class="token number">8.10</span><span class="token punctuation">)</span> 请执行这个::
+
+<span class="token function">sudo</span> <span class="token function">wget</span> http://wine.budgetdedicated.com/apt/sources.list.d/intrepid.list? -O /etc/apt/sources.list.d/winehq.list
+Ubuntu Hardy <span class="token punctuation">(</span><span class="token number">8.04</span><span class="token punctuation">)</span> 请执行这个::
+
+<span class="token function">sudo</span> <span class="token function">wget</span> http://wine.budgetdedicated.com/apt/sources.list.d/hardy.list? -O /etc/apt/sources.list.d/winehq.list
+Ubuntu Gutsy <span class="token punctuation">(</span><span class="token number">7.10</span><span class="token punctuation">)</span> 请执行这个::
+
+<span class="token function">sudo</span> <span class="token function">wget</span> http://wine.budgetdedicated.com/apt/sources.list.d/gutsy.list? -O /etc/apt/sources.list.d/winehq.list
+Ubuntu Feisty <span class="token punctuation">(</span><span class="token number">7.04</span><span class="token punctuation">)</span> 请执行这个::
+
+<span class="token function">sudo</span> <span class="token function">wget</span> http://wine.budgetdedicated.com/apt/sources.list.d/feisty.list -O /etc/apt/sources.list.d/winehq.list
+Ubuntu Edgy <span class="token punctuation">(</span><span class="token number">6.10</span><span class="token punctuation">)</span> 请执行这个::
+
+<span class="token function">sudo</span> <span class="token function">wget</span> http://wine.budgetdedicated.com/apt/sources.list.d/edgy.list? -O /etc/apt/sources.list.d/winehq.list
+Ubuntu Dapper <span class="token punctuation">(</span><span class="token number">6.06</span><span class="token punctuation">)</span> 请执行这个::
+
+<span class="token function">sudo</span> <span class="token function">wget</span> http://wine.budgetdedicated.com/apt/sources.list.d/dapper.list? -O /etc/apt/sources.list.d/winehq.list<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>接下来，可以打开一个终端，执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install wine</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> wine<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>来安装，或者点击</p>
 <blockquote>
@@ -275,10 +296,67 @@
 <h4 id="初始设置，加快-wine-速度"><a href="#初始设置，加快-wine-速度" class="headerlink" title="初始设置，加快 wine 速度"></a>初始设置，加快 wine 速度</h4><p>由于 X locale 的问题， 默认 wine 会轮询 x core fonts ，使得 wine 很慢，请先执行<code>sudo sed -i -e &#39;/GBK/,/^&#125;/d&#39; /usr/share/X11/locale/zh_CN.UTF-8/XLC_LOCALE</code></p>
 <h4 id="修改-wine-外观"><a href="#修改-wine-外观" class="headerlink" title="修改 wine 外观"></a>修改 wine 外观</h4><p>默 认的 wine 字体、主题、颜色等不太合适，可以用这 [Hiweed] 的 wine 配置 新建一个文本文件 hiweed_green_color.reg 写入(在9.04的源中安装的wine无法导入以下reg文件，可能是由于regedit不兼容空格造成的，将下面这段中每行前的第一个空格删除可能会解 决问题)::</p>
 <p>代码如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">REGEDIT4</span><br><span class="line">[HKEY_LOCAL_MACHINESystemCurrentControlSetHardware ProfilesCurrentSoftwareFonts]</span><br><span class="line">&quot;FIXEDFON.FON&quot;&#x3D;&quot;&quot;</span><br><span class="line">&quot;FONTS.FON&quot;&#x3D;&quot;&quot;</span><br><span class="line">&quot;LogPixels&quot;&#x3D;dword:00000060</span><br><span class="line">&quot;OEMFONT.FON&quot;&#x3D;&quot;&quot;</span><br><span class="line">[HKEY_CURRENT_USERSoftware\Wine\Fonts\Replacements]</span><br><span class="line">@&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;Arial&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;Fixedsys&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;Microsoft Sans Serif&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;MingLiU&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;MS UI Gothic&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;PMingLiU&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;Simsun&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;Songti&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;System&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;Tahoma&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;Terminal&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">&quot;宋体&quot;&#x3D;&quot;文鼎PL细上海宋Uni&quot;</span><br><span class="line">[HKEY_CURRENT_USERSoftware\Wine\X11 Driver]</span><br><span class="line">&quot;ClientSideAntiAliasWithRender&quot;&#x3D;&quot;N&quot;</span><br><span class="line">[HKEY_LOCAL_MACHINESoftwareMicrosoftWindows NTCurrentVersionFontSubstitutes]</span><br><span class="line">&quot;MS Shell Dlg&quot;&#x3D;&quot;文鼎PL细上海宋Uni&quot;</span><br><span class="line">&quot;MS Shell Dlg 2&quot;&#x3D;&quot;文鼎PL细上海宋Uni&quot;</span><br><span class="line">&quot;System&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;</span><br><span class="line">[HKEY_CURRENT_USERControl Panel\Colors]</span><br><span class="line">&quot;ActiveBorder&quot;&#x3D;&quot;239 235 230&quot;</span><br><span class="line">&quot;ActiveTitle&quot;&#x3D;&quot;0 153 11&quot;</span><br><span class="line">&quot;AppWorkspace&quot;&#x3D;&quot;128 128 128&quot;</span><br><span class="line">&quot;Background&quot;&#x3D;&quot;58 110 165&quot;</span><br><span class="line">&quot;ButtonAlternateFace&quot;&#x3D;&quot;180 180 180&quot;</span><br><span class="line">&quot;ButtonDkShadow&quot;&#x3D;&quot;64 64 64&quot;</span><br><span class="line">&quot;ButtonFace&quot;&#x3D;&quot;232 227 221&quot;</span><br><span class="line">&quot;ButtonHilight&quot;&#x3D;&quot;255 255 255&quot;</span><br><span class="line">&quot;ButtonLight&quot;&#x3D;&quot;239 235 230&quot;</span><br><span class="line">&quot;ButtonShadow&quot;&#x3D;&quot;128 128 128&quot;</span><br><span class="line">&quot;ButtonText&quot;&#x3D;&quot;0 0 0&quot;</span><br><span class="line">&quot;GradientActiveTitle&quot;&#x3D;&quot;166 202 240&quot;</span><br><span class="line">&quot;GradientInactiveTitle&quot;&#x3D;&quot;192 192 192&quot;</span><br><span class="line">&quot;GrayText&quot;&#x3D;&quot;128 128 128&quot;</span><br><span class="line">&quot;Hilight&quot;&#x3D;&quot;0 153 11&quot;</span><br><span class="line">&quot;HilightText&quot;&#x3D;&quot;255 255 255&quot;</span><br><span class="line">&quot;HotTrackingColor&quot;&#x3D;&quot;0 0 255&quot;</span><br><span class="line">&quot;InactiveBorder&quot;&#x3D;&quot;192 192 192&quot;</span><br><span class="line">&quot;InactiveTitle&quot;&#x3D;&quot;232 227 221&quot;</span><br><span class="line">&quot;InactiveTitleText&quot;&#x3D;&quot;0 0 0&quot;</span><br><span class="line">&quot;InfoText&quot;&#x3D;&quot;0 0 0&quot;</span><br><span class="line">&quot;InfoWindow&quot;&#x3D;&quot;255 255 225&quot;</span><br><span class="line">&quot;Menu&quot;&#x3D;&quot;232 227 221&quot;</span><br><span class="line">&quot;MenuBar&quot;&#x3D;&quot;232 227 221&quot;</span><br><span class="line">&quot;MenuHilight&quot;&#x3D;&quot;0 0 0&quot;</span><br><span class="line">&quot;MenuText&quot;&#x3D;&quot;0 0 0&quot;</span><br><span class="line">&quot;Scrollbar&quot;&#x3D;&quot;239 235 230&quot;</span><br><span class="line">&quot;TitleText&quot;&#x3D;&quot;255 255 255&quot;</span><br><span class="line">&quot;Window&quot;&#x3D;&quot;255 255 255&quot;</span><br><span class="line">&quot;WindowFrame&quot;&#x3D;&quot;0 0 0&quot;</span><br><span class="line">&quot;WindowText&quot;&#x3D;&quot;0 0 0&quot;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">REGEDIT4
+[HKEY_LOCAL_MACHINESystemCurrentControlSetHardware ProfilesCurrentSoftwareFonts]
+&quot;FIXEDFON.FON&quot;&#x3D;&quot;&quot;
+&quot;FONTS.FON&quot;&#x3D;&quot;&quot;
+&quot;LogPixels&quot;&#x3D;dword:00000060
+&quot;OEMFONT.FON&quot;&#x3D;&quot;&quot;
+[HKEY_CURRENT_USERSoftware\Wine\Fonts\Replacements]
+@&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;Arial&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;Fixedsys&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;Microsoft Sans Serif&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;MingLiU&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;MS UI Gothic&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;PMingLiU&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;Simsun&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;Songti&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;System&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;Tahoma&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;Terminal&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+&quot;宋体&quot;&#x3D;&quot;文鼎PL细上海宋Uni&quot;
+[HKEY_CURRENT_USERSoftware\Wine\X11 Driver]
+&quot;ClientSideAntiAliasWithRender&quot;&#x3D;&quot;N&quot;
+[HKEY_LOCAL_MACHINESoftwareMicrosoftWindows NTCurrentVersionFontSubstitutes]
+&quot;MS Shell Dlg&quot;&#x3D;&quot;文鼎PL细上海宋Uni&quot;
+&quot;MS Shell Dlg 2&quot;&#x3D;&quot;文鼎PL细上海宋Uni&quot;
+&quot;System&quot;&#x3D;&quot;AR PL ShanHeiSun Uni&quot;
+[HKEY_CURRENT_USERControl Panel\Colors]
+&quot;ActiveBorder&quot;&#x3D;&quot;239 235 230&quot;
+&quot;ActiveTitle&quot;&#x3D;&quot;0 153 11&quot;
+&quot;AppWorkspace&quot;&#x3D;&quot;128 128 128&quot;
+&quot;Background&quot;&#x3D;&quot;58 110 165&quot;
+&quot;ButtonAlternateFace&quot;&#x3D;&quot;180 180 180&quot;
+&quot;ButtonDkShadow&quot;&#x3D;&quot;64 64 64&quot;
+&quot;ButtonFace&quot;&#x3D;&quot;232 227 221&quot;
+&quot;ButtonHilight&quot;&#x3D;&quot;255 255 255&quot;
+&quot;ButtonLight&quot;&#x3D;&quot;239 235 230&quot;
+&quot;ButtonShadow&quot;&#x3D;&quot;128 128 128&quot;
+&quot;ButtonText&quot;&#x3D;&quot;0 0 0&quot;
+&quot;GradientActiveTitle&quot;&#x3D;&quot;166 202 240&quot;
+&quot;GradientInactiveTitle&quot;&#x3D;&quot;192 192 192&quot;
+&quot;GrayText&quot;&#x3D;&quot;128 128 128&quot;
+&quot;Hilight&quot;&#x3D;&quot;0 153 11&quot;
+&quot;HilightText&quot;&#x3D;&quot;255 255 255&quot;
+&quot;HotTrackingColor&quot;&#x3D;&quot;0 0 255&quot;
+&quot;InactiveBorder&quot;&#x3D;&quot;192 192 192&quot;
+&quot;InactiveTitle&quot;&#x3D;&quot;232 227 221&quot;
+&quot;InactiveTitleText&quot;&#x3D;&quot;0 0 0&quot;
+&quot;InfoText&quot;&#x3D;&quot;0 0 0&quot;
+&quot;InfoWindow&quot;&#x3D;&quot;255 255 225&quot;
+&quot;Menu&quot;&#x3D;&quot;232 227 221&quot;
+&quot;MenuBar&quot;&#x3D;&quot;232 227 221&quot;
+&quot;MenuHilight&quot;&#x3D;&quot;0 0 0&quot;
+&quot;MenuText&quot;&#x3D;&quot;0 0 0&quot;
+&quot;Scrollbar&quot;&#x3D;&quot;239 235 230&quot;
+&quot;TitleText&quot;&#x3D;&quot;255 255 255&quot;
+&quot;Window&quot;&#x3D;&quot;255 255 255&quot;
+&quot;WindowFrame&quot;&#x3D;&quot;0 0 0&quot;
+&quot;WindowText&quot;&#x3D;&quot;0 0 0&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>再用 regedit 导入这个reg，执行<code> regedit hiweed_green_color.reg</code><br>如果 <code>.wine/drive_c/windows/fonts/</code>下没有文鼎的字体文件，应该用以下命令连接</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/share/fonts/TTF/odosung.ttc ~/.wine/drive_c/windows/Fonts/</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ln</span> -s /usr/share/fonts/TTF/odosung.ttc ~/.wine/drive_c/windows/Fonts/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>乱码解决方法</p>
 <ol>
@@ -299,7 +377,15 @@
 <li>安装 winehq 官方的 wine 相应版本(请参考:<a target="_blank" rel="noopener" href="http://wiki.ubuntu.org.cn/Wine)%EF%BC%9B">http://wiki.Ubuntu.org.cn/Wine)；</a><br>2）载相应版本的补丁包；</li>
 <li>解压(先进入补丁包在所在目录)：<br>代码: <code>tar -xvvf wine-1.1.25_amd64_gdi32.dll.so.tar.bz2</code><br>4）然后输入命令：</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Hardy amd64:</span></span><br><span class="line"><span class="comment"># 代码:</span></span><br><span class="line">sudo mv /usr/lib32/wine/gdi32.dll.so gdi32.dll.so.backup</span><br><span class="line">sudo cp gdi32.dll.so /usr/lib32/wine</span><br><span class="line"></span><br><span class="line"><span class="comment"># Hardy i386:</span></span><br><span class="line"><span class="comment"># 代码:</span></span><br><span class="line">sudo mv /usr/lib/wine/gdi32.dll.so gdi32.dll.so.backup</span><br><span class="line">sudo cp gdi32.dll.so /usr/lib/wine</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Hardy amd64:</span>
+<span class="token comment"># 代码:</span>
+<span class="token function">sudo</span> <span class="token function">mv</span> /usr/lib32/wine/gdi32.dll.so gdi32.dll.so.backup
+<span class="token function">sudo</span> <span class="token function">cp</span> gdi32.dll.so /usr/lib32/wine
+
+<span class="token comment"># Hardy i386:</span>
+<span class="token comment"># 代码:</span>
+<span class="token function">sudo</span> <span class="token function">mv</span> /usr/lib/wine/gdi32.dll.so gdi32.dll.so.backup
+<span class="token function">sudo</span> <span class="token function">cp</span> gdi32.dll.so /usr/lib/wine<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>补丁下在地址：<a target="_blank" rel="noopener" href="http://forum.ubuntu.org.cn/viewtopic.php?f=121&amp;t=131400">http://forum.Ubuntu.org.cn/viewtopic.php?f=121&amp;t=131400</a></p>
 <h4 id="美化"><a href="#美化" class="headerlink" title="美化"></a>美化</h4><p>如果在英文环境下使用wine，用env LANG=zh_CN.UTF-8 wine “运行的程序”。</p>

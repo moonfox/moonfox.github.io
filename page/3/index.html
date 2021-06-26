@@ -255,10 +255,38 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>主goroutine先执行完,子goroutine居然还可以运行</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">	log.Println(<span class="string">&quot;===========&quot;</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		log.Println(<span class="string">&quot;doing in sub goroutine&quot;</span>)</span><br><span class="line">		<span class="comment">// 主程序向通道发送数据，但此时由于 主 gor 行速度慢</span></span><br><span class="line">		<span class="comment">// 程序还没有执行到 fmt.Println(&quot;x in ch is:&quot;, &lt;-ch)，</span></span><br><span class="line">		<span class="comment">// 通道还没有接收数据，所以此时发生 阻塞</span></span><br><span class="line">		ch &lt;- <span class="number">1</span></span><br><span class="line">		log.Println(<span class="string">&quot;done in sub goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 模拟执行速度慢</span></span><br><span class="line">	time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line"></span><br><span class="line">	log.Println(<span class="string">&quot;doing in main goroutine&quot;</span>)</span><br><span class="line">	<span class="comment">// 1. 执行到这里时发生，由于子 gor 已经在等待向通道发送数据</span></span><br><span class="line">	<span class="comment">//    所以此处的 从通道接收数据的 &lt;-ch 立即执行</span></span><br><span class="line">	<span class="comment">// 2. 子 gor 被唤酲, 立即向通道发送数据</span></span><br><span class="line">	<span class="comment">// 3. &lt;-ch 开始接收数据</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 当从通道中取出数据时，数据是通道中复制的，这需要花费一定的时间</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;x in ch is:&quot;</span>, &lt;-ch)      <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">	log.Println(<span class="string">&quot;done in main goroutine&quot;</span>) <span class="comment">// 竞争打印，顺序不定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	ch <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">)</span>
+	log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"==========="</span><span class="token punctuation">)</span>
+	<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"doing in sub goroutine"</span><span class="token punctuation">)</span>
+		<span class="token comment">// 主程序向通道发送数据，但此时由于 主 gor 行速度慢</span>
+		<span class="token comment">// 程序还没有执行到 fmt.Println("x in ch is:", &lt;-ch)，</span>
+		<span class="token comment">// 通道还没有接收数据，所以此时发生 阻塞</span>
+		ch <span class="token operator">&lt;-</span> <span class="token number">1</span>
+		log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"done in sub goroutine"</span><span class="token punctuation">)</span> <span class="token comment">// 竞争打印，顺序不定</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+	<span class="token comment">// 模拟执行速度慢</span>
+	time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
+
+	log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"doing in main goroutine"</span><span class="token punctuation">)</span>
+	<span class="token comment">// 1. 执行到这里时发生，由于子 gor 已经在等待向通道发送数据</span>
+	<span class="token comment">//    所以此处的 从通道接收数据的 &lt;-ch 立即执行</span>
+	<span class="token comment">// 2. 子 gor 被唤酲, 立即向通道发送数据</span>
+	<span class="token comment">// 3. &lt;-ch 开始接收数据</span>
+
+	<span class="token comment">// 当从通道中取出数据时，数据是通道中复制的，这需要花费一定的时间</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"x in ch is:"</span><span class="token punctuation">,</span> <span class="token operator">&lt;-</span>ch<span class="token punctuation">)</span>      <span class="token comment">// 竞争打印，顺序不定</span>
+	log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"done in main goroutine"</span><span class="token punctuation">)</span> <span class="token comment">// 竞争打印，顺序不定</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>  output：这个比较奇怪,主 先执行完,子居然还可以运行</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2021/03/04 16:26:35 doing in sub goroutine</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 doing in main goroutine</span></span><br><span class="line"><span class="comment">// x in ch is: 1</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 done in main goroutine (主 先执行完)</span></span><br><span class="line"><span class="comment">// 2021/03/04 16:26:36 done in sub goroutine （子居然还可以运行）</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 2021/03/04 16:26:35 doing in sub goroutine</span>
+<span class="token comment">// 2021/03/04 16:26:36 doing in main goroutine</span>
+<span class="token comment">// x in ch is: 1</span>
+<span class="token comment">// 2021/03/04 16:26:36 done in main goroutine (主 先执行完)</span>
+<span class="token comment">// 2021/03/04 16:26:36 done in sub goroutine （子居然还可以运行）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>关于原因</p>
 <ol>
@@ -349,7 +377,14 @@
 <h1 id="行锁的实现"><a href="#行锁的实现" class="headerlink" title="行锁的实现"></a>行锁的实现</h1><p>由存储引擎自已实现，每个存储引擎实现的方式都不一样</p>
 <p> MyISAM 引擎不支持行锁</p>
 <h1 id="两阶段锁"><a href="#两阶段锁" class="headerlink" title="两阶段锁"></a>两阶段锁</h1><p>在更新数据时，需要对数据所在行加锁，但更新数据完成后，锁并不会马上释放，而是要等到事务提交才释放</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table t_07_recordlock(</span><br><span class="line">	id int not null auto_increment primary key,</span><br><span class="line">  c int,</span><br><span class="line">  d int,</span><br><span class="line"> 	key c (c)</span><br><span class="line">) engine&#x3D;innodb;</span><br><span class="line"></span><br><span class="line">insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create table t_07_recordlock(
+	id int not null auto_increment primary key,
+  c int,
+  d int,
+ 	key c (c)
+) engine&#x3D;innodb;
+
+insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <table>
 <thead>
@@ -575,7 +610,25 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>无缓冲通道的cap是零</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无缓冲通道的cap、len永远是0</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	noCache := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; noCache &lt;- <span class="number">6</span> &#125;()</span><br><span class="line"></span><br><span class="line">	time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">	fmt.Println(<span class="string">&quot;cap of noCache pipeline is&quot;</span>, <span class="built_in">cap</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;len of noCache pipeline is&quot;</span>, <span class="built_in">len</span>(noCache)) <span class="comment">// =&gt; 0</span></span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;noCache &quot;</span>, &lt;-noCache)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"time"</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// 无缓冲通道的cap、len永远是0</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	noCache <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> noCache <span class="token operator">&lt;-</span> <span class="token number">6</span> <span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+	time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"cap of noCache pipeline is"</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>noCache<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// => 0</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"len of noCache pipeline is"</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>noCache<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// => 0</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"noCache "</span><span class="token punctuation">,</span> <span class="token operator">&lt;-</span>noCache<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -666,7 +719,40 @@
 <li><p>空目录无法被添加到git<br>因为根据算法，添加的对象必须要有内容，以供sha1算法使用</p>
 </li>
 <li><p>合并后再使用 <code>git rebase </code> 使提交成为一条直线</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">git merge upstream-master</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line">Merge made by the <span class="string">&#x27;recursive&#x27;</span> strategy.</span><br><span class="line"> layout/_partials/header/menu-item.njk      | 5 +----</span><br><span class="line"> layout/_partials/page/breadcrumb.njk       | 6 +-----</span><br><span class="line"> layout/_partials/post/post-followme.njk    | 2 +-</span><br><span class="line"> layout/_partials/sidebar/site-overview.njk | 2 +-</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">*   b1b3e13 (HEAD -&gt; release) Merge branch <span class="string">&#x27;upstream-master&#x27;</span> into release</span><br><span class="line">|\</span><br><span class="line">| * d51ca0e (upstream/master, upstream-master) Fix: handle invalid config</span><br><span class="line">* | 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts</span><br><span class="line">|/</span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 把前分支作为基础分枝, 把 upstream-master 分支的提交嫁接在其上面</span></span><br><span class="line">git rebase</span><br><span class="line">First, rewinding head to replay your work on top of it...</span><br><span class="line">Applying: Fix: handle invalid config</span><br><span class="line">Using index info to reconstruct a base tree...</span><br><span class="line">M	layout/_partials/post/post-followme.njk</span><br><span class="line">M	layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Falling back to patching base and 3-way merge...</span><br><span class="line">Auto-merging layout/_partials/sidebar/site-overview.njk</span><br><span class="line">Auto-merging layout/_partials/post/post-followme.njk</span><br><span class="line"></span><br><span class="line">git slog --graph</span><br><span class="line">* 217e224 (HEAD -&gt; release) Fix: handle invalid config</span><br><span class="line">* 369c5b5 (origin/release, origin/master, origin/HEAD, master) Resolve conflicts <span class="comment"># 以这个提交做为 rebase</span></span><br><span class="line">* d6f344f Refactor sidebar-panel using flex layout</span><br><span class="line">* edefcda Add NProgress (<span class="comment">#79)</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge upstream-master
+Auto-merging layout/_partials/sidebar/site-overview.njk
+Auto-merging layout/_partials/post/post-followme.njk
+Merge made by the <span class="token string">'recursive'</span> strategy.
+ layout/_partials/header/menu-item.njk      <span class="token operator">|</span> <span class="token number">5</span> +----
+ layout/_partials/page/breadcrumb.njk       <span class="token operator">|</span> <span class="token number">6</span> +-----
+ layout/_partials/post/post-followme.njk    <span class="token operator">|</span> <span class="token number">2</span> +-
+ layout/_partials/sidebar/site-overview.njk <span class="token operator">|</span> <span class="token number">2</span> +-
+
+<span class="token function">git</span> slog --graph
+*   b1b3e13 <span class="token punctuation">(</span>HEAD -<span class="token operator">></span> release<span class="token punctuation">)</span> Merge branch <span class="token string">'upstream-master'</span> into release
+<span class="token operator">|</span><span class="token punctuation">\</span>
+<span class="token operator">|</span> * d51ca0e <span class="token punctuation">(</span>upstream/master, upstream-master<span class="token punctuation">)</span> Fix: handle invalid config
+* <span class="token operator">|</span> 369c5b5 <span class="token punctuation">(</span>origin/release, origin/master, origin/HEAD, master<span class="token punctuation">)</span> Resolve conflicts
+<span class="token operator">|</span>/
+* d6f344f Refactor sidebar-panel using flex layout
+* edefcda Add NProgress <span class="token punctuation">(</span><span class="token comment">#79)</span>
+
+<span class="token comment"># 把前分支作为基础分枝, 把 upstream-master 分支的提交嫁接在其上面</span>
+<span class="token function">git</span> rebase
+First, rewinding <span class="token function">head</span> to replay your work on <span class="token function">top</span> of it<span class="token punctuation">..</span>.
+Applying: Fix: handle invalid config
+Using index info to reconstruct a base tree<span class="token punctuation">..</span>.
+M	layout/_partials/post/post-followme.njk
+M	layout/_partials/sidebar/site-overview.njk
+Falling back to patching base and <span class="token number">3</span>-way merge<span class="token punctuation">..</span>.
+Auto-merging layout/_partials/sidebar/site-overview.njk
+Auto-merging layout/_partials/post/post-followme.njk
+
+<span class="token function">git</span> slog --graph
+* 217e224 <span class="token punctuation">(</span>HEAD -<span class="token operator">></span> release<span class="token punctuation">)</span> Fix: handle invalid config
+* 369c5b5 <span class="token punctuation">(</span>origin/release, origin/master, origin/HEAD, master<span class="token punctuation">)</span> Resolve conflicts <span class="token comment"># 以这个提交做为 rebase</span>
+* d6f344f Refactor sidebar-panel using flex layout
+* edefcda Add NProgress <span class="token punctuation">(</span><span class="token comment">#79)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol>
 <li>使用merge出现了分支线路</li>
@@ -746,34 +832,67 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="What-does-kill-0-do"><a href="#What-does-kill-0-do" class="headerlink" title="What does kill -0 ... do?"></a>What does <code>kill -0 ...</code> do?</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(cat /path/to/file.pid); <span class="keyword">then</span></span><br><span class="line">    ... <span class="keyword">do</span> something ...</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+          <h3 id="What-does-kill-0-do"><a href="#What-does-kill-0-do" class="headerlink" title="What does kill -0 ... do?"></a>What does <code>kill -0 ...</code> do?</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /path/to/file.pid<span class="token variable">)</span></span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token punctuation">..</span>. <span class="token keyword">do</span> something <span class="token punctuation">..</span>.
+<span class="token keyword">fi</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="kill-1"><a href="#kill-1" class="headerlink" title="kill(1)"></a><em>kill(1)</em></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ man 1 <span class="built_in">kill</span></span><br><span class="line">...</span><br><span class="line">If sig is 0, <span class="keyword">then</span> no signal is sent, but error checking is still performed.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h4 id="kill-1"><a href="#kill-1" class="headerlink" title="kill(1)"></a><em>kill(1)</em></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">man</span> <span class="token number">1</span> <span class="token function">kill</span>
+<span class="token punctuation">..</span>.
+If sig is <span class="token number">0</span>, <span class="token keyword">then</span> no signal is sent, but error checking is still performed.
+<span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="kill-2"><a href="#kill-2" class="headerlink" title="kill(2)"></a><em>kill(2)</em></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ man 2 <span class="built_in">kill</span></span><br><span class="line">...</span><br><span class="line">If sig is 0, <span class="keyword">then</span> no signal is sent, but error checking is still performed; </span><br><span class="line">this can be used to check <span class="keyword">for</span> the existence of a process ID or process </span><br><span class="line">group ID.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h4 id="kill-2"><a href="#kill-2" class="headerlink" title="kill(2)"></a><em>kill(2)</em></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">man</span> <span class="token number">2</span> <span class="token function">kill</span>
+<span class="token punctuation">..</span>.
+If sig is <span class="token number">0</span>, <span class="token keyword">then</span> no signal is sent, but error checking is still performed<span class="token punctuation">;</span> 
+this can be used to check <span class="token keyword">for</span> the existence of a process ID or process 
+group ID.
+<span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>So signal 0 will not actually in fact send anything to your process’s PID, but will check whether you have permissions to do so.</p>
 <h3 id="Where-might-this-be-useful"><a href="#Where-might-this-be-useful" class="headerlink" title="Where might this be useful?"></a>Where might this be useful?</h3><p>One obvious place would be if you were trying to determine if you had permissions to send signals to a running process via <code>kill</code>. You could check prior to sending the actual <code>kill</code> signal that you want, by wrapping a check to make sure that <code>kill -0 &lt;PID&gt;</code> was first allowed.</p>
 <h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Say a process was being run by root as follows:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sleep 2500 &amp;</span><br><span class="line">[1] 15693</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">sleep</span> <span class="token number">2500</span> <span class="token operator">&amp;</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token number">15693</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>Now in another window if we run this command we can confirm that that PID is running.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pgrep sleep</span><br><span class="line">15693</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ pgrep <span class="token function">sleep</span>
+<span class="token number">15693</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>Now let’s try this command to see if we have access to send that PID signals via <code>kill</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(pgrep sleep); <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;You&#x27;re weak!&quot;</span>; <span class="keyword">fi</span></span><br><span class="line">bash: <span class="built_in">kill</span>: (15693) - Operation not permitted</span><br><span class="line">You<span class="string">&#x27;re weak!</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable"><span class="token variable">$(</span>pgrep <span class="token function">sleep</span><span class="token variable">)</span></span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token builtin class-name">echo</span> <span class="token string">"You're weak!"</span><span class="token punctuation">;</span> <span class="token keyword">fi</span>
+bash: kill: <span class="token punctuation">(</span><span class="token number">15693</span><span class="token punctuation">)</span> - Operation not permitted
+You're weak<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>So it works, but the output is leaking a message from the <code>kill</code> command that we don’t have permissions. Not a big deal, simply catch STDERR and send it to <code>/dev/null</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">if</span> ! <span class="built_in">kill</span> -0 $(pgrep sleep) 2&gt;/dev/null; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&quot;You&#x27;re weak!&quot;</span>; <span class="keyword">fi</span></span><br><span class="line">You<span class="string">&#x27;re weak!</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable"><span class="token variable">$(</span>pgrep <span class="token function">sleep</span><span class="token variable">)</span></span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null<span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token builtin class-name">echo</span> <span class="token string">"You're weak!"</span><span class="token punctuation">;</span> <span class="token keyword">fi</span>
+You're weak<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="Complete-example"><a href="#Complete-example" class="headerlink" title="Complete example"></a>Complete example</h3><p>So then we could do something like this, <code>killer.bash</code>:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">PID=$(pgrep sleep)</span><br><span class="line"><span class="keyword">if</span> ! <span class="built_in">kill</span> -0 <span class="variable">$PID</span> 2&gt;/dev/null; <span class="keyword">then</span> </span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;you don&#x27;t have permissions to kill PID:<span class="variable">$PID</span>&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">kill</span> -9 <span class="variable">$PID</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>pgrep <span class="token function">sleep</span><span class="token variable">)</span></span>
+<span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable">$PID</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null<span class="token punctuation">;</span> <span class="token keyword">then</span> 
+  <span class="token builtin class-name">echo</span> <span class="token string">"you don't have permissions to kill PID:<span class="token variable">$PID</span>"</span>
+  <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+<span class="token keyword">fi</span>
+
+<span class="token function">kill</span> -9 <span class="token variable">$PID</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Now when I run the above as a non-root user:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ~/killer.bash </span><br><span class="line">you don<span class="string">&#x27;t have permissions to kill PID:15693</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ echo $?</span></span><br><span class="line"><span class="string">1</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ~/killer.bash 
+you don't have permissions to <span class="token function">kill</span> PID:15693
+
+$ <span class="token builtin class-name">echo</span> <span class="token variable">$?</span>
+<span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>However when it’s run as root:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ~/killer.bash </span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> $?</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">$ pgrep sleep</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> ~/killer.bash 
+
+$ <span class="token builtin class-name">echo</span> <span class="token variable">$?</span>
+<span class="token number">0</span>
+
+$ pgrep <span class="token function">sleep</span>
+$<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
@@ -847,17 +966,25 @@
     
     <div class="post-body" itemprop="articleBody">
           <h3 id="binlog-index文件内容"><a href="#binlog-index文件内容" class="headerlink" title="binlog.index文件内容"></a><code>binlog.index</code>文件内容</h3><p>记录了<code>binlog</code>文件的具体路径，在MySQL启动时，会找到<code>binlog.index</code>文件，然后读取它里面的条目，从而读取<code>binlog</code>文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat /mysql/3306/data/master.index</span><br><span class="line"></span><br><span class="line">/mysql/3306/data/master.000001</span><br><span class="line">/mysql/3306/data/master.000002</span><br><span class="line">/mysql/3306/data/master.000003</span><br><span class="line">./master.000004</span><br><span class="line">./master.000005</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> /mysql/3306/data/master.index
+
+/mysql/3306/data/master.000001
+/mysql/3306/data/master.000002
+/mysql/3306/data/master.000003
+./master.000004
+./master.000005<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol>
 <li><code>binlog</code>文件的路径可以是相对路径，也可以是绝对路径</li>
 <li>如果是绝对路径，当文件被移动到其它地方时，只能手动修改对应的路径，否则MySQL在启动时，会报找不到文件路径的错误</li>
 </ol>
 <h3 id="设置binlog文件路径"><a href="#设置binlog文件路径" class="headerlink" title="设置binlog文件路径"></a>设置<code>binlog</code>文件路径</h3><p>可以在 <code>my.cnf</code>中设置<code>binlog</code>的文件路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin&#x3D;master</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">[mysqld]
+log-bin&#x3D;master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>或设置为绝对路径</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">log-bin=/mysql/3306/data/master</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>mysqld<span class="token punctuation">]</span>
+log-bin<span class="token operator">=</span>/mysql/3306/data/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="参数-log-bin身兼多职"><a href="#参数-log-bin身兼多职" class="headerlink" title="参数 log-bin身兼多职"></a>参数 <code>log-bin</code>身兼多职</h3><p>设置后生效多个参数</p>
 <ol>
@@ -865,7 +992,17 @@
 <li>同时设置 <code>binlog.index</code>的文件名</li>
 <li>同时设置<code>binlog</code>的文件名</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;%log_bin%&#39;;</span><br><span class="line">+---------------------------------+----------------------------------------------+</span><br><span class="line">| Variable_name                   | Value                                        |</span><br><span class="line">+---------------------------------+----------------------------------------------+</span><br><span class="line">| log_bin                         | ON                                           |</span><br><span class="line">| log_bin_basename                | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master       |</span><br><span class="line">| log_bin_index                   | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master.index |</span><br><span class="line">| log_bin_trust_function_creators | OFF                                          |</span><br><span class="line">| log_bin_use_v1_row_events       | OFF                                          |</span><br><span class="line">| sql_log_bin                     | ON                                           |</span><br><span class="line">+---------------------------------+----------------------------------------------+</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">show variables like &#39;%log_bin%&#39;;
++---------------------------------+----------------------------------------------+
+| Variable_name                   | Value                                        |
++---------------------------------+----------------------------------------------+
+| log_bin                         | ON                                           |
+| log_bin_basename                | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master       |
+| log_bin_index                   | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master.index |
+| log_bin_trust_function_creators | OFF                                          |
+| log_bin_use_v1_row_events       | OFF                                          |
+| sql_log_bin                     | ON                                           |
++---------------------------------+----------------------------------------------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
@@ -970,7 +1107,37 @@
 </li>
 </ul>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>插入大量数据时，应减少事务的提交，让多个插入在一个事务中完成，从而提高插入数据的效率</p>
-<h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImportTradelog</span></span></span><br><span class="line">  def <span class="keyword">self</span>.import(date)</span><br><span class="line">    <span class="comment"># 导入30天的数据</span></span><br><span class="line">    <span class="number">30</span>.times <span class="keyword">do</span> <span class="params">|offset|</span></span><br><span class="line">      datas = init_data(date + (<span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>) * offset)</span><br><span class="line">      puts datas</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 批量插入， 每1000条插入一次，效率很高，用时7.99秒</span></span><br><span class="line">      <span class="comment"># 5.54s user 0.54s system 77% cpu 7.799 total</span></span><br><span class="line">      <span class="comment"># 5.38s user 0.48s system 78% cpu 7.452 total</span></span><br><span class="line">      Tradelog.bulk_insert <span class="symbol">set_size:</span> <span class="number">1000</span>, <span class="symbol">values:</span> datas</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 每天导入1000条数据</span></span><br><span class="line">  def <span class="keyword">self</span>.init_data(day)</span><br><span class="line">    datas = []</span><br><span class="line">    <span class="number">1000</span>.times <span class="keyword">do</span> <span class="params">|index|</span></span><br><span class="line">      <span class="comment"># 插入效率很低，30 * 1000 条记录用时 1分钟</span></span><br><span class="line">      <span class="comment"># date = &#123;tradeid: tradeid, operator: operator, t_modified: t_modified&#125;</span></span><br><span class="line">      <span class="comment"># Tradelog.create(date)</span></span><br><span class="line">      datas &lt;&lt; &#123;</span><br><span class="line">        <span class="symbol">tradeid:</span> <span class="string">&quot;<span class="subst">#&#123;day.strftime(<span class="string">&#x27;%Y%m%d&#x27;</span>)&#125;</span><span class="subst">#&#123;format(<span class="string">&#x27;%04d&#x27;</span>, (index + <span class="number">1</span>))&#125;</span>&quot;</span>,</span><br><span class="line">        <span class="symbol">operator:</span> rand(<span class="number">50</span>),</span><br><span class="line">        <span class="symbol">t_modified:</span> (day + <span class="number">60</span> * index)</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    datas</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">class</span> <span class="token class-name">ImportTradelog</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">import</span></span><span class="token punctuation">(</span>date<span class="token punctuation">)</span>
+    <span class="token comment"># 导入30天的数据</span>
+    <span class="token number">30.</span>times <span class="token keyword">do</span> <span class="token operator">|</span>offset<span class="token operator">|</span>
+      datas <span class="token operator">=</span> init_data<span class="token punctuation">(</span>date <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">60</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">24</span><span class="token punctuation">)</span> <span class="token operator">*</span> offset<span class="token punctuation">)</span>
+      puts datas
+
+      <span class="token comment"># 批量插入， 每1000条插入一次，效率很高，用时7.99秒</span>
+      <span class="token comment"># 5.54s user 0.54s system 77% cpu 7.799 total</span>
+      <span class="token comment"># 5.38s user 0.48s system 78% cpu 7.452 total</span>
+      <span class="token constant">Tradelog</span><span class="token punctuation">.</span>bulk_insert set_size<span class="token punctuation">:</span> <span class="token number">1000</span><span class="token punctuation">,</span> values<span class="token punctuation">:</span> datas
+    <span class="token keyword">end</span>
+  <span class="token keyword">end</span>
+
+  <span class="token comment"># 每天导入1000条数据</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">init_data</span></span><span class="token punctuation">(</span>day<span class="token punctuation">)</span>
+    datas <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token number">1000.</span>times <span class="token keyword">do</span> <span class="token operator">|</span>index<span class="token operator">|</span>
+      <span class="token comment"># 插入效率很低，30 * 1000 条记录用时 1分钟</span>
+      <span class="token comment"># date = &#123;tradeid: tradeid, operator: operator, t_modified: t_modified&#125;</span>
+      <span class="token comment"># Tradelog.create(date)</span>
+      datas <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token punctuation">&#123;</span>
+        tradeid<span class="token punctuation">:</span> <span class="token string">"<span class="token interpolation"><span class="token delimiter tag">#&#123;</span>day<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y%m%d'</span><span class="token punctuation">)</span><span class="token delimiter tag">&#125;</span></span><span class="token interpolation"><span class="token delimiter tag">#&#123;</span>format<span class="token punctuation">(</span><span class="token string">'%04d'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token delimiter tag">&#125;</span></span>"</span><span class="token punctuation">,</span>
+        operator<span class="token punctuation">:</span> rand<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        t_modified<span class="token punctuation">:</span> <span class="token punctuation">(</span>day <span class="token operator">+</span> <span class="token number">60</span> <span class="token operator">*</span> index<span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token keyword">end</span>
+
+    datas
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
       
@@ -1057,13 +1224,20 @@
 <ol>
 <li>配置主题为 Next 主题</li>
 </ol>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line">theme: <span class="string">&quot;next&quot;</span></span><br></pre></td></tr></table></figure>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># _config.yml</span>
+theme: <span class="token string">"next"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <ol start="2">
 <li><p>在 site 根目录新建 <code>_config.next.yml</code>文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch _config.next.yml</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">touch</span> _config.next.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p>打开 <code>theme/next/_config.yml</code>把需要修改的选项 copy 到 <code>_config.next.yml</code>中</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.next.yml</span></span><br><span class="line"><span class="comment"># 设置网站图标</span></span><br><span class="line"><span class="attr">favicon:</span></span><br><span class="line">  <span class="attr">small:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">medium:</span> <span class="string">/favicon.ico</span></span><br><span class="line">  <span class="attr">apple_touch_icon:</span> <span class="string">/apple-touch-icon.png</span></span><br><span class="line">  <span class="attr">safari_pinned_tab:</span> <span class="string">/apple-touch-icon.png</span></span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"># _config.next.yml
+# 设置网站图标
+favicon:
+  small: &#x2F;favicon.ico
+  medium: &#x2F;favicon.ico
+  apple_touch_icon: &#x2F;apple-touch-icon.png
+  safari_pinned_tab: &#x2F;apple-touch-icon.png<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>hexo启动时，会自动合并 <code>_config.next.yml</code> 与<code>theme/next/_config.yml</code> 的设置内容，从而达到配置主题的作用。 </p>
 </li>
 </ol>
@@ -1073,15 +1247,30 @@
 <ol>
 <li>删除文章底部的Rss(整个 follow me 设置都删除)</li>
 </ol>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.njk</span><br><span class="line"></span><br><span class="line"># 删除以下代码</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
+  <pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.njk
+
+# 删除以下代码
+&#123;%- if theme.follow_me %&#125;
+  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;
+&#123;%- endif %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ol start="2">
 <li><p>修改 Rss 样式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;post&#x2F;post-followme.njk</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;followme&quot;&gt; # 修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  &lt;span&gt;&#123;&#123; __(&#39;follow_me.welcome&#39;) &#125;&#125;&lt;&#x2F;span&gt; # 删除这一行</span><br><span class="line">  &lt;div class&#x3D;&quot;social-list&quot;&gt; # #修改为 &lt;div class&#x3D;&quot;&quot;&gt;</span><br><span class="line">  # 省略部分源码</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;post&#x2F;post-followme.njk
+
+&lt;div class&#x3D;&quot;followme&quot;&gt; # 修改为 &lt;div class&#x3D;&quot;&quot;&gt;
+  &lt;span&gt;&#123;&#123; __(&#39;follow_me.welcome&#39;) &#125;&#125;&lt;&#x2F;span&gt; # 删除这一行
+  &lt;div class&#x3D;&quot;social-list&quot;&gt; # #修改为 &lt;div class&#x3D;&quot;&quot;&gt;
+  # 省略部分源码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>添加 Rss 到侧边栏(其实就是整个的 follwe me)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;sidebar&#x2F;site-overview.njk</span><br><span class="line">&#123;%- if theme.follow_me %&#125;</span><br><span class="line">  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;sidebar&#x2F;site-overview.njk
+&#123;%- if theme.follow_me %&#125;
+  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;
+&#123;%- endif %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>在站点配置文件中打开 Rss 设置</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="attr">follow_me:</span></span><br><span class="line">  <span class="attr">RSS:</span> <span class="string">/rss2.xml</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-rss</span></span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># _config.yml</span>
+<span class="token key atrule">follow_me</span><span class="token punctuation">:</span>
+  <span class="token key atrule">RSS</span><span class="token punctuation">:</span> /rss2.xml <span class="token punctuation">|</span><span class="token punctuation">|</span> fa fa<span class="token punctuation">-</span>rss<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 <li><p>重启站点即可，就可以看到 Rss 显示在侧边栏了</p>
 </li>
 </ol>
