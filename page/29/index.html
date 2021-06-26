@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">453</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">454</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,89 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/custom-ubuntu-cmd-shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/custom-ubuntu-cmd-shell/" class="post-title-link" itemprop="url">定制Ubuntu命令行提示符</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2011-01-07 18:08:58" itemprop="dateCreated datePublished" datetime="2011-01-07T18:08:58+08:00">2011-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/os/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>ubuntu命令行下默认显示当前路径的完整路径，当进入到一个很深的目录时，一行往往显示不下。</p>
+<p>为了不让文件路径占用更多的命令行空间，我们可以让shell只显示当前目录，而不是完整路径。</p>
+<p>操作方法：</p>
+<blockquote>
+<ol>
+<li>打开主目录下的.bashrc文件(它是个隐藏文件，所以不要忘记加上前面那个点)</li>
+<li>找到PS1变量，把等号后面的“/w”所为大写的W。<code>eg:PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ &#39;</code></li>
+<li>重新载入设置即可生效</li>
+</ol>
+</blockquote>
+<p>当然也可以自定义shell的显示样式：如<br><code>PS1=&#39;$&#123;debian_chroot:+($debian_chroot)&#125;\u:\W\$ &#39;</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -882,88 +965,6 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line"></span><br><span class="line">fdisk -l <span class="comment">#查看你的linux所在分区，如果你把/boot单独分了区，请查看/boot所在分区，本人没有将/boot单独分区，所以查看的是linux所在分区，被安装在了sda10上（实际操作中请以你的为准）</span></span><br><span class="line"></span><br><span class="line">mount /dev/sda10 /mnt</span><br><span class="line">mount /dev/sda10 /mnt/boot  <span class="comment">#/boot单独分区，没有单独分区的请跳过这一步</span></span><br><span class="line"></span><br><span class="line">mount –<span class="built_in">bind</span> /proc /mnt/proc  <span class="comment">#（bind前面是两个减号）</span></span><br><span class="line">mount –<span class="built_in">bind</span> /dev /mnt/dev</span><br><span class="line"><span class="comment">#以上这两步很重要，如果不挂载，系统会找不到proc无法顺利重新安装Grub</span></span><br><span class="line"></span><br><span class="line">chroot /mnt  <span class="comment">#进入虚拟系统，如果不行请尝试 chroot /mnt /bin/bash</span></span><br><span class="line">update-grub2 <span class="comment">#可以省略</span></span><br><span class="line">grub-install /dev/sda <span class="comment">#如果看到Installation finished.No Error Reported.说明已经成功啦</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> <span class="comment">#这里是退出虚拟系统</span></span><br><span class="line"></span><br><span class="line">umount /mnt/sys</span><br><span class="line">umount /mnt/dev</span><br><span class="line"></span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
 
 <p>重新启动后就可以看到grub菜单了</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/rails3-0-gem-mysql2-lmysqlclient/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/rails3-0-gem-mysql2-lmysqlclient/" class="post-title-link" itemprop="url">rails3.0 安装mysql2 失败，发生lmysqlclient 错误</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2010-11-03 22:54:52" itemprop="dateCreated datePublished" datetime="2010-11-03T22:54:52+08:00">2010-11-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>rails3.0使用的mysql驱动是mysql2，默认安装使用 bundle install，在安装过程中出现如下错误</p>
-<blockquote>
-<p>/opt/ruby/bin/ruby extconf.rb<br>checking for rb_thread_blocking_region()… no<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lm… yes<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lz… yes<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lsocket… no<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lnsl… yes<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lmygcc… no<br>checking for mysql_query() in -lmysqlclient… no<br>*** extconf.rb failed ***<br>Could not create Makefile due to some reason, probably lack of<br>necessary libraries and/or headers.  Check the mkmf.log file for more<br>details.  You may need configuration options.</p>
-</blockquote>
-<p>解决方法</p>
-<p>既然要安装 mysql2 驱动，我们完全可以抛开bundle，而使用传统的gem的安装方式，并指明mysql的以下几个选项即可<br><code>sudo gem install mysql2 -- --with-mysql-dir=/opt/mysql --with-mysql-include=/opt/mysql/include/mysql --with-mysql-lib=/opt/mysql/lib/mysql/</code></p>
-<p>然后再运行 bundle intall顺利完成其它gem组件的安装。看到网上有的解决方法是安装mysql-deve这个库，其实知道原因后对症下药即可，本博没有安装mysql-deve，仅是指明了mysql的相关选项，即可解决问题。</p>
-<blockquote>
-<p>PS：bundle这个gem真的被集成到rails3.0里了。</p>
-</blockquote>
 
       
     </div>

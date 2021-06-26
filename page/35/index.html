@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">453</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">454</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,80 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/rails-dev-production/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/rails-dev-production/" class="post-title-link" itemprop="url">rails项目开发环境一定要与服务器生产环境一致</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2010-05-26 00:24:06" itemprop="dateCreated datePublished" datetime="2010-05-26T00:24:06+08:00">2010-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在使用ruby1.8.6时，发现字段串也有.last方法，即取出字符串的最后一位，后来在ruby1.8.7的环境下调用此代码，被告之没有定义last方法，查询api实确没有找到last方法，开发环境下使用的是ruby1.8.6版本，而ruby1.8.7是生产环境下的版本，还好发现的早，错误及时在发生前被终止。</p>
+<p>由于开发环境在windows下，所以使用的ruby版本为1.8.6二进制发行版，而服务器为linux环境，ruby版本为1.8.7，从而导致出现上述不兼容问题，所以开发环境务必要与生产环境一致，否则你写的每一行代码都将会成为一串串定时炸弹，不定在什么时候就会炸开， 所以为了我们项目的安全，我们在开发时的环境必须与服务器生产环境一致。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -844,71 +918,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER yy IDENTIFIED BY <span class="string">&#x27;123&#x27;</span>;</span><br><span class="line"></span><br><span class="line">如果要限制在固定地址登陆，比如localhost 登陆：</span><br><span class="line">CREATE USER yy@localhost IDENTIFIED BY <span class="string">&#x27;123&#x27;</span>;</span><br><span class="line"></span><br><span class="line">grant:</span><br><span class="line">GRANT ALL PRIVILEGES ON *.* TO user@localhost;</span><br><span class="line"></span><br><span class="line">grant select,insert,update,delete on *.* to test1@<span class="string">&quot;%&quot;</span> Identified by <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">格式：grant select on 数据库.* to 用户名@登录主机 identified by <span class="string">&quot;密码&quot;</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/find-strawberry/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/find-strawberry/" class="post-title-link" itemprop="url">怎么识别被染色的草莓(转)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2010-03-20 23:26:07" itemprop="dateCreated datePublished" datetime="2010-03-20T23:26:07+08:00">2010-03-20</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>草莓的籽，应该是金黄色的（类似炒熟的白芝麻），如果你看到市场上卖的草莓，籽也是红色的，甚至是深紫色的，那就说明有可能是染色的。</p>
-<p>图中右侧的草莓，是我用淡盐水浸泡过的（非常抱歉给大家带来视觉不悦感）<br><img src="//img.gagahappy.cn/blog/2010/03/54a625bft80f92b1de1b9690690-300x225.jpg" alt="怎么识别被染色的草莓" title="怎么识别被染色的草莓"></p>
 
       
     </div>

@@ -15,8 +15,37 @@
     <atom:link href="https://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby</description>
-    <pubDate>Thu, 24 Jun 2021 09:25:03 GMT</pubDate>
+    <pubDate>Sat, 26 Jun 2021 06:38:28 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>ab 压力测试 设置 nginx gzip</title>
+      <link>https://www.gagahappy.com/nginx-set-gzip-http-version/</link>
+      <guid>https://www.gagahappy.com/nginx-set-gzip-http-version/</guid>
+      <pubDate>Sat, 26 Jun 2021 06:11:40 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;设置gzip-http-version&quot;&gt;&lt;a href=&quot;#设置gzip-http-version&quot; class=&quot;headerlink&quot;</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="设置gzip-http-version"><a href="#设置gzip-http-version" class="headerlink" title="设置gzip_http_version"></a>设置<code>gzip_http_version</code></h1><p>使用<code>ab</code> 测试网站，参数如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ab -n 50 -c 10 -H <span class="string">&quot;Accept-Encoding: gzip, deflate&quot;</span> https://example.com/</span><br></pre></td></tr></table></figure><p>发现返回的文档没有被压缩，查看<code>nginx</code>日志也显示返回的是原始大小，查询资料后发现是<code>nginx</code> 配置<code>gzip_http</code>版本问题</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="attribute">gzip_vary</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">gzip_min_length</span> <span class="number">1k</span>;</span><br><span class="line"><span class="attribute">gzip_proxied</span> any;</span><br><span class="line"><span class="attribute">gzip_comp_level</span> <span class="number">6</span>;</span><br><span class="line"><span class="attribute">gzip_buffers</span> <span class="number">16</span> <span class="number">8k</span>;</span><br><span class="line"><span class="attribute">gzip_http_version</span> <span class="number">1</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure><p><code>gzip_http_version </code>设置为了1.1，而 <code>ab</code>只支持<code>http_version:1.0</code>，改为<code>1.0</code>即可。</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gzip_http_version</span> <span class="number">1</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure><p>再次测试，返回数据是被压缩后的数据，从<code>nginx</code>日志也可以看到数据是压缩后的。类似的<code>ab</code> 的工具还有<a href="https://github.com/JoeDog/siege">siege</a>，可以很好的支持<code>http 1.1</code></p><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>在<code>nginx</code>配置中，有些属性如果没有显示的进行设置，比如设置<code>gzip on;</code>时，没有设置<code>gzip_http_version</code>，<code>nginx</code>会启用默认值 <code>gzip_http_version:1.1;</code>，所以当你不想限制<code>http_version</code>的最低版本时，仅仅把<code>gzip_http_version</code>注释掉是不行的，你必须给其赋一个值才可以。类似这种问题不光在<code>nginx</code>配置中需要注意，在其它软件配置文件中也要注意</p>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/software/">软件</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/nginx/">nginx</category>
+      
+      
+      <comments>https://www.gagahappy.com/nginx-set-gzip-http-version/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Go 语言 外部测试包</title>
@@ -131,36 +160,6 @@
       
       
       <comments>https://www.gagahappy.com/linux-fd-in-linux/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Go 语言 截取0长度的Slice</title>
-      <link>https://www.gagahappy.com/golang-create-slice-with-zero-length/</link>
-      <guid>https://www.gagahappy.com/golang-create-slice-with-zero-length/</guid>
-      <pubDate>Fri, 11 Jun 2021 03:48:13 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;截取0长度的&lt;code&gt;slice&lt;/code&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>截取0长度的<code>slice</code></p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">s1 := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line">s2 := s1[<span class="number">1</span>:<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="built_in">cap</span>(s2), <span class="built_in">len</span>(s2), s2) <span class="comment">// 5 0 []</span></span><br><span class="line"></span><br><span class="line">s2 = s1[<span class="number">6</span>:<span class="number">6</span>]</span><br><span class="line">fmt.Println(<span class="built_in">cap</span>(s2), <span class="built_in">len</span>(s2), s2) <span class="comment">// 0 0 []</span></span><br><span class="line"></span><br><span class="line">s2 = s1[<span class="number">1</span>:<span class="number">2</span>]</span><br><span class="line">fmt.Println(<span class="built_in">cap</span>(s2), <span class="built_in">len</span>(s2), s2) <span class="comment">// 5 1 [2]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>s1[1:1]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是5(6-1)</p><p><code>s1[6:6]</code>表示截取的位置从最后一个元素最后一个字节的后面开始，到最后一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是0(6-6)</p><p><code>s1[1:2]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第二个元素最后一个字节的后面结束，在这个范围内的元素只有 <code>2</code>，所以生成的<code>slice</code>的长度是1，容量是5(1-6)</p>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
-      
-      
-      <comments>https://www.gagahappy.com/golang-create-slice-with-zero-length/#disqus_thread</comments>
       
     </item>
     

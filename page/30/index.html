@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">453</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">454</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,88 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/rails3-0-gem-mysql2-lmysqlclient/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/rails3-0-gem-mysql2-lmysqlclient/" class="post-title-link" itemprop="url">rails3.0 安装mysql2 失败，发生lmysqlclient 错误</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2010-11-03 22:54:52" itemprop="dateCreated datePublished" datetime="2010-11-03T22:54:52+08:00">2010-11-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>rails3.0使用的mysql驱动是mysql2，默认安装使用 bundle install，在安装过程中出现如下错误</p>
+<blockquote>
+<p>/opt/ruby/bin/ruby extconf.rb<br>checking for rb_thread_blocking_region()… no<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lm… yes<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lz… yes<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lsocket… no<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lnsl… yes<br>checking for mysql_query() in -lmysqlclient… no<br>checking for main() in -lmygcc… no<br>checking for mysql_query() in -lmysqlclient… no<br>*** extconf.rb failed ***<br>Could not create Makefile due to some reason, probably lack of<br>necessary libraries and/or headers.  Check the mkmf.log file for more<br>details.  You may need configuration options.</p>
+</blockquote>
+<p>解决方法</p>
+<p>既然要安装 mysql2 驱动，我们完全可以抛开bundle，而使用传统的gem的安装方式，并指明mysql的以下几个选项即可<br><code>sudo gem install mysql2 -- --with-mysql-dir=/opt/mysql --with-mysql-include=/opt/mysql/include/mysql --with-mysql-lib=/opt/mysql/lib/mysql/</code></p>
+<p>然后再运行 bundle intall顺利完成其它gem组件的安装。看到网上有的解决方法是安装mysql-deve这个库，其实知道原因后对症下药即可，本博没有安装mysql-deve，仅是指明了mysql的相关选项，即可解决问题。</p>
+<blockquote>
+<p>PS：bundle这个gem真的被集成到rails3.0里了。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -858,88 +940,6 @@
 <li>耦合性比较高的话，模块代码不易分离，是不好的编程模式</li>
 <li>内聚是越高越好，内聚个人认为是只是实现一个功能，不是很多的功能</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/macbuntu-make-ubuntu-to-mac-osx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/macbuntu-make-ubuntu-to-mac-osx/" class="post-title-link" itemprop="url">Macbuntu，Ubuntu变身苹果</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2010-10-13 20:44:48" itemprop="dateCreated datePublished" datetime="2010-10-13T20:44:48+08:00">2010-10-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/os/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>记得以前把ubuntu美化成mac要安装许多软件，不但时间长，而且相当的复杂，上手比较困难，使得许多人望而却步，其中也包括本博，终于Macbuntu的出现使得这一问题变得相当简单，下载后一健安装就可以完成ubuntu界面向MAC OSX的转变。</p>
-<p>目前，Macbuntu有两种版本，分别针对ubuntu10.04和ubuntu10.10，下载的时候一定要选对版本，否则不能正常安装。</p>
-<p>安装步骤：</p>
-<ol>
-<li>下载：<a target="_blank" rel="noopener" href="http://sourceforge.net/projects/macbuntu/files/macbuntu-10.04/v2.3/Macbuntu-10.04.tar.gz/download">http://sourceforge.net/projects/macbuntu/files/macbuntu-10.04/v2.3/Macbuntu-10.04.tar.gz/download</a></li>
-<li>安装：解压后进入文件夹，执行./install.sh。注意，这里不用加sudo</li>
-<li>选择安装内容：<br><img src="//img.gagahappy.cn/blog/2010/10/sendpix0.jpg" title="Macbuntu"></li>
-</ol>
-<p>在这个过程中会让你选择一些特效，例如show desktop，scale等类似Mac os X的Expose特效。</p>
-<p>等待安装完成后，界面会自动变成MAC OSX，怎么样，简单吧，相信你已经安装好了，尽情的使用吧！</p>
 
       
     </div>

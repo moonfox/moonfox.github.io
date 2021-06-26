@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">453</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">454</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,89 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/nginx-set-gzip-http-version/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/nginx-set-gzip-http-version/" class="post-title-link" itemprop="url">ab 压力测试 设置 nginx gzip</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-26 14:11:40" itemprop="dateCreated datePublished" datetime="2021-06-26T14:11:40+08:00">2021-06-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="设置gzip-http-version"><a href="#设置gzip-http-version" class="headerlink" title="设置gzip_http_version"></a>设置<code>gzip_http_version</code></h1><p>使用<code>ab</code> 测试网站，参数如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ab -n 50 -c 10 -H <span class="string">&quot;Accept-Encoding: gzip, deflate&quot;</span> https://example.com/</span><br></pre></td></tr></table></figure>
+
+<p>发现返回的文档没有被压缩，查看<code>nginx</code>日志也显示返回的是原始大小，查询资料后发现是<code>nginx</code> 配置<code>gzip_http</code>版本问题</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line"></span><br><span class="line"><span class="attribute">gzip_vary</span> <span class="literal">on</span>;</span><br><span class="line"><span class="attribute">gzip_min_length</span> <span class="number">1k</span>;</span><br><span class="line"><span class="attribute">gzip_proxied</span> any;</span><br><span class="line"><span class="attribute">gzip_comp_level</span> <span class="number">6</span>;</span><br><span class="line"><span class="attribute">gzip_buffers</span> <span class="number">16</span> <span class="number">8k</span>;</span><br><span class="line"><span class="attribute">gzip_http_version</span> <span class="number">1</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><code>gzip_http_version </code>设置为了1.1，而 <code>ab</code>只支持<code>http_version:1.0</code>，改为<code>1.0</code>即可。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gzip_http_version</span> <span class="number">1</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>再次测试，返回数据是被压缩后的数据，从<code>nginx</code>日志也可以看到数据是压缩后的。类似的<code>ab</code> 的工具还有<a target="_blank" rel="noopener" href="https://github.com/JoeDog/siege">siege</a>，可以很好的支持<code>http 1.1</code></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>在<code>nginx</code>配置中，有些属性如果没有显示的进行设置，比如设置<code>gzip on;</code>时，没有设置<code>gzip_http_version</code>，<code>nginx</code>会启用默认值 <code>gzip_http_version:1.1;</code>，所以当你不想限制<code>http_version</code>的最低版本时，仅仅把<code>gzip_http_version</code>注释掉是不行的，你必须给其赋一个值才可以。类似这种问题不光在<code>nginx</code>配置中需要注意，在其它软件配置文件中也要注意</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -973,89 +1056,6 @@
 <p>In short, the instructions below should be taken only as a guide to how to use GDB when it works, not as a guarantee of success. Besides this overview you might want to consult the <a target="_blank" rel="noopener" href="https://sourceware.org/gdb/current/onlinedocs/gdb/">GDB manual</a>.</p>
 </blockquote>
 <p>最后祝你一切顺利</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-create-tag/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/git-create-tag/" class="post-title-link" itemprop="url">Git 创建标签</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-05 22:16:35" itemprop="dateCreated datePublished" datetime="2021-06-05T22:16:35+08:00">2021-06-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Git-创建标签"><a href="#Git-创建标签" class="headerlink" title="Git 创建标签"></a>Git 创建标签</h1><p>Git 标签分两种</p>
-<ul>
-<li>附注标签: annotated: 是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息</li>
-<li>轻量级标签: lightweight: 像一个不会改变的分支——它只是某个特定提交的引用。在实践中不推荐使用</li>
-</ul>
-<h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 附注标签</span></span><br><span class="line">git tag -a v0.0.1 -m <span class="string">&quot;first release try&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 发布标签</span></span><br><span class="line"><span class="comment"># 标签不会随push而自动被push到远程，需要单独push</span></span><br><span class="line">git push origin v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给某个commit单独打tag</span></span><br><span class="line"><span class="comment"># 这种操作多用于给历史commit打tag,原因可能是当时没有打</span></span><br><span class="line">git tag -a v0.0.2 2234093</span><br></pre></td></tr></table></figure>
-
-<h2 id="标签操作"><a href="#标签操作" class="headerlink" title="标签操作"></a>标签操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某个tag的具体内容</span></span><br><span class="line">git show v0.0.1</span><br><span class="line">git cat-file -p v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除标签</span></span><br><span class="line">git tag -d v0.0.1</span><br><span class="line">=&gt; Deleted tag <span class="string">&#x27;v0.0.1&#x27;</span> (was 79db751)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除远程标签</span></span><br><span class="line">git push origin :v0.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tag的sha1</span></span><br><span class="line">cat .git/refs/tags/v5.4.1 <span class="comment"># 在标签被删除的时候会显示这个值</span></span><br><span class="line"><span class="comment"># =&gt; 79db751</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="签名tag"><a href="#签名tag" class="headerlink" title="签名tag"></a>签名tag</h2><p>前置条件：要先配置GPG</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 强制给tag 签名</span></span><br><span class="line"><span class="comment"># 直接编辑  ~/.gitconfig 也可以</span></span><br><span class="line">git config --global tag.forcesignannotated <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
