@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">454</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">455</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,96 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-test-coverage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-test-coverage/" class="post-title-link" itemprop="url">Go 语言 测试覆盖率</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-27 14:48:39" itemprop="dateCreated datePublished" datetime="2021-06-27T14:48:39+08:00">2021-06-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="覆盖率"><a href="#覆盖率" class="headerlink" title="覆盖率"></a>覆盖率</h1><p>语句的覆盖率是指在测试中至少被运行一次的代码占总代码数的比例。</p>
+<h1 id="生成测试报告"><a href="#生成测试报告" class="headerlink" title="生成测试报告"></a>生成测试报告</h1><p>在生成报告之前，要确保所有的测试都正常通过。使用<code>go test</code>命令配合不同的参数标示可以生成不同类型的覆盖率分析报告</p>
+<h2 id="使用标志coverprofile"><a href="#使用标志coverprofile" class="headerlink" title="使用标志coverprofile"></a>使用标志<code>coverprofile</code></h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -run<span class="token operator">=</span>Coverage -coverprofile<span class="token operator">=</span>c.out golang/gop/ch7_interfaces/7.9_example_expression_evaluator/eval<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在运行每个测试前，会把参与测试的源代码拷贝一份，并对每个词法块插入一个布尔变量，来统计代码块在测试中是否被执行过，以此来统计代码覆盖率，统计日志数据写入c.out文件</p>
+<h2 id="使用标志covermode"><a href="#使用标志covermode" class="headerlink" title="使用标志covermode"></a>使用标志<code>covermode</code></h2><p>如果同时使用了<code>-covermode=count</code>，会在每个代码块插入计数器以统计代码块被执行的次数，用这个功能可以看到哪些代码是频繁执行的热点代码</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -run<span class="token operator">=</span>Coverage -covermode<span class="token operator">=</span>count -coverprofile<span class="token operator">=</span>c.out golang/gop/ch7_interfaces/7.9_example_expression_evaluator/eval<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h1 id="查看测试报告"><a href="#查看测试报告" class="headerlink" title="查看测试报告"></a>查看测试报告</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go tool cover -html<span class="token operator">=</span>c.out<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>运行后会自动在浏览器中打开，绿色的代码块代表被测试覆盖到了，红色的则表示没有被覆盖到。如果使用了<code> -covermode=count</code>标志，会用红、灰、绿 三种颜色表示代码被调用的频率，红色表示没有调用，灰色表示频率较低，绿色随颜色深浅表示不同程度的频率调用</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>测试不可能是完整的，计算机科学家Edsger Dijkstra曾说过：“测试能证明缺陷存在，而无法证明没有缺陷。”</li>
+<li>实现100%的测试覆盖率听起来很美，但是在具体实践中通常是不可行的，也不是值得推荐的做法。应该对更需要测试的地方添加测试代码，而不是一味的为每个方法都加入测试代码</li>
+<li>测试覆盖率工具可以帮助我们快速识别测试薄弱的地方</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1076,173 +1166,6 @@ log<span class="token punctuation">.</span><span class="token function">Println<
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/gdb-setup-on-macos/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/gdb-setup-on-macos/" class="post-title-link" itemprop="url">Mac OS 安装 gdb</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-06 15:14:15" itemprop="dateCreated datePublished" datetime="2021-06-06T15:14:15+08:00">2021-06-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/software/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew <span class="token function">install</span> gdb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>也可以从源码进安装，<a target="_blank" rel="noopener" href="https://www.gnu.org/software/gdb/">官网</a>，目前GDB对下列语言进行了支持</p>
-<blockquote>
-<p>Ada<br>Assembly<br>C<br>C++<br>D<br>Fortran<br>Go<br>Objective-C<br>OpenCL<br>Modula-2<br>Pascal<br>Rust</p>
-</blockquote>
-<p>安装后还不能直接使用，MacOS 对安全性有效高的要求，不允许没有许可的程序运行其它程序</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gdb helloworld
-<span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> run
-
-Unable to <span class="token function">find</span> Mach task port <span class="token keyword">for</span> process-id <span class="token number">798</span>: <span class="token punctuation">(</span>os/kern<span class="token punctuation">)</span> failure <span class="token punctuation">(</span>0x5<span class="token punctuation">)</span>.
- <span class="token punctuation">(</span>please check gdb is codesigned - see taskgated<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">))</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>提示<code>please check gdb is codesigned - see taskgated(8)</code>，原因是还没有为<code>gdb</code>签名，需要在系统的<code>Keychain</code>中创建用于签名的证书</p>
-<h1 id="创建certificate"><a href="#创建certificate" class="headerlink" title="创建certificate"></a>创建certificate</h1><p>步骤如下：</p>
-<ol>
-<li>Launch Keychain Access application: Applications &gt; Utilities &gt; Keychain Access.</li>
-<li>From the Keychains list on the left, right-click on the System item and select Unlock Keychain “System”.</li>
-<li>From the toolbar, go to Keychain Access &gt; Certificate Assistant &gt; Create a Certificate.</li>
-<li>Choose a name (e.g. gdb-cert).</li>
-<li>Set Identity Type to Self Signed Root.</li>
-<li>Set Certificate Type to Code Signing.</li>
-<li>Check the Let me override defaults checkbox.</li>
-<li>At this point, you can go on with the installation process until you get the Specify a Location For The Certificate dialogue box. Here you need to set Keychain to System. Finally, you can click on the Create button.</li>
-<li>After these steps, you can see the new certificate under System keychains. From the contextual menu of the newly created certificate (right-click on it) select the Get info option. In the dialogue box, expand the Trust item and set Code signing to Always Trust.</li>
-<li>Then, from the Keychains list on the left, right-click on the System item and select Lock Keychain “System”.</li>
-<li>Finally, reboot your system.</li>
-</ol>
-<h1 id="gdb签名"><a href="#gdb签名" class="headerlink" title="gdb签名"></a>gdb签名</h1><p>在创建你自己的证书后，就可以给gdb进行签名了，在签名前要先配置<code>gdb-entitlement.xml</code>文件，它允许MacOs信任gdb</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
-<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">plist</span> <span class="token name">PUBLIC</span> <span class="token string">"-//Apple//DTD PLIST 1.0//EN"</span>
-<span class="token string">"http://www.apple.com/DTDs/PropertyList-1.0.dtd"</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plist</span> <span class="token attr-name">version</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1.0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dict</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.allow-jit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.allow-unsigned-executable-memory<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.allow-dyld-environment-variables<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.disable-library-validation<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.disable-executable-page-protection<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.debugger<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.get-task-allow<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dict</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plist</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在命令行运行</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">codesign --entitlements gdb-entitlement.xml -fs gdb-cert <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">which</span> gdb<span class="token variable">)</span></span>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><code>-fs</code>: 要填写你刚刚生成的证书的名子，<code>$(which gdb)</code>: 是gdb的安装路径</p>
-<p>接着在<code>home</code>目录创建<code>~/.gdbinit</code>文件，并写入如下内容</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">"set startup-with-shell off"</span> <span class="token operator">>></span> ~/.gdbinit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<h1 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h1><p>为了解决<code>No symbol table is loaded</code>问题，可以在编译时加入<code>-ggdb</code></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gcc hello_world.c -o hello_world -ggdb
-
-<span class="token comment"># 使用示例</span>
-gdb hello_world
-<span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> list
-<span class="token number">1</span>	<span class="token comment">#include &lt;stdio.h></span>
-<span class="token number">2</span>
-<span class="token number">3</span>	int my_strlen<span class="token punctuation">(</span>char *string<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token number">4</span>
-<span class="token number">5</span>	int main<span class="token punctuation">(</span>int argc, char const *argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token number">6</span>	<span class="token punctuation">&#123;</span>
-<span class="token number">7</span>	  // char *string<span class="token punctuation">;</span>
-<span class="token number">8</span>	  // string <span class="token operator">=</span> <span class="token string">"hello world haha"</span><span class="token punctuation">;</span>
-<span class="token number">9</span>	  char string<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"hello world haha"</span><span class="token punctuation">;</span>
-<span class="token number">10</span>	  printf<span class="token punctuation">(</span><span class="token string">"The string '%s' len is <span class="token entity" title="\&quot;">\"</span>%d<span class="token entity" title="\&quot;">\"</span><span class="token entity" title="\n">\n</span>"</span>, string, my_strlen<span class="token punctuation">(</span>string<span class="token punctuation">))</span><span class="token punctuation">;</span>
-<span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> run
-Starting program: /Users/ga/m/book/c-lang/ch02-basic/hello_world
-<span class="token punctuation">[</span>New Thread 0x2603 of process <span class="token number">6002</span><span class="token punctuation">]</span>
-<span class="token punctuation">[</span>New Thread 0x1803 of process <span class="token number">6002</span><span class="token punctuation">]</span>
-warning: unhandled dyld version <span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span>
-The string <span class="token string">'hello world haha'</span> len is <span class="token string">"16"</span>
-<span class="token punctuation">[</span>Inferior <span class="token number">1</span> <span class="token punctuation">(</span>process <span class="token number">6002</span><span class="token punctuation">)</span> exited normally<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h1 id="使用gdb调试golang"><a href="#使用gdb调试golang" class="headerlink" title="使用gdb调试golang"></a>使用gdb调试golang</h1><p>本博没有成功，一直提示错误<code>No symbol table is loaded.  Use the &quot;file&quot; command.</code> ，后来查看了Go的官方文档，官方建议使用<code>Delve</code>进行调试。<a target="_blank" rel="noopener" href="https://golang.org/doc/gdb">官方原文</a></p>
-<blockquote>
-<p><em>Note that <a target="_blank" rel="noopener" href="https://github.com/go-delve/delve">Delve</a> is a better alternative to GDB when debugging Go programs built with the standard toolchain. It understands the Go runtime, data structures, and expressions better than GDB. Delve currently supports Linux, OSX, and Windows on <code>amd64</code>. For the most up-to-date list of supported platforms, please see <a target="_blank" rel="noopener" href="https://github.com/go-delve/delve/tree/master/Documentation/installation">the Delve documentation</a>.</em></p>
-</blockquote>
-<p>并且在官方给出的示例中，也不保证你照着运行也可以成功</p>
-<blockquote>
-<p>In short, the instructions below should be taken only as a guide to how to use GDB when it works, not as a guarantee of success. Besides this overview you might want to consult the <a target="_blank" rel="noopener" href="https://sourceware.org/gdb/current/onlinedocs/gdb/">GDB manual</a>.</p>
-</blockquote>
-<p>最后祝你一切顺利</p>
 
       
     </div>

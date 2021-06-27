@@ -10436,4 +10436,33 @@ log<span class="token punctuation">.</span><span class="token function">Println<
         <tag>safari</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Go 语言 测试覆盖率</title>
+    <url>/golang-test-coverage/</url>
+    <content><![CDATA[<h1 id="覆盖率"><a href="#覆盖率" class="headerlink" title="覆盖率"></a>覆盖率</h1><p>语句的覆盖率是指在测试中至少被运行一次的代码占总代码数的比例。</p>
+<h1 id="生成测试报告"><a href="#生成测试报告" class="headerlink" title="生成测试报告"></a>生成测试报告</h1><p>在生成报告之前，要确保所有的测试都正常通过。使用<code>go test</code>命令配合不同的参数标示可以生成不同类型的覆盖率分析报告</p>
+<h2 id="使用标志coverprofile"><a href="#使用标志coverprofile" class="headerlink" title="使用标志coverprofile"></a>使用标志<code>coverprofile</code></h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -run<span class="token operator">=</span>Coverage -coverprofile<span class="token operator">=</span>c.out golang/gop/ch7_interfaces/7.9_example_expression_evaluator/eval<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>在运行每个测试前，会把参与测试的源代码拷贝一份，并对每个词法块插入一个布尔变量，来统计代码块在测试中是否被执行过，以此来统计代码覆盖率，统计日志数据写入c.out文件</p>
+<h2 id="使用标志covermode"><a href="#使用标志covermode" class="headerlink" title="使用标志covermode"></a>使用标志<code>covermode</code></h2><p>如果同时使用了<code>-covermode=count</code>，会在每个代码块插入计数器以统计代码块被执行的次数，用这个功能可以看到哪些代码是频繁执行的热点代码</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -run<span class="token operator">=</span>Coverage -covermode<span class="token operator">=</span>count -coverprofile<span class="token operator">=</span>c.out golang/gop/ch7_interfaces/7.9_example_expression_evaluator/eval<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h1 id="查看测试报告"><a href="#查看测试报告" class="headerlink" title="查看测试报告"></a>查看测试报告</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go tool cover -html<span class="token operator">=</span>c.out<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>运行后会自动在浏览器中打开，绿色的代码块代表被测试覆盖到了，红色的则表示没有被覆盖到。如果使用了<code> -covermode=count</code>标志，会用红、灰、绿 三种颜色表示代码被调用的频率，红色表示没有调用，灰色表示频率较低，绿色随颜色深浅表示不同程度的频率调用</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>测试不可能是完整的，计算机科学家Edsger Dijkstra曾说过：“测试能证明缺陷存在，而无法证明没有缺陷。”</li>
+<li>实现100%的测试覆盖率听起来很美，但是在具体实践中通常是不可行的，也不是值得推荐的做法。应该对更需要测试的地方添加测试代码，而不是一味的为每个方法都加入测试代码</li>
+<li>测试覆盖率工具可以帮助我们快速识别测试薄弱的地方</li>
+</ul>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
 </search>

@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">454</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">455</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,106 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/ubuntu9-10-install-fcitx-3-6-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ubuntu9-10-install-fcitx-3-6-3/" class="post-title-link" itemprop="url">ubuntu9 install fcitx</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2010-02-26 23:06:28" itemprop="dateCreated datePublished" datetime="2010-02-26T23:06:28+08:00">2010-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/os/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>由于9.10自带的fcitx默认版本为3.6，在本人的机子上经常出现CPU满载的情况，不得不更换其它输入法，但都没有fcitx好用（本人用五笔），发现其官网上已经提供了3.6.3的稳定版，决定自行进行安装。</p>
+</blockquote>
+<p>一、下载<br>首先从fcitx的官网下载fcitx-3.6.3.tar.bz2，更新日期为2010-02-13</p>
+<p>二、安装</p>
+<ol>
+<li><p>手动编译安装<br>安装必须的库文件：<br><code>sudo apt-get install libxpm-dev libxft-dev libxtst-dev</code></p>
+<blockquote>
+<p>安装过程就不多说了，说说安装后出现的问题</p>
+<ul>
+<li>问题1、启动后输入法栏为灰色，即不能使用，从网上找了N多方法也没有解决。</li>
+<li>问题2、不能随机启动。至今没有解决</li>
+</ul>
+<p>总结：用这种方法安装的难度还是满大的，不建议使用。</p>
+</blockquote>
+</li>
+<li><p>生成deb包，进入安装</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">安装必须的库文件：
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> debhelper
+进入解压后的文件夹
+<span class="token builtin class-name">cd</span> fcitx-3.6.3
+fakeroot debian/rules binary
+待程序运行结束后，会在当前目录的上层生成fcitx_3.6~rc-1_i386.deb文件，双击安装即可，然后再重新登入下，即可使用。
+优点：安装相对简单，易上手<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<blockquote>
+<p>使用感受：fcitx-3.6.3还是比较另人满意的，在输入速度和界面美观上表现的都不错。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -890,83 +990,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/svn-change-ur/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/svn-change-ur/" class="post-title-link" itemprop="url">svn更换仓库地址</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2010-01-26 17:56:56" itemprop="dateCreated datePublished" datetime="2010-01-26T17:56:56+08:00">2010-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>因为IP地址的变更，造成项目不能更新与提交，解决方法如下</p>
-<ol>
-<li>从新的仓库地址重新检出项目文件（费时，费力）</li>
-<li>如果你使用了TortoiseSVN，在项目上点击右键，选择TortoiseSVN  –&gt; Relocate，输入新的仓库地址，又可以更新与提交文件了吧！</li>
-</ol>
-
       
     </div>
 

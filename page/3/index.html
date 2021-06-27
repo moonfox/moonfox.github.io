@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">454</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">455</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -199,6 +199,99 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-auto-increment-strategy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/mysql-auto-increment-strategy/" class="post-title-link" itemprop="url">MySQL自增值申请策略</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-27 18:43:33" itemprop="dateCreated datePublished" datetime="2021-03-27T18:43:33+08:00">2021-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/database/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="自增值申请策略"><a href="#自增值申请策略" class="headerlink" title="自增值申请策略"></a>自增值申请策略</h1><ol>
+<li><p>能否先查ID，再查入数据？</p>
+<p>不能，如果每次插入前，都要在主键的索引树上查询要插入的id是否存在，会大大降低插入插入的效率。</p>
+</li>
+<li><p>能否等事务完成后，再释放自增值的锁？</p>
+<p>不能，如果需要等待当前事务完成，其它事务先能获取自增值的锁，就会大大降低并发。</p>
+</li>
+</ol>
+<h2 id="innodb-autoinc-lock-mode"><a href="#innodb-autoinc-lock-mode" class="headerlink" title="innodb_autoinc_lock_mode"></a><code>innodb_autoinc_lock_mode</code></h2><p>MySQL通过参数<code>innodb_autoinc_lock_mode</code>，来设置自值锁的行为，默认值为1</p>
+<ol>
+<li><p>0值 ：等事务完成才释放锁</p>
+</li>
+<li><p>1值 ：</p>
+<ul>
+<li>对于普通的<code>insert into table</code>，申请到自增锁后就释放，不用等插入语句的完成。</li>
+<li>对于批量插入，类似<code>insert ... select</code>，一直持有自增锁，直到事务执行完成。这样也保证了id的连续性。</li>
+</ul>
+</li>
+<li><p>2值：所有插入操作在申请到自增锁后就释放，包括<code>insert ... select </code>这种</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1274,79 +1367,6 @@ favicon:
 <li><p>重启站点即可，就可以看到 Rss 显示在侧边栏了</p>
 </li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-study-programming-ch7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-study-programming-ch7/" class="post-title-link" itemprop="url">Go 语言 第7章</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-04-05 23:43:54" itemprop="dateCreated datePublished" datetime="2020-04-05T23:43:54+08:00">2020-04-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/development/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>发现自己在看GoPL的时候，居然上来就选择从一个最长的章节开始(by accident)，第7章，接口，这个章节居然有15个小节，是全书里最多的。真不是特意选择从一个最长的章节开始的，早知道就换短一点的了。也不至于一开始就面对这么难的挑战</p>
 
       
     </div>

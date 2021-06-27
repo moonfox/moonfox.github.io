@@ -15,8 +15,38 @@
     <atom:link href="https://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby</description>
-    <pubDate>Sat, 26 Jun 2021 06:38:28 GMT</pubDate>
+    <pubDate>Sun, 27 Jun 2021 07:58:59 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Go 语言 测试覆盖率</title>
+      <link>https://www.gagahappy.com/golang-test-coverage/</link>
+      <guid>https://www.gagahappy.com/golang-test-coverage/</guid>
+      <pubDate>Sun, 27 Jun 2021 06:48:39 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;覆盖率&quot;&gt;&lt;a href=&quot;#覆盖率&quot; class=&quot;headerlink&quot; title=&quot;覆盖率&quot;&gt;&lt;/a&gt;覆盖率&lt;/h1&gt;&lt;p&gt;语句的覆盖率是指在测试中至少被运行一次的代码占总代码数的比例。&lt;/p&gt;
+&lt;h1 id=&quot;生成测试报告&quot;&gt;&lt;a</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="覆盖率"><a href="#覆盖率" class="headerlink" title="覆盖率"></a>覆盖率</h1><p>语句的覆盖率是指在测试中至少被运行一次的代码占总代码数的比例。</p><h1 id="生成测试报告"><a href="#生成测试报告" class="headerlink" title="生成测试报告"></a>生成测试报告</h1><p>在生成报告之前，要确保所有的测试都正常通过。使用<code>go test</code>命令配合不同的参数标示可以生成不同类型的覆盖率分析报告</p><h2 id="使用标志coverprofile"><a href="#使用标志coverprofile" class="headerlink" title="使用标志coverprofile"></a>使用标志<code>coverprofile</code></h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -run<span class="token operator">=</span>Coverage -coverprofile<span class="token operator">=</span>c.out golang/gop/ch7_interfaces/7.9_example_expression_evaluator/eval<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>在运行每个测试前，会把参与测试的源代码拷贝一份，并对每个词法块插入一个布尔变量，来统计代码块在测试中是否被执行过，以此来统计代码覆盖率，统计日志数据写入c.out文件</p><h2 id="使用标志covermode"><a href="#使用标志covermode" class="headerlink" title="使用标志covermode"></a>使用标志<code>covermode</code></h2><p>如果同时使用了<code>-covermode=count</code>，会在每个代码块插入计数器以统计代码块被执行的次数，用这个功能可以看到哪些代码是频繁执行的热点代码</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -run<span class="token operator">=</span>Coverage -covermode<span class="token operator">=</span>count -coverprofile<span class="token operator">=</span>c.out golang/gop/ch7_interfaces/7.9_example_expression_evaluator/eval<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h1 id="查看测试报告"><a href="#查看测试报告" class="headerlink" title="查看测试报告"></a>查看测试报告</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go tool cover -html<span class="token operator">=</span>c.out<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>运行后会自动在浏览器中打开，绿色的代码块代表被测试覆盖到了，红色的则表示没有被覆盖到。如果使用了<code> -covermode=count</code>标志，会用红、灰、绿 三种颜色表示代码被调用的频率，红色表示没有调用，灰色表示频率较低，绿色随颜色深浅表示不同程度的频率调用</p><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul><li>测试不可能是完整的，计算机科学家Edsger Dijkstra曾说过：“测试能证明缺陷存在，而无法证明没有缺陷。”</li><li>实现100%的测试覆盖率听起来很美，但是在具体实践中通常是不可行的，也不是值得推荐的做法。应该对更需要测试的地方添加测试代码，而不是一味的为每个方法都加入测试代码</li><li>测试覆盖率工具可以帮助我们快速识别测试薄弱的地方</li></ul>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
+      
+      
+      <comments>https://www.gagahappy.com/golang-test-coverage/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>ab 压力测试 设置 nginx gzip</title>
@@ -131,35 +161,6 @@
       
       
       <comments>https://www.gagahappy.com/golang-pprof/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Linux 中的文件描述符</title>
-      <link>https://www.gagahappy.com/linux-fd-in-linux/</link>
-      <guid>https://www.gagahappy.com/linux-fd-in-linux/</guid>
-      <pubDate>Sat, 12 Jun 2021 11:08:09 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;文件描述符&quot;&gt;&lt;a href=&quot;#文件描述符&quot; class=&quot;headerlink&quot; title=&quot;文件描述符&quot;&gt;&lt;/a&gt;文件描述符&lt;/h1&gt;&lt;p&gt;即&lt;code&gt;file descriptor&lt;/code&gt;，简称&lt;code&gt;FD&lt;/code&gt;</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h1><p>即<code>file descriptor</code>，简称<code>FD</code> ，用于指代被打开的文件，用一个非负的整数表示</p><h1 id="对文件描述符的误区"><a href="#对文件描述符的误区" class="headerlink" title="对文件描述符的误区"></a>对文件描述符的误区</h1><p>每个程序启动的时候，都会打开3个文件，分别是，0标准输入，1标准输出，2标准错误，此后再打开文件的文件描述符就是3，依次类推。之前的误区是，当在进程中打开一个文件，它的文件描述符应该已经很大了，不应该是<code>3</code>，因为系统本身已经运行了很多程序。正确的应该是：进程只能看到自己的文件描述符，每个进程的文件描述符的编号都是从0开始，进程启动，默认都会打开<code>标准输入，标准输出，标准错误</code>这三个文件，之后再打开的文件的描述符从编号3开始</p><h1 id="文件件描述符列表"><a href="#文件件描述符列表" class="headerlink" title="文件件描述符列表"></a>文件件描述符列表</h1><p>每个进程都有着自己的文件描述符列表。进程A启动后，拥有<code>stdin,stdout,stderr</code>这三个文件描述符 ，再打开一个文件，这个文件的文件描述符就是3。进程B启动后，拥有<code>stdin,stdout,stderr</code>这三个文件描述符，再打一个文件，它的文件描述符也是3，和进程A的一样。所以，不同进程，可以拥有相同的文件描述符。</p><p>当一个文件在同一个进程中，被打开多次，那么这个文件具有不同的文件描述符，在同一个进程中，每个文件描述符只能对应一个文件。同一个进程，不同文件描述符可以指向同一个文件。</p><p>不同进程，如果都打开了同一个文件(文件描述符都指向同一个文件)，那么它们都具有这个文件的句柄，其中一个进程对文件的修改，对其它进程是可见的。比如进程A对文件写入了10个字节，进程B在对文件进行写入时，是从第11个字节处开始写入的，而不是从文件头开始写入，这些操作包括<code>read(),write(),seek()</code>等</p><h1 id="文件描述符限制"><a href="#文件描述符限制" class="headerlink" title="文件描述符限制"></a>文件描述符限制</h1><p>内核为了不让某个进程消耗掉所有的文件资源，会对单个进程最大打开文件数做默认值处理（称之为用户级限制），默认值一般是1024。注意：同一个文件，可以有多个文件句柄，这可能是不同进程打开了同一个文件，或者是同一个进程内，对一个文件打开了多次</p>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/os/">操作系统</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/linux/">linux</category>
-      
-      
-      <comments>https://www.gagahappy.com/linux-fd-in-linux/#disqus_thread</comments>
       
     </item>
     
