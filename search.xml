@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>git blob 对象</title>
-    <url>/git-blob-object/</url>
-    <content><![CDATA[<p><a href="//img.gagahappy.cn/blog/2011/07/blob.jpg"><img src="//img.gagahappy.cn/blog/2011/07/blob.jpg" title="blob"></a><br>一个”blob对象”就是一块二进制数据，它没有指向任何东西或有任何其它属性，甚至连文件名都没有.</p>
-<p>因为blob对象内容全部都是数据，如两个文件在一个目录树（或是一个版本仓库）中有同样的数据内容，那么它们将会共享同一个blob对象。Blob对象和其所对应的文件所在路径、文件名是否改被更改都完全没有关系。</p>
+    <title>git 恢复单个文件</title>
+    <url>/git-checkout-file/</url>
+    <content><![CDATA[<p>如果你只是要恢复一个文件(修复未提交文件中的错误),如”hello.rb”, 你就要使用 git checkout</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> checkout -- hello.rb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -14,10 +14,10 @@
       </tags>
   </entry>
   <entry>
-    <title>git 恢复单个文件</title>
-    <url>/git-checkout-file/</url>
-    <content><![CDATA[<p>如果你只是要恢复一个文件(修复未提交文件中的错误),如”hello.rb”, 你就要使用 git checkout</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> checkout -- hello.rb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+    <title>git blob 对象</title>
+    <url>/git-blob-object/</url>
+    <content><![CDATA[<p><a href="//img.gagahappy.cn/blog/2011/07/blob.jpg"><img src="//img.gagahappy.cn/blog/2011/07/blob.jpg" title="blob"></a><br>一个”blob对象”就是一块二进制数据，它没有指向任何东西或有任何其它属性，甚至连文件名都没有.</p>
+<p>因为blob对象内容全部都是数据，如两个文件在一个目录树（或是一个版本仓库）中有同样的数据内容，那么它们将会共享同一个blob对象。Blob对象和其所对应的文件所在路径、文件名是否改被更改都完全没有关系。</p>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -164,19 +164,6 @@ $ <span class="token function">git</span> config --global user.email <span class
       </tags>
   </entry>
   <entry>
-    <title>git fetch origin</title>
-    <url>/git-fetch-origin/</url>
-    <content><![CDATA[<p>可以运行 git fetch origin 来同步远程服务器上的数据到本地。</p>
-<p>那么用 git pull 不是也可以吗？区别是啥？</p>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>git 与 subversion分支</title>
     <url>/git-different-of-branch-between-subversion/</url>
     <content><![CDATA[<p>subversion合并分支消耗太大。然而在 Git 中，一天之内建立、使用、合并再删除多个分支是常见的事。</p>
@@ -189,21 +176,10 @@ $ <span class="token function">git</span> config --global user.email <span class
       </tags>
   </entry>
   <entry>
-    <title>git log查找某一个author的提交</title>
-    <url>/git-log-author/</url>
-    <content><![CDATA[<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> log --author<span class="token operator">=</span><span class="token operator">&lt;</span>pattern<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git 硬恢复</title>
-    <url>/git-recover-delete-file-from-commit/</url>
-    <content><![CDATA[<p>git-reset –hard HEAD~1</p>
+    <title>git fetch origin</title>
+    <url>/git-fetch-origin/</url>
+    <content><![CDATA[<p>可以运行 git fetch origin 来同步远程服务器上的数据到本地。</p>
+<p>那么用 git pull 不是也可以吗？区别是啥？</p>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -284,50 +260,6 @@ $ <span class="token function">git</span> config --global user.email <span class
       </tags>
   </entry>
   <entry>
-    <title>git rebase 与 git reset的应用</title>
-    <url>/git-rebase-vs-git-reset/</url>
-    <content><![CDATA[<h3 id="常用的应用场景"><a href="#常用的应用场景" class="headerlink" title="常用的应用场景"></a>常用的应用场景</h3><ol>
-<li><p>合并提交</p>
-</li>
-<li><p>去除不要的提交</p>
-</li>
-</ol>
-<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><h3 id="场景1，合并多个提交"><a href="#场景1，合并多个提交" class="headerlink" title="场景1，合并多个提交"></a>场景1，合并多个提交</h3><p>有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交</p>
-<ol>
-<li>方法一: <code>git reset</code></li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset B --soft
-<span class="token function">git</span> ci -m <span class="token string">"merge C to F"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li>方法二: <code>git rebase</code></li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto B C^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="场景2，去掉D提交"><a href="#场景2，去掉D提交" class="headerlink" title="场景2，去掉D提交"></a>场景2，去掉D提交</h3><p>此时，<code>git reset</code>已经不再适合这个场景</p>
-<p>使用<code>git rebase</code></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto C E^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ol>
-<li><code>git rebase</code> 语法</li>
-</ol>
-<p>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt;</code><br>  <code>git rebase &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase &lt;since&gt;</code><br>  <code>git rebase -i</code></p>
-<p>  onbase为要架接到的commit, since表示不包括自身到till的所有提交</p>
-<p>  <code>git rebase --continue</code> # 解决冲突后使用，以完成rebase<br>  <code>git rebase --skip</code>     # 跳过当前commit，进行下一个commit的合并<br>  <code>git rebase --abort</code>    # 放弃此次操作，还原工作区</p>
-<ol start="2">
-<li><code>git rebase</code>的莫名冲突</li>
-</ol>
-<p>  对于场景二： 使用<code>git rebase</code>可能出现冲突（感觉不应该出现冲突的，对此不是很理解，难道是因为丢弃D后使查找链C-D-E-F断裂造成git认为这两个commit需要合并，是因为E无法知道C是它的祖先吗）</p>
-<p>  在解决冲突后，使用<code>git rebase --continue</code>完成rebase操作</p>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>git cat-file type选项和p选项的区别</title>
     <url>/git-cat-file-type-option/</url>
     <content><![CDATA[<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> cat-file type选项和-p选项的区别
@@ -391,6 +323,50 @@ modified:   metaprogramming/blocks/block_binding.rb<span aria-hidden="true" clas
 <p>执行</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> write-tree
 <span class="token function">git</span> ls_tree <span class="token operator">&lt;</span>git write-tree 的输出<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git rebase 与 git reset的应用</title>
+    <url>/git-rebase-vs-git-reset/</url>
+    <content><![CDATA[<h3 id="常用的应用场景"><a href="#常用的应用场景" class="headerlink" title="常用的应用场景"></a>常用的应用场景</h3><ol>
+<li><p>合并提交</p>
+</li>
+<li><p>去除不要的提交</p>
+</li>
+</ol>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><h3 id="场景1，合并多个提交"><a href="#场景1，合并多个提交" class="headerlink" title="场景1，合并多个提交"></a>场景1，合并多个提交</h3><p>有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交</p>
+<ol>
+<li>方法一: <code>git reset</code></li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset B --soft
+<span class="token function">git</span> ci -m <span class="token string">"merge C to F"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>方法二: <code>git rebase</code></li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto B C^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="场景2，去掉D提交"><a href="#场景2，去掉D提交" class="headerlink" title="场景2，去掉D提交"></a>场景2，去掉D提交</h3><p>此时，<code>git reset</code>已经不再适合这个场景</p>
+<p>使用<code>git rebase</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto C E^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ol>
+<li><code>git rebase</code> 语法</li>
+</ol>
+<p>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt;</code><br>  <code>git rebase &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase &lt;since&gt;</code><br>  <code>git rebase -i</code></p>
+<p>  onbase为要架接到的commit, since表示不包括自身到till的所有提交</p>
+<p>  <code>git rebase --continue</code> # 解决冲突后使用，以完成rebase<br>  <code>git rebase --skip</code>     # 跳过当前commit，进行下一个commit的合并<br>  <code>git rebase --abort</code>    # 放弃此次操作，还原工作区</p>
+<ol start="2">
+<li><code>git rebase</code>的莫名冲突</li>
+</ol>
+<p>  对于场景二： 使用<code>git rebase</code>可能出现冲突（感觉不应该出现冲突的，对此不是很理解，难道是因为丢弃D后使查找链C-D-E-F断裂造成git认为这两个commit需要合并，是因为E无法知道C是它的祖先吗）</p>
+<p>  在解决冲突后，使用<code>git rebase --continue</code>完成rebase操作</p>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -611,7 +587,7 @@ Auto-merging layout/_partials/post/post-followme.njk
       </tags>
   </entry>
   <entry>
-    <title>Linux What does kill 0 do</title>
+    <title>linux What does kill 0 do</title>
     <url>/linux-what-does-kill-zero/</url>
     <content><![CDATA[<h3 id="What-does-kill-0-do"><a href="#What-does-kill-0-do" class="headerlink" title="What does kill -0 ... do?"></a>What does <code>kill -0 ...</code> do?</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /path/to/file.pid<span class="token variable">)</span></span><span class="token punctuation">;</span> <span class="token keyword">then</span>
     <span class="token punctuation">..</span>. <span class="token keyword">do</span> something <span class="token punctuation">..</span>.
@@ -740,7 +716,7 @@ log-bin<span class="token operator">=</span>/mysql/3306/data/master<span aria-hi
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 无缓冲通道的cap是零</title>
+    <title>go 语言 无缓冲通道的cap是零</title>
     <url>/golang-unbuffered-channel-no-cap/</url>
     <content><![CDATA[<p>无缓冲通道的cap是零</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
@@ -886,7 +862,7 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 主程序退出时会进行一些额外工作</title>
+    <title>go 语言 主程序退出时会进行一些额外工作</title>
     <url>/golang-main-do-something-when-quit/</url>
     <content><![CDATA[<p>主goroutine先执行完,子goroutine居然还可以运行</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -975,6 +951,30 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </tags>
   </entry>
   <entry>
+    <title>git log查找某一个author的提交</title>
+    <url>/git-log-author/</url>
+    <content><![CDATA[<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> log --author<span class="token operator">=</span><span class="token operator">&lt;</span>pattern<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git 硬恢复</title>
+    <url>/git-recover-delete-file-from-commit/</url>
+    <content><![CDATA[<p>git-reset –hard HEAD~1</p>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git 使用 rebase 代替 merge</title>
     <url>/git-using-rebase-instead-of-merge/</url>
     <content><![CDATA[<h1 id="合并还是变基"><a href="#合并还是变基" class="headerlink" title="合并还是变基"></a>合并还是变基</h1><p>合并分支时，应使用<code>rebase</code>合并分支而不是使用<code>merge</code></p>
@@ -1041,7 +1041,7 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 在动态值为 nil 的接口上调用方法</title>
+    <title>go 语言 在动态值为 nil 的接口上调用方法</title>
     <url>/golang-call-method-on-nil-of-interface-value/</url>
     <content><![CDATA[<h1 id="在动态值为-nil-的接口上调用方法"><a href="#在动态值为-nil-的接口上调用方法" class="headerlink" title="在动态值为 nil 的接口上调用方法"></a>在动态值为 nil 的接口上调用方法</h1><p>把一个值为nil的某个实现类型的变量赋给了接口变量，是否可以在这个接口变量上调用该接口的方法</p>
 <p>lib/lib.go</p>
@@ -1110,7 +1110,7 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 sync.Wait的使用</title>
+    <title>go 语言 sync.Wait的使用</title>
     <url>/golang-sync-wait/</url>
     <content><![CDATA[<p>如何让主 goroutine 在所有其他 goroutine 都运行完后，再退出</p>
 <h1 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h1><p>通过 sleep 让主 goroutine 在所有子goroutine运行结束后，再退出</p>
@@ -1208,7 +1208,7 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 buffer.truncate 分析</title>
+    <title>go 语言 buffer.truncate 分析</title>
     <url>/golang-bytes-buffer-truncate/</url>
     <content><![CDATA[<p>对于Golang的初学者，<code>Truncate</code>方法的行为使人迷惑，它不是从 <code>buffer</code>的头部截取 <code>n 个</code>字节，而是丢弃<code>除了前n个</code>未读取的字节之外的所有未读取的字节，也是就只保留已读取的字节和还没有读取的<code>前n个</code>字节。这种逻辑确实让人不太适应</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Truncate discards all but the first n unread bytes from the buffer</span>
@@ -1254,7 +1254,7 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 结构体在内存中的布局</title>
+    <title>go 语言 结构体在内存中的布局</title>
     <url>/golang-layout-of-struct/</url>
     <content><![CDATA[<h1 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h1><ul>
 <li>字节对齐</li>
@@ -1354,9 +1354,9 @@ Sizeof(x.c) = 24  Alignof(x.c) = 8 Offsetof(x.c) = 8
       </tags>
   </entry>
   <entry>
-    <title>Mac OS 安装 gdb</title>
+    <title>gdb 安装</title>
     <url>/gdb-setup-on-macos/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew <span class="token function">install</span> gdb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+    <content><![CDATA[<h1 id="在-mac-OS-上安装"><a href="#在-mac-OS-上安装" class="headerlink" title="在 mac OS 上安装"></a>在 mac OS 上安装</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew <span class="token function">install</span> gdb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>也可以从源码进安装，<a href="https://www.gnu.org/software/gdb/">官网</a>，目前GDB对下列语言进行了支持</p>
 <blockquote>
@@ -1453,7 +1453,7 @@ The string <span class="token string">'hello world haha'</span> len is <span cla
 <p>最后祝你一切顺利</p>
 ]]></content>
       <categories>
-        <category>软件</category>
+        <category>后端</category>
       </categories>
       <tags>
         <tag>gdb</tag>
@@ -1508,7 +1508,7 @@ git tag -a v0.0.2 2234093<span aria-hidden="true" class="line-numbers-rows"><spa
       </tags>
   </entry>
   <entry>
-    <title>Gitalk 评论系统 安装</title>
+    <title>gitalk 评论系统 安装</title>
     <url>/gitalk-install/</url>
     <content><![CDATA[<h1 id="申请GitHub应用"><a href="#申请GitHub应用" class="headerlink" title="申请GitHub应用"></a>申请GitHub应用</h1><h2 id="1-注册一个新应用"><a href="#1-注册一个新应用" class="headerlink" title="1.  注册一个新应用"></a>1.  注册一个新应用</h2><p><a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> 有三项内容必须填写</p>
 <pre class="line-numbers language-html" data-language="html"><code class="language-html">Application name：这个随意填写
@@ -1567,11 +1567,11 @@ gitalk<span class="token punctuation">.</span><span class="token function">rende
         <category>软件</category>
       </categories>
       <tags>
-        <tag>Gitalk</tag>
+        <tag>gitalk</tag>
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 对指针类型接收者本身赋值</title>
+    <title>go 语言 对指针类型接收者本身赋值</title>
     <url>/golang-assign_receiver_of_ptr/</url>
     <content><![CDATA[<p><code>r</code> 是指针类型接收者，可以对其进行解引赋值。结构体的<code>0值</code>不是<code>nil</code>，而是其各个成员的<code>0值</code></p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
@@ -1608,7 +1608,7 @@ gitalk<span class="token punctuation">.</span><span class="token function">rende
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 bufio.Peek 源码</title>
+    <title>go 语言 bufio.Peek 源码</title>
     <url>/golang-bufio-reader-peek/</url>
     <content><![CDATA[<p> <code>bufio.Peek(n)</code>返回前N个未读字节 ，不会更改已读计数的值。在方法调用后，要查看返回参数<code>error</code>是否为nil，以确保操作满足要求</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>b <span class="token operator">*</span>Reader<span class="token punctuation">)</span> <span class="token function">Peek</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -1656,7 +1656,7 @@ gitalk<span class="token punctuation">.</span><span class="token function">rende
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 截取0长度的Slice</title>
+    <title>go 语言 截取0长度的Slice</title>
     <url>/golang-create-slice-with-zero-length/</url>
     <content><![CDATA[<p>截取0长度的<code>slice</code></p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -1684,7 +1684,7 @@ gitalk<span class="token punctuation">.</span><span class="token function">rende
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 外部测试包</title>
+    <title>go 语言 外部测试包</title>
     <url>/golang-external-test-packages/</url>
     <content><![CDATA[<h1 id="外部包"><a href="#外部包" class="headerlink" title="外部包"></a>外部包</h1><p>外部包使用<code>package xxx_test</code>方式来命名，比如<code>package bytes_test</code>就是<code>src/btyes/buffer_test.go</code>外部包的命名方式，<code>_test</code>后缀告诉go test工具它应该建立一个额外的包来运行测试。</p>
 <p>通过外部测试包的方式可以解决导入包循环依赖的问题，因为外部测试包是一个独立的包，所以能够导入那些<code>依赖待测代码本身</code>的其他辅助包；包内的测试代码就无法做到这点。注意：外部包不能被其它包导入</p>
@@ -1738,7 +1738,7 @@ gitalk<span class="token punctuation">.</span><span class="token function">rende
 <li><p>查看包内部的测试代码</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>TestGoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes <span class="token comment">// => [export_test.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li><p>XTestGoFiles表示的是属于外部测试包的测试代码</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>XTestGoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes 
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>XTestGoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes
 <span class="token comment">// => [buffer_test.go bytes_test.go compare_test.go example_test.go reader_test.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 </ul>
 ]]></content>
@@ -1750,7 +1750,7 @@ gitalk<span class="token punctuation">.</span><span class="token function">rende
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 fmt对string中零值的处理</title>
+    <title>go 语言 fmt对string中零值的处理</title>
     <url>/golang-fmt-string-with-zerovalue/</url>
     <content><![CDATA[<p><code>fmt</code>格式化含有0值的<code>string</code>时，是如何显示的</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -1790,7 +1790,7 @@ helloA world
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 io.Writer 接口</title>
+    <title>go 语言 io.Writer 接口</title>
     <url>/golang-io-writer/</url>
     <content><![CDATA[<h1 id="io-Writer接口实现要求"><a href="#io-Writer接口实现要求" class="headerlink" title="io.Writer接口实现要求"></a><code>io.Writer</code>接口实现要求</h1><p>开始以为只是实现了<code>Write</code>方法就行，看了源码发现还有很多细节上的要求</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// src/io/io.go</span>
@@ -1811,7 +1811,7 @@ helloA world
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 程序性能分析</title>
+    <title>go 语言 程序性能分析</title>
     <url>/golang-pprof/</url>
     <content><![CDATA[<h1 id="性能分析API"><a href="#性能分析API" class="headerlink" title="性能分析API"></a>性能分析API</h1><p>可以使用标准库中的 <code>runtime/pprof</code>，<code>runtime/trace</code>，<code>net/http/pprof</code>这三个包中提供的API来对Go程序进行性能分析，其中 <code>runtime/pprof</code>包中还提供了生成性能分析概要文件的API。概要文件是以二进制格式存储的，<code>go test</code> 命令也可以生成概要文件</p>
 <h1 id="概要文件的读取"><a href="#概要文件的读取" class="headerlink" title="概要文件的读取"></a>概要文件的读取</h1><p>概要文件有：CPU 概要文件（CPU Profile）、内存概要文件（Mem Profile）和阻塞概要文件（Block Profile），是Go程序在某一段时间内，对相关指标采样后，得到的概要信息。Go标准工具中<code>go tool pprof</code> 和 <code>go tool trace</code>可以解析概要文件中的信息，以可以阅读的方式展现出来，供分析性能使用</p>
@@ -1857,7 +1857,7 @@ log<span class="token punctuation">.</span><span class="token function">Println<
       </tags>
   </entry>
   <entry>
-    <title>Go 语言 测试覆盖率</title>
+    <title>go 语言 测试覆盖率</title>
     <url>/golang-test-coverage/</url>
     <content><![CDATA[<h1 id="覆盖率"><a href="#覆盖率" class="headerlink" title="覆盖率"></a>覆盖率</h1><p>语句的覆盖率是指在测试中至少被运行一次的代码占总代码数的比例。</p>
 <h1 id="生成测试报告"><a href="#生成测试报告" class="headerlink" title="生成测试报告"></a>生成测试报告</h1><p>在生成报告之前，要确保所有的测试都正常通过。使用<code>go test</code>命令配合不同的参数标示可以生成不同类型的覆盖率分析报告</p>
@@ -1886,7 +1886,7 @@ log<span class="token punctuation">.</span><span class="token function">Println<
       </tags>
   </entry>
   <entry>
-    <title>Linux 中的文件描述符</title>
+    <title>linux 中的文件描述符</title>
     <url>/linux-fd-in-linux/</url>
     <content><![CDATA[<h1 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h1><p>即<code>file descriptor</code>，简称<code>FD</code> ，用于指代被打开的文件，用一个非负的整数表示</p>
 <h1 id="对文件描述符的误区"><a href="#对文件描述符的误区" class="headerlink" title="对文件描述符的误区"></a>对文件描述符的误区</h1><p>每个程序启动的时候，都会打开3个文件，分别是，0标准输入，1标准输出，2标准错误，此后再打开文件的文件描述符就是3，依次类推。之前的误区是，当在进程中打开一个文件，它的文件描述符应该已经很大了，不应该是<code>3</code>，因为系统本身已经运行了很多程序。正确的应该是：进程只能看到自己的文件描述符，每个进程的文件描述符的编号都是从0开始，进程启动，默认都会打开<code>标准输入，标准输出，标准错误</code>这三个文件，之后再打开的文件的描述符从编号3开始</p>
@@ -1903,7 +1903,7 @@ log<span class="token punctuation">.</span><span class="token function">Println<
       </tags>
   </entry>
   <entry>
-    <title>ab 压力测试 设置 nginx gzip</title>
+    <title>nginx 设置 gzip http 版本</title>
     <url>/nginx-set-gzip-http-version/</url>
     <content><![CDATA[<h1 id="设置gzip-http-version"><a href="#设置gzip-http-version" class="headerlink" title="设置gzip_http_version"></a>设置<code>gzip_http_version</code></h1><p>使用<code>ab</code> 测试网站，参数如下</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ab -n <span class="token number">50</span> -c <span class="token number">10</span> -H <span class="token string">"Accept-Encoding: gzip, deflate"</span> https://example.com/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1925,7 +1925,7 @@ log<span class="token punctuation">.</span><span class="token function">Println<
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>在<code>nginx</code>配置中，有些属性如果没有显示的进行设置，比如设置<code>gzip on;</code>时，没有设置<code>gzip_http_version</code>，<code>nginx</code>会启用默认值 <code>gzip_http_version:1.1;</code>，所以当你不想限制<code>http_version</code>的最低版本时，仅仅把<code>gzip_http_version</code>注释掉是不行的，你必须给其赋一个值才可以。类似这种问题不光在<code>nginx</code>配置中需要注意，在其它软件配置文件中也要注意</p>
 ]]></content>
       <categories>
-        <category>软件</category>
+        <category>网络通信</category>
       </categories>
       <tags>
         <tag>nginx</tag>
@@ -1967,11 +1967,11 @@ log<span class="token punctuation">.</span><span class="token function">Println<
         <category>后端</category>
       </categories>
       <tags>
-        <tag>Ruby</tag>
+        <tag>ruby</tag>
       </tags>
   </entry>
   <entry>
-    <title>Safari 网站图标 favicon 不显示</title>
+    <title>safari 网站图标 favicon 不显示</title>
     <url>/safari-favicon-setting/</url>
     <content><![CDATA[<h1 id="favicon图标不显示"><a href="#favicon图标不显示" class="headerlink" title="favicon图标不显示"></a><code>favicon</code>图标不显示</h1><p>发现博客的<code>favicon</code>图标一直不能在<code>safari</code> 的标签栏上显示，只能显示在地址栏，经过一番研究后发现是Hexo 的 Next主题的设置不正确造成的</p>
 <pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">favicon</span><span class="token punctuation">:</span>

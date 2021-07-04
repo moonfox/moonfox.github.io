@@ -21,13 +21,13 @@
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="设置gzip_http_version使用ab 测试网站，参数如下 ab -n 50 -c 10 -H &quot;Accept-Encoding: gzip, deflate&quot; https:&#x2F;&#x2F;example.com&#x2F;  发现返回的文档没有被压缩，查看nginx日志也显示返回的是原始大小，查询资料后发现是nginx 配置gzip_http版本问题 gzip on;  gzip_vary on; gzip_">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ab 压力测试 设置 nginx gzip">
+<meta property="og:title" content="nginx 设置 gzip http 版本">
 <meta property="og:url" content="https://www.gagahappy.com/nginx-set-gzip-http-version/">
 <meta property="og:site_name" content="睡月花儿">
 <meta property="og:description" content="设置gzip_http_version使用ab 测试网站，参数如下 ab -n 50 -c 10 -H &quot;Accept-Encoding: gzip, deflate&quot; https:&#x2F;&#x2F;example.com&#x2F;  发现返回的文档没有被压缩，查看nginx日志也显示返回的是原始大小，查询资料后发现是nginx 配置gzip_http版本问题 gzip on;  gzip_vary on; gzip_">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-06-26T06:11:40.000Z">
-<meta property="article:modified_time" content="2021-07-03T13:43:05.063Z">
+<meta property="article:modified_time" content="2021-07-04T07:21:01.030Z">
 <meta property="article:author" content="戛戛Happy">
 <meta property="article:tag" content="nginx">
 <meta name="twitter:card" content="summary">
@@ -37,10 +37,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-Hans&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;www.gagahappy.com&#x2F;nginx-set-gzip-http-version&#x2F;&quot;,&quot;path&quot;:&quot;nginx-set-gzip-http-version&#x2F;&quot;,&quot;title&quot;:&quot;ab 压力测试 设置 nginx gzip&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-Hans&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;www.gagahappy.com&#x2F;nginx-set-gzip-http-version&#x2F;&quot;,&quot;path&quot;:&quot;nginx-set-gzip-http-version&#x2F;&quot;,&quot;title&quot;:&quot;nginx 设置 gzip http 版本&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>ab 压力测试 设置 nginx gzip | 睡月花儿</title>
+<title>nginx 设置 gzip http 版本 | 睡月花儿</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-17621945-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;UA-17621945-1&quot;,&quot;only_pageview&quot;:false}</script>
@@ -225,7 +225,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ab 压力测试 设置 nginx gzip
+          nginx 设置 gzip http 版本
         </h1>
 
         <div class="post-meta-container">
@@ -240,7 +240,7 @@
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-tag"></i>
+        <i class="fa fa-tag"></i>
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -293,7 +293,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://www.gagahappy.com/nginx-set-gzip-http-version/" title="ab 压力测试 设置 nginx gzip">https://www.gagahappy.com/nginx-set-gzip-http-version/</a>
+      <a href="https://www.gagahappy.com/nginx-set-gzip-http-version/" title="nginx 设置 gzip http 版本">https://www.gagahappy.com/nginx-set-gzip-http-version/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -302,20 +302,20 @@
 </div>
 
           <div class="post-tags">
-              <a href="/categories/software/" rel="category"><i class="fa fa-folder"></i> 软件</a>
+              <a href="/categories/tcpip/" rel="category"><i class="fa fa-folder"></i> 网络通信</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/golang-test-coverage/" rel="prev" title="Go 语言 测试覆盖率">
-                  <i class="fa fa-chevron-left"></i> Go 语言 测试覆盖率
+                <a href="/golang-test-coverage/" rel="prev" title="go 语言 测试覆盖率">
+                  <i class="fa fa-chevron-left"></i> go 语言 测试覆盖率
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/golang-external-test-packages/" rel="next" title="Go 语言 外部测试包">
-                  Go 语言 外部测试包 <i class="fa fa-chevron-right"></i>
+                <a href="/golang-external-test-packages/" rel="next" title="go 语言 外部测试包">
+                  go 语言 外部测试包 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

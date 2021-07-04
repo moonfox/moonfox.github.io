@@ -21,13 +21,13 @@
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.gagahappy.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;right&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="性能分析API可以使用标准库中的 runtime&#x2F;pprof，runtime&#x2F;trace，net&#x2F;http&#x2F;pprof这三个包中提供的API来对Go程序进行性能分析，其中 runtime&#x2F;pprof包中还提供了生成性能分析概要文件的API。概要文件是以二进制格式存储的，go test 命令也可以生成概要文件 概要文件的读取概要文件有：CPU 概要文件（CPU Profile）、内存概要文件（Mem">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go 语言 程序性能分析">
+<meta property="og:title" content="go 语言 程序性能分析">
 <meta property="og:url" content="https://www.gagahappy.com/golang-pprof/">
 <meta property="og:site_name" content="睡月花儿">
 <meta property="og:description" content="性能分析API可以使用标准库中的 runtime&#x2F;pprof，runtime&#x2F;trace，net&#x2F;http&#x2F;pprof这三个包中提供的API来对Go程序进行性能分析，其中 runtime&#x2F;pprof包中还提供了生成性能分析概要文件的API。概要文件是以二进制格式存储的，go test 命令也可以生成概要文件 概要文件的读取概要文件有：CPU 概要文件（CPU Profile）、内存概要文件（Mem">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-06-15T06:59:46.000Z">
-<meta property="article:modified_time" content="2021-06-17T15:49:19.937Z">
+<meta property="article:modified_time" content="2021-07-04T07:12:19.421Z">
 <meta property="article:author" content="戛戛Happy">
 <meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary">
@@ -37,10 +37,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-Hans&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;www.gagahappy.com&#x2F;golang-pprof&#x2F;&quot;,&quot;path&quot;:&quot;golang-pprof&#x2F;&quot;,&quot;title&quot;:&quot;Go 语言 程序性能分析&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-Hans&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;www.gagahappy.com&#x2F;golang-pprof&#x2F;&quot;,&quot;path&quot;:&quot;golang-pprof&#x2F;&quot;,&quot;title&quot;:&quot;go 语言 程序性能分析&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>Go 语言 程序性能分析 | 睡月花儿</title>
+<title>go 语言 程序性能分析 | 睡月花儿</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-17621945-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;UA-17621945-1&quot;,&quot;only_pageview&quot;:false}</script>
@@ -225,7 +225,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Go 语言 程序性能分析
+          go 语言 程序性能分析
         </h1>
 
         <div class="post-meta-container">
@@ -240,7 +240,7 @@
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-tag"></i>
+        <i class="fa fa-tag"></i>
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -310,7 +310,7 @@ log<span class="token punctuation">.</span><span class="token function">Println<
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://www.gagahappy.com/golang-pprof/" title="Go 语言 程序性能分析">https://www.gagahappy.com/golang-pprof/</a>
+      <a href="https://www.gagahappy.com/golang-pprof/" title="go 语言 程序性能分析">https://www.gagahappy.com/golang-pprof/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -326,13 +326,13 @@ log<span class="token punctuation">.</span><span class="token function">Println<
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/safari-favicon-setting/" rel="prev" title="Safari 网站图标 favicon 不显示">
-                  <i class="fa fa-chevron-left"></i> Safari 网站图标 favicon 不显示
+                <a href="/safari-favicon-setting/" rel="prev" title="safari 网站图标 favicon 不显示">
+                  <i class="fa fa-chevron-left"></i> safari 网站图标 favicon 不显示
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/linux-fd-in-linux/" rel="next" title="Linux 中的文件描述符">
-                  Linux 中的文件描述符 <i class="fa fa-chevron-right"></i>
+                <a href="/linux-fd-in-linux/" rel="next" title="linux 中的文件描述符">
+                  linux 中的文件描述符 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
