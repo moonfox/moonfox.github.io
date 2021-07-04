@@ -1,10 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>git 恢复单个文件</title>
-    <url>/git-checkout-file/</url>
-    <content><![CDATA[<p>如果你只是要恢复一个文件(修复未提交文件中的错误),如”hello.rb”, 你就要使用 git checkout</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> checkout -- hello.rb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+    <title>git 与 subversion分支</title>
+    <url>/git-different-of-branch-between-subversion/</url>
+    <content><![CDATA[<p>subversion合并分支消耗太大。然而在 Git 中，一天之内建立、使用、合并再删除多个分支是常见的事。</p>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git fetch origin</title>
+    <url>/git-fetch-origin/</url>
+    <content><![CDATA[<p>可以运行 git fetch origin 来同步远程服务器上的数据到本地。</p>
+<p>那么用 git pull 不是也可以吗？区别是啥？</p>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git log查找某一个author的提交</title>
+    <url>/git-log-author/</url>
+    <content><![CDATA[<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> log --author<span class="token operator">=</span><span class="token operator">&lt;</span>pattern<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git 硬恢复</title>
+    <url>/git-recover-delete-file-from-commit/</url>
+    <content><![CDATA[<p>git-reset –hard HEAD~1</p>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git cherry-pick</title>
+    <url>/git-cherry-pick/</url>
+    <content><![CDATA[<p>执行git cherry-pick 解决合并冲突之前的提交，好像会自动pull下分支的最新提交内容，造成当前提交下的内容冲突。</p>
+<p>为什么会再现之前的冲突，从哪里pull下来的呢？最新commit?</p>
+<p>为什么会向暂存区放内容？</p>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -18,6 +68,19 @@
     <url>/git-blob-object/</url>
     <content><![CDATA[<p><a href="//img.gagahappy.cn/blog/2011/07/blob.jpg"><img src="//img.gagahappy.cn/blog/2011/07/blob.jpg" title="blob"></a><br>一个”blob对象”就是一块二进制数据，它没有指向任何东西或有任何其它属性，甚至连文件名都没有.</p>
 <p>因为blob对象内容全部都是数据，如两个文件在一个目录树（或是一个版本仓库）中有同样的数据内容，那么它们将会共享同一个blob对象。Blob对象和其所对应的文件所在路径、文件名是否改被更改都完全没有关系。</p>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git 恢复单个文件</title>
+    <url>/git-checkout-file/</url>
+    <content><![CDATA[<p>如果你只是要恢复一个文件(修复未提交文件中的错误),如”hello.rb”, 你就要使用 git checkout</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> checkout -- hello.rb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -164,36 +227,41 @@ $ <span class="token function">git</span> config --global user.email <span class
       </tags>
   </entry>
   <entry>
-    <title>git 与 subversion分支</title>
-    <url>/git-different-of-branch-between-subversion/</url>
-    <content><![CDATA[<p>subversion合并分支消耗太大。然而在 Git 中，一天之内建立、使用、合并再删除多个分支是常见的事。</p>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git fetch origin</title>
-    <url>/git-fetch-origin/</url>
-    <content><![CDATA[<p>可以运行 git fetch origin 来同步远程服务器上的数据到本地。</p>
-<p>那么用 git pull 不是也可以吗？区别是啥？</p>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git cherry-pick</title>
-    <url>/git-cherry-pick/</url>
-    <content><![CDATA[<p>执行git cherry-pick 解决合并冲突之前的提交，好像会自动pull下分支的最新提交内容，造成当前提交下的内容冲突。</p>
-<p>为什么会再现之前的冲突，从哪里pull下来的呢？最新commit?</p>
-<p>为什么会向暂存区放内容？</p>
+    <title>git rebase 与 git reset的应用</title>
+    <url>/git-rebase-vs-git-reset/</url>
+    <content><![CDATA[<h3 id="常用的应用场景"><a href="#常用的应用场景" class="headerlink" title="常用的应用场景"></a>常用的应用场景</h3><ol>
+<li><p>合并提交</p>
+</li>
+<li><p>去除不要的提交</p>
+</li>
+</ol>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><h3 id="场景1，合并多个提交"><a href="#场景1，合并多个提交" class="headerlink" title="场景1，合并多个提交"></a>场景1，合并多个提交</h3><p>有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交</p>
+<ol>
+<li>方法一: <code>git reset</code></li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset B --soft
+<span class="token function">git</span> ci -m <span class="token string">"merge C to F"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>方法二: <code>git rebase</code></li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto B C^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="场景2，去掉D提交"><a href="#场景2，去掉D提交" class="headerlink" title="场景2，去掉D提交"></a>场景2，去掉D提交</h3><p>此时，<code>git reset</code>已经不再适合这个场景</p>
+<p>使用<code>git rebase</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto C E^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ol>
+<li><code>git rebase</code> 语法</li>
+</ol>
+<p>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt;</code><br>  <code>git rebase &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase &lt;since&gt;</code><br>  <code>git rebase -i</code></p>
+<p>  onbase为要架接到的commit, since表示不包括自身到till的所有提交</p>
+<p>  <code>git rebase --continue</code> # 解决冲突后使用，以完成rebase<br>  <code>git rebase --skip</code>     # 跳过当前commit，进行下一个commit的合并<br>  <code>git rebase --abort</code>    # 放弃此次操作，还原工作区</p>
+<ol start="2">
+<li><code>git rebase</code>的莫名冲突</li>
+</ol>
+<p>  对于场景二： 使用<code>git rebase</code>可能出现冲突（感觉不应该出现冲突的，对此不是很理解，难道是因为丢弃D后使查找链C-D-E-F断裂造成git认为这两个commit需要合并，是因为E无法知道C是它的祖先吗）</p>
+<p>  在解决冲突后，使用<code>git rebase --continue</code>完成rebase操作</p>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -257,6 +325,152 @@ $ <span class="token function">git</span> config --global user.email <span class
       </categories>
       <tags>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>go 语言 无缓冲通道的cap是零</title>
+    <url>/golang-unbuffered-channel-no-cap/</url>
+    <content><![CDATA[<p>无缓冲通道的cap是零</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"time"</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment">// 无缓冲通道的cap、len永远是0</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	noCache <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> noCache <span class="token operator">&lt;-</span> <span class="token number">6</span> <span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+	time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"cap of noCache pipeline is"</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>noCache<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// => 0</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"len of noCache pipeline is"</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>noCache<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// => 0</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"noCache "</span><span class="token punctuation">,</span> <span class="token operator">&lt;-</span>noCache<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql 行锁两阶段</title>
+    <url>/mysql-recordlock-2phase/</url>
+    <content><![CDATA[<h1 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h1><p>优点：</p>
+<p>比起表锁，可以支持更大的并发</p>
+<h1 id="行锁的实现"><a href="#行锁的实现" class="headerlink" title="行锁的实现"></a>行锁的实现</h1><p>由存储引擎自已实现，每个存储引擎实现的方式都不一样</p>
+<p> MyISAM 引擎不支持行锁</p>
+<h1 id="两阶段锁"><a href="#两阶段锁" class="headerlink" title="两阶段锁"></a>两阶段锁</h1><p>在更新数据时，需要对数据所在行加锁，但更新数据完成后，锁并不会马上释放，而是要等到事务提交才释放</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create table t_07_recordlock(
+	id int not null auto_increment primary key,
+  c int,
+  d int,
+ 	key c (c)
+) engine&#x3D;innodb;
+
+insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Session A</th>
+<th>Session B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>Begin;</td>
+<td>begin;</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>update t_07_recordlock set d=d+1 where id = 1;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>update t_07_recordlock set d=d+1 where id = 2;</td>
+<td></td>
+</tr>
+<tr>
+<td>T3</td>
+<td></td>
+<td>update t_07_recordlock set d=d+1 where id = 1;</td>
+</tr>
+<tr>
+<td>T4</td>
+<td>Commit</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>T2时刻，SessionA已经完成了对两行数据的更新，但没有提交</li>
+<li>T3时候，SessionB对id=1的行进行更新，由于Session A没有提交，其依然持有id=1上的写锁，与Session B要加的写锁互斥，所以SessionB被阻塞，直到Session A提交，释放锁，才能对执行更新语句</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql 自增值不能回退</title>
+    <url>/mysql-auto-increment/</url>
+    <content><![CDATA[<p>MySql 主键不连续的原因之一是自增值不能回退</p>
+<p>设当前自增值=2，此时并发两个事务T1,T2。T1先申请到自增值，插入ID=3，自增值更为4</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Tx1</th>
+<th>Tx2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>申请到自增值=2，set id =2, 更新自增值=3</td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td>插入数据失败</td>
+<td>申请到自增值=3，set id=3，更新自增值=4</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>如果让自增值回退到=2</td>
+<td>插入数据成功</td>
+</tr>
+<tr>
+<td>T4</td>
+<td>申请到自增值=2，set id =2, 更新自增值=3</td>
+<td></td>
+</tr>
+<tr>
+<td>T5</td>
+<td>插入数据成功</td>
+<td>申请到自增值=3，set id=3，更新自增值=4</td>
+</tr>
+<tr>
+<td>T6</td>
+<td></td>
+<td>插入数据失败，插入语句报错“主键冲突” id=3已经存在</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -329,536 +543,6 @@ modified:   metaprogramming/blocks/block_binding.rb<span aria-hidden="true" clas
       </categories>
       <tags>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git rebase 与 git reset的应用</title>
-    <url>/git-rebase-vs-git-reset/</url>
-    <content><![CDATA[<h3 id="常用的应用场景"><a href="#常用的应用场景" class="headerlink" title="常用的应用场景"></a>常用的应用场景</h3><ol>
-<li><p>合并提交</p>
-</li>
-<li><p>去除不要的提交</p>
-</li>
-</ol>
-<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><h3 id="场景1，合并多个提交"><a href="#场景1，合并多个提交" class="headerlink" title="场景1，合并多个提交"></a>场景1，合并多个提交</h3><p>有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交</p>
-<ol>
-<li>方法一: <code>git reset</code></li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset B --soft
-<span class="token function">git</span> ci -m <span class="token string">"merge C to F"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li>方法二: <code>git rebase</code></li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto B C^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="场景2，去掉D提交"><a href="#场景2，去掉D提交" class="headerlink" title="场景2，去掉D提交"></a>场景2，去掉D提交</h3><p>此时，<code>git reset</code>已经不再适合这个场景</p>
-<p>使用<code>git rebase</code></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto C E^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ol>
-<li><code>git rebase</code> 语法</li>
-</ol>
-<p>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt;</code><br>  <code>git rebase &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase &lt;since&gt;</code><br>  <code>git rebase -i</code></p>
-<p>  onbase为要架接到的commit, since表示不包括自身到till的所有提交</p>
-<p>  <code>git rebase --continue</code> # 解决冲突后使用，以完成rebase<br>  <code>git rebase --skip</code>     # 跳过当前commit，进行下一个commit的合并<br>  <code>git rebase --abort</code>    # 放弃此次操作，还原工作区</p>
-<ol start="2">
-<li><code>git rebase</code>的莫名冲突</li>
-</ol>
-<p>  对于场景二： 使用<code>git rebase</code>可能出现冲突（感觉不应该出现冲突的，对此不是很理解，难道是因为丢弃D后使查找链C-D-E-F断裂造成git认为这两个commit需要合并，是因为E无法知道C是它的祖先吗）</p>
-<p>  在解决冲突后，使用<code>git rebase --continue</code>完成rebase操作</p>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo Next主题 Rss 侧边栏</title>
-    <url>/hexo-next-theme/</url>
-    <content><![CDATA[<p>无意间发现 <code>Hexo</code> 的 <code>Next</code> 主题也很好看，之前的 <code>Yelee</code> 主题使用了好久，决定换成 <code>Next</code>。在配置过程中遇到不少问题，主要有两点值得分享：</p>
-<ul>
-<li>不要直接在主题配置文件上进行修改</li>
-<li>修改RSS显示位置使其在首页显示</li>
-</ul>
-<h3 id="配置主题文件"><a href="#配置主题文件" class="headerlink" title="配置主题文件"></a>配置主题文件</h3><p>根据 Hexo 官方的推荐，不要直接修改主题的配置文件</p>
-<blockquote>
-<p>The file should be placed in your site folder, both <code>yml</code> and <code>json</code> are supported. <code>theme</code> inside <code>_config.yml</code> must be configured for Hexo to read <code>_config.[theme].yml</code></p>
-</blockquote>
-<p>根据推荐执行以下操作:</p>
-<ol>
-<li>配置主题为 Next 主题</li>
-</ol>
-  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># _config.yml</span>
-theme: <span class="token string">"next"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li><p>在 site 根目录新建 <code>_config.next.yml</code>文件</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">touch</span> _config.next.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p>打开 <code>theme/next/_config.yml</code>把需要修改的选项 copy 到 <code>_config.next.yml</code>中</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"># _config.next.yml
-# 设置网站图标
-favicon:
-  small: &#x2F;favicon.ico
-  medium: &#x2F;favicon.ico
-  apple_touch_icon: &#x2F;apple-touch-icon.png
-  safari_pinned_tab: &#x2F;apple-touch-icon.png<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>hexo启动时，会自动合并 <code>_config.next.yml</code> 与<code>theme/next/_config.yml</code> 的设置内容，从而达到配置主题的作用。</p>
-</li>
-</ol>
-<p>不直接修改<code>theme/next/_config.yml</code>的好处是，当拉取新的更新时，不会因修改了<code>_config.yml</code>而发生冲突。（每个主题都是一个独立的 <code>git</code>项目）</p>
-<h3 id="修改RSS显示位置"><a href="#修改RSS显示位置" class="headerlink" title="修改RSS显示位置"></a>修改RSS显示位置</h3><p>看到网上说Rss的显示位置由首页侧边栏的位置移动到了每篇文章的最底部，这显然是不适合的，因为订阅不是按文章订阅，而是直接在首页中订阅。</p>
-<p>自定义RSS到侧边栏：请先确认已经安装 <code>hexo-generator-feed</code>插件</p>
-<ol>
-<li>删除文章底部的Rss(整个 follow me 设置都删除)</li>
-</ol>
-  <pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.njk
-
-# 删除以下代码
-&#123;%- if theme.follow_me %&#125;
-  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;
-&#123;%- endif %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li><p>修改 Rss 样式</p>
-<pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;post&#x2F;post-followme.njk
-
-&lt;div class&#x3D;&quot;followme&quot;&gt; # 修改为 &lt;div class&#x3D;&quot;&quot;&gt;
-  &lt;span&gt;&#123;&#123; __(&#39;follow_me.welcome&#39;) &#125;&#125;&lt;&#x2F;span&gt; # 删除这一行
-  &lt;div class&#x3D;&quot;social-list&quot;&gt; # #修改为 &lt;div class&#x3D;&quot;&quot;&gt;
-  # 省略部分源码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>添加 Rss 到侧边栏(其实就是整个的 follwe me)</p>
-<pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;sidebar&#x2F;site-overview.njk
-&#123;%- if theme.follow_me %&#125;
-  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;
-&#123;%- endif %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>在站点配置文件中打开 Rss 设置</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># _config.yml</span>
-<span class="token key atrule">follow_me</span><span class="token punctuation">:</span>
-  <span class="token key atrule">RSS</span><span class="token punctuation">:</span> /rss2.xml <span class="token punctuation">|</span><span class="token punctuation">|</span> fa fa<span class="token punctuation">-</span>rss<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
-<li><p>重启站点即可，就可以看到 Rss 显示在侧边栏了</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql 批量插入数据</title>
-    <url>/mysql-bluk-insert/</url>
-    <content><![CDATA[<h2 id="导入大数据到表"><a href="#导入大数据到表" class="headerlink" title="导入大数据到表"></a>导入大数据到表</h2><p>向数据库中插入3万条数据</p>
-<h3 id="单个插入数据"><a href="#单个插入数据" class="headerlink" title="单个插入数据"></a>单个插入数据</h3><p>如果每个数据单独插入，效率很低，每个插入都产生一个事务，写入效率低</p>
-<h3 id="批量插入数据"><a href="#批量插入数据" class="headerlink" title="批量插入数据"></a>批量插入数据</h3><ul>
-<li><p>每1000条插入一次，只产生一个事件，降低了事务的生成，提高了效率</p>
-</li>
-<li><p>具体方法</p>
-<ol>
-<li><p>把多条插入语句拼成一条</p>
-</li>
-<li><p>手动开启一个事务，在插入1000条数据后，提交事务。</p>
-<p>这样做可以减少<code>binlog</code>的生成次数，但<code>redolog</code>不一定减少</p>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="批量-vs-单个插入"><a href="#批量-vs-单个插入" class="headerlink" title="批量 vs 单个插入"></a>批量 vs 单个插入</h3><ul>
-<li><p>单个插入效率很低，30 * 1000 条记录用时 1分钟</p>
-</li>
-<li><p>批量插入， 每1000条插入一次，效率很高，用时7.99秒</p>
-<p><code>5.54s user 0.54s system 77% cpu 7.799 total</code></p>
-<p><code>5.38s user 0.48s system 78% cpu 7.452 total</code></p>
-</li>
-</ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>插入大量数据时，应减少事务的提交，让多个插入在一个事务中完成，从而提高插入数据的效率</p>
-<h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">class</span> <span class="token class-name">ImportTradelog</span>
-  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">import</span></span><span class="token punctuation">(</span>date<span class="token punctuation">)</span>
-    <span class="token comment"># 导入30天的数据</span>
-    <span class="token number">30.</span>times <span class="token keyword">do</span> <span class="token operator">|</span>offset<span class="token operator">|</span>
-      datas <span class="token operator">=</span> init_data<span class="token punctuation">(</span>date <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">60</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">24</span><span class="token punctuation">)</span> <span class="token operator">*</span> offset<span class="token punctuation">)</span>
-      puts datas
-
-      <span class="token comment"># 批量插入， 每1000条插入一次，效率很高，用时7.99秒</span>
-      <span class="token comment"># 5.54s user 0.54s system 77% cpu 7.799 total</span>
-      <span class="token comment"># 5.38s user 0.48s system 78% cpu 7.452 total</span>
-      <span class="token constant">Tradelog</span><span class="token punctuation">.</span>bulk_insert set_size<span class="token punctuation">:</span> <span class="token number">1000</span><span class="token punctuation">,</span> values<span class="token punctuation">:</span> datas
-    <span class="token keyword">end</span>
-  <span class="token keyword">end</span>
-
-  <span class="token comment"># 每天导入1000条数据</span>
-  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">init_data</span></span><span class="token punctuation">(</span>day<span class="token punctuation">)</span>
-    datas <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    <span class="token number">1000.</span>times <span class="token keyword">do</span> <span class="token operator">|</span>index<span class="token operator">|</span>
-      <span class="token comment"># 插入效率很低，30 * 1000 条记录用时 1分钟</span>
-      <span class="token comment"># date = &#123;tradeid: tradeid, operator: operator, t_modified: t_modified&#125;</span>
-      <span class="token comment"># Tradelog.create(date)</span>
-      datas <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token punctuation">&#123;</span>
-        tradeid<span class="token punctuation">:</span> <span class="token string">"<span class="token interpolation"><span class="token delimiter tag">#&#123;</span>day<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y%m%d'</span><span class="token punctuation">)</span><span class="token delimiter tag">&#125;</span></span><span class="token interpolation"><span class="token delimiter tag">#&#123;</span>format<span class="token punctuation">(</span><span class="token string">'%04d'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token delimiter tag">&#125;</span></span>"</span><span class="token punctuation">,</span>
-        operator<span class="token punctuation">:</span> rand<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        t_modified<span class="token punctuation">:</span> <span class="token punctuation">(</span>day <span class="token operator">+</span> <span class="token number">60</span> <span class="token operator">*</span> index<span class="token punctuation">)</span>
-      <span class="token punctuation">&#125;</span>
-    <span class="token keyword">end</span>
-
-    datas
-  <span class="token keyword">end</span>
-<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git 知识补充</title>
-    <url>/git-learning-supplement/</url>
-    <content><![CDATA[<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ol>
-<li><p>git 可以只提交文件的部分内容， git add -p,称之为hunk, sourcetree也可以进行设置</p>
-</li>
-<li><p>分支改名<br>git branch -m cat tiger</p>
-</li>
-<li><p>分支合并后产生的commit, A合并B，commit 信息中，父提交记录顺序，parents : A, B</p>
-<p>A在前，B在后，表示是A 合并的B</p>
-</li>
-<li><p>git如何判断分支是否可以删除<br>当前分支所指向的commit ，没有其它commit指向它（这个提交(分支)还没有被合并），或只有当前分支指向它，没有其它分支指向它时，在删除这个分支时就会有提示不能直接删除</p>
-</li>
-<li><p>rebase 后，对应commit 值是否发生变化<br>看情况，嫁接到其它commit 之上的commit 的值会发生变化，因为其父提交发生了变化，同理，在这个commit 之后的提交的值也发生变化<br>A B C D E F，把F嫁接到其它 COMMIT后，A到E的COMMIT的值都发生变化</p>
-<p>修改现有COMMIT 的注释，也会发生这样的连锁反应</p>
-</li>
-<li><p>rebase 的其他用途<br>修改历史提交注释 r选项<br>合并多个提交 s 选项<br>把一个提交拆分成多个commit 在操作列表使用使用 edit<br>在commit 之间添加新的commit edit选项<br>调整commit 之间的顺序 直接在列表里调整，<br>删除commit 在列表里删除相关行过使用drop,删除后对它之后commit 的影响如何</p>
-</li>
-<li><p>空目录无法被添加到git<br>因为根据算法，添加的对象必须要有内容，以供sha1算法使用</p>
-</li>
-<li><p>合并后再使用 <code>git rebase </code> 使提交成为一条直线</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge upstream-master
-Auto-merging layout/_partials/sidebar/site-overview.njk
-Auto-merging layout/_partials/post/post-followme.njk
-Merge made by the <span class="token string">'recursive'</span> strategy.
- layout/_partials/header/menu-item.njk      <span class="token operator">|</span> <span class="token number">5</span> +----
- layout/_partials/page/breadcrumb.njk       <span class="token operator">|</span> <span class="token number">6</span> +-----
- layout/_partials/post/post-followme.njk    <span class="token operator">|</span> <span class="token number">2</span> +-
- layout/_partials/sidebar/site-overview.njk <span class="token operator">|</span> <span class="token number">2</span> +-
-
-<span class="token function">git</span> slog --graph
-*   b1b3e13 <span class="token punctuation">(</span>HEAD -<span class="token operator">></span> release<span class="token punctuation">)</span> Merge branch <span class="token string">'upstream-master'</span> into release
-<span class="token operator">|</span><span class="token punctuation">\</span>
-<span class="token operator">|</span> * d51ca0e <span class="token punctuation">(</span>upstream/master, upstream-master<span class="token punctuation">)</span> Fix: handle invalid config
-* <span class="token operator">|</span> 369c5b5 <span class="token punctuation">(</span>origin/release, origin/master, origin/HEAD, master<span class="token punctuation">)</span> Resolve conflicts
-<span class="token operator">|</span>/
-* d6f344f Refactor sidebar-panel using flex layout
-* edefcda Add NProgress <span class="token punctuation">(</span><span class="token comment">#79)</span>
-
-<span class="token comment"># 把前分支作为基础分枝, 把 upstream-master 分支的提交嫁接在其上面</span>
-<span class="token function">git</span> rebase
-First, rewinding <span class="token function">head</span> to replay your work on <span class="token function">top</span> of it<span class="token punctuation">..</span>.
-Applying: Fix: handle invalid config
-Using index info to reconstruct a base tree<span class="token punctuation">..</span>.
-M	layout/_partials/post/post-followme.njk
-M	layout/_partials/sidebar/site-overview.njk
-Falling back to patching base and <span class="token number">3</span>-way merge<span class="token punctuation">..</span>.
-Auto-merging layout/_partials/sidebar/site-overview.njk
-Auto-merging layout/_partials/post/post-followme.njk
-
-<span class="token function">git</span> slog --graph
-* 217e224 <span class="token punctuation">(</span>HEAD -<span class="token operator">></span> release<span class="token punctuation">)</span> Fix: handle invalid config
-* 369c5b5 <span class="token punctuation">(</span>origin/release, origin/master, origin/HEAD, master<span class="token punctuation">)</span> Resolve conflicts <span class="token comment"># 以这个提交做为 rebase</span>
-* d6f344f Refactor sidebar-panel using flex layout
-* edefcda Add NProgress <span class="token punctuation">(</span><span class="token comment">#79)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol>
-<li>使用merge出现了分支线路</li>
-<li>rebase后，分支线路消失，成为一条直线。 是 以当前分支的最TOP的那个(369c5b5)提交做为rebase，重放合并进来的分支上的提交的</li>
-</ol>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux What does kill 0 do</title>
-    <url>/linux-what-does-kill-zero/</url>
-    <content><![CDATA[<h3 id="What-does-kill-0-do"><a href="#What-does-kill-0-do" class="headerlink" title="What does kill -0 ... do?"></a>What does <code>kill -0 ...</code> do?</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /path/to/file.pid<span class="token variable">)</span></span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token punctuation">..</span>. <span class="token keyword">do</span> something <span class="token punctuation">..</span>.
-<span class="token keyword">fi</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="kill-1"><a href="#kill-1" class="headerlink" title="kill(1)"></a><em>kill(1)</em></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">man</span> <span class="token number">1</span> <span class="token function">kill</span>
-<span class="token punctuation">..</span>.
-If sig is <span class="token number">0</span>, <span class="token keyword">then</span> no signal is sent, but error checking is still performed.
-<span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="kill-2"><a href="#kill-2" class="headerlink" title="kill(2)"></a><em>kill(2)</em></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">man</span> <span class="token number">2</span> <span class="token function">kill</span>
-<span class="token punctuation">..</span>.
-If sig is <span class="token number">0</span>, <span class="token keyword">then</span> no signal is sent, but error checking is still performed<span class="token punctuation">;</span>
-this can be used to check <span class="token keyword">for</span> the existence of a process ID or process
-group ID.
-<span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>So signal 0 will not actually in fact send anything to your process’s PID, but will check whether you have permissions to do so.</p>
-<h3 id="Where-might-this-be-useful"><a href="#Where-might-this-be-useful" class="headerlink" title="Where might this be useful?"></a>Where might this be useful?</h3><p>One obvious place would be if you were trying to determine if you had permissions to send signals to a running process via <code>kill</code>. You could check prior to sending the actual <code>kill</code> signal that you want, by wrapping a check to make sure that <code>kill -0 &lt;PID&gt;</code> was first allowed.</p>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Say a process was being run by root as follows:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">sleep</span> <span class="token number">2500</span> <span class="token operator">&amp;</span>
-<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token number">15693</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>Now in another window if we run this command we can confirm that that PID is running.</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ pgrep <span class="token function">sleep</span>
-<span class="token number">15693</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>Now let’s try this command to see if we have access to send that PID signals via <code>kill</code>.</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable"><span class="token variable">$(</span>pgrep <span class="token function">sleep</span><span class="token variable">)</span></span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token builtin class-name">echo</span> <span class="token string">"You're weak!"</span><span class="token punctuation">;</span> <span class="token keyword">fi</span>
-bash: kill: <span class="token punctuation">(</span><span class="token number">15693</span><span class="token punctuation">)</span> - Operation not permitted
-You're weak<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>So it works, but the output is leaking a message from the <code>kill</code> command that we don’t have permissions. Not a big deal, simply catch STDERR and send it to <code>/dev/null</code>.</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable"><span class="token variable">$(</span>pgrep <span class="token function">sleep</span><span class="token variable">)</span></span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null<span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token builtin class-name">echo</span> <span class="token string">"You're weak!"</span><span class="token punctuation">;</span> <span class="token keyword">fi</span>
-You're weak<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h3 id="Complete-example"><a href="#Complete-example" class="headerlink" title="Complete example"></a>Complete example</h3><p>So then we could do something like this, <code>killer.bash</code>:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
-
-<span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>pgrep <span class="token function">sleep</span><span class="token variable">)</span></span>
-<span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable">$PID</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null<span class="token punctuation">;</span> <span class="token keyword">then</span>
-  <span class="token builtin class-name">echo</span> <span class="token string">"you don't have permissions to kill PID:<span class="token variable">$PID</span>"</span>
-  <span class="token builtin class-name">exit</span> <span class="token number">1</span>
-<span class="token keyword">fi</span>
-
-<span class="token function">kill</span> -9 <span class="token variable">$PID</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>Now when I run the above as a non-root user:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ~/killer.bash
-you don't have permissions to <span class="token function">kill</span> PID:15693
-
-$ <span class="token builtin class-name">echo</span> <span class="token variable">$?</span>
-<span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>However when it’s run as root:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> ~/killer.bash
-
-$ <span class="token builtin class-name">echo</span> <span class="token variable">$?</span>
-<span class="token number">0</span>
-
-$ pgrep <span class="token function">sleep</span>
-$<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>操作系统</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql binlog index 文件内容</title>
-    <url>/mysql-binlog-index/</url>
-    <content><![CDATA[<h3 id="binlog-index文件内容"><a href="#binlog-index文件内容" class="headerlink" title="binlog.index文件内容"></a><code>binlog.index</code>文件内容</h3><p>记录了<code>binlog</code>文件的具体路径，在MySQL启动时，会找到<code>binlog.index</code>文件，然后读取它里面的条目，从而读取<code>binlog</code>文件。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> /mysql/3306/data/master.index
-
-/mysql/3306/data/master.000001
-/mysql/3306/data/master.000002
-/mysql/3306/data/master.000003
-./master.000004
-./master.000005<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol>
-<li><code>binlog</code>文件的路径可以是相对路径，也可以是绝对路径</li>
-<li>如果是绝对路径，当文件被移动到其它地方时，只能手动修改对应的路径，否则MySQL在启动时，会报找不到文件路径的错误</li>
-</ol>
-<h3 id="设置binlog文件路径"><a href="#设置binlog文件路径" class="headerlink" title="设置binlog文件路径"></a>设置<code>binlog</code>文件路径</h3><p>可以在 <code>my.cnf</code>中设置<code>binlog</code>的文件路径</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">[mysqld]
-log-bin&#x3D;master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>或设置为绝对路径</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>mysqld<span class="token punctuation">]</span>
-log-bin<span class="token operator">=</span>/mysql/3306/data/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h3 id="参数-log-bin身兼多职"><a href="#参数-log-bin身兼多职" class="headerlink" title="参数 log-bin身兼多职"></a>参数 <code>log-bin</code>身兼多职</h3><p>设置后生效多个参数</p>
-<ol>
-<li>表示启用 <code>binlog</code>功能</li>
-<li>同时设置 <code>binlog.index</code>的文件名</li>
-<li>同时设置<code>binlog</code>的文件名</li>
-</ol>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">show variables like &#39;%log_bin%&#39;;
-+---------------------------------+----------------------------------------------+
-| Variable_name                   | Value                                        |
-+---------------------------------+----------------------------------------------+
-| log_bin                         | ON                                           |
-| log_bin_basename                | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master       |
-| log_bin_index                   | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master.index |
-| log_bin_trust_function_creators | OFF                                          |
-| log_bin_use_v1_row_events       | OFF                                          |
-| sql_log_bin                     | ON                                           |
-+---------------------------------+----------------------------------------------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="binlog文件的读取"><a href="#binlog文件的读取" class="headerlink" title="binlog文件的读取"></a><code>binlog</code>文件的读取</h3><p>MySQL在启动时会读取<code>data</code>目录下的所有以<code>.index</code>后缀的文件(默认值)，然后在读取每个<code>index</code>文件中的条目</p>
-<h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><blockquote>
-<p>The default location for binary log files and the binary log index file is the data directory. You can use the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_log-bin"><code>--log-bin</code></a> option to specify an alternative location, by adding a leading absolute path name to the base name to specify a different directory. When the server reads an entry from the binary log index file, which tracks the binary log files that have been used, it checks whether the entry contains a relative path. If it does, the relative part of the path is replaced with the absolute path set using the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_log-bin"><code>--log-bin</code></a> option. An absolute path recorded in the binary log index file remains unchanged; in such a case, the index file must be edited manually to enable a new path or paths to be used. The binary log file base name and any specified path are available as the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_log_bin_basename"><code>log_bin_basename</code></a> system variable.</p>
-</blockquote>
-<p>只摘录了一部分，更全面的内容可到官网查看</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>go 语言 无缓冲通道的cap是零</title>
-    <url>/golang-unbuffered-channel-no-cap/</url>
-    <content><![CDATA[<p>无缓冲通道的cap是零</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
-
-<span class="token keyword">import</span> <span class="token punctuation">(</span>
-	<span class="token string">"fmt"</span>
-	<span class="token string">"time"</span>
-<span class="token punctuation">)</span>
-
-<span class="token comment">// 无缓冲通道的cap、len永远是0</span>
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	noCache <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token builtin">int</span><span class="token punctuation">)</span>
-
-	<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> noCache <span class="token operator">&lt;-</span> <span class="token number">6</span> <span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-	time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"cap of noCache pipeline is"</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>noCache<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// => 0</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"len of noCache pipeline is"</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>noCache<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// => 0</span>
-
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"noCache "</span><span class="token punctuation">,</span> <span class="token operator">&lt;-</span>noCache<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>后端</category>
-      </categories>
-      <tags>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql 自增值不能回退</title>
-    <url>/mysql-auto-increment/</url>
-    <content><![CDATA[<p>MySql 主键不连续的原因之一是自增值不能回退</p>
-<p>设当前自增值=2，此时并发两个事务T1,T2。T1先申请到自增值，插入ID=3，自增值更为4</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Tx1</th>
-<th>Tx2</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>T1</td>
-<td>申请到自增值=2，set id =2, 更新自增值=3</td>
-<td></td>
-</tr>
-<tr>
-<td>T2</td>
-<td>插入数据失败</td>
-<td>申请到自增值=3，set id=3，更新自增值=4</td>
-</tr>
-<tr>
-<td>T3</td>
-<td>如果让自增值回退到=2</td>
-<td>插入数据成功</td>
-</tr>
-<tr>
-<td>T4</td>
-<td>申请到自增值=2，set id =2, 更新自增值=3</td>
-<td></td>
-</tr>
-<tr>
-<td>T5</td>
-<td>插入数据成功</td>
-<td>申请到自增值=3，set id=3，更新自增值=4</td>
-</tr>
-<tr>
-<td>T6</td>
-<td></td>
-<td>插入数据失败，插入语句报错“主键冲突” id=3已经存在</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql 行锁两阶段</title>
-    <url>/mysql-recordlock-2phase/</url>
-    <content><![CDATA[<h1 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h1><p>优点：</p>
-<p>比起表锁，可以支持更大的并发</p>
-<h1 id="行锁的实现"><a href="#行锁的实现" class="headerlink" title="行锁的实现"></a>行锁的实现</h1><p>由存储引擎自已实现，每个存储引擎实现的方式都不一样</p>
-<p> MyISAM 引擎不支持行锁</p>
-<h1 id="两阶段锁"><a href="#两阶段锁" class="headerlink" title="两阶段锁"></a>两阶段锁</h1><p>在更新数据时，需要对数据所在行加锁，但更新数据完成后，锁并不会马上释放，而是要等到事务提交才释放</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create table t_07_recordlock(
-	id int not null auto_increment primary key,
-  c int,
-  d int,
- 	key c (c)
-) engine&#x3D;innodb;
-
-insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Session A</th>
-<th>Session B</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>T1</td>
-<td>Begin;</td>
-<td>begin;</td>
-</tr>
-<tr>
-<td>T2</td>
-<td>update t_07_recordlock set d=d+1 where id = 1;</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>update t_07_recordlock set d=d+1 where id = 2;</td>
-<td></td>
-</tr>
-<tr>
-<td>T3</td>
-<td></td>
-<td>update t_07_recordlock set d=d+1 where id = 1;</td>
-</tr>
-<tr>
-<td>T4</td>
-<td>Commit</td>
-<td></td>
-</tr>
-</tbody></table>
-<ul>
-<li>T2时刻，SessionA已经完成了对两行数据的更新，但没有提交</li>
-<li>T3时候，SessionB对id=1的行进行更新，由于Session A没有提交，其依然持有id=1上的写锁，与Session B要加的写锁互斥，所以SessionB被阻塞，直到Session A提交，释放锁，才能对执行更新语句</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -948,30 +632,6 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </categories>
       <tags>
         <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git log查找某一个author的提交</title>
-    <url>/git-log-author/</url>
-    <content><![CDATA[<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> log --author<span class="token operator">=</span><span class="token operator">&lt;</span>pattern<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git 硬恢复</title>
-    <url>/git-recover-delete-file-from-commit/</url>
-    <content><![CDATA[<p>git-reset –hard HEAD~1</p>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1351,6 +1011,147 @@ Sizeof(x.c) = 24  Alignof(x.c) = 8 Offsetof(x.c) = 8
       </categories>
       <tags>
         <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Next主题 Rss 侧边栏</title>
+    <url>/hexo-next-theme/</url>
+    <content><![CDATA[<p>无意间发现 <code>Hexo</code> 的 <code>Next</code> 主题也很好看，之前的 <code>Yelee</code> 主题使用了好久，决定换成 <code>Next</code>。在配置过程中遇到不少问题，主要有两点值得分享：</p>
+<ul>
+<li>不要直接在主题配置文件上进行修改</li>
+<li>修改RSS显示位置使其在首页显示</li>
+</ul>
+<h3 id="配置主题文件"><a href="#配置主题文件" class="headerlink" title="配置主题文件"></a>配置主题文件</h3><p>根据 Hexo 官方的推荐，不要直接修改主题的配置文件</p>
+<blockquote>
+<p>The file should be placed in your site folder, both <code>yml</code> and <code>json</code> are supported. <code>theme</code> inside <code>_config.yml</code> must be configured for Hexo to read <code>_config.[theme].yml</code></p>
+</blockquote>
+<p>根据推荐执行以下操作:</p>
+<ol>
+<li>配置主题为 Next 主题</li>
+</ol>
+  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># _config.yml</span>
+theme: <span class="token string">"next"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li><p>在 site 根目录新建 <code>_config.next.yml</code>文件</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">touch</span> _config.next.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>打开 <code>theme/next/_config.yml</code>把需要修改的选项 copy 到 <code>_config.next.yml</code>中</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"># _config.next.yml
+# 设置网站图标
+favicon:
+  small: &#x2F;favicon.ico
+  medium: &#x2F;favicon.ico
+  apple_touch_icon: &#x2F;apple-touch-icon.png
+  safari_pinned_tab: &#x2F;apple-touch-icon.png<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>hexo启动时，会自动合并 <code>_config.next.yml</code> 与<code>theme/next/_config.yml</code> 的设置内容，从而达到配置主题的作用。</p>
+</li>
+</ol>
+<p>不直接修改<code>theme/next/_config.yml</code>的好处是，当拉取新的更新时，不会因修改了<code>_config.yml</code>而发生冲突。（每个主题都是一个独立的 <code>git</code>项目）</p>
+<h3 id="修改RSS显示位置"><a href="#修改RSS显示位置" class="headerlink" title="修改RSS显示位置"></a>修改RSS显示位置</h3><p>看到网上说Rss的显示位置由首页侧边栏的位置移动到了每篇文章的最底部，这显然是不适合的，因为订阅不是按文章订阅，而是直接在首页中订阅。</p>
+<p>自定义RSS到侧边栏：请先确认已经安装 <code>hexo-generator-feed</code>插件</p>
+<ol>
+<li>删除文章底部的Rss(整个 follow me 设置都删除)</li>
+</ol>
+  <pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.njk
+
+# 删除以下代码
+&#123;%- if theme.follow_me %&#125;
+  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;
+&#123;%- endif %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li><p>修改 Rss 样式</p>
+<pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;post&#x2F;post-followme.njk
+
+&lt;div class&#x3D;&quot;followme&quot;&gt; # 修改为 &lt;div class&#x3D;&quot;&quot;&gt;
+  &lt;span&gt;&#123;&#123; __(&#39;follow_me.welcome&#39;) &#125;&#125;&lt;&#x2F;span&gt; # 删除这一行
+  &lt;div class&#x3D;&quot;social-list&quot;&gt; # #修改为 &lt;div class&#x3D;&quot;&quot;&gt;
+  # 省略部分源码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>添加 Rss 到侧边栏(其实就是整个的 follwe me)</p>
+<pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;sidebar&#x2F;site-overview.njk
+&#123;%- if theme.follow_me %&#125;
+  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;
+&#123;%- endif %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>在站点配置文件中打开 Rss 设置</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># _config.yml</span>
+<span class="token key atrule">follow_me</span><span class="token punctuation">:</span>
+  <span class="token key atrule">RSS</span><span class="token punctuation">:</span> /rss2.xml <span class="token punctuation">|</span><span class="token punctuation">|</span> fa fa<span class="token punctuation">-</span>rss<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li><p>重启站点即可，就可以看到 Rss 显示在侧边栏了</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql 批量插入数据</title>
+    <url>/mysql-bluk-insert/</url>
+    <content><![CDATA[<h2 id="导入大数据到表"><a href="#导入大数据到表" class="headerlink" title="导入大数据到表"></a>导入大数据到表</h2><p>向数据库中插入3万条数据</p>
+<h3 id="单个插入数据"><a href="#单个插入数据" class="headerlink" title="单个插入数据"></a>单个插入数据</h3><p>如果每个数据单独插入，效率很低，每个插入都产生一个事务，写入效率低</p>
+<h3 id="批量插入数据"><a href="#批量插入数据" class="headerlink" title="批量插入数据"></a>批量插入数据</h3><ul>
+<li><p>每1000条插入一次，只产生一个事件，降低了事务的生成，提高了效率</p>
+</li>
+<li><p>具体方法</p>
+<ol>
+<li><p>把多条插入语句拼成一条</p>
+</li>
+<li><p>手动开启一个事务，在插入1000条数据后，提交事务。</p>
+<p>这样做可以减少<code>binlog</code>的生成次数，但<code>redolog</code>不一定减少</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="批量-vs-单个插入"><a href="#批量-vs-单个插入" class="headerlink" title="批量 vs 单个插入"></a>批量 vs 单个插入</h3><ul>
+<li><p>单个插入效率很低，30 * 1000 条记录用时 1分钟</p>
+</li>
+<li><p>批量插入， 每1000条插入一次，效率很高，用时7.99秒</p>
+<p><code>5.54s user 0.54s system 77% cpu 7.799 total</code></p>
+<p><code>5.38s user 0.48s system 78% cpu 7.452 total</code></p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>插入大量数据时，应减少事务的提交，让多个插入在一个事务中完成，从而提高插入数据的效率</p>
+<h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token keyword">class</span> <span class="token class-name">ImportTradelog</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">import</span></span><span class="token punctuation">(</span>date<span class="token punctuation">)</span>
+    <span class="token comment"># 导入30天的数据</span>
+    <span class="token number">30.</span>times <span class="token keyword">do</span> <span class="token operator">|</span>offset<span class="token operator">|</span>
+      datas <span class="token operator">=</span> init_data<span class="token punctuation">(</span>date <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">60</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">24</span><span class="token punctuation">)</span> <span class="token operator">*</span> offset<span class="token punctuation">)</span>
+      puts datas
+
+      <span class="token comment"># 批量插入， 每1000条插入一次，效率很高，用时7.99秒</span>
+      <span class="token comment"># 5.54s user 0.54s system 77% cpu 7.799 total</span>
+      <span class="token comment"># 5.38s user 0.48s system 78% cpu 7.452 total</span>
+      <span class="token constant">Tradelog</span><span class="token punctuation">.</span>bulk_insert set_size<span class="token punctuation">:</span> <span class="token number">1000</span><span class="token punctuation">,</span> values<span class="token punctuation">:</span> datas
+    <span class="token keyword">end</span>
+  <span class="token keyword">end</span>
+
+  <span class="token comment"># 每天导入1000条数据</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">init_data</span></span><span class="token punctuation">(</span>day<span class="token punctuation">)</span>
+    datas <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token number">1000.</span>times <span class="token keyword">do</span> <span class="token operator">|</span>index<span class="token operator">|</span>
+      <span class="token comment"># 插入效率很低，30 * 1000 条记录用时 1分钟</span>
+      <span class="token comment"># date = &#123;tradeid: tradeid, operator: operator, t_modified: t_modified&#125;</span>
+      <span class="token comment"># Tradelog.create(date)</span>
+      datas <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token punctuation">&#123;</span>
+        tradeid<span class="token punctuation">:</span> <span class="token string">"<span class="token interpolation"><span class="token delimiter tag">#&#123;</span>day<span class="token punctuation">.</span>strftime<span class="token punctuation">(</span><span class="token string">'%Y%m%d'</span><span class="token punctuation">)</span><span class="token delimiter tag">&#125;</span></span><span class="token interpolation"><span class="token delimiter tag">#&#123;</span>format<span class="token punctuation">(</span><span class="token string">'%04d'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token delimiter tag">&#125;</span></span>"</span><span class="token punctuation">,</span>
+        operator<span class="token punctuation">:</span> rand<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        t_modified<span class="token punctuation">:</span> <span class="token punctuation">(</span>day <span class="token operator">+</span> <span class="token number">60</span> <span class="token operator">*</span> index<span class="token punctuation">)</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token keyword">end</span>
+
+    datas
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -2003,6 +1804,205 @@ log<span class="token punctuation">.</span><span class="token function">Println<
       </categories>
       <tags>
         <tag>safari</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git 知识补充</title>
+    <url>/git-learning-supplement/</url>
+    <content><![CDATA[<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ol>
+<li><p>git 可以只提交文件的部分内容， git add -p,称之为hunk, sourcetree也可以进行设置</p>
+</li>
+<li><p>分支改名<br>git branch -m cat tiger</p>
+</li>
+<li><p>分支合并后产生的commit, A合并B，commit 信息中，父提交记录顺序，parents : A, B</p>
+<p>A在前，B在后，表示是A 合并的B</p>
+</li>
+<li><p>git如何判断分支是否可以删除<br>当前分支所指向的commit ，没有其它commit指向它（这个提交(分支)还没有被合并），或只有当前分支指向它，没有其它分支指向它时，在删除这个分支时就会有提示不能直接删除</p>
+</li>
+<li><p>rebase 后，对应commit 值是否发生变化<br>看情况，嫁接到其它commit 之上的commit 的值会发生变化，因为其父提交发生了变化，同理，在这个commit 之后的提交的值也发生变化<br>A B C D E F，把F嫁接到其它 COMMIT后，A到E的COMMIT的值都发生变化</p>
+<p>修改现有COMMIT 的注释，也会发生这样的连锁反应</p>
+</li>
+<li><p>rebase 的其他用途<br>修改历史提交注释 r选项<br>合并多个提交 s 选项<br>把一个提交拆分成多个commit 在操作列表使用使用 edit<br>在commit 之间添加新的commit edit选项<br>调整commit 之间的顺序 直接在列表里调整，<br>删除commit 在列表里删除相关行过使用drop,删除后对它之后commit 的影响如何</p>
+</li>
+<li><p>空目录无法被添加到git<br>因为根据算法，添加的对象必须要有内容，以供sha1算法使用</p>
+</li>
+<li><p>合并后再使用 <code>git rebase </code> 使提交成为一条直线</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> merge upstream-master
+Auto-merging layout/_partials/sidebar/site-overview.njk
+Auto-merging layout/_partials/post/post-followme.njk
+Merge made by the <span class="token string">'recursive'</span> strategy.
+ layout/_partials/header/menu-item.njk      <span class="token operator">|</span> <span class="token number">5</span> +----
+ layout/_partials/page/breadcrumb.njk       <span class="token operator">|</span> <span class="token number">6</span> +-----
+ layout/_partials/post/post-followme.njk    <span class="token operator">|</span> <span class="token number">2</span> +-
+ layout/_partials/sidebar/site-overview.njk <span class="token operator">|</span> <span class="token number">2</span> +-
+
+<span class="token function">git</span> slog --graph
+*   b1b3e13 <span class="token punctuation">(</span>HEAD -<span class="token operator">></span> release<span class="token punctuation">)</span> Merge branch <span class="token string">'upstream-master'</span> into release
+<span class="token operator">|</span><span class="token punctuation">\</span>
+<span class="token operator">|</span> * d51ca0e <span class="token punctuation">(</span>upstream/master, upstream-master<span class="token punctuation">)</span> Fix: handle invalid config
+* <span class="token operator">|</span> 369c5b5 <span class="token punctuation">(</span>origin/release, origin/master, origin/HEAD, master<span class="token punctuation">)</span> Resolve conflicts
+<span class="token operator">|</span>/
+* d6f344f Refactor sidebar-panel using flex layout
+* edefcda Add NProgress <span class="token punctuation">(</span><span class="token comment">#79)</span>
+
+<span class="token comment"># 把前分支作为基础分枝, 把 upstream-master 分支的提交嫁接在其上面</span>
+<span class="token function">git</span> rebase
+First, rewinding <span class="token function">head</span> to replay your work on <span class="token function">top</span> of it<span class="token punctuation">..</span>.
+Applying: Fix: handle invalid config
+Using index info to reconstruct a base tree<span class="token punctuation">..</span>.
+M	layout/_partials/post/post-followme.njk
+M	layout/_partials/sidebar/site-overview.njk
+Falling back to patching base and <span class="token number">3</span>-way merge<span class="token punctuation">..</span>.
+Auto-merging layout/_partials/sidebar/site-overview.njk
+Auto-merging layout/_partials/post/post-followme.njk
+
+<span class="token function">git</span> slog --graph
+* 217e224 <span class="token punctuation">(</span>HEAD -<span class="token operator">></span> release<span class="token punctuation">)</span> Fix: handle invalid config
+* 369c5b5 <span class="token punctuation">(</span>origin/release, origin/master, origin/HEAD, master<span class="token punctuation">)</span> Resolve conflicts <span class="token comment"># 以这个提交做为 rebase</span>
+* d6f344f Refactor sidebar-panel using flex layout
+* edefcda Add NProgress <span class="token punctuation">(</span><span class="token comment">#79)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>使用merge出现了分支线路</li>
+<li>rebase后，分支线路消失，成为一条直线。 是 以当前分支的最TOP的那个(369c5b5)提交做为rebase，重放合并进来的分支上的提交的</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql binlog index 文件内容</title>
+    <url>/mysql-binlog-index/</url>
+    <content><![CDATA[<h3 id="binlog-index文件内容"><a href="#binlog-index文件内容" class="headerlink" title="binlog.index文件内容"></a><code>binlog.index</code>文件内容</h3><p>记录了<code>binlog</code>文件的具体路径，在MySQL启动时，会找到<code>binlog.index</code>文件，然后读取它里面的条目，从而读取<code>binlog</code>文件。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> /mysql/3306/data/master.index
+
+/mysql/3306/data/master.000001
+/mysql/3306/data/master.000002
+/mysql/3306/data/master.000003
+./master.000004
+./master.000005<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li><code>binlog</code>文件的路径可以是相对路径，也可以是绝对路径</li>
+<li>如果是绝对路径，当文件被移动到其它地方时，只能手动修改对应的路径，否则MySQL在启动时，会报找不到文件路径的错误</li>
+</ol>
+<h3 id="设置binlog文件路径"><a href="#设置binlog文件路径" class="headerlink" title="设置binlog文件路径"></a>设置<code>binlog</code>文件路径</h3><p>可以在 <code>my.cnf</code>中设置<code>binlog</code>的文件路径</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">[mysqld]
+log-bin&#x3D;master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>或设置为绝对路径</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>mysqld<span class="token punctuation">]</span>
+log-bin<span class="token operator">=</span>/mysql/3306/data/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="参数-log-bin身兼多职"><a href="#参数-log-bin身兼多职" class="headerlink" title="参数 log-bin身兼多职"></a>参数 <code>log-bin</code>身兼多职</h3><p>设置后生效多个参数</p>
+<ol>
+<li>表示启用 <code>binlog</code>功能</li>
+<li>同时设置 <code>binlog.index</code>的文件名</li>
+<li>同时设置<code>binlog</code>的文件名</li>
+</ol>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">show variables like &#39;%log_bin%&#39;;
++---------------------------------+----------------------------------------------+
+| Variable_name                   | Value                                        |
++---------------------------------+----------------------------------------------+
+| log_bin                         | ON                                           |
+| log_bin_basename                | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master       |
+| log_bin_index                   | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master.index |
+| log_bin_trust_function_creators | OFF                                          |
+| log_bin_use_v1_row_events       | OFF                                          |
+| sql_log_bin                     | ON                                           |
++---------------------------------+----------------------------------------------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="binlog文件的读取"><a href="#binlog文件的读取" class="headerlink" title="binlog文件的读取"></a><code>binlog</code>文件的读取</h3><p>MySQL在启动时会读取<code>data</code>目录下的所有以<code>.index</code>后缀的文件(默认值)，然后在读取每个<code>index</code>文件中的条目</p>
+<h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><blockquote>
+<p>The default location for binary log files and the binary log index file is the data directory. You can use the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_log-bin"><code>--log-bin</code></a> option to specify an alternative location, by adding a leading absolute path name to the base name to specify a different directory. When the server reads an entry from the binary log index file, which tracks the binary log files that have been used, it checks whether the entry contains a relative path. If it does, the relative part of the path is replaced with the absolute path set using the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_log-bin"><code>--log-bin</code></a> option. An absolute path recorded in the binary log index file remains unchanged; in such a case, the index file must be edited manually to enable a new path or paths to be used. The binary log file base name and any specified path are available as the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_log_bin_basename"><code>log_bin_basename</code></a> system variable.</p>
+</blockquote>
+<p>只摘录了一部分，更全面的内容可到官网查看</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux What does kill 0 do</title>
+    <url>/linux-what-does-kill-zero/</url>
+    <content><![CDATA[<h3 id="What-does-kill-0-do"><a href="#What-does-kill-0-do" class="headerlink" title="What does kill -0 ... do?"></a>What does <code>kill -0 ...</code> do?</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable"><span class="token variable">$(</span><span class="token function">cat</span> /path/to/file.pid<span class="token variable">)</span></span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token punctuation">..</span>. <span class="token keyword">do</span> something <span class="token punctuation">..</span>.
+<span class="token keyword">fi</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="kill-1"><a href="#kill-1" class="headerlink" title="kill(1)"></a><em>kill(1)</em></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">man</span> <span class="token number">1</span> <span class="token function">kill</span>
+<span class="token punctuation">..</span>.
+If sig is <span class="token number">0</span>, <span class="token keyword">then</span> no signal is sent, but error checking is still performed.
+<span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="kill-2"><a href="#kill-2" class="headerlink" title="kill(2)"></a><em>kill(2)</em></h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">man</span> <span class="token number">2</span> <span class="token function">kill</span>
+<span class="token punctuation">..</span>.
+If sig is <span class="token number">0</span>, <span class="token keyword">then</span> no signal is sent, but error checking is still performed<span class="token punctuation">;</span>
+this can be used to check <span class="token keyword">for</span> the existence of a process ID or process
+group ID.
+<span class="token punctuation">..</span>.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>So signal 0 will not actually in fact send anything to your process’s PID, but will check whether you have permissions to do so.</p>
+<h3 id="Where-might-this-be-useful"><a href="#Where-might-this-be-useful" class="headerlink" title="Where might this be useful?"></a>Where might this be useful?</h3><p>One obvious place would be if you were trying to determine if you had permissions to send signals to a running process via <code>kill</code>. You could check prior to sending the actual <code>kill</code> signal that you want, by wrapping a check to make sure that <code>kill -0 &lt;PID&gt;</code> was first allowed.</p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Say a process was being run by root as follows:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">sleep</span> <span class="token number">2500</span> <span class="token operator">&amp;</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token number">15693</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Now in another window if we run this command we can confirm that that PID is running.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ pgrep <span class="token function">sleep</span>
+<span class="token number">15693</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Now let’s try this command to see if we have access to send that PID signals via <code>kill</code>.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable"><span class="token variable">$(</span>pgrep <span class="token function">sleep</span><span class="token variable">)</span></span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token builtin class-name">echo</span> <span class="token string">"You're weak!"</span><span class="token punctuation">;</span> <span class="token keyword">fi</span>
+bash: kill: <span class="token punctuation">(</span><span class="token number">15693</span><span class="token punctuation">)</span> - Operation not permitted
+You're weak<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>So it works, but the output is leaking a message from the <code>kill</code> command that we don’t have permissions. Not a big deal, simply catch STDERR and send it to <code>/dev/null</code>.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable"><span class="token variable">$(</span>pgrep <span class="token function">sleep</span><span class="token variable">)</span></span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null<span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token builtin class-name">echo</span> <span class="token string">"You're weak!"</span><span class="token punctuation">;</span> <span class="token keyword">fi</span>
+You're weak<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="Complete-example"><a href="#Complete-example" class="headerlink" title="Complete example"></a>Complete example</h3><p>So then we could do something like this, <code>killer.bash</code>:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable">PID</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>pgrep <span class="token function">sleep</span><span class="token variable">)</span></span>
+<span class="token keyword">if</span> <span class="token operator">!</span> <span class="token function">kill</span> -0 <span class="token variable">$PID</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null<span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"you don't have permissions to kill PID:<span class="token variable">$PID</span>"</span>
+  <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+<span class="token keyword">fi</span>
+
+<span class="token function">kill</span> -9 <span class="token variable">$PID</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Now when I run the above as a non-root user:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ ~/killer.bash
+you don't have permissions to <span class="token function">kill</span> PID:15693
+
+$ <span class="token builtin class-name">echo</span> <span class="token variable">$?</span>
+<span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>However when it’s run as root:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> ~/killer.bash
+
+$ <span class="token builtin class-name">echo</span> <span class="token variable">$?</span>
+<span class="token number">0</span>
+
+$ pgrep <span class="token function">sleep</span>
+$<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
       </tags>
   </entry>
 </search>
