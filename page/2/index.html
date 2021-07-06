@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">10</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">54</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">55</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,104 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-assign_receiver_of_ptr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-assign_receiver_of_ptr/" class="post-title-link" itemprop="url">go 语言 对指针类型接收者本身赋值</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-07 22:50:29" itemprop="dateCreated datePublished" datetime="2021-06-07T22:50:29+08:00">2021-06-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>r</code> 是指针类型接收者，可以对其进行解引赋值。结构体的<code>0值</code>不是<code>nil</code>，而是其各个成员的<code>0值</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token string">"fmt"</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">newReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">type</span> reader <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	buf  <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
+	r<span class="token punctuation">,</span> w <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">newReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	r <span class="token operator">:=</span> <span class="token function">new</span><span class="token punctuation">(</span>reader<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token comment">// &amp;&#123;[] 0 0&#125;</span>
+	r<span class="token punctuation">.</span><span class="token function">reset</span><span class="token punctuation">(</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token comment">// &amp;&#123;[0 0 0 0 0] -1 -1&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>r <span class="token operator">*</span>reader<span class="token punctuation">)</span> <span class="token function">reset</span><span class="token punctuation">(</span>buf <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token operator">*</span>r <span class="token operator">=</span> reader<span class="token punctuation">&#123;</span>buf<span class="token punctuation">:</span> buf<span class="token punctuation">,</span> r<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> w<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1324,133 +1422,6 @@ Sizeof(x.c) = 24  Alignof(x.c) = 8 Offsetof(x.c) = 8
 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-using-rebase-instead-of-merge/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/git-using-rebase-instead-of-merge/" class="post-title-link" itemprop="url">git 使用 rebase 代替 merge</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-04-06 16:11:18" itemprop="dateCreated datePublished" datetime="2021-04-06T16:11:18+08:00">2021-04-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="合并还是变基"><a href="#合并还是变基" class="headerlink" title="合并还是变基"></a>合并还是变基</h1><p>合并分支时，应使用<code>rebase</code>合并分支而不是使用<code>merge</code></p>
-<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p>在分支很多的时候，<code>merge</code>会使提交变得异常混乱，查找某个提交会非常不好找，即使使用图形工具，也无法快速的查找，如果想退到某次提交更是难上加难。<code>merge</code>即使删除了合并过来的分支，其合并轨迹也依然被保留，所以还是很乱。</p>
-<p><img src="//img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-merge.png_b1" alt="git merge" title="git merge"></p>
-<h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><p>在分支很多的时候，不会产生很多的分支线，实践中应该就只有<code>master</code>,<code>release</code>等分支线，功能分支线在合并到<code>master</code> 上后都被删除，这样提交基本都在一条线上，十分清楚整洁。</p>
-<p><img src="//img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-rebase.png_b1" alt="git rebase" title="git rebase"></p>
-<h1 id="使用rebase合并分支"><a href="#使用rebase合并分支" class="headerlink" title="使用rebase合并分支"></a>使用rebase合并分支</h1><h2 id="场景分析："><a href="#场景分析：" class="headerlink" title="场景分析："></a>场景分析：</h2><p>功能<code>feature1</code>与<code>feature2</code>都在开发，<code>feature1</code>先上线，合并到了master，此时，<code>feature2</code>不应使用<code>merge</code>对<code>master</code>进行合并操作，而是使用<code>rebase</code>进行合并</p>
-<ul>
-<li><p>master上的提交有：<code>[m1, m2, m3]</code></p>
-</li>
-<li><p>feature1上的提交有: <code>[f1_01, f1_02, f1_03]</code></p>
-</li>
-<li><p>feature2上的提交有: <code>[f2_01, f2_02, f2_03]</code></p>
-</li>
-</ul>
-<p><code>feature1</code>先被合并到master:</p>
-<ul>
-<li>master上的提交有：<code>[m1, m2, m3, f1_01, f1_02, f1_03]</code></li>
-</ul>
-<p><code>feature2</code>合并master</p>
-<ul>
-<li><code>feature2</code>上的提交有：<code>[m1, m2, m3, f1_01, f1_02, f1_03，f2_01_new, f2_02_new, f2_03_new]</code></li>
-</ul>
-<h2 id="合并步骤"><a href="#合并步骤" class="headerlink" title="合并步骤"></a>合并步骤</h2><p><code>feature2</code>要把<code>master</code>上的提交合并过来，使用<code>rebase</code> 而不是<code>merge</code>，这样就会不产生合并提交，在向<code>master</code>提交时就变成了<code>快速向前</code></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> co feature2
-<span class="token function">git</span> rebase master
-
-<span class="token comment"># 如果发生冲突，解决冲突后把冲突文件加入 index 区</span>
-<span class="token function">git</span> <span class="token function">add</span> -u
-<span class="token comment"># 运行continue 以使rebase完成</span>
-<span class="token function">git</span> rebase --continue<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><p>步骤1：<code>git rebase master</code>：以<code>master</code>分支做为<code>feature2</code>的基础</p>
-</li>
-<li><p>步骤2：计算出<code>feature2</code>与<code>master</code>上的差异提交，相当于<code>git log master...feture2</code>，即<code>[f2_01, f2_02, f2_03]</code></p>
-</li>
-<li><p>步骤3：把<code>[f2_01, f2_02, f2_03]</code>在<code>master</code>上的最新提交<code>f1_03</code>上进行重放生成新的提交</p>
-<p><code>[f2_01_new, f2_02_new, f2_03_new]</code></p>
-<p>重放生成过程：</p>
-<ol>
-<li>f2_01以f1_03为基础，生成新的f2_01_new</li>
-<li>f2_02以f2_01_new为基础，生成新的f2_02_new</li>
-<li>f2_03以f2_02_new为基础，生成新的f2_03_new</li>
-</ol>
-</li>
-<li><p>步骤4：把当前分支设置为<code>feature2</code></p>
-<p>feature2<code>rebase</code>后的提交有<code>[m1, m2, m3, f1_01, f1_02, f1_03，f2_01_new, f2_02_new, f2_03_new]</code></p>
-<p>之前的旧的<code>[f2_01, f2_02, f2_03]</code> 在<code>feature2</code>上就看不到了，但依然在git中，如果没有其它分支指向它们，则会被git 回收机制删除</p>
-</li>
-</ul>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ol>
-<li>merge会让提交变得越来越混乱</li>
-<li>rebase可以使主线一直保持清晰，rebase操作可以看是剪支操作，把分支剪下来，接到主线上。这样就可以把多条分支线变为一条，使所有提交变得清晰。</li>
-<li>不要对已经<code>push</code>了的分支进行<code>rebase</code>，这会让已经存在的提交丢失，如果有人已经拉取了这个分支，也会给别人提交带来混乱</li>
-</ol>
 
       
     </div>

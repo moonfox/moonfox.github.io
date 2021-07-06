@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">10</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">54</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">55</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,148 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/go-test-part1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/go-test-part1/" class="post-title-link" itemprop="url">go 语言 测试 part1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-05 15:37:07" itemprop="dateCreated datePublished" datetime="2021-07-05T15:37:07+08:00">2021-07-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="缓存目录"><a href="#缓存目录" class="headerlink" title="缓存目录"></a>缓存目录</h1><p>Go 总是会缓存程序构建的结果，以便在将来使用。当有任何变动时，缓存就会失效，构建过程会真正的被执行。被缓存的构建结果保存在<code>go env GOCACHE</code>目录中，为了防止目录中的数据越来越多，go会自动删除不经常使用的缓存文件。可以手动清除缓存结果，执行<code>go clean -cache</code>即可。</p>
+<p><code>go test</code>命令也会把测试成功的结果缓存起来，如果测试代码和源代码没有改动，再次运行测试时，直接使用缓存的结果。当源码和测试代码有改动时，缓存结果就会失效，测试会被真正的运行。运行<code>go clean -testcache</code>可以删除测试的缓存结果，但不会删除构建结果缓存</p>
+<h1 id="测试日志打印"><a href="#测试日志打印" class="headerlink" title="测试日志打印"></a>测试日志打印</h1><p>可以使用<code>t.Log</code>与<code>t.Logf</code>方法打印测试日志，这两个方法会在测试失败时，进行打印，在测试成功的时候，是不进行打印的。如果想在测试结果中看到所有的日志，可以使用<code>-v</code>参数</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestIntroduce</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	intro <span class="token operator">:=</span> <span class="token function">introduce</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	expected <span class="token operator">:=</span> <span class="token string">"Welcome to my Golang column."</span>
+	<span class="token keyword">if</span> intro <span class="token operator">!=</span> expected <span class="token punctuation">&#123;</span>
+		t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"The actual introduce %q is not the expected."</span><span class="token punctuation">,</span>
+			intro<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">// 默认只在测试失败的时候，才打印日志内容</span>
+	t<span class="token punctuation">.</span><span class="token function">Logf</span><span class="token punctuation">(</span><span class="token string">"The expected introduce is %q.\n"</span><span class="token punctuation">,</span> expected<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 测试失败，显示t.Logf()中的内容</span>
+<span class="token operator">--</span><span class="token operator">-</span> FAIL<span class="token punctuation">:</span> TestIntroduce <span class="token punctuation">(</span><span class="token number">0.00</span>s<span class="token punctuation">)</span>
+    demo53_test<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">41</span><span class="token punctuation">:</span> The actual introduce <span class="token string">"Welcome to my Golang column."</span> is not the expected<span class="token punctuation">.</span>
+    demo53_test<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">44</span><span class="token punctuation">:</span> The expected introduce is <span class="token string">"Welcome to my golang column."</span><span class="token punctuation">.</span>
+FAIL
+FAIL	puzzlers<span class="token operator">/</span>article20<span class="token operator">/</span>q2	<span class="token number">0.013</span>s
+FAIL
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="t-Fail-与-t-FailNow"><a href="#t-Fail-与-t-FailNow" class="headerlink" title="t.Fail() 与 t.FailNow()"></a><code>t.Fail()</code> 与 <code>t.FailNow()</code></h1><p><code>t.Fail()</code>令测试结果为失败，但其后的代码依然会被执行</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestFail</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token comment">// t.Log("Failed.")可以被执行到</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed."</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>t.FailNow()</code>也会令测试结果为失败，但其后的代码不再执行，不会影响其它测试用例的执行</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestFail</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token comment">// t.Log() 不能被执行到</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed."</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="t-Errorf-与t-Error"><a href="#t-Errorf-与t-Error" class="headerlink" title="t.Errorf()与t.Error()"></a><code>t.Errorf()</code>与<code>t.Error()</code></h1><p>打印日志并使测试失败，等效于调用<code>t.Logf/t.Log</code>后，又调用了<code>t.Fail</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// t.Error 等效于在调用 t.Log 后，接着又调用了 t.Fail</span>
+<span class="token comment">// Error is equivalent to Log followed by Fail.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Error</span><span class="token punctuation">(</span>args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintln</span><span class="token punctuation">(</span>args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Errorf is equivalent to Logf followed by Fail.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Errorf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span>format<span class="token punctuation">,</span> args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="t-Fatal与t-Fatalf方法"><a href="#t-Fatal与t-Fatalf方法" class="headerlink" title="t.Fatal与t.Fatalf方法"></a><code>t.Fatal</code>与<code>t.Fatalf</code>方法</h1><p>打印日志并使测试失败，在其后的代码不会被执行，当前测试用例立即结束，但不会影响其它测试用例，等效于调用<code>t.Logf/t.Log</code>后，又调用了<code>t.FailNow</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Fatal is equivalent to Log followed by FailNow.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Fatal</span><span class="token punctuation">(</span>args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintln</span><span class="token punctuation">(</span>args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Fatalf is equivalent to Logf followed by FailNow.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Fatalf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span>format<span class="token punctuation">,</span> args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1070,104 +1212,6 @@ log<span class="token punctuation">.</span><span class="token function">Println<
 	<span class="token comment">// 当 n 小于 未读字节数时，程序直接跳到这里</span>
 	<span class="token keyword">return</span> b<span class="token punctuation">.</span>buf<span class="token punctuation">[</span>b<span class="token punctuation">.</span>r <span class="token punctuation">:</span> b<span class="token punctuation">.</span>r<span class="token operator">+</span>n<span class="token punctuation">]</span><span class="token punctuation">,</span> err
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-assign_receiver_of_ptr/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-assign_receiver_of_ptr/" class="post-title-link" itemprop="url">go 语言 对指针类型接收者本身赋值</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-07 22:50:29" itemprop="dateCreated datePublished" datetime="2021-06-07T22:50:29+08:00">2021-06-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>r</code> 是指针类型接收者，可以对其进行解引赋值。结构体的<code>0值</code>不是<code>nil</code>，而是其各个成员的<code>0值</code></p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
-
-<span class="token keyword">import</span> <span class="token string">"fmt"</span>
-
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token function">newReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">type</span> reader <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-	buf  <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
-	r<span class="token punctuation">,</span> w <span class="token builtin">int</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">func</span> <span class="token function">newReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	r <span class="token operator">:=</span> <span class="token function">new</span><span class="token punctuation">(</span>reader<span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token comment">// &amp;&#123;[] 0 0&#125;</span>
-	r<span class="token punctuation">.</span><span class="token function">reset</span><span class="token punctuation">(</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token comment">// &amp;&#123;[0 0 0 0 0] -1 -1&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">func</span> <span class="token punctuation">(</span>r <span class="token operator">*</span>reader<span class="token punctuation">)</span> <span class="token function">reset</span><span class="token punctuation">(</span>buf <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token operator">*</span>r <span class="token operator">=</span> reader<span class="token punctuation">&#123;</span>buf<span class="token punctuation">:</span> buf<span class="token punctuation">,</span> r<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> w<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
       
     </div>
