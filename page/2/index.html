@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">10</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">55</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">57</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,215 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/ruby-character-to-ascii/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ruby-character-to-ascii/" class="post-title-link" itemprop="url">ruby 字符和 ascii 码之间的转换</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-09 17:05:03" itemprop="dateCreated datePublished" datetime="2021-06-09T17:05:03+08:00">2021-06-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/ruby/" itemprop="url" rel="index"><span itemprop="name">ruby</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="字符-转-ascii"><a href="#字符-转-ascii" class="headerlink" title="字符 转 ascii"></a>字符 转 ascii</h1><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token string">'a'</span><span class="token punctuation">.</span>ord <span class="token comment"># => 97</span>
+
+<span class="token string">"a"</span><span class="token punctuation">.</span>unpack<span class="token punctuation">(</span><span class="token string">'c'</span><span class="token punctuation">)</span> <span class="token comment">#=> 97 `c` 提取一个字符作为整数</span>
+
+<span class="token string">"string"</span><span class="token punctuation">.</span>each_byte <span class="token keyword">do</span> <span class="token operator">|</span>c<span class="token operator">|</span>
+    puts c
+<span class="token keyword">end</span>
+
+<span class="token string">'hello world'</span><span class="token punctuation">.</span>each_byte<span class="token punctuation">.</span>to_a
+<span class="token punctuation">[</span><span class="token number">104</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">111</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">119</span><span class="token punctuation">,</span> <span class="token number">111</span><span class="token punctuation">,</span> <span class="token number">114</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">]</span>
+
+<span class="token string">'hello world'</span><span class="token punctuation">.</span>bytes
+<span class="token punctuation">[</span><span class="token number">104</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">111</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">119</span><span class="token punctuation">,</span> <span class="token number">111</span><span class="token punctuation">,</span> <span class="token number">114</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="Ascii-转-字符"><a href="#Ascii-转-字符" class="headerlink" title="Ascii 转 字符"></a>Ascii 转 字符</h1><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token number">97.</span>chr <span class="token comment"># => "a"</span>
+
+<span class="token string">'hello world'</span><span class="token punctuation">.</span>bytes <span class="token comment"># => [104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100]</span>
+<span class="token punctuation">[</span><span class="token number">104</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">111</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token number">119</span><span class="token punctuation">,</span> <span class="token number">111</span><span class="token punctuation">,</span> <span class="token number">114</span><span class="token punctuation">,</span> <span class="token number">108</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">.</span>map<span class="token punctuation">&#123;</span><span class="token operator">|</span>m<span class="token operator">|</span>m<span class="token punctuation">.</span>chr<span class="token punctuation">&#125;</span>
+<span class="token comment"># => ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="字符转二进制"><a href="#字符转二进制" class="headerlink" title="字符转二进制"></a>字符转二进制</h1><pre class="line-numbers language-ruby" data-language="ruby"><code class="language-ruby"><span class="token string">"aa"</span><span class="token punctuation">.</span>unpack<span class="token punctuation">(</span><span class="token string">'b8B8'</span><span class="token punctuation">)</span>  <span class="token comment">#=> ["10000110", "01100001"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><code>B</code> 从每个字符中提取位（首先是最高有效位）</p>
+<p><code>b</code> 从每个字符中提取位（首先是最低有效位）</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-bufio-reader-peek/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-bufio-reader-peek/" class="post-title-link" itemprop="url">go 语言 bufio.Peek 源码</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-08 15:03:58" itemprop="dateCreated datePublished" datetime="2021-06-08T15:03:58+08:00">2021-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p> <code>bufio.Peek(n)</code>返回前N个未读字节 ，不会更改已读计数的值。在方法调用后，要查看返回参数<code>error</code>是否为nil，以确保操作满足要求</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>b <span class="token operator">*</span>Reader<span class="token punctuation">)</span> <span class="token function">Peek</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> n <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> ErrNegativeCount
+	<span class="token punctuation">&#125;</span>
+
+	b<span class="token punctuation">.</span>lastByte <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+	b<span class="token punctuation">.</span>lastRuneSize <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+
+	<span class="token comment">// 当未读字节数小于n，且缓冲区不满(b.w-b.r &lt; len(b.buf))，</span>
+	<span class="token comment">// 即缓冲区中从头到尾必须都是未读字节才算是缓冲区已经满</span>
+	<span class="token comment">// 且 b.err 为nil，这三者都满足时，开始调用b.fill()填充缓冲区</span>
+	<span class="token comment">// fill()方法会把未读数据移动到缓冲区头部，并把后面空出来的部分写满</span>
+	<span class="token comment">// for 保证了至少可以把缓冲区填满</span>
+	<span class="token keyword">for</span> b<span class="token punctuation">.</span>w<span class="token operator">-</span>b<span class="token punctuation">.</span>r <span class="token operator">&lt;</span> n <span class="token operator">&amp;&amp;</span> b<span class="token punctuation">.</span>w<span class="token operator">-</span>b<span class="token punctuation">.</span>r <span class="token operator">&lt;</span> <span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>buf<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> b<span class="token punctuation">.</span>err <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		b<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// b.w-b.r &lt; len(b.buf) => buffer is not full</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// 当要读取的字节数大于缓冲区长度时，返回所有未读节字，并附带错误信息</span>
+	<span class="token keyword">if</span> n <span class="token operator">></span> <span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>buf<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> b<span class="token punctuation">.</span>buf<span class="token punctuation">[</span>b<span class="token punctuation">.</span>r<span class="token punctuation">:</span>b<span class="token punctuation">.</span>w<span class="token punctuation">]</span><span class="token punctuation">,</span> ErrBufferFull
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// 0 &lt;= n &lt;= len(b.buf)</span>
+	<span class="token keyword">var</span> err <span class="token builtin">error</span>
+	<span class="token comment">// 当要读取的字节数大于所有未读节字数时，返回所有未读节字，并附带错误信息</span>
+	<span class="token keyword">if</span> avail <span class="token operator">:=</span> b<span class="token punctuation">.</span>w <span class="token operator">-</span> b<span class="token punctuation">.</span>r<span class="token punctuation">;</span> avail <span class="token operator">&lt;</span> n <span class="token punctuation">&#123;</span>
+		<span class="token comment">// not enough data in buffer</span>
+		n <span class="token operator">=</span> avail
+		err <span class="token operator">=</span> b<span class="token punctuation">.</span><span class="token function">readErr</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		<span class="token keyword">if</span> err <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+			err <span class="token operator">=</span> ErrBufferFull
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">// 当 n 小于 未读字节数时，程序直接跳到这里</span>
+	<span class="token keyword">return</span> b<span class="token punctuation">.</span>buf<span class="token punctuation">[</span>b<span class="token punctuation">.</span>r <span class="token punctuation">:</span> b<span class="token punctuation">.</span>r<span class="token operator">+</span>n<span class="token punctuation">]</span><span class="token punctuation">,</span> err
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1133,295 +1342,6 @@ Sizeof(x.c) = 24  Alignof(x.c) = 8 Offsetof(x.c) = 8
 
 
 <h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>未来的Go语言编译器应该会默认优化结构体的顺序，当然应该也能够指定具体的内存布局，相同讨论请参考 <a target="_blank" rel="noopener" href="https://github.com/golang/go/issues/10014">Issue10014</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-call-method-on-nil-of-interface-value/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-call-method-on-nil-of-interface-value/" class="post-title-link" itemprop="url">go 语言 在动态值为 nil 的接口上调用方法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-04-19 15:37:54" itemprop="dateCreated datePublished" datetime="2021-04-19T15:37:54+08:00">2021-04-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="在动态值为-nil-的接口上调用方法"><a href="#在动态值为-nil-的接口上调用方法" class="headerlink" title="在动态值为 nil 的接口上调用方法"></a>在动态值为 nil 的接口上调用方法</h1><p>把一个值为nil的某个实现类型的变量赋给了接口变量，是否可以在这个接口变量上调用该接口的方法</p>
-<p>lib/lib.go</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> People <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-	Name <span class="token builtin">string</span>
-	Age  <span class="token builtin">int</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">type</span> Superman <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-	People
-	color <span class="token builtin">string</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">type</span> Mutant <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
-	<span class="token function">Speaking</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">type</span> Fly <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
-	<span class="token function">Fly</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">func</span> <span class="token punctuation">(</span>sp Superman<span class="token punctuation">)</span> <span class="token function">Speaking</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"I'm %s"</span><span class="token punctuation">,</span> sp<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">func</span> <span class="token punctuation">(</span>sp <span class="token operator">*</span>Superman<span class="token punctuation">)</span> <span class="token function">Fly</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"I can fly"</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>value.go</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">callMethodOnNil</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">var</span> mu lib<span class="token punctuation">.</span>Mutant
-	<span class="token keyword">var</span> xman <span class="token operator">*</span>lib<span class="token punctuation">.</span>Superman
-
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"xman:"</span><span class="token punctuation">,</span> xman<span class="token punctuation">)</span> <span class="token comment">// nil</span>
-	mu <span class="token operator">=</span> xman
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"mu:"</span><span class="token punctuation">,</span> mu<span class="token punctuation">)</span> <span class="token comment">// nil</span>
-	<span class="token comment">// Panic: runtime error: invalid memory address or nil pointer dereference</span>
-	<span class="token comment">// 动态类值为 nil 时，不能在其上调用值方法</span>
-	<span class="token comment">// mu.Speaking()</span>
-
-	<span class="token keyword">var</span> fly lib<span class="token punctuation">.</span>Fly
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"xman:"</span><span class="token punctuation">,</span> xman<span class="token punctuation">)</span> <span class="token comment">// nil</span>
-	fly <span class="token operator">=</span> xman
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"fly:"</span><span class="token punctuation">,</span> fly<span class="token punctuation">)</span> <span class="token comment">// nil</span>
-
-	<span class="token comment">// 动态类值为 nil 时，可以在其上调用指针方法</span>
-	<span class="token comment">// Fly()方法可以被调用，它的接收者是 *T 类型，且方法中没有涉及到对类型属性的调用</span>
-	fly<span class="token punctuation">.</span><span class="token function">Fly</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// I can fly</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ol>
-<li><p>值类型(T)的方法不能被调用，无论这个方法中是否涉及了对类型属性的调用</p>
-</li>
-<li><p>指针类型(*T)的方法可以被调用，但方法中不能涉及类型属性的调用</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-sync-wait/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-sync-wait/" class="post-title-link" itemprop="url">go 语言 sync.Wait的使用</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-04-14 18:43:00" itemprop="dateCreated datePublished" datetime="2021-04-14T18:43:00+08:00">2021-04-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如何让主 goroutine 在所有其他 goroutine 都运行完后，再退出</p>
-<h1 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h1><p>通过 sleep 让主 goroutine 在所有子goroutine运行结束后，再退出</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">usingSleep</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">go</span> fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-	time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>缺点：无法判断 for 循环到底需要多长时间，导致估计sleep的时间要么不够，要么太长</p>
-<h1 id="缓冲通道"><a href="#缓冲通道" class="headerlink" title="缓冲通道"></a>缓冲通道</h1><p>通过缓冲通道让主 goroutine 在所有子goroutine运行结束后，再退出</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">usingChannel</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	c <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">chan</span> <span class="token keyword">struct</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
-	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span>i <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-			fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
-			c <span class="token operator">&lt;-</span> <span class="token keyword">struct</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-		<span class="token punctuation">&#125;</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-
-	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
-		<span class="token operator">&lt;-</span>c
-	<span class="token punctuation">&#125;</span>
-
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>缺点：</p>
-<ul>
-<li>channel应该被用在goroutine间的通信</li>
-<li>如果子goroutine太多，使用通道也会消耗很多资源</li>
-</ul>
-<h1 id="sync-WaitGroup"><a href="#sync-WaitGroup" class="headerlink" title="sync.WaitGroup"></a>sync.WaitGroup</h1><p>使用 sync.WaitGroup()控制主 goroutine 在所有子goroutine运行结束后，再退出</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">waitGroup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	wg <span class="token operator">:=</span> sync<span class="token punctuation">.</span>WaitGroup<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-
-	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
-		wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-		<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span>i <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-			<span class="token keyword">defer</span> wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-			fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
-		<span class="token punctuation">&#125;</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-
-	wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 一直阻塞主goroutine，直到wg为零</span>
-
-	<span class="token comment">// output</span>
-	<span class="token comment">// 乱序输出,并不是按1,2,3,4...</span>
-	<span class="token comment">// 2</span>
-	<span class="token comment">// 4</span>
-	<span class="token comment">// 7</span>
-	<span class="token comment">// 3</span>
-	<span class="token comment">// 1</span>
-	<span class="token comment">// 0</span>
-	<span class="token comment">// 9</span>
-	<span class="token comment">// 5</span>
-	<span class="token comment">// 8</span>
-	<span class="token comment">// 6</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><p>Wait() 方法的功能是，阻塞当前的 goroutine，直到其所属值中的计数器归零</p>
-</li>
-<li><p>不要把增加其计数器值的操作和调用其Wait方法的代码，放在不同的 goroutine 中执行，如果同时启用的两个 goroutine ，分别调用这两个方法(add 和 wait)，那么就有可能会让这里的Add方法抛出一个 panic。最好用“先统一Add，再并发Done，最后Wait”这种标准方式，来使用WaitGroup值</p>
-</li>
-<li><p>计数器不能为负值，发生为负的情况是：不适当地调用Done方法和Add方法都会如此。</p>
-</li>
-<li><p>Done()是Add(-1)的别名</p>
-</li>
-<li><p>计数不为0, 阻塞Wait()的运行</p>
-</li>
-</ul>
-<h1 id="WaitGroup对象不是一个引用类型"><a href="#WaitGroup对象不是一个引用类型" class="headerlink" title="WaitGroup对象不是一个引用类型"></a>WaitGroup对象不是一个引用类型</h1><p>在通过函数传值的时候需要使用地址，不然会出现 <code>fatal error: all goroutines are asleep - deadlock!</code></p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">passWGByPointer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	wg <span class="token operator">:=</span> sync<span class="token punctuation">.</span>WaitGroup<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-
-	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
-		wg<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-		<span class="token keyword">go</span> <span class="token function">wgDone</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token operator">&amp;</span>wg<span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-	wg<span class="token punctuation">.</span><span class="token function">Wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">func</span> <span class="token function">wgDone</span><span class="token punctuation">(</span>i <span class="token builtin">int</span><span class="token punctuation">,</span> wg <span class="token operator">*</span>sync<span class="token punctuation">.</span>WaitGroup<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">defer</span> wg<span class="token punctuation">.</span><span class="token function">Done</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
       
     </div>

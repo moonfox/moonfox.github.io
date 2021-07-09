@@ -15,13 +15,74 @@
     <atom:link href="https://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby</description>
-    <pubDate>Tue, 06 Jul 2021 15:36:34 GMT</pubDate>
+    <pubDate>Fri, 09 Jul 2021 09:52:29 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>go 语言 测试 part1</title>
+      <title>go 语言 基准测试结果解读</title>
       <link>https://www.gagahappy.com/go-test-part1/</link>
       <guid>https://www.gagahappy.com/go-test-part1/</guid>
+      <pubDate>Fri, 09 Jul 2021 09:16:54 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;p&gt;count 标记&lt;/p&gt;
+&lt;p&gt;cpu 标记&lt;/p&gt;
+&lt;p&gt;Parallel 标记&lt;/p&gt;
+&lt;p&gt;go test</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>count 标记</p><p>cpu 标记</p><p>Parallel 标记</p><p>go test 在运行测试时，如果被测试的代码包有多个，为了加快测试速度，会并行的运行这些代码包，但每个代码包中的功能测试用例是被串行执行的。</p><p>小结</p><ul><li>可以通过运行<code>runtime.GOMAXPROCS(0)</code>获得运行时的最大P的数量</li></ul>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
+      
+      
+      <comments>https://www.gagahappy.com/go-test-part1/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>go 语言 基准测试 结果解读</title>
+      <link>https://www.gagahappy.com/go-test-benchmark-result-introducing/</link>
+      <guid>https://www.gagahappy.com/go-test-benchmark-result-introducing/</guid>
+      <pubDate>Thu, 08 Jul 2021 07:16:54 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;基准测试&quot;&gt;&lt;a href=&quot;#基准测试&quot; class=&quot;headerlink&quot; title=&quot;基准测试&quot;&gt;&lt;/a&gt;基准测试&lt;/h1&gt;&lt;p&gt;是测量一个程序在固定工作负载下的性能，使用 &lt;code&gt;-bench&lt;/code&gt;</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="基准测试"><a href="#基准测试" class="headerlink" title="基准测试"></a>基准测试</h1><p>是测量一个程序在固定工作负载下的性能，使用 <code>-bench</code> 标记可以对代码进行基准测试</p><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test <span class="token operator">-</span>v <span class="token operator">-</span>bench<span class="token operator">=</span><span class="token punctuation">.</span> gott<span class="token operator">/</span>hellogoos<span class="token punctuation">:</span> darwingoarch<span class="token punctuation">:</span> amd64pkg<span class="token punctuation">:</span> gott<span class="token operator">/</span>helloBenchmarkHello<span class="token operator">-</span><span class="token number">4</span>         <span class="token number">4964053</span>               <span class="token number">228.5</span> ns<span class="token operator">/</span>opPASSok      gott<span class="token operator">/</span>hello      <span class="token number">2.386</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><ul><li><p><code>.</code>表示执行代码包中所有的基准测试用例(前缀为<code> Benchmark</code>的方法)，在使用<code>-bench</code>标记后，默认不执行功能测，同时执行功能测试会影响基准测试的结果</p></li><li><p>指定运行某个基准测试</p><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test <span class="token operator">-</span>v <span class="token operator">-</span>bench<span class="token operator">=</span>BenchmarkHello gott<span class="token operator">/</span>hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li></ul><h1 id="b-N值的确定"><a href="#b-N值的确定" class="headerlink" title="b.N值的确定"></a><code>b.N</code>值的确定</h1><p>表示被测试的方法在不超过默认执行时间上限(默认为1秒)的情况下，最多可以执行多少次，这个值就是测试结果中的值。</p><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">BenchmarkHello</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token string">"Max"</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>当测试开始时，<code>b.N</code>的值被设置为1，执行后如果没有超过上限，则加大<code>b.N</code>的值，按<code>1、2、5、10、20、50</code>一直递增，直到执行时间超过上限，那么就用上一次的<code>b.N</code>的值，做为测试的最终结果</p><pre class="line-numbers language-go" data-language="go"><code class="language-go">BenchmarkHello<span class="token operator">-</span><span class="token number">4</span>         <span class="token number">4964053</span>               <span class="token number">228.5</span> ns<span class="token operator">/</span>opPASSok      gott<span class="token operator">/</span>hello      <span class="token number">2.386</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ul><li><code>4964053</code>:  表示<code>hello()</code>方法在1秒内，最多可以执行的次数</li><li><code>228.5 ns/op</code>： 表示每次执行<code>hello()</code>所消耗的平均执行时间</li><li><code>2.386s</code>：表示测试总共用时</li><li>总共用时 / 最多可以执行的次数 = 平均执行时间</li></ul><h1 id="测试总时间的计算"><a href="#测试总时间的计算" class="headerlink" title="测试总时间的计算"></a>测试总时间的计算</h1><p>既然<code>4964053</code>表示1秒内执行的次数，那么测试总时间用时却是<code>2.386s</code>超过了1秒，这是为什么呢</p><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">BenchmarkHello</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span><span class="token function">hello</span><span class="token punctuation">(</span><span class="token string">"Max"</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>b<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"NNNNN:"</span><span class="token punctuation">,</span> b<span class="token punctuation">.</span>N<span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在测试中加入<code>b.Log(&quot;NNNNN:&quot;, b.N)</code>，再执行基准测试，并加入<code>-v</code>，打印测试中的日志</p><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -bench<span class="token operator">=</span>. gott/hello<span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello    hello_test.go:15: hello Max--- PASS: TestHello <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span><span class="token operator">==</span><span class="token operator">=</span> RUN   TestPrint    hello_test.go:19: just Print--- PASS: TestPrint <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span>goos: darwingoarch: amd64pkg: gott/helloBenchmarkHello    hello_test.go:26: NNNNN: <span class="token number">1</span>    hello_test.go:26: NNNNN: <span class="token number">100</span>    hello_test.go:26: NNNNN: <span class="token number">10000</span>    hello_test.go:26: NNNNN: <span class="token number">1000000</span>    hello_test.go:26: NNNNN: <span class="token number">3541896</span>    hello_test.go:26: NNNNN: <span class="token number">4832275</span>BenchmarkHello-4         <span class="token number">4832275</span>               <span class="token number">236.8</span> ns/opPASSok      gott/hello      <span class="token number">2</span>.395s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>可以看到<code>b.Log(&quot;NNNNN:&quot;, b.N)</code>被执行了6次，这证明了之前提到的，测试会对<code>b.N</code>依次递增，直到执行时间超过上限。在对<code>BenchmarkHello()</code>运行基准测试时，N值依次按<code>1,100,10000,1000000,3541896,4832275</code>递增，直到找到在执行时间上限1秒内，最大的可执行次数<code>4832275</code> 。</p><p>这也说明<code>BenchmarkHello()</code>一共被调用了6次，每次运行<code>BenchmarkHello()</code>都要消耗一定的时间，所以测试总耗时为这6次调用时间之和，<code>2.395s</code>，超过了1秒</p><p>问题：是否测试总时间一定会超过1秒？答：因为要找到1秒内最大可执行次数，而在这之前肯定要进行多次尝试，所以测试总时间应该总是会超过1秒的。</p><h1 id="平均执行时间的计算"><a href="#平均执行时间的计算" class="headerlink" title="平均执行时间的计算"></a>平均执行时间的计算</h1><p>应该用，运行<code>4832275</code>时所消耗的时间 <code>t</code>，<code>t / 4832275 = 236.8 ns/op</code>  </p><ul><li>如果用 测试总共用时 / 最多可以执行的次数  则不等于 平均执行时间，即 <code>2.386 * (1000 ** 3) / 4832275 = 493.7 </code> 大于测试结果中的<code>236.8 ns/op</code>。</li><li>如果用 <code>1 秒 / 4832275 = 206 ns</code> ，与<code>236.8 ns/op</code>并不是很接近</li><li>如果把尝试过程中的运行次数也加入进来<code>total = 1 + 100 + 10000 + 1000000 + 3541896 + 4832275</code>，即<code>2.386 * (1000 ** 3) / 9384272 = 254.25</code>与<code>236.8 ns/op</code>接近</li><li>反推运行时间：<code>4832275 * 236.8 ns / 1000 ** 3 = 1.14s</code> 大于1秒</li></ul><h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>如果 <code>236.8 ns</code>为运行<code>4832275</code>次的平均时间，那么总时间已经大于执行时间上限1秒，<code>236.8 ns</code>应该是由最后一次运行<code>BenchmarkHello()</code>的时间 / <code>4832275</code> 得来，这个时间不应该超过1秒，但按测试结果的数据计算已经超过1秒，所以最终执行次数的取值是第一次大于1秒时的取值？</p>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
+      
+      
+      <comments>https://www.gagahappy.com/go-test-benchmark-result-introducing/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>go 语言 测试日志打印</title>
+      <link>https://www.gagahappy.com/go-test-log-print/</link>
+      <guid>https://www.gagahappy.com/go-test-log-print/</guid>
       <pubDate>Mon, 05 Jul 2021 07:37:07 GMT</pubDate>
       
         
@@ -43,7 +104,7 @@
       <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
       
       
-      <comments>https://www.gagahappy.com/go-test-part1/#disqus_thread</comments>
+      <comments>https://www.gagahappy.com/go-test-log-print/#disqus_thread</comments>
       
     </item>
     
@@ -103,64 +164,6 @@
       
       
       <comments>https://www.gagahappy.com/nginx-set-gzip-http-version/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>go 语言 外部测试包</title>
-      <link>https://www.gagahappy.com/golang-external-test-packages/</link>
-      <guid>https://www.gagahappy.com/golang-external-test-packages/</guid>
-      <pubDate>Thu, 24 Jun 2021 08:29:21 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;外部包&quot;&gt;&lt;a href=&quot;#外部包&quot; class=&quot;headerlink&quot; title=&quot;外部包&quot;&gt;&lt;/a&gt;外部包&lt;/h1&gt;&lt;p&gt;外部包使用&lt;code&gt;package xxx_test&lt;/code&gt;方式来命名，比如&lt;code&gt;package</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="外部包"><a href="#外部包" class="headerlink" title="外部包"></a>外部包</h1><p>外部包使用<code>package xxx_test</code>方式来命名，比如<code>package bytes_test</code>就是<code>src/btyes/buffer_test.go</code>外部包的命名方式，<code>_test</code>后缀告诉go test工具它应该建立一个额外的包来运行测试。</p><p>通过外部测试包的方式可以解决导入包循环依赖的问题，因为外部测试包是一个独立的包，所以能够导入那些<code>依赖待测代码本身</code>的其他辅助包；包内的测试代码就无法做到这点。注意：外部包不能被其它包导入</p><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 文件 src/btyes/buffer_test.go</span><span class="token keyword">package</span> bytes_test<span class="token keyword">import</span> <span class="token punctuation">(</span><span class="token punctuation">.</span> <span class="token string">"bytes"</span><span class="token operator">...</span> 代码片段<span class="token punctuation">)</span><span class="token keyword">func</span> <span class="token function">TestNewBuffer</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>buf <span class="token operator">:=</span> <span class="token function">NewBuffer</span><span class="token punctuation">(</span>testBytes<span class="token punctuation">)</span><span class="token function">check</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> <span class="token string">"NewBuffer"</span><span class="token punctuation">,</span> buf<span class="token punctuation">,</span> testString<span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token operator">...</span> 代码片段<span class="token keyword">func</span> <span class="token function">empty</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">,</span> testname <span class="token builtin">string</span><span class="token punctuation">,</span> buf <span class="token operator">*</span>Buffer<span class="token punctuation">,</span> s <span class="token builtin">string</span><span class="token punctuation">,</span> fub <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h1 id="测试技巧"><a href="#测试技巧" class="headerlink" title="测试技巧"></a>测试技巧</h1><p>如果在测试中，需要对包内部的没有导出的函数进行测试，可以利用包内的 <code>_test.go</code>文件，如 <code>export_test.go</code>，在这个文件中将包的内部函数、方法导出，以供外部测试包使用。<code>indexBytePortable</code>方法在 src/bytes/bytes.go 中定义</p><p><code>src/bytes/bytes.go</code></p><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">indexBytePortable</span><span class="token punctuation">(</span>s <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> c <span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span><span class="token comment">/* ... */</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>把<code>bytes</code>包中的内部方法导出，供外部包<code>package bytes_test</code>使用</p><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// src/bytes/export_test.go</span><span class="token keyword">package</span> bytes<span class="token comment">// Export func for testing</span><span class="token keyword">var</span> IndexBytePortable <span class="token operator">=</span> indexBytePortable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>外部包使用导出的方法<code>IndexBytePortable</code></p><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// src/bytes/bytes_test.go</span><span class="token keyword">package</span> bytes_test<span class="token keyword">func</span> <span class="token function">TestIndexByte</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> tt <span class="token operator">:=</span> <span class="token keyword">range</span> indexTests <span class="token punctuation">&#123;</span><span class="token operator">...</span> 代码片段posp <span class="token operator">:=</span> <span class="token function">IndexBytePortable</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token keyword">if</span> posp <span class="token operator">!=</span> tt<span class="token punctuation">.</span>i <span class="token punctuation">&#123;</span>t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">`indexBytePortable(%q, '%c') = %v`</span><span class="token punctuation">,</span> tt<span class="token punctuation">.</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> posp<span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>测试文件<code>export_test.go</code>并没有定义测试代码，它只是通过<code>bytes.IndexBytePortable</code>简单导出了内部的<code>indexBytePortable</code>函数，这个技巧可以广泛用于位于外部测试包的白盒测试</p><h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul><li><p>Go语言规范是禁止包的循环依赖</p></li><li><p>go list命令 查看包对应目录中哪些Go源文件</p><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>GoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes <span class="token comment">// => [buffer.go bytes.go reader.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>查看包内部的测试代码</p><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>TestGoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes <span class="token comment">// => [export_test.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li><li><p>XTestGoFiles表示的是属于外部测试包的测试代码</p><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>XTestGoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes<span class="token comment">// => [buffer_test.go bytes_test.go compare_test.go example_test.go reader_test.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li></ul>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/development/">后端</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/golang/">golang</category>
-      
-      
-      <comments>https://www.gagahappy.com/golang-external-test-packages/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>safari 网站图标 favicon 不显示</title>
-      <link>https://www.gagahappy.com/safari-favicon-setting/</link>
-      <guid>https://www.gagahappy.com/safari-favicon-setting/</guid>
-      <pubDate>Tue, 22 Jun 2021 07:26:43 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;h1 id=&quot;favicon图标不显示&quot;&gt;&lt;a href=&quot;#favicon图标不显示&quot; class=&quot;headerlink&quot;</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<h1 id="favicon图标不显示"><a href="#favicon图标不显示" class="headerlink" title="favicon图标不显示"></a><code>favicon</code>图标不显示</h1><p>发现博客的<code>favicon</code>图标一直不能在<code>safari</code> 的标签栏上显示，只能显示在地址栏，经过一番研究后发现是Hexo 的 Next主题的设置不正确造成的</p><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">favicon</span><span class="token punctuation">:</span>  <span class="token key atrule">small</span><span class="token punctuation">:</span> /favicon<span class="token punctuation">-</span>16x16.png  <span class="token key atrule">medium</span><span class="token punctuation">:</span> /favicon<span class="token punctuation">-</span>32x32.png  <span class="token key atrule">apple_touch_icon</span><span class="token punctuation">:</span> /apple<span class="token punctuation">-</span>touch<span class="token punctuation">-</span>icon.png  <span class="token comment"># 不能把 safari_pinned_tab 注释掉，只能留空，表示不启用,</span>  <span class="token comment"># 注释掉会默认使用 next 主题中的设置.</span>  <span class="token comment"># 注意: &lt;link rel="mask-icon" href="logo.svg"> 会覆盖</span>  <span class="token comment"># &lt;link rel="icon" href="favicon.png"> 导致safari favicon图标被替换为logo.svg</span>  safari_pinned_tab<span class="token punctuation">:</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><code>small</code>与<code>medium</code>会生成两个与<code>favicon</code>相关的设置，用来在地址栏与标签栏显示网站图标</p><pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>icon<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image/png<span class="token punctuation">"</span></span> <span class="token attr-name">sizes</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>32x32<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/favicon-32x32.png<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>icon<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image/png<span class="token punctuation">"</span></span> <span class="token attr-name">sizes</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>16x16<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/favicon-16x16.png<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p><code>safari_pinned_tab</code>会生成<code>&lt;link rel=&quot;mask-icon&quot; href=&quot;logo.svg&quot;&gt;</code>，它会覆盖标签栏上的<code>favicon</code>图标，由于在设置这个属性的时候，错误的使用了非<code>svg</code>文件(用的是png)导致了图标不能正确显示。</p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>设置正确的<code>svg</code>文件，或者就不设置<code>&lt;link rel=&quot;mask-icon&quot;&gt;</code>属性，只使用<code>&lt;link rel=&quot;icon&quot; &gt;</code>设置<code>favicon</code>图标即可。如果不设置<code>&lt;link rel=&quot;mask-icon&quot;&gt;</code>属性，需要在配置文件中把<code>safari_pinned_tab</code>的值留空，而不是不设置或注释掉，这样做会使用next 主题中的默认设置，造成<code>favicon</code>图标显示为Next官网的图标</p><h1 id="关于safari缓存图标的问题"><a href="#关于safari缓存图标的问题" class="headerlink" title="关于safari缓存图标的问题"></a>关于<code>safari</code>缓存图标的问题</h1><p><code>safari</code>会对图标按域名进行缓存，从而造成更新图标后不能马上更新显示的问题，需要对缓存的图标进行清理。</p><ul><li>首先要清理它的缓存：<code>setting</code>-&gt;<code>privacy</code>-&gt;<code>Manage Website Date</code>，搜索相关域名，删除即可。</li><li>磁盘缓存文件：<code>~/Library/Safari</code>目录下，删除<code>Template Icons</code>文件夹，如果不起作用，删除<code>Favicon Cache</code>，<code>Touch Icons Cache</code>文件夹</li></ul>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/software/">软件</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/safari/">safari</category>
-      
-      
-      <comments>https://www.gagahappy.com/safari-favicon-setting/#disqus_thread</comments>
       
     </item>
     
