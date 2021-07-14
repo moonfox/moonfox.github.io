@@ -73,23 +73,6 @@ $ <span class="token function">git</span> push<span aria-hidden="true" class="li
       </tags>
   </entry>
   <entry>
-    <title>git 建立远程分支缩写</title>
-    <url>/git-remote-sort/</url>
-    <content><![CDATA[<p>git 建立远程分支缩写</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> remote <span class="token function">add</span> bob /home/bob/myrepo
-$ <span class="token function">git</span> log -p master<span class="token punctuation">..</span>bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>上面的命令把Bob从Alice的主分支(master)中签出后所做的修改全部显示出来。<br>当检查完修改后,Alice就可以把修改合并到她的主分支中。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> merge bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>git 多人协作</title>
     <url>/git-init-on-server/</url>
     <content><![CDATA[<p>git 协同开发</p>
@@ -101,6 +84,23 @@ $ <span class="token function">git</span> --bare init --shared<span aria-hidden=
 <p>也就是说m2ge.git 本来是一个工作树，但是 –bare 选项将本应当存放在m2ge.git/.git 中的仓库内容全部放置在 m2ge.git 目录下，就好像仓库完全的裸露在工作树中，所以称之为赤裸的仓库。</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token builtin class-name">cd</span> ~/work/m2ge
 $ <span class="token function">git</span> push m2@192.168.0.2:~/project/m2ge.git master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git 建立远程分支缩写</title>
+    <url>/git-remote-sort/</url>
+    <content><![CDATA[<p>git 建立远程分支缩写</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> remote <span class="token function">add</span> bob /home/bob/myrepo
+$ <span class="token function">git</span> log -p master<span class="token punctuation">..</span>bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>上面的命令把Bob从Alice的主分支(master)中签出后所做的修改全部显示出来。<br>当检查完修改后,Alice就可以把修改合并到她的主分支中。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> merge bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -125,10 +125,10 @@ $ <span class="token function">git</span> push m2@192.168.0.2:~/project/m2ge.git
       </tags>
   </entry>
   <entry>
-    <title>git tag 对象</title>
-    <url>/git-tag-object/</url>
-    <content><![CDATA[<p><a href="//img.gagahappy.cn/blog/2011/07/tag.jpg"><img src="//img.gagahappy.cn/blog/2011/07/tag.jpg" title="tag"></a></p>
-<p>一个标签对象包一个对象名(译者注:就是SHA1签名), 对象类型, 标签名, 标签创建人的名字(“tagger”), 还有一条可能包含有签名(signature)的消息.</p>
+    <title>git 设置用户名</title>
+    <url>/git-set-your-name/</url>
+    <content><![CDATA[<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> config --global user.name <span class="token string">"Scott Chacon"</span>
+$ <span class="token function">git</span> config --global user.email <span class="token string">"schacon@gmail.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -138,10 +138,10 @@ $ <span class="token function">git</span> push m2@192.168.0.2:~/project/m2ge.git
       </tags>
   </entry>
   <entry>
-    <title>git 设置用户名</title>
-    <url>/git-set-your-name/</url>
-    <content><![CDATA[<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> config --global user.name <span class="token string">"Scott Chacon"</span>
-$ <span class="token function">git</span> config --global user.email <span class="token string">"schacon@gmail.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    <title>git tag 对象</title>
+    <url>/git-tag-object/</url>
+    <content><![CDATA[<p><a href="//img.gagahappy.cn/blog/2011/07/tag.jpg"><img src="//img.gagahappy.cn/blog/2011/07/tag.jpg" title="tag"></a></p>
+<p>一个标签对象包一个对象名(译者注:就是SHA1签名), 对象类型, 标签名, 标签创建人的名字(“tagger”), 还有一条可能包含有签名(signature)的消息.</p>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -227,6 +227,21 @@ $ <span class="token function">git</span> config --global user.email <span class
       </tags>
   </entry>
   <entry>
+    <title>git 如何自动合并文件内容</title>
+    <url>/git-how-to-merge/</url>
+    <content><![CDATA[<p>git可以自动进行文件合并</p>
+<p>情况1 ：文件A在第一次提交成功后，分别被A用户和B用户编辑后提交，A用户pull B用户的提交，这时，git判断两个文件是否冲突，如果不冲突则进行合并</p>
+<p>情况2 ：文件A在第一次提交成功后，B用户对其进行了编辑提交，A用户没有对文件做出任何修改，pull B用户的提交，这时，git会自动用B用户的修改去覆盖A用户的文件，即使A文件同一行的内容不同</p>
+<p>思考：git是如何判断什么情况可以直接进行覆盖，什么情况需要进行合并。</p>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git 新建 版本库</title>
     <url>/git-new-repo/</url>
     <content><![CDATA[<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> test_demo
@@ -237,21 +252,6 @@ $ <span class="token function">git</span> config --global user.email <span class
 <span class="token function">git</span> commit -m <span class="token string">'first commit'</span>
 <span class="token function">git</span> remote <span class="token function">add</span> origin git@github.com:youname/test_demo.git
 <span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git 如何自动合并文件内容</title>
-    <url>/git-how-to-merge/</url>
-    <content><![CDATA[<p>git可以自动进行文件合并</p>
-<p>情况1 ：文件A在第一次提交成功后，分别被A用户和B用户编辑后提交，A用户pull B用户的提交，这时，git判断两个文件是否冲突，如果不冲突则进行合并</p>
-<p>情况2 ：文件A在第一次提交成功后，B用户对其进行了编辑提交，A用户没有对文件做出任何修改，pull B用户的提交，这时，git会自动用B用户的修改去覆盖A用户的文件，即使A文件同一行的内容不同</p>
-<p>思考：git是如何判断什么情况可以直接进行覆盖，什么情况需要进行合并。</p>
 ]]></content>
       <categories>
         <category>软件</category>
