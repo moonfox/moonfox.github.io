@@ -2006,90 +2006,6 @@ log<span class="token punctuation">.</span><span class="token function">Println<
       </tags>
   </entry>
   <entry>
-    <title>go 语言 基准测试 结果解读</title>
-    <url>/go-test-benchmark-result-introducing/</url>
-    <content><![CDATA[<h1 id="基准测试"><a href="#基准测试" class="headerlink" title="基准测试"></a>基准测试</h1><p>是测量一个程序在固定工作负载下的性能，使用 <code>-bench</code> 标记可以对代码进行基准测试</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test <span class="token operator">-</span>v <span class="token operator">-</span>bench<span class="token operator">=</span><span class="token punctuation">.</span> gott<span class="token operator">/</span>hello
-goos<span class="token punctuation">:</span> darwin
-goarch<span class="token punctuation">:</span> amd64
-pkg<span class="token punctuation">:</span> gott<span class="token operator">/</span>hello
-BenchmarkHello<span class="token operator">-</span><span class="token number">4</span>         <span class="token number">4964053</span>               <span class="token number">228.5</span> ns<span class="token operator">/</span>op
-PASS
-ok      gott<span class="token operator">/</span>hello      <span class="token number">2.386</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><p><code>.</code>表示执行代码包中所有的基准测试用例(前缀为<code> Benchmark</code>的方法)，在使用<code>-bench</code>标记后，默认不执行功能测，同时执行功能测试会影响基准测试的结果</p>
-</li>
-<li><p>指定运行某个基准测试</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test <span class="token operator">-</span>v <span class="token operator">-</span>bench<span class="token operator">=</span>BenchmarkHello gott<span class="token operator">/</span>hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ul>
-<h1 id="b-N值的确定"><a href="#b-N值的确定" class="headerlink" title="b.N值的确定"></a><code>b.N</code>值的确定</h1><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">BenchmarkHello</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
-		<span class="token function">hello</span><span class="token punctuation">(</span><span class="token string">"Max"</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>当测试开始时，<code>b.N</code>的值被设置为1，执行后如果没有超过默认执行时间上限(默认为1秒)，则加大<code>b.N</code>的值，按某种规则一直递增，直到执行时间等于或超过上限，那么就用这一次的<code>b.N</code>的值，做为测试的最终结果</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go">BenchmarkHello<span class="token operator">-</span><span class="token number">4</span>         <span class="token number">4964053</span>               <span class="token number">228.5</span> ns<span class="token operator">/</span>op
-PASS
-ok      gott<span class="token operator">/</span>hello      <span class="token number">2.386</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><code>4964053</code>:  表示<code>hello()</code>方法在达到这个执行次数时，等于或超过了1秒</li>
-<li><code>228.5 ns/op</code>： 表示每次执行<code>hello()</code>所消耗的平均执行时间</li>
-<li><code>2.386s</code>：表示测试总共用时</li>
-</ul>
-<h1 id="测试总时间的计算"><a href="#测试总时间的计算" class="headerlink" title="测试总时间的计算"></a>测试总时间的计算</h1><p>既然<code>4964053</code>表示1秒或大于1秒时执行的次数，那么测试总时间用时却是<code>2.386s</code>，超出了不少，这是为什么呢</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">BenchmarkHello</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
-		<span class="token function">hello</span><span class="token punctuation">(</span><span class="token string">"Max"</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-	b<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"NNNNN:"</span><span class="token punctuation">,</span> b<span class="token punctuation">.</span>N<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在测试中加入<code>b.Log(&quot;NNNNN:&quot;, b.N)</code>，再执行基准测试，并加入<code>-v</code>，打印测试中的日志</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -bench<span class="token operator">=</span>. gott/hello
-<span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
-    hello_test.go:15: hello Max
---- PASS: TestHello <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span>
-<span class="token operator">==</span><span class="token operator">=</span> RUN   TestPrint
-    hello_test.go:19: just Print
---- PASS: TestPrint <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span>
-goos: darwin
-goarch: amd64
-pkg: gott/hello
-BenchmarkHello
-    hello_test.go:26: NNNNN: <span class="token number">1</span>
-    hello_test.go:26: NNNNN: <span class="token number">100</span>
-    hello_test.go:26: NNNNN: <span class="token number">10000</span>
-    hello_test.go:26: NNNNN: <span class="token number">1000000</span>
-    hello_test.go:26: NNNNN: <span class="token number">3541896</span>
-    hello_test.go:26: NNNNN: <span class="token number">4832275</span>
-BenchmarkHello-4         <span class="token number">4832275</span>               <span class="token number">236.8</span> ns/op
-PASS
-ok      gott/hello      <span class="token number">2</span>.395s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>可以看到<code>b.Log(&quot;NNNNN:&quot;, b.N)</code>被执行了6次，这证明了之前提到的，测试会对<code>b.N</code>依次递增，直到执行时间等于或超过上限。在对<code>BenchmarkHello()</code>运行基准测试时，N值依次按<code>1,100,10000,1000000,3541896,4832275</code>递增，直到执行次数为<code>4832275</code>时，执行时间等于或超过了上限。</p>
-<p>同时也说明<code>BenchmarkHello()</code>一共被调用了6次，每次运行<code>BenchmarkHello()</code>都要消耗一定的时间，所以测试总耗时为这6次调用时间之和，<code>2.395s</code>，超过了1秒</p>
-<p>问题：是否测试总时间一定会超过1秒？答：因为要找到最大可执行次数，而在这之前肯定要进行多次尝试，所以测试总时间应该总是会超过1秒的。</p>
-<h1 id="平均执行时间的计算"><a href="#平均执行时间的计算" class="headerlink" title="平均执行时间的计算"></a>平均执行时间的计算</h1><p>应该用，运行<code>4832275</code>时所消耗的时间 <code>t</code>，<code>t / 4832275 = 236.8 ns/op</code>  </p>
-<ul>
-<li>如果用 测试总共用时 / 最多可以执行的次数  则不等于 平均执行时间，即 <code>2.386 * (1000 ** 3) / 4832275 = 493.7 </code> 大于测试结果中的<code>236.8 ns/op</code>。</li>
-<li>如果用 <code>1 秒 / 4832275 = 206 ns</code> ，与<code>236.8 ns/op</code>并不是很接近</li>
-<li>如果把尝试过程中的运行次数也加入进来<code>total = 1 + 100 + 10000 + 1000000 + 3541896 + 4832275</code>，即<code>2.386 * (1000 ** 3) / 9384272 = 254.25</code>与<code>236.8 ns/op</code>接近</li>
-<li>反推运行时间：<code>4832275 * 236.8 ns / 1000 ** 3 = 1.14s</code> ，测试结果使用了运行时间超过1秒上限时的数值</li>
-</ul>
-]]></content>
-      <categories>
-        <category>后端</category>
-      </categories>
-      <tags>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>go 语言 测试日志打印</title>
     <url>/go-test-log-print/</url>
     <content><![CDATA[<h1 id="缓存目录"><a href="#缓存目录" class="headerlink" title="缓存目录"></a>缓存目录</h1><p>Go 总是会缓存程序构建的结果，以便在将来使用。当有任何变动时，缓存就会失效，构建过程会真正的被执行。被缓存的构建结果保存在<code>go env GOCACHE</code>目录中，为了防止目录中的数据越来越多，go会自动删除不经常使用的缓存文件。可以手动清除缓存结果，执行<code>go clean -cache</code>即可。</p>
@@ -2243,6 +2159,90 @@ FAIL
 	c<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>go 语言 基准测试 结果解读</title>
+    <url>/go-test-benchmark-result-introducing/</url>
+    <content><![CDATA[<h1 id="基准测试"><a href="#基准测试" class="headerlink" title="基准测试"></a>基准测试</h1><p>是测量一个程序在固定工作负载下的性能，使用 <code>-bench</code> 标记可以对代码进行基准测试</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test <span class="token operator">-</span>v <span class="token operator">-</span>bench<span class="token operator">=</span><span class="token punctuation">.</span> gott<span class="token operator">/</span>hello
+goos<span class="token punctuation">:</span> darwin
+goarch<span class="token punctuation">:</span> amd64
+pkg<span class="token punctuation">:</span> gott<span class="token operator">/</span>hello
+BenchmarkHello<span class="token operator">-</span><span class="token number">4</span>         <span class="token number">4964053</span>               <span class="token number">228.5</span> ns<span class="token operator">/</span>op
+PASS
+ok      gott<span class="token operator">/</span>hello      <span class="token number">2.386</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p><code>.</code>表示执行代码包中所有的基准测试用例(前缀为<code> Benchmark</code>的方法)，在使用<code>-bench</code>标记后，默认不执行功能测，同时执行功能测试会影响基准测试的结果</p>
+</li>
+<li><p>指定运行某个基准测试</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test <span class="token operator">-</span>v <span class="token operator">-</span>bench<span class="token operator">=</span>BenchmarkHello gott<span class="token operator">/</span>hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h1 id="b-N值的确定"><a href="#b-N值的确定" class="headerlink" title="b.N值的确定"></a><code>b.N</code>值的确定</h1><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">BenchmarkHello</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">hello</span><span class="token punctuation">(</span><span class="token string">"Max"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>当测试开始时，<code>b.N</code>的值被设置为1，执行后如果没有超过默认执行时间上限(默认为1秒)，则加大<code>b.N</code>的值，按某种规则一直递增，直到执行时间等于或超过上限，那么就用这一次的<code>b.N</code>的值，做为测试的最终结果</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">BenchmarkHello<span class="token operator">-</span><span class="token number">4</span>         <span class="token number">4964053</span>               <span class="token number">228.5</span> ns<span class="token operator">/</span>op
+PASS
+ok      gott<span class="token operator">/</span>hello      <span class="token number">2.386</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><code>4964053</code>:  表示<code>hello()</code>方法在达到这个执行次数时，等于或超过了1秒</li>
+<li><code>228.5 ns/op</code>： 表示每次执行<code>hello()</code>所消耗的平均执行时间</li>
+<li><code>2.386s</code>：表示测试总共用时</li>
+</ul>
+<h1 id="测试总时间的计算"><a href="#测试总时间的计算" class="headerlink" title="测试总时间的计算"></a>测试总时间的计算</h1><p>既然<code>4964053</code>表示1秒或大于1秒时执行的次数，那么测试总时间用时却是<code>2.386s</code>，超出了不少，这是为什么呢</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">BenchmarkHello</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">hello</span><span class="token punctuation">(</span><span class="token string">"Max"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	b<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"NNNNN:"</span><span class="token punctuation">,</span> b<span class="token punctuation">.</span>N<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在测试中加入<code>b.Log(&quot;NNNNN:&quot;, b.N)</code>，再执行基准测试，并加入<code>-v</code>，打印测试中的日志</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -bench<span class="token operator">=</span>. gott/hello
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
+    hello_test.go:15: hello Max
+--- PASS: TestHello <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestPrint
+    hello_test.go:19: just Print
+--- PASS: TestPrint <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span>
+goos: darwin
+goarch: amd64
+pkg: gott/hello
+BenchmarkHello
+    hello_test.go:26: NNNNN: <span class="token number">1</span>
+    hello_test.go:26: NNNNN: <span class="token number">100</span>
+    hello_test.go:26: NNNNN: <span class="token number">10000</span>
+    hello_test.go:26: NNNNN: <span class="token number">1000000</span>
+    hello_test.go:26: NNNNN: <span class="token number">3541896</span>
+    hello_test.go:26: NNNNN: <span class="token number">4832275</span>
+BenchmarkHello-4         <span class="token number">4832275</span>               <span class="token number">236.8</span> ns/op
+PASS
+ok      gott/hello      <span class="token number">2</span>.395s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看到<code>b.Log(&quot;NNNNN:&quot;, b.N)</code>被执行了6次，这证明了之前提到的，测试会对<code>b.N</code>依次递增，直到执行时间等于或超过上限。在对<code>BenchmarkHello()</code>运行基准测试时，N值依次按<code>1,100,10000,1000000,3541896,4832275</code>递增，直到执行次数为<code>4832275</code>时，执行时间等于或超过了上限。</p>
+<p>同时也说明<code>BenchmarkHello()</code>一共被调用了6次，每次运行<code>BenchmarkHello()</code>都要消耗一定的时间，所以测试总耗时为这6次调用时间之和，<code>2.395s</code>，超过了1秒</p>
+<p>问题：是否测试总时间一定会超过1秒？答：因为要找到最大可执行次数，而在这之前肯定要进行多次尝试，所以测试总时间应该总是会超过1秒的。</p>
+<h1 id="平均执行时间的计算"><a href="#平均执行时间的计算" class="headerlink" title="平均执行时间的计算"></a>平均执行时间的计算</h1><p>应该用，运行<code>4832275</code>时所消耗的时间 <code>t</code>，<code>t / 4832275 = 236.8 ns/op</code>  </p>
+<ul>
+<li>如果用 测试总共用时 / 最多可以执行的次数  则不等于 平均执行时间，即 <code>2.386 * (1000 ** 3) / 4832275 = 493.7 </code> 大于测试结果中的<code>236.8 ns/op</code>。</li>
+<li>如果用 <code>1 秒 / 4832275 = 206 ns</code> ，与<code>236.8 ns/op</code>并不是很接近</li>
+<li>如果把尝试过程中的运行次数也加入进来<code>total = 1 + 100 + 10000 + 1000000 + 3541896 + 4832275</code>，即<code>2.386 * (1000 ** 3) / 9384272 = 254.25</code>与<code>236.8 ns/op</code>接近</li>
+<li>反推运行时间：<code>4832275 * 236.8 ns / 1000 ** 3 = 1.14s</code> ，测试结果使用了运行时间超过1秒上限时的数值</li>
+</ul>
 ]]></content>
       <categories>
         <category>后端</category>
