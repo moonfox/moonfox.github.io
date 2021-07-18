@@ -90,8 +90,8 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">10</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">57</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">58</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,95 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-create-slice-with-zero-length/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-create-slice-with-zero-length/" class="post-title-link" itemprop="url">go 语言 截取0长度的Slice</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-11 11:48:13" itemprop="dateCreated datePublished" datetime="2021-06-11T11:48:13+00:00">2021-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>截取0长度的<code>slice</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	s1 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">&#125;</span>
+	s2 <span class="token operator">:=</span> s1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">cap</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">)</span> <span class="token comment">// 5 0 []</span>
+
+	s2 <span class="token operator">=</span> s1<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">]</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">cap</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">)</span> <span class="token comment">// 0 0 []</span>
+
+	s2 <span class="token operator">=</span> s1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">cap</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">)</span> <span class="token comment">// 5 1 [2]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>s1[1:1]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是5(6-1)</p>
+<p><code>s1[6:6]</code>表示截取的位置从最后一个元素最后一个字节的后面开始，到最后一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是0(6-6)</p>
+<p><code>s1[1:2]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第二个元素最后一个字节的后面结束，在这个范围内的元素只有 <code>2</code>，所以生成的<code>slice</code>的长度是1，容量是5(1-6)</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1181,167 +1270,6 @@ gitalk<span class="token punctuation">.</span><span class="token function">rende
 <li><code>buffer.Truncate(10) </code>再从没有读取的字节中取出10个，丢掉其余未读取的字节，把已读取的8个字节和取出的10个字节保存到 <code>buffer</code>中，此时buffer中的内容为<code>Simple byte buffer</code></li>
 <li><code>buffer.Read(p) </code>再读取8个字节，注意：这里不是从 buffer 的头部读取，而是从未读取处开始读取，即从<code>y</code>开始读取</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-layout-of-struct/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-layout-of-struct/" class="post-title-link" itemprop="url">go 语言 结构体在内存中的布局</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-05-24 14:02:42" itemprop="dateCreated datePublished" datetime="2021-05-24T14:02:42+00:00">2021-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h1><ul>
-<li>字节对齐</li>
-<li>unsafe.Sizeof</li>
-<li>unsafe.Offsetof</li>
-<li>内存空洞</li>
-</ul>
-<h2 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h2><p>可以使计算机在加载和保存数据时，更加的有效率</p>
-<p>通常情况下布尔和数字类型需要对齐到它们本身的大小（最多8个字节），其它的类型对齐到机器字大小</p>
-<h2 id="unsafe-Sizeof"><a href="#unsafe-Sizeof" class="headerlink" title="unsafe.Sizeof"></a>unsafe.Sizeof</h2><p>返回操作数在内存中的字节大小，参数可以是任意类型的表，但不会对表达式进行求值(不求值也能知道大小，好神奇呀)</p>
-<p>unsafe.Sizeof 返回的大小只包含数据结构中固定的部分。如果结构体含有指针字段，不包括针指向的内容。Go语言中非聚合类型通常有一个固定的大小，而聚合类型没有固定的大小，比如 结构体类型和数组类型</p>
-<h2 id="unsafe-Offsetof"><a href="#unsafe-Offsetof" class="headerlink" title="unsafe.Offsetof"></a>unsafe.Offsetof</h2><p>函数的参数必须是一个字段 x.f，然后返回 f 字段相对于 x 起始地址的偏移量，包括可能的空洞</p>
-<h2 id="内存空洞"><a href="#内存空洞" class="headerlink" title="内存空洞"></a>内存空洞</h2><p>一个聚合类型（结构体或数组）的大小至少是所有字段或元素大小的总和，或者更大。因为可能存在内存空洞，内存空洞是编译器自动添加的没有被使用的内存空间，用于保证后面每个字段或元素的地址相对于结构或数组的开始地址能够合理地对齐。内存空洞可能会存在一些随机数据，可能会对用unsafe包直接操作内存的处理产生影响</p>
-<h1 id="结构体内存布局"><a href="#结构体内存布局" class="headerlink" title="结构体内存布局"></a>结构体内存布局</h1><p>设：机器字大小为8个字节</p>
-<h2 id="产生的空洞"><a href="#产生的空洞" class="headerlink" title="产生的空洞"></a>产生的空洞</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> x <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-  a <span class="token builtin">bool</span>
-  b <span class="token builtin">int16</span>
-  c <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span>
-<span class="token punctuation">&#125;</span>
-<span class="token comment">/* output
-Sizeof(x)   = 32  Alignof(x)   = 8
-Sizeof(x.a) = 1   Alignof(x.a) = 1 Offsetof(x.a) = 0
-Sizeof(x.b) = 2   Alignof(x.b) = 2 Offsetof(x.b) = 2
-Sizeof(x.c) = 24  Alignof(x.c) = 8 Offsetof(x.c) = 8
-*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><code>x</code> 占用内存大小为 32字节</li>
-<li><code>x.c</code>字段是一个切片，占用24个字节(3个机器字)，<code>c.data, c.len, c.cap</code> 分别用 8个字节(1 个机器字)</li>
-<li><code>x.a + x.b</code> 总共占用 3字节。用<code>x</code>的占用总字节数 <code>32 - (1 + 2 + 24) = 5</code>， 说明有5字节的内存空洞</li>
-<li>由于<code>x.c</code>占用了3个机器字，所以空洞不是它产生的</li>
-<li> <code>x.a + x.b = 3</code>字节，不满一个机器字(8字节)，所以a和b之间，b和c之间产生了总共5字节的空洞</li>
-</ul>
-<h2 id="字段偏移分析"><a href="#字段偏移分析" class="headerlink" title="字段偏移分析"></a>字段偏移分析</h2><ul>
-<li><code>Offsetof(x.a) = 0</code> 说明 字段 a 处在结构的起始处，a与结构体起始处没有偏移(与起始处没有空洞)</li>
-<li><code>Offsetof(x.b) = 2</code> 说明 字段 b 相对于结构体 起始处 偏移了 2 字节，而<code>Sizeof(x.a) = 1</code>说明 <code>x.a</code> 占用只占用了1字节，但 b 偏移了 2 字节，说明<code>b与a</code>之间有 1 字节的空洞，否则 b 只应该偏移 1 字节，即<code>x.a</code>的大小。</li>
-<li>那么 a与b之间，总共是4字节的大小: <code>x.a</code> 1字节 + 空洞 1 字节 + <code>x.b</code> 2字节</li>
-<li>如果 <code>x.c 与 x.b</code>之前没有空洞，则<code>x.c</code>只应该偏移4字节，但实际却偏移了8字节，则 说明 <code>x.c 与 x.b</code> 之间 存在 <code>8 - 4 = 4</code> 字节的空洞</li>
-<li>所以 x 结构体的内存 分布是: x.a(1)____空洞(1)____x.b(2)____空洞(4)____x.c(24)</li>
-<li>对齐方式：按一个机器字对齐的</li>
-</ul>
-<p><img src="//img.gagahappy.cn/blog/2021/05/layout-of-struct.png_b1" alt="layout of struck" title="layout of struck"></p>
-<h1 id="结构体字段顺序"><a href="#结构体字段顺序" class="headerlink" title="结构体字段顺序"></a>结构体字段顺序</h1><p>Go 语言中，结构内部字段的声明顺序和它们在内存中的顺序可能是不一样的。一个编译器可以随意地重新排列每个字段的内存位置，有效的包装可以使数据结构更加紧凑，从而节省内存空间</p>
-<h2 id="内存占用"><a href="#内存占用" class="headerlink" title="内存占用"></a>内存占用</h2><p>不同结构体相同字段占用内存大小也会不一样，虽然 s1，s2，s3 有着相同的字段，但s1占用了较多的内存空间</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> s1 <span class="token operator">=</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>a <span class="token builtin">bool</span><span class="token punctuation">;</span>b <span class="token builtin">float64</span><span class="token punctuation">;</span>c <span class="token builtin">int16</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// 3 words</span>
-<span class="token keyword">var</span> s2 <span class="token operator">=</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>a <span class="token builtin">float64</span><span class="token punctuation">;</span>b <span class="token builtin">int16</span><span class="token punctuation">;</span>c <span class="token builtin">bool</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// 2 words</span>
-<span class="token keyword">var</span> s3 <span class="token operator">=</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>a <span class="token builtin">bool</span><span class="token punctuation">;</span>b <span class="token builtin">int16</span><span class="token punctuation">;</span>c <span class="token builtin">float64</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// 2 words</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="s1占用空间"><a href="#s1占用空间" class="headerlink" title="s1占用空间"></a>s1占用空间</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token operator">=</span>   <span class="token number">24</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token operator">=</span>    <span class="token number">8</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">0</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">16</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>综上: <code>s1.a 与 s1.b</code> 之间有 7 字节 的空洞，<code>s1.c与结构体结束处</code>(尾部)有 6 字节的空洞</p>
-<p>所以: s1 总字节数是 1 + 8 + 2 + (7 + 6) 空洞 = 24 <em>byte</em>，即3个机器字，可以看出 s1 的字段与字段之间，排列的并不是很紧凑，有较大空洞，造成了内存的浪费</p>
-<p>对齐方式：按一个机器字对齐的</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">|</span>-a-<span class="token operator">|</span>----------holes------------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
-<span class="token operator">|</span>---------------b---------------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
-<span class="token operator">|</span>---c---<span class="token operator">|</span>---------holes---------<span class="token operator">|</span> <span class="token number">8</span>字节，也可看出是按一个机器字对齐的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="s2-占用空间"><a href="#s2-占用空间" class="headerlink" title="s2 占用空间"></a>s2 占用空间</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token operator">=</span>   <span class="token number">16</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token operator">=</span>    <span class="token number">8</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">0</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>综上: <code>s2.a</code> 的大小是一个机器字，本身就是对齐的，且是所有字段中长度最大的，与 <code>s2.b</code>之间没有空洞，<code>s2.c紧贴s2.b</code>，它们之间也没有空洞，<code>s2.c与结构体结束处</code>(尾部)有 5(8-2+1) 字节的空洞</p>
-<p>所以: <code>s2</code> 总字节数是 <code>8 + 2 + 1 + (5) 空洞 = 16 byte</code>，即2个机器字，可以看出 s2 的字段与字段之间，排列是很紧凑，可以大大节省内存空间</p>
-<p>对齐方式：按一个机器字对齐的</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">|</span>---------------a---------------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
-<span class="token operator">|</span>---b---<span class="token operator">|</span>-c-<span class="token operator">|</span>-------holes-------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="s3占用空间"><a href="#s3占用空间" class="headerlink" title="s3占用空间"></a>s3占用空间</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">)</span> <span class="token operator">=</span>   <span class="token number">16</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">)</span> <span class="token operator">=</span>    <span class="token number">8</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">0</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>对齐方式：按一个机器字对齐的</p>
-<p>s3 布局与 s2 相似，可以看成是上下两层对调了，但排列是很紧凑的，也是2个机器字</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">|</span>-a-<span class="token operator">|</span>---b---<span class="token operator">|</span>-------holes-------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
-<span class="token operator">|</span>---------------c---------------<span class="token operator">|</span> <span class="token number">8</span>字节，也可看出是按一个机器字对齐的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-
-
-<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>未来的Go语言编译器应该会默认优化结构体的顺序，当然应该也能够指定具体的内存布局，相同讨论请参考 <a target="_blank" rel="noopener" href="https://github.com/golang/go/issues/10014">Issue10014</a></p>
 
       
     </div>
