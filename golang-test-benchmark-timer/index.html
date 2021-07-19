@@ -19,28 +19,28 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="$ git diff HEAD 上面这条命令会显示你工作目录与上次提交时之间的所有差别，这条命令所显示的 内容都会在执行”git commit -a”命令时被提交。 这句等同于svn中的 svn diff。即比较工作副本与服务器之间的差异。">
+<meta name="description" content="计时器用来记录性能测试函数在每次运行时消耗的时间，同时它也记录了此次运行对内存分配的字节数和分配的次数。与之相关的有三个方法StartTimer、StopTimer和ResetTimer 运行go test 时就用到了计时器，命令会启用这个函数的计时器，当函数执行完成，停止计时器，记录下此次的运行时间，然后与默认执行时间上限(默认为1秒)做比较，如果没有超过，则增大b.N的值，再次执行该函数，如此">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git diff HEAD">
-<meta property="og:url" content="https://www.gagahappy.com/git-diff-head/">
+<meta property="og:title" content="go 语言 性能测试函数中的计时器">
+<meta property="og:url" content="https://www.gagahappy.com/golang-test-benchmark-timer/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="$ git diff HEAD 上面这条命令会显示你工作目录与上次提交时之间的所有差别，这条命令所显示的 内容都会在执行”git commit -a”命令时被提交。 这句等同于svn中的 svn diff。即比较工作副本与服务器之间的差异。">
+<meta property="og:description" content="计时器用来记录性能测试函数在每次运行时消耗的时间，同时它也记录了此次运行对内存分配的字节数和分配的次数。与之相关的有三个方法StartTimer、StopTimer和ResetTimer 运行go test 时就用到了计时器，命令会启用这个函数的计时器，当函数执行完成，停止计时器，记录下此次的运行时间，然后与默认执行时间上限(默认为1秒)做比较，如果没有超过，则增大b.N的值，再次执行该函数，如此">
 <meta property="og:locale">
-<meta property="article:published_time" content="2011-07-24T00:51:30.000Z">
-<meta property="article:modified_time" content="2021-07-19T16:27:15.815Z">
+<meta property="article:published_time" content="2021-07-19T23:41:47.000Z">
+<meta property="article:modified_time" content="2021-07-19T16:27:15.819Z">
 <meta property="article:author" content="戛戛Happy">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://www.gagahappy.com/git-diff-head/">
+<link rel="canonical" href="https://www.gagahappy.com/golang-test-benchmark-timer/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":"","permalink":"https://www.gagahappy.com/git-diff-head/","path":"git-diff-head/","title":"git diff HEAD"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://www.gagahappy.com/golang-test-benchmark-timer/","path":"golang-test-benchmark-timer/","title":"go 语言 性能测试函数中的计时器"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>git diff HEAD | 睡月花儿</title>
+<title>go 语言 性能测试函数中的计时器 | 睡月花儿</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-17621945-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-17621945-1","only_pageview":false}</script>
@@ -139,7 +139,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -152,6 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E6%97%B6%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">计时器</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -213,7 +214,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-diff-head/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-test-benchmark-timer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/apple-touch-icon.png">
@@ -226,7 +227,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          git diff HEAD
+          go 语言 性能测试函数中的计时器
         </h1>
 
         <div class="post-meta-container">
@@ -237,7 +238,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2011-07-24 00:51:30" itemprop="dateCreated datePublished" datetime="2011-07-24T00:51:30+00:00">2011-07-24</time>
+      <time title="Created: 2021-07-19 23:41:47" itemprop="dateCreated datePublished" datetime="2021-07-19T23:41:47+00:00">2021-07-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -245,7 +246,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
         </span>
     </span>
 
@@ -259,9 +260,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> <span class="token function">diff</span> HEAD<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>上面这条命令会显示你工作目录与上次提交时之间的所有差别，这条命令所显示的 内容都会在执行”git commit -a”命令时被提交。</p>
-<p>这句等同于svn中的 svn diff。即比较工作副本与服务器之间的差异。</p>
+        <h1 id="计时器"><a href="#计时器" class="headerlink" title="计时器"></a>计时器</h1><p>用来记录性能测试函数在每次运行时消耗的时间，同时它也记录了此次运行对内存分配的字节数和分配的次数。与之相关的有三个方法<code>StartTimer</code>、<code>StopTimer</code>和<code>ResetTimer</code></p>
+<p>运行go test 时就用到了计时器，命令会启用这个函数的计时器，当函数执行完成，停止计时器，记录下此次的运行时间，然后与默认执行时间上限(默认为1秒)做比较，如果没有超过，则增大<code>b.N</code>的值，再次执行该函数，如此反复，直到函数的运行时间大于或等于执行时间上限，从而得到<code>b.N</code>的值，即函数的最大执行次数及对应的时间，从而得出最终的测试结果</p>
+<p>通过对 StartTimer、StopTimer的调用，我们可以在测试中去除那些本不应该计入测试时间的代码的执行时间，比如一些测试前的准备代码</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">BenchmarkGetPrimes</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	b<span class="token punctuation">.</span><span class="token function">StopTimer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token comment">// 模拟某个耗时但与被测程序关系不大的操作</span>
+	time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Millisecond <span class="token operator">*</span> <span class="token number">500</span><span class="token punctuation">)</span>
+	max <span class="token operator">:=</span> <span class="token number">10000</span>
+	b<span class="token punctuation">.</span><span class="token function">StartTimer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">GetPrimes</span><span class="token punctuation">(</span>max<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>time.Sleep</code>用来模拟得到<code>max</code>的值所要进行的耗时操作，而我们要测试的是<code>GetPrimes()</code>的性能，不应计入计算<code>max</code>值所用的时间，所以要把开始时间设置在得到<code>max</code>之后。</p>
+<p>通过 <code>b.StopTimer()</code> 与 <code>b.StartTimer()</code>的配合使用，就可以去除任何一段代码的执行时间，<code>b.ResetTimer()</code>是去除它之前代码的执行时间。通过对计时器的调用，就可以对测试函数的执行时间进行精准的控制。</p>
 
     </div>
 
@@ -279,7 +294,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://www.gagahappy.com/git-diff-head/" title="git diff HEAD">https://www.gagahappy.com/git-diff-head/</a>
+      <a href="https://www.gagahappy.com/golang-test-benchmark-timer/" title="go 语言 性能测试函数中的计时器">https://www.gagahappy.com/golang-test-benchmark-timer/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -288,20 +303,17 @@
 </div>
 
           <div class="post-tags">
-              <a href="/categories/software/" rel="category"><i class="fa fa-folder"></i> 软件</a>
+              <a href="/categories/development/" rel="category"><i class="fa fa-folder"></i> 后端</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/git-remote-sort/" rel="prev" title="git 建立远程分支缩写">
-                  <i class="fa fa-chevron-left"></i> git 建立远程分支缩写
-                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/git-tag-object/" rel="next" title="git tag 对象">
-                  git tag 对象 <i class="fa fa-chevron-right"></i>
+                <a href="/github-actions-workflows-hexo/" rel="next" title="GitHub Actions Workflows 部署 Hexo">
+                  GitHub Actions Workflows 部署 Hexo <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -314,6 +326,7 @@
 
 
 
+    <div class="comments gitalk-container"></div>
 </div>
   </main>
 
@@ -358,7 +371,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"moonfox","repo":"gitalk","client_id":"2a9c7ba27dd4a9376f8c","client_secret":"cb4fa8779f853f735779a518c57e894a8ee30b09","admin_user":"moonfox","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"git-diff-head/"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"moonfox","repo":"gitalk","client_id":"2a9c7ba27dd4a9376f8c","client_secret":"cb4fa8779f853f735779a518c57e894a8ee30b09","admin_user":"moonfox","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"golang-test-benchmark-timer/"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
