@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">58</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">59</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,90 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-reset-how-to-show-index-info/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/git-reset-how-to-show-index-info/" class="post-title-link" itemprop="url">git reset 暂存区如何信息提示</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2011-12-06 23:17:32" itemprop="dateCreated datePublished" datetime="2011-12-06T23:17:32+00:00">2011-12-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>当对一个已经添加到暂存区的文件进行撤销<br><code>git add file</code><br>然后进行撤销<br><code>git reset HEAD -- file</code><br>这时，暂存区中没有任何被添加的文件<br>如果把某个历史提交（非HEAD指向的提示）中的 file添加到暂存区<br><code>git reset commit -- file</code><br>暂存区中则会显示file文件已经被加入，并且合本地文件不同</p>
+<p>思考</p>
+<blockquote>
+<p>如果把HEAD对应的文件放入暂存区，是否因为文件是HEAD中的，所以暂存区认为文件已经提交过了，所以没有已添加，待提交的提示。</p>
+</blockquote>
+<blockquote>
+<p>而其它非HEAD中的文件则认为是还没有提交的，所以显示为已添加，待提交。</p>
+</blockquote>
+<p>试验：</p>
+<blockquote>
+<p>如果历史提交中的file文件内容与工作区中的file文件内容一样,执行<br><code>git reset commit -- file</code><br>则暂存区应该显示已添加，待提交的提示，但不会显示与本地有差异。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -858,84 +942,6 @@
     <div class="post-body" itemprop="articleBody">
           <p>如果你只是要恢复一个文件(修复未提交文件中的错误),如”hello.rb”, 你就要使用 git checkout</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> checkout -- hello.rb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-remote-sort/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/git-remote-sort/" class="post-title-link" itemprop="url">git 建立远程分支缩写</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2011-07-25 15:49:35" itemprop="dateCreated datePublished" datetime="2011-07-25T15:49:35+00:00">2011-07-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>git 建立远程分支缩写</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> remote <span class="token function">add</span> bob /home/bob/myrepo
-$ <span class="token function">git</span> log -p master<span class="token punctuation">..</span>bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>上面的命令把Bob从Alice的主分支(master)中签出后所做的修改全部显示出来。<br>当检查完修改后,Alice就可以把修改合并到她的主分支中。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> merge bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
       
     </div>

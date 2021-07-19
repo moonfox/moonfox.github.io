@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">58</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">59</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,84 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/linux-fd-in-linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-fd-in-linux/" class="post-title-link" itemprop="url">linux 中的文件描述符</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-12 19:08:09" itemprop="dateCreated datePublished" datetime="2021-06-12T19:08:09+00:00">2021-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h1><p>即<code>file descriptor</code>，简称<code>FD</code> ，用于指代被打开的文件，用一个非负的整数表示</p>
+<h1 id="对文件描述符的误区"><a href="#对文件描述符的误区" class="headerlink" title="对文件描述符的误区"></a>对文件描述符的误区</h1><p>每个程序启动的时候，都会打开3个文件，分别是，0标准输入，1标准输出，2标准错误，此后再打开文件的文件描述符就是3，依次类推。之前的误区是，当在进程中打开一个文件，它的文件描述符应该已经很大了，不应该是<code>3</code>，因为系统本身已经运行了很多程序。正确的应该是：进程只能看到自己的文件描述符，每个进程的文件描述符的编号都是从0开始，进程启动，默认都会打开<code>标准输入，标准输出，标准错误</code>这三个文件，之后再打开的文件的描述符从编号3开始</p>
+<h1 id="文件件描述符列表"><a href="#文件件描述符列表" class="headerlink" title="文件件描述符列表"></a>文件件描述符列表</h1><p>每个进程都有着自己的文件描述符列表。进程A启动后，拥有<code>stdin,stdout,stderr</code>这三个文件描述符 ，再打开一个文件，这个文件的文件描述符就是3。进程B启动后，拥有<code>stdin,stdout,stderr</code>这三个文件描述符，再打一个文件，它的文件描述符也是3，和进程A的一样。所以，不同进程，可以拥有相同的文件描述符。</p>
+<p>当一个文件在同一个进程中，被打开多次，那么这个文件具有不同的文件描述符，在同一个进程中，每个文件描述符只能对应一个文件。同一个进程，不同文件描述符可以指向同一个文件。</p>
+<p>不同进程，如果都打开了同一个文件(文件描述符都指向同一个文件)，那么它们都具有这个文件的句柄，其中一个进程对文件的修改，对其它进程是可见的。比如进程A对文件写入了10个字节，进程B在对文件进行写入时，是从第11个字节处开始写入的，而不是从文件头开始写入，这些操作包括<code>read(),write(),seek()</code>等</p>
+<h1 id="文件描述符限制"><a href="#文件描述符限制" class="headerlink" title="文件描述符限制"></a>文件描述符限制</h1><p>内核为了不让某个进程消耗掉所有的文件资源，会对单个进程最大打开文件数做默认值处理（称之为用户级限制），默认值一般是1024。注意：同一个文件，可以有多个文件句柄，这可能是不同进程打开了同一个文件，或者是同一个进程内，对一个文件打开了多次</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1163,113 +1241,6 @@ gitalk<span class="token punctuation">.</span><span class="token function">rende
 <p>2. Related Issues not found：未找到相关的issue进行评论，出现这种情况是因为文章评论还未初始化，只需要点击下面的按钮，登录 GitHub 账户即可</p>
 <p>3. 评论区一直加载不上：配置中的<code>proxy</code>地址不正确或已经失效。官网默认地址是<code>https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token</code>。如果你使用的是Next主题，请确保也是这个地址</p>
 <p>4.  评论时是黑色的：设置<code>distractionFreeMode</code>为false</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-bytes-buffer-truncate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-bytes-buffer-truncate/" class="post-title-link" itemprop="url">go 语言 buffer.truncate 分析</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-05-30 14:50:41" itemprop="dateCreated datePublished" datetime="2021-05-30T14:50:41+00:00">2021-05-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>对于Golang的初学者，<code>Truncate</code>方法的行为使人迷惑，它不是从 <code>buffer</code>的头部截取 <code>n 个</code>字节，而是丢弃<code>除了前n个</code>未读取的字节之外的所有未读取的字节，也是就只保留已读取的字节和还没有读取的<code>前n个</code>字节。这种逻辑确实让人不太适应</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Truncate discards all but the first n unread bytes from the buffer</span>
-<span class="token comment">// but continues to use the same allocated storage.</span>
-<span class="token comment">// It panics if n is negative or greater than the length of the buffer.</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>b <span class="token operator">*</span>Buffer<span class="token punctuation">)</span> <span class="token function">Truncate</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> n <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
-		b<span class="token punctuation">.</span><span class="token function">Reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token keyword">return</span>
-	<span class="token punctuation">&#125;</span>
-	b<span class="token punctuation">.</span>lastRead <span class="token operator">=</span> opInvalid
-	<span class="token keyword">if</span> n <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> n <span class="token operator">></span> b<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"bytes.Buffer: truncation out of range"</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-	b<span class="token punctuation">.</span>buf <span class="token operator">=</span> b<span class="token punctuation">.</span>buf<span class="token punctuation">[</span><span class="token punctuation">:</span>b<span class="token punctuation">.</span>off<span class="token operator">+</span>n<span class="token punctuation">]</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>从源码的注释中还可以看到，截取后使用原 <code>buffer</code>保存保留下来的节字，不再额外占用内存空间。同时 n 的大小不能超过未读取字节的长度(第10行)</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">truncate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">var</span> buffer bytes<span class="token punctuation">.</span>Buffer
-  str <span class="token operator">:=</span> <span class="token string">"Simple byte buffer for marshaling data."</span>
-  buffer<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>
-  p <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
-  buffer<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span> <span class="token comment">// Simple b</span>
-  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-  buffer<span class="token punctuation">.</span><span class="token function">Truncate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>    <span class="token comment">// 截断到前10个未读节字 Simple byte buffer</span>
-  buffer<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>         <span class="token comment">// 读取8个字节</span>
-  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// yte buff</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><code>p := make([]byte, 8)</code>先读取了8个字节</li>
-<li><code>buffer.Truncate(10) </code>再从没有读取的字节中取出10个，丢掉其余未读取的字节，把已读取的8个字节和取出的10个字节保存到 <code>buffer</code>中，此时buffer中的内容为<code>Simple byte buffer</code></li>
-<li><code>buffer.Read(p) </code>再读取8个字节，注意：这里不是从 buffer 的头部读取，而是从未读取处开始读取，即从<code>y</code>开始读取</li>
-</ul>
 
       
     </div>
