@@ -19,15 +19,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="外部包外部包使用package xxx_test方式来命名，比如package bytes_test就是src&#x2F;btyes&#x2F;buffer_test.go外部包的命名方式，_test后缀告诉go test工具它应该建立一个额外的包来运行测试。 通过外部测试包的方式可以解决导入包循环依赖的问题，因为外部测试包是一个独立的包，所以能够导入那些依赖待测代码本身的其他辅助包；包内的测试代码就无法做到这点。注">
+<meta name="description" content="外部测试包在测试代码的时候，会遇到包循环依赖导入的问题，Go语言规范是禁止包的循环依赖，为了解决这个问题，可以引入外部包。 外部包使用package xxx_test方式来命名，比如package bytes_test就是src&#x2F;btyes&#x2F;buffer外部包的命名方式，_test后缀告诉go test工具它应该建立一个额外的包来运行测试。 package xxx_test中的xxx_test并不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="go 语言 外部测试包">
 <meta property="og:url" content="https://www.gagahappy.com/golang-external-test-packages/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="外部包外部包使用package xxx_test方式来命名，比如package bytes_test就是src&#x2F;btyes&#x2F;buffer_test.go外部包的命名方式，_test后缀告诉go test工具它应该建立一个额外的包来运行测试。 通过外部测试包的方式可以解决导入包循环依赖的问题，因为外部测试包是一个独立的包，所以能够导入那些依赖待测代码本身的其他辅助包；包内的测试代码就无法做到这点。注">
+<meta property="og:description" content="外部测试包在测试代码的时候，会遇到包循环依赖导入的问题，Go语言规范是禁止包的循环依赖，为了解决这个问题，可以引入外部包。 外部包使用package xxx_test方式来命名，比如package bytes_test就是src&#x2F;btyes&#x2F;buffer外部包的命名方式，_test后缀告诉go test工具它应该建立一个额外的包来运行测试。 package xxx_test中的xxx_test并不">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-06-24T16:29:21.000Z">
-<meta property="article:modified_time" content="2021-07-23T06:13:38.086Z">
+<meta property="article:modified_time" content="2021-07-23T15:31:41.609Z">
 <meta property="article:author" content="戛戛Happy">
 <meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary">
@@ -152,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">外部包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%8A%80%E5%B7%A7"><span class="nav-number">2.</span> <span class="nav-text">测试技巧</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E6%B5%8B%E8%AF%95%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">外部测试包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E5%86%85%E9%83%A8%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">访问内部代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E5%8C%85%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96"><span class="nav-number">3.</span> <span class="nav-text">示例：包循环依赖</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -260,10 +260,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="外部包"><a href="#外部包" class="headerlink" title="外部包"></a>外部包</h1><p>外部包使用<code>package xxx_test</code>方式来命名，比如<code>package bytes_test</code>就是<code>src/btyes/buffer_test.go</code>外部包的命名方式，<code>_test</code>后缀告诉go test工具它应该建立一个额外的包来运行测试。</p>
+        <h1 id="外部测试包"><a href="#外部测试包" class="headerlink" title="外部测试包"></a>外部测试包</h1><p>在测试代码的时候，会遇到包循环依赖导入的问题，Go语言规范是禁止包的循环依赖，为了解决这个问题，可以引入外部包。</p>
+<p>外部包使用<code>package xxx_test</code>方式来命名，比如<code>package bytes_test</code>就是<code>src/btyes/buffer</code>外部包的命名方式，<code>_test</code>后缀告诉go test工具它应该建立一个额外的包来运行测试。</p>
+<p><code>package xxx_test</code>中的<code>xxx_test</code>并不需要真的创建这样一个目录，而是在<code>xxx</code>包下的测试文件中引入这个包名就可以了。<code>btyes</code>包的源码目录结构如下</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/src/bytes
+├── boundary_test.go
+├── buffer.go
+├── buffer_test.go
+├── bytes.go
+├── bytes_test.go
+├── compare_test.go
+├── example_test.go
+├── export_test.go
+├── reader.go
+└── reader_test.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 <p>通过外部测试包的方式可以解决导入包循环依赖的问题，因为外部测试包是一个独立的包，所以能够导入那些<code>依赖待测代码本身</code>的其他辅助包；包内的测试代码就无法做到这点。注意：外部包不能被其它包导入</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 文件 src/btyes/buffer_test.go</span>
-<span class="token keyword">package</span> bytes_test
+<span class="token keyword">package</span> bytes_test <span class="token comment">// 'btyes目录下并不存在 bytes_test 目录'</span>
 <span class="token keyword">import</span> <span class="token punctuation">(</span>
 	<span class="token punctuation">.</span> <span class="token string">"bytes"</span>
 	<span class="token operator">...</span> 代码片段
@@ -279,15 +295,30 @@
 
 
 
-<h1 id="测试技巧"><a href="#测试技巧" class="headerlink" title="测试技巧"></a>测试技巧</h1><p>如果在测试中，需要对包内部的没有导出的函数进行测试，可以利用包内的 <code>_test.go</code>文件，如 <code>export_test.go</code>，在这个文件中将包的内部函数、方法导出，以供外部测试包使用。<code>indexBytePortable</code>方法在 src/bytes/bytes.go 中定义</p>
-<p><code>src/bytes/bytes.go</code></p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">indexBytePortable</span><span class="token punctuation">(</span>s <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> c <span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span><span class="token comment">/* ... */</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p> <code>go list 命令</code></p>
+<ul>
+<li><p>通过<code>GoFiles</code>查看<code>bytes</code>包的Go源文件</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>GoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes <span class="token comment">// => [buffer.go bytes.go reader.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>通过<code>TestGoFiles</code>查看<code>bytes</code>包内部的测试代码</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>TestGoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes <span class="token comment">// => [export_test.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>通过<code>XTestGoFiles</code>查看<code>bytes</code>包的外部测试代码，也就是bytes_test包</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>XTestGoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes
+<span class="token comment">// => [buffer_test.go bytes_test.go compare_test.go example_test.go reader_test.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<h1 id="访问内部代码"><a href="#访问内部代码" class="headerlink" title="访问内部代码"></a>访问内部代码</h1><p>如果在测试中，需要对包内部的没有导出的函数进行测试，可以利用包内的 <code>_test.go</code>文件，如 <code>export_test.go</code>，在这个文件中将包的内部函数、方法导出，以供外部测试包使用。</p>
+<p><code>indexBytePortable</code>方法在 src/bytes/bytes.go 中定义</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// src/bytes/bytes.go</span>
+<span class="token keyword">func</span> <span class="token function">indexBytePortable</span><span class="token punctuation">(</span>s <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> c <span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span><span class="token comment">/* ... */</span><span class="token punctuation">&#125;</span> <span class="token comment">// 这是一个内部方法</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>把<code>bytes</code>包中的内部方法导出，供外部包<code>package bytes_test</code>使用</p>
+
+
+<p>把<code>bytes</code>包中的内部方法导出，供外部包<code>package bytes_test</code>使用。因为只有在测试时，才会把内部代码导出，所以导出内部代码是安全的</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// src/bytes/export_test.go</span>
 <span class="token keyword">package</span> bytes
 <span class="token comment">// Export func for testing</span>
-<span class="token keyword">var</span> IndexBytePortable <span class="token operator">=</span> indexBytePortable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">var</span> IndexBytePortable <span class="token operator">=</span> indexBytePortable <span class="token comment">// 赋值给包级可导出变量 IndexBytePortable</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
 
 <p>外部包使用导出的方法<code>IndexBytePortable</code></p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// src/bytes/bytes_test.go</span>
@@ -296,7 +327,7 @@
 <span class="token keyword">func</span> <span class="token function">TestIndexByte</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> tt <span class="token operator">:=</span> <span class="token keyword">range</span> indexTests <span class="token punctuation">&#123;</span>
 		<span class="token operator">...</span> 代码片段
-		posp <span class="token operator">:=</span> <span class="token function">IndexBytePortable</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+		posp <span class="token operator">:=</span> <span class="token function">IndexBytePortable</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token comment">// 导出的内部方法在这里被使用</span>
 		<span class="token keyword">if</span> posp <span class="token operator">!=</span> tt<span class="token punctuation">.</span>i <span class="token punctuation">&#123;</span>
 			t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">`indexBytePortable(%q, '%c') = %v`</span><span class="token punctuation">,</span> tt<span class="token punctuation">.</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> posp<span class="token punctuation">)</span>
 		<span class="token punctuation">&#125;</span>
@@ -304,17 +335,111 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>测试文件<code>export_test.go</code>并没有定义测试代码，它只是通过<code>bytes.IndexBytePortable</code>简单导出了内部的<code>indexBytePortable</code>函数，这个技巧可以广泛用于位于外部测试包的白盒测试</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
-<li><p>Go语言规范是禁止包的循环依赖</p>
-</li>
-<li><p>go list命令 查看包对应目录中哪些Go源文件</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>GoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes <span class="token comment">// => [buffer.go bytes.go reader.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p>查看包内部的测试代码</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>TestGoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes <span class="token comment">// => [export_test.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p>XTestGoFiles表示的是属于外部测试包的测试代码</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>XTestGoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes
-<span class="token comment">// => [buffer_test.go bytes_test.go compare_test.go example_test.go reader_test.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-</ul>
+<h1 id="示例：包循环依赖"><a href="#示例：包循环依赖" class="headerlink" title="示例：包循环依赖"></a>示例：包循环依赖</h1><p>目录结构</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gott
+├── go.mod
+├── hi
+│   └── hi.go
+├── pprint
+│   ├── pprint.go
+│   └── pprint_test.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>hi.go 文件，引用了 pprint 包</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> hi
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"gott/pprint"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	pprint <span class="token operator">:=</span> pprint<span class="token punctuation">.</span><span class="token function">PPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>pprint<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>pprint.go 文件</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> pprint
+
+<span class="token keyword">func</span> <span class="token function">PPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token string">"I'm PPrint()"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>pprint_test.go 测试文件，在 pprint 包中引入了 hi 包，而 hi 包中已经引入了 pprint 包，这就导致了 包循环依赖</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> pprint
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"gott/hi"</span>
+	<span class="token string">"testing"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">TestPPrint</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">PPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	hi<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"expect call PPrint"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>执行测试，提示 import cycle not allowed in test</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v gott/pprint
+<span class="token comment"># gott/pprint</span>
+package gott/pprint <span class="token punctuation">(</span>test<span class="token punctuation">)</span>
+        imports gott/hi
+        imports gott/pprint: <span class="token function">import</span> cycle not allowed <span class="token keyword">in</span> <span class="token builtin class-name">test</span>
+FAIL    gott/pprint <span class="token punctuation">[</span>setup failed<span class="token punctuation">]</span>
+FAIL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>修改 pprint_test.go 测试文件，使用外部测试包 <code>pprint_test</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> pprint_test
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"gott/hi"</span>
+	<span class="token comment">// 导入 要进行测试的 pprint 包本身</span>
+	<span class="token string">"gott/pprint"</span>
+	<span class="token string">"testing"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">TestPPrint</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	pprint<span class="token punctuation">.</span><span class="token function">PPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	hi<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"expect call PPrint"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>&quot;gott/pprint&quot;</code>：导入 要进行测试的 pprint 包本身，没有引入外部包时，不需要导入被测试的包本身</p>
+<p>执行测试，测试通过</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v gott/pprint
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestPPrint
+I'm PPrint<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    pprint_test.go:12: <span class="token function">expect</span> call PPrint
+--- PASS: TestPPrint <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span>
+PASS
+ok      gott/pprint     <span class="token punctuation">(</span>cached<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>使用 Go 官方的代码风格：pprint_test.go 文件，因为pprint_test在 pprint 目录下，通过在 import 时，使用 <code>.</code> 选项，可以直接调用PPrint()方法，这使得调用包内的方法和内部测试包一致，整体代码风格得到统一</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> pprint_test
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"gott/hi"</span>
+	<span class="token punctuation">.</span> <span class="token string">"gott/pprint"</span>
+	<span class="token string">"testing"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">TestPPrint</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">PPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	hi<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"expect call PPrint"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     </div>
 
