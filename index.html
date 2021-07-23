@@ -272,7 +272,7 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>time.Sleep</code>用来模拟得到<code>max</code>的值所要进行的耗时操作，而我们要测试的是<code>GetPrimes()</code>的性能，不应计入计算<code>max</code>值所用的时间，所以要把开始时间设置在得到<code>max</code>之后。</p>
-<p>通过 <code>b.StopTimer()</code> 与 <code>b.StartTimer()</code>的配合使用，就可以去除任何一段代码的执行时间，<code>b.ResetTimer()</code>是去除它之前代码的执行时间。通过对计时器的调用，就可以对测试函数的执行时间进行精准的控制。</p>
+<p>通过 <code>b.StopTimer()</code> 与 <code>b.StartTimer()</code>的配合使用，就可以去除任何一段代码的执行时间，<code>b.ResetTimer()</code>是去除它之前代码的执行时间。通过对计时器的调用，可以让测试函数的执行时间更加准确。</p>
 
       
     </div>
@@ -596,7 +596,7 @@ SSH_PRIVATE_KEY: ***<span aria-hidden="true" class="line-numbers-rows"><span></s
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="cpu-标记"><a href="#cpu-标记" class="headerlink" title="cpu 标记"></a>cpu 标记</h1><p>用来设置运行时，P的最大数量，即<code>GOMAXPROCS</code>的值。可以设置一组值，在运行测试时，P被设置为不同的值分别运行测试函数。</p>
-<p>最大P数量代表着 go 运行时系统同时运行goroutine的能力，可以被视为最大逻辑CPU的数量，在默认情况下，最大 P 数量就等于当前计算机 CPU 核心的实际数量，最大P可以大小或小于实际CPU的核心数量。</p>
+<p>最大P数量代表着 go 运行时系统同时运行goroutine的能力，可以被视为最大逻辑CPU的数量，在默认情况下，最大 P 数量就等于当前计算机 CPU 核心的实际数量，最大P可以大于或小于实际CPU的核心数量。</p>
 <p>通过设置<code>-cpu</code>的值，就可以来模拟程序在不同CPU数量下的表现。设置<code>-cpu=2,4,8</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -cpu<span class="token operator">=</span><span class="token number">2,4</span>,8 -bench<span class="token operator">=</span>. gott/hello
 goos: darwin
@@ -675,7 +675,7 @@ ok      gott/hello      <span class="token number">6</span>.601s<span aria-hidde
     hello_test.go:17: number of runtime.GOMAXPROCS: <span class="token number">8</span>
 ok      gott/hello      <span class="token number">0</span>.009s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>对于功能测试，并不需要重复的执行多次，只需要执行一次即可，所以可以把<code>-cpu</code>的数值设置为1，<code>-count</code>的值不用设置，使用默认值为1就可以。功能测试重点关注的是能否通过测试，而不是程序的性能</p>
+<p>对于功能测试，并不需要重复的执行多次，只需要执行一次即可，所以可以把<code>-cpu</code>的数值设置为1，<code>-count</code>的值不用设置，使用默认值为1就可以。功能测试关注的重点是验证逻辑是否正确，而不是程序的性能</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v   -cpu<span class="token operator">=</span><span class="token number">1</span> gott/hello
 <span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
     hello_test.go:17: number of runtime.GOMAXPROCS: <span class="token number">1</span>
@@ -685,7 +685,7 @@ ok      gott/hello      <span class="token number">0</span>.008s<span aria-hidde
 
 
 
-<h1 id="Parallel-标记"><a href="#Parallel-标记" class="headerlink" title="Parallel 标记"></a>Parallel 标记</h1><p><code>-parallel</code>标记可以指定同时运行测试用例的最大个数，但仅适用于单个二进制测试文件，通过修改<code>GOMAXPROCS</code>的值实现，该标记的默认值是测试运行时的最大 P 数量。</p>
+<h1 id="Parallel-标记"><a href="#Parallel-标记" class="headerlink" title="Parallel 标记"></a>Parallel 标记</h1><p><code>-parallel</code>标记可以指定同时运行测试用例的最大并发执行数，但仅适用于单个二进制测试文件，通过修改<code>GOMAXPROCS</code>的值实现，该标记的默认值是测试运行时的最大 P 数量。</p>
 <p>可以通过在测试函数中添加<code>t.Parallel()</code>调用，以同时运行多个功能测试。默认情况下 go test 在运行测试时，为了加快测试速度，package 是被并行运行的，但每个包中的功能测试用例是被串行执行的。</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestParallelPrintHello</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	t<span class="token punctuation">.</span><span class="token function">Parallel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -739,7 +739,7 @@ PASS
 ok      gott/hello      <span class="token number">1</span>.026s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
-<li>测试结果中<code>runtime.GOMAXPROCS: 4  </code>的值为4，并不是指定的<code>8</code>，说明<code>-parallel</code>标记并没有生成，因为测试运行的不是二进制文件，此时，即使不指定<code>-parallel</code>也可以，如果想让更多的测试用例同时运行，可以在运行<code>go test</code>时，指定<code>-p</code>参数</li>
+<li>测试结果中<code>runtime.GOMAXPROCS: 4  </code>的值为4，并不是指定的<code>8</code>，说明<code>-parallel</code>标记并没有生成，因为测试运行的不是二进制文件，此时，即使不指定<code>-parallel</code>也是可以的，如果想让更多的测试用例同时运行，可以在运行<code>go test</code>时，指定<code>-p</code>参数，运行更多的P，来同时执行更多的测试用例，比如设置p的值为4，让同时并行执行的最大并发数为4</li>
 <li>使用<code>t.Parallel()</code>后，输出的信息多了<code>PAUSE</code>和<code>CONT</code>字段</li>
 </ul>
 <p>如果加入<code>-count=2</code>标记，对于测试用例来说，此时的并发不会是2个count之间的并发，这两个count也是串行执行的</p>
@@ -1135,16 +1135,14 @@ FAIL
 <h1 id="t-Fail-与t-FailNow"><a href="#t-Fail-与t-FailNow" class="headerlink" title="t.Fail()与t.FailNow()"></a><code>t.Fail()</code>与<code>t.FailNow()</code></h1><p><code>t.Fail()</code>令测试结果为失败，但其后的代码依然会被执行。go 语言测试用例失败的触发必须手动调用<code>t.Fail/t.FailNow/t.Errorf/t.Fatalf</code>等方法才可以，并不像其它语言支持测试断言，由断言失败触发。</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestFail</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	t<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token comment">// t.Log("Failed.")可以被执行到</span>
-	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed."</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed."</span><span class="token punctuation">)</span> <span class="token comment">// 可以被执行到</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>t.FailNow()</code>也会令测试结果为失败，但其后的代码不再执行，不会影响其它测试用例的执行</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestFail</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	t<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token comment">// t.Log() 不能被执行到</span>
-	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed."</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	t<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed"</span><span class="token punctuation">)</span> <span class="token comment">// 不能被执行到</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 

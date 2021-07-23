@@ -19,15 +19,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="cpu 标记用来设置运行时，P的最大数量，即GOMAXPROCS的值。可以设置一组值，在运行测试时，P被设置为不同的值分别运行测试函数。 最大P数量代表着 go 运行时系统同时运行goroutine的能力，可以被视为最大逻辑CPU的数量，在默认情况下，最大 P 数量就等于当前计算机 CPU 核心的实际数量，最大P可以大小或小于实际CPU的核心数量。 通过设置-cpu的值，就可以来模拟程序在不同CP">
+<meta name="description" content="cpu 标记用来设置运行时，P的最大数量，即GOMAXPROCS的值。可以设置一组值，在运行测试时，P被设置为不同的值分别运行测试函数。 最大P数量代表着 go 运行时系统同时运行goroutine的能力，可以被视为最大逻辑CPU的数量，在默认情况下，最大 P 数量就等于当前计算机 CPU 核心的实际数量，最大P可以大于或小于实际CPU的核心数量。 通过设置-cpu的值，就可以来模拟程序在不同CP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="go 语言 test 测试工具的标记 flag">
 <meta property="og:url" content="https://www.gagahappy.com/golang-test-flag-cpu-count-parallel/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="cpu 标记用来设置运行时，P的最大数量，即GOMAXPROCS的值。可以设置一组值，在运行测试时，P被设置为不同的值分别运行测试函数。 最大P数量代表着 go 运行时系统同时运行goroutine的能力，可以被视为最大逻辑CPU的数量，在默认情况下，最大 P 数量就等于当前计算机 CPU 核心的实际数量，最大P可以大小或小于实际CPU的核心数量。 通过设置-cpu的值，就可以来模拟程序在不同CP">
+<meta property="og:description" content="cpu 标记用来设置运行时，P的最大数量，即GOMAXPROCS的值。可以设置一组值，在运行测试时，P被设置为不同的值分别运行测试函数。 最大P数量代表着 go 运行时系统同时运行goroutine的能力，可以被视为最大逻辑CPU的数量，在默认情况下，最大 P 数量就等于当前计算机 CPU 核心的实际数量，最大P可以大于或小于实际CPU的核心数量。 通过设置-cpu的值，就可以来模拟程序在不同CP">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-07-11T17:16:54.000Z">
-<meta property="article:modified_time" content="2021-07-22T16:18:59.333Z">
+<meta property="article:modified_time" content="2021-07-23T06:13:38.086Z">
 <meta property="article:author" content="戛戛Happy">
 <meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary">
@@ -261,7 +261,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="cpu-标记"><a href="#cpu-标记" class="headerlink" title="cpu 标记"></a>cpu 标记</h1><p>用来设置运行时，P的最大数量，即<code>GOMAXPROCS</code>的值。可以设置一组值，在运行测试时，P被设置为不同的值分别运行测试函数。</p>
-<p>最大P数量代表着 go 运行时系统同时运行goroutine的能力，可以被视为最大逻辑CPU的数量，在默认情况下，最大 P 数量就等于当前计算机 CPU 核心的实际数量，最大P可以大小或小于实际CPU的核心数量。</p>
+<p>最大P数量代表着 go 运行时系统同时运行goroutine的能力，可以被视为最大逻辑CPU的数量，在默认情况下，最大 P 数量就等于当前计算机 CPU 核心的实际数量，最大P可以大于或小于实际CPU的核心数量。</p>
 <p>通过设置<code>-cpu</code>的值，就可以来模拟程序在不同CPU数量下的表现。设置<code>-cpu=2,4,8</code></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -cpu<span class="token operator">=</span><span class="token number">2,4</span>,8 -bench<span class="token operator">=</span>. gott/hello
 goos: darwin
@@ -340,7 +340,7 @@ ok      gott/hello      <span class="token number">6</span>.601s<span aria-hidde
     hello_test.go:17: number of runtime.GOMAXPROCS: <span class="token number">8</span>
 ok      gott/hello      <span class="token number">0</span>.009s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>对于功能测试，并不需要重复的执行多次，只需要执行一次即可，所以可以把<code>-cpu</code>的数值设置为1，<code>-count</code>的值不用设置，使用默认值为1就可以。功能测试重点关注的是能否通过测试，而不是程序的性能</p>
+<p>对于功能测试，并不需要重复的执行多次，只需要执行一次即可，所以可以把<code>-cpu</code>的数值设置为1，<code>-count</code>的值不用设置，使用默认值为1就可以。功能测试关注的重点是验证逻辑是否正确，而不是程序的性能</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v   -cpu<span class="token operator">=</span><span class="token number">1</span> gott/hello
 <span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
     hello_test.go:17: number of runtime.GOMAXPROCS: <span class="token number">1</span>
@@ -350,7 +350,7 @@ ok      gott/hello      <span class="token number">0</span>.008s<span aria-hidde
 
 
 
-<h1 id="Parallel-标记"><a href="#Parallel-标记" class="headerlink" title="Parallel 标记"></a>Parallel 标记</h1><p><code>-parallel</code>标记可以指定同时运行测试用例的最大个数，但仅适用于单个二进制测试文件，通过修改<code>GOMAXPROCS</code>的值实现，该标记的默认值是测试运行时的最大 P 数量。</p>
+<h1 id="Parallel-标记"><a href="#Parallel-标记" class="headerlink" title="Parallel 标记"></a>Parallel 标记</h1><p><code>-parallel</code>标记可以指定同时运行测试用例的最大并发执行数，但仅适用于单个二进制测试文件，通过修改<code>GOMAXPROCS</code>的值实现，该标记的默认值是测试运行时的最大 P 数量。</p>
 <p>可以通过在测试函数中添加<code>t.Parallel()</code>调用，以同时运行多个功能测试。默认情况下 go test 在运行测试时，为了加快测试速度，package 是被并行运行的，但每个包中的功能测试用例是被串行执行的。</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestParallelPrintHello</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	t<span class="token punctuation">.</span><span class="token function">Parallel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -404,7 +404,7 @@ PASS
 ok      gott/hello      <span class="token number">1</span>.026s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
-<li>测试结果中<code>runtime.GOMAXPROCS: 4  </code>的值为4，并不是指定的<code>8</code>，说明<code>-parallel</code>标记并没有生成，因为测试运行的不是二进制文件，此时，即使不指定<code>-parallel</code>也可以，如果想让更多的测试用例同时运行，可以在运行<code>go test</code>时，指定<code>-p</code>参数</li>
+<li>测试结果中<code>runtime.GOMAXPROCS: 4  </code>的值为4，并不是指定的<code>8</code>，说明<code>-parallel</code>标记并没有生成，因为测试运行的不是二进制文件，此时，即使不指定<code>-parallel</code>也是可以的，如果想让更多的测试用例同时运行，可以在运行<code>go test</code>时，指定<code>-p</code>参数，运行更多的P，来同时执行更多的测试用例，比如设置p的值为4，让同时并行执行的最大并发数为4</li>
 <li>使用<code>t.Parallel()</code>后，输出的信息多了<code>PAUSE</code>和<code>CONT</code>字段</li>
 </ul>
 <p>如果加入<code>-count=2</code>标记，对于测试用例来说，此时的并发不会是2个count之间的并发，这两个count也是串行执行的</p>

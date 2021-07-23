@@ -27,7 +27,7 @@
 <meta property="og:description" content="计时器用来记录性能测试函数在每次运行时消耗的时间，同时它也记录了此次运行对内存分配的字节数和分配的次数。与之相关的有三个方法StartTimer、StopTimer和ResetTimer 运行go test 时就用到了计时器，命令会启用这个函数的计时器，当函数执行完成，停止计时器，记录下此次的运行时间，然后与默认执行时间上限(默认为1秒)做比较，如果没有超过，则增大b.N的值，再次执行该函数，如此">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-07-19T23:41:47.000Z">
-<meta property="article:modified_time" content="2021-07-22T16:18:59.333Z">
+<meta property="article:modified_time" content="2021-07-23T06:13:38.086Z">
 <meta property="article:author" content="戛戛Happy">
 <meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary">
@@ -276,7 +276,7 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>time.Sleep</code>用来模拟得到<code>max</code>的值所要进行的耗时操作，而我们要测试的是<code>GetPrimes()</code>的性能，不应计入计算<code>max</code>值所用的时间，所以要把开始时间设置在得到<code>max</code>之后。</p>
-<p>通过 <code>b.StopTimer()</code> 与 <code>b.StartTimer()</code>的配合使用，就可以去除任何一段代码的执行时间，<code>b.ResetTimer()</code>是去除它之前代码的执行时间。通过对计时器的调用，就可以对测试函数的执行时间进行精准的控制。</p>
+<p>通过 <code>b.StopTimer()</code> 与 <code>b.StartTimer()</code>的配合使用，就可以去除任何一段代码的执行时间，<code>b.ResetTimer()</code>是去除它之前代码的执行时间。通过对计时器的调用，可以让测试函数的执行时间更加准确。</p>
 
     </div>
 
