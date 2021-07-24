@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <meta name="google-site-verification" content="mRjQM6azHRnllmCObIorLO1p8dqt92U33mbEzoA2HnU">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="运行某个包的测试不指定包名：go test 命令如果没有参数指定包，默认使用当前目录对应的包运行测试，且测试结果不会被缓存。第二次运行测试，测试结果中没有包含(cached)标示，说明测试结果没有被缓存，每次执行都会重新构建测试 # gott&#x2F;hello 当前目录为包名为 hello的目录 go test PASS ok  	gott&#x2F;hello	1.025s  go test ok  	gott">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go 语言 测试惯例">
+<meta property="og:url" content="https://www.gagahappy.com/golang-test-convention/">
+<meta property="og:site_name" content="睡月花儿">
+<meta property="og:description" content="运行某个包的测试不指定包名：go test 命令如果没有参数指定包，默认使用当前目录对应的包运行测试，且测试结果不会被缓存。第二次运行测试，测试结果中没有包含(cached)标示，说明测试结果没有被缓存，每次执行都会重新构建测试 # gott&#x2F;hello 当前目录为包名为 hello的目录 go test PASS ok  	gott&#x2F;hello	1.025s  go test ok  	gott">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-07-24T15:37:16.000Z">
+<meta property="article:modified_time" content="2021-07-24T10:30:14.014Z">
+<meta property="article:author" content="戛戛Happy">
+<meta property="article:tag" content="golang">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.gagahappy.com/golang-test-convention/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://www.gagahappy.com/golang-test-convention/","path":"golang-test-convention/","title":"go 语言 测试惯例"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>go 语言 测试惯例 | 睡月花儿</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-17621945-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-17621945-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss2.xml" title="睡月花儿" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">睡月花儿</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">60</span></a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%9F%90%E4%B8%AA%E5%8C%85%E7%9A%84%E6%B5%8B%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">运行某个包的测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%89%80%E6%9C%89%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">运行所有测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E7%9A%84%E8%AE%B0%E5%BD%95%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">有效的记录测试失败信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%B5%8B%E8%AF%95%E5%A6%82%E4%BD%95%E9%A2%84%E5%88%A4%E7%BB%93%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">随机测试如何预判结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8"><span class="nav-number">5.</span> <span class="nav-text">测试中的异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mock-%E6%B5%8B%E8%AF%95%E4%B8%AD%E7%9A%84%E6%95%8F%E6%84%9F%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.</span> <span class="nav-text">mock 测试中的敏感对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E8%84%86%E5%BC%B1%E7%9A%84%E6%B5%8B%E8%AF%95"><span class="nav-number">7.</span> <span class="nav-text">避免脆弱的测试</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="戛戛Happy"
+      src="/apple-touch-icon.png">
+  <p class="site-author-name" itemprop="name">戛戛Happy</p>
+  <div class="site-description" itemprop="description">后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby</div>
+</div>
+  <div class="">
+
+  <div class="">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/rss2.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-test-convention/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          go 语言 测试惯例
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-24 15:37:16" itemprop="dateCreated datePublished" datetime="2021-07-24T15:37:16+00:00">2021-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="运行某个包的测试"><a href="#运行某个包的测试" class="headerlink" title="运行某个包的测试"></a>运行某个包的测试</h1><p>不指定包名：go test 命令如果没有参数指定包，默认使用当前目录对应的包运行测试，且测试结果不会被缓存。第二次运行测试，测试结果中没有包含(cached)标示，说明测试结果没有被缓存，每次执行都会重新构建测试</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># gott/hello 当前目录为包名为 hello的目录</span>
+go <span class="token builtin class-name">test</span>
+PASS
+ok  	gott/hello	<span class="token number">1</span>.025s
+
+go <span class="token builtin class-name">test</span>
+ok  	gott/hello	<span class="token number">1</span>.025s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>指定包名：测试结果会被缓存</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> gott/hello
+ok  	gott/hello	<span class="token punctuation">(</span>cached<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="运行所有测试"><a href="#运行所有测试" class="headerlink" title="运行所有测试"></a>运行所有测试</h1><p>使用<code>go test ./...</code>标记运行所有包的测试，测试结果会被缓存</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> ./<span class="token punctuation">..</span>.
+ok  	gott/hello	<span class="token number">1</span>.026s
+ok  	gott/hi	<span class="token number">0</span>.040s
+ok  	gott/pprint	<span class="token number">0</span>.017s
+ok  	gott/prime	<span class="token number">0</span>.014s
+
+go <span class="token builtin class-name">test</span> ./<span class="token punctuation">..</span>.
+ok  	gott/hello	<span class="token punctuation">(</span>cached<span class="token punctuation">)</span>
+ok  	gott/hi	<span class="token punctuation">(</span>cached<span class="token punctuation">)</span>
+ok  	gott/pprint	<span class="token punctuation">(</span>cached<span class="token punctuation">)</span>
+ok  	gott/prime	<span class="token punctuation">(</span>cached<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="有效的记录测试失败信息"><a href="#有效的记录测试失败信息" class="headerlink" title="有效的记录测试失败信息"></a>有效的记录测试失败信息</h1><p>测试失败的信息一般的形式是“f(x) = y, want z”，其中f(x)解释了失败的操作和对应的输入，y是实际的运行结果，z是期望的正确的结果。比起那些失败就打印满屏的堆栈信息的错误日志，这种记录格式使得测试人员很容易定位到问题所在，甚至都不需要去看源码文件。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">got <span class="token operator">:=</span> <span class="token function">sum</span><span class="token punctuation">(</span>x1<span class="token punctuation">,</span> x2<span class="token punctuation">)</span>
+<span class="token keyword">if</span> got <span class="token operator">!=</span> want <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"sum(%d, %d) = %d, want %d"</span><span class="token punctuation">,</span> x1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> got<span class="token punctuation">,</span> want<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="随机测试如何预判结果"><a href="#随机测试如何预判结果" class="headerlink" title="随机测试如何预判结果"></a>随机测试如何预判结果</h1><p>一种方法是编写另一个对照函数，使用简单和清晰的算法，虽然效率较低但是行为和要测试的函数是一致的，然后针对相同的随机输入检查两者的输出结果。</p>
+<p>第二种是生成的随机输入的数据遵循特定的模式，这样我们就可以知道期望的输出的模式。比如基于随机种子生成需要的大量数据，测试日志中不用去记录这些大量的数据，只需要记录这个随机种子即可，之后可以根据这个种子重现失败的测试用例，查找代码问题所在</p>
+<h1 id="测试中的异常"><a href="#测试中的异常" class="headerlink" title="测试中的异常"></a>测试中的异常</h1><p>在测试代码中不要调用 <code>log.Fatal</code> 或 <code>os.Exit</code> ，调用这类函数会导致整个测试提前退出，后面的测试都将无法运行。调用这些函数的特权应该放在 <code>main</code> 函数中。如果真的有意外发生导致测试过程中发生 <code>panic</code> 异常，那么在测试中应该尝试用 <code>recover</code> 捕获异常，并记录下来，然后将当前测试当作失败处理(即调用<code>t.Effor/t.Fail/t.FailNow之类的方法</code>)。</p>
+<p>在运行测试的时候，应该确保所有测试都得到运行，这样当测试运行结束后，就可以得到所有失败的测试用例的信息，而不是在某个测试失败后，就停止运行其后面的测试。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestLogFatal</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	log<span class="token punctuation">.</span><span class="token function">Fatal</span><span class="token punctuation">(</span><span class="token string">"Test encounter a fatal"</span><span class="token punctuation">)</span>
+	<span class="token comment">// os.Exit(2)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">TestPrint</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"just Print"</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span><span class="token function">Getenv</span><span class="token punctuation">(</span><span class="token string">"GOROOT"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>由于调用了<code>log.Fatal</code>或<code>os.Exit</code>，在<code>TestLogFatal()</code>后面的测试用例都不会被运行</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v  gott/hello
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestLogFatal
+<span class="token number">2021</span>/07/24 <span class="token number">17</span>:34:02 Test encounter a fatal
+FAIL    gott/hello      <span class="token number">0</span>.007s
+FAIL
+<span class="token comment"># 没有打印 TestPrint()的测试日志</span>
+
+<span class="token comment"># 把 TestPrint()放到 TestLogFatal()的前面</span>
+ go <span class="token builtin class-name">test</span> -v  gott/hello
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestPrint
+    hello_test.go:24: just Print
+    hello_test.go:25: /Users/ga/m/opt/go/go_root
+--- PASS: TestPrint <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestLogFatal
+<span class="token number">2021</span>/07/24 <span class="token number">17</span>:37:04 Test encounter a fatal
+FAIL    gott/hello      <span class="token number">0</span>.013s
+FAIL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>TestPrint 可以运行，但 TestLogFatal 之后的测试用例都不会得到运行，在调用 log.Fatal 函数后，整个测试程序就退出了</p>
+<h1 id="mock-测试中的敏感对象"><a href="#mock-测试中的敏感对象" class="headerlink" title="mock 测试中的敏感对象"></a>mock 测试中的敏感对象</h1><ul>
+<li><p>对外部环境的依赖</p>
+<p>数据库的连接，第三方接口的调用</p>
+</li>
+<li><p>导致生产代码产生一些调试信息的钩子函数</p>
+</li>
+<li><p>诱导生产代码进入某些重要状态的改变</p>
+<p>超时、错误，甚至是一些刻意制造的并发行为等因素</p>
+</li>
+</ul>
+<p>应该对以上这些对象进行仿造(mock)，从而得到一个纯净的测试环境。有一个需要注意的地方，如果在某个测试用例中mock了某些对象，在这个测试用例运行完成后，要对这些mock的对象进行还原，以避免影响其它测试用例。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestCheckQuotaNotifiesUser</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// Save and restore original notifyUser.</span>
+  	<span class="token comment">// 保存 及 恢复 mock的原始对象</span>
+    saved <span class="token operator">:=</span> notifyUser
+    <span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> notifyUser <span class="token operator">=</span> saved <span class="token punctuation">&#125;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Install the test's fake notifyUser.</span>
+    <span class="token keyword">var</span> notifiedUser<span class="token punctuation">,</span> notifiedMsg <span class="token builtin">string</span>
+    notifyUser <span class="token operator">=</span> <span class="token keyword">func</span><span class="token punctuation">(</span>user<span class="token punctuation">,</span> msg <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        notifiedUser<span class="token punctuation">,</span> notifiedMsg <span class="token operator">=</span> user<span class="token punctuation">,</span> msg
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// ...rest of test...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>先把要mock的对象保存起来，等测试完成后，再对其进行恢复，可以使用<code>defer</code>语句来延后执行处理恢复的代码</p>
+<h1 id="避免脆弱的测试"><a href="#避免脆弱的测试" class="headerlink" title="避免脆弱的测试"></a>避免脆弱的测试</h1><ul>
+<li><p>一个好的测试不应该在程序仅仅只是做了微小变化就失败</p>
+</li>
+<li><p>一个好的测试不应该在遇到一点小错误时就立刻退出测试，它应该尝试报告更多的相关的错误信息，因为我们可能从多个失败测试的模式中发现错误产生的规律</p>
+</li>
+<li><p>一个好的测试的关键是首先实现你期望的具体行为，然后才是考虑简化测试代码、避免重复。如果直接从抽象、通用的测试库着手，很难取得良好结果。</p>
+</li>
+<li><p>保持测试代码的简洁和内部结构的稳定，特别是对断言部分要有所选择，比如不要对字符串进行全字匹配，而是针对那些在项目的发展中是比较稳定不变的子串</p>
+</li>
+<li><p>测试时涉及到对全局变量产生修改的那些测试，要以串行的方式运行，不能并行运行</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>戛戛Happy
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://www.gagahappy.com/golang-test-convention/" title="go 语言 测试惯例">https://www.gagahappy.com/golang-test-convention/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/categories/development/" rel="category"><i class="fa fa-folder"></i> 后端</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/golang-test-benchmark-timer/" rel="next" title="go 语言 性能测试函数中的计时器">
+                  go 语言 性能测试函数中的计时器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备10044755号 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 2009 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戛戛Happy</span>
+  <span class="with-love">
+    <i class="fa fa-chart-bar"></i>
+  </span>
+  <span itemprop="cnzz"><script type="text/javascript" src="//s4.cnzz.com/z_stat.php?id=2325808&web_id=2325808"></script></span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"moonfox","repo":"gitalk","client_id":"2a9c7ba27dd4a9376f8c","client_secret":"cb4fa8779f853f735779a518c57e894a8ee30b09","admin_user":"moonfox","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"golang-test-convention/"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">59</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">60</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,113 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-pprof/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-pprof/" class="post-title-link" itemprop="url">go 语言 程序性能分析</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-15 14:59:46" itemprop="dateCreated datePublished" datetime="2021-06-15T14:59:46+00:00">2021-06-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="性能分析API"><a href="#性能分析API" class="headerlink" title="性能分析API"></a>性能分析API</h1><p>可以使用标准库中的 <code>runtime/pprof</code>，<code>runtime/trace</code>，<code>net/http/pprof</code>这三个包中提供的API来对Go程序进行性能分析，其中 <code>runtime/pprof</code>包中还提供了生成性能分析概要文件的API。概要文件是以二进制格式存储的，<code>go test</code> 命令也可以生成概要文件</p>
+<h1 id="概要文件的读取"><a href="#概要文件的读取" class="headerlink" title="概要文件的读取"></a>概要文件的读取</h1><p>概要文件有：CPU 概要文件（CPU Profile）、内存概要文件（Mem Profile）和阻塞概要文件（Block Profile），是Go程序在某一段时间内，对相关指标采样后，得到的概要信息。Go标准工具中<code>go tool pprof</code> 和 <code>go tool trace</code>可以解析概要文件中的信息，以可以阅读的方式展现出来，供分析性能使用</p>
+<h1 id="概要文件的生成"><a href="#概要文件的生成" class="headerlink" title="概要文件的生成"></a>概要文件的生成</h1><h2 id="protocol-buffers"><a href="#protocol-buffers" class="headerlink" title="protocol buffers"></a>protocol buffers</h2><p>概要文件其实就是 由 <code>protocol buffers</code> 生成的二进制数据流，<code>protocol buffers</code> 是一种数据序列化协议，它定义了程序对象如 <code>map</code>，结构体，数组等与字节之间如何相互转化。同时 <code>protocol buffers</code> 不仅仅是协议，也可以作为转化工具来使用。<code>protocol buffers</code> 会对生成的字节流进行压缩，它的体积比(<code>JSON，XML</code>)都要更小，所以也更适合用于数据在网上传输</p>
+<h2 id="StartCPUProfile-函数"><a href="#StartCPUProfile-函数" class="headerlink" title="StartCPUProfile 函数"></a>StartCPUProfile 函数</h2><p>对CPU信息进行定时采样生成概要文件，默认采样频率是100Hz，即每秒采样100次，调用<code>pprof.StartCPUProfile()</code>函数开始进行采样，调用<code>pprof.StopCPUProfile()</code>停止采样</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">StopCPUProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	cpu<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">defer</span> cpu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">if</span> <span class="token operator">!</span>cpu<span class="token punctuation">.</span>profiling <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+	cpu<span class="token punctuation">.</span>profiling <span class="token operator">=</span> <span class="token boolean">false</span>
+	runtime<span class="token punctuation">.</span><span class="token function">SetCPUProfileRate</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+	<span class="token operator">&lt;-</span>cpu<span class="token punctuation">.</span>done
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>StopCPUProfile</code>是通过设置<code>SetCPUProfileRate(0)</code>为0，来停止采样的，而<code>pprof.StartCPUProfile</code> 是把<code>runtime.SetCPUProfileRate(100)</code>设置为100来开始采样的</p>
+<h2 id="runtime-MemProfileRate值"><a href="#runtime-MemProfileRate值" class="headerlink" title="runtime.MemProfileRate值"></a>runtime.MemProfileRate值</h2><p>对堆内存的使用进行采样，通过对其赋值指定平均每分配多少个字节，就对堆内存的使用情况进行一次采样。默认值是512KB，对其赋0值表示停止采样。把收集到的采样信息写入文件需要调用<code>WriteHeapProfile(f)</code>函数，它会把概要文件信息写入传入的参数文件<code>f</code>中。<code>WriteHeapProfile(f)</code>函数记录的并不是实时的内存概要信息，而是最近一次内存垃圾工作完成后产生的。要得到实时信息可以使用<code>runtime.ReadMemStats()</code>函数</p>
+<h2 id="SetBlockProfileRate函数"><a href="#SetBlockProfileRate函数" class="headerlink" title="SetBlockProfileRate函数"></a>SetBlockProfileRate函数</h2><p>对阻塞概要信息的采样进行设定，其参数<code>rate</code>的值表示，当阻塞持续多少纳秒后对其进行进行采样。如果这个值小于等于0，则停止采样。把概要信息写入文件需要调用<code>pprof.Lookup(&quot;block&quot;)</code>，并传入值为<code>block</code>的参数，函数会返回一个<code>*pprof.Profile</code>类型的值，对这个值调用<code>WriteTo(w io.Writer, debug int)</code>方法，把概要信息写入文件。这个方法的第一个参数传入要写入概要信息的文件</p>
+<h1 id="pprof-Lookup函数的使用"><a href="#pprof-Lookup函数的使用" class="headerlink" title="pprof.Lookup函数的使用"></a>pprof.Lookup函数的使用</h1><p><code>Lookup(name string)</code>通过给定的<code>name</code> 的值，返回对应的概要信息。可以得到的概要信息有<code>goroutine, threadcreate, heap, allocs, block, mutex</code>这6个预定义指标的概要信息，它们都是<code>*Profile</code>类型的值，可以通过调用<code>WriteTo(w io.Writer, debug int)</code>方法，把采样的概要信息写入指定的文件中(通过第一个参数设置)，第二个参数表示了写入信息的详细细节，有<code>0,1,2</code>3个值，这6个指标使用不同的值写入细节信息</p>
+<ul>
+<li><code>goroutine</code>：此指标可以收集正在使用的所有 goroutine 的堆栈跟踪信息</li>
+<li><code>heap、allocs</code>：此指标会收集与堆内存的分配和释放有关的采样信息，可以看成是内存概要信息，heap 与 allocs 的展示视角不同</li>
+<li><code>threadcreate</code>：此指标会收集堆栈跟踪信息。这些堆栈跟踪信息中的每一个都会描绘出一个代码调用链，这些调用链上的代码都导致新的操作系统线程产生</li>
+<li><code>block</code>：此指标会收集因争用同步原语而被阻塞的那些代码的堆栈跟踪信息</li>
+<li><code>mutex</code>：此指标会收集曾经作为同步原语持有者的那些代码，它们的堆栈跟踪信息</li>
+</ul>
+<h1 id="使用在线网页查看程序性能"><a href="#使用在线网页查看程序性能" class="headerlink" title="使用在线网页查看程序性能"></a>使用在线网页查看程序性能</h1><p>在我们编写网络服务程序的时候，使用<code>net/http/pprof</code>包要比直接使用<code>runtime/pprof</code>包方便和实用很多，这个代码包可以为网络服务的监测提供有力的支撑</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">import</span> <span class="token boolean">_</span> <span class="token string">"net/http/pprof"</span>
+log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span><span class="token function">ListenAndServe</span><span class="token punctuation">(</span><span class="token string">"localhost:8082"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>直接访问<a target="_blank" rel="noopener" href="http://localhost:8082/debug/pprof">http://localhost:8082/debug/pprof</a> 可以看到<code>goroutine,threadcreate,heap, allocs,block,mutex</code>这6个指标的概要信息。</p>
+<p>当访问<a target="_blank" rel="noopener" href="http://localhost:8082/debug/pprof/profile">http://localhost:8082/debug/pprof/profile</a> 时，程序会执行对 CPU 概要信息的采样，可以通过加入参数<code>seconds</code>来控制对cpu的访问时间(默认是30秒)，当采样结束后，会提示你下载概要文件。你也可以执行下面命令，直接读取概要文件</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token punctuation">:</span><span class="token number">6060</span><span class="token operator">/</span>debug<span class="token operator">/</span>pprof<span class="token operator">/</span>profile?seconds<span class="token operator">=</span><span class="token number">60</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1117,130 +1224,6 @@ helloA world
 <p>2.要返回实际写入的长度和在写入时遇到的错误，如果实际写入的长度小于<code>len(p)</code>，返回的<code>err</code>必须是非<code>nil</code>的</p>
 <p>3. <code>p</code>不能在方法内部被修改，即使临时性的也不可以</p>
 <p>4. 不能对<code>p</code>进行保存</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/gitalk-install/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/gitalk-install/" class="post-title-link" itemprop="url">gitalk 评论系统 安装</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-01 14:25:33" itemprop="dateCreated datePublished" datetime="2021-06-01T14:25:33+00:00">2021-06-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/gitalk/" itemprop="url" rel="index"><span itemprop="name">gitalk</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="申请GitHub应用"><a href="#申请GitHub应用" class="headerlink" title="申请GitHub应用"></a>申请GitHub应用</h1><h2 id="1-注册一个新应用"><a href="#1-注册一个新应用" class="headerlink" title="1.  注册一个新应用"></a>1.  注册一个新应用</h2><p><a target="_blank" rel="noopener" href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a> 有三项内容必须填写</p>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html">Application name：这个随意填写
-Homepage URL：你的网站的URL地址，包含http部分。
-Authorization callback URL：你的网站的URL地址，包含http部分，和上面的 Homepage URL 一致就行<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="2-Homepage-URL与Authorization-callback-URL的填写"><a href="#2-Homepage-URL与Authorization-callback-URL的填写" class="headerlink" title="2. Homepage URL与Authorization callback URL的填写"></a>2. <code>Homepage URL</code>与<code>Authorization callback URL</code>的填写</h2><ol>
-<li>如果你的网站是host在github上的，是通过github分配给你的网址进行访问的，直接填写github分配给你的网站就可以，类似 <code>yourgithub.github.io</code></li>
-<li>如果你有自己的域名，但网站内容是host在github上的，是通过cname的方式访问的，那么这两项都填你的域名</li>
-<li>如果你有自己的域名，也有自己的站点，那么这两项都填你的域名</li>
-</ol>
-<p>在调试阶段，可以把这两项设置为你的本地地址，这样方便测试，而不用一次又一次的部署网站，等测试好之后再统一部署。</p>
-<h2 id="3-生成Client信息"><a href="#3-生成Client信息" class="headerlink" title="3. 生成Client信息"></a>3. 生成Client信息</h2><p>点击 “register application”完成注册，系统会生成<code>Client ID</code>和<code>Client secrets</code>(需要手动点一下旁边的按钮)</p>
-<h1 id="配置Gitalk"><a href="#配置Gitalk" class="headerlink" title="配置Gitalk"></a>配置Gitalk</h1><h2 id="通过Next主题进行配置"><a href="#通过Next主题进行配置" class="headerlink" title="通过Next主题进行配置"></a>通过<code>Next</code>主题进行配置</h2><p>如果你的网点是用Hexo驱动，且主题是<code>Next</code>，这个主题已经为我们配置了gitalk，只需配置即可</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">gitalk</span><span class="token punctuation">:</span>
-  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
-  <span class="token key atrule">github_id</span><span class="token punctuation">:</span> 你的Github登录账号
-  <span class="token key atrule">repo</span><span class="token punctuation">:</span> gitalk 你的 Github仓库的名称
-  <span class="token key atrule">client_id</span><span class="token punctuation">:</span> 上面刚刚申请的 Client ID
-  <span class="token key atrule">client_secret</span><span class="token punctuation">:</span> 上面刚刚申请的 Client Secret
-  <span class="token key atrule">admin_user</span><span class="token punctuation">:</span> 你的Github登录账号
-  <span class="token key atrule">distraction_free_mode</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
-  <span class="token key atrule">proxy</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//cors<span class="token punctuation">-</span>anywhere.azm.workers.dev/https<span class="token punctuation">:</span>//github.com/login/oauth/access_token
-  language<span class="token punctuation">:</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="使用官网配置"><a href="#使用官网配置" class="headerlink" title="使用官网配置"></a>使用官网配置</h2><p>官网地址：<a target="_blank" rel="noopener" href="https://github.com/gitalk/gitalk">https://github.com/gitalk/gitalk</a></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> gitalk <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Gitalk</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-  clientID<span class="token operator">:</span> <span class="token string">'GitHub Application Client ID'</span><span class="token punctuation">,</span>
-  clientSecret<span class="token operator">:</span> <span class="token string">'GitHub Application Client Secret'</span><span class="token punctuation">,</span>
-  repo<span class="token operator">:</span> <span class="token string">'GitHub repo'</span><span class="token punctuation">,</span>      <span class="token comment">// The repository of store comments,</span>
-  owner<span class="token operator">:</span> <span class="token string">'GitHub repo owner'</span><span class="token punctuation">,</span>
-  admin<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'GitHub repo owner and collaborators, only these guys can initialize github issues'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-  id<span class="token operator">:</span> location<span class="token punctuation">.</span>pathname<span class="token punctuation">,</span>      <span class="token comment">// Ensure uniqueness and length less than 50</span>
-  distractionFreeMode<span class="token operator">:</span> <span class="token boolean">false</span>  <span class="token comment">// Facebook-like distraction free mode</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-
-gitalk<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token string">'gitalk-container'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><p>注：官网配置的参数和Hexo主题Next的参数是通用的</p>
-<ul>
-<li><code>repo</code>: 要求填写你的Github仓库的名称，这个仓库可以是你的github上的任意一个，但必须是公开的。评论内容会以 <code>issue</code>的形式保存到仓库的<code>issues</code>中，所以建议为评论单独新建一个仓库</li>
-<li><code>admin</code>: 指定了可以初始化文章评论的github用户，一般只填写你自己就可以了</li>
-<li><code>id</code>: 文章的URL路径，不包括域名，这个路径要求必须是唯一的，且不能超过50个字符(如果超过了，可以使用md5等工具对路径进行摘要缩短长度即可)。每一扁文章的评论和这个路径相关联，所以即使域名不同，只要文章的URL一样，就会显示相关联的评论。在Next主题中是自动配置的Hexo主题Next的参数定义在<code>layout/_third-party/comments/gitalk.njk</code>中</li>
-<li><code>distractionFreeMode</code>：是否是聚精会神模式，即评论框在写评论的时候，周围是否变成黑</li>
-</ul>
-<h1 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h1><p>1. Error: Not Found：一般是仓库名称没有正确设置，请依据上面的参数说明部分进行设置</p>
-<p>2. Related Issues not found：未找到相关的issue进行评论，出现这种情况是因为文章评论还未初始化，只需要点击下面的按钮，登录 GitHub 账户即可</p>
-<p>3. 评论区一直加载不上：配置中的<code>proxy</code>地址不正确或已经失效。官网默认地址是<code>https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token</code>。如果你使用的是Next主题，请确保也是这个地址</p>
-<p>4.  评论时是黑色的：设置<code>distractionFreeMode</code>为false</p>
 
       
     </div>
