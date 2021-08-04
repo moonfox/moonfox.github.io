@@ -19,18 +19,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="覆盖率语句的覆盖率是指在测试中至少被运行一次的代码占总代码数的比例。 生成测试报告在生成报告之前，要确保所有的测试都正常通过。使用go test命令配合不同的参数标示可以生成不同类型的覆盖率分析报告 使用标志coverprofilego test -v -run&#x3D;Coverage -coverprofile&#x3D;c.out golang&#x2F;gop&#x2F;ch7_interfaces&#x2F;7.9_example_e">
+<meta name="description" content="覆盖率语句的覆盖率是指在测试中至少被运行一次的代码占总代码数的比例。 生成测试报告在生成报告之前，要确保所有的测试都正常通过。使用go test命令配合不同的参数标示可以生成不同类型的覆盖率分析报告 使用标志coverprofilego test gott&#x2F;prime -coverprofile&#x3D;c.out ok      gott&#x2F;prime      0.013s  coverage: 93.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="go 语言 测试覆盖率">
 <meta property="og:url" content="https://www.gagahappy.com/golang-test-coverage/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="覆盖率语句的覆盖率是指在测试中至少被运行一次的代码占总代码数的比例。 生成测试报告在生成报告之前，要确保所有的测试都正常通过。使用go test命令配合不同的参数标示可以生成不同类型的覆盖率分析报告 使用标志coverprofilego test -v -run&#x3D;Coverage -coverprofile&#x3D;c.out golang&#x2F;gop&#x2F;ch7_interfaces&#x2F;7.9_example_e">
+<meta property="og:description" content="覆盖率语句的覆盖率是指在测试中至少被运行一次的代码占总代码数的比例。 生成测试报告在生成报告之前，要确保所有的测试都正常通过。使用go test命令配合不同的参数标示可以生成不同类型的覆盖率分析报告 使用标志coverprofilego test gott&#x2F;prime -coverprofile&#x3D;c.out ok      gott&#x2F;prime      0.013s  coverage: 93.">
 <meta property="og:locale">
+<meta property="og:image" content="https://img.gagahappy.cn/blog/2021/08/golang-test-coverage-1.png_b1">
+<meta property="og:image" content="https://img.gagahappy.cn/blog/2021/08/golang-test-coverage-2.png_b1">
 <meta property="article:published_time" content="2021-06-27T14:48:39.000Z">
-<meta property="article:modified_time" content="2021-07-27T16:49:19.720Z">
+<meta property="article:modified_time" content="2021-08-04T15:42:15.191Z">
 <meta property="article:author" content="戛戛Happy">
 <meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.gagahappy.cn/blog/2021/08/golang-test-coverage-1.png_b1">
 
 
 <link rel="canonical" href="https://www.gagahappy.com/golang-test-coverage/">
@@ -152,7 +155,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%8E%87"><span class="nav-number">1.</span> <span class="nav-text">覆盖率</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A"><span class="nav-number">2.</span> <span class="nav-text">生成测试报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%87%E5%BF%97coverprofile"><span class="nav-number">2.1.</span> <span class="nav-text">使用标志coverprofile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%87%E5%BF%97covermode"><span class="nav-number">2.2.</span> <span class="nav-text">使用标志covermode</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A"><span class="nav-number">3.</span> <span class="nav-text">查看测试报告</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A6%86%E7%9B%96%E7%8E%87"><span class="nav-number">1.</span> <span class="nav-text">覆盖率</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A"><span class="nav-number">2.</span> <span class="nav-text">生成测试报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%87%E5%BF%97coverprofile"><span class="nav-number">2.1.</span> <span class="nav-text">使用标志coverprofile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%87%E5%BF%97covermode"><span class="nav-number">2.2.</span> <span class="nav-text">使用标志covermode</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A"><span class="nav-number">3.</span> <span class="nav-text">查看测试报告</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BA%90%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">源文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -262,17 +265,56 @@
     <div class="post-body" itemprop="articleBody">
         <h1 id="覆盖率"><a href="#覆盖率" class="headerlink" title="覆盖率"></a>覆盖率</h1><p>语句的覆盖率是指在测试中至少被运行一次的代码占总代码数的比例。</p>
 <h1 id="生成测试报告"><a href="#生成测试报告" class="headerlink" title="生成测试报告"></a>生成测试报告</h1><p>在生成报告之前，要确保所有的测试都正常通过。使用<code>go test</code>命令配合不同的参数标示可以生成不同类型的覆盖率分析报告</p>
-<h2 id="使用标志coverprofile"><a href="#使用标志coverprofile" class="headerlink" title="使用标志coverprofile"></a>使用标志<code>coverprofile</code></h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -run<span class="token operator">=</span>Coverage -coverprofile<span class="token operator">=</span>c.out golang/gop/ch7_interfaces/7.9_example_expression_evaluator/eval<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="使用标志coverprofile"><a href="#使用标志coverprofile" class="headerlink" title="使用标志coverprofile"></a>使用标志<code>coverprofile</code></h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> gott/prime -coverprofile<span class="token operator">=</span>c.out
+ok      gott/prime      <span class="token number">0</span>.013s  coverage: <span class="token number">93.8</span>% of statements<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>在运行每个测试前，会把参与测试的源代码拷贝一份，并对每个词法块插入一个布尔变量，来统计代码块在测试中是否被执行过，以此来统计代码覆盖率，统计日志数据写入c.out文件</p>
+<p><img src="//img.gagahappy.cn/blog/2021/08/golang-test-coverage-1.png_b1" alt="go 语言 测试覆盖率" title="go 语言 测试覆盖率"></p>
 <h2 id="使用标志covermode"><a href="#使用标志covermode" class="headerlink" title="使用标志covermode"></a>使用标志<code>covermode</code></h2><p>如果同时使用了<code>-covermode=count</code>，会在每个代码块插入计数器以统计代码块被执行的次数，用这个功能可以看到哪些代码是频繁执行的热点代码</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -run<span class="token operator">=</span>Coverage -covermode<span class="token operator">=</span>count -coverprofile<span class="token operator">=</span>c.out golang/gop/ch7_interfaces/7.9_example_expression_evaluator/eval<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> gott/prime -coverprofile<span class="token operator">=</span>c.out -covermode<span class="token operator">=</span>count
+ok      gott/prime      <span class="token number">0</span>.015s  coverage: <span class="token number">93.8</span>% of statements<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-
-
+<p><img src="//img.gagahappy.cn/blog/2021/08/golang-test-coverage-2.png_b1" alt="go 语言 测试覆盖率" title="go 语言 测试覆盖率"></p>
 <h1 id="查看测试报告"><a href="#查看测试报告" class="headerlink" title="查看测试报告"></a>查看测试报告</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go tool cover -html<span class="token operator">=</span>c.out<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>运行后会自动在浏览器中打开，绿色的代码块代表被测试覆盖到了，红色的则表示没有被覆盖到。如果使用了<code> -covermode=count</code>标志，会用红、灰、绿 三种颜色表示代码被调用的频率，红色表示没有调用，灰色表示频率较低，绿色随颜色深浅表示不同程度的频率调用</p>
+<p>运行后会自动在浏览器中打开，绿色的代码块代表被测试覆盖到了，红色的则表示没有被覆盖到。如果使用了<code> -covermode=count</code>标志，会用红、灰、绿 三种颜色表示代码被调用的频率，红色表示没有调用，灰色表示频率较低，绿色随颜色深浅表示不同程度的频率调用。具体可见上图测试报告。</p>
+<h1 id="源文件"><a href="#源文件" class="headerlink" title="源文件"></a>源文件</h1><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// primes_test.go</span>
+<span class="token keyword">func</span> <span class="token function">TestPrimes</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	max <span class="token operator">:=</span> <span class="token number">1000</span>
+	primes <span class="token operator">:=</span> <span class="token function">GetPrimes</span><span class="token punctuation">(</span>max<span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span>primes<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// primes.go</span>
+<span class="token comment">// 查找质数</span>
+<span class="token keyword">func</span> <span class="token function">GetPrimes</span><span class="token punctuation">(</span>max <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> max <span class="token operator">&lt;=</span> <span class="token number">1</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	marks <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">bool</span><span class="token punctuation">,</span> max<span class="token punctuation">)</span>
+	<span class="token keyword">var</span> count <span class="token builtin">int</span>
+	squareRoot <span class="token operator">:=</span> <span class="token function">int</span><span class="token punctuation">(</span>math<span class="token punctuation">.</span><span class="token function">Sqrt</span><span class="token punctuation">(</span><span class="token function">float64</span><span class="token punctuation">(</span>max<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> squareRoot<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token operator">!</span>marks<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">for</span> j <span class="token operator">:=</span> i <span class="token operator">*</span> i<span class="token punctuation">;</span> j <span class="token operator">&lt;</span> max<span class="token punctuation">;</span> j <span class="token operator">+=</span> i <span class="token punctuation">&#123;</span>
+				<span class="token keyword">if</span> <span class="token operator">!</span>marks<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">&#123;</span>
+					marks<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span>
+					count<span class="token operator">++</span>
+				<span class="token punctuation">&#125;</span>
+			<span class="token punctuation">&#125;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	primes <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> max<span class="token operator">-</span>count<span class="token punctuation">)</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> max<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token operator">!</span>marks<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token punctuation">&#123;</span>
+			primes <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>primes<span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> primes
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
 <li>测试不可能是完整的，计算机科学家Edsger Dijkstra曾说过：“测试能证明缺陷存在，而无法证明没有缺陷。”</li>
 <li>实现100%的测试覆盖率听起来很美，但是在具体实践中通常是不可行的，也不是值得推荐的做法。应该对更需要测试的地方添加测试代码，而不是一味的为每个方法都加入测试代码</li>
