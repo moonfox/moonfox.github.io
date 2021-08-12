@@ -1936,12 +1936,75 @@ helloA world
       </tags>
   </entry>
   <entry>
-    <title>go 语言 程序性能分析</title>
+    <title>go 语言 程序性能剖析</title>
     <url>/golang-pprof/</url>
-    <content><![CDATA[<h1 id="性能分析API"><a href="#性能分析API" class="headerlink" title="性能分析API"></a>性能分析API</h1><p>可以使用标准库中的 <code>runtime/pprof</code>，<code>runtime/trace</code>，<code>net/http/pprof</code>这三个包中提供的API来对Go程序进行性能分析，其中 <code>runtime/pprof</code>包中还提供了生成性能分析概要文件的API。概要文件是以二进制格式存储的，<code>go test</code> 命令也可以生成概要文件</p>
-<h1 id="概要文件的读取"><a href="#概要文件的读取" class="headerlink" title="概要文件的读取"></a>概要文件的读取</h1><p>概要文件有：CPU 概要文件（CPU Profile）、内存概要文件（Mem Profile）和阻塞概要文件（Block Profile），是Go程序在某一段时间内，对相关指标采样后，得到的概要信息。Go标准工具中<code>go tool pprof</code> 和 <code>go tool trace</code>可以解析概要文件中的信息，以可以阅读的方式展现出来，供分析性能使用</p>
-<h1 id="概要文件的生成"><a href="#概要文件的生成" class="headerlink" title="概要文件的生成"></a>概要文件的生成</h1><h2 id="protocol-buffers"><a href="#protocol-buffers" class="headerlink" title="protocol buffers"></a>protocol buffers</h2><p>概要文件其实就是 由 <code>protocol buffers</code> 生成的二进制数据流，<code>protocol buffers</code> 是一种数据序列化协议，它定义了程序对象如 <code>map</code>，结构体，数组等与字节之间如何相互转化。同时 <code>protocol buffers</code> 不仅仅是协议，也可以作为转化工具来使用。<code>protocol buffers</code> 会对生成的字节流进行压缩，它的体积比(<code>JSON，XML</code>)都要更小，所以也更适合用于数据在网上传输</p>
-<h2 id="StartCPUProfile-函数"><a href="#StartCPUProfile-函数" class="headerlink" title="StartCPUProfile 函数"></a>StartCPUProfile 函数</h2><p>对CPU信息进行定时采样生成概要文件，默认采样频率是100Hz，即每秒采样100次，调用<code>pprof.StartCPUProfile()</code>函数开始进行采样，调用<code>pprof.StopCPUProfile()</code>停止采样</p>
+    <content><![CDATA[<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p><em><strong>先写结论，便于接下来的阅读与理解</strong></em></p>
+<h2 id="基准测试与剖析的区别"><a href="#基准测试与剖析的区别" class="headerlink" title="基准测试与剖析的区别"></a>基准测试与剖析的区别</h2><p>基准测试可以用来衡量一个程序的性能，如果想让程序运行的更快，或对性能不理想的程序进行提升，基准测试无法给出从哪里可以进行优化。</p>
+<p>通过剖析，可以找出程序性能瓶颈所在，从而有针对性的对程序进行优化，提高性能。不要过早的进行优化，97%的场景，都不需要过早优化或根本就不需要优化，我们要做的仅是让程序可以正常运行即可。</p>
+<h2 id="剖析是如何进行的"><a href="#剖析是如何进行的" class="headerlink" title="剖析是如何进行的"></a>剖析是如何进行的</h2><p>剖析就是在程序执行期间进行一些自动抽样，在结束时进行推断，最后把统计结果保存为剖析数据文件，供剖析工具使用。Go 语言支持多种类型的剖析性能分析，可以通过go test 工具或调用Go的runtime 性能分析API(启用运行时剖析)，对程序进行剖析。</p>
+<h2 id="需要对哪些代码进行剖析"><a href="#需要对哪些代码进行剖析" class="headerlink" title="需要对哪些代码进行剖析"></a>需要对哪些代码进行剖析</h2><p>要对程序的主要功能，关键部分进行基准测试，然后对其进行剖析，功能测试不应该参与进来，使用 <code>-run=None</code>，禁止功能测试的运行</p>
+<h1 id="Go-test-标识剖析"><a href="#Go-test-标识剖析" class="headerlink" title="Go test 标识剖析"></a>Go test 标识剖析</h1><p>可以使用 <code>go test</code>工具提供的剖析标识对程序进行分析，不要让多个剖析标识同时运行，它们之间会相互影响，导致分析结果不准确</p>
+<h2 id="Cpu-剖析标识"><a href="#Cpu-剖析标识" class="headerlink" title="Cpu 剖析标识"></a>Cpu 剖析标识</h2><p>记录占用CPU时间最长的函数，每个运行在CPU上的函数每几毫秒都会遇到系统中断事件，每次中断时，都会记录一个剖析数据</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test gott<span class="token operator">/</span>fib <span class="token operator">-</span>cpuprofile<span class="token operator">=</span>cpu<span class="token punctuation">.</span>log <span class="token operator">-</span>run<span class="token operator">=</span>None <span class="token operator">-</span>bench<span class="token operator">=</span>FibWithMap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="堆剖析标识"><a href="#堆剖析标识" class="headerlink" title="堆剖析标识"></a>堆剖析标识</h2><p>记录最耗内容的语句，平均每申请512K的内存，就会记录一个剖析数据</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test gott<span class="token operator">/</span>fib <span class="token operator">-</span>memprofile<span class="token operator">=</span>mem<span class="token punctuation">.</span>log <span class="token operator">-</span>run<span class="token operator">=</span>None <span class="token operator">-</span>bench<span class="token operator">=</span>FibWithMap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="阻塞剖解标识"><a href="#阻塞剖解标识" class="headerlink" title="阻塞剖解标识"></a>阻塞剖解标识</h2><p>记录阻塞goroutine最久的操作，如系统调用，等待锁，管道收发等，每当这些操作阻塞goroutine时，就会记录一个剖析数据</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test gott<span class="token operator">/</span>fib <span class="token operator">-</span>blockprofile<span class="token operator">=</span>block<span class="token punctuation">.</span>log <span class="token operator">-</span>run<span class="token operator">=</span>None <span class="token operator">-</span>bench<span class="token operator">=</span>FibWithMap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h1 id="剖析文件分析"><a href="#剖析文件分析" class="headerlink" title="剖析文件分析"></a>剖析文件分析</h1><h2 id="可执行文件"><a href="#可执行文件" class="headerlink" title="可执行文件"></a>可执行文件</h2><p>使用以上标识符，除了生成了剖析数据日志(cpu.log/mem.log/block.log)，go test  还会生成对应的可执行程序(fib.test)，以包名做为前缀，后面为<code>.test</code>的文件。为了减少剖析数据日志占用的空间和提高分析效率，分析日志本身并没有记录函数的名称，而是函数的地址，所以需要与之对应的可执行文件，才可以对剖析日志进行数据分析</p>
+<h2 id="pprof-分析工具"><a href="#pprof-分析工具" class="headerlink" title="pprof 分析工具"></a>pprof 分析工具</h2><p> <code>go tool pprof</code>命令可以用来分析剖析日志，它需要两个基本的参数</p>
+<ul>
+<li>剖析文件日志</li>
+<li>测试生成的可执行文件</li>
+</ul>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof <span class="token operator">-</span>text <span class="token operator">-</span>nodecount<span class="token operator">=</span><span class="token number">10</span> <span class="token punctuation">.</span><span class="token operator">/</span>fib<span class="token punctuation">.</span>test cpu<span class="token punctuation">.</span>log
+
+File<span class="token punctuation">:</span> fib<span class="token punctuation">.</span>test
+Type<span class="token punctuation">:</span> cpu
+Time<span class="token punctuation">:</span> Aug <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">2021</span> at <span class="token number">11</span><span class="token punctuation">:</span><span class="token number">30</span>am <span class="token punctuation">(</span>CST<span class="token punctuation">)</span>
+Duration<span class="token punctuation">:</span> <span class="token number">1.43</span>s<span class="token punctuation">,</span> Total samples <span class="token operator">=</span> <span class="token number">1.09</span>s <span class="token punctuation">(</span><span class="token number">76.02</span><span class="token operator">%</span><span class="token punctuation">)</span>
+Showing nodes accounting <span class="token keyword">for</span> <span class="token number">1.09</span>s<span class="token punctuation">,</span> <span class="token number">100</span><span class="token operator">%</span> of <span class="token number">1.09</span>s total
+Showing top <span class="token number">10</span> nodes out of <span class="token number">17</span>
+      flat  flat<span class="token operator">%</span>   sum<span class="token operator">%</span>        cum   cum<span class="token operator">%</span>
+     <span class="token number">0.49</span>s <span class="token number">44.95</span><span class="token operator">%</span> <span class="token number">44.95</span><span class="token operator">%</span>      <span class="token number">0.94</span>s <span class="token number">86.24</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>mapaccess2_fast64
+     <span class="token number">0.36</span>s <span class="token number">33.03</span><span class="token operator">%</span> <span class="token number">77.98</span><span class="token operator">%</span>      <span class="token number">0.36</span>s <span class="token number">33.03</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>memhash64
+     <span class="token number">0.12</span>s <span class="token number">11.01</span><span class="token operator">%</span> <span class="token number">88.99</span><span class="token operator">%</span>      <span class="token number">1.06</span>s <span class="token number">97.25</span><span class="token operator">%</span>  gott<span class="token operator">/</span>fib<span class="token punctuation">.</span>fibWithMap
+     <span class="token number">0.06</span>s  <span class="token number">5.50</span><span class="token operator">%</span> <span class="token number">94.50</span><span class="token operator">%</span>      <span class="token number">0.06</span>s  <span class="token number">5.50</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>add <span class="token punctuation">(</span>partial<span class="token operator">-</span>inline<span class="token punctuation">)</span>
+     <span class="token number">0.03</span>s  <span class="token number">2.75</span><span class="token operator">%</span> <span class="token number">97.25</span><span class="token operator">%</span>      <span class="token number">0.03</span>s  <span class="token number">2.75</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>bucketShift <span class="token punctuation">(</span>inline<span class="token punctuation">)</span>
+     <span class="token number">0.02</span>s  <span class="token number">1.83</span><span class="token operator">%</span> <span class="token number">99.08</span><span class="token operator">%</span>      <span class="token number">1.08</span>s <span class="token number">99.08</span><span class="token operator">%</span>  gott<span class="token operator">/</span>fib<span class="token punctuation">.</span>BenchmarkFibWithMap
+     <span class="token number">0.01</span>s  <span class="token number">0.92</span><span class="token operator">%</span>   <span class="token number">100</span><span class="token operator">%</span>      <span class="token number">0.01</span>s  <span class="token number">0.92</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>wbBufFlush1
+         <span class="token number">0</span>     <span class="token number">0</span><span class="token operator">%</span>   <span class="token number">100</span><span class="token operator">%</span>      <span class="token number">0.01</span>s  <span class="token number">0.92</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>bmap<span class="token punctuation">)</span><span class="token punctuation">.</span>overflow <span class="token punctuation">(</span>inline<span class="token punctuation">)</span>
+         <span class="token number">0</span>     <span class="token number">0</span><span class="token operator">%</span>   <span class="token number">100</span><span class="token operator">%</span>      <span class="token number">0.03</span>s  <span class="token number">2.75</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>bucketMask <span class="token punctuation">(</span>inline<span class="token punctuation">)</span>
+         <span class="token number">0</span>     <span class="token number">0</span><span class="token operator">%</span>   <span class="token number">100</span><span class="token operator">%</span>      <span class="token number">0.01</span>s  <span class="token number">0.92</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>findrunnable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p><code>./fib.test</code>：测试生成的可执行文件，在一般的测试中，当测试完成后，文件就会被丢弃，但在启用剖析标识后，这个文件会被保留，供之后的分析使用</p>
+</li>
+<li><p><code> -nodecount</code>：限制分析结果输出的行数</p>
+</li>
+<li><p><code>-text</code>：指定输出的格式</p>
+</li>
+</ul>
+<p>还可以使用-web选项，用于生成函数的有向图，标注有CPU的使用和最热点的函数等信息</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof <span class="token operator">-</span>web <span class="token operator">-</span>nodecount<span class="token operator">=</span><span class="token number">10</span> <span class="token punctuation">.</span><span class="token operator">/</span>fib<span class="token punctuation">.</span>test cpu<span class="token punctuation">.</span>log
+
+<span class="token comment">// 使用-web需要安装 GraphViz</span>
+brew install graphviz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="运行时API剖析"><a href="#运行时API剖析" class="headerlink" title="运行时API剖析"></a>运行时API剖析</h1><p>可以使用标准库中的 <code>runtime/pprof</code>，<code>runtime/trace</code>，<code>net/http/pprof</code>这三个包中提供的API来对Go程序进行性能分析，其中 <code>runtime/pprof</code>包中还提供了生成性能分析概要文件的API。概要文件是以二进制格式存储的，<code>go test</code> 命令也可以生成概要文件</p>
+<h2 id="概要文件的读取"><a href="#概要文件的读取" class="headerlink" title="概要文件的读取"></a>概要文件的读取</h2><p>概要文件有：CPU 概要文件（CPU Profile）、内存概要文件（Mem Profile）和阻塞概要文件（Block Profile），是Go程序在某一段时间内，对相关指标采样后，得到的概要信息。Go标准工具中<code>go tool pprof</code> 和 <code>go tool trace</code>可以解析概要文件中的信息，以可以阅读的方式展现出来，供分析性能使用</p>
+<h2 id="概要文件的生成"><a href="#概要文件的生成" class="headerlink" title="概要文件的生成"></a>概要文件的生成</h2><h3 id="protocol-buffers"><a href="#protocol-buffers" class="headerlink" title="protocol buffers"></a>protocol buffers</h3><p>概要文件其实就是 由 <code>protocol buffers</code> 生成的二进制数据流，<code>protocol buffers</code> 是一种数据序列化协议，它定义了程序对象如 <code>map</code>，结构体，数组等与字节之间如何相互转化。同时 <code>protocol buffers</code> 不仅仅是协议，也可以作为转化工具来使用。<code>protocol buffers</code> 会对生成的字节流进行压缩，它的体积比(<code>JSON，XML</code>)都要更小，所以也更适合用于数据在网上传输</p>
+<h3 id="StartCPUProfile-函数"><a href="#StartCPUProfile-函数" class="headerlink" title="StartCPUProfile 函数"></a>StartCPUProfile 函数</h3><p>对CPU信息进行定时采样生成概要文件，默认采样频率是100Hz，即每秒采样100次，调用<code>pprof.StartCPUProfile()</code>函数开始进行采样，调用<code>pprof.StopCPUProfile()</code>停止采样</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">StopCPUProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	cpu<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 	<span class="token keyword">defer</span> cpu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -1955,9 +2018,9 @@ helloA world
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>StopCPUProfile</code>是通过设置<code>SetCPUProfileRate(0)</code>为0，来停止采样的，而<code>pprof.StartCPUProfile</code> 是把<code>runtime.SetCPUProfileRate(100)</code>设置为100来开始采样的</p>
-<h2 id="runtime-MemProfileRate值"><a href="#runtime-MemProfileRate值" class="headerlink" title="runtime.MemProfileRate值"></a>runtime.MemProfileRate值</h2><p>对堆内存的使用进行采样，通过对其赋值指定平均每分配多少个字节，就对堆内存的使用情况进行一次采样。默认值是512KB，对其赋0值表示停止采样。把收集到的采样信息写入文件需要调用<code>WriteHeapProfile(f)</code>函数，它会把概要文件信息写入传入的参数文件<code>f</code>中。<code>WriteHeapProfile(f)</code>函数记录的并不是实时的内存概要信息，而是最近一次内存垃圾工作完成后产生的。要得到实时信息可以使用<code>runtime.ReadMemStats()</code>函数</p>
-<h2 id="SetBlockProfileRate函数"><a href="#SetBlockProfileRate函数" class="headerlink" title="SetBlockProfileRate函数"></a>SetBlockProfileRate函数</h2><p>对阻塞概要信息的采样进行设定，其参数<code>rate</code>的值表示，当阻塞持续多少纳秒后对其进行进行采样。如果这个值小于等于0，则停止采样。把概要信息写入文件需要调用<code>pprof.Lookup(&quot;block&quot;)</code>，并传入值为<code>block</code>的参数，函数会返回一个<code>*pprof.Profile</code>类型的值，对这个值调用<code>WriteTo(w io.Writer, debug int)</code>方法，把概要信息写入文件。这个方法的第一个参数传入要写入概要信息的文件</p>
-<h1 id="pprof-Lookup函数的使用"><a href="#pprof-Lookup函数的使用" class="headerlink" title="pprof.Lookup函数的使用"></a>pprof.Lookup函数的使用</h1><p><code>Lookup(name string)</code>通过给定的<code>name</code> 的值，返回对应的概要信息。可以得到的概要信息有<code>goroutine, threadcreate, heap, allocs, block, mutex</code>这6个预定义指标的概要信息，它们都是<code>*Profile</code>类型的值，可以通过调用<code>WriteTo(w io.Writer, debug int)</code>方法，把采样的概要信息写入指定的文件中(通过第一个参数设置)，第二个参数表示了写入信息的详细细节，有<code>0,1,2</code>3个值，这6个指标使用不同的值写入细节信息</p>
+<h3 id="runtime-MemProfileRate值"><a href="#runtime-MemProfileRate值" class="headerlink" title="runtime.MemProfileRate值"></a>runtime.MemProfileRate值</h3><p>对堆内存的使用进行采样，通过对其赋值指定平均每分配多少个字节，就对堆内存的使用情况进行一次采样。默认值是512KB，对其赋0值表示停止采样。把收集到的采样信息写入文件需要调用<code>WriteHeapProfile(f)</code>函数，它会把概要文件信息写入传入的参数文件<code>f</code>中。<code>WriteHeapProfile(f)</code>函数记录的并不是实时的内存概要信息，而是最近一次内存垃圾工作完成后产生的。要得到实时信息可以使用<code>runtime.ReadMemStats()</code>函数</p>
+<h3 id="SetBlockProfileRate函数"><a href="#SetBlockProfileRate函数" class="headerlink" title="SetBlockProfileRate函数"></a>SetBlockProfileRate函数</h3><p>对阻塞概要信息的采样进行设定，其参数<code>rate</code>的值表示，当阻塞持续多少纳秒后对其进行进行采样。如果这个值小于等于0，则停止采样。把概要信息写入文件需要调用<code>pprof.Lookup(&quot;block&quot;)</code>，并传入值为<code>block</code>的参数，函数会返回一个<code>*pprof.Profile</code>类型的值，对这个值调用<code>WriteTo(w io.Writer, debug int)</code>方法，把概要信息写入文件。这个方法的第一个参数传入要写入概要信息的文件</p>
+<h2 id="pprof-Lookup函数的使用"><a href="#pprof-Lookup函数的使用" class="headerlink" title="pprof.Lookup函数的使用"></a>pprof.Lookup函数的使用</h2><p><code>Lookup(name string)</code>通过给定的<code>name</code> 的值，返回对应的概要信息。可以得到的概要信息有<code>goroutine, threadcreate, heap, allocs, block, mutex</code>这6个预定义指标的概要信息，它们都是<code>*Profile</code>类型的值，可以通过调用<code>WriteTo(w io.Writer, debug int)</code>方法，把采样的概要信息写入指定的文件中(通过第一个参数设置)，第二个参数表示了写入信息的详细细节，有<code>0,1,2</code>3个值，这6个指标使用不同的值写入细节信息</p>
 <ul>
 <li><code>goroutine</code>：此指标可以收集正在使用的所有 goroutine 的堆栈跟踪信息</li>
 <li><code>heap、allocs</code>：此指标会收集与堆内存的分配和释放有关的采样信息，可以看成是内存概要信息，heap 与 allocs 的展示视角不同</li>
@@ -1965,7 +2028,7 @@ helloA world
 <li><code>block</code>：此指标会收集因争用同步原语而被阻塞的那些代码的堆栈跟踪信息</li>
 <li><code>mutex</code>：此指标会收集曾经作为同步原语持有者的那些代码，它们的堆栈跟踪信息</li>
 </ul>
-<h1 id="使用在线网页查看程序性能"><a href="#使用在线网页查看程序性能" class="headerlink" title="使用在线网页查看程序性能"></a>使用在线网页查看程序性能</h1><p>在我们编写网络服务程序的时候，使用<code>net/http/pprof</code>包要比直接使用<code>runtime/pprof</code>包方便和实用很多，这个代码包可以为网络服务的监测提供有力的支撑</p>
+<h2 id="使用在线网页查看程序性能"><a href="#使用在线网页查看程序性能" class="headerlink" title="使用在线网页查看程序性能"></a>使用在线网页查看程序性能</h2><p>在我们编写网络服务程序的时候，使用<code>net/http/pprof</code>包要比直接使用<code>runtime/pprof</code>包方便和实用很多，这个代码包可以为网络服务的监测提供有力的支撑</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">import</span> <span class="token boolean">_</span> <span class="token string">"net/http/pprof"</span>
 log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span><span class="token function">ListenAndServe</span><span class="token punctuation">(</span><span class="token string">"localhost:8082"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
@@ -2498,6 +2561,24 @@ ok      gott/hello      <span class="token number">1</span>.399s<span aria-hidde
 <li><code>2 allocs/op</code>：平均每次迭代内存分配的次数</li>
 </ul>
 <p>平均每次迭代计算的依据应该使用的是 <code>b.N=5137456</code>迭代次数</p>
+<h1 id="基准测试的用途"><a href="#基准测试的用途" class="headerlink" title="基准测试的用途"></a>基准测试的用途</h1><p>一般用于对比两个不同的操作所消耗的时间，如</p>
+<ul>
+<li><p>渐近增长函数的运行时间</p>
+<p>一个函数需要1ms处理1,000个元素，处理10000或1百万将需要多少时间呢</p>
+</li>
+<li><p>I/O缓存该设置为多大</p>
+<p>基准测试可以帮助我们选择在性能达标情况下所需的最小内存</p>
+</li>
+<li><p>确定哪种算法更好</p>
+</li>
+</ul>
+<p>比较型的基准测试代码</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">,</span> size <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* ... */</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">Benchmark10</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span>         <span class="token punctuation">&#123;</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">Benchmark100</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span>        <span class="token punctuation">&#123;</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">Benchmark1000</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span>       <span class="token punctuation">&#123;</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>通过参数<code>size</code>来控制输入的大小，而不是直接修改<code>b.N</code>的值，除非你只是想知道一个固定大小的迭代的耗时，否则基准测试的结果将毫无意义</p>
 ]]></content>
       <categories>
         <category>后端</category>
@@ -3004,6 +3085,84 @@ FAIL
 	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span>format<span class="token punctuation">,</span> args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 	c<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>go 语言 测试 示例函数</title>
+    <url>/golang-test-example/</url>
+    <content><![CDATA[<h1 id="示例函数"><a href="#示例函数" class="headerlink" title="示例函数"></a>示例函数</h1><p>以<code>Example</code>开头，后面加对应的函数名，示例没有参数列表与返回值列表</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">ExampleFibMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>后缀<code>FibMap</code>的首字母是大写，因为这个函数在源码中就是大写，必须与源码保持一致，如果写为<code>fibMap</code>，那么会提示<code> ExampleFibWithMap refers an unknown identifier</code>，即无法与对应的函数相关联。</p>
+<p>要注意的是，因为<code>FibMap</code>方法是可导出的，它的示例函数要写为<code>ExampleFibMap</code>，如果方法是不可导出的，那么它的示例函数要写为<code>Example_xxx</code>的形式，如<code>fibWithMap</code>方法的示例函数可以命名为<code>Example_fibWithMap</code></p>
+<h1 id="命名约定"><a href="#命名约定" class="headerlink" title="命名约定"></a>命名约定</h1><p>Go 语言通过大量的命名约定来简化工具的复杂度，规范代码的风格。对示例函数的命名有如下约定：</p>
+<ul>
+<li>包级别的示例函数，直接命名为 <code>func Example() &#123; ... &#125;</code></li>
+<li>函数 F 的示例，命名为 <code>func ExampleF() &#123; ... &#125;</code></li>
+<li>类型 T 的示例，命名为 <code>func ExampleT() &#123; ... &#125;</code></li>
+<li>类型 T 上的 方法 M 的示例，命名为 <code>func ExampleT_M() &#123; ... &#125;</code></li>
+</ul>
+<p>如果同一个方法需要提供多个示例，可以在示例函数名称后附加一个不同的后缀来实现，但这种后缀必须以小写字母开头</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Example_suffix</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">ExampleF_suffix</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">ExampleT_suffix</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">ExampleT_M_suffix</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>示例代码会放在单独的示例文件中，如<code>example_test.go</code></p>
+<p><a href="https://github.com/golang/go/blob/master/src/bytes/example_test.go">https://github.com/golang/go/blob/master/src/bytes/example_test.go</a></p>
+<h1 id="测试示例函数"><a href="#测试示例函数" class="headerlink" title="测试示例函数"></a>测试示例函数</h1><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 测试通过</span>
+<span class="token keyword">go</span> test gott<span class="token operator">/</span>fib <span class="token operator">-</span>run<span class="token operator">=</span>ExampleFibMap
+ok      gott<span class="token operator">/</span>fib        <span class="token number">0.008</span>s
+
+<span class="token comment">// 测试不通过</span>
+<span class="token keyword">go</span> test gott<span class="token operator">/</span>fib <span class="token operator">-</span>run<span class="token operator">=</span>ExampleFibMap
+<span class="token operator">--</span><span class="token operator">-</span> FAIL<span class="token punctuation">:</span> ExampleFibMap <span class="token punctuation">(</span><span class="token number">0.00</span>s<span class="token punctuation">)</span>
+got<span class="token punctuation">:</span>
+<span class="token number">102334155</span>
+want<span class="token punctuation">:</span> <span class="token comment">// 这里就是output 后面期待的值</span>
+<span class="token number">102334156</span>
+FAIL
+FAIL    gott<span class="token operator">/</span>fib        <span class="token number">0.012</span>s
+FAIL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>有时候，输出顺序可能不确定，比如循环输出 map 的值，那么可以使用 <code>Unordered output</code> 开头的注释</p>
+<h1 id="示例函数的作用"><a href="#示例函数的作用" class="headerlink" title="示例函数的作用"></a>示例函数的作用</h1><ol>
+<li><p>作为文档使用</p>
+<p>它可以直观的展示一个函数的用法与功能。根据<code>Example</code>的后缀部分，<code>godoc</code>文档服务会把示例函数关联到函数本身，在查询在线文档的时候，可以看到函数的具体用法及示例函数</p>
+</li>
+<li><p>验证函数是否正确</p>
+<p>如果示例函数中包含<code>// Output</code>注释，那么在执行 go test 的时候，示例函数也会被运行，然后检查标准输出是否与注释匹配，不匹配则做为测试失败处理。如果示例函数中没有包含<code>// Output</code>注释，那么 go test 的时候，它不会被运行</p>
+</li>
+</ol>
+<h1 id="源码文件"><a href="#源码文件" class="headerlink" title="源码文件"></a>源码文件</h1><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// fib_text.go</span>
+<span class="token keyword">func</span> <span class="token function">ExampleFibMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	num <span class="token operator">:=</span> <span class="token function">fibWithMap</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
+	<span class="token comment">//Output:</span>
+	<span class="token comment">//102334155</span>
+	<span class="token comment">//hello</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">Example_fibWithMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	num <span class="token operator">:=</span> <span class="token function">fibWithMap</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
+	<span class="token comment">//Output:</span>
+	<span class="token comment">//102334155</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以有多个标准输出，与之对应的output也要有多个注释</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">FibMap</span><span class="token punctuation">(</span>x <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">fibWithMap</span><span class="token punctuation">(</span>x <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span><span class="token operator">...</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 ]]></content>
       <categories>

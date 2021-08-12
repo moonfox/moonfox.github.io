@@ -27,7 +27,7 @@
 <meta property="og:description" content="基准测试是测量一个程序在固定工作负载下的性能，使用 -bench 标记可以对代码进行基准测试 go test -v -bench&#x3D;. -run&#x3D;^$ gott&#x2F;hello goos: darwin goarch: amd64 pkg: gott&#x2F;hello BenchmarkHello-4         4964053               228.5 ns&#x2F;op PASS ok">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-07-08T15:16:54.000Z">
-<meta property="article:modified_time" content="2021-08-04T15:42:15.191Z">
+<meta property="article:modified_time" content="2021-08-12T13:50:25.380Z">
 <meta property="article:author" content="戛戛Happy">
 <meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary">
@@ -93,7 +93,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">60</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">61</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -152,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">基准测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#b-N%E5%80%BC%E7%9A%84%E7%A1%AE%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">b.N值的确定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%80%BB%E6%97%B6%E9%97%B4%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">3.</span> <span class="nav-text">测试总时间的计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E5%9D%87%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">4.</span> <span class="nav-text">平均执行时间的计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#benchtime-%E6%A0%87%E8%AE%B0"><span class="nav-number">5.</span> <span class="nav-text">benchtime 标记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#benchmem-%E6%A0%87%E8%AE%B0"><span class="nav-number">6.</span> <span class="nav-text">benchmem 标记</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">基准测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#b-N%E5%80%BC%E7%9A%84%E7%A1%AE%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">b.N值的确定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%80%BB%E6%97%B6%E9%97%B4%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">3.</span> <span class="nav-text">测试总时间的计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B3%E5%9D%87%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">4.</span> <span class="nav-text">平均执行时间的计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#benchtime-%E6%A0%87%E8%AE%B0"><span class="nav-number">5.</span> <span class="nav-text">benchtime 标记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#benchmem-%E6%A0%87%E8%AE%B0"><span class="nav-number">6.</span> <span class="nav-text">benchmem 标记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-number">7.</span> <span class="nav-text">基准测试的用途</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -397,6 +397,24 @@ ok      gott/hello      <span class="token number">1</span>.399s<span aria-hidde
 <li><code>2 allocs/op</code>：平均每次迭代内存分配的次数</li>
 </ul>
 <p>平均每次迭代计算的依据应该使用的是 <code>b.N=5137456</code>迭代次数</p>
+<h1 id="基准测试的用途"><a href="#基准测试的用途" class="headerlink" title="基准测试的用途"></a>基准测试的用途</h1><p>一般用于对比两个不同的操作所消耗的时间，如</p>
+<ul>
+<li><p>渐近增长函数的运行时间</p>
+<p>一个函数需要1ms处理1,000个元素，处理10000或1百万将需要多少时间呢</p>
+</li>
+<li><p>I/O缓存该设置为多大</p>
+<p>基准测试可以帮助我们选择在性能达标情况下所需的最小内存</p>
+</li>
+<li><p>确定哪种算法更好</p>
+</li>
+</ul>
+<p>比较型的基准测试代码</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">,</span> size <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* ... */</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">Benchmark10</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span>         <span class="token punctuation">&#123;</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">Benchmark100</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span>        <span class="token punctuation">&#123;</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">Benchmark1000</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span>       <span class="token punctuation">&#123;</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>通过参数<code>size</code>来控制输入的大小，而不是直接修改<code>b.N</code>的值，除非你只是想知道一个固定大小的迭代的耗时，否则基准测试的结果将毫无意义</p>
 
     </div>
 
