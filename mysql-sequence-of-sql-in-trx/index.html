@@ -19,28 +19,28 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="$ git config --global user.name &quot;Scott Chacon&quot; $ git config --global user.email &quot;schacon@gmail.com&quot;">
+<meta name="description" content="场景：用户购买商品A，对应的SQL如下  商品A库存减1 (SQL1) 用户购买商品A，扣减用户金额 (SQL2) 插入一条交易日志 (SQL3)  这三个操作为原子操作，所以要写在一个事务中。如果有大量用户购买商品A，则商品A库存减1 为热点数据，被频繁更新。假设每条SQL的执行时间为5秒，则整个事务的执行时间为15秒，由于有大量用户购买，那么不同的执行顺序将会影响最终的执行时间，从而影响并发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git 设置用户名">
-<meta property="og:url" content="https://www.gagahappy.com/git-set-your-name/">
+<meta property="og:title" content="mysql 事务中多条SQL的排序">
+<meta property="og:url" content="https://www.gagahappy.com/mysql-sequence-of-sql-in-trx/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="$ git config --global user.name &quot;Scott Chacon&quot; $ git config --global user.email &quot;schacon@gmail.com&quot;">
+<meta property="og:description" content="场景：用户购买商品A，对应的SQL如下  商品A库存减1 (SQL1) 用户购买商品A，扣减用户金额 (SQL2) 插入一条交易日志 (SQL3)  这三个操作为原子操作，所以要写在一个事务中。如果有大量用户购买商品A，则商品A库存减1 为热点数据，被频繁更新。假设每条SQL的执行时间为5秒，则整个事务的执行时间为15秒，由于有大量用户购买，那么不同的执行顺序将会影响最终的执行时间，从而影响并发">
 <meta property="og:locale">
-<meta property="article:published_time" content="2011-07-22T19:28:30.000Z">
-<meta property="article:modified_time" content="2021-09-04T08:23:29.010Z">
+<meta property="article:published_time" content="2021-08-18T16:00:31.000Z">
+<meta property="article:modified_time" content="2021-09-04T08:23:29.014Z">
 <meta property="article:author" content="戛戛Happy">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://www.gagahappy.com/git-set-your-name/">
+<link rel="canonical" href="https://www.gagahappy.com/mysql-sequence-of-sql-in-trx/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":"","permalink":"https://www.gagahappy.com/git-set-your-name/","path":"git-set-your-name/","title":"git 设置用户名"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://www.gagahappy.com/mysql-sequence-of-sql-in-trx/","path":"mysql-sequence-of-sql-in-trx/","title":"mysql 事务中多条SQL的排序"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>git 设置用户名 | 睡月花儿</title>
+<title>mysql 事务中多条SQL的排序 | 睡月花儿</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-17621945-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-17621945-1","only_pageview":false}</script>
@@ -213,7 +213,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-set-your-name/">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-sequence-of-sql-in-trx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/apple-touch-icon.png">
@@ -226,7 +226,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          git 设置用户名
+          mysql 事务中多条SQL的排序
         </h1>
 
         <div class="post-meta-container">
@@ -237,7 +237,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2011-07-22 19:28:30" itemprop="dateCreated datePublished" datetime="2011-07-22T19:28:30+00:00">2011-07-22</time>
+      <time title="Created: 2021-08-18 16:00:31" itemprop="dateCreated datePublished" datetime="2021-08-18T16:00:31+00:00">2021-08-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -245,7 +245,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+          <a href="/tags/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
         </span>
     </span>
 
@@ -259,8 +259,109 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> config --global user.name <span class="token string">"Scott Chacon"</span>
-$ <span class="token function">git</span> config --global user.email <span class="token string">"schacon@gmail.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+        <p>场景：用户购买商品A，对应的SQL如下</p>
+<ol>
+<li>商品A库存减1 (SQL1)</li>
+<li>用户购买商品A，扣减用户金额 (SQL2)</li>
+<li>插入一条交易日志 (SQL3)</li>
+</ol>
+<p>这三个操作为原子操作，所以要写在一个事务中。如果有大量用户购买商品A，则<code>商品A库存减1 </code>为热点数据，被频繁更新。假设每条SQL的执行时间为5秒，则整个事务的执行时间为15秒，由于有大量用户购买，那么不同的执行顺序将会影响最终的执行时间，从而影响并发</p>
+<p>把<code>商品A库存减1 (SQL1)</code>放在首行(情况1)</p>
+<table>
+<thead>
+<tr>
+<th>时刻</th>
+<th>事务A</th>
+<th>事务B</th>
+<th>耗时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>商品A库存减1 (SQL1)</td>
+<td>商品A库存减1 (SQL1) 发生等待，不能执行，直到  T4 时刻</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>用户购买商品A，扣减用户金额 (SQL2)</td>
+<td></td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>插入一条交易日志 (SQL3)</td>
+<td></td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T4</td>
+<td></td>
+<td>商品A库存减1 (SQL1)</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T5</td>
+<td></td>
+<td>用户购买商品A，扣减用户金额 (SQL2)</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T6</td>
+<td></td>
+<td>插入一条交易日志 (SQL3)</td>
+<td>5s</td>
+</tr>
+</tbody></table>
+<ul>
+<li>T1时刻，事务A执行<code>商品A库存减1</code>，给其上锁，直到事务提交（15秒以后）</li>
+<li>同时事务B也执行<code>商品A库存减1</code>，被阻塞，发生锁等待，这使得后面的<code>Sql2,sql2</code>语句不能执行，直到15s后，事务A提交数据。 即T4时刻才开始执行。</li>
+<li>事务B总共耗时30秒才完成。等待事务A的15s(T1到T3) + 自身的15s</li>
+</ul>
+<p>如果把<code>商品A库存减1 (SQL1)</code>放在最后，可以减少等待的时间(情况2)</p>
+<table>
+<thead>
+<tr>
+<th>时刻</th>
+<th>事务A</th>
+<th>事务B</th>
+<th>耗时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>用户购买商品A，扣减用户金额 (SQL2)</td>
+<td>用户购买商品A，扣减用户金额 (SQL2)</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>插入一条交易日志 (SQL3)</td>
+<td>插入一条交易日志 (SQL3)</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>商品A库存减1 (SQL1)</td>
+<td>商品A库存减1 (SQL1) 发生等待，不能执行，直到  T4 时刻</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T4</td>
+<td></td>
+<td>商品A库存减1 (SQL1)</td>
+<td>5s</td>
+</tr>
+</tbody></table>
+<ul>
+<li>扣减用户金额是针对单个用户操作，在同一时刻更新这些记录不太容易发生锁等待，所以事务A与事务B在T1时刻可以同时进行</li>
+<li>插入一条交易日志 也是可以同时进行的，所以事务A与事务B在T2时刻同时进行</li>
+<li>事务A T3 时刻执行完成，耗时15s，事务B 在此时被阻塞，因为要更新同一条记录，发生了锁等待，需要等待5秒</li>
+<li>事务B在T4时刻，执行完成，耗时 20s（10s + 等待 5s + 5s）</li>
+</ul>
+<p>当把<code>商品A库存减1 (SQL1)</code>放在最后时，事务B的执行时间缩短到了20s，节省了10s，大大提高了并发度。</p>
+<p>可以看出，锁等待时间是正在执行的事物引起锁的语句到提交的时间间隔，如果放在事务最后，那这个时间间隔会变为最少。对照上面的例子，情况1事务A从T1到T3时刻，持有锁总共15s。情况2，事务A只在T3时刻持有锁，总共5s，可见把<code>商品A库存减1 (SQL1)</code>放到最后时，大大减少了时间间隔。</p>
+<p>通过减少事务持有锁的时间，大程度的减少了事务之间的锁等待，提高了并发度。所以通常的做法是把热点更新语句放到事务的最后，这样当事务结束后，热点语句的锁可以被马上释放，减少事务锁持有的时间，其它事务等待锁释放的时间就会变短，从而使并发度得到了提高。</p>
 
     </div>
 
@@ -278,7 +379,7 @@ $ <span class="token function">git</span> config --global user.email <span class
   </li>
   <li class="post-copyright-link">
       <strong>Post link: </strong>
-      <a href="https://www.gagahappy.com/git-set-your-name/" title="git 设置用户名">https://www.gagahappy.com/git-set-your-name/</a>
+      <a href="https://www.gagahappy.com/mysql-sequence-of-sql-in-trx/" title="mysql 事务中多条SQL的排序">https://www.gagahappy.com/mysql-sequence-of-sql-in-trx/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -287,20 +388,20 @@ $ <span class="token function">git</span> config --global user.email <span class
 </div>
 
           <div class="post-tags">
-              <a href="/categories/software/" rel="category"><i class="fa fa-folder"></i> 软件</a>
+              <a href="/categories/database/" rel="category"><i class="fa fa-folder"></i> 数据库</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/git-commit-object/" rel="prev" title="git commit 对象">
-                  <i class="fa fa-chevron-left"></i> git commit 对象
+                <a href="/mysql-deadlock/" rel="prev" title="mysql 死锁">
+                  <i class="fa fa-chevron-left"></i> mysql 死锁
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/git-commit-flow/" rel="next" title="git 多人协作提交流程">
-                  git 多人协作提交流程 <i class="fa fa-chevron-right"></i>
+                <a href="/golang-pprof/" rel="next" title="go 语言 程序性能剖析">
+                  go 语言 程序性能剖析 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -313,6 +414,7 @@ $ <span class="token function">git</span> config --global user.email <span class
 
 
 
+    <div class="comments gitalk-container"></div>
 </div>
   </main>
 
@@ -357,7 +459,7 @@ $ <span class="token function">git</span> config --global user.email <span class
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"moonfox","repo":"gitalk","client_id":"2a9c7ba27dd4a9376f8c","client_secret":"cb4fa8779f853f735779a518c57e894a8ee30b09","admin_user":"moonfox","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"git-set-your-name/"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"moonfox","repo":"gitalk","client_id":"2a9c7ba27dd4a9376f8c","client_secret":"cb4fa8779f853f735779a518c57e894a8ee30b09","admin_user":"moonfox","distraction_free_mode":false,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"mysql-sequence-of-sql-in-trx/"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

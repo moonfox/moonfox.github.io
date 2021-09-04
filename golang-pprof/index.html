@@ -19,15 +19,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.gagahappy.com","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="结论先写结论，便于接下来的阅读与理解 基准测试与剖析的区别基准测试可以用来衡量一个程序的性能，如果想让程序运行的更快，或对性能不理想的程序进行提升，基准测试无法给出从哪里可以进行优化。 通过剖析，可以找出程序性能瓶颈所在，从而有针对性的对程序进行优化，提高性能。不要过早的进行优化，97%的场景，都不需要过早优化或根本就不需要优化，我们要做的仅是让程序可以正常运行即可。 剖析是如何进行的剖析就是在程">
+<meta name="description" content="用途对程序性能进行剖析，可以找到性能的瓶颈、bug、以及对程序进行有目标的优化，从而提高程序的性能，解决程序中存在的问题。 如何对程序进行剖析 设置要分析的指标，利用工具 (go test)或性能指标API对指标进行剖析，生成对应的概要文件(二进制文件) 使用分析工具(go tool pprof&#x2F; go tool trace)对概要文件进行解析，得到性能指标值的具体信息，这些信息可以以文本，图形的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="go 语言 程序性能剖析">
 <meta property="og:url" content="https://www.gagahappy.com/golang-pprof/">
 <meta property="og:site_name" content="睡月花儿">
-<meta property="og:description" content="结论先写结论，便于接下来的阅读与理解 基准测试与剖析的区别基准测试可以用来衡量一个程序的性能，如果想让程序运行的更快，或对性能不理想的程序进行提升，基准测试无法给出从哪里可以进行优化。 通过剖析，可以找出程序性能瓶颈所在，从而有针对性的对程序进行优化，提高性能。不要过早的进行优化，97%的场景，都不需要过早优化或根本就不需要优化，我们要做的仅是让程序可以正常运行即可。 剖析是如何进行的剖析就是在程">
+<meta property="og:description" content="用途对程序性能进行剖析，可以找到性能的瓶颈、bug、以及对程序进行有目标的优化，从而提高程序的性能，解决程序中存在的问题。 如何对程序进行剖析 设置要分析的指标，利用工具 (go test)或性能指标API对指标进行剖析，生成对应的概要文件(二进制文件) 使用分析工具(go tool pprof&#x2F; go tool trace)对概要文件进行解析，得到性能指标值的具体信息，这些信息可以以文本，图形的">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-06-15T14:59:46.000Z">
-<meta property="article:modified_time" content="2021-08-12T13:50:25.380Z">
+<meta property="article:published_time" content="2021-08-15T14:59:46.000Z">
+<meta property="article:modified_time" content="2021-09-04T08:23:29.014Z">
 <meta property="article:author" content="戛戛Happy">
 <meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary">
@@ -93,7 +93,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">61</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">64</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -152,7 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">结论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%89%96%E6%9E%90%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">基准测试与剖析的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%96%E6%9E%90%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%9A%84"><span class="nav-number">1.2.</span> <span class="nav-text">剖析是如何进行的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E5%AF%B9%E5%93%AA%E4%BA%9B%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E5%89%96%E6%9E%90"><span class="nav-number">1.3.</span> <span class="nav-text">需要对哪些代码进行剖析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Go-test-%E6%A0%87%E8%AF%86%E5%89%96%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">Go test 标识剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cpu-%E5%89%96%E6%9E%90%E6%A0%87%E8%AF%86"><span class="nav-number">2.1.</span> <span class="nav-text">Cpu 剖析标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E5%89%96%E6%9E%90%E6%A0%87%E8%AF%86"><span class="nav-number">2.2.</span> <span class="nav-text">堆剖析标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E%E5%89%96%E8%A7%A3%E6%A0%87%E8%AF%86"><span class="nav-number">2.3.</span> <span class="nav-text">阻塞剖解标识</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%96%E6%9E%90%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">剖析文件分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">可执行文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pprof-%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7"><span class="nav-number">3.2.</span> <span class="nav-text">pprof 分析工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6API%E5%89%96%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">运行时API剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%8F%96"><span class="nav-number">4.1.</span> <span class="nav-text">概要文件的读取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6%E7%9A%84%E7%94%9F%E6%88%90"><span class="nav-number">4.2.</span> <span class="nav-text">概要文件的生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#protocol-buffers"><span class="nav-number">4.2.1.</span> <span class="nav-text">protocol buffers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StartCPUProfile-%E5%87%BD%E6%95%B0"><span class="nav-number">4.2.2.</span> <span class="nav-text">StartCPUProfile 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#runtime-MemProfileRate%E5%80%BC"><span class="nav-number">4.2.3.</span> <span class="nav-text">runtime.MemProfileRate值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SetBlockProfileRate%E5%87%BD%E6%95%B0"><span class="nav-number">4.2.4.</span> <span class="nav-text">SetBlockProfileRate函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pprof-Lookup%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.3.</span> <span class="nav-text">pprof.Lookup函数的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%A8%E7%BA%BF%E7%BD%91%E9%A1%B5%E6%9F%A5%E7%9C%8B%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD"><span class="nav-number">4.4.</span> <span class="nav-text">使用在线网页查看程序性能</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E9%80%94"><span class="nav-number">1.</span> <span class="nav-text">用途</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AF%B9%E7%A8%8B%E5%BA%8F%E8%BF%9B%E8%A1%8C%E5%89%96%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">如何对程序进行剖析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">概要文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">概要文件的格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">生成概要文件的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%85%B3%E6%80%A7%E8%83%BD%E7%9A%84%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">有关性能的概要文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Go-test-%E6%A0%87%E8%AF%86%E7%94%9F%E6%88%90%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">Go test 标识生成概要文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cpu-%E5%89%96%E6%9E%90%E6%A0%87%E8%AF%86"><span class="nav-number">4.1.</span> <span class="nav-text">Cpu 剖析标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E5%89%96%E6%9E%90%E6%A0%87%E8%AF%86"><span class="nav-number">4.2.</span> <span class="nav-text">堆剖析标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E%E5%89%96%E8%A7%A3%E6%A0%87%E8%AF%86"><span class="nav-number">4.3.</span> <span class="nav-text">阻塞剖解标识</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">解析概要文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">可执行文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pprof-%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7"><span class="nav-number">5.2.</span> <span class="nav-text">pprof 分析工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87API%E7%94%9F%E6%88%90%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">性能指标API生成概要文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90CPU%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6"><span class="nav-number">6.1.</span> <span class="nav-text">生成CPU概要文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#StartCPUProfile%E5%87%BD%E6%95%B0"><span class="nav-number">6.1.1.</span> <span class="nav-text">StartCPUProfile函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StopCPUProfile%E5%87%BD%E6%95%B0"><span class="nav-number">6.1.2.</span> <span class="nav-text">StopCPUProfile函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%86%85%E5%AD%98%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6"><span class="nav-number">6.2.</span> <span class="nav-text">生成内存概要文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MemProfileRate"><span class="nav-number">6.2.1.</span> <span class="nav-text">MemProfileRate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WriteHeapProfile-%E5%87%BD%E6%95%B0"><span class="nav-number">6.2.2.</span> <span class="nav-text">WriteHeapProfile 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReadMemStats-%E5%87%BD%E6%95%B0"><span class="nav-number">6.2.3.</span> <span class="nav-text">ReadMemStats 函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%98%BB%E5%A1%9E%E6%A6%82%E8%A6%81%E6%96%87%E4%BB%B6"><span class="nav-number">6.3.</span> <span class="nav-text">生成阻塞概要文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SetBlockProfileRate%E5%87%BD%E6%95%B0"><span class="nav-number">6.3.1.</span> <span class="nav-text">SetBlockProfileRate函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#blockprofilerate%E5%8F%98%E9%87%8F"><span class="nav-number">6.3.2.</span> <span class="nav-text">blockprofilerate变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pprof-Lookup-%E2%80%9Cblock%E2%80%9D"><span class="nav-number">6.3.3.</span> <span class="nav-text">pprof.Lookup(“block”)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pprof-Lookup%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">pprof.Lookup函数的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E5%9F%BA%E4%BA%8E-HTTP-%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E6%B7%BB%E5%8A%A0%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E6%8E%A5%E5%8F%A3"><span class="nav-number">8.</span> <span class="nav-text">为基于 HTTP 协议的网络服务添加性能分析接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A6%81%E5%9B%9E%E7%AD%94%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">9.</span> <span class="nav-text">要回答的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%89%96%E6%9E%90%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">9.1.</span> <span class="nav-text">基准测试与剖析的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%96%E6%9E%90%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%9A%84"><span class="nav-number">9.2.</span> <span class="nav-text">剖析是如何进行的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E5%AF%B9%E5%93%AA%E4%BA%9B%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E5%89%96%E6%9E%90"><span class="nav-number">9.3.</span> <span class="nav-text">需要对哪些代码进行剖析</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -238,7 +238,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-06-15 14:59:46" itemprop="dateCreated datePublished" datetime="2021-06-15T14:59:46+00:00">2021-06-15</time>
+      <time title="Created: 2021-08-15 14:59:46" itemprop="dateCreated datePublished" datetime="2021-08-15T14:59:46+00:00">2021-08-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -260,12 +260,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p><em><strong>先写结论，便于接下来的阅读与理解</strong></em></p>
-<h2 id="基准测试与剖析的区别"><a href="#基准测试与剖析的区别" class="headerlink" title="基准测试与剖析的区别"></a>基准测试与剖析的区别</h2><p>基准测试可以用来衡量一个程序的性能，如果想让程序运行的更快，或对性能不理想的程序进行提升，基准测试无法给出从哪里可以进行优化。</p>
-<p>通过剖析，可以找出程序性能瓶颈所在，从而有针对性的对程序进行优化，提高性能。不要过早的进行优化，97%的场景，都不需要过早优化或根本就不需要优化，我们要做的仅是让程序可以正常运行即可。</p>
-<h2 id="剖析是如何进行的"><a href="#剖析是如何进行的" class="headerlink" title="剖析是如何进行的"></a>剖析是如何进行的</h2><p>剖析就是在程序执行期间进行一些自动抽样，在结束时进行推断，最后把统计结果保存为剖析数据文件，供剖析工具使用。Go 语言支持多种类型的剖析性能分析，可以通过go test 工具或调用Go的runtime 性能分析API(启用运行时剖析)，对程序进行剖析。</p>
-<h2 id="需要对哪些代码进行剖析"><a href="#需要对哪些代码进行剖析" class="headerlink" title="需要对哪些代码进行剖析"></a>需要对哪些代码进行剖析</h2><p>要对程序的主要功能，关键部分进行基准测试，然后对其进行剖析，功能测试不应该参与进来，使用 <code>-run=None</code>，禁止功能测试的运行</p>
-<h1 id="Go-test-标识剖析"><a href="#Go-test-标识剖析" class="headerlink" title="Go test 标识剖析"></a>Go test 标识剖析</h1><p>可以使用 <code>go test</code>工具提供的剖析标识对程序进行分析，不要让多个剖析标识同时运行，它们之间会相互影响，导致分析结果不准确</p>
+        <h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>对程序性能进行剖析，可以找到性能的瓶颈、bug、以及对程序进行有目标的优化，从而提高程序的性能，解决程序中存在的问题。</p>
+<h1 id="如何对程序进行剖析"><a href="#如何对程序进行剖析" class="headerlink" title="如何对程序进行剖析"></a>如何对程序进行剖析</h1><ol>
+<li>设置要分析的指标，利用<code>工具 (go test)</code>或<code>性能指标API</code>对指标进行剖析，生成对应的概要文件(二进制文件)</li>
+<li>使用分析工具(go tool pprof/ go tool trace)对概要文件进行解析，得到性能指标值的具体信息，这些信息可以以文本，图形的形式展示。</li>
+<li>根据得到性能指标值的具体信息，分析程序性能，查找程序瓶颈或对程序进行优化</li>
+</ol>
+<p>要对一个程序进行剖析，必须先生成对应指标的<code>概要文件</code>，然后再用<code>分析工具</code>去解析这个<code>概要文件</code></p>
+<h1 id="概要文件"><a href="#概要文件" class="headerlink" title="概要文件"></a>概要文件</h1><p>是Go程序在某一段时间内，对相关指标采样后，得到的概要信息。剖析时，会在程序执行期间进行一些自动抽样，在结束时进行推断，最后把统计结果保存为概要文件，供分析工具使用。</p>
+<h2 id="概要文件的格式"><a href="#概要文件的格式" class="headerlink" title="概要文件的格式"></a>概要文件的格式</h2><p>概要文件其实就是 由 <code>protocol buffers</code> 生成的二进制数据流，<code>protocol buffers</code> 是一种数据序列化协议，它定义了程序对象如 <code>map</code>，结构体，数组等与字节之间如何相互转化。同时 <code>protocol buffers</code> 不仅仅是协议，也可以作为转化工具来使用，它可以把字节流转化为对象，也可以把对象转化为字节流。<code>protocol buffers</code> 会对生成的字节流进行压缩，它的体积比(<code>JSON，XML</code>)都要更小，所以也更适合用于数据在网上传输</p>
+<h2 id="生成概要文件的方法"><a href="#生成概要文件的方法" class="headerlink" title="生成概要文件的方法"></a>生成概要文件的方法</h2><p>Go 语言支持多种类型的性能分析，可以通过</p>
+<ul>
+<li>使用 go test 配合对应的标识符</li>
+<li>使用性能指标API</li>
+</ul>
+<p>这两种方式，都可以生成概要文件</p>
+<h2 id="有关性能的概要文件"><a href="#有关性能的概要文件" class="headerlink" title="有关性能的概要文件"></a>有关性能的概要文件</h2><p>CPU概要文件，内存概要文件，阻塞概要文件，它们可以通过 go test 配合对应的标识符生成，对CPU，内存，阻塞这三个指标进行分析。</p>
+<h1 id="Go-test-标识生成概要文件"><a href="#Go-test-标识生成概要文件" class="headerlink" title="Go test 标识生成概要文件"></a>Go test 标识生成概要文件</h1><p>可以使用 <code>go test</code>工具提供的剖析标识对程序进行分析，生成概要文件。不要让多个剖析标识同时运行，它们之间会相互影响，导致分析结果不准确</p>
 <h2 id="Cpu-剖析标识"><a href="#Cpu-剖析标识" class="headerlink" title="Cpu 剖析标识"></a>Cpu 剖析标识</h2><p>记录占用CPU时间最长的函数，每个运行在CPU上的函数每几毫秒都会遇到系统中断事件，每次中断时，都会记录一个剖析数据</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test gott<span class="token operator">/</span>fib <span class="token operator">-</span>cpuprofile<span class="token operator">=</span>cpu<span class="token punctuation">.</span>log <span class="token operator">-</span>run<span class="token operator">=</span>None <span class="token operator">-</span>bench<span class="token operator">=</span>FibWithMap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -281,7 +292,7 @@
 
 
 
-<h1 id="剖析文件分析"><a href="#剖析文件分析" class="headerlink" title="剖析文件分析"></a>剖析文件分析</h1><h2 id="可执行文件"><a href="#可执行文件" class="headerlink" title="可执行文件"></a>可执行文件</h2><p>使用以上标识符，除了生成了剖析数据日志(cpu.log/mem.log/block.log)，go test  还会生成对应的可执行程序(fib.test)，以包名做为前缀，后面为<code>.test</code>的文件。为了减少剖析数据日志占用的空间和提高分析效率，分析日志本身并没有记录函数的名称，而是函数的地址，所以需要与之对应的可执行文件，才可以对剖析日志进行数据分析</p>
+<h1 id="解析概要文件"><a href="#解析概要文件" class="headerlink" title="解析概要文件"></a>解析概要文件</h1><h2 id="可执行文件"><a href="#可执行文件" class="headerlink" title="可执行文件"></a>可执行文件</h2><p>使用以上标识符，除了生成了剖析数据日志(cpu.log/mem.log/block.log)，go test  还会生成对应的可执行程序(fib.test)，以包名做为前缀，后面为<code>.test</code>的文件。为了减少剖析数据日志占用的空间和提高分析效率，分析日志本身并没有记录函数的名称，而是函数的地址，所以需要与之对应的可执行文件，才可以对剖析日志进行数据分析</p>
 <h2 id="pprof-分析工具"><a href="#pprof-分析工具" class="headerlink" title="pprof 分析工具"></a>pprof 分析工具</h2><p> <code>go tool pprof</code>命令可以用来分析剖析日志，它需要两个基本的参数</p>
 <ul>
 <li>剖析文件日志</li>
@@ -308,12 +319,9 @@ Showing top <span class="token number">10</span> nodes out of <span class="token
          <span class="token number">0</span>     <span class="token number">0</span><span class="token operator">%</span>   <span class="token number">100</span><span class="token operator">%</span>      <span class="token number">0.01</span>s  <span class="token number">0.92</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>findrunnable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
-<li><p><code>./fib.test</code>：测试生成的可执行文件，在一般的测试中，当测试完成后，文件就会被丢弃，但在启用剖析标识后，这个文件会被保留，供之后的分析使用</p>
-</li>
-<li><p><code> -nodecount</code>：限制分析结果输出的行数</p>
-</li>
-<li><p><code>-text</code>：指定输出的格式</p>
-</li>
+<li><code>./fib.test</code>：测试生成的可执行文件，在一般的测试中，当测试完成后，文件就会被丢弃，但在启用剖析标识后，这个文件会被保留，供之后的分析使用</li>
+<li><code> -nodecount</code>：限制分析结果输出的行数</li>
+<li><code>-text</code>：指定输出的格式</li>
 </ul>
 <p>还可以使用-web选项，用于生成函数的有向图，标注有CPU的使用和最热点的函数等信息</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof <span class="token operator">-</span>web <span class="token operator">-</span>nodecount<span class="token operator">=</span><span class="token number">10</span> <span class="token punctuation">.</span><span class="token operator">/</span>fib<span class="token punctuation">.</span>test cpu<span class="token punctuation">.</span>log
@@ -323,10 +331,18 @@ brew install graphviz<span aria-hidden="true" class="line-numbers-rows"><span></
 
 
 
-<h1 id="运行时API剖析"><a href="#运行时API剖析" class="headerlink" title="运行时API剖析"></a>运行时API剖析</h1><p>可以使用标准库中的 <code>runtime/pprof</code>，<code>runtime/trace</code>，<code>net/http/pprof</code>这三个包中提供的API来对Go程序进行性能分析，其中 <code>runtime/pprof</code>包中还提供了生成性能分析概要文件的API。概要文件是以二进制格式存储的，<code>go test</code> 命令也可以生成概要文件</p>
-<h2 id="概要文件的读取"><a href="#概要文件的读取" class="headerlink" title="概要文件的读取"></a>概要文件的读取</h2><p>概要文件有：CPU 概要文件（CPU Profile）、内存概要文件（Mem Profile）和阻塞概要文件（Block Profile），是Go程序在某一段时间内，对相关指标采样后，得到的概要信息。Go标准工具中<code>go tool pprof</code> 和 <code>go tool trace</code>可以解析概要文件中的信息，以可以阅读的方式展现出来，供分析性能使用</p>
-<h2 id="概要文件的生成"><a href="#概要文件的生成" class="headerlink" title="概要文件的生成"></a>概要文件的生成</h2><h3 id="protocol-buffers"><a href="#protocol-buffers" class="headerlink" title="protocol buffers"></a>protocol buffers</h3><p>概要文件其实就是 由 <code>protocol buffers</code> 生成的二进制数据流，<code>protocol buffers</code> 是一种数据序列化协议，它定义了程序对象如 <code>map</code>，结构体，数组等与字节之间如何相互转化。同时 <code>protocol buffers</code> 不仅仅是协议，也可以作为转化工具来使用。<code>protocol buffers</code> 会对生成的字节流进行压缩，它的体积比(<code>JSON，XML</code>)都要更小，所以也更适合用于数据在网上传输</p>
-<h3 id="StartCPUProfile-函数"><a href="#StartCPUProfile-函数" class="headerlink" title="StartCPUProfile 函数"></a>StartCPUProfile 函数</h3><p>对CPU信息进行定时采样生成概要文件，默认采样频率是100Hz，即每秒采样100次，调用<code>pprof.StartCPUProfile()</code>函数开始进行采样，调用<code>pprof.StopCPUProfile()</code>停止采样</p>
+<p>还可以不加任何选项进入交互界面</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof cpu<span class="token punctuation">.</span>log
+Type<span class="token punctuation">:</span> cpu
+Time<span class="token punctuation">:</span> Aug <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">2021</span> at <span class="token number">11</span><span class="token punctuation">:</span><span class="token number">30</span>am <span class="token punctuation">(</span>CST<span class="token punctuation">)</span>
+Duration<span class="token punctuation">:</span> <span class="token number">1.43</span>s<span class="token punctuation">,</span> Total samples <span class="token operator">=</span> <span class="token number">1.09</span>s <span class="token punctuation">(</span><span class="token number">76.02</span><span class="token operator">%</span><span class="token punctuation">)</span>
+Entering interactive mode <span class="token punctuation">(</span><span class="token keyword">type</span> <span class="token string">"help"</span> <span class="token keyword">for</span> commands<span class="token punctuation">,</span> <span class="token string">"o"</span> <span class="token keyword">for</span> options<span class="token punctuation">)</span>
+<span class="token punctuation">(</span>pprof<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里只用到了概要文件，没有用到测试生成的可执行文件</p>
+<h1 id="性能指标API生成概要文件"><a href="#性能指标API生成概要文件" class="headerlink" title="性能指标API生成概要文件"></a>性能指标API生成概要文件</h1><p>除了使用 go test 标识对程序进行性能分析，还可以使用标准库中的 <code>runtime/pprof</code>，<code>runtime/trace</code>，<code>net/http/pprof</code>这三个包中提供的API来对Go程序进行性能分析，生成概要文件。</p>
+<h2 id="生成CPU概要文件"><a href="#生成CPU概要文件" class="headerlink" title="生成CPU概要文件"></a>生成CPU概要文件</h2><h3 id="StartCPUProfile函数"><a href="#StartCPUProfile函数" class="headerlink" title="StartCPUProfile函数"></a>StartCPUProfile函数</h3><p><code>StartCPUProfile()</code>函数对CPU信息进行定时采样生成概要文件，默认采样频率是100Hz，即每秒采样100次，调用<code>pprof.StartCPUProfile()</code>函数开始进行采样。</p>
+<h3 id="StopCPUProfile函数"><a href="#StopCPUProfile函数" class="headerlink" title="StopCPUProfile函数"></a>StopCPUProfile函数</h3><p>调用<code>pprof.StopCPUProfile()</code>停止采样。当调用<code>pprof.StartCPUProfile()</code>时，会启用一个新的goroutine，并在其中进行CPU信息的收集</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">StopCPUProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	cpu<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 	<span class="token keyword">defer</span> cpu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -340,24 +356,181 @@ brew install graphviz<span aria-hidden="true" class="line-numbers-rows"><span></
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>StopCPUProfile</code>是通过设置<code>SetCPUProfileRate(0)</code>为0，来停止采样的，而<code>pprof.StartCPUProfile</code> 是把<code>runtime.SetCPUProfileRate(100)</code>设置为100来开始采样的</p>
-<h3 id="runtime-MemProfileRate值"><a href="#runtime-MemProfileRate值" class="headerlink" title="runtime.MemProfileRate值"></a>runtime.MemProfileRate值</h3><p>对堆内存的使用进行采样，通过对其赋值指定平均每分配多少个字节，就对堆内存的使用情况进行一次采样。默认值是512KB，对其赋0值表示停止采样。把收集到的采样信息写入文件需要调用<code>WriteHeapProfile(f)</code>函数，它会把概要文件信息写入传入的参数文件<code>f</code>中。<code>WriteHeapProfile(f)</code>函数记录的并不是实时的内存概要信息，而是最近一次内存垃圾工作完成后产生的。要得到实时信息可以使用<code>runtime.ReadMemStats()</code>函数</p>
-<h3 id="SetBlockProfileRate函数"><a href="#SetBlockProfileRate函数" class="headerlink" title="SetBlockProfileRate函数"></a>SetBlockProfileRate函数</h3><p>对阻塞概要信息的采样进行设定，其参数<code>rate</code>的值表示，当阻塞持续多少纳秒后对其进行进行采样。如果这个值小于等于0，则停止采样。把概要信息写入文件需要调用<code>pprof.Lookup(&quot;block&quot;)</code>，并传入值为<code>block</code>的参数，函数会返回一个<code>*pprof.Profile</code>类型的值，对这个值调用<code>WriteTo(w io.Writer, debug int)</code>方法，把概要信息写入文件。这个方法的第一个参数传入要写入概要信息的文件</p>
-<h2 id="pprof-Lookup函数的使用"><a href="#pprof-Lookup函数的使用" class="headerlink" title="pprof.Lookup函数的使用"></a>pprof.Lookup函数的使用</h2><p><code>Lookup(name string)</code>通过给定的<code>name</code> 的值，返回对应的概要信息。可以得到的概要信息有<code>goroutine, threadcreate, heap, allocs, block, mutex</code>这6个预定义指标的概要信息，它们都是<code>*Profile</code>类型的值，可以通过调用<code>WriteTo(w io.Writer, debug int)</code>方法，把采样的概要信息写入指定的文件中(通过第一个参数设置)，第二个参数表示了写入信息的详细细节，有<code>0,1,2</code>3个值，这6个指标使用不同的值写入细节信息</p>
-<ul>
-<li><code>goroutine</code>：此指标可以收集正在使用的所有 goroutine 的堆栈跟踪信息</li>
-<li><code>heap、allocs</code>：此指标会收集与堆内存的分配和释放有关的采样信息，可以看成是内存概要信息，heap 与 allocs 的展示视角不同</li>
-<li><code>threadcreate</code>：此指标会收集堆栈跟踪信息。这些堆栈跟踪信息中的每一个都会描绘出一个代码调用链，这些调用链上的代码都导致新的操作系统线程产生</li>
-<li><code>block</code>：此指标会收集因争用同步原语而被阻塞的那些代码的堆栈跟踪信息</li>
-<li><code>mutex</code>：此指标会收集曾经作为同步原语持有者的那些代码，它们的堆栈跟踪信息</li>
-</ul>
-<h2 id="使用在线网页查看程序性能"><a href="#使用在线网页查看程序性能" class="headerlink" title="使用在线网页查看程序性能"></a>使用在线网页查看程序性能</h2><p>在我们编写网络服务程序的时候，使用<code>net/http/pprof</code>包要比直接使用<code>runtime/pprof</code>包方便和实用很多，这个代码包可以为网络服务的监测提供有力的支撑</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">import</span> <span class="token boolean">_</span> <span class="token string">"net/http/pprof"</span>
-log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span><span class="token function">ListenAndServe</span><span class="token punctuation">(</span><span class="token string">"localhost:8082"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	profileName <span class="token operator">:=</span> <span class="token string">"cpu_api.log"</span>
+	f<span class="token punctuation">,</span> err <span class="token operator">:=</span> common<span class="token punctuation">.</span><span class="token function">CreateFile</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> profileName<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"CPU profile creation error: %v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">defer</span> f<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-<p>直接访问<a target="_blank" rel="noopener" href="http://localhost:8082/debug/pprof">http://localhost:8082/debug/pprof</a> 可以看到<code>goroutine,threadcreate,heap, allocs,block,mutex</code>这6个指标的概要信息。</p>
+	pprof<span class="token punctuation">.</span><span class="token function">StartCPUProfile</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+	op<span class="token punctuation">.</span><span class="token function">CPULoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 耗时的CPU操作</span>
+	pprof<span class="token punctuation">.</span><span class="token function">StopCPUProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>pprof.StartCPUProfile(f)</code>：把概要文件写入 cpu_api.log 文件</p>
+<p>生成概要文件</p>
+<p><code>go run pprof/cpu/cpu.go</code></p>
+<p>go tool pprof 查看概要文件内容</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go tool pprof -text -nodecount<span class="token operator">=</span><span class="token number">15</span>  cpu_api.log
+Type: cpu
+Time: Aug <span class="token number">17</span>, <span class="token number">2021</span> at <span class="token number">3</span>:56pm <span class="token punctuation">(</span>CST<span class="token punctuation">)</span>
+Duration: <span class="token number">1</span>.62s, Total samples <span class="token operator">=</span> <span class="token number">1</span>.47s <span class="token punctuation">(</span><span class="token number">90.66</span>%<span class="token punctuation">)</span>
+Showing nodes accounting <span class="token keyword">for</span> <span class="token number">1</span>.47s, <span class="token number">100</span>% of <span class="token number">1</span>.47s total
+Showing <span class="token function">top</span> <span class="token number">15</span> nodes out of <span class="token number">49</span>
+      flat  flat%   sum%        cum   cum%
+     <span class="token number">1</span>.29s <span class="token number">87.76</span>% <span class="token number">87.76</span>%      <span class="token number">1</span>.29s <span class="token number">87.76</span>%  runtime.memmove
+     <span class="token number">0</span>.06s  <span class="token number">4.08</span>% <span class="token number">91.84</span>%      <span class="token number">0</span>.06s  <span class="token number">4.08</span>%  runtime.usleep
+     <span class="token number">0</span>.02s  <span class="token number">1.36</span>% <span class="token number">93.20</span>%      <span class="token number">0</span>.02s  <span class="token number">1.36</span>%  runtime.madvise
+     <span class="token number">0</span>.02s  <span class="token number">1.36</span>% <span class="token number">94.56</span>%      <span class="token number">0</span>.02s  <span class="token number">1.36</span>%  runtime.pthread_kill
+     <span class="token number">0</span>.02s  <span class="token number">1.36</span>% <span class="token number">95.92</span>%      <span class="token number">0</span>.10s  <span class="token number">6.80</span>%  runtime.slicebytetostring
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>% <span class="token number">96.60</span>%      <span class="token number">1</span>.25s <span class="token number">85.03</span>%  bytes.<span class="token punctuation">(</span>*Buffer<span class="token punctuation">)</span>.WriteString
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>% <span class="token number">97.28</span>%      <span class="token number">0</span>.01s  <span class="token number">0.68</span>%  runtime.<span class="token punctuation">(</span>*mspan<span class="token punctuation">)</span>.init <span class="token punctuation">(</span>inline<span class="token punctuation">)</span>
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>% <span class="token number">97.96</span>%      <span class="token number">0</span>.01s  <span class="token number">0.68</span>%  runtime.memclrNoHeapPointers
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>% <span class="token number">98.64</span>%      <span class="token number">0</span>.01s  <span class="token number">0.68</span>%  runtime.newArenaMayUnlock
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>% <span class="token number">99.32</span>%      <span class="token number">0</span>.01s  <span class="token number">0.68</span>%  runtime.pthread_cond_wait
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>%   <span class="token number">100</span>%      <span class="token number">0</span>.05s  <span class="token number">3.40</span>%  strconv.FormatInt
+         <span class="token number">0</span>     <span class="token number">0</span>%   <span class="token number">100</span>%      <span class="token number">0</span>.06s  <span class="token number">4.08</span>%  bytes.<span class="token punctuation">(</span>*Buffer<span class="token punctuation">)</span>.String <span class="token punctuation">(</span>inline<span class="token punctuation">)</span>
+         <span class="token number">0</span>     <span class="token number">0</span>%   <span class="token number">100</span>%      <span class="token number">0</span>.10s  <span class="token number">6.80</span>%  bytes.<span class="token punctuation">(</span>*Buffer<span class="token punctuation">)</span>.grow
+         <span class="token number">0</span>     <span class="token number">0</span>%   <span class="token number">100</span>%      <span class="token number">0</span>.01s  <span class="token number">0.68</span>%  bytes.makeSlice
+         <span class="token number">0</span>     <span class="token number">0</span>%   <span class="token number">100</span>%      <span class="token number">1</span>.36s <span class="token number">92.52</span>%  gott/common/op.CPULoad<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+<h2 id="生成内存概要文件"><a href="#生成内存概要文件" class="headerlink" title="生成内存概要文件"></a>生成内存概要文件</h2><p>对堆内存的使用进行采样，会按照平均每分配多少个字节(默认为512B)，就对堆内存的使用情况进行一次采样。</p>
+<h3 id="MemProfileRate"><a href="#MemProfileRate" class="headerlink" title="MemProfileRate"></a>MemProfileRate</h3><p>为 runtime.MemProfileRate 设置采样频率(默认值是512KB)，对其赋0值表示停止采样。</p>
+<h3 id="WriteHeapProfile-函数"><a href="#WriteHeapProfile-函数" class="headerlink" title="WriteHeapProfile 函数"></a>WriteHeapProfile 函数</h3><p>调用WriteHeapProfile 函数，根据采样频率进行采样，并把收集到的采样信息写入指定文件。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 源码文件</span>
+<span class="token comment">// WriteHeapProfile is shorthand for Lookup("heap").WriteTo(w, 0).</span>
+<span class="token comment">// It is preserved for backwards compatibility.</span>
+<span class="token keyword">func</span> <span class="token function">WriteHeapProfile</span><span class="token punctuation">(</span>w io<span class="token punctuation">.</span>Writer<span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token function">writeHeap</span><span class="token punctuation">(</span>w<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="ReadMemStats-函数"><a href="#ReadMemStats-函数" class="headerlink" title="ReadMemStats 函数"></a>ReadMemStats 函数</h3><p><code>WriteHeapProfile(f)</code>函数记录的并不是实时的内存概要信息，而是最近一次内存垃圾工作完成后产生的。要得到实时信息可以使用<code>runtime.ReadMemStats()</code>函数</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	profileName <span class="token operator">:=</span> <span class="token string">"mem_api.log"</span>
+	f<span class="token punctuation">,</span> err <span class="token operator">:=</span> common<span class="token punctuation">.</span><span class="token function">CreateFile</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> profileName<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"memory profile creation error: %v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">defer</span> f<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">startMemProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	fib<span class="token punctuation">.</span><span class="token function">FibMap</span><span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span>
+	<span class="token function">endMemProfile</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">startMemProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	runtime<span class="token punctuation">.</span>MemProfileRate <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">endMemProfile</span><span class="token punctuation">(</span>f <span class="token operator">*</span>os<span class="token punctuation">.</span>File<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	pprof<span class="token punctuation">.</span><span class="token function">WriteHeapProfile</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>调用<code>runtime.MemProfileRate</code>设置每申请1B的内存，就进行采样，调用<code>pprof.WriteHeapProfile(f)</code>把采样信息写入指定的文件<code>mem_api.log</code>中</p>
+<h2 id="生成阻塞概要文件"><a href="#生成阻塞概要文件" class="headerlink" title="生成阻塞概要文件"></a>生成阻塞概要文件</h2><h3 id="SetBlockProfileRate函数"><a href="#SetBlockProfileRate函数" class="headerlink" title="SetBlockProfileRate函数"></a>SetBlockProfileRate函数</h3><p>它在<code>runtime</code>包中，用来设置采样频率，其参数<code>rate</code>的值表示，当阻塞持续多少纳秒后对其进行进行采样。如果这个值小于等于0，则停止采样。</p>
+<h3 id="blockprofilerate变量"><a href="#blockprofilerate变量" class="headerlink" title="blockprofilerate变量"></a>blockprofilerate变量</h3><p>参数<code>rate</code>的值会被转换为CPU的时钟周期，然后赋值给<code>blockprofilerate</code>，即：实际采样频率为当一个阻塞持续了多少个CPU时钟周期，就对这个事件进行采样</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// go 源码文件</span>
+<span class="token keyword">func</span> <span class="token function">SetBlockProfileRate</span><span class="token punctuation">(</span>rate <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> r <span class="token builtin">int64</span>
+	<span class="token keyword">if</span> rate <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		r <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment">// disable profiling</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> rate <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">&#123;</span>
+		r <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">// profile everything</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">// convert ns to cycles, use float64 to prevent overflow during multiplication</span>
+		r <span class="token operator">=</span> <span class="token function">int64</span><span class="token punctuation">(</span><span class="token function">float64</span><span class="token punctuation">(</span>rate<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token function">float64</span><span class="token punctuation">(</span><span class="token function">tickspersecond</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+		<span class="token keyword">if</span> r <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+			r <span class="token operator">=</span> <span class="token number">1</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+
+	atomic<span class="token punctuation">.</span><span class="token function">Store64</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>blockprofilerate<span class="token punctuation">,</span> <span class="token function">uint64</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="pprof-Lookup-“block”"><a href="#pprof-Lookup-“block”" class="headerlink" title="pprof.Lookup(“block”)"></a>pprof.Lookup(“block”)</h3><p>用来获取阻塞概要信息，获取信息要调用<code>pprof.Lookup(&quot;block&quot;)</code>，<code>block</code>做为参数传入，函数会返回一个<code>*pprof.Profile</code>类型的值，对这个值调用<code>WriteTo(w io.Writer, debug int)</code>方法，可以把概要信息写入文件。这个方法的第一个参数传入要写入概要信息的文件，第二个参数debug表示概要信息详细程度</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	profileName <span class="token operator">:=</span> <span class="token string">"block_api.log"</span>
+	f<span class="token punctuation">,</span> err <span class="token operator">:=</span> common<span class="token punctuation">.</span><span class="token function">CreateFile</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> profileName<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"block profile creation error: %v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">defer</span> f<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">startBlockProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	fib<span class="token punctuation">.</span><span class="token function">FibMap</span><span class="token punctuation">(</span><span class="token number">45</span><span class="token punctuation">)</span>
+	<span class="token function">stopBlockProfile</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">startBlockProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	runtime<span class="token punctuation">.</span><span class="token function">SetBlockProfileRate</span><span class="token punctuation">(</span>blockProfileRate<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">stopBlockProfile</span><span class="token punctuation">(</span>f <span class="token operator">*</span>os<span class="token punctuation">.</span>File<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	pprof<span class="token punctuation">.</span><span class="token function">Lookup</span><span class="token punctuation">(</span><span class="token string">"block"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">WriteTo</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> debug<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>debug参数的值</p>
+<ul>
+<li>0：生成protocol buffers字节流</li>
+<li>1：生成内容可读的普通文本的概要文件，且函数名，包名，源码文件等信息会被做为注释加入进概要文件</li>
+<li>2：生成内容可读的普通文本的概要文件，且包括更详细的信息</li>
+</ul>
+<p>对于使用参数值<code>1、2</code>生成的概要文件，不能使用 <code>go tool pprof </code> 查看，因为文件不是 <code>protocol</code>格式</p>
+<h1 id="pprof-Lookup函数的使用"><a href="#pprof-Lookup函数的使用" class="headerlink" title="pprof.Lookup函数的使用"></a>pprof.Lookup函数的使用</h1><p><code>Lookup(name string)</code>通过给定的<code>name</code> 的值，返回对应的概要信息。如果返回值是 nil，表示不存在与给定名称对应的概要信息。预定义了6个概要名称，分别是<code>goroutine, threadcreate, heap, allocs, block, mutex</code></p>
+<p>函数的返回值是<code>*Profile</code>类型的值，可以通过调用<code>WriteTo(w io.Writer, debug int)</code>方法，把采样的概要信息写入指定的文件中(通过第一个参数设置)，第二个参数表示了写入信息的详细细节程序，值可以是<code>0,1,2</code>(具体代表的内容就是上面小节讲的)。</p>
+<p>预定义概要名称的使用</p>
+<ul>
+<li><p><code>goroutine</code></p>
+<p>此指标可以收集正在使用的所有 goroutine 的堆栈跟踪信息，在调用WriteTo方法时，如果debug的值大于等于2，会把这些信息写入概要文件，文件可能会非常大</p>
+</li>
+<li><p><code>heap、allocs</code></p>
+<p>此指标会收集与堆内存的分配和释放有关的采样信息，可以看成是内存概要信息，heap 与 allocs 仅在debug为0的时候会有区别，heap统计的是已经分配但还没有释放的内存空间，allocs展示的是已分配的内存空间。当debug的值大于0时，这两个指标值输出的内容是相同的</p>
+</li>
+<li><p><code>threadcreate</code></p>
+<p>此指标会收集堆栈跟踪信息。这些堆栈跟踪信息中的每一个都会描绘出一个代码调用链，这些调用链上的代码都导致新的操作系统线程产生</p>
+</li>
+<li><p><code>block</code></p>
+<p>此指标会收集因争用同步原语而被阻塞的那些代码的堆栈跟踪信息</p>
+</li>
+<li><p><code>mutex</code></p>
+<p>此指标会收集曾经作为同步原语持有者的那些代码，它们的堆栈跟踪信息</p>
+<p>同步原语可以理解为：通道、互斥锁、条件变量、”WaitGroup”</p>
+</li>
+</ul>
+<p>对于除了 CPU 概要信息之外的其他概要信息，我们都可以通过调用这个函数获取到。</p>
+<h1 id="为基于-HTTP-协议的网络服务添加性能分析接口"><a href="#为基于-HTTP-协议的网络服务添加性能分析接口" class="headerlink" title="为基于 HTTP 协议的网络服务添加性能分析接口"></a>为基于 HTTP 协议的网络服务添加性能分析接口</h1><p>在我们编写网络服务程序的时候，使用<code>net/http/pprof</code>包要比直接使用<code>runtime/pprof</code>包方便和实用很多，这个代码包可以为网络服务的监测提供有力的支撑</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"log"</span>
+	<span class="token string">"net/http"</span>
+	<span class="token boolean">_</span> <span class="token string">"net/http/pprof"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span><span class="token function">ListenAndServe</span><span class="token punctuation">(</span><span class="token string">"localhost:8082"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>直接访问<a target="_blank" rel="noopener" href="http://localhost:8082/debug/pprof">http://localhost:8082/debug/pprof</a> 可以看到<code>goroutine,threadcreate,heap, allocs,block,mutex</code>这6个指标的概要信息。它们都配有debug参数，默认值为0，可以通过改变debug的值改变概要信息的详细程度，如 <code>gotroutine</code>的URL是<code>http://localhost:8082/debug/pprof/goroutine?debug=1</code></p>
 <p>当访问<a target="_blank" rel="noopener" href="http://localhost:8082/debug/pprof/profile">http://localhost:8082/debug/pprof/profile</a> 时，程序会执行对 CPU 概要信息的采样，可以通过加入参数<code>seconds</code>来控制对cpu的访问时间(默认是30秒)，当采样结束后，会提示你下载概要文件。你也可以执行下面命令，直接读取概要文件</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token punctuation">:</span><span class="token number">6060</span><span class="token operator">/</span>debug<span class="token operator">/</span>pprof<span class="token operator">/</span>profile?seconds<span class="token operator">=</span><span class="token number">60</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+
+
+<h1 id="要回答的问题"><a href="#要回答的问题" class="headerlink" title="要回答的问题"></a>要回答的问题</h1><p><em><strong>先写结论，便于接下来的阅读与理解</strong></em></p>
+<h2 id="基准测试与剖析的区别"><a href="#基准测试与剖析的区别" class="headerlink" title="基准测试与剖析的区别"></a>基准测试与剖析的区别</h2><p>基准测试可以用来衡量一个程序的性能，如果想让程序运行的更快，或对性能不理想的程序进行提升，基准测试无法给出从哪里可以进行优化。</p>
+<p>通过剖析，可以找出程序性能瓶颈所在，从而有针对性的对程序进行优化，提高性能。不要过早的进行优化，97%的场景，都不需要过早优化或根本就不需要优化，我们要做的仅是让程序可以正常运行即可。</p>
+<h2 id="剖析是如何进行的"><a href="#剖析是如何进行的" class="headerlink" title="剖析是如何进行的"></a>剖析是如何进行的</h2><p>剖析就是在程序执行期间进行一些自动抽样，在结束时进行推断，最后把统计结果保存为剖析数据文件，供剖析工具使用。Go 语言支持多种类型的剖析性能分析，可以通过go test 工具或调用Go的runtime 性能分析API(启用运行时剖析)，对程序进行剖析。</p>
+<h2 id="需要对哪些代码进行剖析"><a href="#需要对哪些代码进行剖析" class="headerlink" title="需要对哪些代码进行剖析"></a>需要对哪些代码进行剖析</h2><p>要对程序的主要功能，关键部分进行基准测试，然后对其进行剖析，功能测试不应该参与进来，使用 <code>-run=None</code>，禁止功能测试的运行</p>
 
     </div>
 
@@ -391,13 +564,13 @@ log<span class="token punctuation">.</span><span class="token function">Println<
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/safari-favicon-setting/" rel="prev" title="safari 网站图标 favicon 不显示">
-                  <i class="fa fa-chevron-left"></i> safari 网站图标 favicon 不显示
+                <a href="/mysql-sequence-of-sql-in-trx/" rel="prev" title="mysql 事务中多条SQL的排序">
+                  <i class="fa fa-chevron-left"></i> mysql 事务中多条SQL的排序
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/linux-fd-in-linux/" rel="next" title="linux 中的文件描述符">
-                  linux 中的文件描述符 <i class="fa fa-chevron-right"></i>
+                <a href="/golang-test-example/" rel="next" title="go 语言 测试 示例函数">
+                  go 语言 测试 示例函数 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

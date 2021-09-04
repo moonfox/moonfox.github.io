@@ -1938,12 +1938,23 @@ helloA world
   <entry>
     <title>go 语言 程序性能剖析</title>
     <url>/golang-pprof/</url>
-    <content><![CDATA[<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p><em><strong>先写结论，便于接下来的阅读与理解</strong></em></p>
-<h2 id="基准测试与剖析的区别"><a href="#基准测试与剖析的区别" class="headerlink" title="基准测试与剖析的区别"></a>基准测试与剖析的区别</h2><p>基准测试可以用来衡量一个程序的性能，如果想让程序运行的更快，或对性能不理想的程序进行提升，基准测试无法给出从哪里可以进行优化。</p>
-<p>通过剖析，可以找出程序性能瓶颈所在，从而有针对性的对程序进行优化，提高性能。不要过早的进行优化，97%的场景，都不需要过早优化或根本就不需要优化，我们要做的仅是让程序可以正常运行即可。</p>
-<h2 id="剖析是如何进行的"><a href="#剖析是如何进行的" class="headerlink" title="剖析是如何进行的"></a>剖析是如何进行的</h2><p>剖析就是在程序执行期间进行一些自动抽样，在结束时进行推断，最后把统计结果保存为剖析数据文件，供剖析工具使用。Go 语言支持多种类型的剖析性能分析，可以通过go test 工具或调用Go的runtime 性能分析API(启用运行时剖析)，对程序进行剖析。</p>
-<h2 id="需要对哪些代码进行剖析"><a href="#需要对哪些代码进行剖析" class="headerlink" title="需要对哪些代码进行剖析"></a>需要对哪些代码进行剖析</h2><p>要对程序的主要功能，关键部分进行基准测试，然后对其进行剖析，功能测试不应该参与进来，使用 <code>-run=None</code>，禁止功能测试的运行</p>
-<h1 id="Go-test-标识剖析"><a href="#Go-test-标识剖析" class="headerlink" title="Go test 标识剖析"></a>Go test 标识剖析</h1><p>可以使用 <code>go test</code>工具提供的剖析标识对程序进行分析，不要让多个剖析标识同时运行，它们之间会相互影响，导致分析结果不准确</p>
+    <content><![CDATA[<h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>对程序性能进行剖析，可以找到性能的瓶颈、bug、以及对程序进行有目标的优化，从而提高程序的性能，解决程序中存在的问题。</p>
+<h1 id="如何对程序进行剖析"><a href="#如何对程序进行剖析" class="headerlink" title="如何对程序进行剖析"></a>如何对程序进行剖析</h1><ol>
+<li>设置要分析的指标，利用<code>工具 (go test)</code>或<code>性能指标API</code>对指标进行剖析，生成对应的概要文件(二进制文件)</li>
+<li>使用分析工具(go tool pprof/ go tool trace)对概要文件进行解析，得到性能指标值的具体信息，这些信息可以以文本，图形的形式展示。</li>
+<li>根据得到性能指标值的具体信息，分析程序性能，查找程序瓶颈或对程序进行优化</li>
+</ol>
+<p>要对一个程序进行剖析，必须先生成对应指标的<code>概要文件</code>，然后再用<code>分析工具</code>去解析这个<code>概要文件</code></p>
+<h1 id="概要文件"><a href="#概要文件" class="headerlink" title="概要文件"></a>概要文件</h1><p>是Go程序在某一段时间内，对相关指标采样后，得到的概要信息。剖析时，会在程序执行期间进行一些自动抽样，在结束时进行推断，最后把统计结果保存为概要文件，供分析工具使用。</p>
+<h2 id="概要文件的格式"><a href="#概要文件的格式" class="headerlink" title="概要文件的格式"></a>概要文件的格式</h2><p>概要文件其实就是 由 <code>protocol buffers</code> 生成的二进制数据流，<code>protocol buffers</code> 是一种数据序列化协议，它定义了程序对象如 <code>map</code>，结构体，数组等与字节之间如何相互转化。同时 <code>protocol buffers</code> 不仅仅是协议，也可以作为转化工具来使用，它可以把字节流转化为对象，也可以把对象转化为字节流。<code>protocol buffers</code> 会对生成的字节流进行压缩，它的体积比(<code>JSON，XML</code>)都要更小，所以也更适合用于数据在网上传输</p>
+<h2 id="生成概要文件的方法"><a href="#生成概要文件的方法" class="headerlink" title="生成概要文件的方法"></a>生成概要文件的方法</h2><p>Go 语言支持多种类型的性能分析，可以通过</p>
+<ul>
+<li>使用 go test 配合对应的标识符</li>
+<li>使用性能指标API</li>
+</ul>
+<p>这两种方式，都可以生成概要文件</p>
+<h2 id="有关性能的概要文件"><a href="#有关性能的概要文件" class="headerlink" title="有关性能的概要文件"></a>有关性能的概要文件</h2><p>CPU概要文件，内存概要文件，阻塞概要文件，它们可以通过 go test 配合对应的标识符生成，对CPU，内存，阻塞这三个指标进行分析。</p>
+<h1 id="Go-test-标识生成概要文件"><a href="#Go-test-标识生成概要文件" class="headerlink" title="Go test 标识生成概要文件"></a>Go test 标识生成概要文件</h1><p>可以使用 <code>go test</code>工具提供的剖析标识对程序进行分析，生成概要文件。不要让多个剖析标识同时运行，它们之间会相互影响，导致分析结果不准确</p>
 <h2 id="Cpu-剖析标识"><a href="#Cpu-剖析标识" class="headerlink" title="Cpu 剖析标识"></a>Cpu 剖析标识</h2><p>记录占用CPU时间最长的函数，每个运行在CPU上的函数每几毫秒都会遇到系统中断事件，每次中断时，都会记录一个剖析数据</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test gott<span class="token operator">/</span>fib <span class="token operator">-</span>cpuprofile<span class="token operator">=</span>cpu<span class="token punctuation">.</span>log <span class="token operator">-</span>run<span class="token operator">=</span>None <span class="token operator">-</span>bench<span class="token operator">=</span>FibWithMap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -1959,7 +1970,7 @@ helloA world
 
 
 
-<h1 id="剖析文件分析"><a href="#剖析文件分析" class="headerlink" title="剖析文件分析"></a>剖析文件分析</h1><h2 id="可执行文件"><a href="#可执行文件" class="headerlink" title="可执行文件"></a>可执行文件</h2><p>使用以上标识符，除了生成了剖析数据日志(cpu.log/mem.log/block.log)，go test  还会生成对应的可执行程序(fib.test)，以包名做为前缀，后面为<code>.test</code>的文件。为了减少剖析数据日志占用的空间和提高分析效率，分析日志本身并没有记录函数的名称，而是函数的地址，所以需要与之对应的可执行文件，才可以对剖析日志进行数据分析</p>
+<h1 id="解析概要文件"><a href="#解析概要文件" class="headerlink" title="解析概要文件"></a>解析概要文件</h1><h2 id="可执行文件"><a href="#可执行文件" class="headerlink" title="可执行文件"></a>可执行文件</h2><p>使用以上标识符，除了生成了剖析数据日志(cpu.log/mem.log/block.log)，go test  还会生成对应的可执行程序(fib.test)，以包名做为前缀，后面为<code>.test</code>的文件。为了减少剖析数据日志占用的空间和提高分析效率，分析日志本身并没有记录函数的名称，而是函数的地址，所以需要与之对应的可执行文件，才可以对剖析日志进行数据分析</p>
 <h2 id="pprof-分析工具"><a href="#pprof-分析工具" class="headerlink" title="pprof 分析工具"></a>pprof 分析工具</h2><p> <code>go tool pprof</code>命令可以用来分析剖析日志，它需要两个基本的参数</p>
 <ul>
 <li>剖析文件日志</li>
@@ -1986,12 +1997,9 @@ Showing top <span class="token number">10</span> nodes out of <span class="token
          <span class="token number">0</span>     <span class="token number">0</span><span class="token operator">%</span>   <span class="token number">100</span><span class="token operator">%</span>      <span class="token number">0.01</span>s  <span class="token number">0.92</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>findrunnable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
-<li><p><code>./fib.test</code>：测试生成的可执行文件，在一般的测试中，当测试完成后，文件就会被丢弃，但在启用剖析标识后，这个文件会被保留，供之后的分析使用</p>
-</li>
-<li><p><code> -nodecount</code>：限制分析结果输出的行数</p>
-</li>
-<li><p><code>-text</code>：指定输出的格式</p>
-</li>
+<li><code>./fib.test</code>：测试生成的可执行文件，在一般的测试中，当测试完成后，文件就会被丢弃，但在启用剖析标识后，这个文件会被保留，供之后的分析使用</li>
+<li><code> -nodecount</code>：限制分析结果输出的行数</li>
+<li><code>-text</code>：指定输出的格式</li>
 </ul>
 <p>还可以使用-web选项，用于生成函数的有向图，标注有CPU的使用和最热点的函数等信息</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof <span class="token operator">-</span>web <span class="token operator">-</span>nodecount<span class="token operator">=</span><span class="token number">10</span> <span class="token punctuation">.</span><span class="token operator">/</span>fib<span class="token punctuation">.</span>test cpu<span class="token punctuation">.</span>log
@@ -2001,10 +2009,18 @@ brew install graphviz<span aria-hidden="true" class="line-numbers-rows"><span></
 
 
 
-<h1 id="运行时API剖析"><a href="#运行时API剖析" class="headerlink" title="运行时API剖析"></a>运行时API剖析</h1><p>可以使用标准库中的 <code>runtime/pprof</code>，<code>runtime/trace</code>，<code>net/http/pprof</code>这三个包中提供的API来对Go程序进行性能分析，其中 <code>runtime/pprof</code>包中还提供了生成性能分析概要文件的API。概要文件是以二进制格式存储的，<code>go test</code> 命令也可以生成概要文件</p>
-<h2 id="概要文件的读取"><a href="#概要文件的读取" class="headerlink" title="概要文件的读取"></a>概要文件的读取</h2><p>概要文件有：CPU 概要文件（CPU Profile）、内存概要文件（Mem Profile）和阻塞概要文件（Block Profile），是Go程序在某一段时间内，对相关指标采样后，得到的概要信息。Go标准工具中<code>go tool pprof</code> 和 <code>go tool trace</code>可以解析概要文件中的信息，以可以阅读的方式展现出来，供分析性能使用</p>
-<h2 id="概要文件的生成"><a href="#概要文件的生成" class="headerlink" title="概要文件的生成"></a>概要文件的生成</h2><h3 id="protocol-buffers"><a href="#protocol-buffers" class="headerlink" title="protocol buffers"></a>protocol buffers</h3><p>概要文件其实就是 由 <code>protocol buffers</code> 生成的二进制数据流，<code>protocol buffers</code> 是一种数据序列化协议，它定义了程序对象如 <code>map</code>，结构体，数组等与字节之间如何相互转化。同时 <code>protocol buffers</code> 不仅仅是协议，也可以作为转化工具来使用。<code>protocol buffers</code> 会对生成的字节流进行压缩，它的体积比(<code>JSON，XML</code>)都要更小，所以也更适合用于数据在网上传输</p>
-<h3 id="StartCPUProfile-函数"><a href="#StartCPUProfile-函数" class="headerlink" title="StartCPUProfile 函数"></a>StartCPUProfile 函数</h3><p>对CPU信息进行定时采样生成概要文件，默认采样频率是100Hz，即每秒采样100次，调用<code>pprof.StartCPUProfile()</code>函数开始进行采样，调用<code>pprof.StopCPUProfile()</code>停止采样</p>
+<p>还可以不加任何选项进入交互界面</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof cpu<span class="token punctuation">.</span>log
+Type<span class="token punctuation">:</span> cpu
+Time<span class="token punctuation">:</span> Aug <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">2021</span> at <span class="token number">11</span><span class="token punctuation">:</span><span class="token number">30</span>am <span class="token punctuation">(</span>CST<span class="token punctuation">)</span>
+Duration<span class="token punctuation">:</span> <span class="token number">1.43</span>s<span class="token punctuation">,</span> Total samples <span class="token operator">=</span> <span class="token number">1.09</span>s <span class="token punctuation">(</span><span class="token number">76.02</span><span class="token operator">%</span><span class="token punctuation">)</span>
+Entering interactive mode <span class="token punctuation">(</span><span class="token keyword">type</span> <span class="token string">"help"</span> <span class="token keyword">for</span> commands<span class="token punctuation">,</span> <span class="token string">"o"</span> <span class="token keyword">for</span> options<span class="token punctuation">)</span>
+<span class="token punctuation">(</span>pprof<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里只用到了概要文件，没有用到测试生成的可执行文件</p>
+<h1 id="性能指标API生成概要文件"><a href="#性能指标API生成概要文件" class="headerlink" title="性能指标API生成概要文件"></a>性能指标API生成概要文件</h1><p>除了使用 go test 标识对程序进行性能分析，还可以使用标准库中的 <code>runtime/pprof</code>，<code>runtime/trace</code>，<code>net/http/pprof</code>这三个包中提供的API来对Go程序进行性能分析，生成概要文件。</p>
+<h2 id="生成CPU概要文件"><a href="#生成CPU概要文件" class="headerlink" title="生成CPU概要文件"></a>生成CPU概要文件</h2><h3 id="StartCPUProfile函数"><a href="#StartCPUProfile函数" class="headerlink" title="StartCPUProfile函数"></a>StartCPUProfile函数</h3><p><code>StartCPUProfile()</code>函数对CPU信息进行定时采样生成概要文件，默认采样频率是100Hz，即每秒采样100次，调用<code>pprof.StartCPUProfile()</code>函数开始进行采样。</p>
+<h3 id="StopCPUProfile函数"><a href="#StopCPUProfile函数" class="headerlink" title="StopCPUProfile函数"></a>StopCPUProfile函数</h3><p>调用<code>pprof.StopCPUProfile()</code>停止采样。当调用<code>pprof.StartCPUProfile()</code>时，会启用一个新的goroutine，并在其中进行CPU信息的收集</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">StopCPUProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	cpu<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 	<span class="token keyword">defer</span> cpu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -2018,24 +2034,181 @@ brew install graphviz<span aria-hidden="true" class="line-numbers-rows"><span></
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>StopCPUProfile</code>是通过设置<code>SetCPUProfileRate(0)</code>为0，来停止采样的，而<code>pprof.StartCPUProfile</code> 是把<code>runtime.SetCPUProfileRate(100)</code>设置为100来开始采样的</p>
-<h3 id="runtime-MemProfileRate值"><a href="#runtime-MemProfileRate值" class="headerlink" title="runtime.MemProfileRate值"></a>runtime.MemProfileRate值</h3><p>对堆内存的使用进行采样，通过对其赋值指定平均每分配多少个字节，就对堆内存的使用情况进行一次采样。默认值是512KB，对其赋0值表示停止采样。把收集到的采样信息写入文件需要调用<code>WriteHeapProfile(f)</code>函数，它会把概要文件信息写入传入的参数文件<code>f</code>中。<code>WriteHeapProfile(f)</code>函数记录的并不是实时的内存概要信息，而是最近一次内存垃圾工作完成后产生的。要得到实时信息可以使用<code>runtime.ReadMemStats()</code>函数</p>
-<h3 id="SetBlockProfileRate函数"><a href="#SetBlockProfileRate函数" class="headerlink" title="SetBlockProfileRate函数"></a>SetBlockProfileRate函数</h3><p>对阻塞概要信息的采样进行设定，其参数<code>rate</code>的值表示，当阻塞持续多少纳秒后对其进行进行采样。如果这个值小于等于0，则停止采样。把概要信息写入文件需要调用<code>pprof.Lookup(&quot;block&quot;)</code>，并传入值为<code>block</code>的参数，函数会返回一个<code>*pprof.Profile</code>类型的值，对这个值调用<code>WriteTo(w io.Writer, debug int)</code>方法，把概要信息写入文件。这个方法的第一个参数传入要写入概要信息的文件</p>
-<h2 id="pprof-Lookup函数的使用"><a href="#pprof-Lookup函数的使用" class="headerlink" title="pprof.Lookup函数的使用"></a>pprof.Lookup函数的使用</h2><p><code>Lookup(name string)</code>通过给定的<code>name</code> 的值，返回对应的概要信息。可以得到的概要信息有<code>goroutine, threadcreate, heap, allocs, block, mutex</code>这6个预定义指标的概要信息，它们都是<code>*Profile</code>类型的值，可以通过调用<code>WriteTo(w io.Writer, debug int)</code>方法，把采样的概要信息写入指定的文件中(通过第一个参数设置)，第二个参数表示了写入信息的详细细节，有<code>0,1,2</code>3个值，这6个指标使用不同的值写入细节信息</p>
-<ul>
-<li><code>goroutine</code>：此指标可以收集正在使用的所有 goroutine 的堆栈跟踪信息</li>
-<li><code>heap、allocs</code>：此指标会收集与堆内存的分配和释放有关的采样信息，可以看成是内存概要信息，heap 与 allocs 的展示视角不同</li>
-<li><code>threadcreate</code>：此指标会收集堆栈跟踪信息。这些堆栈跟踪信息中的每一个都会描绘出一个代码调用链，这些调用链上的代码都导致新的操作系统线程产生</li>
-<li><code>block</code>：此指标会收集因争用同步原语而被阻塞的那些代码的堆栈跟踪信息</li>
-<li><code>mutex</code>：此指标会收集曾经作为同步原语持有者的那些代码，它们的堆栈跟踪信息</li>
-</ul>
-<h2 id="使用在线网页查看程序性能"><a href="#使用在线网页查看程序性能" class="headerlink" title="使用在线网页查看程序性能"></a>使用在线网页查看程序性能</h2><p>在我们编写网络服务程序的时候，使用<code>net/http/pprof</code>包要比直接使用<code>runtime/pprof</code>包方便和实用很多，这个代码包可以为网络服务的监测提供有力的支撑</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">import</span> <span class="token boolean">_</span> <span class="token string">"net/http/pprof"</span>
-log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span><span class="token function">ListenAndServe</span><span class="token punctuation">(</span><span class="token string">"localhost:8082"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	profileName <span class="token operator">:=</span> <span class="token string">"cpu_api.log"</span>
+	f<span class="token punctuation">,</span> err <span class="token operator">:=</span> common<span class="token punctuation">.</span><span class="token function">CreateFile</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> profileName<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"CPU profile creation error: %v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">defer</span> f<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-<p>直接访问<a href="http://localhost:8082/debug/pprof">http://localhost:8082/debug/pprof</a> 可以看到<code>goroutine,threadcreate,heap, allocs,block,mutex</code>这6个指标的概要信息。</p>
+	pprof<span class="token punctuation">.</span><span class="token function">StartCPUProfile</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+	op<span class="token punctuation">.</span><span class="token function">CPULoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 耗时的CPU操作</span>
+	pprof<span class="token punctuation">.</span><span class="token function">StopCPUProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>pprof.StartCPUProfile(f)</code>：把概要文件写入 cpu_api.log 文件</p>
+<p>生成概要文件</p>
+<p><code>go run pprof/cpu/cpu.go</code></p>
+<p>go tool pprof 查看概要文件内容</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go tool pprof -text -nodecount<span class="token operator">=</span><span class="token number">15</span>  cpu_api.log
+Type: cpu
+Time: Aug <span class="token number">17</span>, <span class="token number">2021</span> at <span class="token number">3</span>:56pm <span class="token punctuation">(</span>CST<span class="token punctuation">)</span>
+Duration: <span class="token number">1</span>.62s, Total samples <span class="token operator">=</span> <span class="token number">1</span>.47s <span class="token punctuation">(</span><span class="token number">90.66</span>%<span class="token punctuation">)</span>
+Showing nodes accounting <span class="token keyword">for</span> <span class="token number">1</span>.47s, <span class="token number">100</span>% of <span class="token number">1</span>.47s total
+Showing <span class="token function">top</span> <span class="token number">15</span> nodes out of <span class="token number">49</span>
+      flat  flat%   sum%        cum   cum%
+     <span class="token number">1</span>.29s <span class="token number">87.76</span>% <span class="token number">87.76</span>%      <span class="token number">1</span>.29s <span class="token number">87.76</span>%  runtime.memmove
+     <span class="token number">0</span>.06s  <span class="token number">4.08</span>% <span class="token number">91.84</span>%      <span class="token number">0</span>.06s  <span class="token number">4.08</span>%  runtime.usleep
+     <span class="token number">0</span>.02s  <span class="token number">1.36</span>% <span class="token number">93.20</span>%      <span class="token number">0</span>.02s  <span class="token number">1.36</span>%  runtime.madvise
+     <span class="token number">0</span>.02s  <span class="token number">1.36</span>% <span class="token number">94.56</span>%      <span class="token number">0</span>.02s  <span class="token number">1.36</span>%  runtime.pthread_kill
+     <span class="token number">0</span>.02s  <span class="token number">1.36</span>% <span class="token number">95.92</span>%      <span class="token number">0</span>.10s  <span class="token number">6.80</span>%  runtime.slicebytetostring
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>% <span class="token number">96.60</span>%      <span class="token number">1</span>.25s <span class="token number">85.03</span>%  bytes.<span class="token punctuation">(</span>*Buffer<span class="token punctuation">)</span>.WriteString
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>% <span class="token number">97.28</span>%      <span class="token number">0</span>.01s  <span class="token number">0.68</span>%  runtime.<span class="token punctuation">(</span>*mspan<span class="token punctuation">)</span>.init <span class="token punctuation">(</span>inline<span class="token punctuation">)</span>
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>% <span class="token number">97.96</span>%      <span class="token number">0</span>.01s  <span class="token number">0.68</span>%  runtime.memclrNoHeapPointers
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>% <span class="token number">98.64</span>%      <span class="token number">0</span>.01s  <span class="token number">0.68</span>%  runtime.newArenaMayUnlock
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>% <span class="token number">99.32</span>%      <span class="token number">0</span>.01s  <span class="token number">0.68</span>%  runtime.pthread_cond_wait
+     <span class="token number">0</span>.01s  <span class="token number">0.68</span>%   <span class="token number">100</span>%      <span class="token number">0</span>.05s  <span class="token number">3.40</span>%  strconv.FormatInt
+         <span class="token number">0</span>     <span class="token number">0</span>%   <span class="token number">100</span>%      <span class="token number">0</span>.06s  <span class="token number">4.08</span>%  bytes.<span class="token punctuation">(</span>*Buffer<span class="token punctuation">)</span>.String <span class="token punctuation">(</span>inline<span class="token punctuation">)</span>
+         <span class="token number">0</span>     <span class="token number">0</span>%   <span class="token number">100</span>%      <span class="token number">0</span>.10s  <span class="token number">6.80</span>%  bytes.<span class="token punctuation">(</span>*Buffer<span class="token punctuation">)</span>.grow
+         <span class="token number">0</span>     <span class="token number">0</span>%   <span class="token number">100</span>%      <span class="token number">0</span>.01s  <span class="token number">0.68</span>%  bytes.makeSlice
+         <span class="token number">0</span>     <span class="token number">0</span>%   <span class="token number">100</span>%      <span class="token number">1</span>.36s <span class="token number">92.52</span>%  gott/common/op.CPULoad<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+<h2 id="生成内存概要文件"><a href="#生成内存概要文件" class="headerlink" title="生成内存概要文件"></a>生成内存概要文件</h2><p>对堆内存的使用进行采样，会按照平均每分配多少个字节(默认为512B)，就对堆内存的使用情况进行一次采样。</p>
+<h3 id="MemProfileRate"><a href="#MemProfileRate" class="headerlink" title="MemProfileRate"></a>MemProfileRate</h3><p>为 runtime.MemProfileRate 设置采样频率(默认值是512KB)，对其赋0值表示停止采样。</p>
+<h3 id="WriteHeapProfile-函数"><a href="#WriteHeapProfile-函数" class="headerlink" title="WriteHeapProfile 函数"></a>WriteHeapProfile 函数</h3><p>调用WriteHeapProfile 函数，根据采样频率进行采样，并把收集到的采样信息写入指定文件。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 源码文件</span>
+<span class="token comment">// WriteHeapProfile is shorthand for Lookup("heap").WriteTo(w, 0).</span>
+<span class="token comment">// It is preserved for backwards compatibility.</span>
+<span class="token keyword">func</span> <span class="token function">WriteHeapProfile</span><span class="token punctuation">(</span>w io<span class="token punctuation">.</span>Writer<span class="token punctuation">)</span> <span class="token builtin">error</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token function">writeHeap</span><span class="token punctuation">(</span>w<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="ReadMemStats-函数"><a href="#ReadMemStats-函数" class="headerlink" title="ReadMemStats 函数"></a>ReadMemStats 函数</h3><p><code>WriteHeapProfile(f)</code>函数记录的并不是实时的内存概要信息，而是最近一次内存垃圾工作完成后产生的。要得到实时信息可以使用<code>runtime.ReadMemStats()</code>函数</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	profileName <span class="token operator">:=</span> <span class="token string">"mem_api.log"</span>
+	f<span class="token punctuation">,</span> err <span class="token operator">:=</span> common<span class="token punctuation">.</span><span class="token function">CreateFile</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> profileName<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"memory profile creation error: %v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">defer</span> f<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">startMemProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	fib<span class="token punctuation">.</span><span class="token function">FibMap</span><span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span>
+	<span class="token function">endMemProfile</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">startMemProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	runtime<span class="token punctuation">.</span>MemProfileRate <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">endMemProfile</span><span class="token punctuation">(</span>f <span class="token operator">*</span>os<span class="token punctuation">.</span>File<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	pprof<span class="token punctuation">.</span><span class="token function">WriteHeapProfile</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>调用<code>runtime.MemProfileRate</code>设置每申请1B的内存，就进行采样，调用<code>pprof.WriteHeapProfile(f)</code>把采样信息写入指定的文件<code>mem_api.log</code>中</p>
+<h2 id="生成阻塞概要文件"><a href="#生成阻塞概要文件" class="headerlink" title="生成阻塞概要文件"></a>生成阻塞概要文件</h2><h3 id="SetBlockProfileRate函数"><a href="#SetBlockProfileRate函数" class="headerlink" title="SetBlockProfileRate函数"></a>SetBlockProfileRate函数</h3><p>它在<code>runtime</code>包中，用来设置采样频率，其参数<code>rate</code>的值表示，当阻塞持续多少纳秒后对其进行进行采样。如果这个值小于等于0，则停止采样。</p>
+<h3 id="blockprofilerate变量"><a href="#blockprofilerate变量" class="headerlink" title="blockprofilerate变量"></a>blockprofilerate变量</h3><p>参数<code>rate</code>的值会被转换为CPU的时钟周期，然后赋值给<code>blockprofilerate</code>，即：实际采样频率为当一个阻塞持续了多少个CPU时钟周期，就对这个事件进行采样</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// go 源码文件</span>
+<span class="token keyword">func</span> <span class="token function">SetBlockProfileRate</span><span class="token punctuation">(</span>rate <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> r <span class="token builtin">int64</span>
+	<span class="token keyword">if</span> rate <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		r <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment">// disable profiling</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> rate <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">&#123;</span>
+		r <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">// profile everything</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">// convert ns to cycles, use float64 to prevent overflow during multiplication</span>
+		r <span class="token operator">=</span> <span class="token function">int64</span><span class="token punctuation">(</span><span class="token function">float64</span><span class="token punctuation">(</span>rate<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token function">float64</span><span class="token punctuation">(</span><span class="token function">tickspersecond</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+		<span class="token keyword">if</span> r <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+			r <span class="token operator">=</span> <span class="token number">1</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+
+	atomic<span class="token punctuation">.</span><span class="token function">Store64</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>blockprofilerate<span class="token punctuation">,</span> <span class="token function">uint64</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="pprof-Lookup-“block”"><a href="#pprof-Lookup-“block”" class="headerlink" title="pprof.Lookup(“block”)"></a>pprof.Lookup(“block”)</h3><p>用来获取阻塞概要信息，获取信息要调用<code>pprof.Lookup(&quot;block&quot;)</code>，<code>block</code>做为参数传入，函数会返回一个<code>*pprof.Profile</code>类型的值，对这个值调用<code>WriteTo(w io.Writer, debug int)</code>方法，可以把概要信息写入文件。这个方法的第一个参数传入要写入概要信息的文件，第二个参数debug表示概要信息详细程度</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	profileName <span class="token operator">:=</span> <span class="token string">"block_api.log"</span>
+	f<span class="token punctuation">,</span> err <span class="token operator">:=</span> common<span class="token punctuation">.</span><span class="token function">CreateFile</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> profileName<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"block profile creation error: %v\n"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">defer</span> f<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">startBlockProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	fib<span class="token punctuation">.</span><span class="token function">FibMap</span><span class="token punctuation">(</span><span class="token number">45</span><span class="token punctuation">)</span>
+	<span class="token function">stopBlockProfile</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">startBlockProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	runtime<span class="token punctuation">.</span><span class="token function">SetBlockProfileRate</span><span class="token punctuation">(</span>blockProfileRate<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">stopBlockProfile</span><span class="token punctuation">(</span>f <span class="token operator">*</span>os<span class="token punctuation">.</span>File<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	pprof<span class="token punctuation">.</span><span class="token function">Lookup</span><span class="token punctuation">(</span><span class="token string">"block"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">WriteTo</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> debug<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>debug参数的值</p>
+<ul>
+<li>0：生成protocol buffers字节流</li>
+<li>1：生成内容可读的普通文本的概要文件，且函数名，包名，源码文件等信息会被做为注释加入进概要文件</li>
+<li>2：生成内容可读的普通文本的概要文件，且包括更详细的信息</li>
+</ul>
+<p>对于使用参数值<code>1、2</code>生成的概要文件，不能使用 <code>go tool pprof </code> 查看，因为文件不是 <code>protocol</code>格式</p>
+<h1 id="pprof-Lookup函数的使用"><a href="#pprof-Lookup函数的使用" class="headerlink" title="pprof.Lookup函数的使用"></a>pprof.Lookup函数的使用</h1><p><code>Lookup(name string)</code>通过给定的<code>name</code> 的值，返回对应的概要信息。如果返回值是 nil，表示不存在与给定名称对应的概要信息。预定义了6个概要名称，分别是<code>goroutine, threadcreate, heap, allocs, block, mutex</code></p>
+<p>函数的返回值是<code>*Profile</code>类型的值，可以通过调用<code>WriteTo(w io.Writer, debug int)</code>方法，把采样的概要信息写入指定的文件中(通过第一个参数设置)，第二个参数表示了写入信息的详细细节程序，值可以是<code>0,1,2</code>(具体代表的内容就是上面小节讲的)。</p>
+<p>预定义概要名称的使用</p>
+<ul>
+<li><p><code>goroutine</code></p>
+<p>此指标可以收集正在使用的所有 goroutine 的堆栈跟踪信息，在调用WriteTo方法时，如果debug的值大于等于2，会把这些信息写入概要文件，文件可能会非常大</p>
+</li>
+<li><p><code>heap、allocs</code></p>
+<p>此指标会收集与堆内存的分配和释放有关的采样信息，可以看成是内存概要信息，heap 与 allocs 仅在debug为0的时候会有区别，heap统计的是已经分配但还没有释放的内存空间，allocs展示的是已分配的内存空间。当debug的值大于0时，这两个指标值输出的内容是相同的</p>
+</li>
+<li><p><code>threadcreate</code></p>
+<p>此指标会收集堆栈跟踪信息。这些堆栈跟踪信息中的每一个都会描绘出一个代码调用链，这些调用链上的代码都导致新的操作系统线程产生</p>
+</li>
+<li><p><code>block</code></p>
+<p>此指标会收集因争用同步原语而被阻塞的那些代码的堆栈跟踪信息</p>
+</li>
+<li><p><code>mutex</code></p>
+<p>此指标会收集曾经作为同步原语持有者的那些代码，它们的堆栈跟踪信息</p>
+<p>同步原语可以理解为：通道、互斥锁、条件变量、”WaitGroup”</p>
+</li>
+</ul>
+<p>对于除了 CPU 概要信息之外的其他概要信息，我们都可以通过调用这个函数获取到。</p>
+<h1 id="为基于-HTTP-协议的网络服务添加性能分析接口"><a href="#为基于-HTTP-协议的网络服务添加性能分析接口" class="headerlink" title="为基于 HTTP 协议的网络服务添加性能分析接口"></a>为基于 HTTP 协议的网络服务添加性能分析接口</h1><p>在我们编写网络服务程序的时候，使用<code>net/http/pprof</code>包要比直接使用<code>runtime/pprof</code>包方便和实用很多，这个代码包可以为网络服务的监测提供有力的支撑</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"log"</span>
+	<span class="token string">"net/http"</span>
+	<span class="token boolean">_</span> <span class="token string">"net/http/pprof"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span><span class="token function">ListenAndServe</span><span class="token punctuation">(</span><span class="token string">"localhost:8082"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>直接访问<a href="http://localhost:8082/debug/pprof">http://localhost:8082/debug/pprof</a> 可以看到<code>goroutine,threadcreate,heap, allocs,block,mutex</code>这6个指标的概要信息。它们都配有debug参数，默认值为0，可以通过改变debug的值改变概要信息的详细程度，如 <code>gotroutine</code>的URL是<code>http://localhost:8082/debug/pprof/goroutine?debug=1</code></p>
 <p>当访问<a href="http://localhost:8082/debug/pprof/profile">http://localhost:8082/debug/pprof/profile</a> 时，程序会执行对 CPU 概要信息的采样，可以通过加入参数<code>seconds</code>来控制对cpu的访问时间(默认是30秒)，当采样结束后，会提示你下载概要文件。你也可以执行下面命令，直接读取概要文件</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token punctuation">:</span><span class="token number">6060</span><span class="token operator">/</span>debug<span class="token operator">/</span>pprof<span class="token operator">/</span>profile?seconds<span class="token operator">=</span><span class="token number">60</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+
+
+<h1 id="要回答的问题"><a href="#要回答的问题" class="headerlink" title="要回答的问题"></a>要回答的问题</h1><p><em><strong>先写结论，便于接下来的阅读与理解</strong></em></p>
+<h2 id="基准测试与剖析的区别"><a href="#基准测试与剖析的区别" class="headerlink" title="基准测试与剖析的区别"></a>基准测试与剖析的区别</h2><p>基准测试可以用来衡量一个程序的性能，如果想让程序运行的更快，或对性能不理想的程序进行提升，基准测试无法给出从哪里可以进行优化。</p>
+<p>通过剖析，可以找出程序性能瓶颈所在，从而有针对性的对程序进行优化，提高性能。不要过早的进行优化，97%的场景，都不需要过早优化或根本就不需要优化，我们要做的仅是让程序可以正常运行即可。</p>
+<h2 id="剖析是如何进行的"><a href="#剖析是如何进行的" class="headerlink" title="剖析是如何进行的"></a>剖析是如何进行的</h2><p>剖析就是在程序执行期间进行一些自动抽样，在结束时进行推断，最后把统计结果保存为剖析数据文件，供剖析工具使用。Go 语言支持多种类型的剖析性能分析，可以通过go test 工具或调用Go的runtime 性能分析API(启用运行时剖析)，对程序进行剖析。</p>
+<h2 id="需要对哪些代码进行剖析"><a href="#需要对哪些代码进行剖析" class="headerlink" title="需要对哪些代码进行剖析"></a>需要对哪些代码进行剖析</h2><p>要对程序的主要功能，关键部分进行基准测试，然后对其进行剖析，功能测试不应该参与进来，使用 <code>-run=None</code>，禁止功能测试的运行</p>
 ]]></content>
       <categories>
         <category>后端</category>
@@ -3109,7 +3282,7 @@ FAIL
 <li>类型 T 的示例，命名为 <code>func ExampleT() &#123; ... &#125;</code></li>
 <li>类型 T 上的 方法 M 的示例，命名为 <code>func ExampleT_M() &#123; ... &#125;</code></li>
 </ul>
-<p>如果同一个方法需要提供多个示例，可以在示例函数名称后附加一个不同的后缀来实现，但这种后缀必须以小写字母开头</p>
+<p>如果同一个方法需要提供多个示例，可以在示例函数名称后附加一个不同的后缀来实现，但这种后缀必须以小写字母开头，大写也是可以的</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">Example_suffix</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span>
 <span class="token keyword">func</span> <span class="token function">ExampleF_suffix</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span>
 <span class="token keyword">func</span> <span class="token function">ExampleT_suffix</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span>
@@ -3142,8 +3315,10 @@ FAIL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
 <li><p>验证函数是否正确</p>
 <p>如果示例函数中包含<code>// Output</code>注释，那么在执行 go test 的时候，示例函数也会被运行，然后检查标准输出是否与注释匹配，不匹配则做为测试失败处理。如果示例函数中没有包含<code>// Output</code>注释，那么 go test 的时候，它不会被运行</p>
 </li>
+<li><p>可以在 godoc 提供的在线文档上显示，包括函数信息，示例函数</p>
+</li>
 </ol>
-<h1 id="源码文件"><a href="#源码文件" class="headerlink" title="源码文件"></a>源码文件</h1><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// fib_text.go</span>
+<h1 id="源码文件"><a href="#源码文件" class="headerlink" title="源码文件"></a>源码文件</h1><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// fib_test.go</span>
 <span class="token keyword">func</span> <span class="token function">ExampleFibMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	num <span class="token operator">:=</span> <span class="token function">fibWithMap</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span>
 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
@@ -3170,6 +3345,411 @@ FAIL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
       </categories>
       <tags>
         <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql 死锁</title>
+    <url>/mysql-deadlock/</url>
+    <content><![CDATA[<h1 id="死锁的发生"><a href="#死锁的发生" class="headerlink" title="死锁的发生"></a>死锁的发生</h1><p>不同线程出现资源的循环依赖，都在等待对方释放自己所需要的资源，就会导致这几个线程进行无限等待的状态，发生死锁。</p>
+<table>
+<thead>
+<tr>
+<th>事务A</th>
+<th>事务B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Begin;</td>
+<td>Begin;</td>
+</tr>
+<tr>
+<td>update t set k=k+1 where id = 1;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>update t set k=k+1 where id = 2;</td>
+</tr>
+<tr>
+<td>update t set k=k+1 where id = 2;(block)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>update t set k=k+1 where id = 1;<br><font color=red><br>&lt;ERROR 1213 (40001): <br>Deadlock found when trying to get lock;<br> try restarting transaction</font></td>
+</tr>
+<tr>
+<td><font color=green>Query OK, 1 row affected (6.99 sec)<br>Rows matched: 1  Changed: 1  Warnings: 0</font></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>事务A在等待事物B释放 id=2的行锁，而事务B在等待事物A释放id=1的行锁，双方都在等待对方释放资源，就发生了死锁。由于MySQL有死锁检测，会马上发现这个死锁，并对事务B进行回滚。</p>
+<p>发生死锁的线程都是要锁至少2行(参与的有2个资源，一个资源是自己已经加锁，但别人也要加，另一个资源是别人已经加锁，但自己也要加)。如果一个事务只锁一行是不会发生死锁的，只会发生锁阻塞。</p>
+<h2 id="应对策略"><a href="#应对策略" class="headerlink" title="应对策略"></a>应对策略</h2><ul>
+<li><p>什么都不做，直接等到超时</p>
+<p>上面的事务B，会发生超时。</p>
+<p>通过设置<code>innodb_lock_wait_timeout</code>来指定超时时间，默认值是50s</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">show</span> variables <span class="token operator">like</span> <span class="token string">'%innodb_lock_wait_timeout%'</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">--------------------------+-------+</span>
+<span class="token operator">|</span> Variable_name            <span class="token operator">|</span> <span class="token keyword">Value</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">--------------------------+-------+</span>
+<span class="token operator">|</span> innodb_lock_wait_timeout <span class="token operator">|</span> <span class="token number">50</span>    <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">--------------------------+-------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>进行死锁检测</p>
+<p>开启死锁检测功能，检测到死锁后，对回滚成本比较低的事务进行回滚，让其它事务继续执行。设置参数<code>innodb_deadlock_detect</code>为on，开启此功能(默认为开启)</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token operator">+</span><span class="token comment">------------------------+-------+</span>
+<span class="token operator">|</span> Variable_name          <span class="token operator">|</span> <span class="token keyword">Value</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------------------------+-------+</span>
+<span class="token operator">|</span> innodb_deadlock_detect <span class="token operator">|</span> <span class="token keyword">ON</span>    <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------------------------+-------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="哪种策略更好"><a href="#哪种策略更好" class="headerlink" title="哪种策略更好"></a>哪种策略更好</h2><ul>
+<li><p>缩短等待的超时时间</p>
+<p><code>innodb_lock_wait_timeout</code>的默认等待为50秒，对于生产环境，这显然是无法接受的。如果设置为1秒呢，虽然等待的时间变短，但也会误伤那些只是等待锁，而不是陷入死锁的线程。比如2秒以后就可以拿到锁的那些线程。</p>
+</li>
+<li><p>启用死锁检测</p>
+<p>MySql默认启用死锁检测，当发现加入进来的线程会产生死锁时，会回滚成本较低的事务。MySQL发现死锁的速度很快，所以推荐使用死锁检测</p>
+</li>
+<li><p>关闭死锁检测</p>
+<p>如果可以确定所有的SQL不会产生死锁问题，可以关闭死锁检测。死锁检测虽然好使，但也是有代价的，会占用CPU的资源。</p>
+</li>
+</ul>
+<h1 id="死锁检测的成本"><a href="#死锁检测的成本" class="headerlink" title="死锁检测的成本"></a>死锁检测的成本</h1><p>当一个线程新加入到某个资源的阻塞队列时，会检测它的加入是否与其它正在发生阻塞的线程存在资源的相互依赖，从而导致死锁的发生。如果这是一个高并发的资源，阻塞队列里有大量排队的线程，那么每个线程都要把其它线程检查一遍，每个线程要检查的时间复杂度就是<code>O(N)</code>。</p>
+<p>比如有1000个并发线程，那么要总共要检测的数量就是 1000 * 1000 = 100W，即<code>O(N^2)</code>，这种数量级的检测就会导致消耗大量的CPU资源，你看到的现象就是CPU占用率很高，却处理不了多少事务，或是你发现理处的事务很少，但CPU占用率却很高。</p>
+<h1 id="控制并发度"><a href="#控制并发度" class="headerlink" title="控制并发度"></a>控制并发度</h1><p>要想从根本上减少死锁及锁等待，就要降低对同一资源的并发访问数量</p>
+<p>可以使用的方法</p>
+<ul>
+<li><p>分摊热点资源的访问量</p>
+<p>比如参加秒杀的商品，它的库存如果存放在一条记录中，那么在高并发下，比如有1000个请求，就会同时更新，这样就会导致线程的阻塞或发生死锁。</p>
+<p>可以把保存库存的记录一条拆成N条，让请求随机访问这N条记录，比如分别放在100个记录中，那么每个记录最多只有10个更新请求，这样可以把并发量降为原来的<code>1/N</code>，大大减小了死锁的发生和锁的等待， 以及死锁检测的成本</p>
+</li>
+<li><p>把并发请求放入队列</p>
+<p>数据库中间件可以把请求放入队列，使并发请求变为顺序访问</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql 事务中多条SQL的排序</title>
+    <url>/mysql-sequence-of-sql-in-trx/</url>
+    <content><![CDATA[<p>场景：用户购买商品A，对应的SQL如下</p>
+<ol>
+<li>商品A库存减1 (SQL1)</li>
+<li>用户购买商品A，扣减用户金额 (SQL2)</li>
+<li>插入一条交易日志 (SQL3)</li>
+</ol>
+<p>这三个操作为原子操作，所以要写在一个事务中。如果有大量用户购买商品A，则<code>商品A库存减1 </code>为热点数据，被频繁更新。假设每条SQL的执行时间为5秒，则整个事务的执行时间为15秒，由于有大量用户购买，那么不同的执行顺序将会影响最终的执行时间，从而影响并发</p>
+<p>把<code>商品A库存减1 (SQL1)</code>放在首行(情况1)</p>
+<table>
+<thead>
+<tr>
+<th>时刻</th>
+<th>事务A</th>
+<th>事务B</th>
+<th>耗时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>商品A库存减1 (SQL1)</td>
+<td>商品A库存减1 (SQL1) 发生等待，不能执行，直到  T4 时刻</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>用户购买商品A，扣减用户金额 (SQL2)</td>
+<td></td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>插入一条交易日志 (SQL3)</td>
+<td></td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T4</td>
+<td></td>
+<td>商品A库存减1 (SQL1)</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T5</td>
+<td></td>
+<td>用户购买商品A，扣减用户金额 (SQL2)</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T6</td>
+<td></td>
+<td>插入一条交易日志 (SQL3)</td>
+<td>5s</td>
+</tr>
+</tbody></table>
+<ul>
+<li>T1时刻，事务A执行<code>商品A库存减1</code>，给其上锁，直到事务提交（15秒以后）</li>
+<li>同时事务B也执行<code>商品A库存减1</code>，被阻塞，发生锁等待，这使得后面的<code>Sql2,sql2</code>语句不能执行，直到15s后，事务A提交数据。 即T4时刻才开始执行。</li>
+<li>事务B总共耗时30秒才完成。等待事务A的15s(T1到T3) + 自身的15s</li>
+</ul>
+<p>如果把<code>商品A库存减1 (SQL1)</code>放在最后，可以减少等待的时间(情况2)</p>
+<table>
+<thead>
+<tr>
+<th>时刻</th>
+<th>事务A</th>
+<th>事务B</th>
+<th>耗时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>用户购买商品A，扣减用户金额 (SQL2)</td>
+<td>用户购买商品A，扣减用户金额 (SQL2)</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T2</td>
+<td>插入一条交易日志 (SQL3)</td>
+<td>插入一条交易日志 (SQL3)</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>商品A库存减1 (SQL1)</td>
+<td>商品A库存减1 (SQL1) 发生等待，不能执行，直到  T4 时刻</td>
+<td>5s</td>
+</tr>
+<tr>
+<td>T4</td>
+<td></td>
+<td>商品A库存减1 (SQL1)</td>
+<td>5s</td>
+</tr>
+</tbody></table>
+<ul>
+<li>扣减用户金额是针对单个用户操作，在同一时刻更新这些记录不太容易发生锁等待，所以事务A与事务B在T1时刻可以同时进行</li>
+<li>插入一条交易日志 也是可以同时进行的，所以事务A与事务B在T2时刻同时进行</li>
+<li>事务A T3 时刻执行完成，耗时15s，事务B 在此时被阻塞，因为要更新同一条记录，发生了锁等待，需要等待5秒</li>
+<li>事务B在T4时刻，执行完成，耗时 20s（10s + 等待 5s + 5s）</li>
+</ul>
+<p>当把<code>商品A库存减1 (SQL1)</code>放在最后时，事务B的执行时间缩短到了20s，节省了10s，大大提高了并发度。</p>
+<p>可以看出，锁等待时间是正在执行的事物引起锁的语句到提交的时间间隔，如果放在事务最后，那这个时间间隔会变为最少。对照上面的例子，情况1事务A从T1到T3时刻，持有锁总共15s。情况2，事务A只在T3时刻持有锁，总共5s，可见把<code>商品A库存减1 (SQL1)</code>放到最后时，大大减少了时间间隔。</p>
+<p>通过减少事务持有锁的时间，大程度的减少了事务之间的锁等待，提高了并发度。所以通常的做法是把热点更新语句放到事务的最后，这样当事务结束后，热点语句的锁可以被马上释放，减少事务锁持有的时间，其它事务等待锁释放的时间就会变短，从而使并发度得到了提高。</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql limit 的妙用</title>
+    <url>/mysql-update-with-limit/</url>
+    <content><![CDATA[<p>更新无索引的列，会导致全表被锁，其它线程无法更新表中的数据，如果加入了<code>limit N</code>关键字，可以减少被锁定的行，在一定程度上可以提高并发</p>
+<p>表结构及数据如下</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span> <span class="token punctuation">(</span>
+  <span class="token punctuation">`</span>id<span class="token punctuation">`</span> <span class="token keyword">int</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>name<span class="token punctuation">`</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>age<span class="token punctuation">`</span> <span class="token keyword">int</span> <span class="token keyword">default</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>ismale<span class="token punctuation">`</span> <span class="token keyword">tinyint</span> <span class="token keyword">default</span> <span class="token boolean">null</span>
+<span class="token punctuation">)</span> <span class="token keyword">engine</span><span class="token operator">=</span><span class="token keyword">innodb</span><span class="token punctuation">;</span>
+
+<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'d001'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">'d003'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token string">'d005'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token string">'d007'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token string">'d009'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token string">'d011'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> t<span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
+<span class="token operator">|</span> id <span class="token operator">|</span> name <span class="token operator">|</span> age  <span class="token operator">|</span> ismale <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
+<span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> d001 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">3</span> <span class="token operator">|</span> d003 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">5</span> <span class="token operator">|</span> d005 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">7</span> <span class="token operator">|</span> d007 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">9</span> <span class="token operator">|</span> d009 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token number">11</span> <span class="token operator">|</span> d011 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="不加入limit锁全表"><a href="#不加入limit锁全表" class="headerlink" title="不加入limit锁全表"></a>不加入<code>limit</code>锁全表</h2><table>
+<thead>
+<tr>
+<th>时刻</th>
+<th>Session A</th>
+<th>Session B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>begin;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>update t set age=31 where name=’d003’;</td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td></td>
+<td>Begin;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>update t set age=31 where name=’d005’;<font color=red>(blocked)</font></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>update t set age=31 where id=5;<font color=red>(blocked)</font></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>insert into t values(2,’d002’,30,1);<font color=red>(blocked)</font></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>insert into t values(12,’d012’,30,1);<font color=red>(blocked)</font></td>
+</tr>
+</tbody></table>
+<h3 id="SessionA的加锁范围"><a href="#SessionA的加锁范围" class="headerlink" title="SessionA的加锁范围"></a>SessionA的加锁范围</h3><p>主键索引<code>id</code>锁的范围是[infimum，supremum]</p>
+<p>由于name列没有索引，<code>where name=&#39;d003&#39;</code>查询时走主键索引，全表扫描。先找到id=1的行，加<code>next-key</code>锁，发现name的值不匹配，继续向右查找，给id=3的行上锁，name匹配，返回结果给server层，然后继续向右查找直到最后一行id=11，查找过程中涉及到的行都被加了<code>next-key</code>锁(id=5,7,9,11的行)，由于事务没有提交，这些行锁没有被释放。</p>
+<h3 id="SessionB被阻塞在哪里"><a href="#SessionB被阻塞在哪里" class="headerlink" title="SessionB被阻塞在哪里"></a>SessionB被阻塞在哪里</h3><p>更新条件 <code>where name=&#39;d005&#39;</code>，由于name列没有索引，查询时也要走主键索引。先找到id=1的行，加<code>next-key</code>锁，由于SessionA已经加了<code>next-key</code>锁，SessionB只能等待，它在此时发生了阻塞</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> name<span class="token operator">=</span><span class="token string">'d005'</span>
+<span class="token comment"># 被SessionA上的 id=1的行的 next-key锁阻塞</span>
+RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span>
+trx id <span class="token number">4366</span> lock_mode X waiting
+ <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000001</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000000</span>d98<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">81000000</span>a70110<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303031</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d001
+ <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>通过Id=5更新也会被SessinA的<code>next-key</code>锁阻塞，虽然SessionB加要的是<code>行锁</code>，这也从则面说明了<code>next-key</code>是由<code>行锁</code>和<code>间隙锁</code>组成</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">5</span>
+<span class="token comment"># 被id=5的记录上行锁阻塞</span>
+RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span>
+trx id <span class="token number">4367</span> lock_mode X locks rec but <span class="token operator">not</span> gap waiting
+ <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000005</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000000</span>d9e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">82000000</span>a80110<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303034</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d004
+ <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>插入数据也被阻塞，因为插入Id的值都落在了<code>间隙锁</code>[infimum，supremum]内，无法插入任何的值。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'d002'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment"># 插入id=2的值，被间隙锁(1,3)阻塞</span>
+RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span>
+trx id <span class="token number">4365</span> lock_mode X locks gap before rec <span class="token keyword">insert</span> intention waiting
+ <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000003</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000001106</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">01000001120488</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303033</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d003
+ <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>f<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="加入limit减少被锁的行"><a href="#加入limit减少被锁的行" class="headerlink" title="加入limit减少被锁的行"></a>加入<code>limit</code>减少被锁的行</h2><table>
+<thead>
+<tr>
+<th>时刻</th>
+<th>Session A</th>
+<th>Session B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>begin;</td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td>update t set age=31 where name=’d003’ limit 1;</td>
+<td></td>
+</tr>
+<tr>
+<td>T3</td>
+<td></td>
+<td>begin;</td>
+</tr>
+<tr>
+<td>T4</td>
+<td></td>
+<td>update t set age=31 where name=’d005’;<font color=red>(blocked)</font></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>insert into t values(2,’d002’,30,1);<font color=red>(blocked)</font></td>
+</tr>
+<tr>
+<td>T5</td>
+<td></td>
+<td>insert into t values(4,’d004’,30,1);<font color=green>(Query Ok)</font></td>
+</tr>
+</tbody></table>
+<h3 id="SessionA加锁的范围是怎么样的"><a href="#SessionA加锁的范围是怎么样的" class="headerlink" title="SessionA加锁的范围是怎么样的"></a>SessionA加锁的范围是怎么样的</h3><p>主键索引<code>id</code>锁的范围是[infimum，3]</p>
+<p>由于name列没有索引，查询时走主键索引，全表扫描。先找到id=1的行，加<code>next-key</code>锁，发现name的值不匹配，继续向右查找，给id=3的行上锁，name匹配，返回结果给server层，由于使用了<code>limit 1</code>，满足条件，不再向后查找，查询结束。记录(id:1),(id:3)的行上了<code>next-key</code>锁，之后的记录没有上锁。</p>
+<h3 id="SessionB被阻塞在哪里-1"><a href="#SessionB被阻塞在哪里-1" class="headerlink" title="SessionB被阻塞在哪里"></a>SessionB被阻塞在哪里</h3><p>更新条件 <code>where name=&#39;d005&#39;</code>，由于name列没有索引，查询时也要走主键索引。先找到id=1的行，加<code>next-key</code>锁，由于SessionA已经加了<code>next-key</code>锁，SessionB只能等待，它在此时发生了阻塞</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> name<span class="token operator">=</span><span class="token string">'d005'</span>
+<span class="token comment"># 被SessionA上的 id=1的行的 next-key锁阻塞</span>
+RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span> 
+trx id <span class="token number">4871</span> lock_mode X waiting
+ <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000001</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000000</span>d98<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">81000000</span>a70110<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303031</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d001
+ <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>因为<code>id</code>锁的范围是[infimum，3]，(id=5,7,9,11)的行没有被上锁，可以更新及插入id &gt; 3的数据。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment"># Session B</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token string">'d004'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">(</span>Query Ok<span class="token punctuation">)</span>
+
+<span class="token comment"># 虽然不能通过 where name='d005' 修改</span>
+<span class="token comment"># 但可以通过where id=5 修改，也说明了id=5的行没有被锁</span>
+<span class="token comment"># 同时也绕过了需要等待id=1的锁的限制</span>
+<span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token punctuation">(</span>Query Ok<span class="token punctuation">)</span>
+
+<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> t<span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
+<span class="token operator">|</span> id <span class="token operator">|</span> name <span class="token operator">|</span> age  <span class="token operator">|</span> ismale <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
+<span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> d001 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">3</span> <span class="token operator">|</span> d003 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">4</span> <span class="token operator">|</span> d004 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">5</span> <span class="token operator">|</span> d005 <span class="token operator">|</span>   <span class="token number">31</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">7</span> <span class="token operator">|</span> d007 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">9</span> <span class="token operator">|</span> d009 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token number">11</span> <span class="token operator">|</span> d011 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
       </tags>
   </entry>
 </search>

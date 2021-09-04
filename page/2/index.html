@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">61</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">64</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -210,6 +210,617 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-test-log-print/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-test-log-print/" class="post-title-link" itemprop="url">go 语言 测试日志打印</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-05 15:37:07" itemprop="dateCreated datePublished" datetime="2021-07-05T15:37:07+00:00">2021-07-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="缓存目录"><a href="#缓存目录" class="headerlink" title="缓存目录"></a>缓存目录</h1><p>Go 总是会缓存程序构建的结果，以便在将来使用(可以加速构建速度)。当有任何变动时，缓存就会失效，构建过程会真正的被执行。被缓存的构建结果保存在<code>go env GOCACHE</code>目录中，为了防止目录中的数据越来越多，go会自动删除不经常使用的缓存文件。可以手动清除缓存结果，执行<code>go clean -cache</code>即可。</p>
+<p><code>go test</code>命令也会把测试成功的结果缓存起来，如果测试代码和源代码没有改动，再次运行测试时，直接使用缓存的结果。当源码和测试代码有改动时，缓存结果就会失效，测试会被真正的运行。运行<code>go clean -testcache</code>可以删除测试的缓存结果，但不会删除构建结果缓存</p>
+<h1 id="测试日志打印"><a href="#测试日志打印" class="headerlink" title="测试日志打印"></a>测试日志打印</h1><p>可以使用<code>t.Log</code>与<code>t.Logf</code>方法打印测试日志，这两个方法会在测试失败时，进行打印，在测试成功的时候，是不进行打印的。如果想在测试结果中看到所有的日志，可以使用<code>-v</code>参数</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestIntroduce</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	intro <span class="token operator">:=</span> <span class="token function">introduce</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	expected <span class="token operator">:=</span> <span class="token string">"Welcome to my Golang column."</span>
+	<span class="token keyword">if</span> intro <span class="token operator">!=</span> expected <span class="token punctuation">&#123;</span>
+		t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"The actual introduce %q is not the expected."</span><span class="token punctuation">,</span>
+			intro<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">// 默认只在测试失败的时候，才打印日志内容</span>
+	t<span class="token punctuation">.</span><span class="token function">Logf</span><span class="token punctuation">(</span><span class="token string">"The expected introduce is %q.\n"</span><span class="token punctuation">,</span> expected<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 测试失败，显示t.Logf()中的内容</span>
+<span class="token operator">--</span><span class="token operator">-</span> FAIL<span class="token punctuation">:</span> TestIntroduce <span class="token punctuation">(</span><span class="token number">0.00</span>s<span class="token punctuation">)</span>
+    demo53_test<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">41</span><span class="token punctuation">:</span> The actual introduce <span class="token string">"Welcome to my Golang column."</span> is not the expected<span class="token punctuation">.</span>
+    demo53_test<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">44</span><span class="token punctuation">:</span> The expected introduce is <span class="token string">"Welcome to my golang column."</span><span class="token punctuation">.</span>
+FAIL
+FAIL	puzzlers<span class="token operator">/</span>article20<span class="token operator">/</span>q2	<span class="token number">0.013</span>s
+FAIL
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="t-Fail-与t-FailNow"><a href="#t-Fail-与t-FailNow" class="headerlink" title="t.Fail()与t.FailNow()"></a><code>t.Fail()</code>与<code>t.FailNow()</code></h1><p><code>t.Fail()</code>令测试结果为失败，但其后的代码依然会被执行。go 语言测试用例失败的触发必须手动调用<code>t.Fail/t.FailNow/t.Errorf/t.Fatalf</code>等方法才可以，并不像其它语言支持测试断言，由断言失败触发。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestFail</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed."</span><span class="token punctuation">)</span> <span class="token comment">// 可以被执行到</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>t.FailNow()</code>也会令测试结果为失败，但其后的代码不再执行，不会影响其它测试用例的执行</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestFail</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed"</span><span class="token punctuation">)</span> <span class="token comment">// 不能被执行到</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="t-Errorf-与t-Error"><a href="#t-Errorf-与t-Error" class="headerlink" title="t.Errorf()与t.Error()"></a><code>t.Errorf()</code>与<code>t.Error()</code></h1><p>打印日志并使测试失败，等效于调用<code>t.Logf/t.Log</code>后，又调用了<code>t.Fail</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// t.Error 等效于在调用 t.Log 后，接着又调用了 t.Fail</span>
+<span class="token comment">// Error is equivalent to Log followed by Fail.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Error</span><span class="token punctuation">(</span>args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintln</span><span class="token punctuation">(</span>args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Errorf is equivalent to Logf followed by Fail.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Errorf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span>format<span class="token punctuation">,</span> args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="t-Fatal与t-Fatalf方法"><a href="#t-Fatal与t-Fatalf方法" class="headerlink" title="t.Fatal与t.Fatalf方法"></a><code>t.Fatal</code>与<code>t.Fatalf</code>方法</h1><p>打印日志并使测试失败，在其后的代码不会被执行，当前测试用例立即结束，但不会影响其它测试用例，等效于调用<code>t.Logf/t.Log</code>后，又调用了<code>t.FailNow</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Fatal is equivalent to Log followed by FailNow.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Fatal</span><span class="token punctuation">(</span>args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintln</span><span class="token punctuation">(</span>args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Fatalf is equivalent to Logf followed by FailNow.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Fatalf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span>format<span class="token punctuation">,</span> args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-test-coverage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-test-coverage/" class="post-title-link" itemprop="url">go 语言 测试覆盖率</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-27 14:48:39" itemprop="dateCreated datePublished" datetime="2021-06-27T14:48:39+00:00">2021-06-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="覆盖率"><a href="#覆盖率" class="headerlink" title="覆盖率"></a>覆盖率</h1><p>语句的覆盖率是指在测试中至少被运行一次的代码占总代码数的比例。</p>
+<h1 id="生成测试报告"><a href="#生成测试报告" class="headerlink" title="生成测试报告"></a>生成测试报告</h1><p>在生成报告之前，要确保所有的测试都正常通过。使用<code>go test</code>命令配合不同的参数标示可以生成不同类型的覆盖率分析报告</p>
+<h2 id="使用标志coverprofile"><a href="#使用标志coverprofile" class="headerlink" title="使用标志coverprofile"></a>使用标志<code>coverprofile</code></h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> gott/prime -coverprofile<span class="token operator">=</span>c.out
+ok      gott/prime      <span class="token number">0</span>.013s  coverage: <span class="token number">93.8</span>% of statements<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>在运行每个测试前，会把参与测试的源代码拷贝一份，并对每个词法块插入一个布尔变量，来统计代码块在测试中是否被执行过，以此来统计代码覆盖率，统计日志数据写入c.out文件</p>
+<p><img src="//img.gagahappy.cn/blog/2021/08/golang-test-coverage-1.png_b1" alt="go 语言 测试覆盖率" title="go 语言 测试覆盖率"></p>
+<h2 id="使用标志covermode"><a href="#使用标志covermode" class="headerlink" title="使用标志covermode"></a>使用标志<code>covermode</code></h2><p>如果同时使用了<code>-covermode=count</code>，会在每个代码块插入计数器以统计代码块被执行的次数，用这个功能可以看到哪些代码是频繁执行的热点代码</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> gott/prime -coverprofile<span class="token operator">=</span>c.out -covermode<span class="token operator">=</span>count
+ok      gott/prime      <span class="token number">0</span>.015s  coverage: <span class="token number">93.8</span>% of statements<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="//img.gagahappy.cn/blog/2021/08/golang-test-coverage-2.png_b1" alt="go 语言 测试覆盖率" title="go 语言 测试覆盖率"></p>
+<h1 id="查看测试报告"><a href="#查看测试报告" class="headerlink" title="查看测试报告"></a>查看测试报告</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go tool cover -html<span class="token operator">=</span>c.out<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>运行后会自动在浏览器中打开，绿色的代码块代表被测试覆盖到了，红色的则表示没有被覆盖到。如果使用了<code> -covermode=count</code>标志，会用红、灰、绿 三种颜色表示代码被调用的频率，红色表示没有调用，灰色表示频率较低，绿色随颜色深浅表示不同程度的频率调用。具体可见上图测试报告。</p>
+<h1 id="源文件"><a href="#源文件" class="headerlink" title="源文件"></a>源文件</h1><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// primes_test.go</span>
+<span class="token keyword">func</span> <span class="token function">TestPrimes</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	max <span class="token operator">:=</span> <span class="token number">1000</span>
+	primes <span class="token operator">:=</span> <span class="token function">GetPrimes</span><span class="token punctuation">(</span>max<span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span>primes<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// primes.go</span>
+<span class="token comment">// 查找质数</span>
+<span class="token keyword">func</span> <span class="token function">GetPrimes</span><span class="token punctuation">(</span>max <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> max <span class="token operator">&lt;=</span> <span class="token number">1</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	marks <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">bool</span><span class="token punctuation">,</span> max<span class="token punctuation">)</span>
+	<span class="token keyword">var</span> count <span class="token builtin">int</span>
+	squareRoot <span class="token operator">:=</span> <span class="token function">int</span><span class="token punctuation">(</span>math<span class="token punctuation">.</span><span class="token function">Sqrt</span><span class="token punctuation">(</span><span class="token function">float64</span><span class="token punctuation">(</span>max<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> squareRoot<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token operator">!</span>marks<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">for</span> j <span class="token operator">:=</span> i <span class="token operator">*</span> i<span class="token punctuation">;</span> j <span class="token operator">&lt;</span> max<span class="token punctuation">;</span> j <span class="token operator">+=</span> i <span class="token punctuation">&#123;</span>
+				<span class="token keyword">if</span> <span class="token operator">!</span>marks<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">&#123;</span>
+					marks<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span>
+					count<span class="token operator">++</span>
+				<span class="token punctuation">&#125;</span>
+			<span class="token punctuation">&#125;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	primes <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> max<span class="token operator">-</span>count<span class="token punctuation">)</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> max<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token operator">!</span>marks<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token punctuation">&#123;</span>
+			primes <span class="token operator">=</span> <span class="token function">append</span><span class="token punctuation">(</span>primes<span class="token punctuation">,</span> i<span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> primes
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>测试不可能是完整的，计算机科学家Edsger Dijkstra曾说过：“测试能证明缺陷存在，而无法证明没有缺陷。”</li>
+<li>实现100%的测试覆盖率听起来很美，但是在具体实践中通常是不可行的，也不是值得推荐的做法。应该对更需要测试的地方添加测试代码，而不是一味的为每个方法都加入测试代码</li>
+<li>测试覆盖率工具可以帮助我们快速识别测试薄弱的地方</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/nginx-set-gzip-http-version/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/nginx-set-gzip-http-version/" class="post-title-link" itemprop="url">nginx 设置 gzip http 版本</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-26 14:11:40" itemprop="dateCreated datePublished" datetime="2021-06-26T14:11:40+00:00">2021-06-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/nginx/" itemprop="url" rel="index"><span itemprop="name">nginx</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="设置gzip-http-version"><a href="#设置gzip-http-version" class="headerlink" title="设置gzip_http_version"></a>设置<code>gzip_http_version</code></h1><p>使用<code>ab</code> 测试网站，参数如下</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ab -n <span class="token number">50</span> -c <span class="token number">10</span> -H <span class="token string">"Accept-Encoding: gzip, deflate"</span> https://example.com/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>发现返回的文档没有被压缩，查看<code>nginx</code>日志也显示返回的是原始大小，查询资料后发现是<code>nginx</code> 配置<code>gzip_http</code>版本问题</p>
+<pre class="line-numbers language-nginx" data-language="nginx"><code class="language-nginx"><span class="token directive"><span class="token keyword">gzip</span> <span class="token boolean">on</span></span><span class="token punctuation">;</span>
+
+<span class="token directive"><span class="token keyword">gzip_vary</span> <span class="token boolean">on</span></span><span class="token punctuation">;</span>
+<span class="token directive"><span class="token keyword">gzip_min_length</span> <span class="token number">1k</span></span><span class="token punctuation">;</span>
+<span class="token directive"><span class="token keyword">gzip_proxied</span> any</span><span class="token punctuation">;</span>
+<span class="token directive"><span class="token keyword">gzip_comp_level</span> <span class="token number">6</span></span><span class="token punctuation">;</span>
+<span class="token directive"><span class="token keyword">gzip_buffers</span> <span class="token number">16</span> <span class="token number">8k</span></span><span class="token punctuation">;</span>
+gzip_http_version 1.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>gzip_http_version </code>设置为了1.1，而 <code>ab</code>只支持<code>http_version:1.0</code>，改为<code>1.0</code>即可。</p>
+<pre class="line-numbers language-nginx" data-language="nginx"><code class="language-nginx">gzip_http_version 1.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>再次测试，返回数据是被压缩后的数据，从<code>nginx</code>日志也可以看到数据是压缩后的。类似的<code>ab</code> 的工具还有<a target="_blank" rel="noopener" href="https://github.com/JoeDog/siege">siege</a>，可以很好的支持<code>http 1.1</code></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>在<code>nginx</code>配置中，有些属性如果没有显示的进行设置，比如设置<code>gzip on;</code>时，没有设置<code>gzip_http_version</code>，<code>nginx</code>会启用默认值 <code>gzip_http_version:1.1;</code>，所以当你不想限制<code>http_version</code>的最低版本时，仅仅把<code>gzip_http_version</code>注释掉是不行的，你必须给其赋一个值才可以。类似这种问题不光在<code>nginx</code>配置中需要注意，在其它软件配置文件中也要注意</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-external-test-packages/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-external-test-packages/" class="post-title-link" itemprop="url">go 语言 外部测试包</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-24 16:29:21" itemprop="dateCreated datePublished" datetime="2021-06-24T16:29:21+00:00">2021-06-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="外部测试包"><a href="#外部测试包" class="headerlink" title="外部测试包"></a>外部测试包</h1><p>在测试代码的时候，会遇到包循环依赖导入的问题，Go语言规范是禁止包的循环依赖，为了解决这个问题，可以引入外部包。</p>
+<p>外部包使用<code>package xxx_test</code>方式来命名，比如<code>package bytes_test</code>就是<code>src/btyes/buffer</code>外部包的命名方式，<code>_test</code>后缀告诉go test工具它应该建立一个额外的包来运行测试。</p>
+<p><code>package xxx_test</code>中的<code>xxx_test</code>并不需要真的创建这样一个目录，而是在<code>xxx</code>包下的测试文件中引入这个包名就可以了。<code>btyes</code>包的源码目录结构如下</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/src/bytes
+├── boundary_test.go
+├── buffer.go
+├── buffer_test.go
+├── bytes.go
+├── bytes_test.go
+├── compare_test.go
+├── example_test.go
+├── export_test.go
+├── reader.go
+└── reader_test.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>通过外部测试包的方式可以解决导入包循环依赖的问题，因为外部测试包是一个独立的包，所以能够导入那些<code>依赖待测代码本身</code>的其他辅助包；包内的测试代码就无法做到这点。注意：外部包不能被其它包导入</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// 文件 src/btyes/buffer_test.go</span>
+<span class="token keyword">package</span> bytes_test <span class="token comment">// 'btyes目录下并不存在 bytes_test 目录'</span>
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token punctuation">.</span> <span class="token string">"bytes"</span>
+	<span class="token operator">...</span> 代码片段
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">TestNewBuffer</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	buf <span class="token operator">:=</span> <span class="token function">NewBuffer</span><span class="token punctuation">(</span>testBytes<span class="token punctuation">)</span>
+	<span class="token function">check</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> <span class="token string">"NewBuffer"</span><span class="token punctuation">,</span> buf<span class="token punctuation">,</span> testString<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token operator">...</span> 代码片段
+<span class="token keyword">func</span> <span class="token function">empty</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">,</span> testname <span class="token builtin">string</span><span class="token punctuation">,</span> buf <span class="token operator">*</span>Buffer<span class="token punctuation">,</span> s <span class="token builtin">string</span><span class="token punctuation">,</span> fub <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p> <code>go list 命令</code></p>
+<ul>
+<li><p>通过<code>GoFiles</code>查看<code>bytes</code>包的Go源文件</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>GoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes <span class="token comment">// => [buffer.go bytes.go reader.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>通过<code>TestGoFiles</code>查看<code>bytes</code>包内部的测试代码</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>TestGoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes <span class="token comment">// => [export_test.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>通过<code>XTestGoFiles</code>查看<code>bytes</code>包的外部测试代码，也就是bytes_test包</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> list <span class="token operator">-</span>f<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">.</span>XTestGoFiles<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> bytes
+<span class="token comment">// => [buffer_test.go bytes_test.go compare_test.go example_test.go reader_test.go]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<h1 id="访问内部代码"><a href="#访问内部代码" class="headerlink" title="访问内部代码"></a>访问内部代码</h1><p>如果在测试中，需要对包内部的没有导出的函数进行测试，可以利用包内的 <code>_test.go</code>文件，如 <code>export_test.go</code>，在这个文件中将包的内部函数、方法导出，以供外部测试包使用。</p>
+<p><code>indexBytePortable</code>方法在 src/bytes/bytes.go 中定义</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// src/bytes/bytes.go</span>
+<span class="token keyword">func</span> <span class="token function">indexBytePortable</span><span class="token punctuation">(</span>s <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> c <span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span><span class="token comment">/* ... */</span><span class="token punctuation">&#125;</span> <span class="token comment">// 这是一个内部方法</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<p>把<code>bytes</code>包中的内部方法导出，供外部包<code>package bytes_test</code>使用。因为只有在测试时，才会把内部代码导出，所以导出内部代码是安全的</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// src/bytes/export_test.go</span>
+<span class="token keyword">package</span> bytes
+<span class="token comment">// Export func for testing</span>
+<span class="token keyword">var</span> IndexBytePortable <span class="token operator">=</span> indexBytePortable <span class="token comment">// 赋值给包级可导出变量 IndexBytePortable</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>外部包使用导出的方法<code>IndexBytePortable</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// src/bytes/bytes_test.go</span>
+<span class="token keyword">package</span> bytes_test
+
+<span class="token keyword">func</span> <span class="token function">TestIndexByte</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> tt <span class="token operator">:=</span> <span class="token keyword">range</span> indexTests <span class="token punctuation">&#123;</span>
+		<span class="token operator">...</span> 代码片段
+		posp <span class="token operator">:=</span> <span class="token function">IndexBytePortable</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token comment">// 导出的内部方法在这里被使用</span>
+		<span class="token keyword">if</span> posp <span class="token operator">!=</span> tt<span class="token punctuation">.</span>i <span class="token punctuation">&#123;</span>
+			t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">`indexBytePortable(%q, '%c') = %v`</span><span class="token punctuation">,</span> tt<span class="token punctuation">.</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> posp<span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>测试文件<code>export_test.go</code>并没有定义测试代码，它只是通过<code>bytes.IndexBytePortable</code>简单导出了内部的<code>indexBytePortable</code>函数，这个技巧可以广泛用于位于外部测试包的白盒测试</p>
+<h1 id="示例：包循环依赖"><a href="#示例：包循环依赖" class="headerlink" title="示例：包循环依赖"></a>示例：包循环依赖</h1><p>目录结构</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gott
+├── go.mod
+├── hi
+│   └── hi.go
+├── pprint
+│   ├── pprint.go
+│   └── pprint_test.go<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>hi.go 文件，引用了 pprint 包</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> hi
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"gott/pprint"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	pprint <span class="token operator">:=</span> pprint<span class="token punctuation">.</span><span class="token function">PPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>pprint<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>pprint.go 文件</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> pprint
+
+<span class="token keyword">func</span> <span class="token function">PPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token string">"I'm PPrint()"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>pprint_test.go 测试文件，在 pprint 包中引入了 hi 包，而 hi 包中已经引入了 pprint 包，这就导致了 包循环依赖</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> pprint
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"gott/hi"</span>
+	<span class="token string">"testing"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">TestPPrint</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">PPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	hi<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"expect call PPrint"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>执行测试，提示 import cycle not allowed in test</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v gott/pprint
+<span class="token comment"># gott/pprint</span>
+package gott/pprint <span class="token punctuation">(</span>test<span class="token punctuation">)</span>
+        imports gott/hi
+        imports gott/pprint: <span class="token function">import</span> cycle not allowed <span class="token keyword">in</span> <span class="token builtin class-name">test</span>
+FAIL    gott/pprint <span class="token punctuation">[</span>setup failed<span class="token punctuation">]</span>
+FAIL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>修改 pprint_test.go 测试文件，使用外部测试包 <code>pprint_test</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> pprint_test
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"gott/hi"</span>
+	<span class="token comment">// 导入 要进行测试的 pprint 包本身</span>
+	<span class="token string">"gott/pprint"</span>
+	<span class="token string">"testing"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">TestPPrint</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	pprint<span class="token punctuation">.</span><span class="token function">PPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	hi<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"expect call PPrint"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>&quot;gott/pprint&quot;</code>：导入 要进行测试的 pprint 包本身，没有引入外部包时，不需要导入被测试的包本身</p>
+<p>执行测试，测试通过</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v gott/pprint
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestPPrint
+I'm PPrint<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    pprint_test.go:12: <span class="token function">expect</span> call PPrint
+--- PASS: TestPPrint <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span>
+PASS
+ok      gott/pprint     <span class="token punctuation">(</span>cached<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>使用 Go 官方的代码风格：pprint_test.go 文件，因为pprint_test在 pprint 目录下，通过在 import 时，使用 <code>.</code> 选项，可以直接调用PPrint()方法，这使得调用包内的方法和内部测试包一致，整体代码风格得到统一</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> pprint_test
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"gott/hi"</span>
+	<span class="token punctuation">.</span> <span class="token string">"gott/pprint"</span>
+	<span class="token string">"testing"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">TestPPrint</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">PPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	hi<span class="token punctuation">.</span><span class="token function">Say</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"expect call PPrint"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/safari-favicon-setting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -280,176 +891,6 @@
 <li>首先要清理它的缓存：<code>setting</code>-&gt;<code>privacy</code>-&gt;<code>Manage Website Date</code>，搜索相关域名，删除即可。</li>
 <li>磁盘缓存文件：<code>~/Library/Safari</code>目录下，删除<code>Template Icons</code>文件夹，如果不起作用，删除<code>Favicon Cache</code>，<code>Touch Icons Cache</code>文件夹</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-pprof/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-pprof/" class="post-title-link" itemprop="url">go 语言 程序性能剖析</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-15 14:59:46" itemprop="dateCreated datePublished" datetime="2021-06-15T14:59:46+00:00">2021-06-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p><em><strong>先写结论，便于接下来的阅读与理解</strong></em></p>
-<h2 id="基准测试与剖析的区别"><a href="#基准测试与剖析的区别" class="headerlink" title="基准测试与剖析的区别"></a>基准测试与剖析的区别</h2><p>基准测试可以用来衡量一个程序的性能，如果想让程序运行的更快，或对性能不理想的程序进行提升，基准测试无法给出从哪里可以进行优化。</p>
-<p>通过剖析，可以找出程序性能瓶颈所在，从而有针对性的对程序进行优化，提高性能。不要过早的进行优化，97%的场景，都不需要过早优化或根本就不需要优化，我们要做的仅是让程序可以正常运行即可。</p>
-<h2 id="剖析是如何进行的"><a href="#剖析是如何进行的" class="headerlink" title="剖析是如何进行的"></a>剖析是如何进行的</h2><p>剖析就是在程序执行期间进行一些自动抽样，在结束时进行推断，最后把统计结果保存为剖析数据文件，供剖析工具使用。Go 语言支持多种类型的剖析性能分析，可以通过go test 工具或调用Go的runtime 性能分析API(启用运行时剖析)，对程序进行剖析。</p>
-<h2 id="需要对哪些代码进行剖析"><a href="#需要对哪些代码进行剖析" class="headerlink" title="需要对哪些代码进行剖析"></a>需要对哪些代码进行剖析</h2><p>要对程序的主要功能，关键部分进行基准测试，然后对其进行剖析，功能测试不应该参与进来，使用 <code>-run=None</code>，禁止功能测试的运行</p>
-<h1 id="Go-test-标识剖析"><a href="#Go-test-标识剖析" class="headerlink" title="Go test 标识剖析"></a>Go test 标识剖析</h1><p>可以使用 <code>go test</code>工具提供的剖析标识对程序进行分析，不要让多个剖析标识同时运行，它们之间会相互影响，导致分析结果不准确</p>
-<h2 id="Cpu-剖析标识"><a href="#Cpu-剖析标识" class="headerlink" title="Cpu 剖析标识"></a>Cpu 剖析标识</h2><p>记录占用CPU时间最长的函数，每个运行在CPU上的函数每几毫秒都会遇到系统中断事件，每次中断时，都会记录一个剖析数据</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test gott<span class="token operator">/</span>fib <span class="token operator">-</span>cpuprofile<span class="token operator">=</span>cpu<span class="token punctuation">.</span>log <span class="token operator">-</span>run<span class="token operator">=</span>None <span class="token operator">-</span>bench<span class="token operator">=</span>FibWithMap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<h2 id="堆剖析标识"><a href="#堆剖析标识" class="headerlink" title="堆剖析标识"></a>堆剖析标识</h2><p>记录最耗内容的语句，平均每申请512K的内存，就会记录一个剖析数据</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test gott<span class="token operator">/</span>fib <span class="token operator">-</span>memprofile<span class="token operator">=</span>mem<span class="token punctuation">.</span>log <span class="token operator">-</span>run<span class="token operator">=</span>None <span class="token operator">-</span>bench<span class="token operator">=</span>FibWithMap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<h2 id="阻塞剖解标识"><a href="#阻塞剖解标识" class="headerlink" title="阻塞剖解标识"></a>阻塞剖解标识</h2><p>记录阻塞goroutine最久的操作，如系统调用，等待锁，管道收发等，每当这些操作阻塞goroutine时，就会记录一个剖析数据</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test gott<span class="token operator">/</span>fib <span class="token operator">-</span>blockprofile<span class="token operator">=</span>block<span class="token punctuation">.</span>log <span class="token operator">-</span>run<span class="token operator">=</span>None <span class="token operator">-</span>bench<span class="token operator">=</span>FibWithMap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<h1 id="剖析文件分析"><a href="#剖析文件分析" class="headerlink" title="剖析文件分析"></a>剖析文件分析</h1><h2 id="可执行文件"><a href="#可执行文件" class="headerlink" title="可执行文件"></a>可执行文件</h2><p>使用以上标识符，除了生成了剖析数据日志(cpu.log/mem.log/block.log)，go test  还会生成对应的可执行程序(fib.test)，以包名做为前缀，后面为<code>.test</code>的文件。为了减少剖析数据日志占用的空间和提高分析效率，分析日志本身并没有记录函数的名称，而是函数的地址，所以需要与之对应的可执行文件，才可以对剖析日志进行数据分析</p>
-<h2 id="pprof-分析工具"><a href="#pprof-分析工具" class="headerlink" title="pprof 分析工具"></a>pprof 分析工具</h2><p> <code>go tool pprof</code>命令可以用来分析剖析日志，它需要两个基本的参数</p>
-<ul>
-<li>剖析文件日志</li>
-<li>测试生成的可执行文件</li>
-</ul>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof <span class="token operator">-</span>text <span class="token operator">-</span>nodecount<span class="token operator">=</span><span class="token number">10</span> <span class="token punctuation">.</span><span class="token operator">/</span>fib<span class="token punctuation">.</span>test cpu<span class="token punctuation">.</span>log
-
-File<span class="token punctuation">:</span> fib<span class="token punctuation">.</span>test
-Type<span class="token punctuation">:</span> cpu
-Time<span class="token punctuation">:</span> Aug <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">2021</span> at <span class="token number">11</span><span class="token punctuation">:</span><span class="token number">30</span>am <span class="token punctuation">(</span>CST<span class="token punctuation">)</span>
-Duration<span class="token punctuation">:</span> <span class="token number">1.43</span>s<span class="token punctuation">,</span> Total samples <span class="token operator">=</span> <span class="token number">1.09</span>s <span class="token punctuation">(</span><span class="token number">76.02</span><span class="token operator">%</span><span class="token punctuation">)</span>
-Showing nodes accounting <span class="token keyword">for</span> <span class="token number">1.09</span>s<span class="token punctuation">,</span> <span class="token number">100</span><span class="token operator">%</span> of <span class="token number">1.09</span>s total
-Showing top <span class="token number">10</span> nodes out of <span class="token number">17</span>
-      flat  flat<span class="token operator">%</span>   sum<span class="token operator">%</span>        cum   cum<span class="token operator">%</span>
-     <span class="token number">0.49</span>s <span class="token number">44.95</span><span class="token operator">%</span> <span class="token number">44.95</span><span class="token operator">%</span>      <span class="token number">0.94</span>s <span class="token number">86.24</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>mapaccess2_fast64
-     <span class="token number">0.36</span>s <span class="token number">33.03</span><span class="token operator">%</span> <span class="token number">77.98</span><span class="token operator">%</span>      <span class="token number">0.36</span>s <span class="token number">33.03</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>memhash64
-     <span class="token number">0.12</span>s <span class="token number">11.01</span><span class="token operator">%</span> <span class="token number">88.99</span><span class="token operator">%</span>      <span class="token number">1.06</span>s <span class="token number">97.25</span><span class="token operator">%</span>  gott<span class="token operator">/</span>fib<span class="token punctuation">.</span>fibWithMap
-     <span class="token number">0.06</span>s  <span class="token number">5.50</span><span class="token operator">%</span> <span class="token number">94.50</span><span class="token operator">%</span>      <span class="token number">0.06</span>s  <span class="token number">5.50</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>add <span class="token punctuation">(</span>partial<span class="token operator">-</span>inline<span class="token punctuation">)</span>
-     <span class="token number">0.03</span>s  <span class="token number">2.75</span><span class="token operator">%</span> <span class="token number">97.25</span><span class="token operator">%</span>      <span class="token number">0.03</span>s  <span class="token number">2.75</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>bucketShift <span class="token punctuation">(</span>inline<span class="token punctuation">)</span>
-     <span class="token number">0.02</span>s  <span class="token number">1.83</span><span class="token operator">%</span> <span class="token number">99.08</span><span class="token operator">%</span>      <span class="token number">1.08</span>s <span class="token number">99.08</span><span class="token operator">%</span>  gott<span class="token operator">/</span>fib<span class="token punctuation">.</span>BenchmarkFibWithMap
-     <span class="token number">0.01</span>s  <span class="token number">0.92</span><span class="token operator">%</span>   <span class="token number">100</span><span class="token operator">%</span>      <span class="token number">0.01</span>s  <span class="token number">0.92</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>wbBufFlush1
-         <span class="token number">0</span>     <span class="token number">0</span><span class="token operator">%</span>   <span class="token number">100</span><span class="token operator">%</span>      <span class="token number">0.01</span>s  <span class="token number">0.92</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token operator">*</span>bmap<span class="token punctuation">)</span><span class="token punctuation">.</span>overflow <span class="token punctuation">(</span>inline<span class="token punctuation">)</span>
-         <span class="token number">0</span>     <span class="token number">0</span><span class="token operator">%</span>   <span class="token number">100</span><span class="token operator">%</span>      <span class="token number">0.03</span>s  <span class="token number">2.75</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>bucketMask <span class="token punctuation">(</span>inline<span class="token punctuation">)</span>
-         <span class="token number">0</span>     <span class="token number">0</span><span class="token operator">%</span>   <span class="token number">100</span><span class="token operator">%</span>      <span class="token number">0.01</span>s  <span class="token number">0.92</span><span class="token operator">%</span>  runtime<span class="token punctuation">.</span>findrunnable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><p><code>./fib.test</code>：测试生成的可执行文件，在一般的测试中，当测试完成后，文件就会被丢弃，但在启用剖析标识后，这个文件会被保留，供之后的分析使用</p>
-</li>
-<li><p><code> -nodecount</code>：限制分析结果输出的行数</p>
-</li>
-<li><p><code>-text</code>：指定输出的格式</p>
-</li>
-</ul>
-<p>还可以使用-web选项，用于生成函数的有向图，标注有CPU的使用和最热点的函数等信息</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof <span class="token operator">-</span>web <span class="token operator">-</span>nodecount<span class="token operator">=</span><span class="token number">10</span> <span class="token punctuation">.</span><span class="token operator">/</span>fib<span class="token punctuation">.</span>test cpu<span class="token punctuation">.</span>log
-
-<span class="token comment">// 使用-web需要安装 GraphViz</span>
-brew install graphviz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h1 id="运行时API剖析"><a href="#运行时API剖析" class="headerlink" title="运行时API剖析"></a>运行时API剖析</h1><p>可以使用标准库中的 <code>runtime/pprof</code>，<code>runtime/trace</code>，<code>net/http/pprof</code>这三个包中提供的API来对Go程序进行性能分析，其中 <code>runtime/pprof</code>包中还提供了生成性能分析概要文件的API。概要文件是以二进制格式存储的，<code>go test</code> 命令也可以生成概要文件</p>
-<h2 id="概要文件的读取"><a href="#概要文件的读取" class="headerlink" title="概要文件的读取"></a>概要文件的读取</h2><p>概要文件有：CPU 概要文件（CPU Profile）、内存概要文件（Mem Profile）和阻塞概要文件（Block Profile），是Go程序在某一段时间内，对相关指标采样后，得到的概要信息。Go标准工具中<code>go tool pprof</code> 和 <code>go tool trace</code>可以解析概要文件中的信息，以可以阅读的方式展现出来，供分析性能使用</p>
-<h2 id="概要文件的生成"><a href="#概要文件的生成" class="headerlink" title="概要文件的生成"></a>概要文件的生成</h2><h3 id="protocol-buffers"><a href="#protocol-buffers" class="headerlink" title="protocol buffers"></a>protocol buffers</h3><p>概要文件其实就是 由 <code>protocol buffers</code> 生成的二进制数据流，<code>protocol buffers</code> 是一种数据序列化协议，它定义了程序对象如 <code>map</code>，结构体，数组等与字节之间如何相互转化。同时 <code>protocol buffers</code> 不仅仅是协议，也可以作为转化工具来使用。<code>protocol buffers</code> 会对生成的字节流进行压缩，它的体积比(<code>JSON，XML</code>)都要更小，所以也更适合用于数据在网上传输</p>
-<h3 id="StartCPUProfile-函数"><a href="#StartCPUProfile-函数" class="headerlink" title="StartCPUProfile 函数"></a>StartCPUProfile 函数</h3><p>对CPU信息进行定时采样生成概要文件，默认采样频率是100Hz，即每秒采样100次，调用<code>pprof.StartCPUProfile()</code>函数开始进行采样，调用<code>pprof.StopCPUProfile()</code>停止采样</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">StopCPUProfile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	cpu<span class="token punctuation">.</span><span class="token function">Lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	<span class="token keyword">defer</span> cpu<span class="token punctuation">.</span><span class="token function">Unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-	<span class="token keyword">if</span> <span class="token operator">!</span>cpu<span class="token punctuation">.</span>profiling <span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span>
-	<span class="token punctuation">&#125;</span>
-	cpu<span class="token punctuation">.</span>profiling <span class="token operator">=</span> <span class="token boolean">false</span>
-	runtime<span class="token punctuation">.</span><span class="token function">SetCPUProfileRate</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
-	<span class="token operator">&lt;-</span>cpu<span class="token punctuation">.</span>done
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><code>StopCPUProfile</code>是通过设置<code>SetCPUProfileRate(0)</code>为0，来停止采样的，而<code>pprof.StartCPUProfile</code> 是把<code>runtime.SetCPUProfileRate(100)</code>设置为100来开始采样的</p>
-<h3 id="runtime-MemProfileRate值"><a href="#runtime-MemProfileRate值" class="headerlink" title="runtime.MemProfileRate值"></a>runtime.MemProfileRate值</h3><p>对堆内存的使用进行采样，通过对其赋值指定平均每分配多少个字节，就对堆内存的使用情况进行一次采样。默认值是512KB，对其赋0值表示停止采样。把收集到的采样信息写入文件需要调用<code>WriteHeapProfile(f)</code>函数，它会把概要文件信息写入传入的参数文件<code>f</code>中。<code>WriteHeapProfile(f)</code>函数记录的并不是实时的内存概要信息，而是最近一次内存垃圾工作完成后产生的。要得到实时信息可以使用<code>runtime.ReadMemStats()</code>函数</p>
-<h3 id="SetBlockProfileRate函数"><a href="#SetBlockProfileRate函数" class="headerlink" title="SetBlockProfileRate函数"></a>SetBlockProfileRate函数</h3><p>对阻塞概要信息的采样进行设定，其参数<code>rate</code>的值表示，当阻塞持续多少纳秒后对其进行进行采样。如果这个值小于等于0，则停止采样。把概要信息写入文件需要调用<code>pprof.Lookup(&quot;block&quot;)</code>，并传入值为<code>block</code>的参数，函数会返回一个<code>*pprof.Profile</code>类型的值，对这个值调用<code>WriteTo(w io.Writer, debug int)</code>方法，把概要信息写入文件。这个方法的第一个参数传入要写入概要信息的文件</p>
-<h2 id="pprof-Lookup函数的使用"><a href="#pprof-Lookup函数的使用" class="headerlink" title="pprof.Lookup函数的使用"></a>pprof.Lookup函数的使用</h2><p><code>Lookup(name string)</code>通过给定的<code>name</code> 的值，返回对应的概要信息。可以得到的概要信息有<code>goroutine, threadcreate, heap, allocs, block, mutex</code>这6个预定义指标的概要信息，它们都是<code>*Profile</code>类型的值，可以通过调用<code>WriteTo(w io.Writer, debug int)</code>方法，把采样的概要信息写入指定的文件中(通过第一个参数设置)，第二个参数表示了写入信息的详细细节，有<code>0,1,2</code>3个值，这6个指标使用不同的值写入细节信息</p>
-<ul>
-<li><code>goroutine</code>：此指标可以收集正在使用的所有 goroutine 的堆栈跟踪信息</li>
-<li><code>heap、allocs</code>：此指标会收集与堆内存的分配和释放有关的采样信息，可以看成是内存概要信息，heap 与 allocs 的展示视角不同</li>
-<li><code>threadcreate</code>：此指标会收集堆栈跟踪信息。这些堆栈跟踪信息中的每一个都会描绘出一个代码调用链，这些调用链上的代码都导致新的操作系统线程产生</li>
-<li><code>block</code>：此指标会收集因争用同步原语而被阻塞的那些代码的堆栈跟踪信息</li>
-<li><code>mutex</code>：此指标会收集曾经作为同步原语持有者的那些代码，它们的堆栈跟踪信息</li>
-</ul>
-<h2 id="使用在线网页查看程序性能"><a href="#使用在线网页查看程序性能" class="headerlink" title="使用在线网页查看程序性能"></a>使用在线网页查看程序性能</h2><p>在我们编写网络服务程序的时候，使用<code>net/http/pprof</code>包要比直接使用<code>runtime/pprof</code>包方便和实用很多，这个代码包可以为网络服务的监测提供有力的支撑</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">import</span> <span class="token boolean">_</span> <span class="token string">"net/http/pprof"</span>
-log<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span><span class="token function">ListenAndServe</span><span class="token punctuation">(</span><span class="token string">"localhost:8082"</span><span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>直接访问<a target="_blank" rel="noopener" href="http://localhost:8082/debug/pprof">http://localhost:8082/debug/pprof</a> 可以看到<code>goroutine,threadcreate,heap, allocs,block,mutex</code>这6个指标的概要信息。</p>
-<p>当访问<a target="_blank" rel="noopener" href="http://localhost:8082/debug/pprof/profile">http://localhost:8082/debug/pprof/profile</a> 时，程序会执行对 CPU 概要信息的采样，可以通过加入参数<code>seconds</code>来控制对cpu的访问时间(默认是30秒)，当采样结束后，会提示你下载概要文件。你也可以执行下面命令，直接读取概要文件</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> tool pprof http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token punctuation">:</span><span class="token number">6060</span><span class="token operator">/</span>debug<span class="token operator">/</span>pprof<span class="token operator">/</span>profile?seconds<span class="token operator">=</span><span class="token number">60</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 
       
     </div>
@@ -924,383 +1365,6 @@ log<span class="token punctuation">.</span><span class="token function">Println<
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/gdb-setup-on-macos/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/gdb-setup-on-macos/" class="post-title-link" itemprop="url">gdb 安装</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-06 15:14:15" itemprop="dateCreated datePublished" datetime="2021-06-06T15:14:15+00:00">2021-06-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/gdb/" itemprop="url" rel="index"><span itemprop="name">gdb</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="在-mac-OS-上安装"><a href="#在-mac-OS-上安装" class="headerlink" title="在 mac OS 上安装"></a>在 mac OS 上安装</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">brew <span class="token function">install</span> gdb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>也可以从源码进安装，<a target="_blank" rel="noopener" href="https://www.gnu.org/software/gdb/">官网</a>，目前GDB对下列语言进行了支持</p>
-<blockquote>
-<p>Ada<br>Assembly<br>C<br>C++<br>D<br>Fortran<br>Go<br>Objective-C<br>OpenCL<br>Modula-2<br>Pascal<br>Rust</p>
-</blockquote>
-<p>安装后还不能直接使用，MacOS 对安全性有效高的要求，不允许没有许可的程序运行其它程序</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gdb helloworld
-<span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> run
-
-Unable to <span class="token function">find</span> Mach task port <span class="token keyword">for</span> process-id <span class="token number">798</span>: <span class="token punctuation">(</span>os/kern<span class="token punctuation">)</span> failure <span class="token punctuation">(</span>0x5<span class="token punctuation">)</span>.
- <span class="token punctuation">(</span>please check gdb is codesigned - see taskgated<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">))</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>提示<code>please check gdb is codesigned - see taskgated(8)</code>，原因是还没有为<code>gdb</code>签名，需要在系统的<code>Keychain</code>中创建用于签名的证书</p>
-<h1 id="创建certificate"><a href="#创建certificate" class="headerlink" title="创建certificate"></a>创建certificate</h1><p>步骤如下：</p>
-<ol>
-<li>Launch Keychain Access application: Applications &gt; Utilities &gt; Keychain Access.</li>
-<li>From the Keychains list on the left, right-click on the System item and select Unlock Keychain “System”.</li>
-<li>From the toolbar, go to Keychain Access &gt; Certificate Assistant &gt; Create a Certificate.</li>
-<li>Choose a name (e.g. gdb-cert).</li>
-<li>Set Identity Type to Self Signed Root.</li>
-<li>Set Certificate Type to Code Signing.</li>
-<li>Check the Let me override defaults checkbox.</li>
-<li>At this point, you can go on with the installation process until you get the Specify a Location For The Certificate dialogue box. Here you need to set Keychain to System. Finally, you can click on the Create button.</li>
-<li>After these steps, you can see the new certificate under System keychains. From the contextual menu of the newly created certificate (right-click on it) select the Get info option. In the dialogue box, expand the Trust item and set Code signing to Always Trust.</li>
-<li>Then, from the Keychains list on the left, right-click on the System item and select Lock Keychain “System”.</li>
-<li>Finally, reboot your system.</li>
-</ol>
-<h1 id="gdb签名"><a href="#gdb签名" class="headerlink" title="gdb签名"></a>gdb签名</h1><p>在创建你自己的证书后，就可以给gdb进行签名了，在签名前要先配置<code>gdb-entitlement.xml</code>文件，它允许MacOs信任gdb</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
-<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">plist</span> <span class="token name">PUBLIC</span> <span class="token string">"-//Apple//DTD PLIST 1.0//EN"</span>
-<span class="token string">"http://www.apple.com/DTDs/PropertyList-1.0.dtd"</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plist</span> <span class="token attr-name">version</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1.0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dict</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.allow-jit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.allow-unsigned-executable-memory<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.allow-dyld-environment-variables<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.disable-library-validation<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.disable-executable-page-protection<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.cs.debugger<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>key</span><span class="token punctuation">></span></span>com.apple.security.get-task-allow<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>key</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>true</span><span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dict</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plist</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在命令行运行</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">codesign --entitlements gdb-entitlement.xml -fs gdb-cert <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">which</span> gdb<span class="token variable">)</span></span>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><code>-fs</code>: 要填写你刚刚生成的证书的名子，<code>$(which gdb)</code>: 是gdb的安装路径</p>
-<p>接着在<code>home</code>目录创建<code>~/.gdbinit</code>文件，并写入如下内容</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">"set startup-with-shell off"</span> <span class="token operator">>></span> ~/.gdbinit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<h1 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h1><p>为了解决<code>No symbol table is loaded</code>问题，可以在编译时加入<code>-ggdb</code></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gcc hello_world.c -o hello_world -ggdb
-
-<span class="token comment"># 使用示例</span>
-gdb hello_world
-<span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> list
-<span class="token number">1</span>	<span class="token comment">#include &lt;stdio.h></span>
-<span class="token number">2</span>
-<span class="token number">3</span>	int my_strlen<span class="token punctuation">(</span>char *string<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token number">4</span>
-<span class="token number">5</span>	int main<span class="token punctuation">(</span>int argc, char const *argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token number">6</span>	<span class="token punctuation">&#123;</span>
-<span class="token number">7</span>	  // char *string<span class="token punctuation">;</span>
-<span class="token number">8</span>	  // string <span class="token operator">=</span> <span class="token string">"hello world haha"</span><span class="token punctuation">;</span>
-<span class="token number">9</span>	  char string<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"hello world haha"</span><span class="token punctuation">;</span>
-<span class="token number">10</span>	  printf<span class="token punctuation">(</span><span class="token string">"The string '%s' len is <span class="token entity" title="\&quot;">\"</span>%d<span class="token entity" title="\&quot;">\"</span><span class="token entity" title="\n">\n</span>"</span>, string, my_strlen<span class="token punctuation">(</span>string<span class="token punctuation">))</span><span class="token punctuation">;</span>
-<span class="token punctuation">(</span>gdb<span class="token punctuation">)</span> run
-Starting program: /Users/ga/m/book/c-lang/ch02-basic/hello_world
-<span class="token punctuation">[</span>New Thread 0x2603 of process <span class="token number">6002</span><span class="token punctuation">]</span>
-<span class="token punctuation">[</span>New Thread 0x1803 of process <span class="token number">6002</span><span class="token punctuation">]</span>
-warning: unhandled dyld version <span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span>
-The string <span class="token string">'hello world haha'</span> len is <span class="token string">"16"</span>
-<span class="token punctuation">[</span>Inferior <span class="token number">1</span> <span class="token punctuation">(</span>process <span class="token number">6002</span><span class="token punctuation">)</span> exited normally<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h1 id="使用gdb调试golang"><a href="#使用gdb调试golang" class="headerlink" title="使用gdb调试golang"></a>使用gdb调试golang</h1><p>本博没有成功，一直提示错误<code>No symbol table is loaded.  Use the &quot;file&quot; command.</code> ，后来查看了Go的官方文档，官方建议使用<code>Delve</code>进行调试。<a target="_blank" rel="noopener" href="https://golang.org/doc/gdb">官方原文</a></p>
-<blockquote>
-<p><em>Note that <a target="_blank" rel="noopener" href="https://github.com/go-delve/delve">Delve</a> is a better alternative to GDB when debugging Go programs built with the standard toolchain. It understands the Go runtime, data structures, and expressions better than GDB. Delve currently supports Linux, OSX, and Windows on <code>amd64</code>. For the most up-to-date list of supported platforms, please see <a target="_blank" rel="noopener" href="https://github.com/go-delve/delve/tree/master/Documentation/installation">the Delve documentation</a>.</em></p>
-</blockquote>
-<p>并且在官方给出的示例中，也不保证你照着运行也可以成功</p>
-<blockquote>
-<p>In short, the instructions below should be taken only as a guide to how to use GDB when it works, not as a guarantee of success. Besides this overview you might want to consult the <a target="_blank" rel="noopener" href="https://sourceware.org/gdb/current/onlinedocs/gdb/">GDB manual</a>.</p>
-</blockquote>
-<p>最后祝你一切顺利</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-create-tag/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/git-create-tag/" class="post-title-link" itemprop="url">git 创建标签</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-05 22:16:35" itemprop="dateCreated datePublished" datetime="2021-06-05T22:16:35+00:00">2021-06-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Git-创建标签"><a href="#Git-创建标签" class="headerlink" title="Git 创建标签"></a>Git 创建标签</h1><p>Git 标签分两种</p>
-<ul>
-<li>附注标签: annotated: 是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息</li>
-<li>轻量级标签: lightweight: 像一个不会改变的分支——它只是某个特定提交的引用。在实践中不推荐使用</li>
-</ul>
-<h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 附注标签
-git tag -a v0.0.1 -m &quot;first release try&quot;
-
-# 发布标签
-# 标签不会随push而自动被push到远程，需要单独push
-git push origin v0.0.1
-
-# 给某个commit单独打tag
-# 这种操作多用于给历史commit打tag,原因可能是当时没有打
-git tag -a v0.0.2 2234093<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="标签操作"><a href="#标签操作" class="headerlink" title="标签操作"></a>标签操作</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> tag
-
-<span class="token comment"># 查看某个tag的具体内容</span>
-<span class="token function">git</span> show v0.0.1
-<span class="token function">git</span> cat-file -p v0.0.1
-
-<span class="token comment"># 删除标签</span>
-<span class="token function">git</span> tag -d v0.0.1
-<span class="token operator">=</span><span class="token operator">></span> Deleted tag <span class="token string">'v0.0.1'</span> <span class="token punctuation">(</span>was 79db751<span class="token punctuation">)</span>
-
-<span class="token comment"># 删除远程标签</span>
-<span class="token function">git</span> push origin :v0.0.1
-
-<span class="token comment"># 查看tag的sha1</span>
-<span class="token function">cat</span> .git/refs/tags/v5.4.1 <span class="token comment"># 在标签被删除的时候会显示这个值</span>
-<span class="token comment"># => 79db751</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="签名tag"><a href="#签名tag" class="headerlink" title="签名tag"></a>签名tag</h2><p>前置条件：要先配置GPG</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 强制给tag 签名</span>
-<span class="token comment"># 直接编辑  ~/.gitconfig 也可以</span>
-<span class="token function">git</span> config --global tag.forcesignannotated <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-fmt-string-with-zerovalue/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-fmt-string-with-zerovalue/" class="post-title-link" itemprop="url">go 语言 fmt对string中零值的处理</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-05 14:32:08" itemprop="dateCreated datePublished" datetime="2021-06-05T14:32:08+00:00">2021-06-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>fmt</code>格式化含有0值的<code>string</code>时，是如何显示的</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	buf <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
-	buf<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'A'</span>
-	<span class="token function">copy</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"cap(%d),len(%d)\n"</span><span class="token punctuation">,</span> <span class="token function">cap</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"buf:"</span><span class="token punctuation">,</span> buf<span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"buf:%q\n"</span><span class="token punctuation">,</span> buf<span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"buf:"</span><span class="token punctuation">,</span> <span class="token function">string</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-	str <span class="token operator">:=</span> <span class="token function">string</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span>
-	str <span class="token operator">=</span> str <span class="token operator">+</span> <span class="token string">" world"</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// => 16</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>      <span class="token comment">// => helloA world</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">/* output
-cap(10),len(10)
-buf: [104 101 108 108 111 0 0 0 65 0]
-buf:"hello\x00\x00\x00A\x00"
-buf: helloA
-16
-helloA world
-*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>1. 使用<code>fmt</code>打印<code>string(buf)</code>虽然显示为<code>helloA</code>，看上去字符数变少了，只有6个(0值没有显示，其<code>ascii码</code>是不可打印码)，但底层数据没变，依然是<code>[104 101 108 108 111 0 0 0 65 0]</code></p>
-<p>2. 格式化参数<code>%q</code>直接对0值进行了输出<code>hello\x00\x00\x00A\x00</code>，它打印了<code>string</code>中的每一个字节，包括不可打印的字节</p>
-<p>3. <code>str + &quot; world&quot;</code>的长度为16，也证明了<code>str</code>中的0值没有被去除(10 + 6 = 16)</p>
-<p>4.使用<code>fmt</code>查看数据”长什么样子”有时候是不准确的</p>
 
       
     </div>
