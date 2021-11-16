@@ -14,6 +14,19 @@
       </tags>
   </entry>
   <entry>
+    <title>git 恢复单个文件</title>
+    <url>/git-checkout-file/</url>
+    <content><![CDATA[<p>如果你只是要恢复一个文件(修复未提交文件中的错误),如”hello.rb”, 你就要使用 git checkout</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> checkout -- hello.rb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git 多人协作提交流程</title>
     <url>/git-commit-flow/</url>
     <content><![CDATA[<p>提交流程大致如下</p>
@@ -24,19 +37,6 @@ $ <span class="token function">git</span> commit
 $ <span class="token function">git</span> pull
 <span class="token comment">#... 解决版本合并问题 ...</span>
 $ <span class="token function">git</span> push<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git 恢复单个文件</title>
-    <url>/git-checkout-file/</url>
-    <content><![CDATA[<p>如果你只是要恢复一个文件(修复未提交文件中的错误),如”hello.rb”, 你就要使用 git checkout</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> checkout -- hello.rb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -356,6 +356,50 @@ modified:   metaprogramming/blocks/block_binding.rb<span aria-hidden="true" clas
       </tags>
   </entry>
   <entry>
+    <title>git rebase 与 git reset的应用</title>
+    <url>/git-rebase-vs-git-reset/</url>
+    <content><![CDATA[<h3 id="常用的应用场景"><a href="#常用的应用场景" class="headerlink" title="常用的应用场景"></a>常用的应用场景</h3><ol>
+<li><p>合并提交</p>
+</li>
+<li><p>去除不要的提交</p>
+</li>
+</ol>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><h3 id="场景1，合并多个提交"><a href="#场景1，合并多个提交" class="headerlink" title="场景1，合并多个提交"></a>场景1，合并多个提交</h3><p>有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交</p>
+<ol>
+<li>方法一: <code>git reset</code></li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset B --soft
+<span class="token function">git</span> ci -m <span class="token string">"merge C to F"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>方法二: <code>git rebase</code></li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto B C^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="场景2，去掉D提交"><a href="#场景2，去掉D提交" class="headerlink" title="场景2，去掉D提交"></a>场景2，去掉D提交</h3><p>此时，<code>git reset</code>已经不再适合这个场景</p>
+<p>使用<code>git rebase</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto C E^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ol>
+<li><code>git rebase</code> 语法</li>
+</ol>
+<p>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt;</code><br>  <code>git rebase &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase &lt;since&gt;</code><br>  <code>git rebase -i</code></p>
+<p>  onbase为要架接到的commit, since表示不包括自身到till的所有提交</p>
+<p>  <code>git rebase --continue</code> # 解决冲突后使用，以完成rebase<br>  <code>git rebase --skip</code>     # 跳过当前commit，进行下一个commit的合并<br>  <code>git rebase --abort</code>    # 放弃此次操作，还原工作区</p>
+<ol start="2">
+<li><code>git rebase</code>的莫名冲突</li>
+</ol>
+<p>  对于场景二： 使用<code>git rebase</code>可能出现冲突（感觉不应该出现冲突的，对此不是很理解，难道是因为丢弃D后使查找链C-D-E-F断裂造成git认为这两个commit需要合并，是因为E无法知道C是它的祖先吗）</p>
+<p>  在解决冲突后，使用<code>git rebase --continue</code>完成rebase操作</p>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo Next主题 Rss 侧边栏</title>
     <url>/hexo-next-theme/</url>
     <content><![CDATA[<p>无意间发现 <code>Hexo</code> 的 <code>Next</code> 主题也很好看，之前的 <code>Yelee</code> 主题使用了好久，决定换成 <code>Next</code>。在配置过程中遇到不少问题，主要有两点值得分享：</p>
@@ -427,50 +471,6 @@ favicon:
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git rebase 与 git reset的应用</title>
-    <url>/git-rebase-vs-git-reset/</url>
-    <content><![CDATA[<h3 id="常用的应用场景"><a href="#常用的应用场景" class="headerlink" title="常用的应用场景"></a>常用的应用场景</h3><ol>
-<li><p>合并提交</p>
-</li>
-<li><p>去除不要的提交</p>
-</li>
-</ol>
-<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><h3 id="场景1，合并多个提交"><a href="#场景1，合并多个提交" class="headerlink" title="场景1，合并多个提交"></a>场景1，合并多个提交</h3><p>有 A B C D E F 6个提交，当前分支develop的最新提交为F，C D E F都是某一功能的持续提交，现需要把C到F的commit合并成一个commit，去除多余提交</p>
-<ol>
-<li>方法一: <code>git reset</code></li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> reset B --soft
-<span class="token function">git</span> ci -m <span class="token string">"merge C to F"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li>方法二: <code>git rebase</code></li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto B C^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="场景2，去掉D提交"><a href="#场景2，去掉D提交" class="headerlink" title="场景2，去掉D提交"></a>场景2，去掉D提交</h3><p>此时，<code>git reset</code>已经不再适合这个场景</p>
-<p>使用<code>git rebase</code></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> rebase --onto C E^ develop<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ol>
-<li><code>git rebase</code> 语法</li>
-</ol>
-<p>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase --onto &lt;onbase&gt; &lt;since&gt;</code><br>  <code>git rebase &lt;since&gt; &lt;till&gt;</code><br>  <code>git rebase &lt;since&gt;</code><br>  <code>git rebase -i</code></p>
-<p>  onbase为要架接到的commit, since表示不包括自身到till的所有提交</p>
-<p>  <code>git rebase --continue</code> # 解决冲突后使用，以完成rebase<br>  <code>git rebase --skip</code>     # 跳过当前commit，进行下一个commit的合并<br>  <code>git rebase --abort</code>    # 放弃此次操作，还原工作区</p>
-<ol start="2">
-<li><code>git rebase</code>的莫名冲突</li>
-</ol>
-<p>  对于场景二： 使用<code>git rebase</code>可能出现冲突（感觉不应该出现冲突的，对此不是很理解，难道是因为丢弃D后使查找链C-D-E-F断裂造成git认为这两个commit需要合并，是因为E无法知道C是它的祖先吗）</p>
-<p>  在解决冲突后，使用<code>git rebase --continue</code>完成rebase操作</p>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -771,6 +771,58 @@ log-bin<span class="token operator">=</span>/mysql/3306/data/master<span aria-hi
       </tags>
   </entry>
   <entry>
+    <title>mysql 自增值不能回退</title>
+    <url>/mysql-auto-increment/</url>
+    <content><![CDATA[<p>MySql 主键不连续的原因之一是自增值不能回退</p>
+<p>设当前自增值=2，此时并发两个事务T1,T2。T1先申请到自增值，插入ID=3，自增值更为4</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Tx1</th>
+<th>Tx2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>申请到自增值=2，set id =2, 更新自增值=3</td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td>插入数据失败</td>
+<td>申请到自增值=3，set id=3，更新自增值=4</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>如果让自增值回退到=2</td>
+<td>插入数据成功</td>
+</tr>
+<tr>
+<td>T4</td>
+<td>申请到自增值=2，set id =2, 更新自增值=3</td>
+<td></td>
+</tr>
+<tr>
+<td>T5</td>
+<td>插入数据成功</td>
+<td>申请到自增值=3，set id=3，更新自增值=4</td>
+</tr>
+<tr>
+<td>T6</td>
+<td></td>
+<td>插入数据失败，插入语句报错“主键冲突” id=3已经存在</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mysql 行锁两阶段</title>
     <url>/mysql-recordlock-2phase/</url>
     <content><![CDATA[<h1 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h1><p>优点：</p>
@@ -825,58 +877,6 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
 <li>T2时刻，SessionA已经完成了对两行数据的更新，但没有提交</li>
 <li>T3时候，SessionB对id=1的行进行更新，由于Session A没有提交，其依然持有id=1上的写锁，与Session B要加的写锁互斥，所以SessionB被阻塞，直到Session A提交，释放锁，才能对执行更新语句</li>
 </ul>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql 自增值不能回退</title>
-    <url>/mysql-auto-increment/</url>
-    <content><![CDATA[<p>MySql 主键不连续的原因之一是自增值不能回退</p>
-<p>设当前自增值=2，此时并发两个事务T1,T2。T1先申请到自增值，插入ID=3，自增值更为4</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Tx1</th>
-<th>Tx2</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>T1</td>
-<td>申请到自增值=2，set id =2, 更新自增值=3</td>
-<td></td>
-</tr>
-<tr>
-<td>T2</td>
-<td>插入数据失败</td>
-<td>申请到自增值=3，set id=3，更新自增值=4</td>
-</tr>
-<tr>
-<td>T3</td>
-<td>如果让自增值回退到=2</td>
-<td>插入数据成功</td>
-</tr>
-<tr>
-<td>T4</td>
-<td>申请到自增值=2，set id =2, 更新自增值=3</td>
-<td></td>
-</tr>
-<tr>
-<td>T5</td>
-<td>插入数据成功</td>
-<td>申请到自增值=3，set id=3，更新自增值=4</td>
-</tr>
-<tr>
-<td>T6</td>
-<td></td>
-<td>插入数据失败，插入语句报错“主键冲突” id=3已经存在</td>
-</tr>
-</tbody></table>
 ]]></content>
       <categories>
         <category>数据库</category>
@@ -943,6 +943,38 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </tags>
   </entry>
   <entry>
+    <title>mysql 自增值申请策略</title>
+    <url>/mysql-auto-increment-strategy/</url>
+    <content><![CDATA[<h1 id="自增值申请策略"><a href="#自增值申请策略" class="headerlink" title="自增值申请策略"></a>自增值申请策略</h1><ol>
+<li><p>能否先查ID，再查入数据？</p>
+<p>不能，如果每次插入前，都要在主键的索引树上查询要插入的id是否存在，会大大降低插入插入的效率。</p>
+</li>
+<li><p>能否等事务完成后，再释放自增值的锁？</p>
+<p>不能，如果需要等待当前事务完成，其它事务先能获取自增值的锁，就会大大降低并发。</p>
+</li>
+</ol>
+<h2 id="innodb-autoinc-lock-mode"><a href="#innodb-autoinc-lock-mode" class="headerlink" title="innodb_autoinc_lock_mode"></a><code>innodb_autoinc_lock_mode</code></h2><p>MySQL通过参数<code>innodb_autoinc_lock_mode</code>，来设置自值锁的行为，默认值为1</p>
+<ol>
+<li><p>0值 ：等事务完成才释放锁</p>
+</li>
+<li><p>1值 ：</p>
+<ul>
+<li>对于普通的<code>insert into table</code>，申请到自增锁后就释放，不用等插入语句的完成。</li>
+<li>对于批量插入，类似<code>insert ... select</code>，一直持有自增锁，直到事务执行完成。这样也保证了id的连续性。</li>
+</ul>
+</li>
+<li><p>2值：所有插入操作在申请到自增锁后就释放，包括<code>insert ... select </code>这种</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git 使用 rebase 代替 merge</title>
     <url>/git-using-rebase-instead-of-merge/</url>
     <content><![CDATA[<h1 id="合并还是变基"><a href="#合并还是变基" class="headerlink" title="合并还是变基"></a>合并还是变基</h1><p>合并分支时，应使用<code>rebase</code>合并分支而不是使用<code>merge</code></p>
@@ -1006,38 +1038,6 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </categories>
       <tags>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql 自增值申请策略</title>
-    <url>/mysql-auto-increment-strategy/</url>
-    <content><![CDATA[<h1 id="自增值申请策略"><a href="#自增值申请策略" class="headerlink" title="自增值申请策略"></a>自增值申请策略</h1><ol>
-<li><p>能否先查ID，再查入数据？</p>
-<p>不能，如果每次插入前，都要在主键的索引树上查询要插入的id是否存在，会大大降低插入插入的效率。</p>
-</li>
-<li><p>能否等事务完成后，再释放自增值的锁？</p>
-<p>不能，如果需要等待当前事务完成，其它事务先能获取自增值的锁，就会大大降低并发。</p>
-</li>
-</ol>
-<h2 id="innodb-autoinc-lock-mode"><a href="#innodb-autoinc-lock-mode" class="headerlink" title="innodb_autoinc_lock_mode"></a><code>innodb_autoinc_lock_mode</code></h2><p>MySQL通过参数<code>innodb_autoinc_lock_mode</code>，来设置自值锁的行为，默认值为1</p>
-<ol>
-<li><p>0值 ：等事务完成才释放锁</p>
-</li>
-<li><p>1值 ：</p>
-<ul>
-<li>对于普通的<code>insert into table</code>，申请到自增锁后就释放，不用等插入语句的完成。</li>
-<li>对于批量插入，类似<code>insert ... select</code>，一直持有自增锁，直到事务执行完成。这样也保证了id的连续性。</li>
-</ul>
-</li>
-<li><p>2值：所有插入操作在申请到自增锁后就释放，包括<code>insert ... select </code>这种</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -1208,6 +1208,52 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </tags>
   </entry>
   <entry>
+    <title>go 语言 buffer.truncate 分析</title>
+    <url>/golang-bytes-buffer-truncate/</url>
+    <content><![CDATA[<p>对于Golang的初学者，<code>Truncate</code>方法的行为使人迷惑，它不是从 <code>buffer</code>的头部截取 <code>n 个</code>字节，而是丢弃<code>除了前n个</code>未读取的字节之外的所有未读取的字节，也是就只保留已读取的字节和还没有读取的<code>前n个</code>字节。这种逻辑确实让人不太适应</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Truncate discards all but the first n unread bytes from the buffer</span>
+<span class="token comment">// but continues to use the same allocated storage.</span>
+<span class="token comment">// It panics if n is negative or greater than the length of the buffer.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>b <span class="token operator">*</span>Buffer<span class="token punctuation">)</span> <span class="token function">Truncate</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> n <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		b<span class="token punctuation">.</span><span class="token function">Reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+	b<span class="token punctuation">.</span>lastRead <span class="token operator">=</span> opInvalid
+	<span class="token keyword">if</span> n <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> n <span class="token operator">></span> b<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"bytes.Buffer: truncation out of range"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	b<span class="token punctuation">.</span>buf <span class="token operator">=</span> b<span class="token punctuation">.</span>buf<span class="token punctuation">[</span><span class="token punctuation">:</span>b<span class="token punctuation">.</span>off<span class="token operator">+</span>n<span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>从源码的注释中还可以看到，截取后使用原 <code>buffer</code>保存保留下来的节字，不再额外占用内存空间。同时 n 的大小不能超过未读取字节的长度(第10行)</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">truncate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">var</span> buffer bytes<span class="token punctuation">.</span>Buffer
+  str <span class="token operator">:=</span> <span class="token string">"Simple byte buffer for marshaling data."</span>
+  buffer<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>
+  p <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
+  buffer<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span> <span class="token comment">// Simple b</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+  buffer<span class="token punctuation">.</span><span class="token function">Truncate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>    <span class="token comment">// 截断到前10个未读节字 Simple byte buffer</span>
+  buffer<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>         <span class="token comment">// 读取8个字节</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// yte buff</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><code>p := make([]byte, 8)</code>先读取了8个字节</li>
+<li><code>buffer.Truncate(10) </code>再从没有读取的字节中取出10个，丢掉其余未读取的字节，把已读取的8个字节和取出的10个字节保存到 <code>buffer</code>中，此时buffer中的内容为<code>Simple byte buffer</code></li>
+<li><code>buffer.Read(p) </code>再读取8个字节，注意：这里不是从 buffer 的头部读取，而是从未读取处开始读取，即从<code>y</code>开始读取</li>
+</ul>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>go 语言 结构体在内存中的布局</title>
     <url>/golang-layout-of-struct/</url>
     <content><![CDATA[<h1 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h1><ul>
@@ -1299,52 +1345,6 @@ Sizeof(x.c) = 24  Alignof(x.c) = 8 Offsetof(x.c) = 8
 
 
 <h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>未来的Go语言编译器应该会默认优化结构体的顺序，当然应该也能够指定具体的内存布局，相同讨论请参考 <a href="https://github.com/golang/go/issues/10014">Issue10014</a></p>
-]]></content>
-      <categories>
-        <category>后端</category>
-      </categories>
-      <tags>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>go 语言 buffer.truncate 分析</title>
-    <url>/golang-bytes-buffer-truncate/</url>
-    <content><![CDATA[<p>对于Golang的初学者，<code>Truncate</code>方法的行为使人迷惑，它不是从 <code>buffer</code>的头部截取 <code>n 个</code>字节，而是丢弃<code>除了前n个</code>未读取的字节之外的所有未读取的字节，也是就只保留已读取的字节和还没有读取的<code>前n个</code>字节。这种逻辑确实让人不太适应</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Truncate discards all but the first n unread bytes from the buffer</span>
-<span class="token comment">// but continues to use the same allocated storage.</span>
-<span class="token comment">// It panics if n is negative or greater than the length of the buffer.</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>b <span class="token operator">*</span>Buffer<span class="token punctuation">)</span> <span class="token function">Truncate</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> n <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
-		b<span class="token punctuation">.</span><span class="token function">Reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token keyword">return</span>
-	<span class="token punctuation">&#125;</span>
-	b<span class="token punctuation">.</span>lastRead <span class="token operator">=</span> opInvalid
-	<span class="token keyword">if</span> n <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> n <span class="token operator">></span> b<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"bytes.Buffer: truncation out of range"</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-	b<span class="token punctuation">.</span>buf <span class="token operator">=</span> b<span class="token punctuation">.</span>buf<span class="token punctuation">[</span><span class="token punctuation">:</span>b<span class="token punctuation">.</span>off<span class="token operator">+</span>n<span class="token punctuation">]</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>从源码的注释中还可以看到，截取后使用原 <code>buffer</code>保存保留下来的节字，不再额外占用内存空间。同时 n 的大小不能超过未读取字节的长度(第10行)</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">truncate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">var</span> buffer bytes<span class="token punctuation">.</span>Buffer
-  str <span class="token operator">:=</span> <span class="token string">"Simple byte buffer for marshaling data."</span>
-  buffer<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>
-  p <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
-  buffer<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span> <span class="token comment">// Simple b</span>
-  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-  buffer<span class="token punctuation">.</span><span class="token function">Truncate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>    <span class="token comment">// 截断到前10个未读节字 Simple byte buffer</span>
-  buffer<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>         <span class="token comment">// 读取8个字节</span>
-  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// yte buff</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><code>p := make([]byte, 8)</code>先读取了8个字节</li>
-<li><code>buffer.Truncate(10) </code>再从没有读取的字节中取出10个，丢掉其余未读取的字节，把已读取的8个字节和取出的10个字节保存到 <code>buffer</code>中，此时buffer中的内容为<code>Simple byte buffer</code></li>
-<li><code>buffer.Read(p) </code>再读取8个字节，注意：这里不是从 buffer 的头部读取，而是从未读取处开始读取，即从<code>y</code>开始读取</li>
-</ul>
 ]]></content>
       <categories>
         <category>后端</category>
@@ -2909,85 +2909,6 @@ FAIL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
       </tags>
   </entry>
   <entry>
-    <title>go 语言 测试日志打印</title>
-    <url>/golang-test-log-print/</url>
-    <content><![CDATA[<h1 id="缓存目录"><a href="#缓存目录" class="headerlink" title="缓存目录"></a>缓存目录</h1><p>Go 总是会缓存程序构建的结果，以便在将来使用(可以加速构建速度)。当有任何变动时，缓存就会失效，构建过程会真正的被执行。被缓存的构建结果保存在<code>go env GOCACHE</code>目录中，为了防止目录中的数据越来越多，go会自动删除不经常使用的缓存文件。可以手动清除缓存结果，执行<code>go clean -cache</code>即可。</p>
-<p><code>go test</code>命令也会把测试成功的结果缓存起来，如果测试代码和源代码没有改动，再次运行测试时，直接使用缓存的结果。当源码和测试代码有改动时，缓存结果就会失效，测试会被真正的运行。运行<code>go clean -testcache</code>可以删除测试的缓存结果，但不会删除构建结果缓存</p>
-<h1 id="测试日志打印"><a href="#测试日志打印" class="headerlink" title="测试日志打印"></a>测试日志打印</h1><p>可以使用<code>t.Log</code>与<code>t.Logf</code>方法打印测试日志，这两个方法会在测试失败时，进行打印，在测试成功的时候，是不进行打印的。如果想在测试结果中看到所有的日志，可以使用<code>-v</code>参数</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestIntroduce</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	intro <span class="token operator">:=</span> <span class="token function">introduce</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	expected <span class="token operator">:=</span> <span class="token string">"Welcome to my Golang column."</span>
-	<span class="token keyword">if</span> intro <span class="token operator">!=</span> expected <span class="token punctuation">&#123;</span>
-		t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"The actual introduce %q is not the expected."</span><span class="token punctuation">,</span>
-			intro<span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-	<span class="token comment">// 默认只在测试失败的时候，才打印日志内容</span>
-	t<span class="token punctuation">.</span><span class="token function">Logf</span><span class="token punctuation">(</span><span class="token string">"The expected introduce is %q.\n"</span><span class="token punctuation">,</span> expected<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 测试失败，显示t.Logf()中的内容</span>
-<span class="token operator">--</span><span class="token operator">-</span> FAIL<span class="token punctuation">:</span> TestIntroduce <span class="token punctuation">(</span><span class="token number">0.00</span>s<span class="token punctuation">)</span>
-    demo53_test<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">41</span><span class="token punctuation">:</span> The actual introduce <span class="token string">"Welcome to my Golang column."</span> is not the expected<span class="token punctuation">.</span>
-    demo53_test<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">44</span><span class="token punctuation">:</span> The expected introduce is <span class="token string">"Welcome to my golang column."</span><span class="token punctuation">.</span>
-FAIL
-FAIL	puzzlers<span class="token operator">/</span>article20<span class="token operator">/</span>q2	<span class="token number">0.013</span>s
-FAIL
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h1 id="t-Fail-与t-FailNow"><a href="#t-Fail-与t-FailNow" class="headerlink" title="t.Fail()与t.FailNow()"></a><code>t.Fail()</code>与<code>t.FailNow()</code></h1><p><code>t.Fail()</code>令测试结果为失败，但其后的代码依然会被执行。go 语言测试用例失败的触发必须手动调用<code>t.Fail/t.FailNow/t.Errorf/t.Fatalf</code>等方法才可以，并不像其它语言支持测试断言，由断言失败触发。</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestFail</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	t<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed."</span><span class="token punctuation">)</span> <span class="token comment">// 可以被执行到</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><code>t.FailNow()</code>也会令测试结果为失败，但其后的代码不再执行，不会影响其它测试用例的执行</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestFail</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	t<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed"</span><span class="token punctuation">)</span> <span class="token comment">// 不能被执行到</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h1 id="t-Errorf-与t-Error"><a href="#t-Errorf-与t-Error" class="headerlink" title="t.Errorf()与t.Error()"></a><code>t.Errorf()</code>与<code>t.Error()</code></h1><p>打印日志并使测试失败，等效于调用<code>t.Logf/t.Log</code>后，又调用了<code>t.Fail</code></p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// t.Error 等效于在调用 t.Log 后，接着又调用了 t.Fail</span>
-<span class="token comment">// Error is equivalent to Log followed by Fail.</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Error</span><span class="token punctuation">(</span>args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintln</span><span class="token punctuation">(</span>args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	c<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// Errorf is equivalent to Logf followed by Fail.</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Errorf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span>format<span class="token punctuation">,</span> args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	c<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h1 id="t-Fatal与t-Fatalf方法"><a href="#t-Fatal与t-Fatalf方法" class="headerlink" title="t.Fatal与t.Fatalf方法"></a><code>t.Fatal</code>与<code>t.Fatalf</code>方法</h1><p>打印日志并使测试失败，在其后的代码不会被执行，当前测试用例立即结束，但不会影响其它测试用例，等效于调用<code>t.Logf/t.Log</code>后，又调用了<code>t.FailNow</code></p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Fatal is equivalent to Log followed by FailNow.</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Fatal</span><span class="token punctuation">(</span>args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintln</span><span class="token punctuation">(</span>args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	c<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// Fatalf is equivalent to Logf followed by FailNow.</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Fatalf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span>format<span class="token punctuation">,</span> args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	c<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>后端</category>
-      </categories>
-      <tags>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>go 语言 test 测试工具的标记 flag</title>
     <url>/golang-test-flag-cpu-count-parallel/</url>
     <content><![CDATA[<h1 id="cpu-标记"><a href="#cpu-标记" class="headerlink" title="cpu 标记"></a>cpu 标记</h1><p>用来设置运行时，P的最大数量，即<code>GOMAXPROCS</code>的值。可以设置一组值，在运行测试时，P被设置为不同的值分别运行测试函数。</p>
@@ -3259,6 +3180,85 @@ ok      gott/hello      <span class="token number">2</span>.036s<span aria-hidde
 <li>在功能测试中，无法避免依赖一些外部环境，比如数据库的连接，第三方接口的调用，应该对这些外部环境进行仿造(mock)，从而得到一个纯净的测试环境</li>
 <li><code>go help testflag  </code>查看 flag 帮助文件</li>
 </ul>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>go 语言 测试日志打印</title>
+    <url>/golang-test-log-print/</url>
+    <content><![CDATA[<h1 id="缓存目录"><a href="#缓存目录" class="headerlink" title="缓存目录"></a>缓存目录</h1><p>Go 总是会缓存程序构建的结果，以便在将来使用(可以加速构建速度)。当有任何变动时，缓存就会失效，构建过程会真正的被执行。被缓存的构建结果保存在<code>go env GOCACHE</code>目录中，为了防止目录中的数据越来越多，go会自动删除不经常使用的缓存文件。可以手动清除缓存结果，执行<code>go clean -cache</code>即可。</p>
+<p><code>go test</code>命令也会把测试成功的结果缓存起来，如果测试代码和源代码没有改动，再次运行测试时，直接使用缓存的结果。当源码和测试代码有改动时，缓存结果就会失效，测试会被真正的运行。运行<code>go clean -testcache</code>可以删除测试的缓存结果，但不会删除构建结果缓存</p>
+<h1 id="测试日志打印"><a href="#测试日志打印" class="headerlink" title="测试日志打印"></a>测试日志打印</h1><p>可以使用<code>t.Log</code>与<code>t.Logf</code>方法打印测试日志，这两个方法会在测试失败时，进行打印，在测试成功的时候，是不进行打印的。如果想在测试结果中看到所有的日志，可以使用<code>-v</code>参数</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestIntroduce</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	intro <span class="token operator">:=</span> <span class="token function">introduce</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	expected <span class="token operator">:=</span> <span class="token string">"Welcome to my Golang column."</span>
+	<span class="token keyword">if</span> intro <span class="token operator">!=</span> expected <span class="token punctuation">&#123;</span>
+		t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"The actual introduce %q is not the expected."</span><span class="token punctuation">,</span>
+			intro<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">// 默认只在测试失败的时候，才打印日志内容</span>
+	t<span class="token punctuation">.</span><span class="token function">Logf</span><span class="token punctuation">(</span><span class="token string">"The expected introduce is %q.\n"</span><span class="token punctuation">,</span> expected<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 测试失败，显示t.Logf()中的内容</span>
+<span class="token operator">--</span><span class="token operator">-</span> FAIL<span class="token punctuation">:</span> TestIntroduce <span class="token punctuation">(</span><span class="token number">0.00</span>s<span class="token punctuation">)</span>
+    demo53_test<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">41</span><span class="token punctuation">:</span> The actual introduce <span class="token string">"Welcome to my Golang column."</span> is not the expected<span class="token punctuation">.</span>
+    demo53_test<span class="token punctuation">.</span><span class="token keyword">go</span><span class="token punctuation">:</span><span class="token number">44</span><span class="token punctuation">:</span> The expected introduce is <span class="token string">"Welcome to my golang column."</span><span class="token punctuation">.</span>
+FAIL
+FAIL	puzzlers<span class="token operator">/</span>article20<span class="token operator">/</span>q2	<span class="token number">0.013</span>s
+FAIL
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="t-Fail-与t-FailNow"><a href="#t-Fail-与t-FailNow" class="headerlink" title="t.Fail()与t.FailNow()"></a><code>t.Fail()</code>与<code>t.FailNow()</code></h1><p><code>t.Fail()</code>令测试结果为失败，但其后的代码依然会被执行。go 语言测试用例失败的触发必须手动调用<code>t.Fail/t.FailNow/t.Errorf/t.Fatalf</code>等方法才可以，并不像其它语言支持测试断言，由断言失败触发。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestFail</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed."</span><span class="token punctuation">)</span> <span class="token comment">// 可以被执行到</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>t.FailNow()</code>也会令测试结果为失败，但其后的代码不再执行，不会影响其它测试用例的执行</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestFail</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Failed"</span><span class="token punctuation">)</span> <span class="token comment">// 不能被执行到</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="t-Errorf-与t-Error"><a href="#t-Errorf-与t-Error" class="headerlink" title="t.Errorf()与t.Error()"></a><code>t.Errorf()</code>与<code>t.Error()</code></h1><p>打印日志并使测试失败，等效于调用<code>t.Logf/t.Log</code>后，又调用了<code>t.Fail</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// t.Error 等效于在调用 t.Log 后，接着又调用了 t.Fail</span>
+<span class="token comment">// Error is equivalent to Log followed by Fail.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Error</span><span class="token punctuation">(</span>args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintln</span><span class="token punctuation">(</span>args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Errorf is equivalent to Logf followed by Fail.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Errorf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span>format<span class="token punctuation">,</span> args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">Fail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="t-Fatal与t-Fatalf方法"><a href="#t-Fatal与t-Fatalf方法" class="headerlink" title="t.Fatal与t.Fatalf方法"></a><code>t.Fatal</code>与<code>t.Fatalf</code>方法</h1><p>打印日志并使测试失败，在其后的代码不会被执行，当前测试用例立即结束，但不会影响其它测试用例，等效于调用<code>t.Logf/t.Log</code>后，又调用了<code>t.FailNow</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Fatal is equivalent to Log followed by FailNow.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Fatal</span><span class="token punctuation">(</span>args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintln</span><span class="token punctuation">(</span>args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Fatalf is equivalent to Logf followed by FailNow.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>c <span class="token operator">*</span>common<span class="token punctuation">)</span> <span class="token function">Fatalf</span><span class="token punctuation">(</span>format <span class="token builtin">string</span><span class="token punctuation">,</span> args <span class="token operator">...</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span>format<span class="token punctuation">,</span> args<span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">FailNow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 ]]></content>
       <categories>
         <category>后端</category>
