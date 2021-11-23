@@ -73,6 +73,23 @@ $ <span class="token function">git</span> push<span aria-hidden="true" class="li
       </tags>
   </entry>
   <entry>
+    <title>git 建立远程分支缩写</title>
+    <url>/git-remote-sort/</url>
+    <content><![CDATA[<p>git 建立远程分支缩写</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> remote <span class="token function">add</span> bob /home/bob/myrepo
+$ <span class="token function">git</span> log -p master<span class="token punctuation">..</span>bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>上面的命令把Bob从Alice的主分支(master)中签出后所做的修改全部显示出来。<br>当检查完修改后,Alice就可以把修改合并到她的主分支中。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> merge bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git 多人协作</title>
     <url>/git-init-on-server/</url>
     <content><![CDATA[<p>git 协同开发</p>
@@ -84,23 +101,6 @@ $ <span class="token function">git</span> --bare init --shared<span aria-hidden=
 <p>也就是说m2ge.git 本来是一个工作树，但是 –bare 选项将本应当存放在m2ge.git/.git 中的仓库内容全部放置在 m2ge.git 目录下，就好像仓库完全的裸露在工作树中，所以称之为赤裸的仓库。</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token builtin class-name">cd</span> ~/work/m2ge
 $ <span class="token function">git</span> push m2@192.168.0.2:~/project/m2ge.git master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git 建立远程分支缩写</title>
-    <url>/git-remote-sort/</url>
-    <content><![CDATA[<p>git 建立远程分支缩写</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> remote <span class="token function">add</span> bob /home/bob/myrepo
-$ <span class="token function">git</span> log -p master<span class="token punctuation">..</span>bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>上面的命令把Bob从Alice的主分支(master)中签出后所做的修改全部显示出来。<br>当检查完修改后,Alice就可以把修改合并到她的主分支中。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> merge bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>软件</category>
