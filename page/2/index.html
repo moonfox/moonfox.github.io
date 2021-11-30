@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">64</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">65</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,233 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-test-benchmark-result-introducing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-test-benchmark-result-introducing/" class="post-title-link" itemprop="url">go 语言 基准测试 结果解读</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-08 15:16:54" itemprop="dateCreated datePublished" datetime="2021-07-08T15:16:54+00:00">2021-07-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="基准测试"><a href="#基准测试" class="headerlink" title="基准测试"></a>基准测试</h1><p>是测量一个程序在固定工作负载下的性能，使用 <code>-bench</code> 标记可以对代码进行基准测试</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test <span class="token operator">-</span>v <span class="token operator">-</span>bench<span class="token operator">=</span><span class="token punctuation">.</span> <span class="token operator">-</span>run<span class="token operator">=</span><span class="token operator">^</span>$ gott<span class="token operator">/</span>hello
+goos<span class="token punctuation">:</span> darwin
+goarch<span class="token punctuation">:</span> amd64
+pkg<span class="token punctuation">:</span> gott<span class="token operator">/</span>hello
+BenchmarkHello<span class="token operator">-</span><span class="token number">4</span>         <span class="token number">4964053</span>               <span class="token number">228.5</span> ns<span class="token operator">/</span>op
+PASS
+ok      gott<span class="token operator">/</span>hello      <span class="token number">2.386</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p><code>.</code>表示执行代码包中所有的基准测试用例(前缀为<code>Benchmark</code>的方法)，由于功能测试也会被运行，但同时运行功能测试会影响性能测试的结果，通过加入<code>-run=^$</code>，来禁止功能测试与性能测试一起执行。<code>^$</code>意味着：只执行名称为空的功能测试函数，即不执行任何测试函数。</p>
+</li>
+<li><p>指定运行某个基准测试</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">go</span> test <span class="token operator">-</span>v <span class="token operator">-</span>bench<span class="token operator">=</span>BenchmarkHello gott<span class="token operator">/</span>hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>功能测试也会一起运行。。。。。。</p>
+</li>
+</ul>
+<h1 id="b-N值的确定"><a href="#b-N值的确定" class="headerlink" title="b.N值的确定"></a><code>b.N</code>值的确定</h1><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">BenchmarkHello</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">hello</span><span class="token punctuation">(</span><span class="token string">"Max"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>当测试开始时，<code>b.N</code>的值被设置为1，执行后如果没有超过默认执行时间上限(默认为1秒)，则加大<code>b.N</code>的值，按某种规则一直递增，直到执行时间等于或超过上限，那么就用这一次的<code>b.N</code>的值，做为测试的最终结果</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">BenchmarkHello<span class="token operator">-</span><span class="token number">4</span>         <span class="token number">4964053</span>               <span class="token number">228.5</span> ns<span class="token operator">/</span>op
+PASS
+ok      gott<span class="token operator">/</span>hello      <span class="token number">2.386</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><code>BenchmarkHello-4</code>表示执行 BenchmarkHello 时，所用的最大P的数量为4</li>
+<li><code>4964053</code>:  表示<code>hello()</code>方法在达到这个执行次数时，等于或超过了1秒</li>
+<li><code>228.5 ns/op</code>： 表示每次执行<code>hello()</code>所消耗的平均执行时间</li>
+<li><code>2.386s</code>：表示测试总共用时</li>
+</ul>
+<h1 id="测试总时间的计算"><a href="#测试总时间的计算" class="headerlink" title="测试总时间的计算"></a>测试总时间的计算</h1><p>既然<code>4964053</code>表示1秒或大于1秒时执行的次数，那么测试总时间用时却是<code>2.386s</code>，超出了不少，这是为什么呢</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">BenchmarkHello</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">hello</span><span class="token punctuation">(</span><span class="token string">"Max"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	b<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"NNNNN:"</span><span class="token punctuation">,</span> b<span class="token punctuation">.</span>N<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在测试中加入<code>b.Log(&quot;NNNNN:&quot;, b.N)</code>，再执行基准测试，并加入<code>-v</code>，打印测试中的日志</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -bench<span class="token operator">=</span>. -run<span class="token operator">=</span>^$ gott/hello
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
+    hello_test.go:15: hello Max
+--- PASS: TestHello <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestPrint
+    hello_test.go:19: just Print
+--- PASS: TestPrint <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span>
+goos: darwin
+goarch: amd64
+pkg: gott/hello
+BenchmarkHello
+    hello_test.go:26: NNNNN: <span class="token number">1</span>
+    hello_test.go:26: NNNNN: <span class="token number">100</span>
+    hello_test.go:26: NNNNN: <span class="token number">10000</span>
+    hello_test.go:26: NNNNN: <span class="token number">1000000</span>
+    hello_test.go:26: NNNNN: <span class="token number">3541896</span>
+    hello_test.go:26: NNNNN: <span class="token number">4832275</span>
+BenchmarkHello-4         <span class="token number">4832275</span>               <span class="token number">236.8</span> ns/op
+PASS
+ok      gott/hello      <span class="token number">2</span>.395s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看到<code>b.Log(&quot;NNNNN:&quot;, b.N)</code>被执行了6次，这证明了之前提到的，测试会对<code>b.N</code>依次递增，直到执行时间等于或超过上限。在对<code>BenchmarkHello()</code>运行基准测试时，N值依次按<code>1,100,10000,1000000,3541896,4832275</code>递增，直到执行次数为<code>4832275</code>时，执行时间等于或超过了上限。</p>
+<p>同时也说明<code>BenchmarkHello()</code>一共被调用了6次，每次运行<code>BenchmarkHello()</code>都要消耗一定的时间，所以测试总耗时为这6次调用时间之和，<code>2.395s</code>，超过了1秒</p>
+<h1 id="平均执行时间的计算"><a href="#平均执行时间的计算" class="headerlink" title="平均执行时间的计算"></a>平均执行时间的计算</h1><p>应该用，运行<code>4832275</code>时所消耗的时间 <code>t</code>，<code>t / 4832275 = 236.8 ns/op</code></p>
+<ul>
+<li>如果用 测试总共用时 / 最多可以执行的次数  则不等于 平均执行时间，即 <code>2.386 * (1000 ** 3) / 4832275 = 493.7 </code> 大于测试结果中的<code>236.8 ns/op</code>。</li>
+<li>如果用 <code>1 秒 / 4832275 = 206 ns</code> ，与<code>236.8 ns/op</code>并不是很接近</li>
+<li>如果把尝试过程中的运行次数也加入进来<code>total = 1 + 100 + 10000 + 1000000 + 3541896 + 4832275</code>，即<code>2.386 * (1000 ** 3) / 9384272 = 254.25</code>与<code>236.8 ns/op</code>接近</li>
+<li>反推运行时间：<code>4832275 * 236.8 ns / 1000 ** 3 = 1.14s</code> ，测试结果使用了运行时间超过1秒上限时的数值</li>
+</ul>
+<p>问题：是否测试总时间一定会超过1秒？答：因为要找到最大可执行次数，而在这之前肯定要进行多次尝试，所以测试总时间应该总是会超过1秒的。</p>
+<h1 id="benchtime-标记"><a href="#benchtime-标记" class="headerlink" title="benchtime 标记"></a>benchtime 标记</h1><p>可以通过<code> -benchtime</code>标记修改默认时间上限，比如改为3秒</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -bench<span class="token operator">=</span>. -benchtime<span class="token operator">=</span>3s -run<span class="token operator">=</span>^$ gott/hello
+goos: darwin
+goarch: amd64
+pkg: gott/hello
+BenchmarkHello
+    hello_test.go:31: NNNNN: <span class="token number">1</span>
+    hello_test.go:32: /Users/ga/m/opt/go/go_root
+    hello_test.go:31: NNNNN: <span class="token number">100</span>
+    hello_test.go:32: /Users/ga/m/opt/go/go_root
+    hello_test.go:31: NNNNN: <span class="token number">10000</span>
+    hello_test.go:32: /Users/ga/m/opt/go/go_root
+    hello_test.go:31: NNNNN: <span class="token number">1000000</span>
+    hello_test.go:32: /Users/ga/m/opt/go/go_root
+    hello_test.go:31: NNNNN: <span class="token number">15927812</span>
+    hello_test.go:32: /Users/ga/m/opt/go/go_root
+BenchmarkHello-4   	<span class="token number">15927812</span>	       <span class="token number">223.4</span> ns/op
+PASS
+ok  	gott/hello	<span class="token number">3</span>.802s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>还可以设置具体的探索次数最大值，格式为<code>-benchtime=Nx</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> gott/hello -run<span class="token operator">=</span>^$ -bench<span class="token operator">=</span>BenchmarkHello -benchtime<span class="token operator">=</span>50x
+goos: darwin
+goarch: amd64
+pkg: gott/hello
+BenchmarkHello-4              <span class="token number">50</span>              <span class="token number">2183</span> ns/op
+--- BENCH: BenchmarkHello-4
+    hello_test.go:35: NNNNN: <span class="token number">1</span>
+    hello_test.go:36: /Users/ga/m/opt/go/go_root
+    hello_test.go:35: NNNNN: <span class="token number">50</span>
+    hello_test.go:36: /Users/ga/m/opt/go/go_root
+PASS
+ok      gott/hello      <span class="token number">0</span>.011s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>b.N</code>的值被设置为50，函数运行了50次</p>
+<h1 id="benchmem-标记"><a href="#benchmem-标记" class="headerlink" title="benchmem 标记"></a>benchmem 标记</h1><p>可以通过<code>-benchmem</code>标记查看内存使用信息</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> gott/hello -run<span class="token operator">=</span>^$ -bench<span class="token operator">=</span>BenchmarkHello -benchmem
+goos: darwin
+goarch: amd64
+pkg: gott/hello
+BenchmarkHello-4         <span class="token number">5137456</span>               <span class="token number">223.1</span> ns/op            <span class="token number">32</span> B/op          <span class="token number">2</span> allocs/op
+--- BENCH: BenchmarkHello-4
+    hello_test.go:35: NNNNN: <span class="token number">1</span>
+    hello_test.go:36: /Users/ga/m/opt/go/go_root
+    hello_test.go:35: NNNNN: <span class="token number">100</span>
+    hello_test.go:36: /Users/ga/m/opt/go/go_root
+    hello_test.go:35: NNNNN: <span class="token number">10000</span>
+    hello_test.go:36: /Users/ga/m/opt/go/go_root
+    hello_test.go:35: NNNNN: <span class="token number">1000000</span>
+    hello_test.go:36: /Users/ga/m/opt/go/go_root
+    hello_test.go:35: NNNNN: <span class="token number">5137456</span>
+    hello_test.go:36: /Users/ga/m/opt/go/go_root
+        <span class="token punctuation">..</span>. <span class="token punctuation">[</span>output truncated<span class="token punctuation">]</span>
+PASS
+ok      gott/hello      <span class="token number">1</span>.399s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><code>32 B/op</code>：平均每次迭代内存分配的字节数</li>
+<li><code>2 allocs/op</code>：平均每次迭代内存分配的次数</li>
+</ul>
+<p>平均每次迭代计算的依据应该使用的是 <code>b.N=5137456</code>迭代次数</p>
+<h1 id="基准测试的用途"><a href="#基准测试的用途" class="headerlink" title="基准测试的用途"></a>基准测试的用途</h1><p>一般用于对比两个不同的操作所消耗的时间，如</p>
+<ul>
+<li><p>渐近增长函数的运行时间</p>
+<p>一个函数需要1ms处理1,000个元素，处理10000或1百万将需要多少时间呢</p>
+</li>
+<li><p>I/O缓存该设置为多大</p>
+<p>基准测试可以帮助我们选择在性能达标情况下所需的最小内存</p>
+</li>
+<li><p>确定哪种算法更好</p>
+</li>
+</ul>
+<p>比较型的基准测试代码</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">,</span> size <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">/* ... */</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">Benchmark10</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span>         <span class="token punctuation">&#123;</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">Benchmark100</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span>        <span class="token punctuation">&#123;</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function">Benchmark1000</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span>       <span class="token punctuation">&#123;</span> <span class="token function">benchmark</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>通过参数<code>size</code>来控制输入的大小，而不是直接修改<code>b.N</code>的值，除非你只是想知道一个固定大小的迭代的耗时，否则基准测试的结果将毫无意义</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1267,104 +1494,6 @@ ok      gott/pprint     <span class="token punctuation">(</span>cached<span aria
 	<span class="token comment">// 当 n 小于 未读字节数时，程序直接跳到这里</span>
 	<span class="token keyword">return</span> b<span class="token punctuation">.</span>buf<span class="token punctuation">[</span>b<span class="token punctuation">.</span>r <span class="token punctuation">:</span> b<span class="token punctuation">.</span>r<span class="token operator">+</span>n<span class="token punctuation">]</span><span class="token punctuation">,</span> err
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-assign_receiver_of_ptr/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-assign_receiver_of_ptr/" class="post-title-link" itemprop="url">go 语言 对指针类型接收者本身赋值</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-07 22:50:29" itemprop="dateCreated datePublished" datetime="2021-06-07T22:50:29+00:00">2021-06-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>r</code> 是指针类型接收者，可以对其进行解引赋值。结构体的<code>0值</code>不是<code>nil</code>，而是其各个成员的<code>0值</code></p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
-
-<span class="token keyword">import</span> <span class="token string">"fmt"</span>
-
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token function">newReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">type</span> reader <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-	buf  <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span>
-	r<span class="token punctuation">,</span> w <span class="token builtin">int</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">func</span> <span class="token function">newReader</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	r <span class="token operator">:=</span> <span class="token function">new</span><span class="token punctuation">(</span>reader<span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token comment">// &amp;&#123;[] 0 0&#125;</span>
-	r<span class="token punctuation">.</span><span class="token function">reset</span><span class="token punctuation">(</span><span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token comment">// &amp;&#123;[0 0 0 0 0] -1 -1&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">func</span> <span class="token punctuation">(</span>r <span class="token operator">*</span>reader<span class="token punctuation">)</span> <span class="token function">reset</span><span class="token punctuation">(</span>buf <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token operator">*</span>r <span class="token operator">=</span> reader<span class="token punctuation">&#123;</span>buf<span class="token punctuation">:</span> buf<span class="token punctuation">,</span> r<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> w<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
       
     </div>

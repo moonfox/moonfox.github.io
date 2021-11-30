@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">64</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">65</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,133 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/git-using-rebase-instead-of-merge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/git-using-rebase-instead-of-merge/" class="post-title-link" itemprop="url">git 使用 rebase 代替 merge</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-06 16:11:18" itemprop="dateCreated datePublished" datetime="2021-04-06T16:11:18+00:00">2021-04-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="合并还是变基"><a href="#合并还是变基" class="headerlink" title="合并还是变基"></a>合并还是变基</h1><p>合并分支时，应使用<code>rebase</code>合并分支而不是使用<code>merge</code></p>
+<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><p>在分支很多的时候，<code>merge</code>会使提交变得异常混乱，查找某个提交会非常不好找，即使使用图形工具，也无法快速的查找，如果想退到某次提交更是难上加难。<code>merge</code>即使删除了合并过来的分支，其合并轨迹也依然被保留，所以还是很乱。</p>
+<p><img src="//img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-merge.png_b1" alt="git merge" title="git merge"></p>
+<h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><p>在分支很多的时候，不会产生很多的分支线，实践中应该就只有<code>master</code>,<code>release</code>等分支线，功能分支线在合并到<code>master</code> 上后都被删除，这样提交基本都在一条线上，十分清楚整洁。</p>
+<p><img src="//img.gagahappy.cn/blog/2021/04/using-rebase-instead-of-merge-rebase.png_b1" alt="git rebase" title="git rebase"></p>
+<h1 id="使用rebase合并分支"><a href="#使用rebase合并分支" class="headerlink" title="使用rebase合并分支"></a>使用rebase合并分支</h1><h2 id="场景分析："><a href="#场景分析：" class="headerlink" title="场景分析："></a>场景分析：</h2><p>功能<code>feature1</code>与<code>feature2</code>都在开发，<code>feature1</code>先上线，合并到了master，此时，<code>feature2</code>不应使用<code>merge</code>对<code>master</code>进行合并操作，而是使用<code>rebase</code>进行合并</p>
+<ul>
+<li><p>master上的提交有：<code>[m1, m2, m3]</code></p>
+</li>
+<li><p>feature1上的提交有: <code>[f1_01, f1_02, f1_03]</code></p>
+</li>
+<li><p>feature2上的提交有: <code>[f2_01, f2_02, f2_03]</code></p>
+</li>
+</ul>
+<p><code>feature1</code>先被合并到master:</p>
+<ul>
+<li>master上的提交有：<code>[m1, m2, m3, f1_01, f1_02, f1_03]</code></li>
+</ul>
+<p><code>feature2</code>合并master</p>
+<ul>
+<li><code>feature2</code>上的提交有：<code>[m1, m2, m3, f1_01, f1_02, f1_03，f2_01_new, f2_02_new, f2_03_new]</code></li>
+</ul>
+<h2 id="合并步骤"><a href="#合并步骤" class="headerlink" title="合并步骤"></a>合并步骤</h2><p><code>feature2</code>要把<code>master</code>上的提交合并过来，使用<code>rebase</code> 而不是<code>merge</code>，这样就会不产生合并提交，在向<code>master</code>提交时就变成了<code>快速向前</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> co feature2
+<span class="token function">git</span> rebase master
+
+<span class="token comment"># 如果发生冲突，解决冲突后把冲突文件加入 index 区</span>
+<span class="token function">git</span> <span class="token function">add</span> -u
+<span class="token comment"># 运行continue 以使rebase完成</span>
+<span class="token function">git</span> rebase --continue<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p>步骤1：<code>git rebase master</code>：以<code>master</code>分支做为<code>feature2</code>的基础</p>
+</li>
+<li><p>步骤2：计算出<code>feature2</code>与<code>master</code>上的差异提交，相当于<code>git log master...feture2</code>，即<code>[f2_01, f2_02, f2_03]</code></p>
+</li>
+<li><p>步骤3：把<code>[f2_01, f2_02, f2_03]</code>在<code>master</code>上的最新提交<code>f1_03</code>上进行重放生成新的提交</p>
+<p><code>[f2_01_new, f2_02_new, f2_03_new]</code></p>
+<p>重放生成过程：</p>
+<ol>
+<li>f2_01以f1_03为基础，生成新的f2_01_new</li>
+<li>f2_02以f2_01_new为基础，生成新的f2_02_new</li>
+<li>f2_03以f2_02_new为基础，生成新的f2_03_new</li>
+</ol>
+</li>
+<li><p>步骤4：把当前分支设置为<code>feature2</code></p>
+<p>feature2<code>rebase</code>后的提交有<code>[m1, m2, m3, f1_01, f1_02, f1_03，f2_01_new, f2_02_new, f2_03_new]</code></p>
+<p>之前的旧的<code>[f2_01, f2_02, f2_03]</code> 在<code>feature2</code>上就看不到了，但依然在git中，如果没有其它分支指向它们，则会被git 回收机制删除</p>
+</li>
+</ul>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ol>
+<li>merge会让提交变得越来越混乱</li>
+<li>rebase可以使主线一直保持清晰，rebase操作可以看是剪支操作，把分支剪下来，接到主线上。这样就可以把多条分支线变为一条，使所有提交变得清晰。</li>
+<li>不要对已经<code>push</code>了的分支进行<code>rebase</code>，这会让已经存在的提交丢失，如果有人已经拉取了这个分支，也会给别人提交带来混乱</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1234,141 +1361,6 @@ log-bin<span class="token operator">=</span>/mysql/3306/data/master<span aria-hi
   <span class="token keyword">end</span>
 <span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/hexo-next-theme/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/hexo-next-theme/" class="post-title-link" itemprop="url">Hexo Next主题 Rss 侧边栏</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-08-18 15:47:49" itemprop="dateCreated datePublished" datetime="2020-08-18T15:47:49+00:00">2020-08-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>无意间发现 <code>Hexo</code> 的 <code>Next</code> 主题也很好看，之前的 <code>Yelee</code> 主题使用了好久，决定换成 <code>Next</code>。在配置过程中遇到不少问题，主要有两点值得分享：</p>
-<ul>
-<li>不要直接在主题配置文件上进行修改</li>
-<li>修改RSS显示位置使其在首页显示</li>
-</ul>
-<h3 id="配置主题文件"><a href="#配置主题文件" class="headerlink" title="配置主题文件"></a>配置主题文件</h3><p>根据 Hexo 官方的推荐，不要直接修改主题的配置文件</p>
-<blockquote>
-<p>The file should be placed in your site folder, both <code>yml</code> and <code>json</code> are supported. <code>theme</code> inside <code>_config.yml</code> must be configured for Hexo to read <code>_config.[theme].yml</code></p>
-</blockquote>
-<p>根据推荐执行以下操作:</p>
-<ol>
-<li>配置主题为 Next 主题</li>
-</ol>
-  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># _config.yml</span>
-theme: <span class="token string">"next"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li><p>在 site 根目录新建 <code>_config.next.yml</code>文件</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">touch</span> _config.next.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p>打开 <code>theme/next/_config.yml</code>把需要修改的选项 copy 到 <code>_config.next.yml</code>中</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"># _config.next.yml
-# 设置网站图标
-favicon:
-  small: &#x2F;favicon.ico
-  medium: &#x2F;favicon.ico
-  apple_touch_icon: &#x2F;apple-touch-icon.png
-  safari_pinned_tab: &#x2F;apple-touch-icon.png<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>hexo启动时，会自动合并 <code>_config.next.yml</code> 与<code>theme/next/_config.yml</code> 的设置内容，从而达到配置主题的作用。</p>
-</li>
-</ol>
-<p>不直接修改<code>theme/next/_config.yml</code>的好处是，当拉取新的更新时，不会因修改了<code>_config.yml</code>而发生冲突。（每个主题都是一个独立的 <code>git</code>项目）</p>
-<h3 id="修改RSS显示位置"><a href="#修改RSS显示位置" class="headerlink" title="修改RSS显示位置"></a>修改RSS显示位置</h3><p>看到网上说Rss的显示位置由首页侧边栏的位置移动到了每篇文章的最底部，这显然是不适合的，因为订阅不是按文章订阅，而是直接在首页中订阅。</p>
-<p>自定义RSS到侧边栏：请先确认已经安装 <code>hexo-generator-feed</code>插件</p>
-<ol>
-<li>删除文章底部的Rss(整个 follow me 设置都删除)</li>
-</ol>
-  <pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.njk
-
-# 删除以下代码
-&#123;%- if theme.follow_me %&#125;
-  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;
-&#123;%- endif %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li><p>修改 Rss 样式</p>
-<pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;post&#x2F;post-followme.njk
-
-&lt;div class&#x3D;&quot;followme&quot;&gt; # 修改为 &lt;div class&#x3D;&quot;&quot;&gt;
-  &lt;span&gt;&#123;&#123; __(&#39;follow_me.welcome&#39;) &#125;&#125;&lt;&#x2F;span&gt; # 删除这一行
-  &lt;div class&#x3D;&quot;social-list&quot;&gt; # #修改为 &lt;div class&#x3D;&quot;&quot;&gt;
-  # 省略部分源码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>添加 Rss 到侧边栏(其实就是整个的 follwe me)</p>
-<pre class="line-numbers language-njk" data-language="njk"><code class="language-njk"># theme&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;sidebar&#x2F;site-overview.njk
-&#123;%- if theme.follow_me %&#125;
-  &#123;&#123; partial(&#39;_partials&#x2F;post&#x2F;post-followme.njk&#39;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;
-&#123;%- endif %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>在站点配置文件中打开 Rss 设置</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># _config.yml</span>
-<span class="token key atrule">follow_me</span><span class="token punctuation">:</span>
-  <span class="token key atrule">RSS</span><span class="token punctuation">:</span> /rss2.xml <span class="token punctuation">|</span><span class="token punctuation">|</span> fa fa<span class="token punctuation">-</span>rss<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
-<li><p>重启站点即可，就可以看到 Rss 显示在侧边栏了</p>
-</li>
-</ol>
 
       
     </div>
