@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">65</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">66</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,347 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-test-flag-cpu-count-parallel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-test-flag-cpu-count-parallel/" class="post-title-link" itemprop="url">go 语言 test 测试工具的标记 flag</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-11 17:16:54" itemprop="dateCreated datePublished" datetime="2021-07-11T17:16:54+00:00">2021-07-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="cpu-标记"><a href="#cpu-标记" class="headerlink" title="cpu 标记"></a>cpu 标记</h1><p>用来设置运行时，P的最大数量，即<code>GOMAXPROCS</code>的值。可以设置一组值，在运行测试时，P被设置为不同的值分别运行测试函数。</p>
+<p>最大P数量代表着 go 运行时系统同时运行goroutine的能力，可以被视为最大逻辑CPU的数量，在默认情况下，最大 P 数量就等于当前计算机 CPU 核心的实际数量，最大P可以大于或小于实际CPU的核心数量。</p>
+<p>通过设置<code>-cpu</code>的值，就可以来模拟程序在不同CPU数量下的表现。设置<code>-cpu=2,4,8</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -cpu<span class="token operator">=</span><span class="token number">2,4</span>,8 -bench<span class="token operator">=</span>. gott/hello
+goos: darwin
+goarch: amd64
+pkg: gott/hello
+BenchmarkHello-2         <span class="token number">5081475</span>               <span class="token number">228.6</span> ns/op
+BenchmarkHello-4         <span class="token number">5190867</span>               <span class="token number">215.8</span> ns/op
+BenchmarkHello-8         <span class="token number">5256798</span>               <span class="token number">212.6</span> ns/op
+PASS
+ok      gott/hello      <span class="token number">4</span>.129s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>性能测试函数<code>BenchmarkHello</code>被执行了3次，最大P数量分别为<code>2,4,8</code></p>
+<p>如果没有指定<code>-cpu</code>参数，测试运行时使用默认的最大P的数量，这个数量就等于当前CPU实际的核心数(比如你的CPU是4核，那么这个数量就是4)</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -bench<span class="token operator">=</span>.  gott/hello
+goos: darwin
+goarch: amd64
+pkg: gott/hello
+BenchmarkHello-4         <span class="token number">4670545</span>               <span class="token number">234.7</span> ns/op
+PASS
+ok      gott/hello      <span class="token number">1</span>.381s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>BenchmarkHello-4 </code>表明默认P的值为4，即cpu是4核</p>
+<h1 id="count-标记"><a href="#count-标记" class="headerlink" title="count 标记"></a>count 标记</h1><p>设置重复执行测试函数的次数</p>
+<p>性能函数总的执行次数=<code>-cpu</code>标记的值中正整数的个数 x <code>-count</code>标记的值 x 探索式执行中测试函数的实际执行次数=2 * 2 * 5 =20</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -count<span class="token operator">=</span><span class="token number">2</span> -bench<span class="token operator">=</span>. -cpu<span class="token operator">=</span><span class="token number">2,4</span>  gott/hello
+goos: darwin
+goarch: amd64
+pkg: gott/hello
+BenchmarkHello-2         <span class="token number">5184015</span>               <span class="token number">224.1</span> ns/op
+--- BENCH: BenchmarkHello-2
+    hello_test.go:30: NNNNN: <span class="token number">1</span>
+    hello_test.go:30: NNNNN: <span class="token number">100</span>
+    hello_test.go:30: NNNNN: <span class="token number">10000</span>
+    hello_test.go:30: NNNNN: <span class="token number">1000000</span>
+    hello_test.go:30: NNNNN: <span class="token number">5184015</span>
+BenchmarkHello-2         <span class="token number">5676196</span>               <span class="token number">214.5</span> ns/op
+--- BENCH: BenchmarkHello-2
+    hello_test.go:30: NNNNN: <span class="token number">1</span>
+    hello_test.go:30: NNNNN: <span class="token number">100</span>
+    hello_test.go:30: NNNNN: <span class="token number">10000</span>
+    hello_test.go:30: NNNNN: <span class="token number">1000000</span>
+    hello_test.go:30: NNNNN: <span class="token number">4618954</span>
+    hello_test.go:30: NNNNN: <span class="token number">5676196</span>
+BenchmarkHello-4         <span class="token number">5304111</span>               <span class="token number">213.8</span> ns/op
+--- BENCH: BenchmarkHello-4
+    hello_test.go:30: NNNNN: <span class="token number">1</span>
+    hello_test.go:30: NNNNN: <span class="token number">100</span>
+    hello_test.go:30: NNNNN: <span class="token number">10000</span>
+    hello_test.go:30: NNNNN: <span class="token number">1000000</span>
+    hello_test.go:30: NNNNN: <span class="token number">5304111</span>
+BenchmarkHello-4         <span class="token number">5286376</span>               <span class="token number">212.4</span> ns/op
+--- BENCH: BenchmarkHello-4
+    hello_test.go:30: NNNNN: <span class="token number">1</span>
+    hello_test.go:30: NNNNN: <span class="token number">100</span>
+    hello_test.go:30: NNNNN: <span class="token number">10000</span>
+    hello_test.go:30: NNNNN: <span class="token number">1000000</span>
+    hello_test.go:30: NNNNN: <span class="token number">5286376</span>
+PASS
+ok      gott/hello      <span class="token number">6</span>.601s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>功能函数总的执行次数=<code>-cpu</code>标记的值中正整数的个数 x <code>-count</code>标记的值=3 x 2 = 6</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -count<span class="token operator">=</span><span class="token number">2</span>  -cpu<span class="token operator">=</span><span class="token number">2,4</span>,8  gott/hello
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
+    hello_test.go:17: number of runtime.GOMAXPROCS: <span class="token number">2</span>
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
+    hello_test.go:17: number of runtime.GOMAXPROCS: <span class="token number">2</span>
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
+    hello_test.go:17: number of runtime.GOMAXPROCS: <span class="token number">4</span>
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
+    hello_test.go:17: number of runtime.GOMAXPROCS: <span class="token number">4</span>
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
+    hello_test.go:17: number of runtime.GOMAXPROCS: <span class="token number">8</span>
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
+    hello_test.go:17: number of runtime.GOMAXPROCS: <span class="token number">8</span>
+ok      gott/hello      <span class="token number">0</span>.009s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>对于功能测试，并不需要重复的执行多次，只需要执行一次即可，所以可以把<code>-cpu</code>的数值设置为1，<code>-count</code>的值不用设置，使用默认值为1就可以。功能测试关注的重点是验证逻辑是否正确，而不是程序的性能</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v   -cpu<span class="token operator">=</span><span class="token number">1</span> gott/hello
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestHello
+    hello_test.go:17: number of runtime.GOMAXPROCS: <span class="token number">1</span>
+--- PASS: TestHello <span class="token punctuation">(</span><span class="token number">0</span>.00s<span class="token punctuation">)</span>
+PASS
+ok      gott/hello      <span class="token number">0</span>.008s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="Parallel-标记"><a href="#Parallel-标记" class="headerlink" title="Parallel 标记"></a>Parallel 标记</h1><p><code>-parallel</code>标记可以指定同时运行测试用例的最大并发执行数，但仅适用于单个二进制测试文件，通过修改<code>GOMAXPROCS</code>的值实现，该标记的默认值是测试运行时的最大 P 数量。</p>
+<p>可以通过在测试函数中添加<code>t.Parallel()</code>调用，以同时运行多个功能测试。默认情况下 go test 在运行测试时，为了加快测试速度，package 是被并行运行的，但每个包中的功能测试用例是被串行执行的。</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">TestParallelPrintHello</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">Parallel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">200</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Millisecond<span class="token punctuation">)</span>
+		t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"==========Hello=========="</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">TestParallelPrintWorld</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">Parallel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"number of runtime.GOMAXPROCS:"</span><span class="token punctuation">,</span> runtime<span class="token punctuation">.</span><span class="token function">GOMAXPROCS</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">200</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Millisecond<span class="token punctuation">)</span>
+		t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"==========World=========="</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>使用<code>t.Parallel()</code>指定需要并行执行的测试，在测试结果中可以看到TestParallelPrintWorld与TestParallelPrintHello交替输出，说明这两个测试函数是并行执行的</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -parallel<span class="token operator">=</span><span class="token number">8</span> gott/hello
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestParallelPrintHello
+<span class="token operator">==</span><span class="token operator">=</span> PAUSE TestParallelPrintHello
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestParallelPrintWorld
+<span class="token operator">==</span><span class="token operator">=</span> PAUSE TestParallelPrintWorld
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:43: number of runtime.GOMAXPROCS: <span class="token number">4</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+--- PASS: TestParallelPrintWorld <span class="token punctuation">(</span><span class="token number">1</span>.02s<span class="token punctuation">)</span>
+--- PASS: TestParallelPrintHello <span class="token punctuation">(</span><span class="token number">1</span>.02s<span class="token punctuation">)</span>
+PASS
+ok      gott/hello      <span class="token number">1</span>.026s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>测试结果中<code>runtime.GOMAXPROCS: 4  </code>的值为4，并不是指定的<code>8</code>，说明<code>-parallel</code>标记并没有生成，因为测试运行的不是二进制文件，此时，即使不指定<code>-parallel</code>也是可以的，如果想让更多的测试用例同时运行，可以在运行<code>go test</code>时，指定<code>-p</code>参数，运行更多的P，来同时执行更多的测试用例，比如设置p的值为4，让同时并行执行的最大并发数为4</li>
+<li>使用<code>t.Parallel()</code>后，输出的信息多了<code>PAUSE</code>和<code>CONT</code>字段</li>
+</ul>
+<p>如果加入<code>-count=2</code>标记，对于测试用例来说，此时的并发不会是2个count之间的并发，这两个count也是串行执行的</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go <span class="token builtin class-name">test</span> -v -count<span class="token operator">=</span><span class="token number">2</span>  gott/hello
+<span class="token comment"># 这里是第一遍count</span>
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestParallelPrintHello
+<span class="token operator">==</span><span class="token operator">=</span> PAUSE TestParallelPrintHello
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestParallelPrintWorld
+<span class="token operator">==</span><span class="token operator">=</span> PAUSE TestParallelPrintWorld
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:43: number of runtime.GOMAXPROCS: <span class="token number">4</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+--- PASS: TestParallelPrintWorld <span class="token punctuation">(</span><span class="token number">1</span>.02s<span class="token punctuation">)</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+--- PASS: TestParallelPrintHello <span class="token punctuation">(</span><span class="token number">1</span>.02s<span class="token punctuation">)</span>
+
+<span class="token comment"># 这里是第二遍count</span>
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestParallelPrintHello
+<span class="token operator">==</span><span class="token operator">=</span> PAUSE TestParallelPrintHello
+<span class="token operator">==</span><span class="token operator">=</span> RUN   TestParallelPrintWorld
+<span class="token operator">==</span><span class="token operator">=</span> PAUSE TestParallelPrintWorld
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:43: number of runtime.GOMAXPROCS: <span class="token number">4</span>
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintWorld
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+    hello_test.go:46: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>World<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+<span class="token operator">==</span><span class="token operator">=</span> CONT  TestParallelPrintHello
+    hello_test.go:36: <span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>Hello<span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span><span class="token operator">==</span>
+--- PASS: TestParallelPrintWorld <span class="token punctuation">(</span><span class="token number">1</span>.01s<span class="token punctuation">)</span>
+--- PASS: TestParallelPrintHello <span class="token punctuation">(</span><span class="token number">1</span>.01s<span class="token punctuation">)</span>
+PASS
+ok      gott/hello      <span class="token number">2</span>.036s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+<h1 id="源码文件"><a href="#源码文件" class="headerlink" title="源码文件"></a>源码文件</h1><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// hello.go</span>
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">hello</span><span class="token punctuation">(</span><span class="token string">"max"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">hello</span><span class="token punctuation">(</span>name <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> fmt<span class="token punctuation">.</span><span class="token function">Sprint</span><span class="token punctuation">(</span><span class="token string">"hello "</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// hello_test.go</span>
+<span class="token keyword">func</span> <span class="token function">TestHello</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	name <span class="token operator">:=</span> <span class="token string">"Max"</span>
+	expected <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"hello %s"</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span>
+	greeting <span class="token operator">:=</span> <span class="token function">hello</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+	<span class="token keyword">if</span> greeting <span class="token operator">!=</span> expected <span class="token punctuation">&#123;</span>
+		t<span class="token punctuation">.</span><span class="token function">Errorf</span><span class="token punctuation">(</span><span class="token string">"hello(%s) = %s, expected = %s"</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> greeting<span class="token punctuation">,</span> expected<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span>expected<span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"number of runtime.GOMAXPROCS:"</span><span class="token punctuation">,</span> runtime<span class="token punctuation">.</span><span class="token function">GOMAXPROCS</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">TestPrint</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"just Print"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">BenchmarkHello</span><span class="token punctuation">(</span>b <span class="token operator">*</span>testing<span class="token punctuation">.</span>B<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>N<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">hello</span><span class="token punctuation">(</span><span class="token string">"Max"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	b<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"NNNNN:"</span><span class="token punctuation">,</span> b<span class="token punctuation">.</span>N<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">TestParallelPrintHello</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">Parallel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">200</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Millisecond<span class="token punctuation">)</span>
+		t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"==========Hello=========="</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">TestParallelPrintWorld</span><span class="token punctuation">(</span>t <span class="token operator">*</span>testing<span class="token punctuation">.</span>T<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">.</span><span class="token function">Parallel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"number of runtime.GOMAXPROCS:"</span><span class="token punctuation">,</span> runtime<span class="token punctuation">.</span><span class="token function">GOMAXPROCS</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">200</span> <span class="token operator">*</span> time<span class="token punctuation">.</span>Millisecond<span class="token punctuation">)</span>
+		t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"==========World=========="</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>可以通过运行<code>runtime.GOMAXPROCS(0)</code>获得运行时的最大P的数量</li>
+<li>在功能测试中，无法避免依赖一些外部环境，比如数据库的连接，第三方接口的调用，应该对这些外部环境进行仿造(mock)，从而得到一个纯净的测试环境</li>
+<li><code>go help testflag  </code>查看 flag 帮助文件</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1385,115 +1726,6 @@ ok      gott/pprint     <span class="token punctuation">(</span>cached<span aria
 
 <p><code>B</code> 从每个字符中提取位（首先是最高有效位）</p>
 <p><code>b</code> 从每个字符中提取位（首先是最低有效位）</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-bufio-reader-peek/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/golang-bufio-reader-peek/" class="post-title-link" itemprop="url">go 语言 bufio.Peek 源码</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-06-08 15:03:58" itemprop="dateCreated datePublished" datetime="2021-06-08T15:03:58+00:00">2021-06-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p> <code>bufio.Peek(n)</code>返回前N个未读字节 ，不会更改已读计数的值。在方法调用后，要查看返回参数<code>error</code>是否为nil，以确保操作满足要求</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token punctuation">(</span>b <span class="token operator">*</span>Reader<span class="token punctuation">)</span> <span class="token function">Peek</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token builtin">error</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> n <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span> <span class="token boolean">nil</span><span class="token punctuation">,</span> ErrNegativeCount
-	<span class="token punctuation">&#125;</span>
-
-	b<span class="token punctuation">.</span>lastByte <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
-	b<span class="token punctuation">.</span>lastRuneSize <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
-
-	<span class="token comment">// 当未读字节数小于n，且缓冲区不满(b.w-b.r &lt; len(b.buf))，</span>
-	<span class="token comment">// 即缓冲区中从头到尾必须都是未读字节才算是缓冲区已经满</span>
-	<span class="token comment">// 且 b.err 为nil，这三者都满足时，开始调用b.fill()填充缓冲区</span>
-	<span class="token comment">// fill()方法会把未读数据移动到缓冲区头部，并把后面空出来的部分写满</span>
-	<span class="token comment">// for 保证了至少可以把缓冲区填满</span>
-	<span class="token keyword">for</span> b<span class="token punctuation">.</span>w<span class="token operator">-</span>b<span class="token punctuation">.</span>r <span class="token operator">&lt;</span> n <span class="token operator">&amp;&amp;</span> b<span class="token punctuation">.</span>w<span class="token operator">-</span>b<span class="token punctuation">.</span>r <span class="token operator">&lt;</span> <span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>buf<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> b<span class="token punctuation">.</span>err <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
-		b<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// b.w-b.r &lt; len(b.buf) => buffer is not full</span>
-	<span class="token punctuation">&#125;</span>
-
-	<span class="token comment">// 当要读取的字节数大于缓冲区长度时，返回所有未读节字，并附带错误信息</span>
-	<span class="token keyword">if</span> n <span class="token operator">></span> <span class="token function">len</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>buf<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">return</span> b<span class="token punctuation">.</span>buf<span class="token punctuation">[</span>b<span class="token punctuation">.</span>r<span class="token punctuation">:</span>b<span class="token punctuation">.</span>w<span class="token punctuation">]</span><span class="token punctuation">,</span> ErrBufferFull
-	<span class="token punctuation">&#125;</span>
-
-	<span class="token comment">// 0 &lt;= n &lt;= len(b.buf)</span>
-	<span class="token keyword">var</span> err <span class="token builtin">error</span>
-	<span class="token comment">// 当要读取的字节数大于所有未读节字数时，返回所有未读节字，并附带错误信息</span>
-	<span class="token keyword">if</span> avail <span class="token operator">:=</span> b<span class="token punctuation">.</span>w <span class="token operator">-</span> b<span class="token punctuation">.</span>r<span class="token punctuation">;</span> avail <span class="token operator">&lt;</span> n <span class="token punctuation">&#123;</span>
-		<span class="token comment">// not enough data in buffer</span>
-		n <span class="token operator">=</span> avail
-		err <span class="token operator">=</span> b<span class="token punctuation">.</span><span class="token function">readErr</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token keyword">if</span> err <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
-			err <span class="token operator">=</span> ErrBufferFull
-		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span>
-	<span class="token comment">// 当 n 小于 未读字节数时，程序直接跳到这里</span>
-	<span class="token keyword">return</span> b<span class="token punctuation">.</span>buf<span class="token punctuation">[</span>b<span class="token punctuation">.</span>r <span class="token punctuation">:</span> b<span class="token punctuation">.</span>r<span class="token operator">+</span>n<span class="token punctuation">]</span><span class="token punctuation">,</span> err
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
