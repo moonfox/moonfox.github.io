@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">66</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">67</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,136 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/golang-call-method-on-nil-of-interface-value/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/golang-call-method-on-nil-of-interface-value/" class="post-title-link" itemprop="url">go 语言 在动态值为 nil 的接口上调用方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-19 15:37:54" itemprop="dateCreated datePublished" datetime="2021-04-19T15:37:54+00:00">2021-04-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="在动态值为-nil-的接口上调用方法"><a href="#在动态值为-nil-的接口上调用方法" class="headerlink" title="在动态值为 nil 的接口上调用方法"></a>在动态值为 nil 的接口上调用方法</h1><p>把一个值为nil的某个实现类型的变量赋给了接口变量，是否可以在这个接口变量上调用该接口的方法</p>
+<p>lib/lib.go</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">type</span> People <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Name <span class="token builtin">string</span>
+	Age  <span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">type</span> Superman <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	People
+	color <span class="token builtin">string</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">type</span> Mutant <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">Speaking</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">type</span> Fly <span class="token keyword">interface</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">Fly</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>sp Superman<span class="token punctuation">)</span> <span class="token function">Speaking</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"I'm %s"</span><span class="token punctuation">,</span> sp<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token punctuation">(</span>sp <span class="token operator">*</span>Superman<span class="token punctuation">)</span> <span class="token function">Fly</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"I can fly"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>value.go</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">callMethodOnNil</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">var</span> mu lib<span class="token punctuation">.</span>Mutant
+	<span class="token keyword">var</span> xman <span class="token operator">*</span>lib<span class="token punctuation">.</span>Superman
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"xman:"</span><span class="token punctuation">,</span> xman<span class="token punctuation">)</span> <span class="token comment">// nil</span>
+	mu <span class="token operator">=</span> xman
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"mu:"</span><span class="token punctuation">,</span> mu<span class="token punctuation">)</span> <span class="token comment">// nil</span>
+	<span class="token comment">// Panic: runtime error: invalid memory address or nil pointer dereference</span>
+	<span class="token comment">// 动态类值为 nil 时，不能在其上调用值方法</span>
+	<span class="token comment">// mu.Speaking()</span>
+
+	<span class="token keyword">var</span> fly lib<span class="token punctuation">.</span>Fly
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"xman:"</span><span class="token punctuation">,</span> xman<span class="token punctuation">)</span> <span class="token comment">// nil</span>
+	fly <span class="token operator">=</span> xman
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"fly:"</span><span class="token punctuation">,</span> fly<span class="token punctuation">)</span> <span class="token comment">// nil</span>
+
+	<span class="token comment">// 动态类值为 nil 时，可以在其上调用指针方法</span>
+	<span class="token comment">// Fly()方法可以被调用，它的接收者是 *T 类型，且方法中没有涉及到对类型属性的调用</span>
+	fly<span class="token punctuation">.</span><span class="token function">Fly</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// I can fly</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ol>
+<li><p>值类型(T)的方法不能被调用，无论这个方法中是否涉及了对类型属性的调用</p>
+</li>
+<li><p>指针类型(*T)的方法可以被调用，但方法中不能涉及类型属性的调用</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1274,124 +1404,6 @@ $ <span class="token builtin class-name">echo</span> <span class="token variable
 
 $ pgrep <span class="token function">sleep</span>
 $<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-binlog-index/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/mysql-binlog-index/" class="post-title-link" itemprop="url">mysql binlog index 文件内容</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-09-15 23:20:20" itemprop="dateCreated datePublished" datetime="2020-09-15T23:20:20+00:00">2020-09-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="binlog-index文件内容"><a href="#binlog-index文件内容" class="headerlink" title="binlog.index文件内容"></a><code>binlog.index</code>文件内容</h3><p>记录了<code>binlog</code>文件的具体路径，在MySQL启动时，会找到<code>binlog.index</code>文件，然后读取它里面的条目，从而读取<code>binlog</code>文件。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> /mysql/3306/data/master.index
-
-/mysql/3306/data/master.000001
-/mysql/3306/data/master.000002
-/mysql/3306/data/master.000003
-./master.000004
-./master.000005<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol>
-<li><code>binlog</code>文件的路径可以是相对路径，也可以是绝对路径</li>
-<li>如果是绝对路径，当文件被移动到其它地方时，只能手动修改对应的路径，否则MySQL在启动时，会报找不到文件路径的错误</li>
-</ol>
-<h3 id="设置binlog文件路径"><a href="#设置binlog文件路径" class="headerlink" title="设置binlog文件路径"></a>设置<code>binlog</code>文件路径</h3><p>可以在 <code>my.cnf</code>中设置<code>binlog</code>的文件路径</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">[mysqld]
-log-bin&#x3D;master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>或设置为绝对路径</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>mysqld<span class="token punctuation">]</span>
-log-bin<span class="token operator">=</span>/mysql/3306/data/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h3 id="参数-log-bin身兼多职"><a href="#参数-log-bin身兼多职" class="headerlink" title="参数 log-bin身兼多职"></a>参数 <code>log-bin</code>身兼多职</h3><p>设置后生效多个参数</p>
-<ol>
-<li>表示启用 <code>binlog</code>功能</li>
-<li>同时设置 <code>binlog.index</code>的文件名</li>
-<li>同时设置<code>binlog</code>的文件名</li>
-</ol>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">show variables like &#39;%log_bin%&#39;;
-+---------------------------------+----------------------------------------------+
-| Variable_name                   | Value                                        |
-+---------------------------------+----------------------------------------------+
-| log_bin                         | ON                                           |
-| log_bin_basename                | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master       |
-| log_bin_index                   | &#x2F;mysql&#x2F;3306&#x2F;data&#x2F;master.index |
-| log_bin_trust_function_creators | OFF                                          |
-| log_bin_use_v1_row_events       | OFF                                          |
-| sql_log_bin                     | ON                                           |
-+---------------------------------+----------------------------------------------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h3 id="binlog文件的读取"><a href="#binlog文件的读取" class="headerlink" title="binlog文件的读取"></a><code>binlog</code>文件的读取</h3><p>MySQL在启动时会读取<code>data</code>目录下的所有以<code>.index</code>后缀的文件(默认值)，然后在读取每个<code>index</code>文件中的条目</p>
-<h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><blockquote>
-<p>The default location for binary log files and the binary log index file is the data directory. You can use the <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_log-bin"><code>--log-bin</code></a> option to specify an alternative location, by adding a leading absolute path name to the base name to specify a different directory. When the server reads an entry from the binary log index file, which tracks the binary log files that have been used, it checks whether the entry contains a relative path. If it does, the relative part of the path is replaced with the absolute path set using the <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_log-bin"><code>--log-bin</code></a> option. An absolute path recorded in the binary log index file remains unchanged; in such a case, the index file must be edited manually to enable a new path or paths to be used. The binary log file base name and any specified path are available as the <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_log_bin_basename"><code>log_bin_basename</code></a> system variable.</p>
-</blockquote>
-<p>只摘录了一部分，更全面的内容可到官网查看</p>
 
       
     </div>

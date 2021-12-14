@@ -3949,4 +3949,48 @@ id6<span class="token punctuation">,</span> zhanghao456<span class="token variab
         <tag>mysql</tag>
       </tags>
   </entry>
+  <entry>
+    <title>mysql or 导致的全表扫描</title>
+    <url>/mysql-scan-full-by-or/</url>
+    <content><![CDATA[<h1 id="or-导致的全表扫描"><a href="#or-导致的全表扫描" class="headerlink" title="or 导致的全表扫描"></a>or 导致的全表扫描</h1><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">or</span> operator <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span>
+<span class="token operator">|</span> <span class="token keyword">type</span> <span class="token operator">|</span> possible_keys <span class="token operator">|</span> <span class="token keyword">key</span>  <span class="token operator">|</span> key_len <span class="token operator">|</span> ref  <span class="token operator">|</span> <span class="token keyword">rows</span>   <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra       <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span>
+<span class="token operator">|</span> <span class="token keyword">ALL</span>  <span class="token operator">|</span> tradeid       <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token boolean">NULL</span>    <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token number">389107</span> <span class="token operator">|</span>    <span class="token number">10.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查询条件中有 or 时，mysql 会分别查询每一个条件，然后再把结果合并在一起。</p>
+<p>先对 tradeid = ‘12’ 进行判断，发现可以使用索引，再对 operator = 10 进行判断，发现不能使用索引，只好全表扫描，即然都全表扫描了，顺带也就可以判断当前记录的 tradeid 是否等行 12，就不需要在单独再搜索 tradeid的索引树了。</p>
+<p>所以当 or 条件中出现没有索引的字段会使用全表扫描。如果出现的列都有索引，mysql会尽量使用每个列的索引</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">or</span> id <span class="token operator">=</span><span class="token number">10</span>  <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
+<span class="token operator">|</span> id <span class="token operator">|</span> select_type <span class="token operator">|</span> <span class="token keyword">table</span>    <span class="token operator">|</span> <span class="token keyword">type</span>        <span class="token operator">|</span> possible_keys   <span class="token operator">|</span> <span class="token keyword">key</span>             <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
+<span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> <span class="token keyword">SIMPLE</span>      <span class="token operator">|</span> tradelog <span class="token operator">|</span> index_merge <span class="token operator">|</span> <span class="token keyword">PRIMARY</span><span class="token punctuation">,</span>tradeid <span class="token operator">|</span> tradeid<span class="token punctuation">,</span><span class="token keyword">PRIMARY</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
+
+<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span>
+<span class="token operator">|</span> key_len <span class="token operator">|</span> ref  <span class="token operator">|</span> <span class="token keyword">rows</span> <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra                                     <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span>
+<span class="token operator">|</span> <span class="token number">131</span><span class="token punctuation">,</span><span class="token number">4</span>   <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span>    <span class="token number">2</span> <span class="token operator">|</span>   <span class="token number">100.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">union</span><span class="token punctuation">(</span>tradeid<span class="token punctuation">,</span><span class="token keyword">PRIMARY</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>虽然条件中也有 or ，但 tradeid 和 id 都有索引，mysql 分别单独对这两个索引扫描，然后把找到的结果再合并到一起。执行计划显示 <code>type:index_merge</code> ， <code>key:tradeid,PRIMARY</code>,<code>Extra:Using union</code></p>
+<p>同样的条件，把 or 换成 and 时是可以走索引的，因为找的是要满足所有条件的记录，那么就可以在最小的索引树先找到一条满足条件的记录，再检查这条记录是否还满足其它条件</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">and</span>  operator <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span>
+<span class="token operator">|</span> <span class="token keyword">type</span> <span class="token operator">|</span> possible_keys <span class="token operator">|</span> <span class="token keyword">key</span>     <span class="token operator">|</span> key_len <span class="token operator">|</span> ref   <span class="token operator">|</span> <span class="token keyword">rows</span> <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra       <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span>
+<span class="token operator">|</span> ref  <span class="token operator">|</span> tradeid       <span class="token operator">|</span> tradeid <span class="token operator">|</span> <span class="token number">131</span>     <span class="token operator">|</span> const <span class="token operator">|</span>    <span class="token number">1</span> <span class="token operator">|</span>    <span class="token number">10.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>key:tradeid  显示使用了 tradeid 索引。通过索引树先找到一条  tradeid = ‘12’的记录，再回表查询 operator 是否等于 10。</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
 </search>

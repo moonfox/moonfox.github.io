@@ -91,7 +91,7 @@
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
         <li class="menu-item menu-item-blog"><a href="https://blog.gagahappy.cn/" rel="noopener" target="_blank"><i class="fa fa-coffee fa-fw"></i>Blog</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">66</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Posts<span class="badge">67</span></a></li>
         <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
         <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
@@ -201,6 +201,111 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/mysql-scan-full-by-or/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/apple-touch-icon.png">
+      <meta itemprop="name" content="戛戛Happy">
+      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="睡月花儿">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/mysql-scan-full-by-or/" class="post-title-link" itemprop="url">mysql or 导致的全表扫描</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-12-14 13:56:15" itemprop="dateCreated datePublished" datetime="2021-12-14T13:56:15+00:00">2021-12-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-tag"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/tags/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="or-导致的全表扫描"><a href="#or-导致的全表扫描" class="headerlink" title="or 导致的全表扫描"></a>or 导致的全表扫描</h1><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">or</span> operator <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span>
+<span class="token operator">|</span> <span class="token keyword">type</span> <span class="token operator">|</span> possible_keys <span class="token operator">|</span> <span class="token keyword">key</span>  <span class="token operator">|</span> key_len <span class="token operator">|</span> ref  <span class="token operator">|</span> <span class="token keyword">rows</span>   <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra       <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span>
+<span class="token operator">|</span> <span class="token keyword">ALL</span>  <span class="token operator">|</span> tradeid       <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token boolean">NULL</span>    <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token number">389107</span> <span class="token operator">|</span>    <span class="token number">10.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查询条件中有 or 时，mysql 会分别查询每一个条件，然后再把结果合并在一起。</p>
+<p>先对 tradeid = ‘12’ 进行判断，发现可以使用索引，再对 operator = 10 进行判断，发现不能使用索引，只好全表扫描，即然都全表扫描了，顺带也就可以判断当前记录的 tradeid 是否等行 12，就不需要在单独再搜索 tradeid的索引树了。</p>
+<p>所以当 or 条件中出现没有索引的字段会使用全表扫描。如果出现的列都有索引，mysql会尽量使用每个列的索引</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">or</span> id <span class="token operator">=</span><span class="token number">10</span>  <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
+<span class="token operator">|</span> id <span class="token operator">|</span> select_type <span class="token operator">|</span> <span class="token keyword">table</span>    <span class="token operator">|</span> <span class="token keyword">type</span>        <span class="token operator">|</span> possible_keys   <span class="token operator">|</span> <span class="token keyword">key</span>             <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
+<span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> <span class="token keyword">SIMPLE</span>      <span class="token operator">|</span> tradelog <span class="token operator">|</span> index_merge <span class="token operator">|</span> <span class="token keyword">PRIMARY</span><span class="token punctuation">,</span>tradeid <span class="token operator">|</span> tradeid<span class="token punctuation">,</span><span class="token keyword">PRIMARY</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
+
+<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span>
+<span class="token operator">|</span> key_len <span class="token operator">|</span> ref  <span class="token operator">|</span> <span class="token keyword">rows</span> <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra                                     <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span>
+<span class="token operator">|</span> <span class="token number">131</span><span class="token punctuation">,</span><span class="token number">4</span>   <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span>    <span class="token number">2</span> <span class="token operator">|</span>   <span class="token number">100.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">union</span><span class="token punctuation">(</span>tradeid<span class="token punctuation">,</span><span class="token keyword">PRIMARY</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>虽然条件中也有 or ，但 tradeid 和 id 都有索引，mysql 分别单独对这两个索引扫描，然后把找到的结果再合并到一起。执行计划显示 <code>type:index_merge</code> ， <code>key:tradeid,PRIMARY</code>,<code>Extra:Using union</code></p>
+<p>同样的条件，把 or 换成 and 时是可以走索引的，因为找的是要满足所有条件的记录，那么就可以在最小的索引树先找到一条满足条件的记录，再检查这条记录是否还满足其它条件</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">and</span>  operator <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span>
+<span class="token operator">|</span> <span class="token keyword">type</span> <span class="token operator">|</span> possible_keys <span class="token operator">|</span> <span class="token keyword">key</span>     <span class="token operator">|</span> key_len <span class="token operator">|</span> ref   <span class="token operator">|</span> <span class="token keyword">rows</span> <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra       <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span>
+<span class="token operator">|</span> ref  <span class="token operator">|</span> tradeid       <span class="token operator">|</span> tradeid <span class="token operator">|</span> <span class="token number">131</span>     <span class="token operator">|</span> const <span class="token operator">|</span>    <span class="token number">1</span> <span class="token operator">|</span>    <span class="token number">10.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>key:tradeid  显示使用了 tradeid 索引。通过索引树先找到一条  tradeid = ‘12’的记录，再回表查询 operator 是否等于 10。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1845,256 +1950,6 @@ FAIL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
 
 <p><code>time.Sleep</code>用来模拟得到<code>max</code>的值所要进行的耗时操作，而我们要测试的是<code>GetPrimes()</code>的性能，不应计入计算<code>max</code>值所用的时间，所以要把开始时间设置在得到<code>max</code>之后。</p>
 <p>通过 <code>b.StopTimer()</code> 与 <code>b.StartTimer()</code>的配合使用，就可以去除任何一段代码的执行时间，<code>b.ResetTimer()</code>是去除它之前代码的执行时间。通过对计时器的调用，可以让测试函数的执行时间更加准确。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gagahappy.com/github-actions-workflows-hexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/apple-touch-icon.png">
-      <meta itemprop="name" content="戛戛Happy">
-      <meta itemprop="description" content="后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="睡月花儿">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/github-actions-workflows-hexo/" class="post-title-link" itemprop="url">GitHub Actions Workflows 部署 Hexo</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-07-14 15:04:55" itemprop="dateCreated datePublished" datetime="2021-07-14T15:04:55+00:00">2021-07-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-tag"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/tags/ci/" itemprop="url" rel="index"><span itemprop="name">ci</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Github-Action"><a href="#Github-Action" class="headerlink" title="Github Action"></a>Github Action</h1><p>是Github 提供的免费可持续集成服务，在 GitHub Actions 的仓库中自动化、自定义和执行软件开发工作流程。 可以发现、创建和共享操作以执行任何作业（包括 CI/CD），并将操作合并到完全自定义的工作流程中。</p>
-<p>GitHub Actions 简单易用，在仓库根目录下建立<code>.github/workflows</code>文件夹，把workflows工作流文件(<code>YAML</code>)放到这个目录下，就可以使用Github Action服务了</p>
-<h1 id="workflows-文件"><a href="#workflows-文件" class="headerlink" title="workflows 文件"></a>workflows 文件</h1><p>由多个job组合而成，其指定了持续集成要完成的工作，每个工作流文件代表着一个持续集成工程</p>
-<ul>
-<li>每个<code>workflow</code>由多个<code>job</code>组成，每个<code>job</code>就是你指定的任务</li>
-<li>每个<code>job</code>由多个<code>step</code>组成，每个<code>step</code>代表任务的具体步骤</li>
-<li>每个<code>step</code>由多个<code>action</code>组成，代表具体要执行的指令，<code>actoin</code> 是<code>workflows</code>中的最小单位</li>
-</ul>
-<p><img src="//img.gagahappy.cn/blog/2021/07/github-actions-workflows-hexo.jpg_b1" alt="GitHub Actions Workflows" title="GitHub Actions Workflows"></p>
-<h1 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h1><p>GitHub提供了大量方便的工具，使你可以轻松的完成各种任务。比如克隆仓库并检出，向仓库提交内容，安装各种语言环境，同步文件等等，都有对应的工具，它们就是 Action，只需要调用它们就可以了，几乎不用写任何命令，你需要的在<a target="_blank" rel="noopener" href="https://github.com/marketplace?type=actions">Action市场</a>几乎全部可以找到。如<code> actions/checkout</code>是用来checout仓库的，<code>actions</code>表示这个工具是官方的，如果是其它名称，则表示是第三方提供的</p>
-<h1 id="Hexo-发布到-Github-Pages-及-Ailyun"><a href="#Hexo-发布到-Github-Pages-及-Ailyun" class="headerlink" title="Hexo 发布到  Github Pages  及  Ailyun"></a>Hexo 发布到  Github Pages  及  Ailyun</h1><p>没有使用 GitHub Actions 的发布流程</p>
-<ol>
-<li><code>push</code></li>
-<li>生成静态页：Hexo或hugo，Jekyll等静态博客生成器</li>
-<li><code>push</code>静态页，在 <code>github pages</code>上完成发布</li>
-<li>登录远程服务器，拉取静态页，在自己的站点完成发布</li>
-</ol>
-<p>使用 GitHub Actions 的发布流程</p>
-<ol>
-<li><code>push</code></li>
-</ol>
-<p>后面的工作完全自动化完成</p>
-<ul>
-<li>你不需要在你的本机上安装Hexo等静态站点生成器运行环境</li>
-<li>文章的Build的工作在GitHub 的 <code>work runner</code>中完成，不需要占用的你电脑的资源</li>
-<li>在GitHub 上构建速度快，软硬件兼容性问题也少</li>
-<li>可以随时随地的部署：比如你发布后发现有个错别字要改，那么你用手机登录Github，直接在页面上修改，提交后就会触发部署，甚至都不需要打开电脑，方便快捷。</li>
-</ul>
-<h2 id="建立SSH密钥对"><a href="#建立SSH密钥对" class="headerlink" title="建立SSH密钥对"></a>建立SSH密钥对</h2><p>博客涉及到三个仓库：</p>
-<ul>
-<li>Hexo.git，用来存放Hexo项目和文章</li>
-<li>next.git博客主题</li>
-<li>gagahappy.github.io 用来存放发布的HTML页，设置为 Github Pages</li>
-</ul>
-<p>为什么会用到密钥对</p>
-<ul>
-<li><p>Aliyun服务器：构建过程中要远程登录到Aliyun服务器，要用密钥进行身份验证，需要用到密钥对</p>
-</li>
-<li><p>Github Pages：Github的建议是把源文件即Hexo.git放到master分支，把gagahappy.github.io放到gh-pages分支。但Github Pages必须是公开仓库才可以发布，这样就让存放源文件的Hexo.git也可以被访问，这显然是不安全的，所以没有把这两个仓库放在一起，那么对gagahappy.github.io进行发布就需要使用密钥对，才能对仓库进行操作。如果你遵循了Github的建议，那这么在发布Github pages时就不用设置密钥对了。</p>
-</li>
-</ul>
-<p>生成密钥对</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen -t rsa -b <span class="token number">4096</span> -C <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> config user.email<span class="token variable">)</span></span>"</span> -f gh-pages -N <span class="token string">""</span>
-<span class="token comment"># You will get 2 files:</span>
-<span class="token comment">#   gh-pages.pub (public key)</span>
-<span class="token comment">#   gh-pages     (private key)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>把<code>gh-pages.pub</code>中的内容添加到远程服务器的<code>~/.ssh/authorized_keys</code>中或把文件上传到<code>~/.ssh/</code>目录，执行</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> gh-pages.pub <span class="token operator">>></span> authorized_keys
-<span class="token function">chmod</span> <span class="token number">600</span> -R ~/.ssh <span class="token comment"># 设置~/ssh目录权限</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="设置-github-Secrets"><a href="#设置-github-Secrets" class="headerlink" title="设置 github Secrets"></a>设置 github Secrets</h2><p>Secrets 是用来存放敏感信息的，如数据库的密码，用户名，密钥，等信息，不会让这些信息在日志输出中暴露出来，会以星号(*)代替这些敏感信息。</p>
-<p>在Hexo.git仓库的首页点击 <code>settings</code>，在左侧找到<code>Secrets</code>，点击右上<code>New repository secret </code>，<code>name</code>填写<code>ACTIONS_DEPLOY_KEY</code> ，<code>value</code>填写密钥<code>gh-pages</code>的内容， 点击<code>Add secret</code>，这样就创建了一个<code>secret</code>。之后可以用这个<code>secret</code>操作 gagahappy.github.io 仓库。</p>
-<p>你还可以创建其它的<code>secret</code>，比如MySQL连接的密码，可以新建一个名称为<code>mysql_passwd</code>，内容为MySQL密码的<code>Secret</code>。更多信息可以查看官方 <a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/reference/encrypted-secrets">Secrets 帮助</a></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># secret 在日志中使用 * 号输出敏感信息</span>
-SOURCE: public/
-REMOTE_HOST: ***
-REMOTE_USER: ***
-TARGET: ***
-SSH_PRIVATE_KEY: ***<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="设置-Deploy-keys"><a href="#设置-Deploy-keys" class="headerlink" title="设置 Deploy keys"></a>设置 Deploy keys</h2><p>打开<code>gagahappy.github.io</code>仓库，在仓库的首页点击 <code>settings</code>，在左侧找到<code>Deploy keys</code>，把<code>gh-pages.pub</code>的内容复制进去，勾选下面的<code>Allow write access</code>，点击<code>Add Key</code>，这样在之后的部署过程中，Hexo.git仓库所在的<code>runner</code>就可以通过<code>secrets.ACTIONS_DEPLOY_KEY</code>对其进行操作了。</p>
-<h2 id="编写工作流文件"><a href="#编写工作流文件" class="headerlink" title="编写工作流文件"></a>编写工作流文件</h2><p>在Hexo.git项目根目录下建立<code>.github/wrokflows</code>文件夹，在这个文件夹下创建以<code>yml</code>结尾的文件<code>build.yml</code>。每当你<code>push</code>到github后，github会自动寻找仓库根目录下的<code>.github/wrokflows</code>中扩展名为<code>yml</code>的所文件，运行其中的指令，完成自动部署。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> -p .github/workflows
-<span class="token function">touch</span> .github/workflows/build.yml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>需要持续集成完成的工作有</p>
-<ol>
-<li>Checkout <code>hexo.git</code>中的内容</li>
-<li>Checkout <code>next.git</code>主题内容到 theme目录</li>
-<li>安装 <code>node.js</code>环境</li>
-<li>安装Hexo</li>
-<li>使用Hexo生成静态页面</li>
-<li>发布静态页面到 <code>gagahappy.github.io</code></li>
-<li>同步静态页到Aliyun服务器</li>
-</ol>
-<p>把以上内容翻译为要执行的配置命令就是</p>
-<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">on</span><span class="token punctuation">:</span>
-  <span class="token key atrule">push</span><span class="token punctuation">:</span>
-    <span class="token key atrule">branches</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>master<span class="token punctuation">]</span> <span class="token comment"># 在master分支push时触发部署</span>
-    <span class="token key atrule">paths-ignore</span><span class="token punctuation">:</span> <span class="token comment"># 以下文件的变更不触发部署</span>
-      <span class="token punctuation">-</span> README.md
-  <span class="token key atrule">workflow_dispatch</span><span class="token punctuation">:</span>
-
-<span class="token key atrule">env</span><span class="token punctuation">:</span> <span class="token comment"># 统一设置环境变量</span>
-  <span class="token key atrule">GIT_USER</span><span class="token punctuation">:</span> git
-  <span class="token key atrule">GIT_EMAIL</span><span class="token punctuation">:</span> email@example.com
-  <span class="token key atrule">THEME_REPO</span><span class="token punctuation">:</span> git/next <span class="token comment"># 你使用的主题仓库地址</span>
-  <span class="token key atrule">THEME_BRANCH</span><span class="token punctuation">:</span> master
-  <span class="token key atrule">DEPLOY_REPO</span><span class="token punctuation">:</span> git/gagahappy.github.io <span class="token comment"># 你用来发布github pages的仓库地址</span>
-  <span class="token key atrule">DEPLOY_BRANCH</span><span class="token punctuation">:</span> master
-
-<span class="token key atrule">jobs</span><span class="token punctuation">:</span>
-  <span class="token key atrule">build</span><span class="token punctuation">:</span> <span class="token comment"># job_id，其它job可以引用，比如两个job有先后顺序</span>
-    <span class="token key atrule">name</span><span class="token punctuation">:</span> Build Github Page And Deploy On Aliyun <span class="token comment"># job名称</span>
-    <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest <span class="token comment"># 构建使用的系统，支持 linux/mac/windows</span>
-    <span class="token key atrule">timeout-minutes</span><span class="token punctuation">:</span> <span class="token number">5</span> <span class="token comment"># job超时时间，超过后job会被停止运行</span>
-
-    <span class="token key atrule">steps</span><span class="token punctuation">:</span> <span class="token comment"># 一个job由多个 step 组成，本博的由7个step组成</span>
-    	<span class="token comment"># 1. Checkout hexo.git 中的内容</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Checkout Hexo repo
-      	<span class="token comment"># 检出项目，如果不指定名称，默认使用运行Github Action 的仓库，即hexo.git</span>
-        <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/checkout@v2
-
-    	<span class="token comment"># 2. Checkout next.git 主题内容到 theme目录</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Checkout Theme repo
-      	<span class="token comment"># actions/checkout 就是Acton工具，实现checkout项目，每个action也是一个git仓库</span>
-      	<span class="token comment"># 可以直接通过 github.com/工具名称进行访问，即github.com/actions/checkout</span>
-        <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/checkout@v2
-        <span class="token key atrule">with</span><span class="token punctuation">:</span>
-          <span class="token key atrule">repository</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> env.THEME_REPO <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> <span class="token comment"># 要checkout的仓库地址</span>
-          <span class="token key atrule">ref</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> env.THEME_BRANCH <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-          <span class="token key atrule">path</span><span class="token punctuation">:</span> themes/next <span class="token comment"># 要checkout到的路径</span>
-
-    	<span class="token comment"># 3. 安装 node.js 环境</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Use Node.js $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> matrix.node <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-        <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/setup<span class="token punctuation">-</span>node@v2 <span class="token comment"># 使用actions/setup-node安装nodejs</span>
-        <span class="token key atrule">with</span><span class="token punctuation">:</span>
-          <span class="token key atrule">node-version</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> matrix.node <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-
-    	<span class="token comment"># 4. 安装Heox</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Install Hexo
-        <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span> <span class="token comment"># 运行command命令</span>
-          npm install <span class="token punctuation">-</span>g hexo<span class="token punctuation">-</span>cli
-          npm install
-
-    	<span class="token comment"># 5. 使用Hexo生成静态页面</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Generate Blog
-        <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
-          hexo generate</span>
-
-    	<span class="token comment"># 6. 发布静态页面到 gagahappy.github.io</span>
-			<span class="token comment"># 使用 peaceiris/actions-gh-pages 第三方Action工具，发布静态内容到 github pages</span>
-			<span class="token comment"># 重要:</span>
-			<span class="token comment"># 如果你的源码文件与Html文件在两个仓库，请在源码文件仓库设置</span>
-			<span class="token comment"># secrets 的 ACTIONS_DEPLOY_KEY 值为密钥内容，</span>
-			<span class="token comment"># 在html文件仓库即youname.github.io中设置 Deploy keys 的值设置为公钥内容，</span>
-			<span class="token comment"># 在构建过程中会使用密钥对youname.github.io进行操作</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Deploy Github Page
-        <span class="token key atrule">uses</span><span class="token punctuation">:</span> peaceiris/actions<span class="token punctuation">-</span>gh<span class="token punctuation">-</span>pages@v3
-        <span class="token key atrule">with</span><span class="token punctuation">:</span>
-          <span class="token comment"># 在 hexo.git 上设置的私钥</span>
-          <span class="token key atrule">deploy_key</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> secrets.ACTIONS_DEPLOY_KEY <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> <span class="token comment"># ACTIONS_DEPLOY_KEY 不能修改</span>
-          <span class="token key atrule">external_repository</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> env.DEPLOY_REPO <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span> <span class="token comment"># Hexo.git 的仓库地址</span>
-          <span class="token key atrule">publish_branch</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> env.DEPLOY_BRANCH <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-          <span class="token key atrule">publish_dir</span><span class="token punctuation">:</span> ./public <span class="token comment"># 使用Hexo/hugo等生成静态页面的目录</span>
-          <span class="token key atrule">user_name</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> env.GIT_USER <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-          <span class="token key atrule">user_email</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> env.GIT_EMAIL <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-
-    	<span class="token comment"># 7. 同步静态页到Aliyun服务器</span>
-      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Deploy Github Page on Aliyun
-        <span class="token key atrule">uses</span><span class="token punctuation">:</span> easingthemes/ssh<span class="token punctuation">-</span>deploy@main
-        <span class="token key atrule">env</span><span class="token punctuation">:</span>
-            <span class="token key atrule">SSH_PRIVATE_KEY</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> secrets.ACTIONS_DEPLOY_KEY <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-            <span class="token key atrule">ARGS</span><span class="token punctuation">:</span> <span class="token string">"-rltgoDzvO --delete"</span>
-            <span class="token key atrule">SOURCE</span><span class="token punctuation">:</span> <span class="token string">"public/"</span> <span class="token comment"># 使用Hexo/hugo等生成静态页面的目录</span>
-            <span class="token key atrule">REMOTE_HOST</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> secrets.REMOTE_HOST <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-            <span class="token key atrule">REMOTE_USER</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> secrets.REMOTE_USER <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
-            <span class="token key atrule">TARGET</span><span class="token punctuation">:</span> $<span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> secrets.REMOTE_TARGET <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>可以点击仓库主页上的<code>Actions</code>，查看正在运行的<code>workflows</code>，里面有详细的日志信息</p>
-<p><img src="//img.gagahappy.cn/blog/2021/07/github-actions-workflows-hexo-2.png_b1" alt="GitHub Actions Workflows" title="GitHub Actions Workflows"></p>
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
-<li>GitHub <a target="_blank" rel="noopener" href="https://github.com/marketplace?type=actions">官方市场</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/actions">https://github.com/actions</a></li>
-<li>Action <a target="_blank" rel="noopener" href="https://github.com/sdras/awesome-actions">awesome actions</a> 仓库</li>
-<li><a target="_blank" rel="noopener" href="https://help.github.com/en/articles/about-actions">https://help.github.com/en/articles/about-actions</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions">https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/peaceiris/actions-gh-pages">https://github.com/peaceiris/actions-gh-pages</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/actions/reference/encrypted-secrets">https://docs.github.com/en/actions/reference/encrypted-secrets</a></li>
-<li><a target="_blank" rel="noopener" href="https://docs.github.com/cn/actions">https://docs.github.com/cn/actions</a></li>
-</ul>
 
       
     </div>

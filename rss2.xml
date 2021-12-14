@@ -15,8 +15,37 @@
     <atom:link href="https://www.gagahappy.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>后端, 操作系统, 互联网, 程序开发, Linux, 数据库, MySql, Golang, Ruby</description>
-    <pubDate>Wed, 01 Dec 2021 09:55:59 GMT</pubDate>
+    <pubDate>Tue, 14 Dec 2021 06:03:41 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>mysql or 导致的全表扫描</title>
+      <link>https://www.gagahappy.com/mysql-scan-full-by-or/</link>
+      <guid>https://www.gagahappy.com/mysql-scan-full-by-or/</guid>
+      <pubDate>Tue, 14 Dec 2021 13:56:15 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description>&lt;h1 id=&quot;or-导致的全表扫描&quot;&gt;&lt;a href=&quot;#or-导致的全表扫描&quot; class=&quot;headerlink&quot; title=&quot;or 导致的全表扫描&quot;&gt;&lt;/a&gt;or 导致的全表扫描&lt;/h1&gt;&lt;pre class=&quot;line-numbers language-sql&quot;</description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="or-导致的全表扫描"><a href="#or-导致的全表扫描" class="headerlink" title="or 导致的全表扫描"></a>or 导致的全表扫描</h1><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">or</span> operator <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span><span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span><span class="token operator">|</span> <span class="token keyword">type</span> <span class="token operator">|</span> possible_keys <span class="token operator">|</span> <span class="token keyword">key</span>  <span class="token operator">|</span> key_len <span class="token operator">|</span> ref  <span class="token operator">|</span> <span class="token keyword">rows</span>   <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra       <span class="token operator">|</span><span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span><span class="token operator">|</span> <span class="token keyword">ALL</span>  <span class="token operator">|</span> tradeid       <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token boolean">NULL</span>    <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token number">389107</span> <span class="token operator">|</span>    <span class="token number">10.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span><span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>查询条件中有 or 时，mysql 会分别查询每一个条件，然后再把结果合并在一起。</p><p>先对 tradeid = ‘12’ 进行判断，发现可以使用索引，再对 operator = 10 进行判断，发现不能使用索引，只好全表扫描，即然都全表扫描了，顺带也就可以判断当前记录的 tradeid 是否等行 12，就不需要在单独再搜索 tradeid的索引树了。</p><p>所以当 or 条件中出现没有索引的字段会使用全表扫描。如果出现的列都有索引，mysql会尽量使用每个列的索引</p><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">or</span> id <span class="token operator">=</span><span class="token number">10</span>  <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span><span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span><span class="token operator">|</span> id <span class="token operator">|</span> select_type <span class="token operator">|</span> <span class="token keyword">table</span>    <span class="token operator">|</span> <span class="token keyword">type</span>        <span class="token operator">|</span> possible_keys   <span class="token operator">|</span> <span class="token keyword">key</span>             <span class="token operator">|</span><span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span><span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> <span class="token keyword">SIMPLE</span>      <span class="token operator">|</span> tradelog <span class="token operator">|</span> index_merge <span class="token operator">|</span> <span class="token keyword">PRIMARY</span><span class="token punctuation">,</span>tradeid <span class="token operator">|</span> tradeid<span class="token punctuation">,</span><span class="token keyword">PRIMARY</span> <span class="token operator">|</span><span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span><span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span><span class="token operator">|</span> key_len <span class="token operator">|</span> ref  <span class="token operator">|</span> <span class="token keyword">rows</span> <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra                                     <span class="token operator">|</span><span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span><span class="token operator">|</span> <span class="token number">131</span><span class="token punctuation">,</span><span class="token number">4</span>   <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span>    <span class="token number">2</span> <span class="token operator">|</span>   <span class="token number">100.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">union</span><span class="token punctuation">(</span>tradeid<span class="token punctuation">,</span><span class="token keyword">PRIMARY</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span><span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>虽然条件中也有 or ，但 tradeid 和 id 都有索引，mysql 分别单独对这两个索引扫描，然后把找到的结果再合并到一起。执行计划显示 <code>type:index_merge</code> ， <code>key:tradeid,PRIMARY</code>,<code>Extra:Using union</code></p><p>同样的条件，把 or 换成 and 时是可以走索引的，因为找的是要满足所有条件的记录，那么就可以在最小的索引树先找到一条满足条件的记录，再检查这条记录是否还满足其它条件</p><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">and</span>  operator <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span><span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span><span class="token operator">|</span> <span class="token keyword">type</span> <span class="token operator">|</span> possible_keys <span class="token operator">|</span> <span class="token keyword">key</span>     <span class="token operator">|</span> key_len <span class="token operator">|</span> ref   <span class="token operator">|</span> <span class="token keyword">rows</span> <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra       <span class="token operator">|</span><span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span><span class="token operator">|</span> ref  <span class="token operator">|</span> tradeid       <span class="token operator">|</span> tradeid <span class="token operator">|</span> <span class="token number">131</span>     <span class="token operator">|</span> const <span class="token operator">|</span>    <span class="token number">1</span> <span class="token operator">|</span>    <span class="token number">10.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span><span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>key:tradeid  显示使用了 tradeid 索引。通过索引树先找到一条  tradeid = ‘12’的记录，再回表查询 operator 是否等于 10。</p>]]></content:encoded>
+      
+      
+      <category domain="https://www.gagahappy.com/categories/database/">数据库</category>
+      
+      
+      <category domain="https://www.gagahappy.com/tags/mysql/">mysql</category>
+      
+      
+      <comments>https://www.gagahappy.com/mysql-scan-full-by-or/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>mysql 如何为字符串合理创建索引</title>
@@ -134,39 +163,6 @@
       
       
       <comments>https://www.gagahappy.com/mysql-deadlock/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>mysql 事务中多条SQL的排序</title>
-      <link>https://www.gagahappy.com/mysql-sequence-of-sql-in-trx/</link>
-      <guid>https://www.gagahappy.com/mysql-sequence-of-sql-in-trx/</guid>
-      <pubDate>Wed, 18 Aug 2021 16:00:31 GMT</pubDate>
-      
-        
-        
-          
-          
-      <description>&lt;p&gt;场景：用户购买商品A，对应的SQL如下&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;商品A库存减1 (SQL1)&lt;/li&gt;
-&lt;li&gt;用户购买商品A，扣减用户金额 (SQL2)&lt;/li&gt;
-&lt;li&gt;插入一条交易日志</description>
-          
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>场景：用户购买商品A，对应的SQL如下</p><ol><li>商品A库存减1 (SQL1)</li><li>用户购买商品A，扣减用户金额 (SQL2)</li><li>插入一条交易日志 (SQL3)</li></ol><p>这三个操作为原子操作，所以要写在一个事务中。如果有大量用户购买商品A，则<code>商品A库存减1 </code>为热点数据，被频繁更新。假设每条SQL的执行时间为5秒，则整个事务的执行时间为15秒，由于有大量用户购买，那么不同的执行顺序将会影响最终的执行时间，从而影响并发</p><p>把<code>商品A库存减1 (SQL1)</code>放在首行(情况1)</p><table><thead><tr><th>时刻</th><th>事务A</th><th>事务B</th><th>耗时</th></tr></thead><tbody><tr><td>T1</td><td>商品A库存减1 (SQL1)</td><td>商品A库存减1 (SQL1) 发生等待，不能执行，直到  T4 时刻</td><td>5s</td></tr><tr><td>T2</td><td>用户购买商品A，扣减用户金额 (SQL2)</td><td></td><td>5s</td></tr><tr><td>T3</td><td>插入一条交易日志 (SQL3)</td><td></td><td>5s</td></tr><tr><td>T4</td><td></td><td>商品A库存减1 (SQL1)</td><td>5s</td></tr><tr><td>T5</td><td></td><td>用户购买商品A，扣减用户金额 (SQL2)</td><td>5s</td></tr><tr><td>T6</td><td></td><td>插入一条交易日志 (SQL3)</td><td>5s</td></tr></tbody></table><ul><li>T1时刻，事务A执行<code>商品A库存减1</code>，给其上锁，直到事务提交（15秒以后）</li><li>同时事务B也执行<code>商品A库存减1</code>，被阻塞，发生锁等待，这使得后面的<code>Sql2,sql2</code>语句不能执行，直到15s后，事务A提交数据。 即T4时刻才开始执行。</li><li>事务B总共耗时30秒才完成。等待事务A的15s(T1到T3) + 自身的15s</li></ul><p>如果把<code>商品A库存减1 (SQL1)</code>放在最后，可以减少等待的时间(情况2)</p><table><thead><tr><th>时刻</th><th>事务A</th><th>事务B</th><th>耗时</th></tr></thead><tbody><tr><td>T1</td><td>用户购买商品A，扣减用户金额 (SQL2)</td><td>用户购买商品A，扣减用户金额 (SQL2)</td><td>5s</td></tr><tr><td>T2</td><td>插入一条交易日志 (SQL3)</td><td>插入一条交易日志 (SQL3)</td><td>5s</td></tr><tr><td>T3</td><td>商品A库存减1 (SQL1)</td><td>商品A库存减1 (SQL1) 发生等待，不能执行，直到  T4 时刻</td><td>5s</td></tr><tr><td>T4</td><td></td><td>商品A库存减1 (SQL1)</td><td>5s</td></tr></tbody></table><ul><li>扣减用户金额是针对单个用户操作，在同一时刻更新这些记录不太容易发生锁等待，所以事务A与事务B在T1时刻可以同时进行</li><li>插入一条交易日志 也是可以同时进行的，所以事务A与事务B在T2时刻同时进行</li><li>事务A T3 时刻执行完成，耗时15s，事务B 在此时被阻塞，因为要更新同一条记录，发生了锁等待，需要等待5秒</li><li>事务B在T4时刻，执行完成，耗时 20s（10s + 等待 5s + 5s）</li></ul><p>当把<code>商品A库存减1 (SQL1)</code>放在最后时，事务B的执行时间缩短到了20s，节省了10s，大大提高了并发度。</p><p>可以看出，锁等待时间是正在执行的事物引起锁的语句到提交的时间间隔，如果放在事务最后，那这个时间间隔会变为最少。对照上面的例子，情况1事务A从T1到T3时刻，持有锁总共15s。情况2，事务A只在T3时刻持有锁，总共5s，可见把<code>商品A库存减1 (SQL1)</code>放到最后时，大大减少了时间间隔。</p><p>通过减少事务持有锁的时间，大程度的减少了事务之间的锁等待，提高了并发度。所以通常的做法是把热点更新语句放到事务的最后，这样当事务结束后，热点语句的锁可以被马上释放，减少事务锁持有的时间，其它事务等待锁释放的时间就会变短，从而使并发度得到了提高。</p>]]></content:encoded>
-      
-      
-      <category domain="https://www.gagahappy.com/categories/database/">数据库</category>
-      
-      
-      <category domain="https://www.gagahappy.com/tags/mysql/">mysql</category>
-      
-      
-      <comments>https://www.gagahappy.com/mysql-sequence-of-sql-in-trx/#disqus_thread</comments>
       
     </item>
     
