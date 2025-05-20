@@ -73,6 +73,23 @@ $ <span class="token function">git</span> push<span aria-hidden="true" class="li
       </tags>
   </entry>
   <entry>
+    <title>git 建立远程分支缩写</title>
+    <url>/git-remote-sort/</url>
+    <content><![CDATA[<p>git 建立远程分支缩写</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> remote <span class="token function">add</span> bob /home/bob/myrepo
+$ <span class="token function">git</span> log -p master<span class="token punctuation">..</span>bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>上面的命令把Bob从Alice的主分支(master)中签出后所做的修改全部显示出来。<br>当检查完修改后,Alice就可以把修改合并到她的主分支中。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> merge bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git 多人协作</title>
     <url>/git-init-on-server/</url>
     <content><![CDATA[<p>git 协同开发</p>
@@ -84,23 +101,6 @@ $ <span class="token function">git</span> --bare init --shared<span aria-hidden=
 <p>也就是说m2ge.git 本来是一个工作树，但是 –bare 选项将本应当存放在m2ge.git/.git 中的仓库内容全部放置在 m2ge.git 目录下，就好像仓库完全的裸露在工作树中，所以称之为赤裸的仓库。</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token builtin class-name">cd</span> ~/work/m2ge
 $ <span class="token function">git</span> push m2@192.168.0.2:~/project/m2ge.git master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git 建立远程分支缩写</title>
-    <url>/git-remote-sort/</url>
-    <content><![CDATA[<p>git 建立远程分支缩写</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> remote <span class="token function">add</span> bob /home/bob/myrepo
-$ <span class="token function">git</span> log -p master<span class="token punctuation">..</span>bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>上面的命令把Bob从Alice的主分支(master)中签出后所做的修改全部显示出来。<br>当检查完修改后,Alice就可以把修改合并到她的主分支中。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> merge bob/master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -213,20 +213,6 @@ $ <span class="token function">git</span> config --global user.email <span class
       </tags>
   </entry>
   <entry>
-    <title>git cherry-pick</title>
-    <url>/git-cherry-pick/</url>
-    <content><![CDATA[<p>执行git cherry-pick 解决合并冲突之前的提交，好像会自动pull下分支的最新提交内容，造成当前提交下的内容冲突。</p>
-<p>为什么会再现之前的冲突，从哪里pull下来的呢？最新commit?</p>
-<p>为什么会向暂存区放内容？</p>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>git 如何自动合并文件内容</title>
     <url>/git-how-to-merge/</url>
     <content><![CDATA[<p>git可以自动进行文件合并</p>
@@ -252,6 +238,20 @@ $ <span class="token function">git</span> config --global user.email <span class
 <span class="token function">git</span> commit -m <span class="token string">'first commit'</span>
 <span class="token function">git</span> remote <span class="token function">add</span> origin git@github.com:youname/test_demo.git
 <span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git cherry-pick</title>
+    <url>/git-cherry-pick/</url>
+    <content><![CDATA[<p>执行git cherry-pick 解决合并冲突之前的提交，好像会自动pull下分支的最新提交内容，造成当前提交下的内容冲突。</p>
+<p>为什么会再现之前的冲突，从哪里pull下来的呢？最新commit?</p>
+<p>为什么会向暂存区放内容？</p>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -886,6 +886,38 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </tags>
   </entry>
   <entry>
+    <title>mysql 自增值申请策略</title>
+    <url>/mysql-auto-increment-strategy/</url>
+    <content><![CDATA[<h1 id="自增值申请策略"><a href="#自增值申请策略" class="headerlink" title="自增值申请策略"></a>自增值申请策略</h1><ol>
+<li><p>能否先查ID，再查入数据？</p>
+<p>不能，如果每次插入前，都要在主键的索引树上查询要插入的id是否存在，会大大降低插入插入的效率。</p>
+</li>
+<li><p>能否等事务完成后，再释放自增值的锁？</p>
+<p>不能，如果需要等待当前事务完成，其它事务先能获取自增值的锁，就会大大降低并发。</p>
+</li>
+</ol>
+<h2 id="innodb-autoinc-lock-mode"><a href="#innodb-autoinc-lock-mode" class="headerlink" title="innodb_autoinc_lock_mode"></a><code>innodb_autoinc_lock_mode</code></h2><p>MySQL通过参数<code>innodb_autoinc_lock_mode</code>，来设置自值锁的行为，默认值为1</p>
+<ol>
+<li><p>0值 ：等事务完成才释放锁</p>
+</li>
+<li><p>1值 ：</p>
+<ul>
+<li>对于普通的<code>insert into table</code>，申请到自增锁后就释放，不用等插入语句的完成。</li>
+<li>对于批量插入，类似<code>insert ... select</code>，一直持有自增锁，直到事务执行完成。这样也保证了id的连续性。</li>
+</ul>
+</li>
+<li><p>2值：所有插入操作在申请到自增锁后就释放，包括<code>insert ... select </code>这种</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>go 语言 主程序退出时会进行一些额外工作</title>
     <url>/golang-main-do-something-when-quit/</url>
     <content><![CDATA[<p>主goroutine先执行完,子goroutine居然还可以运行</p>
@@ -943,35 +975,49 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </tags>
   </entry>
   <entry>
-    <title>mysql 自增值申请策略</title>
-    <url>/mysql-auto-increment-strategy/</url>
-    <content><![CDATA[<h1 id="自增值申请策略"><a href="#自增值申请策略" class="headerlink" title="自增值申请策略"></a>自增值申请策略</h1><ol>
-<li><p>能否先查ID，再查入数据？</p>
-<p>不能，如果每次插入前，都要在主键的索引树上查询要插入的id是否存在，会大大降低插入插入的效率。</p>
-</li>
-<li><p>能否等事务完成后，再释放自增值的锁？</p>
-<p>不能，如果需要等待当前事务完成，其它事务先能获取自增值的锁，就会大大降低并发。</p>
-</li>
-</ol>
-<h2 id="innodb-autoinc-lock-mode"><a href="#innodb-autoinc-lock-mode" class="headerlink" title="innodb_autoinc_lock_mode"></a><code>innodb_autoinc_lock_mode</code></h2><p>MySQL通过参数<code>innodb_autoinc_lock_mode</code>，来设置自值锁的行为，默认值为1</p>
-<ol>
-<li><p>0值 ：等事务完成才释放锁</p>
-</li>
-<li><p>1值 ：</p>
+    <title>go 语言 buffer.truncate 分析</title>
+    <url>/golang-bytes-buffer-truncate/</url>
+    <content><![CDATA[<p>对于Golang的初学者，<code>Truncate</code>方法的行为使人迷惑，它不是从 <code>buffer</code>的头部截取 <code>n 个</code>字节，而是丢弃<code>除了前n个</code>未读取的字节之外的所有未读取的字节，也是就只保留已读取的字节和还没有读取的<code>前n个</code>字节。这种逻辑确实让人不太适应</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Truncate discards all but the first n unread bytes from the buffer</span>
+<span class="token comment">// but continues to use the same allocated storage.</span>
+<span class="token comment">// It panics if n is negative or greater than the length of the buffer.</span>
+<span class="token keyword">func</span> <span class="token punctuation">(</span>b <span class="token operator">*</span>Buffer<span class="token punctuation">)</span> <span class="token function">Truncate</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> n <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		b<span class="token punctuation">.</span><span class="token function">Reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+	b<span class="token punctuation">.</span>lastRead <span class="token operator">=</span> opInvalid
+	<span class="token keyword">if</span> n <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> n <span class="token operator">></span> b<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"bytes.Buffer: truncation out of range"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+	b<span class="token punctuation">.</span>buf <span class="token operator">=</span> b<span class="token punctuation">.</span>buf<span class="token punctuation">[</span><span class="token punctuation">:</span>b<span class="token punctuation">.</span>off<span class="token operator">+</span>n<span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>从源码的注释中还可以看到，截取后使用原 <code>buffer</code>保存保留下来的节字，不再额外占用内存空间。同时 n 的大小不能超过未读取字节的长度(第10行)</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">truncate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">var</span> buffer bytes<span class="token punctuation">.</span>Buffer
+  str <span class="token operator">:=</span> <span class="token string">"Simple byte buffer for marshaling data."</span>
+  buffer<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>
+  p <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
+  buffer<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span> <span class="token comment">// Simple b</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+  buffer<span class="token punctuation">.</span><span class="token function">Truncate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>    <span class="token comment">// 截断到前10个未读节字 Simple byte buffer</span>
+  buffer<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>         <span class="token comment">// 读取8个字节</span>
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// yte buff</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <ul>
-<li>对于普通的<code>insert into table</code>，申请到自增锁后就释放，不用等插入语句的完成。</li>
-<li>对于批量插入，类似<code>insert ... select</code>，一直持有自增锁，直到事务执行完成。这样也保证了id的连续性。</li>
+<li><code>p := make([]byte, 8)</code>先读取了8个字节</li>
+<li><code>buffer.Truncate(10) </code>再从没有读取的字节中取出10个，丢掉其余未读取的字节，把已读取的8个字节和取出的10个字节保存到 <code>buffer</code>中，此时buffer中的内容为<code>Simple byte buffer</code></li>
+<li><code>buffer.Read(p) </code>再读取8个字节，注意：这里不是从 buffer 的头部读取，而是从未读取处开始读取，即从<code>y</code>开始读取</li>
 </ul>
-</li>
-<li><p>2值：所有插入操作在申请到自增锁后就释放，包括<code>insert ... select </code>这种</p>
-</li>
-</ol>
 ]]></content>
       <categories>
-        <category>数据库</category>
+        <category>后端</category>
       </categories>
       <tags>
-        <tag>mysql</tag>
+        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
@@ -1038,6 +1084,106 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
       </categories>
       <tags>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>go 语言 结构体在内存中的布局</title>
+    <url>/golang-layout-of-struct/</url>
+    <content><![CDATA[<h1 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h1><ul>
+<li>字节对齐</li>
+<li>unsafe.Sizeof</li>
+<li>unsafe.Offsetof</li>
+<li>内存空洞</li>
+</ul>
+<h2 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h2><p>可以使计算机在加载和保存数据时，更加的有效率</p>
+<p>通常情况下布尔和数字类型需要对齐到它们本身的大小（最多8个字节），其它的类型对齐到机器字大小</p>
+<h2 id="unsafe-Sizeof"><a href="#unsafe-Sizeof" class="headerlink" title="unsafe.Sizeof"></a>unsafe.Sizeof</h2><p>返回操作数在内存中的字节大小，参数可以是任意类型的表，但不会对表达式进行求值(不求值也能知道大小，好神奇呀)</p>
+<p>unsafe.Sizeof 返回的大小只包含数据结构中固定的部分。如果结构体含有指针字段，不包括针指向的内容。Go语言中非聚合类型通常有一个固定的大小，而聚合类型没有固定的大小，比如 结构体类型和数组类型</p>
+<h2 id="unsafe-Offsetof"><a href="#unsafe-Offsetof" class="headerlink" title="unsafe.Offsetof"></a>unsafe.Offsetof</h2><p>函数的参数必须是一个字段 x.f，然后返回 f 字段相对于 x 起始地址的偏移量，包括可能的空洞</p>
+<h2 id="内存空洞"><a href="#内存空洞" class="headerlink" title="内存空洞"></a>内存空洞</h2><p>一个聚合类型（结构体或数组）的大小至少是所有字段或元素大小的总和，或者更大。因为可能存在内存空洞，内存空洞是编译器自动添加的没有被使用的内存空间，用于保证后面每个字段或元素的地址相对于结构或数组的开始地址能够合理地对齐。内存空洞可能会存在一些随机数据，可能会对用unsafe包直接操作内存的处理产生影响</p>
+<h1 id="结构体内存布局"><a href="#结构体内存布局" class="headerlink" title="结构体内存布局"></a>结构体内存布局</h1><p>设：机器字大小为8个字节</p>
+<h2 id="产生的空洞"><a href="#产生的空洞" class="headerlink" title="产生的空洞"></a>产生的空洞</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> x <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+  a <span class="token builtin">bool</span>
+  b <span class="token builtin">int16</span>
+  c <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/* output
+Sizeof(x)   = 32  Alignof(x)   = 8
+Sizeof(x.a) = 1   Alignof(x.a) = 1 Offsetof(x.a) = 0
+Sizeof(x.b) = 2   Alignof(x.b) = 2 Offsetof(x.b) = 2
+Sizeof(x.c) = 24  Alignof(x.c) = 8 Offsetof(x.c) = 8
+*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><code>x</code> 占用内存大小为 32字节</li>
+<li><code>x.c</code>字段是一个切片，占用24个字节(3个机器字)，<code>c.data, c.len, c.cap</code> 分别用 8个字节(1 个机器字)</li>
+<li><code>x.a + x.b</code> 总共占用 3字节。用<code>x</code>的占用总字节数 <code>32 - (1 + 2 + 24) = 5</code>， 说明有5字节的内存空洞</li>
+<li>由于<code>x.c</code>占用了3个机器字，所以空洞不是它产生的</li>
+<li> <code>x.a + x.b = 3</code>字节，不满一个机器字(8字节)，所以a和b之间，b和c之间产生了总共5字节的空洞</li>
+</ul>
+<h2 id="字段偏移分析"><a href="#字段偏移分析" class="headerlink" title="字段偏移分析"></a>字段偏移分析</h2><ul>
+<li><code>Offsetof(x.a) = 0</code> 说明 字段 a 处在结构的起始处，a与结构体起始处没有偏移(与起始处没有空洞)</li>
+<li><code>Offsetof(x.b) = 2</code> 说明 字段 b 相对于结构体 起始处 偏移了 2 字节，而<code>Sizeof(x.a) = 1</code>说明 <code>x.a</code> 占用只占用了1字节，但 b 偏移了 2 字节，说明<code>b与a</code>之间有 1 字节的空洞，否则 b 只应该偏移 1 字节，即<code>x.a</code>的大小。</li>
+<li>那么 a与b之间，总共是4字节的大小: <code>x.a</code> 1字节 + 空洞 1 字节 + <code>x.b</code> 2字节</li>
+<li>如果 <code>x.c 与 x.b</code>之前没有空洞，则<code>x.c</code>只应该偏移4字节，但实际却偏移了8字节，则 说明 <code>x.c 与 x.b</code> 之间 存在 <code>8 - 4 = 4</code> 字节的空洞</li>
+<li>所以 x 结构体的内存 分布是: x.a(1)____空洞(1)____x.b(2)____空洞(4)____x.c(24)</li>
+<li>对齐方式：按一个机器字对齐的</li>
+</ul>
+<p><img src="//img.gagahappy.cn/blog/2021/05/layout-of-struct.png_b1" alt="layout of struck" title="layout of struck"></p>
+<h1 id="结构体字段顺序"><a href="#结构体字段顺序" class="headerlink" title="结构体字段顺序"></a>结构体字段顺序</h1><p>Go 语言中，结构内部字段的声明顺序和它们在内存中的顺序可能是不一样的。一个编译器可以随意地重新排列每个字段的内存位置，有效的包装可以使数据结构更加紧凑，从而节省内存空间</p>
+<h2 id="内存占用"><a href="#内存占用" class="headerlink" title="内存占用"></a>内存占用</h2><p>不同结构体相同字段占用内存大小也会不一样，虽然 s1，s2，s3 有着相同的字段，但s1占用了较多的内存空间</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> s1 <span class="token operator">=</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>a <span class="token builtin">bool</span><span class="token punctuation">;</span>b <span class="token builtin">float64</span><span class="token punctuation">;</span>c <span class="token builtin">int16</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// 3 words</span>
+<span class="token keyword">var</span> s2 <span class="token operator">=</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>a <span class="token builtin">float64</span><span class="token punctuation">;</span>b <span class="token builtin">int16</span><span class="token punctuation">;</span>c <span class="token builtin">bool</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// 2 words</span>
+<span class="token keyword">var</span> s3 <span class="token operator">=</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>a <span class="token builtin">bool</span><span class="token punctuation">;</span>b <span class="token builtin">int16</span><span class="token punctuation">;</span>c <span class="token builtin">float64</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// 2 words</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="s1占用空间"><a href="#s1占用空间" class="headerlink" title="s1占用空间"></a>s1占用空间</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token operator">=</span>   <span class="token number">24</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token operator">=</span>    <span class="token number">8</span>
+<span class="token function">Sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">0</span>
+<span class="token function">Sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span>
+<span class="token function">Sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">16</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>综上: <code>s1.a 与 s1.b</code> 之间有 7 字节 的空洞，<code>s1.c与结构体结束处</code>(尾部)有 6 字节的空洞</p>
+<p>所以: s1 总字节数是 1 + 8 + 2 + (7 + 6) 空洞 = 24 <em>byte</em>，即3个机器字，可以看出 s1 的字段与字段之间，排列的并不是很紧凑，有较大空洞，造成了内存的浪费</p>
+<p>对齐方式：按一个机器字对齐的</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">|</span>-a-<span class="token operator">|</span>----------holes------------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
+<span class="token operator">|</span>---------------b---------------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
+<span class="token operator">|</span>---c---<span class="token operator">|</span>---------holes---------<span class="token operator">|</span> <span class="token number">8</span>字节，也可看出是按一个机器字对齐的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="s2-占用空间"><a href="#s2-占用空间" class="headerlink" title="s2 占用空间"></a>s2 占用空间</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token operator">=</span>   <span class="token number">16</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token operator">=</span>    <span class="token number">8</span>
+<span class="token function">Sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">0</span>
+<span class="token function">Sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span>
+<span class="token function">Sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>综上: <code>s2.a</code> 的大小是一个机器字，本身就是对齐的，且是所有字段中长度最大的，与 <code>s2.b</code>之间没有空洞，<code>s2.c紧贴s2.b</code>，它们之间也没有空洞，<code>s2.c与结构体结束处</code>(尾部)有 5(8-2+1) 字节的空洞</p>
+<p>所以: <code>s2</code> 总字节数是 <code>8 + 2 + 1 + (5) 空洞 = 16 byte</code>，即2个机器字，可以看出 s2 的字段与字段之间，排列是很紧凑，可以大大节省内存空间</p>
+<p>对齐方式：按一个机器字对齐的</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">|</span>---------------a---------------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
+<span class="token operator">|</span>---b---<span class="token operator">|</span>-c-<span class="token operator">|</span>-------holes-------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="s3占用空间"><a href="#s3占用空间" class="headerlink" title="s3占用空间"></a>s3占用空间</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">)</span> <span class="token operator">=</span>   <span class="token number">16</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">)</span> <span class="token operator">=</span>    <span class="token number">8</span>
+<span class="token function">Sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">0</span>
+<span class="token function">Sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span>
+<span class="token function">Sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>对齐方式：按一个机器字对齐的</p>
+<p>s3 布局与 s2 相似，可以看成是上下两层对调了，但排列是很紧凑的，也是2个机器字</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">|</span>-a-<span class="token operator">|</span>---b---<span class="token operator">|</span>-------holes-------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
+<span class="token operator">|</span>---------------c---------------<span class="token operator">|</span> <span class="token number">8</span>字节，也可看出是按一个机器字对齐的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>未来的Go语言编译器应该会默认优化结构体的顺序，当然应该也能够指定具体的内存布局，相同讨论请参考 <a href="https://github.com/golang/go/issues/10014">Issue10014</a></p>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
@@ -1199,152 +1345,6 @@ insert into t_07_recordlock values (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);<span
 	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-]]></content>
-      <categories>
-        <category>后端</category>
-      </categories>
-      <tags>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>go 语言 buffer.truncate 分析</title>
-    <url>/golang-bytes-buffer-truncate/</url>
-    <content><![CDATA[<p>对于Golang的初学者，<code>Truncate</code>方法的行为使人迷惑，它不是从 <code>buffer</code>的头部截取 <code>n 个</code>字节，而是丢弃<code>除了前n个</code>未读取的字节之外的所有未读取的字节，也是就只保留已读取的字节和还没有读取的<code>前n个</code>字节。这种逻辑确实让人不太适应</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">// Truncate discards all but the first n unread bytes from the buffer</span>
-<span class="token comment">// but continues to use the same allocated storage.</span>
-<span class="token comment">// It panics if n is negative or greater than the length of the buffer.</span>
-<span class="token keyword">func</span> <span class="token punctuation">(</span>b <span class="token operator">*</span>Buffer<span class="token punctuation">)</span> <span class="token function">Truncate</span><span class="token punctuation">(</span>n <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> n <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
-		b<span class="token punctuation">.</span><span class="token function">Reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-		<span class="token keyword">return</span>
-	<span class="token punctuation">&#125;</span>
-	b<span class="token punctuation">.</span>lastRead <span class="token operator">=</span> opInvalid
-	<span class="token keyword">if</span> n <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> n <span class="token operator">></span> b<span class="token punctuation">.</span><span class="token function">Len</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"bytes.Buffer: truncation out of range"</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#125;</span>
-	b<span class="token punctuation">.</span>buf <span class="token operator">=</span> b<span class="token punctuation">.</span>buf<span class="token punctuation">[</span><span class="token punctuation">:</span>b<span class="token punctuation">.</span>off<span class="token operator">+</span>n<span class="token punctuation">]</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>从源码的注释中还可以看到，截取后使用原 <code>buffer</code>保存保留下来的节字，不再额外占用内存空间。同时 n 的大小不能超过未读取字节的长度(第10行)</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">truncate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">var</span> buffer bytes<span class="token punctuation">.</span>Buffer
-  str <span class="token operator">:=</span> <span class="token string">"Simple byte buffer for marshaling data."</span>
-  buffer<span class="token punctuation">.</span><span class="token function">WriteString</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span>
-  p <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span>
-  buffer<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span> <span class="token comment">// Simple b</span>
-  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-  buffer<span class="token punctuation">.</span><span class="token function">Truncate</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>    <span class="token comment">// 截断到前10个未读节字 Simple byte buffer</span>
-  buffer<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>         <span class="token comment">// 读取8个字节</span>
-  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// yte buff</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><code>p := make([]byte, 8)</code>先读取了8个字节</li>
-<li><code>buffer.Truncate(10) </code>再从没有读取的字节中取出10个，丢掉其余未读取的字节，把已读取的8个字节和取出的10个字节保存到 <code>buffer</code>中，此时buffer中的内容为<code>Simple byte buffer</code></li>
-<li><code>buffer.Read(p) </code>再读取8个字节，注意：这里不是从 buffer 的头部读取，而是从未读取处开始读取，即从<code>y</code>开始读取</li>
-</ul>
-]]></content>
-      <categories>
-        <category>后端</category>
-      </categories>
-      <tags>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>go 语言 结构体在内存中的布局</title>
-    <url>/golang-layout-of-struct/</url>
-    <content><![CDATA[<h1 id="一些基础知识"><a href="#一些基础知识" class="headerlink" title="一些基础知识"></a>一些基础知识</h1><ul>
-<li>字节对齐</li>
-<li>unsafe.Sizeof</li>
-<li>unsafe.Offsetof</li>
-<li>内存空洞</li>
-</ul>
-<h2 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h2><p>可以使计算机在加载和保存数据时，更加的有效率</p>
-<p>通常情况下布尔和数字类型需要对齐到它们本身的大小（最多8个字节），其它的类型对齐到机器字大小</p>
-<h2 id="unsafe-Sizeof"><a href="#unsafe-Sizeof" class="headerlink" title="unsafe.Sizeof"></a>unsafe.Sizeof</h2><p>返回操作数在内存中的字节大小，参数可以是任意类型的表，但不会对表达式进行求值(不求值也能知道大小，好神奇呀)</p>
-<p>unsafe.Sizeof 返回的大小只包含数据结构中固定的部分。如果结构体含有指针字段，不包括针指向的内容。Go语言中非聚合类型通常有一个固定的大小，而聚合类型没有固定的大小，比如 结构体类型和数组类型</p>
-<h2 id="unsafe-Offsetof"><a href="#unsafe-Offsetof" class="headerlink" title="unsafe.Offsetof"></a>unsafe.Offsetof</h2><p>函数的参数必须是一个字段 x.f，然后返回 f 字段相对于 x 起始地址的偏移量，包括可能的空洞</p>
-<h2 id="内存空洞"><a href="#内存空洞" class="headerlink" title="内存空洞"></a>内存空洞</h2><p>一个聚合类型（结构体或数组）的大小至少是所有字段或元素大小的总和，或者更大。因为可能存在内存空洞，内存空洞是编译器自动添加的没有被使用的内存空间，用于保证后面每个字段或元素的地址相对于结构或数组的开始地址能够合理地对齐。内存空洞可能会存在一些随机数据，可能会对用unsafe包直接操作内存的处理产生影响</p>
-<h1 id="结构体内存布局"><a href="#结构体内存布局" class="headerlink" title="结构体内存布局"></a>结构体内存布局</h1><p>设：机器字大小为8个字节</p>
-<h2 id="产生的空洞"><a href="#产生的空洞" class="headerlink" title="产生的空洞"></a>产生的空洞</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> x <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-  a <span class="token builtin">bool</span>
-  b <span class="token builtin">int16</span>
-  c <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span>
-<span class="token punctuation">&#125;</span>
-<span class="token comment">/* output
-Sizeof(x)   = 32  Alignof(x)   = 8
-Sizeof(x.a) = 1   Alignof(x.a) = 1 Offsetof(x.a) = 0
-Sizeof(x.b) = 2   Alignof(x.b) = 2 Offsetof(x.b) = 2
-Sizeof(x.c) = 24  Alignof(x.c) = 8 Offsetof(x.c) = 8
-*/</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><code>x</code> 占用内存大小为 32字节</li>
-<li><code>x.c</code>字段是一个切片，占用24个字节(3个机器字)，<code>c.data, c.len, c.cap</code> 分别用 8个字节(1 个机器字)</li>
-<li><code>x.a + x.b</code> 总共占用 3字节。用<code>x</code>的占用总字节数 <code>32 - (1 + 2 + 24) = 5</code>， 说明有5字节的内存空洞</li>
-<li>由于<code>x.c</code>占用了3个机器字，所以空洞不是它产生的</li>
-<li> <code>x.a + x.b = 3</code>字节，不满一个机器字(8字节)，所以a和b之间，b和c之间产生了总共5字节的空洞</li>
-</ul>
-<h2 id="字段偏移分析"><a href="#字段偏移分析" class="headerlink" title="字段偏移分析"></a>字段偏移分析</h2><ul>
-<li><code>Offsetof(x.a) = 0</code> 说明 字段 a 处在结构的起始处，a与结构体起始处没有偏移(与起始处没有空洞)</li>
-<li><code>Offsetof(x.b) = 2</code> 说明 字段 b 相对于结构体 起始处 偏移了 2 字节，而<code>Sizeof(x.a) = 1</code>说明 <code>x.a</code> 占用只占用了1字节，但 b 偏移了 2 字节，说明<code>b与a</code>之间有 1 字节的空洞，否则 b 只应该偏移 1 字节，即<code>x.a</code>的大小。</li>
-<li>那么 a与b之间，总共是4字节的大小: <code>x.a</code> 1字节 + 空洞 1 字节 + <code>x.b</code> 2字节</li>
-<li>如果 <code>x.c 与 x.b</code>之前没有空洞，则<code>x.c</code>只应该偏移4字节，但实际却偏移了8字节，则 说明 <code>x.c 与 x.b</code> 之间 存在 <code>8 - 4 = 4</code> 字节的空洞</li>
-<li>所以 x 结构体的内存 分布是: x.a(1)____空洞(1)____x.b(2)____空洞(4)____x.c(24)</li>
-<li>对齐方式：按一个机器字对齐的</li>
-</ul>
-<p><img src="//img.gagahappy.cn/blog/2021/05/layout-of-struct.png_b1" alt="layout of struck" title="layout of struck"></p>
-<h1 id="结构体字段顺序"><a href="#结构体字段顺序" class="headerlink" title="结构体字段顺序"></a>结构体字段顺序</h1><p>Go 语言中，结构内部字段的声明顺序和它们在内存中的顺序可能是不一样的。一个编译器可以随意地重新排列每个字段的内存位置，有效的包装可以使数据结构更加紧凑，从而节省内存空间</p>
-<h2 id="内存占用"><a href="#内存占用" class="headerlink" title="内存占用"></a>内存占用</h2><p>不同结构体相同字段占用内存大小也会不一样，虽然 s1，s2，s3 有着相同的字段，但s1占用了较多的内存空间</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> s1 <span class="token operator">=</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>a <span class="token builtin">bool</span><span class="token punctuation">;</span>b <span class="token builtin">float64</span><span class="token punctuation">;</span>c <span class="token builtin">int16</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// 3 words</span>
-<span class="token keyword">var</span> s2 <span class="token operator">=</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>a <span class="token builtin">float64</span><span class="token punctuation">;</span>b <span class="token builtin">int16</span><span class="token punctuation">;</span>c <span class="token builtin">bool</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// 2 words</span>
-<span class="token keyword">var</span> s3 <span class="token operator">=</span> <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>a <span class="token builtin">bool</span><span class="token punctuation">;</span>b <span class="token builtin">int16</span><span class="token punctuation">;</span>c <span class="token builtin">float64</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// 2 words</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="s1占用空间"><a href="#s1占用空间" class="headerlink" title="s1占用空间"></a>s1占用空间</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token operator">=</span>   <span class="token number">24</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token operator">=</span>    <span class="token number">8</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">0</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">16</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>综上: <code>s1.a 与 s1.b</code> 之间有 7 字节 的空洞，<code>s1.c与结构体结束处</code>(尾部)有 6 字节的空洞</p>
-<p>所以: s1 总字节数是 1 + 8 + 2 + (7 + 6) 空洞 = 24 <em>byte</em>，即3个机器字，可以看出 s1 的字段与字段之间，排列的并不是很紧凑，有较大空洞，造成了内存的浪费</p>
-<p>对齐方式：按一个机器字对齐的</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">|</span>-a-<span class="token operator">|</span>----------holes------------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
-<span class="token operator">|</span>---------------b---------------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
-<span class="token operator">|</span>---c---<span class="token operator">|</span>---------holes---------<span class="token operator">|</span> <span class="token number">8</span>字节，也可看出是按一个机器字对齐的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="s2-占用空间"><a href="#s2-占用空间" class="headerlink" title="s2 占用空间"></a>s2 占用空间</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token operator">=</span>   <span class="token number">16</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token operator">=</span>    <span class="token number">8</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">0</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s2<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">10</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>综上: <code>s2.a</code> 的大小是一个机器字，本身就是对齐的，且是所有字段中长度最大的，与 <code>s2.b</code>之间没有空洞，<code>s2.c紧贴s2.b</code>，它们之间也没有空洞，<code>s2.c与结构体结束处</code>(尾部)有 5(8-2+1) 字节的空洞</p>
-<p>所以: <code>s2</code> 总字节数是 <code>8 + 2 + 1 + (5) 空洞 = 16 byte</code>，即2个机器字，可以看出 s2 的字段与字段之间，排列是很紧凑，可以大大节省内存空间</p>
-<p>对齐方式：按一个机器字对齐的</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">|</span>---------------a---------------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
-<span class="token operator">|</span>---b---<span class="token operator">|</span>-c-<span class="token operator">|</span>-------holes-------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="s3占用空间"><a href="#s3占用空间" class="headerlink" title="s3占用空间"></a>s3占用空间</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token function">sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">)</span> <span class="token operator">=</span>   <span class="token number">16</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">)</span> <span class="token operator">=</span>    <span class="token number">8</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">1</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">0</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">2</span>
-<span class="token function">Sizeof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Alignof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span> <span class="token function">Offsetof</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span>c<span class="token punctuation">)</span> <span class="token operator">=</span>  <span class="token number">8</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>对齐方式：按一个机器字对齐的</p>
-<p>s3 布局与 s2 相似，可以看成是上下两层对调了，但排列是很紧凑的，也是2个机器字</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token operator">|</span>-a-<span class="token operator">|</span>---b---<span class="token operator">|</span>-------holes-------<span class="token operator">|</span> <span class="token number">8</span>字节，即一个机器字
-<span class="token operator">|</span>---------------c---------------<span class="token operator">|</span> <span class="token number">8</span>字节，也可看出是按一个机器字对齐的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-
-
-<h1 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h1><p>未来的Go语言编译器应该会默认优化结构体的顺序，当然应该也能够指定具体的内存布局，相同讨论请参考 <a href="https://github.com/golang/go/issues/10014">Issue10014</a></p>
 ]]></content>
       <categories>
         <category>后端</category>
@@ -1656,34 +1656,6 @@ gitalk<span class="token punctuation">.</span><span class="token function">rende
       </tags>
   </entry>
   <entry>
-    <title>go 语言 截取0长度的Slice</title>
-    <url>/golang-create-slice-with-zero-length/</url>
-    <content><![CDATA[<p>截取0长度的<code>slice</code></p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	s1 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">&#125;</span>
-	s2 <span class="token operator">:=</span> s1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span>
-
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">cap</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">)</span> <span class="token comment">// 5 0 []</span>
-
-	s2 <span class="token operator">=</span> s1<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">]</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">cap</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">)</span> <span class="token comment">// 0 0 []</span>
-
-	s2 <span class="token operator">=</span> s1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">cap</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">)</span> <span class="token comment">// 5 1 [2]</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><code>s1[1:1]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是5(6-1)</p>
-<p><code>s1[6:6]</code>表示截取的位置从最后一个元素最后一个字节的后面开始，到最后一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是0(6-6)</p>
-<p><code>s1[1:2]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第二个元素最后一个字节的后面结束，在这个范围内的元素只有 <code>2</code>，所以生成的<code>slice</code>的长度是1，容量是5(1-6)</p>
-]]></content>
-      <categories>
-        <category>后端</category>
-      </categories>
-      <tags>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>go 语言 外部测试包</title>
     <url>/golang-external-test-packages/</url>
     <content><![CDATA[<h1 id="外部测试包"><a href="#外部测试包" class="headerlink" title="外部测试包"></a>外部测试包</h1><p>在测试代码的时候，会遇到包循环依赖导入的问题，Go语言规范是禁止包的循环依赖，为了解决这个问题，可以引入外部包。</p>
@@ -1866,6 +1838,34 @@ ok      gott/pprint     <span class="token punctuation">(</span>cached<span aria
 	t<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"expect call PPrint"</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>go 语言 截取0长度的Slice</title>
+    <url>/golang-create-slice-with-zero-length/</url>
+    <content><![CDATA[<p>截取0长度的<code>slice</code></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	s1 <span class="token operator">:=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">&#125;</span>
+	s2 <span class="token operator">:=</span> s1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">cap</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">)</span> <span class="token comment">// 5 0 []</span>
+
+	s2 <span class="token operator">=</span> s1<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">:</span><span class="token number">6</span><span class="token punctuation">]</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">cap</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">)</span> <span class="token comment">// 0 0 []</span>
+
+	s2 <span class="token operator">=</span> s1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">cap</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">len</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">)</span> <span class="token comment">// 5 1 [2]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>s1[1:1]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是5(6-1)</p>
+<p><code>s1[6:6]</code>表示截取的位置从最后一个元素最后一个字节的后面开始，到最后一个元素最后一个字节的后面结束，所以生成的<code>slice</code>的长度是0，容量是0(6-6)</p>
+<p><code>s1[1:2]</code>表示截取的位置从第一个元素最后一个字节的后面开始，到第二个元素最后一个字节的后面结束，在这个范围内的元素只有 <code>2</code>，所以生成的<code>slice</code>的长度是1，容量是5(1-6)</p>
 ]]></content>
       <categories>
         <category>后端</category>
@@ -3268,6 +3268,209 @@ FAIL
       </tags>
   </entry>
   <entry>
+    <title>mysql limit 的妙用</title>
+    <url>/mysql-update-with-limit/</url>
+    <content><![CDATA[<p>更新无索引的列，会导致全表被锁，其它线程无法更新表中的数据，如果加入了<code>limit N</code>关键字，可以减少被锁定的行，在一定程度上可以提高并发</p>
+<p>表结构及数据如下</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span> <span class="token punctuation">(</span>
+  <span class="token punctuation">`</span>id<span class="token punctuation">`</span> <span class="token keyword">int</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>name<span class="token punctuation">`</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>age<span class="token punctuation">`</span> <span class="token keyword">int</span> <span class="token keyword">default</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>ismale<span class="token punctuation">`</span> <span class="token keyword">tinyint</span> <span class="token keyword">default</span> <span class="token boolean">null</span>
+<span class="token punctuation">)</span> <span class="token keyword">engine</span><span class="token operator">=</span><span class="token keyword">innodb</span><span class="token punctuation">;</span>
+
+<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'d001'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">'d003'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token string">'d005'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token string">'d007'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token string">'d009'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token string">'d011'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> t<span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
+<span class="token operator">|</span> id <span class="token operator">|</span> name <span class="token operator">|</span> age  <span class="token operator">|</span> ismale <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
+<span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> d001 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">3</span> <span class="token operator">|</span> d003 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">5</span> <span class="token operator">|</span> d005 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">7</span> <span class="token operator">|</span> d007 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">9</span> <span class="token operator">|</span> d009 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token number">11</span> <span class="token operator">|</span> d011 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="不加入limit锁全表"><a href="#不加入limit锁全表" class="headerlink" title="不加入limit锁全表"></a>不加入<code>limit</code>锁全表</h2><table>
+<thead>
+<tr>
+<th>时刻</th>
+<th>Session A</th>
+<th>Session B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>begin;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>update t set age=31 where name=’d003’;</td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td></td>
+<td>Begin;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>update t set age=31 where name=’d005’;<font color=red>(blocked)</font></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>update t set age=31 where id=5;<font color=red>(blocked)</font></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>insert into t values(2,’d002’,30,1);<font color=red>(blocked)</font></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>insert into t values(12,’d012’,30,1);<font color=red>(blocked)</font></td>
+</tr>
+</tbody></table>
+<h3 id="SessionA的加锁范围"><a href="#SessionA的加锁范围" class="headerlink" title="SessionA的加锁范围"></a>SessionA的加锁范围</h3><p>主键索引<code>id</code>锁的范围是[infimum，supremum]</p>
+<p>由于name列没有索引，<code>where name=&#39;d003&#39;</code>查询时走主键索引，全表扫描。先找到id=1的行，加<code>next-key</code>锁，发现name的值不匹配，继续向右查找，给id=3的行上锁，name匹配，返回结果给server层，然后继续向右查找直到最后一行id=11，查找过程中涉及到的行都被加了<code>next-key</code>锁(id=5,7,9,11的行)，由于事务没有提交，这些行锁没有被释放。</p>
+<h3 id="SessionB被阻塞在哪里"><a href="#SessionB被阻塞在哪里" class="headerlink" title="SessionB被阻塞在哪里"></a>SessionB被阻塞在哪里</h3><p>更新条件 <code>where name=&#39;d005&#39;</code>，由于name列没有索引，查询时也要走主键索引。先找到id=1的行，加<code>next-key</code>锁，由于SessionA已经加了<code>next-key</code>锁，SessionB只能等待，它在此时发生了阻塞</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> name<span class="token operator">=</span><span class="token string">'d005'</span>
+<span class="token comment"># 被SessionA上的 id=1的行的 next-key锁阻塞</span>
+RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span>
+trx id <span class="token number">4366</span> lock_mode X waiting
+ <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000001</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000000</span>d98<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">81000000</span>a70110<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303031</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d001
+ <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>通过Id=5更新也会被SessinA的<code>next-key</code>锁阻塞，虽然SessionB加要的是<code>行锁</code>，这也从则面说明了<code>next-key</code>是由<code>行锁</code>和<code>间隙锁</code>组成</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">5</span>
+<span class="token comment"># 被id=5的记录上行锁阻塞</span>
+RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span>
+trx id <span class="token number">4367</span> lock_mode X locks rec but <span class="token operator">not</span> gap waiting
+ <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000005</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000000</span>d9e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">82000000</span>a80110<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303034</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d004
+ <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>插入数据也被阻塞，因为插入Id的值都落在了<code>间隙锁</code>[infimum，supremum]内，无法插入任何的值。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'d002'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment"># 插入id=2的值，被间隙锁(1,3)阻塞</span>
+RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span>
+trx id <span class="token number">4365</span> lock_mode X locks gap before rec <span class="token keyword">insert</span> intention waiting
+ <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000003</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000001106</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">01000001120488</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303033</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d003
+ <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>f<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="加入limit减少被锁的行"><a href="#加入limit减少被锁的行" class="headerlink" title="加入limit减少被锁的行"></a>加入<code>limit</code>减少被锁的行</h2><table>
+<thead>
+<tr>
+<th>时刻</th>
+<th>Session A</th>
+<th>Session B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>begin;</td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td>update t set age=31 where name=’d003’ limit 1;</td>
+<td></td>
+</tr>
+<tr>
+<td>T3</td>
+<td></td>
+<td>begin;</td>
+</tr>
+<tr>
+<td>T4</td>
+<td></td>
+<td>update t set age=31 where name=’d005’;<font color=red>(blocked)</font></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>insert into t values(2,’d002’,30,1);<font color=red>(blocked)</font></td>
+</tr>
+<tr>
+<td>T5</td>
+<td></td>
+<td>insert into t values(4,’d004’,30,1);<font color=green>(Query Ok)</font></td>
+</tr>
+</tbody></table>
+<h3 id="SessionA加锁的范围是怎么样的"><a href="#SessionA加锁的范围是怎么样的" class="headerlink" title="SessionA加锁的范围是怎么样的"></a>SessionA加锁的范围是怎么样的</h3><p>主键索引<code>id</code>锁的范围是[infimum，3]</p>
+<p>由于name列没有索引，查询时走主键索引，全表扫描。先找到id=1的行，加<code>next-key</code>锁，发现name的值不匹配，继续向右查找，给id=3的行上锁，name匹配，返回结果给server层，由于使用了<code>limit 1</code>，满足条件，不再向后查找，查询结束。记录(id:1),(id:3)的行上了<code>next-key</code>锁，之后的记录没有上锁。</p>
+<h3 id="SessionB被阻塞在哪里-1"><a href="#SessionB被阻塞在哪里-1" class="headerlink" title="SessionB被阻塞在哪里"></a>SessionB被阻塞在哪里</h3><p>更新条件 <code>where name=&#39;d005&#39;</code>，由于name列没有索引，查询时也要走主键索引。先找到id=1的行，加<code>next-key</code>锁，由于SessionA已经加了<code>next-key</code>锁，SessionB只能等待，它在此时发生了阻塞</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> name<span class="token operator">=</span><span class="token string">'d005'</span>
+<span class="token comment"># 被SessionA上的 id=1的行的 next-key锁阻塞</span>
+RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span> 
+trx id <span class="token number">4871</span> lock_mode X waiting
+ <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000001</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000000</span>d98<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">81000000</span>a70110<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303031</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d001
+ <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
+ <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>因为<code>id</code>锁的范围是[infimum，3]，(id=5,7,9,11)的行没有被上锁，可以更新及插入id &gt; 3的数据。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment"># Session B</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token string">'d004'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">(</span>Query Ok<span class="token punctuation">)</span>
+
+<span class="token comment"># 虽然不能通过 where name='d005' 修改</span>
+<span class="token comment"># 但可以通过where id=5 修改，也说明了id=5的行没有被锁</span>
+<span class="token comment"># 同时也绕过了需要等待id=1的锁的限制</span>
+<span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token punctuation">(</span>Query Ok<span class="token punctuation">)</span>
+
+<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> t<span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
+<span class="token operator">|</span> id <span class="token operator">|</span> name <span class="token operator">|</span> age  <span class="token operator">|</span> ismale <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
+<span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> d001 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">3</span> <span class="token operator">|</span> d003 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">4</span> <span class="token operator">|</span> d004 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">5</span> <span class="token operator">|</span> d005 <span class="token operator">|</span>   <span class="token number">31</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">7</span> <span class="token operator">|</span> d007 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>  <span class="token number">9</span> <span class="token operator">|</span> d009 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span> <span class="token number">11</span> <span class="token operator">|</span> d011 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>go 语言 测试 示例函数</title>
     <url>/golang-test-example/</url>
     <content><![CDATA[<h1 id="示例函数"><a href="#示例函数" class="headerlink" title="示例函数"></a>示例函数</h1><p>以<code>Example</code>开头，后面加对应的函数名，示例没有参数列表与返回值列表</p>
@@ -3550,201 +3753,42 @@ FAIL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span
       </tags>
   </entry>
   <entry>
-    <title>mysql limit 的妙用</title>
-    <url>/mysql-update-with-limit/</url>
-    <content><![CDATA[<p>更新无索引的列，会导致全表被锁，其它线程无法更新表中的数据，如果加入了<code>limit N</code>关键字，可以减少被锁定的行，在一定程度上可以提高并发</p>
-<p>表结构及数据如下</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span> <span class="token punctuation">(</span>
-  <span class="token punctuation">`</span>id<span class="token punctuation">`</span> <span class="token keyword">int</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
-  <span class="token punctuation">`</span>name<span class="token punctuation">`</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
-  <span class="token punctuation">`</span>age<span class="token punctuation">`</span> <span class="token keyword">int</span> <span class="token keyword">default</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
-  <span class="token punctuation">`</span>ismale<span class="token punctuation">`</span> <span class="token keyword">tinyint</span> <span class="token keyword">default</span> <span class="token boolean">null</span>
-<span class="token punctuation">)</span> <span class="token keyword">engine</span><span class="token operator">=</span><span class="token keyword">innodb</span><span class="token punctuation">;</span>
+    <title>mysql or 导致的全表扫描</title>
+    <url>/mysql-scan-full-by-or/</url>
+    <content><![CDATA[<h1 id="or-导致的全表扫描"><a href="#or-导致的全表扫描" class="headerlink" title="or 导致的全表扫描"></a>or 导致的全表扫描</h1><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">or</span> operator <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span>
+<span class="token operator">|</span> <span class="token keyword">type</span> <span class="token operator">|</span> possible_keys <span class="token operator">|</span> <span class="token keyword">key</span>  <span class="token operator">|</span> key_len <span class="token operator">|</span> ref  <span class="token operator">|</span> <span class="token keyword">rows</span>   <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra       <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span>
+<span class="token operator">|</span> <span class="token keyword">ALL</span>  <span class="token operator">|</span> tradeid       <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token boolean">NULL</span>    <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token number">389107</span> <span class="token operator">|</span>    <span class="token number">10.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'d001'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">'d003'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token string">'d005'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token string">'d007'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token string">'d009'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">,</span><span class="token string">'d011'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>查询条件中有 or 时，mysql 会分别查询每一个条件，然后再把结果合并在一起。</p>
+<p>先对 tradeid = ‘12’ 进行判断，发现可以使用索引，再对 operator = 10 进行判断，发现不能使用索引，只好全表扫描，即然都全表扫描了，顺带也就可以判断当前记录的 tradeid 是否等于 12，就不需要在单独再搜索 tradeid 索引树了。</p>
+<p>所以当 or 条件中出现没有索引的字段会导致使用全表扫描。如果出现的字段都有索引，mysql会尽量使用每个列的索引</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">or</span> id <span class="token operator">=</span><span class="token number">10</span>  <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
+<span class="token operator">|</span> id <span class="token operator">|</span> select_type <span class="token operator">|</span> <span class="token keyword">table</span>    <span class="token operator">|</span> <span class="token keyword">type</span>        <span class="token operator">|</span> possible_keys   <span class="token operator">|</span> <span class="token keyword">key</span>             <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
+<span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> <span class="token keyword">SIMPLE</span>      <span class="token operator">|</span> tradelog <span class="token operator">|</span> index_merge <span class="token operator">|</span> <span class="token keyword">PRIMARY</span><span class="token punctuation">,</span>tradeid <span class="token operator">|</span> tradeid<span class="token punctuation">,</span><span class="token keyword">PRIMARY</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
 
-<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> t<span class="token punctuation">;</span>
-<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
-<span class="token operator">|</span> id <span class="token operator">|</span> name <span class="token operator">|</span> age  <span class="token operator">|</span> ismale <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
-<span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> d001 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">|</span>  <span class="token number">3</span> <span class="token operator">|</span> d003 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">|</span>  <span class="token number">5</span> <span class="token operator">|</span> d005 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">|</span>  <span class="token number">7</span> <span class="token operator">|</span> d007 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">|</span>  <span class="token number">9</span> <span class="token operator">|</span> d009 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">|</span> <span class="token number">11</span> <span class="token operator">|</span> d011 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span>
+<span class="token operator">|</span> key_len <span class="token operator">|</span> ref  <span class="token operator">|</span> <span class="token keyword">rows</span> <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra                                     <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span>
+<span class="token operator">|</span> <span class="token number">131</span><span class="token punctuation">,</span><span class="token number">4</span>   <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span>    <span class="token number">2</span> <span class="token operator">|</span>   <span class="token number">100.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">union</span><span class="token punctuation">(</span>tradeid<span class="token punctuation">,</span><span class="token keyword">PRIMARY</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>虽然条件中也有 or ，但 tradeid 和 id 都有索引，mysql 分别单独对这两个索引扫描，然后把找到的结果再合并到一起。执行计划显示 <code>type:index_merge</code> ， <code>key:tradeid,PRIMARY</code>，<code>Extra:Using union</code></p>
+<p>同样的条件，把 or 换成 and 时是可以走索引的，因为找的是要满足所有条件的记录，那么就可以在最小的索引树先找到一条满足条件的记录，再检查这条记录是否还满足其它条件</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">and</span>  operator <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span>
+<span class="token operator">|</span> <span class="token keyword">type</span> <span class="token operator">|</span> possible_keys <span class="token operator">|</span> <span class="token keyword">key</span>     <span class="token operator">|</span> key_len <span class="token operator">|</span> ref   <span class="token operator">|</span> <span class="token keyword">rows</span> <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra       <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span>
+<span class="token operator">|</span> ref  <span class="token operator">|</span> tradeid       <span class="token operator">|</span> tradeid <span class="token operator">|</span> <span class="token number">131</span>     <span class="token operator">|</span> const <span class="token operator">|</span>    <span class="token number">1</span> <span class="token operator">|</span>    <span class="token number">10.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-<h2 id="不加入limit锁全表"><a href="#不加入limit锁全表" class="headerlink" title="不加入limit锁全表"></a>不加入<code>limit</code>锁全表</h2><table>
-<thead>
-<tr>
-<th>时刻</th>
-<th>Session A</th>
-<th>Session B</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>T1</td>
-<td>begin;</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>update t set age=31 where name=’d003’;</td>
-<td></td>
-</tr>
-<tr>
-<td>T2</td>
-<td></td>
-<td>Begin;</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>update t set age=31 where name=’d005’;<font color=red>(blocked)</font></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>update t set age=31 where id=5;<font color=red>(blocked)</font></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>insert into t values(2,’d002’,30,1);<font color=red>(blocked)</font></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>insert into t values(12,’d012’,30,1);<font color=red>(blocked)</font></td>
-</tr>
-</tbody></table>
-<h3 id="SessionA的加锁范围"><a href="#SessionA的加锁范围" class="headerlink" title="SessionA的加锁范围"></a>SessionA的加锁范围</h3><p>主键索引<code>id</code>锁的范围是[infimum，supremum]</p>
-<p>由于name列没有索引，<code>where name=&#39;d003&#39;</code>查询时走主键索引，全表扫描。先找到id=1的行，加<code>next-key</code>锁，发现name的值不匹配，继续向右查找，给id=3的行上锁，name匹配，返回结果给server层，然后继续向右查找直到最后一行id=11，查找过程中涉及到的行都被加了<code>next-key</code>锁(id=5,7,9,11的行)，由于事务没有提交，这些行锁没有被释放。</p>
-<h3 id="SessionB被阻塞在哪里"><a href="#SessionB被阻塞在哪里" class="headerlink" title="SessionB被阻塞在哪里"></a>SessionB被阻塞在哪里</h3><p>更新条件 <code>where name=&#39;d005&#39;</code>，由于name列没有索引，查询时也要走主键索引。先找到id=1的行，加<code>next-key</code>锁，由于SessionA已经加了<code>next-key</code>锁，SessionB只能等待，它在此时发生了阻塞</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> name<span class="token operator">=</span><span class="token string">'d005'</span>
-<span class="token comment"># 被SessionA上的 id=1的行的 next-key锁阻塞</span>
-RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span>
-trx id <span class="token number">4366</span> lock_mode X waiting
- <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000001</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000000</span>d98<span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">81000000</span>a70110<span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303031</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d001
- <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>通过Id=5更新也会被SessinA的<code>next-key</code>锁阻塞，虽然SessionB加要的是<code>行锁</code>，这也从则面说明了<code>next-key</code>是由<code>行锁</code>和<code>间隙锁</code>组成</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">5</span>
-<span class="token comment"># 被id=5的记录上行锁阻塞</span>
-RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span>
-trx id <span class="token number">4367</span> lock_mode X locks rec but <span class="token operator">not</span> gap waiting
- <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000005</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000000</span>d9e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">82000000</span>a80110<span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303034</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d004
- <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>插入数据也被阻塞，因为插入Id的值都落在了<code>间隙锁</code>[infimum，supremum]内，无法插入任何的值。</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'d002'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment"># 插入id=2的值，被间隙锁(1,3)阻塞</span>
-RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span>
-trx id <span class="token number">4365</span> lock_mode X locks gap before rec <span class="token keyword">insert</span> intention waiting
- <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000003</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000001106</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">01000001120488</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303033</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d003
- <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>f<span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="加入limit减少被锁的行"><a href="#加入limit减少被锁的行" class="headerlink" title="加入limit减少被锁的行"></a>加入<code>limit</code>减少被锁的行</h2><table>
-<thead>
-<tr>
-<th>时刻</th>
-<th>Session A</th>
-<th>Session B</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>T1</td>
-<td>begin;</td>
-<td></td>
-</tr>
-<tr>
-<td>T2</td>
-<td>update t set age=31 where name=’d003’ limit 1;</td>
-<td></td>
-</tr>
-<tr>
-<td>T3</td>
-<td></td>
-<td>begin;</td>
-</tr>
-<tr>
-<td>T4</td>
-<td></td>
-<td>update t set age=31 where name=’d005’;<font color=red>(blocked)</font></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>insert into t values(2,’d002’,30,1);<font color=red>(blocked)</font></td>
-</tr>
-<tr>
-<td>T5</td>
-<td></td>
-<td>insert into t values(4,’d004’,30,1);<font color=green>(Query Ok)</font></td>
-</tr>
-</tbody></table>
-<h3 id="SessionA加锁的范围是怎么样的"><a href="#SessionA加锁的范围是怎么样的" class="headerlink" title="SessionA加锁的范围是怎么样的"></a>SessionA加锁的范围是怎么样的</h3><p>主键索引<code>id</code>锁的范围是[infimum，3]</p>
-<p>由于name列没有索引，查询时走主键索引，全表扫描。先找到id=1的行，加<code>next-key</code>锁，发现name的值不匹配，继续向右查找，给id=3的行上锁，name匹配，返回结果给server层，由于使用了<code>limit 1</code>，满足条件，不再向后查找，查询结束。记录(id:1),(id:3)的行上了<code>next-key</code>锁，之后的记录没有上锁。</p>
-<h3 id="SessionB被阻塞在哪里-1"><a href="#SessionB被阻塞在哪里-1" class="headerlink" title="SessionB被阻塞在哪里"></a>SessionB被阻塞在哪里</h3><p>更新条件 <code>where name=&#39;d005&#39;</code>，由于name列没有索引，查询时也要走主键索引。先找到id=1的行，加<code>next-key</code>锁，由于SessionA已经加了<code>next-key</code>锁，SessionB只能等待，它在此时发生了阻塞</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> name<span class="token operator">=</span><span class="token string">'d005'</span>
-<span class="token comment"># 被SessionA上的 id=1的行的 next-key锁阻塞</span>
-RECORD LOCKS space id <span class="token number">5</span> page <span class="token keyword">no</span> <span class="token number">4</span> n bits <span class="token number">80</span> <span class="token keyword">index</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">of</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span> 
-trx id <span class="token number">4871</span> lock_mode X waiting
- <span class="token number">0</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">80000001</span><span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">1</span>: len <span class="token number">6</span><span class="token punctuation">;</span> hex <span class="token number">000000000</span>d98<span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">2</span>: len <span class="token number">7</span><span class="token punctuation">;</span> hex <span class="token number">81000000</span>a70110<span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">3</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">64303031</span><span class="token punctuation">;</span> <span class="token keyword">asc</span> d001
- <span class="token number">4</span>: len <span class="token number">4</span><span class="token punctuation">;</span> hex <span class="token number">8000001</span>e<span class="token punctuation">;</span> <span class="token keyword">asc</span>
- <span class="token number">5</span>: len <span class="token number">1</span><span class="token punctuation">;</span> hex <span class="token number">81</span><span class="token punctuation">;</span> <span class="token keyword">asc</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>因为<code>id</code>锁的范围是[infimum，3]，(id=5,7,9,11)的行没有被上锁，可以更新及插入id &gt; 3的数据。</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment"># Session B</span>
-<span class="token keyword">insert</span> <span class="token keyword">into</span> t <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token string">'d004'</span><span class="token punctuation">,</span><span class="token number">30</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">(</span>Query Ok<span class="token punctuation">)</span>
-
-<span class="token comment"># 虽然不能通过 where name='d005' 修改</span>
-<span class="token comment"># 但可以通过where id=5 修改，也说明了id=5的行没有被锁</span>
-<span class="token comment"># 同时也绕过了需要等待id=1的锁的限制</span>
-<span class="token keyword">update</span> t <span class="token keyword">set</span> age<span class="token operator">=</span><span class="token number">31</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
-<span class="token punctuation">(</span>Query Ok<span class="token punctuation">)</span>
-
-<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> t<span class="token punctuation">;</span>
-<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
-<span class="token operator">|</span> id <span class="token operator">|</span> name <span class="token operator">|</span> age  <span class="token operator">|</span> ismale <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span>
-<span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> d001 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">|</span>  <span class="token number">3</span> <span class="token operator">|</span> d003 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">|</span>  <span class="token number">4</span> <span class="token operator">|</span> d004 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">|</span>  <span class="token number">5</span> <span class="token operator">|</span> d005 <span class="token operator">|</span>   <span class="token number">31</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">|</span>  <span class="token number">7</span> <span class="token operator">|</span> d007 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">|</span>  <span class="token number">9</span> <span class="token operator">|</span> d009 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">|</span> <span class="token number">11</span> <span class="token operator">|</span> d011 <span class="token operator">|</span>   <span class="token number">30</span> <span class="token operator">|</span>      <span class="token number">1</span> <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">----+------+------+--------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+<p>key:tradeid  显示使用了 tradeid 索引。通过索引树先找到一条  tradeid = ‘12’的记录，再回表查询 operator 是否等于 10。</p>
+]]></content>
       <categories>
         <category>数据库</category>
       </categories>
@@ -3950,47 +3994,212 @@ id6<span class="token punctuation">,</span> zhanghao456<span class="token variab
       </tags>
   </entry>
   <entry>
-    <title>mysql or 导致的全表扫描</title>
-    <url>/mysql-scan-full-by-or/</url>
-    <content><![CDATA[<h1 id="or-导致的全表扫描"><a href="#or-导致的全表扫描" class="headerlink" title="or 导致的全表扫描"></a>or 导致的全表扫描</h1><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">or</span> operator <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span>
-<span class="token operator">|</span> <span class="token keyword">type</span> <span class="token operator">|</span> possible_keys <span class="token operator">|</span> <span class="token keyword">key</span>  <span class="token operator">|</span> key_len <span class="token operator">|</span> ref  <span class="token operator">|</span> <span class="token keyword">rows</span>   <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra       <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span>
-<span class="token operator">|</span> <span class="token keyword">ALL</span>  <span class="token operator">|</span> tradeid       <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token boolean">NULL</span>    <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token number">389107</span> <span class="token operator">|</span>    <span class="token number">10.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">------+---------------+------+---------+------+--------+----------+-------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>查询条件中有 or 时，mysql 会分别查询每一个条件，然后再把结果合并在一起。</p>
-<p>先对 tradeid = ‘12’ 进行判断，发现可以使用索引，再对 operator = 10 进行判断，发现不能使用索引，只好全表扫描，即然都全表扫描了，顺带也就可以判断当前记录的 tradeid 是否等于 12，就不需要在单独再搜索 tradeid 索引树了。</p>
-<p>所以当 or 条件中出现没有索引的字段会导致使用全表扫描。如果出现的字段都有索引，mysql会尽量使用每个列的索引</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">or</span> id <span class="token operator">=</span><span class="token number">10</span>  <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
-<span class="token operator">|</span> id <span class="token operator">|</span> select_type <span class="token operator">|</span> <span class="token keyword">table</span>    <span class="token operator">|</span> <span class="token keyword">type</span>        <span class="token operator">|</span> possible_keys   <span class="token operator">|</span> <span class="token keyword">key</span>             <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
-<span class="token operator">|</span>  <span class="token number">1</span> <span class="token operator">|</span> <span class="token keyword">SIMPLE</span>      <span class="token operator">|</span> tradelog <span class="token operator">|</span> index_merge <span class="token operator">|</span> <span class="token keyword">PRIMARY</span><span class="token punctuation">,</span>tradeid <span class="token operator">|</span> tradeid<span class="token punctuation">,</span><span class="token keyword">PRIMARY</span> <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">----+-------------+----------+-------------+-----------------+-----------------+</span>
-
-<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span>
-<span class="token operator">|</span> key_len <span class="token operator">|</span> ref  <span class="token operator">|</span> <span class="token keyword">rows</span> <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra                                     <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span>
-<span class="token operator">|</span> <span class="token number">131</span><span class="token punctuation">,</span><span class="token number">4</span>   <span class="token operator">|</span> <span class="token boolean">NULL</span> <span class="token operator">|</span>    <span class="token number">2</span> <span class="token operator">|</span>   <span class="token number">100.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">union</span><span class="token punctuation">(</span>tradeid<span class="token punctuation">,</span><span class="token keyword">PRIMARY</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">---------+------+------+----------+-------------------------------------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>虽然条件中也有 or ，但 tradeid 和 id 都有索引，mysql 分别单独对这两个索引扫描，然后把找到的结果再合并到一起。执行计划显示 <code>type:index_merge</code> ， <code>key:tradeid,PRIMARY</code>，<code>Extra:Using union</code></p>
-<p>同样的条件，把 or 换成 and 时是可以走索引的，因为找的是要满足所有条件的记录，那么就可以在最小的索引树先找到一条满足条件的记录，再检查这条记录是否还满足其它条件</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">explain</span> <span class="token keyword">select</span> id <span class="token keyword">from</span> tradelog <span class="token keyword">where</span> tradeid <span class="token operator">=</span> <span class="token string">'12'</span> <span class="token operator">and</span>  operator <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">limit</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span>
-<span class="token operator">|</span> <span class="token keyword">type</span> <span class="token operator">|</span> possible_keys <span class="token operator">|</span> <span class="token keyword">key</span>     <span class="token operator">|</span> key_len <span class="token operator">|</span> ref   <span class="token operator">|</span> <span class="token keyword">rows</span> <span class="token operator">|</span> filtered <span class="token operator">|</span> Extra       <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span>
-<span class="token operator">|</span> ref  <span class="token operator">|</span> tradeid       <span class="token operator">|</span> tradeid <span class="token operator">|</span> <span class="token number">131</span>     <span class="token operator">|</span> const <span class="token operator">|</span>    <span class="token number">1</span> <span class="token operator">|</span>    <span class="token number">10.00</span> <span class="token operator">|</span> <span class="token keyword">Using</span> <span class="token keyword">where</span> <span class="token operator">|</span>
-<span class="token operator">+</span><span class="token comment">------+---------------+---------+---------+-------+------+----------+-------------+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>key:tradeid  显示使用了 tradeid 索引。通过索引树先找到一条  tradeid = ‘12’的记录，再回表查询 operator 是否等于 10。</p>
+    <title>ielts06</title>
+    <url>/ielts06/</url>
+    <content><![CDATA[<h1 id="英文故事：-”The-Forgotten-Turret”"><a href="#英文故事：-”The-Forgotten-Turret”" class="headerlink" title="英文故事：**”The Forgotten Turret”**"></a>英文故事：**”The Forgotten Turret”**</h1><p>On a remote <strong>continent</strong>, archaeologists set out to <strong>discover</strong> a hidden fortress believed to date back to the 12th century. Its main <strong>turret</strong> had fallen into <strong>dormancy</strong>, hidden beneath layers of earth. The team, led by a brilliant <strong>coordinator</strong>, used <strong>statistics</strong> and satellite data to <strong>calculate</strong> its approximate location.</p>
+<p>The weather was tough—<strong>atmospheric</strong> pressure and <strong>stuffy</strong> air made breathing difficult. Despite this, the <strong>major</strong> discovery drove them on. When they tried to unearth the turret, a worker accidentally <strong>mishandled</strong> a tool and nearly caused a collapse. Luckily, no one was injured, and the event was later deemed <strong>excusable</strong>.</p>
+<p>The coordinator <strong>proposed</strong> to <strong>demolish</strong> some unstable walls to safely access the core. Some historians protested, citing <strong>tradition</strong> and cultural <strong>honour</strong>, but the structure wasn’t <strong>durable</strong> enough to withstand continued <strong>suppression</strong> from the weight of time.</p>
+<p>Among the ruins, they found old scrolls, one of which contained what seemed like an ancient <strong>antidote</strong> recipe. Though not <strong>necessarily</strong> magical, its ingredients were unusual.</p>
+<p>After their return, a museum offered a paid <strong>subscription</strong> for monthly updates about the site. The coordinator received a special <strong>licence</strong> to curate the relics. At the celebration event, one researcher appeared nearly <strong>naked</strong>, a result of a lost bet. It was <strong>mainly</strong> a humorous moment, though he felt slightly <strong>guilty</strong>.</p>
+<p>Finally, a loose stone dislodged during the ceremony—perhaps a sign that history still had secrets to tell, waiting to <strong>dislodge</strong> themselves.</p>
+<h1 id="单词造句表格"><a href="#单词造句表格" class="headerlink" title="单词造句表格"></a>单词造句表格</h1><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>单词</th>
+<th>英文例句</th>
+<th>中文翻译</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>calculate</td>
+<td>Engineers [/ˌendʒɪˈnɪr/] calculate the bridge’s weight limit carefully.</td>
+<td>工程师仔细计算桥的承重极限。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>dormancy</td>
+<td>Seeds can remain in dormancy for months before germinating.</td>
+<td>种子在发芽之前可以保持休眠状态数月之久</td>
+</tr>
+<tr>
+<td>3</td>
+<td>particular</td>
+<td>Is there a particular reason why you’re upset?</td>
+<td>你生气有特别的原因吗？</td>
+</tr>
+<tr>
+<td>4</td>
+<td>subscription</td>
+<td>I bought a subscription to the online magazine.</td>
+<td>我订阅了这本在线杂志。</td>
+</tr>
+<tr>
+<td>5</td>
+<td>demolish</td>
+<td>They plan to demolish the old building next month.</td>
+<td>他们计划下个月拆除那栋老楼。</td>
+</tr>
+<tr>
+<td>6</td>
+<td>durable</td>
+<td>These boots are made of durable leather.</td>
+<td>这双靴子由耐用的皮革制成。</td>
+</tr>
+<tr>
+<td>7</td>
+<td>tradition</td>
+<td>It’s a family tradition to gather at New Year.</td>
+<td>一家人在新年团聚是我们的传统。</td>
+</tr>
+<tr>
+<td>8</td>
+<td>statistics</td>
+<td>Statistics show a rise in employment this year.</td>
+<td>统计数据显示今年就业率上升。</td>
+</tr>
+<tr>
+<td>9</td>
+<td>stuffy</td>
+<td>The classroom was hot and stuffy.</td>
+<td>教室又热又闷。</td>
+</tr>
+<tr>
+<td>10</td>
+<td>approximately</td>
+<td>The flight takes approximately ten hours.</td>
+<td>飞行时间大约为十小时。</td>
+</tr>
+<tr>
+<td>11</td>
+<td>excusable</td>
+<td>His mistake was excusable under the circumstances.</td>
+<td>在这种情况下他的错误可以原谅。</td>
+</tr>
+<tr>
+<td>12</td>
+<td>propose</td>
+<td>He proposed a new solution to the problem.</td>
+<td>他提出了一个新解决方案。</td>
+</tr>
+<tr>
+<td>13</td>
+<td>atmospheric</td>
+<td>The atmospheric pressure dropped suddenly.</td>
+<td>大气压突然下降。</td>
+</tr>
+<tr>
+<td>14</td>
+<td>honour</td>
+<td>The soldier was buried with full honour.</td>
+<td>这名士兵以最高荣誉下葬。</td>
+</tr>
+<tr>
+<td>15</td>
+<td>dislodge</td>
+<td>They tried to dislodge the rock from the road.</td>
+<td>他们试图将那块岩石从路上移开。(v.（把某物）强行去除，取出)</td>
+</tr>
+<tr>
+<td>16</td>
+<td>licence</td>
+<td>She finally got her driving licence.</td>
+<td>她终于拿到了驾照。</td>
+</tr>
+<tr>
+<td>17</td>
+<td>major</td>
+<td>Climate change is a major global issue.</td>
+<td>气候变化是一个主要的全球问题。</td>
+</tr>
+<tr>
+<td>18</td>
+<td>antidote</td>
+<td>The nurse administered an antidote for the poison /ˈpɔɪzn/.</td>
+<td>护士给中毒者注射了解毒剂( administer 给予，施用（药物等）)</td>
+</tr>
+<tr>
+<td>19</td>
+<td>discover</td>
+<td>Scientists hope to discover new planets.</td>
+<td>科学家希望发现新的行星。</td>
+</tr>
+<tr>
+<td>20</td>
+<td>necessarily</td>
+<td>More money doesn’t necessarily [/ˌnesəˈserəli/] mean more happiness.</td>
+<td>更多的钱不一定意味着更多的幸福。(adv.必然地)</td>
+</tr>
+<tr>
+<td>21</td>
+<td>turret</td>
+<td>The castle had four tall turrets [/ˈtɜːrət/] at each corner.</td>
+<td>城堡四角都有高塔楼。</td>
+</tr>
+<tr>
+<td>22</td>
+<td>continent</td>
+<td>Africa is a continent [/ˈkɑːntɪnənt/] rich in natural resources.</td>
+<td>非洲是一个自然资源丰富的大陆。</td>
+</tr>
+<tr>
+<td>23</td>
+<td>mishandle</td>
+<td>The courier mishandled the fragile [/ˈfrædʒ(ə)l/] package.</td>
+<td>快递员处理易碎包裹不当。</td>
+</tr>
+<tr>
+<td>24</td>
+<td>suppression</td>
+<td>The regime relied on suppression to maintain power.</td>
+<td>该政权依靠镇压来维持权力。(镇压，压制)</td>
+</tr>
+<tr>
+<td>25</td>
+<td>mainly</td>
+<td>The course is mainly about data science.</td>
+<td>这门课程主要是关于数据科学的。</td>
+</tr>
+<tr>
+<td>26</td>
+<td>naked</td>
+<td>The statue [/ˈstætʃuː/] depicts a naked warrior.</td>
+<td>这尊雕像描绘了一位裸体战士。</td>
+</tr>
+<tr>
+<td>27</td>
+<td>coordinator</td>
+<td>The event coordinator did an excellent job.</td>
+<td>活动协调人做得非常出色。</td>
+</tr>
+<tr>
+<td>28</td>
+<td>guilty</td>
+<td>He felt guilty for forgetting her birthday.</td>
+<td>他因忘记她的生日而感到内疚。</td>
+</tr>
+</tbody></table>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p><strong>administer</strong> 和 <strong>inject</strong> 有区别：</p>
+<ul>
+<li><strong>administer an antidote</strong> 更正式，意思是“给予（药物、解毒剂等）”，不仅限于注射，也包括口服、滴注等方式。</li>
+<li><strong>inject an antidote</strong> 专指“用注射的方式给药”。</li>
+</ul>
+<p>如果你确定解毒剂是通过注射给的，用 <strong>inject</strong> 也可以，但如果不确定具体方式，或者想表达更广泛的给药方式，<strong>administer</strong> 更合适。</p>
+<p>所以，句子可以改成：</p>
+<ul>
+<li>The nurse <strong>injected</strong> an antidote to the poisoned person.（强调注射）</li>
+</ul>
+<p>但更常见和正式的是：</p>
+<ul>
+<li>The nurse <strong>administered</strong> an antidote to the poisoned person.</li>
+</ul>
 ]]></content>
       <categories>
-        <category>数据库</category>
+        <category>英语</category>
       </categories>
       <tags>
-        <tag>mysql</tag>
+        <tag>雅思</tag>
       </tags>
   </entry>
 </search>
